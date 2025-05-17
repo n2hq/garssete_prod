@@ -368,7 +368,7 @@ const route1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
 const CenterNav = ({ theme, navBg }) => {
   return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx("div", { className: `hidden lg:flex place-items-center space-x-14 h-full `, children: navlinks.map((link, index2) => {
     return /* @__PURE__ */ jsx(Link, { to: link.url, children: /* @__PURE__ */ jsx("span", { className: `${theme === "light" ? "text-black" : "text-white"}
-                                font-normal tracking-tight text-[14px] font-sans
+                                font-normal tracking-tight text-[13px] font-sans
                                 hover:text-white/40`, children: link.label }) }, index2);
   }) }) });
 };
@@ -771,6 +771,7 @@ const loader$3 = async ({ request, params }) => {
   return res;
 };
 const index = () => {
+  var _a;
   const res = useLoaderData();
   const data = res.data;
   useEffect(() => {
@@ -782,6 +783,15 @@ const index = () => {
     /* @__PURE__ */ jsx(ResponsiveNav, { theme: "light" }),
     /* @__PURE__ */ jsx("div", { className: ` w-full  bg-yellow-400/90
                 flex flex-col`, children: /* @__PURE__ */ jsx("div", { className: `mt-[80px] mb-[22px]`, children: /* @__PURE__ */ jsx(SearchBox, {}) }) }),
+    /* @__PURE__ */ jsx("div", { className: `px-[15px] border-b`, children: /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] mx-auto w-full`, children: /* @__PURE__ */ jsxs("div", { className: ` grid grid-cols-12 gap-x-2`, children: [
+      /* @__PURE__ */ jsx("div", { className: `flex place-items-center col-span-12 md:col-span-4 truncate
+                             pt-1 pb-0 md:pb-1 `, children: /* @__PURE__ */ jsx("span", { className: `text-[18px] font-bold`, children: ((_a = res.query) == null ? void 0 : _a.length) > 0 ? `Search for '${res.query}'` : `Browse Updates` }) }),
+      /* @__PURE__ */ jsx("div", { className: `space-x-3 flex place-items-center place-content-start
+                            col-span-12 md:col-span-8 truncate md:place-content-end
+                             pt-0 pb-2 md:pt-1 md:pb-1`, children: navlinks.map((link, index2) => {
+        return /* @__PURE__ */ jsx("span", { className: `text-[15px]`, children: link.label });
+      }) })
+    ] }) }) }),
     /* @__PURE__ */ jsxs(ResultLayout, { children: [
       data.length > 0 ? /* @__PURE__ */ jsx(
         SearchPagination,
@@ -981,7 +991,7 @@ const route5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   __proto__: null,
   loader
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-D5a5QfFs.js", "imports": ["/assets/components-u2jWRsVt.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-D8z6UBY6.js", "imports": ["/assets/components-u2jWRsVt.js"], "css": ["/assets/root-D7xu9voL.css"] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-BjiEPGFc.js", "imports": ["/assets/components-u2jWRsVt.js", "/assets/SearchBox-BQGObCFA.js"], "css": [] }, "routes/search": { "id": "routes/search", "parentId": "root", "path": "search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-p0htfuhI.js", "imports": ["/assets/components-u2jWRsVt.js", "/assets/SearchBox-BQGObCFA.js"], "css": [] }, "routes/api/listings/search": { "id": "routes/api/listings/search", "parentId": "root", "path": "/api/listings/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listings/featured_listing": { "id": "routes/api/listings/featured_listing", "parentId": "root", "path": "/api/listings/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listings/listing_by_category": { "id": "routes/api/listings/listing_by_category", "parentId": "root", "path": "api/listings/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-a82bea76.js", "version": "a82bea76" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-D5a5QfFs.js", "imports": ["/assets/components-u2jWRsVt.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-CWnOdP6c.js", "imports": ["/assets/components-u2jWRsVt.js"], "css": ["/assets/root-BzQMnPhE.css"] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-BjiEPGFc.js", "imports": ["/assets/components-u2jWRsVt.js", "/assets/SearchBox-BQGObCFA.js"], "css": [] }, "routes/search": { "id": "routes/search", "parentId": "root", "path": "search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DKcWGXlu.js", "imports": ["/assets/components-u2jWRsVt.js", "/assets/SearchBox-BQGObCFA.js"], "css": [] }, "routes/api/listings/search": { "id": "routes/api/listings/search", "parentId": "root", "path": "/api/listings/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listings/featured_listing": { "id": "routes/api/listings/featured_listing", "parentId": "root", "path": "/api/listings/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listings/listing_by_category": { "id": "routes/api/listings/listing_by_category", "parentId": "root", "path": "api/listings/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-b886c054.js", "version": "b886c054" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";

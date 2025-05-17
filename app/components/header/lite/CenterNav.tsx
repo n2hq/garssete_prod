@@ -12,7 +12,7 @@ const CenterNav = ({ theme, navBg }: any) => {
                         return (
                             <Link key={index} to={link.url}>
                                 <span className={`${theme === 'light' ? 'text-black' : 'text-white'}
-                                font-normal tracking-tight text-[14px] font-sans
+                                font-normal tracking-tight text-[13px] font-sans
                                 hover:text-white/40`}>
                                     {link.label}
                                 </span>

@@ -1,4 +1,4 @@
-import{j as e,v as o,r as l}from"./components-u2jWRsVt.js";import{n as c,L as i,S as x,M as d,a as h}from"./SearchBox-BQGObCFA.js";const m=({navBg:n})=>e.jsx(e.Fragment,{children:e.jsx("div",{className:"hidden lg:flex place-items-center space-x-14 h-full ",children:c.map((t,s)=>e.jsx(o,{to:t.url,children:e.jsx("span",{className:`text-white
+import{n as e,L as o,r as l}from"./components-CtdzqJEk.js";import{n as c,L as i,S as x,M as d,a as h}from"./SearchBox-BAUKm8e6.js";const m=({navBg:n})=>e.jsx(e.Fragment,{children:e.jsx("div",{className:"hidden lg:flex place-items-center space-x-14 h-full ",children:c.map((t,s)=>e.jsx(o,{to:t.url,children:e.jsx("span",{className:`text-white
                                 font-light tracking-normal text-[13px] font-sans
                                 hover:text-white/40`,children:t.label})},s))})}),f=({openNav:n})=>{const[t,s]=l.useState(!1),[a]=l.useState(1);return l.useEffect(()=>{const r=()=>{window.scrollY>=a&&s(!0),window.scrollY<a&&s(!1)};window.onscroll=()=>r()},[a]),e.jsx("div",{className:`${t?"bg-gray-800":"bg-black/30"}
         fixed h-[60px] z-[300] w-full px-[15px]

@@ -1,4 +1,4 @@
-import{r as x,j as l,v as u,w as c}from"./components-u2jWRsVt.js";const j=({theme:e})=>{const[t,r]=x.useState("light");return x.useEffect(()=>{r(e)},[e,t]),l.jsxs("div",{className:"flex place-items-center space-x-1",children:[l.jsx(u,{to:"/",children:l.jsx("div",{className:`${e==="light"?"bg-black text-white":"bg-white/90 text-black"}
+import{r as x,n as l,L as u,y as c}from"./components-CtdzqJEk.js";const j=({theme:e})=>{const[t,r]=x.useState("light");return x.useEffect(()=>{r(e)},[e,t]),l.jsxs("div",{className:"flex place-items-center space-x-1",children:[l.jsx(u,{to:"/",children:l.jsx("div",{className:`${e==="light"?"bg-black text-white":"bg-white/90 text-black"}
                 relative w-8 h-8 
                 `,children:l.jsx("img",{src:"/images/comcerc-logo.png",alt:"comcerc",className:"object-cover w-full hfull"})})}),l.jsx(u,{to:"/",children:l.jsx("span",{className:`${e==="light"?"text-black":"text-white/90"}
                 font-[700] text-2xl tracking-tight relative

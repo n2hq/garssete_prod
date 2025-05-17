@@ -4,10 +4,15 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigation,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
+import { useEffect } from "react";
+import NProgress from "nprogress"
+import "nprogress/nprogress.css"
+
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -25,6 +30,25 @@ export const links: LinksFunction = () => [
 
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const navigation = useNavigation()
+
+  useEffect(() => {
+
+
+    NProgress.start()
+
+    const holdWait = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 13000));
+    }
+
+    if (navigation) {
+      if (navigation.state !== "loading") {
+        NProgress.done();
+
+      }
+    }
+  }, [navigation])
+
   return (
     <html lang="en">
       <head>

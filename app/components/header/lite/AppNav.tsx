@@ -1,0 +1,42 @@
+import React, { useEffect, useState } from 'react'
+import Logo from '../Logo'
+import CenterNav from './CenterNav'
+import SigninMenu from '../SigninMenu'
+
+
+const AppNav = ({
+    theme,
+    openNav,
+    navBg,
+    setNavBg,
+    setTheme,
+    _theme }: any) => {
+
+    const [scrollHeight,] = useState(1)
+
+    useEffect(() => {
+        const handler = () => {
+            if (window.scrollY >= scrollHeight) { setTheme('dark') }
+            if ((window.scrollY < scrollHeight)) { setTheme('light') }
+        }
+        window.onscroll = () => handler()
+    }, [scrollHeight])
+
+    return (
+        <div className={`${_theme === 'dark' ? 'bg-gray-800' : 'bg-yellow-300'}
+        fixed h-[60px] z-[300] w-full px-[15px]
+        transition ease-in-out duration-0`}>
+
+            <div className={`max-w-[1100px] mx-auto w-full
+              h-full flex place-items-center place-content-between
+              `}>
+                <Logo theme={_theme} />
+                <CenterNav theme={_theme} navBg={navBg} />
+                <SigninMenu theme={_theme} openNav={openNav} navBg={navBg} />
+            </div>
+
+        </div>
+    )
+}
+
+export default AppNav

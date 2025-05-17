@@ -19,7 +19,7 @@ const remixHandler = createRequestHandler({
 });
 
 const app = express();
-const PORT = 4000;
+const PORT = 3393;
 
 app.use(compression());
 

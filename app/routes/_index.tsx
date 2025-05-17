@@ -1,4 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
+import ResponsiveNav from "~/components/header/transparent/ResponsiveNav";
+import Home from "./home/Home";
 
 
 export const meta: MetaFunction = () => {
@@ -11,7 +13,8 @@ export const meta: MetaFunction = () => {
 export default function Index() {
   return (
     <div>
-      hello
+      <ResponsiveNav />
+      <Home />
     </div>
   );
 }

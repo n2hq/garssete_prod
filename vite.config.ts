@@ -1,6 +1,7 @@
 import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import { setupRoutes } from "./app/routes";
 
 declare module "@remix-run/node" {
   interface Future {
@@ -18,7 +19,13 @@ export default defineConfig({
         v3_singleFetch: true,
         v3_lazyRouteDiscovery: true,
       },
+      routes: setupRoutes
     }),
     tsconfigPaths(),
   ],
+  server: {//dev server
+    hmr: {
+      port: 4001, // or any other available port
+    },
+  },
 });

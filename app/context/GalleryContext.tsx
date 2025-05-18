@@ -57,7 +57,7 @@ export const GalleryProvider = ({ children }: any) => {
 
                     <div
                         onMouseDown={(e) => e.stopPropagation()}
-                        className={`w-[95%] sm:w-[95%] md:w-[80%] h-[80%] mx-auto
+                        className={`w-[95%] sm:w-[95%] md:w-[80%] max-h-[80%] mx-auto
                          bg-white rounded-lg shadow-lg shadow-black/50 space-y-6
                          z-[3100] overflow-hidden`}>
 

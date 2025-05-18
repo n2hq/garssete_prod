@@ -19,7 +19,7 @@ const BusinessLayout = ({
     ratingsData
 }: any) => {
     return (
-        <div className={`px-[20px]`}>
+        <div className={`px-[15px]`}>
             <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
                 {
                     ratingsData && <StarRating ratingsData={ratingsData} rating={Number(ratingsData.rating_average)} />

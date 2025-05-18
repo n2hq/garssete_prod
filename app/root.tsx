@@ -12,6 +12,9 @@ import "./tailwind.css";
 import { useEffect } from "react";
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
+import { NotificationProvider } from "./context/NotificationContext";
+import { AuthProvider } from "./context/AuthContext";
+import { SliderProvider } from "./context/SliderContext";
 
 
 export const links: LinksFunction = () => [
@@ -58,7 +61,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <NotificationProvider>
+          <SliderProvider>
+            <AuthProvider>
+              {children}
+            </AuthProvider>
+          </SliderProvider>
+        </NotificationProvider>
         <ScrollRestoration />
         <Scripts />
       </body>

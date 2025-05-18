@@ -1,5 +1,9 @@
+import { Rating } from "./types"
+import CryptoJS from 'crypto-js'
+
 export const config = {
-    BASE_URL: import.meta.env.VITE_SITE_BASE_URL
+    BASE_URL: import.meta.env.VITE_SITE_BASE_URL,
+    IMG_BASE_URL: import.meta.env.VITE_IMG_BASE_URL
 }
 
 export const headers = {
@@ -20,9 +24,19 @@ export function DoResponse(json: any, code: number = 500) {
     )
 }
 
+export const HashPwd = (input: string): any => {
+    return CryptoJS.SHA256(input).toString();
+}
+
+export const GenerateRandomHash = () => {
+    const randomBytes = CryptoJS.lib.WordArray.random(16);
+    const hash = CryptoJS.SHA256(randomBytes).toString();
+    return hash
+};
+
 export const getSearch: any = async (criteria: string) => {
 
-    const endpoint = "/api/listings/search?q=" + criteria
+    const endpoint = "/api/listing/search?q=" + criteria
     const url = config.BASE_URL + endpoint
 
 
@@ -46,7 +60,7 @@ export const getSearch: any = async (criteria: string) => {
 
 export const getFeaturedListing: any = async () => {
 
-    const endpoint = `/api/listings/featured_listing`
+    const endpoint = `/api/listing/featured_listing`
     const url = config.BASE_URL + endpoint
 
     console.log(url)
@@ -69,9 +83,9 @@ export const getFeaturedListing: any = async () => {
     }
 }
 
-export const getListingByCategory = async (category: string, limit: number): Promise<any | undefined> => {
+export const getListingByCategory = async (category: string, limit: number) => {
 
-    const endpoint = `/api/listings/listing_by_category/${category}/${limit}`
+    const endpoint = `/api/listing/listing_by_category/${category}/${limit}`
     const url = config.BASE_URL + endpoint
 
     console.log(url)
@@ -90,5 +104,192 @@ export const getListingByCategory = async (category: string, limit: number): Pro
         return data
     } catch (error: any) {
         return ({ "message": error.message })
+    }
+}
+
+export const getRating = async (userGuid: string | null, businessGuid: string | null) => {
+
+    const endpoint = `/api/rating/${userGuid}/${businessGuid}`
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+export const getBusinessProfileImageData = async (guid: string | null): Promise<any | undefined> => {
+
+    const endpoint = "/api/listing/business_profile_image/" + guid
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getBusinessGallery = async (businessGuid: string | null) => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = `/api/listing/business_gallery/${businessGuid}`
+    const url = BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+export const getRatingsReviews = async (businessGuid: string | null) => {
+    const endpoint = `/api/rating/ratings_reviews/${businessGuid}`
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+export const getPage: any = async (criteria: string) => {
+
+    const endpoint = "/api/listing/" + criteria
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        })
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+export const getBusinessRatings = async (businessGuid: string | null): Promise<any | undefined> => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = `/api/rating/business_ratings/${businessGuid}`
+    const url = BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getLocalDate = (date: string) => {
+    const localDate = new Date(date)
+    const formatted = localDate.toLocaleString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+    })
+    return formatted
+}
+
+export const getBusinessFeatures = async (businessGuid: string | null): Promise<any | undefined> => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = `/api/listing/business_facility_features/${businessGuid}`
+    const url = BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
     }
 }

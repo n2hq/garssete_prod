@@ -9,6 +9,7 @@ import { useLoaderData } from '@remix-run/react'
 import LatestBusinesses from './assets/LatestBusinesses'
 import Footer from '~/components/footer/Footer'
 import { navlinks } from '~/lib/json'
+import SearchHead from '~/components/content/SearchHead'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
@@ -44,13 +45,7 @@ const index = () => {
     return (
         <div>
             <ResponsiveNav theme='light' />
-
-            <div className={` w-full  bg-yellow-400/90
-                flex flex-col`}>
-                <div className={`mt-[80px] mb-[22px]`}>
-                    <SearchBox />
-                </div>
-            </div>
+            <SearchHead />
 
             <div className={`px-[15px] border-b`}>
                 <div className={`max-w-[1100px] mx-auto w-full`}>
@@ -69,7 +64,7 @@ const index = () => {
                              pt-0 pb-2 md:pt-1 md:pb-1`}>
                             {
                                 navlinks.map((link, index) => {
-                                    return (<span className={`text-[15px]`}>{link.label}</span>)
+                                    return (<span key={index} className={`text-[15px]`}>{link.label}</span>)
                                 })
                             }
                         </div>

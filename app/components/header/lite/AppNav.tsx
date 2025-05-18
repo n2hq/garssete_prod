@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Logo from '../Logo'
 import CenterNav from './CenterNav'
-import SigninMenu from '../SigninMenu'
+import Hamburger from '../Hamburger'
+import UserMenu from '../usermenu/UserMenu'
+
 
 
 const AppNav = ({
@@ -32,7 +34,10 @@ const AppNav = ({
               `}>
                 <Logo theme={_theme} />
                 <CenterNav theme={_theme} navBg={navBg} />
-                <SigninMenu theme={_theme} openNav={openNav} navBg={navBg} />
+                <div className={`flex place-items-center gap-4`}>
+                    <UserMenu theme={_theme} />
+                    <Hamburger theme={_theme} openNav={openNav} navBg={navBg} />
+                </div>
             </div>
 
         </div>

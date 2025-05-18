@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Logo from '../Logo'
-import CenterNav from '../CenterNav'
-import SigninMenu from '../SigninMenu'
+import SigninMenu from '../Hamburger'
 import { NavProps } from '~/lib/types'
+import CenterNav from './CenterNav'
 
 
 const AppNav = ({ openNav }: NavProps) => {
@@ -27,7 +27,9 @@ const AppNav = ({ openNav }: NavProps) => {
               `}>
                 <Logo theme='dark' />
                 <CenterNav navBg={navBg} />
-                <SigninMenu openNav={openNav} navBg={navBg} />
+                <div>
+                    <SigninMenu openNav={openNav} navBg={navBg} />
+                </div>
             </div>
 
         </div>

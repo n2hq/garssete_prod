@@ -1,6 +1,6 @@
 import React from 'react'
 import { HiBars3BottomRight } from 'react-icons/hi2'
-const SigninMenu = ({ theme, openNav, navBg }: any) => {
+const Hamburger = ({ theme, openNav, navBg }: any) => {
     return (
         <>
             <div className={`flex items-center space-x-4`}
@@ -14,4 +14,4 @@ const SigninMenu = ({ theme, openNav, navBg }: any) => {
     )
 }
 
-export default SigninMenu
+export default Hamburger

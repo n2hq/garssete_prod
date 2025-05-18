@@ -27,7 +27,7 @@ const BusinessLayout = ({
                 {
                     listing && <Header listing={listing} />
                 }
-                <div className={`grid grid-cols-12 mt-4 gap-4 relative`}>
+                <div className={`grid grid-cols-12 mt-4 gap-0 md:gap-12 relative`}>
                     <div className={` col-span-12 lg:col-span-8`}>
                         {
                             images && listing &&
@@ -56,7 +56,7 @@ const BusinessLayout = ({
                     <div className={`col-span-12 lg:col-span-4 hidden lg:block`}>
                         <div className={` sticky top-[100px]`}>
                             <Address />
-                            {/* <Review /> */}
+                            <Review />
                         </div>
 
                     </div>

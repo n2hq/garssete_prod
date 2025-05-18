@@ -7,6 +7,8 @@ import { GalleryProvider } from '~/context/GalleryContext'
 import RatingProvider from '~/context/RatingContext'
 import { getBusinessGallery, getPage, getRatingsReviews, getSearch } from '~/lib/lib'
 import BusinessLayout from './assets/BusinessLayout'
+import Footer from '~/components/footer/Footer'
+import Related from './assets/Related'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const id = params.id || null
@@ -40,7 +42,16 @@ const index = () => {
                         ratingsData={ratingsData}
                     />
                 }
-                Page
+
+
+
+                <Related
+                    category={listing?.category}
+                    limit={6}
+                    title={`Related: ${listing?.category}`}
+                    subtitle={"Related based on the same category."}
+                />
+                <Footer />
             </GalleryProvider>
         </RatingProvider>
     )

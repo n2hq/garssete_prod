@@ -1,6 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
-const SearchBox = () => {
+const SearchBox = ({ query }: any) => {
+    const [queryParam, setQueryParam] = useState('')
+    const changeHandler = (e: any) => {
+        setQueryParam(e.target.value); // updates the input value
+    };
+
+    useEffect(() => {
+
+        if (query !== null && query !== undefined) {
+            setQueryParam(query)
+        }
+
+    }, [query])
+
     return (
         <>
             <form action="/search" method='get'>
@@ -9,6 +22,8 @@ const SearchBox = () => {
                         bg-blue-100 rounded flex gap-x-0 overflow-hidden`}>
                         <input
                             name='q'
+                            value={queryParam}
+                            onChange={(e) => changeHandler(e)}
                             type="text"
                             className={`grow bg-white p-3 outline-none`}
                             placeholder='Enter an address, city, state or country'

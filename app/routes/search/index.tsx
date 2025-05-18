@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchBox from '~/components/content/SearchBox'
 import ResponsiveNav from '~/components/header/lite/ResponsiveNav'
 import ResultLayout from './assets/ResultLayout'
 import SearchPagination from './assets/SearchPagination'
 import { LoaderFunction } from '@remix-run/node'
 import { getSearch } from '~/lib/lib'
-import { useLoaderData } from '@remix-run/react'
+import { Link, useLoaderData, useSearchParams } from '@remix-run/react'
 import LatestBusinesses from './assets/LatestBusinesses'
 import Footer from '~/components/footer/Footer'
 import { navlinks } from '~/lib/json'
@@ -29,13 +29,17 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
 const index = () => {
     const res: any = useLoaderData()
+    const [searchParams] = useSearchParams();
+
     const data = res.data
+    const query = res.query
+    const [queryParam, setQueryParam] = useState<string | null>(null)
 
     useEffect(() => {
-        if (data.length > 0) {
-            console.log((data))
+        if (query) {
+            setQueryParam(query)
         }
-    }, [data])
+    }, [query])
     //const [searchParams] = useSearchParams();
 
     //const query = data.query
@@ -45,13 +49,13 @@ const index = () => {
     return (
         <div>
             <ResponsiveNav theme='light' />
-            <SearchHead />
+            <SearchHead query={query} />
 
             <div className={`px-[15px] border-b`}>
                 <div className={`max-w-[1100px] mx-auto w-full`}>
                     <div className={` grid grid-cols-12 gap-x-2`}>
                         <div className={`flex place-items-center col-span-12 md:col-span-4 truncate
-                             pt-1 pb-0 md:pb-1 `}>
+                             pt-3 pb-0 md:pb-3 `}>
                             <span className={`text-[18px] font-bold`}>
                                 {
                                     res.query?.length > 0 ? `Search for '${res.query}'` : `Browse Updates`
@@ -59,12 +63,12 @@ const index = () => {
                             </span>
                         </div>
 
-                        <div className={`space-x-3 flex place-items-center place-content-start
+                        <div className={`space-x-6 flex place-items-center place-content-start
                             col-span-12 md:col-span-8 truncate md:place-content-end
-                             pt-0 pb-2 md:pt-1 md:pb-1`}>
+                             pt-0 pb-2 md:pt-3 md:pb-3 `}>
                             {
                                 navlinks.map((link, index) => {
-                                    return (<span key={index} className={`text-[15px]`}>{link.label}</span>)
+                                    return (<Link to={`${link.url}`} key={index} className={`text-[14px]`}>{link.label}</Link>)
                                 })
                             }
                         </div>

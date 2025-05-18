@@ -13,7 +13,7 @@ const Address = () => {
         <div className={`bg-blue-50/50 rounded-[5px] overflow-hidden  px-0 pt-0 pb-5 w-full`}>
             <div className={`font-bold text-[18px] border-b pb-2 
                  shadow-gray-700/40 px-3 bg-blue-100/50 pt-3`}>
-                Address
+                Contact
             </div>
             <div className='h-[30px]'></div>
 

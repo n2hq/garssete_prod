@@ -57,7 +57,7 @@ export const GalleryProvider = ({ children }: any) => {
 
                     <div
                         onMouseDown={(e) => e.stopPropagation()}
-                        className={`w-[95%] sm:w-[95%] md:w-[80%] h-fit mx-auto
+                        className={`w-[95%] sm:w-[95%] md:w-[80%] h-[80%] mx-auto
                          bg-white rounded-lg shadow-lg shadow-black/50 space-y-6
                          z-[3100] overflow-hidden`}>
 
@@ -69,15 +69,15 @@ export const GalleryProvider = ({ children }: any) => {
                                 </div>
                             </div>
                             <div className={`grid grid-cols-4 md:grid-cols-6 gap-2 
-                                max-h-[300px] overflow-y-auto pt-2 px-2 pb-2
-                                bg-gray-800`}>
+                                h-full overflow-y-auto pt-2 px-2 pb-2
+                                bg-gray-800 `}>
                                 {gallery &&
                                     gallery?.map((image: any, index: number) => {
                                         return (
                                             <div
                                                 onClick={() => showCarousel(index)}
                                                 className={`relative hover:cursor-pointer
-                                                 bg-red-200 md:h-[100px] lg:h-[120px] rounded-md
+                                                 bg-red-200 h-[80px] md:h-[100px] lg:h-[120px] rounded-md
                                                  overflow-hidden`}>
                                                 <img
                                                     className={`object-cover w-full h-full`}
@@ -88,15 +88,15 @@ export const GalleryProvider = ({ children }: any) => {
                                 }
                             </div>
                         </div>
-                        {/** close button handle */}
-                        <div
-                            onMouseDown={() => handleClose()}
-                            className={`w-[50px] h-[50px] z-[300] bg-white
+                    </div>
+                    {/** close button handle */}
+                    <div
+                        onMouseDown={() => handleClose()}
+                        className={`w-[50px] h-[50px] z-[300] bg-white
                                 flex place-content-center place-items-center
                                 rounded-full absolute left-2 top-2 cursor-pointer
                                 hover:bg-white/40 transition duration-1000 ease-in-out`}>
-                            <IoClose className={`text-[30px]`} />
-                        </div>
+                        <IoClose className={`text-[30px]`} />
                     </div>
                 </div>
             }

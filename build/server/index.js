@@ -1110,36 +1110,36 @@ const GalleryProvider = ({ children }) => {
     slider.setGallery(gallery);
   };
   return /* @__PURE__ */ jsxs(GalleryContext.Provider, { value: vals, children: [
-    show && /* @__PURE__ */ jsx(
+    show && /* @__PURE__ */ jsxs(
       "div",
       {
         onMouseDown: (e) => setShow(false),
         className: `flex w-screen h-screen bg-black/40 
                         z-[3000] fixed top-0 left-0 right-0 bottom-0
                         place-items-center place-content-center px-[15px]`,
-        children: /* @__PURE__ */ jsxs(
-          "div",
-          {
-            onMouseDown: (e) => e.stopPropagation(),
-            className: `w-[95%] sm:w-[95%] md:w-[80%] h-fit mx-auto
+        children: [
+          /* @__PURE__ */ jsx(
+            "div",
+            {
+              onMouseDown: (e) => e.stopPropagation(),
+              className: `w-[95%] sm:w-[95%] md:w-[80%] h-[80%] mx-auto
                          bg-white rounded-lg shadow-lg shadow-black/50 space-y-6
                          z-[3100] overflow-hidden`,
-            children: [
-              /* @__PURE__ */ jsxs("div", { className: `w-full h-full`, children: [
+              children: /* @__PURE__ */ jsxs("div", { className: `w-full h-full`, children: [
                 /* @__PURE__ */ jsx("div", { className: `border-b py-3 px-3`, children: /* @__PURE__ */ jsxs("div", { className: `font-bold text-gray-700
                                     text-xl w-[80%]  truncate`, children: [
                   "Gallery for ",
                   listing && (listing == null ? void 0 : listing.title)
                 ] }) }),
                 /* @__PURE__ */ jsx("div", { className: `grid grid-cols-4 md:grid-cols-6 gap-2 
-                                max-h-[300px] overflow-y-auto pt-2 px-2 pb-2
-                                bg-gray-800`, children: gallery && (gallery == null ? void 0 : gallery.map((image, index2) => {
+                                h-full overflow-y-auto pt-2 px-2 pb-2
+                                bg-gray-800 `, children: gallery && (gallery == null ? void 0 : gallery.map((image, index2) => {
                   return /* @__PURE__ */ jsx(
                     "div",
                     {
                       onClick: () => showCarousel(index2),
                       className: `relative hover:cursor-pointer
-                                                 bg-red-200 md:h-[100px] lg:h-[120px] rounded-md
+                                                 bg-red-200 h-[80px] md:h-[100px] lg:h-[120px] rounded-md
                                                  overflow-hidden`,
                       children: /* @__PURE__ */ jsx(
                         "img",
@@ -1152,21 +1152,21 @@ const GalleryProvider = ({ children }) => {
                     }
                   );
                 })) })
-              ] }),
-              /* @__PURE__ */ jsx(
-                "div",
-                {
-                  onMouseDown: () => handleClose(),
-                  className: `w-[50px] h-[50px] z-[300] bg-white
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsx(
+            "div",
+            {
+              onMouseDown: () => handleClose(),
+              className: `w-[50px] h-[50px] z-[300] bg-white
                                 flex place-content-center place-items-center
                                 rounded-full absolute left-2 top-2 cursor-pointer
                                 hover:bg-white/40 transition duration-1000 ease-in-out`,
-                  children: /* @__PURE__ */ jsx(IoClose, { className: `text-[30px]` })
-                }
-              )
-            ]
-          }
-        )
+              children: /* @__PURE__ */ jsx(IoClose, { className: `text-[30px]` })
+            }
+          )
+        ]
       }
     ),
     children
@@ -2503,7 +2503,7 @@ const route13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   __proto__: null,
   loader
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-BaInFuwy.js", "imports": ["/assets/components-YbiUyo11.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-Cwovw5Ld.js", "imports": ["/assets/components-YbiUyo11.js", "/assets/SliderContext-DG8ooRYW.js", "/assets/index-TpmEskWj.js", "/assets/index-Dn4UAsYz.js"], "css": ["/assets/root-DqnDcHDN.css"] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-JZKE2eY1.js", "imports": ["/assets/components-YbiUyo11.js", "/assets/index-CNIT8RzR.js", "/assets/SliderContext-DG8ooRYW.js", "/assets/index-Dn4UAsYz.js", "/assets/index-TpmEskWj.js", "/assets/MobileNav-fSkQ8WY_.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-ByQEmMZV.js", "imports": ["/assets/components-YbiUyo11.js", "/assets/MobileNav-fSkQ8WY_.js", "/assets/index-TpmEskWj.js"], "css": [] }, "routes/search": { "id": "routes/search", "parentId": "root", "path": "search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-iwa05yLu.js", "imports": ["/assets/components-YbiUyo11.js", "/assets/index-CNIT8RzR.js", "/assets/index-Dn4UAsYz.js", "/assets/index-TpmEskWj.js", "/assets/MobileNav-fSkQ8WY_.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-JZKE2eY1.js", "imports": ["/assets/components-YbiUyo11.js", "/assets/index-CNIT8RzR.js", "/assets/SliderContext-DG8ooRYW.js", "/assets/index-Dn4UAsYz.js", "/assets/index-TpmEskWj.js", "/assets/MobileNav-fSkQ8WY_.js"], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-653753a1.js", "version": "653753a1" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-BaInFuwy.js", "imports": ["/assets/components-YbiUyo11.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-BYuidCwp.js", "imports": ["/assets/components-YbiUyo11.js", "/assets/SliderContext-DG8ooRYW.js", "/assets/index-TpmEskWj.js", "/assets/index-Dn4UAsYz.js"], "css": ["/assets/root-puVAuEbj.css"] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-NJo5Pj0R.js", "imports": ["/assets/components-YbiUyo11.js", "/assets/index-CNIT8RzR.js", "/assets/SliderContext-DG8ooRYW.js", "/assets/index-Dn4UAsYz.js", "/assets/index-TpmEskWj.js", "/assets/MobileNav-fSkQ8WY_.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-ByQEmMZV.js", "imports": ["/assets/components-YbiUyo11.js", "/assets/MobileNav-fSkQ8WY_.js", "/assets/index-TpmEskWj.js"], "css": [] }, "routes/search": { "id": "routes/search", "parentId": "root", "path": "search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-iwa05yLu.js", "imports": ["/assets/components-YbiUyo11.js", "/assets/index-CNIT8RzR.js", "/assets/index-Dn4UAsYz.js", "/assets/index-TpmEskWj.js", "/assets/MobileNav-fSkQ8WY_.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-NJo5Pj0R.js", "imports": ["/assets/components-YbiUyo11.js", "/assets/index-CNIT8RzR.js", "/assets/SliderContext-DG8ooRYW.js", "/assets/index-Dn4UAsYz.js", "/assets/index-TpmEskWj.js", "/assets/MobileNav-fSkQ8WY_.js"], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-da51f17d.js", "version": "da51f17d" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";

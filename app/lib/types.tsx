@@ -217,3 +217,8 @@ export type Rating = {
     fullname: string
     rating_guid: string
 }
+
+export type LoginData = {
+    username: string
+    password: string
+}

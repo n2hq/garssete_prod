@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import SingleStarRating from '~/routes/listing/assets/SingleStarRating'
 
 import { Link } from '@remix-run/react'
 import { getListingByCategory } from '~/lib/lib'
-import LatestStarRating from '~/routes/search/assets/LatestStarRating'
+import LatestStarRating from '~/routes/web/search/assets/LatestStarRating'
 
 const latestData = [
     {

@@ -6,27 +6,27 @@ export const navlinks = [
     },
     {
         id: 2,
-        url: '/search',
+        url: '/web/search',
         label: "Search"
     },
     {
         id: 3,
-        url: '/search?q=hotels',
+        url: '/web/search?q=hotels',
         label: "Hotels"
     },
     {
         id: 4,
-        url: '/search?q=travel',
+        url: '/web/search?q=travel',
         label: "Travel"
     },
     {
         id: 5,
-        url: `/search?q=real estate`,
+        url: `/web/search?q=real estate`,
         label: "Real Estate"
     },
     {
         id: 6,
-        url: '/search?q=services',
+        url: '/web/search?q=services',
         label: "Services"
     }
 ]

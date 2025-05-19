@@ -927,7 +927,7 @@ const SearchBox = ({ query: query2 }) => {
   ] }) }) }) });
 };
 const SearchHead = ({ query: query2 }) => {
-  return /* @__PURE__ */ jsx("div", { className: ` w-full  bg-yellow-400/90
+  return /* @__PURE__ */ jsx("div", { className: ` w-full  bg-gray-800/90
                 flex flex-col`, children: /* @__PURE__ */ jsx("div", { className: `mt-[80px] mb-[22px]`, children: /* @__PURE__ */ jsx(SearchBox, { query: query2 }) }) });
 };
 const Logo = ({ theme }) => {
@@ -937,7 +937,7 @@ const Logo = ({ theme }) => {
   }, [theme, navTheme]);
   return /* @__PURE__ */ jsxs("div", { className: `flex place-items-center space-x-1`, children: [
     /* @__PURE__ */ jsx(Link, { to: "/", children: /* @__PURE__ */ jsx("div", { className: `${theme === "light" ? "bg-black text-white" : "bg-white/90 text-black"}
-                relative w-8 h-8 
+                relative w-8 h-8 rounded-full overflow-hidden
                 `, children: /* @__PURE__ */ jsx(
       "img",
       {
@@ -959,27 +959,27 @@ const navlinks = [
   },
   {
     id: 2,
-    url: "/search",
+    url: "/web/search",
     label: "Search"
   },
   {
     id: 3,
-    url: "/search?q=hotels",
+    url: "/web/search?q=hotels",
     label: "Hotels"
   },
   {
     id: 4,
-    url: "/search?q=travel",
+    url: "/web/search?q=travel",
     label: "Travel"
   },
   {
     id: 5,
-    url: `/search?q=real estate`,
+    url: `/web/search?q=real estate`,
     label: "Real Estate"
   },
   {
     id: 6,
-    url: "/search?q=services",
+    url: "/web/search?q=services",
     label: "Services"
   }
 ];
@@ -987,7 +987,7 @@ const CenterNav$1 = ({ theme, navBg }) => {
   return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx("div", { className: `hidden lg:flex place-items-center space-x-14 h-full `, children: navlinks.map((link, index2) => {
     return /* @__PURE__ */ jsx(Link, { to: link.url, children: /* @__PURE__ */ jsx("span", { className: `${theme === "light" ? "text-black" : "text-white"}
                                 font-normal tracking-tight text-[13px] font-sans
-                                hover:text-white/40`, children: link.label }) }, index2);
+                                hover:text-black/40`, children: link.label }) }, index2);
   }) }) });
 };
 const Hamburger = ({ theme, openNav, navBg }) => {
@@ -1067,7 +1067,7 @@ const UserMenu = ({ theme }) => {
     /* @__PURE__ */ jsx(DropDown, { open })
   ] });
 };
-const AppNav$1 = ({
+const AppNav$2 = ({
   theme,
   openNav,
   navBg,
@@ -1087,7 +1087,7 @@ const AppNav$1 = ({
     };
     window.onscroll = () => handler();
   }, [scrollHeight]);
-  return /* @__PURE__ */ jsx("div", { className: `${_theme === "dark" ? "bg-gray-800" : "bg-yellow-300"}
+  return /* @__PURE__ */ jsx("div", { className: `${_theme === "dark" ? "bg-gray-800" : "bg-white"}
         fixed h-[60px] z-[300] w-full px-[15px]
         transition ease-in-out duration-0`, children: /* @__PURE__ */ jsxs("div", { className: `max-w-[1100px] mx-auto w-full
               h-full flex place-items-center place-content-between
@@ -1134,7 +1134,7 @@ const MobileNav = ({
     ] })
   ] }) });
 };
-const ResponsiveNav$1 = ({ theme }) => {
+const ResponsiveNav$2 = ({ theme }) => {
   const [showNav, setShowNav] = useState(false);
   const [navBg, setNavBg] = useState(false);
   const [_theme, setTheme] = useState(theme);
@@ -1142,7 +1142,7 @@ const ResponsiveNav$1 = ({ theme }) => {
   const closeNav = () => setShowNav(false);
   return /* @__PURE__ */ jsxs("div", { children: [
     /* @__PURE__ */ jsx(
-      AppNav$1,
+      AppNav$2,
       {
         theme,
         openNav,
@@ -1919,13 +1919,13 @@ const loader$b = async ({ request, params }) => {
     ratingsData: ratingData
   };
 };
-const index$1 = () => {
+const index$4 = () => {
   const data = useLoaderData();
   const listing = data.listing;
   const gallery = data.gallery;
   const ratingsData = data.ratingsData;
   return /* @__PURE__ */ jsx(RatingProvider, { children: /* @__PURE__ */ jsxs(GalleryProvider, { children: [
-    /* @__PURE__ */ jsx(ResponsiveNav$1, { theme: "light" }),
+    /* @__PURE__ */ jsx(ResponsiveNav$2, { theme: "light" }),
     /* @__PURE__ */ jsx(SearchHead, {}),
     listing.gid !== null && listing.gid !== void 0 && /* @__PURE__ */ jsx(
       BusinessLayout,
@@ -1947,9 +1947,9 @@ const index$1 = () => {
     /* @__PURE__ */ jsx(Footer, {})
   ] }) });
 };
-const route5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$1,
+  default: index$4,
   loader: loader$b
 }, Symbol.toStringTag, { value: "Module" }));
 const CenterNav = ({ navBg }) => {
@@ -1959,7 +1959,7 @@ const CenterNav = ({ navBg }) => {
                                 hover:text-white/40`, children: link.label }) }, index2);
   }) }) });
 };
-const AppNav = ({ openNav }) => {
+const AppNav$1 = ({ openNav }) => {
   const [navBg, setNavBg] = useState(false);
   const [scrollHeight] = useState(1);
   useEffect(() => {
@@ -1980,16 +1980,19 @@ const AppNav = ({ openNav }) => {
               `, children: [
     /* @__PURE__ */ jsx(Logo, { theme: "dark" }),
     /* @__PURE__ */ jsx(CenterNav, { navBg }),
-    /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(Hamburger, { openNav, navBg }) })
+    /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-4`, children: [
+      /* @__PURE__ */ jsx(UserMenu, { theme: "dark" }),
+      /* @__PURE__ */ jsx(Hamburger, { theme: "dark", openNav, navBg })
+    ] })
   ] }) });
 };
-const ResponsiveNav = () => {
+const ResponsiveNav$1 = () => {
   const [showNav, setShowNav] = useState(false);
   const [navBg] = useState(false);
   const openNav = () => setShowNav(true);
   const closeNav = () => setShowNav(false);
   return /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx(AppNav, { openNav, navBg }),
+    /* @__PURE__ */ jsx(AppNav$1, { openNav, navBg }),
     /* @__PURE__ */ jsx(MobileNav, { showNav, closeNav })
   ] });
 };
@@ -2037,7 +2040,7 @@ const meta = () => {
 };
 function Index() {
   return /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx(ResponsiveNav, {}),
+    /* @__PURE__ */ jsx(ResponsiveNav$1, {}),
     /* @__PURE__ */ jsx(Home, {})
   ] });
 }
@@ -2045,6 +2048,28 @@ const route2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   __proto__: null,
   default: Index,
   meta
+}, Symbol.toStringTag, { value: "Module" }));
+function loader$a() {
+  return null;
+}
+function NotFound() {
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsx(ResponsiveNav$2, { theme: "light" }),
+    /* @__PURE__ */ jsx("div", { className: `min-h-screen flex items-center justify-center 
+        text-center px-4 text-black`, children: /* @__PURE__ */ jsxs("div", { className: `flex place-content-center place-items-center gap-3
+                h-[50px]`, children: [
+      /* @__PURE__ */ jsx("div", { className: `text-2xl font-bold text-red-600 h-full
+                    flex place-items-center`, children: "404" }),
+      /* @__PURE__ */ jsx("div", { className: `h-full w-[2px] border-r` }),
+      /* @__PURE__ */ jsx("div", { className: `text-black text-[14px]
+                    h-full flex place-items-center`, children: "This page could not be found." })
+    ] }) })
+  ] });
+}
+const route3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: NotFound,
+  loader: loader$a
 }, Symbol.toStringTag, { value: "Module" }));
 const Feature = ({ feature }) => {
   return /* @__PURE__ */ jsxs("div", { id: feature.gid, className: `pb-4 pt-3`, children: [
@@ -2267,7 +2292,7 @@ const LatestBusinesses = ({
     })) })
   ] });
 };
-const loader$a = async ({ request, params }) => {
+const loader$9 = async ({ request, params }) => {
   const url = new URL(request.url);
   const query2 = url.searchParams.get("q") || "";
   let data = await getSearch(query2);
@@ -2277,7 +2302,7 @@ const loader$a = async ({ request, params }) => {
   };
   return res;
 };
-const index = () => {
+const index$3 = () => {
   var _a;
   const res = useLoaderData();
   const [searchParams] = useSearchParams();
@@ -2290,7 +2315,7 @@ const index = () => {
     }
   }, [query2]);
   return /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx(ResponsiveNav$1, { theme: "light" }),
+    /* @__PURE__ */ jsx(ResponsiveNav$2, { theme: "light" }),
     /* @__PURE__ */ jsx(SearchHead, { query: query2 }),
     /* @__PURE__ */ jsx("div", { className: `px-[15px] border-b`, children: /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] mx-auto w-full`, children: /* @__PURE__ */ jsxs("div", { className: ` grid grid-cols-12 gap-x-2`, children: [
       /* @__PURE__ */ jsx("div", { className: `flex place-items-center col-span-12 md:col-span-4 truncate
@@ -2332,32 +2357,368 @@ const index = () => {
     /* @__PURE__ */ jsx(Footer, {})
   ] });
 };
-const route3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index,
-  loader: loader$a
+  default: index$3,
+  loader: loader$9
 }, Symbol.toStringTag, { value: "Module" }));
-function loader$9() {
-  return null;
-}
-function NotFound() {
+const AppNav = ({
+  theme,
+  openNav,
+  navBg,
+  setNavBg,
+  setTheme,
+  _theme
+}) => {
+  const [scrollHeight] = useState(1);
+  useEffect(() => {
+    const handler = () => {
+      if (window.scrollY >= scrollHeight) {
+        setTheme("dark");
+      }
+      if (window.scrollY < scrollHeight) {
+        setTheme("light");
+      }
+    };
+    window.onscroll = () => handler();
+  }, [scrollHeight]);
+  return /* @__PURE__ */ jsx("div", { className: `${_theme === "dark" ? "bg-gray-800" : "bg-white"}
+        fixed h-[60px] z-[300] w-full px-[15px]
+        transition ease-in-out duration-0`, children: /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] mx-auto w-full
+              h-full flex place-items-center place-content-between
+              `, children: /* @__PURE__ */ jsx(Logo, { theme: _theme }) }) });
+};
+const ResponsiveNav = ({ theme }) => {
+  const [showNav, setShowNav] = useState(false);
+  const [navBg, setNavBg] = useState(false);
+  const [_theme, setTheme] = useState(theme);
+  const openNav = () => setShowNav(true);
+  const closeNav = () => setShowNav(false);
   return /* @__PURE__ */ jsxs("div", { children: [
-    /* @__PURE__ */ jsx(ResponsiveNav$1, { theme: "light" }),
-    /* @__PURE__ */ jsx("div", { className: `min-h-screen flex items-center justify-center 
-        text-center px-4 text-black`, children: /* @__PURE__ */ jsxs("div", { className: `flex place-content-center place-items-center gap-3
-                h-[50px]`, children: [
-      /* @__PURE__ */ jsx("div", { className: `text-2xl font-bold text-red-600 h-full
-                    flex place-items-center`, children: "404" }),
-      /* @__PURE__ */ jsx("div", { className: `h-full w-[2px] border-r` }),
-      /* @__PURE__ */ jsx("div", { className: `text-black text-[14px]
-                    h-full flex place-items-center`, children: "This page could not be found." })
+    /* @__PURE__ */ jsx(
+      AppNav,
+      {
+        theme,
+        openNav,
+        navBg,
+        setNavBg,
+        setTheme,
+        _theme
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      MobileNav,
+      {
+        showNav,
+        closeNav
+      }
+    )
+  ] });
+};
+const password_regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+const SigninSchema = z.object({
+  username: z.string({ message: "Please enter an email" }).min(7, { message: "Email must be greater than 7 characters" }).email({ message: "Please enter a valid email" }),
+  password: z.string({ message: "Please enter a password" }).min(8, "Password must be at least 8 characters").regex(password_regex, "Please enter a valid password")
+});
+const SigninForm = () => {
+  const [formdata, setFormdata] = useState(null);
+  const { signin } = useAuth();
+  const [working, setWorking] = useState(false);
+  useNotification();
+  useNavigate();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    watch,
+    setError,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    defaultValues: {},
+    resolver: zodResolver(SigninSchema)
+  });
+  return /* @__PURE__ */ jsxs("div", { className: `w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
+        mt-[80px] mb-[20px] `, children: [
+    /* @__PURE__ */ jsx("div", { className: `hidden lg:block ` }),
+    /* @__PURE__ */ jsx("div", { className: `place-content-center flex lg:place-content-end col-span-12 md:col-span-1`, children: /* @__PURE__ */ jsx("form", { children: /* @__PURE__ */ jsxs("div", { className: `w-[350px] bg-white h-full rounded-2xl
+                    flex flex-col place-items-center pt-[40px] pb-[40px]
+                    px-[10px] shadow-lg shadow-gray-500`, children: [
+      /* @__PURE__ */ jsx("div", { className: "", children: /* @__PURE__ */ jsx(Logo, { theme: "light" }) }),
+      /* @__PURE__ */ jsx("div", { className: `text-[22px] text-center
+                        mt-[50px] font-bold text-blue-800`, children: "Sign in to your account" }),
+      /* @__PURE__ */ jsx("div", { className: `text-[15px] text-center
+                        mt-[0px] font-light text-black`, children: "using your Comcerc account" }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[50px]`, children: /* @__PURE__ */ jsx(
+        "input",
+        {
+          placeholder: "Email address",
+          type: "text",
+          className: `border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[15px] `, children: /* @__PURE__ */ jsx(
+        "input",
+        {
+          placeholder: "Password",
+          type: "password",
+          className: `border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[25px]`, children: /* @__PURE__ */ jsx(
+        "button",
+        {
+          className: `w-[85%] bg-blue-600
+                            py-[12px] text-[15px] rounded-full
+                            text-white hover:bg-blue-700`,
+          children: "Sign in"
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                                            place-items-center mt-[20px] `, children: /* @__PURE__ */ jsx(
+        Link,
+        {
+          className: `w-[85%]`,
+          to: `/web/reset_password`,
+          children: /* @__PURE__ */ jsx(
+            "div",
+            {
+              className: `border-b w-full
+                                                    px-[0px] py-1 text-[14px]
+                                                    outline-none hover:underline`,
+              children: "Forgot Password?"
+            }
+          )
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                                            place-items-center mt-[20px]`, children: /* @__PURE__ */ jsx(Link, { to: `/web/signup`, className: `w-[85%]`, children: /* @__PURE__ */ jsx(
+        "button",
+        {
+          className: `w-full 
+                                                py-[2px] text-[14px] rounded-full text-center
+                                                text-blue-700 hover:bg-gray-100`,
+          children: "Not account yet? Create an account"
+        }
+      ) }) })
+    ] }) }) })
+  ] });
+};
+const SigninBody = () => {
+  return /* @__PURE__ */ jsx("div", { className: `bg-black w-full 
+        bg-[url('https://images.pexels.com/photos/823696/pexels-photo-823696.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')]
+        bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(SigninForm, {}) });
+};
+const index$2 = () => {
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsx(ResponsiveNav, { theme: "light" }),
+    /* @__PURE__ */ jsx(SigninBody, {})
+  ] });
+};
+const route6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: index$2
+}, Symbol.toStringTag, { value: "Module" }));
+const SignupForm = () => {
+  return /* @__PURE__ */ jsxs("div", { className: `w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
+        mt-[80px] mb-[20px] `, children: [
+    /* @__PURE__ */ jsx("div", { className: `hidden lg:block ` }),
+    /* @__PURE__ */ jsx("div", { className: `place-content-center flex lg:place-content-end col-span-12 md:col-span-1`, children: /* @__PURE__ */ jsxs("div", { className: `w-[350px] bg-white h-full rounded-2xl
+                    flex flex-col place-items-center pt-[40px] pb-[40px]
+                    px-[10px] shadow-lg shadow-gray-500`, children: [
+      /* @__PURE__ */ jsx("div", { className: "", children: /* @__PURE__ */ jsx(Logo, { theme: "light" }) }),
+      /* @__PURE__ */ jsx("div", { className: `text-[22px] text-center
+                        mt-[50px] font-bold text-blue-800`, children: "Create an account" }),
+      /* @__PURE__ */ jsx("div", { className: `text-[15px] text-center
+                        mt-[0px] font-light text-black`, children: "Get a Comcerc account" }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[50px]`, children: /* @__PURE__ */ jsx(
+        "input",
+        {
+          placeholder: "First name",
+          type: "text",
+          className: `border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[15px]`, children: /* @__PURE__ */ jsx(
+        "input",
+        {
+          placeholder: "Last name",
+          type: "text",
+          className: `border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[15px]`, children: /* @__PURE__ */ jsx(
+        "input",
+        {
+          placeholder: "Email address",
+          type: "text",
+          className: `border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[15px] `, children: /* @__PURE__ */ jsx(
+        "input",
+        {
+          placeholder: "Password",
+          type: "password",
+          className: `border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[25px]`, children: /* @__PURE__ */ jsx(
+        "button",
+        {
+          className: `w-[85%] bg-blue-600
+                            py-[12px] text-[15px] rounded-full
+                            text-white hover:bg-blue-700`,
+          children: "Create an account"
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[20px] `, children: /* @__PURE__ */ jsx(
+        Link,
+        {
+          className: `w-[85%]`,
+          to: `/web/reset_password`,
+          children: /* @__PURE__ */ jsx(
+            "div",
+            {
+              className: `border-b w-full
+                                px-[0px] py-1 text-[14px]
+                                outline-none hover:underline`,
+              children: "Forgot Password?"
+            }
+          )
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[20px]`, children: /* @__PURE__ */ jsx(Link, { to: `/web/signin`, className: `w-[85%]`, children: /* @__PURE__ */ jsxs(
+        "button",
+        {
+          className: `w-full 
+                            py-[2px] text-[14px] rounded-full text-center
+                            text-blue-700 hover:bg-gray-100`,
+          children: [
+            "Alread have an account? ",
+            /* @__PURE__ */ jsx("span", { children: "Sign in" })
+          ]
+        }
+      ) }) })
     ] }) })
   ] });
-}
-const route4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+};
+const SignupBody = () => {
+  return /* @__PURE__ */ jsx("div", { className: `bg-black w-full 
+        bg-[url('https://images.pexels.com/photos/823696/pexels-photo-823696.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')]
+        bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(SignupForm, {}) });
+};
+const index$1 = () => {
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsx(ResponsiveNav, { theme: "light" }),
+    /* @__PURE__ */ jsx(SignupBody, {})
+  ] });
+};
+const route7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: NotFound,
-  loader: loader$9
+  default: index$1
+}, Symbol.toStringTag, { value: "Module" }));
+const ResetPasswordForm = () => {
+  return /* @__PURE__ */ jsxs("div", { className: `w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
+        mt-[80px] mb-[20px] `, children: [
+    /* @__PURE__ */ jsx("div", { className: `hidden lg:block ` }),
+    /* @__PURE__ */ jsx("div", { className: `place-content-center flex lg:place-content-end col-span-12 md:col-span-1`, children: /* @__PURE__ */ jsxs("div", { className: `w-[350px] bg-white h-full rounded-2xl
+                    flex flex-col place-items-center pt-[40px] pb-[40px]
+                    px-[10px] shadow-lg shadow-gray-500`, children: [
+      /* @__PURE__ */ jsx("div", { className: "", children: /* @__PURE__ */ jsx(Logo, { theme: "light" }) }),
+      /* @__PURE__ */ jsx("div", { className: `text-[22px] text-center
+                        mt-[50px] font-bold text-blue-800`, children: "Forgot Password?" }),
+      /* @__PURE__ */ jsx("div", { className: `text-[15px] text-center
+                        mt-[0px] font-light text-black`, children: "enter your email address below" }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[50px]`, children: /* @__PURE__ */ jsx(
+        "input",
+        {
+          placeholder: "Email address",
+          type: "text",
+          className: `border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                        place-items-center mt-[25px]`, children: /* @__PURE__ */ jsx(
+        "button",
+        {
+          className: `w-[85%] bg-blue-600
+                            py-[12px] text-[15px] rounded-full
+                            text-white hover:bg-blue-700`,
+          children: "Send recovery email"
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                                            place-items-center mt-[20px] `, children: /* @__PURE__ */ jsx(
+        Link,
+        {
+          className: `w-[85%]`,
+          to: `/web/signin`,
+          children: /* @__PURE__ */ jsx(
+            "div",
+            {
+              className: `border-b w-full
+                                                    px-[0px] py-1 text-[14px]
+                                                    outline-none hover:underline`,
+              children: "Already have and account? Sign in"
+            }
+          )
+        }
+      ) }),
+      /* @__PURE__ */ jsx("div", { className: `w-full flex flex-col 
+                                            place-items-center mt-[20px]`, children: /* @__PURE__ */ jsx(Link, { to: `/web/signin`, className: `w-[85%]`, children: /* @__PURE__ */ jsxs(
+        "button",
+        {
+          className: `w-full 
+                                                py-[2px] text-[14px] rounded-full text-center
+                                                text-blue-700 hover:bg-gray-100`,
+          children: [
+            "No account yet? ",
+            /* @__PURE__ */ jsx("span", { className: `text-black`, children: "Create an account" })
+          ]
+        }
+      ) }) })
+    ] }) })
+  ] });
+};
+const ResetPasswordBody = () => {
+  return /* @__PURE__ */ jsx("div", { className: `bg-black w-full 
+        bg-[url('https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=1200')]
+        bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(ResetPasswordForm, {}) });
+};
+const index = () => {
+  return /* @__PURE__ */ jsxs("div", { children: [
+    /* @__PURE__ */ jsx(ResponsiveNav, { theme: "light" }),
+    /* @__PURE__ */ jsx(ResetPasswordBody, {})
+  ] });
+};
+const route8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: index
 }, Symbol.toStringTag, { value: "Module" }));
 let cachedPool = global.mysqlPool || null;
 const DATABASE_HOST = "localhost";
@@ -2417,7 +2778,7 @@ const loader$8 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$8
 }, Symbol.toStringTag, { value: "Module" }));
@@ -2479,7 +2840,7 @@ const loader$7 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$7
 }, Symbol.toStringTag, { value: "Module" }));
@@ -2511,7 +2872,7 @@ const loader$6 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$6
 }, Symbol.toStringTag, { value: "Module" }));
@@ -2537,7 +2898,7 @@ const loader$5 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$5
 }, Symbol.toStringTag, { value: "Module" }));
@@ -2573,7 +2934,7 @@ const loader$4 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$4
 }, Symbol.toStringTag, { value: "Module" }));
@@ -2589,7 +2950,7 @@ const loader$3 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$3
 }, Symbol.toStringTag, { value: "Module" }));
@@ -2608,7 +2969,7 @@ const loader$2 = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const route12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route15 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$2
 }, Symbol.toStringTag, { value: "Module" }));
@@ -2642,7 +3003,7 @@ const loader$1 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$1
 }, Symbol.toStringTag, { value: "Module" }));
@@ -2665,11 +3026,11 @@ const loader = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-BUi3dibc.js", "imports": ["/assets/components-RujwakfW.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-CG9_Dl-i.js", "imports": ["/assets/components-RujwakfW.js", "/assets/SliderContext-BsZ5o7L-.js", "/assets/index-DBwm6Css.js", "/assets/index-DJx9Xc4x.js"], "css": ["/assets/root-9I9Dx4Ip.css"] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-j5nF-w4r.js", "imports": ["/assets/components-RujwakfW.js", "/assets/LatestStarRating-DMFFikTa.js", "/assets/ResponsiveNav-AVtYprCS.js", "/assets/SliderContext-BsZ5o7L-.js", "/assets/index-DBwm6Css.js", "/assets/index-DJx9Xc4x.js", "/assets/SearchBox-CqR54RXy.js", "/assets/MobileNav-CrAPO416.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-C4WKyVd2.js", "imports": ["/assets/components-RujwakfW.js", "/assets/MobileNav-CrAPO416.js", "/assets/SearchBox-CqR54RXy.js", "/assets/index-DJx9Xc4x.js"], "css": [] }, "routes/search": { "id": "routes/search", "parentId": "root", "path": "search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-n-Yrf0EE.js", "imports": ["/assets/components-RujwakfW.js", "/assets/ResponsiveNav-AVtYprCS.js", "/assets/index-DBwm6Css.js", "/assets/LatestStarRating-DMFFikTa.js", "/assets/index-DJx9Xc4x.js", "/assets/MobileNav-CrAPO416.js", "/assets/SearchBox-CqR54RXy.js"], "css": [] }, "routes/_404": { "id": "routes/_404", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_404-BegEAMu7.js", "imports": ["/assets/components-RujwakfW.js", "/assets/ResponsiveNav-AVtYprCS.js", "/assets/MobileNav-CrAPO416.js", "/assets/index-DJx9Xc4x.js", "/assets/index-DBwm6Css.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-j5nF-w4r.js", "imports": ["/assets/components-RujwakfW.js", "/assets/LatestStarRating-DMFFikTa.js", "/assets/ResponsiveNav-AVtYprCS.js", "/assets/SliderContext-BsZ5o7L-.js", "/assets/index-DBwm6Css.js", "/assets/index-DJx9Xc4x.js", "/assets/SearchBox-CqR54RXy.js", "/assets/MobileNav-CrAPO416.js"], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-4f1c5dec.js", "version": "4f1c5dec" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-DWm6wvRw.js", "imports": ["/assets/components-UScJPEQZ.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-BSSyb0jP.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/NotificationContext-0di_V1FR.js", "/assets/AuthContext-BglKvpdT.js", "/assets/SliderContext-B0HQRgDP.js", "/assets/index-BFtw7xUU.js", "/assets/index-NVfH2Vn7.js"], "css": ["/assets/root-BdJ8hOEA.css"] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B0iXVddP.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/LatestStarRating-BaYhUSZ4.js", "/assets/ResponsiveNav-D7ocPg28.js", "/assets/SliderContext-B0HQRgDP.js", "/assets/AuthContext-BglKvpdT.js", "/assets/index-DFVatVxl.js", "/assets/NotificationContext-0di_V1FR.js", "/assets/index-BFtw7xUU.js", "/assets/index-NVfH2Vn7.js", "/assets/SearchBox-zAwg0FZa.js", "/assets/MobileNav-Dwu4z7_7.js", "/assets/UserMenu-DwDowppi.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-utmiBP94.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/MobileNav-Dwu4z7_7.js", "/assets/UserMenu-DwDowppi.js", "/assets/SearchBox-zAwg0FZa.js", "/assets/index-BFtw7xUU.js", "/assets/index-NVfH2Vn7.js", "/assets/AuthContext-BglKvpdT.js"], "css": [] }, "routes/_404": { "id": "routes/_404", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_404-BltYV5ge.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-D7ocPg28.js", "/assets/MobileNav-Dwu4z7_7.js", "/assets/index-BFtw7xUU.js", "/assets/UserMenu-DwDowppi.js", "/assets/index-NVfH2Vn7.js", "/assets/AuthContext-BglKvpdT.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B0iXVddP.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/LatestStarRating-BaYhUSZ4.js", "/assets/ResponsiveNav-D7ocPg28.js", "/assets/SliderContext-B0HQRgDP.js", "/assets/AuthContext-BglKvpdT.js", "/assets/index-DFVatVxl.js", "/assets/NotificationContext-0di_V1FR.js", "/assets/index-BFtw7xUU.js", "/assets/index-NVfH2Vn7.js", "/assets/SearchBox-zAwg0FZa.js", "/assets/MobileNav-Dwu4z7_7.js", "/assets/UserMenu-DwDowppi.js"], "css": [] }, "routes/web/search/index": { "id": "routes/web/search/index", "parentId": "root", "path": "/web/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-_1nccAHo.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-D7ocPg28.js", "/assets/AuthContext-BglKvpdT.js", "/assets/LatestStarRating-BaYhUSZ4.js", "/assets/index-BFtw7xUU.js", "/assets/MobileNav-Dwu4z7_7.js", "/assets/UserMenu-DwDowppi.js", "/assets/index-NVfH2Vn7.js", "/assets/SearchBox-zAwg0FZa.js"], "css": [] }, "routes/web/signin/index": { "id": "routes/web/signin/index", "parentId": "root", "path": "/web/signin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CEQaM78-.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-Crhzu24l.js", "/assets/index-DFVatVxl.js", "/assets/MobileNav-Dwu4z7_7.js", "/assets/AuthContext-BglKvpdT.js", "/assets/NotificationContext-0di_V1FR.js", "/assets/index-BFtw7xUU.js"], "css": [] }, "routes/web/signup/index": { "id": "routes/web/signup/index", "parentId": "root", "path": "/web/signup", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C493rcQQ.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-Crhzu24l.js", "/assets/MobileNav-Dwu4z7_7.js", "/assets/index-BFtw7xUU.js"], "css": [] }, "routes/web/reset_password/index": { "id": "routes/web/reset_password/index", "parentId": "root", "path": "/web/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BuhyVVMl.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-Crhzu24l.js", "/assets/MobileNav-Dwu4z7_7.js", "/assets/index-BFtw7xUU.js"], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-6c0fed48.js", "version": "6c0fed48" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";
@@ -2692,7 +3053,7 @@ const routes = {
     path: "listing",
     index: void 0,
     caseSensitive: void 0,
-    module: route5
+    module: route4
   },
   "routes/_index": {
     id: "routes/_index",
@@ -2702,21 +3063,13 @@ const routes = {
     caseSensitive: void 0,
     module: route2
   },
-  "routes/search": {
-    id: "routes/search",
-    parentId: "root",
-    path: "search",
-    index: void 0,
-    caseSensitive: void 0,
-    module: route3
-  },
   "routes/_404": {
     id: "routes/_404",
     parentId: "root",
     path: "*",
     index: void 0,
     caseSensitive: void 0,
-    module: route4
+    module: route3
   },
   "routes/listing/index": {
     id: "routes/listing/index",
@@ -2724,7 +3077,39 @@ const routes = {
     path: "/:id",
     index: void 0,
     caseSensitive: void 0,
+    module: route4
+  },
+  "routes/web/search/index": {
+    id: "routes/web/search/index",
+    parentId: "root",
+    path: "/web/search",
+    index: void 0,
+    caseSensitive: void 0,
     module: route5
+  },
+  "routes/web/signin/index": {
+    id: "routes/web/signin/index",
+    parentId: "root",
+    path: "/web/signin",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route6
+  },
+  "routes/web/signup/index": {
+    id: "routes/web/signup/index",
+    parentId: "root",
+    path: "/web/signup",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route7
+  },
+  "routes/web/reset_password/index": {
+    id: "routes/web/reset_password/index",
+    parentId: "root",
+    path: "/web/reset_password",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route8
   },
   "routes/api/listing/listing": {
     id: "routes/api/listing/listing",
@@ -2732,7 +3117,7 @@ const routes = {
     path: "api/listing/:guid_or_username",
     index: void 0,
     caseSensitive: void 0,
-    module: route6
+    module: route9
   },
   "routes/api/listing/search": {
     id: "routes/api/listing/search",
@@ -2740,7 +3125,7 @@ const routes = {
     path: "api/listing/search",
     index: void 0,
     caseSensitive: void 0,
-    module: route7
+    module: route10
   },
   "routes/api/listing/featured_listing": {
     id: "routes/api/listing/featured_listing",
@@ -2748,7 +3133,7 @@ const routes = {
     path: "api/listing/featured_listing",
     index: void 0,
     caseSensitive: void 0,
-    module: route8
+    module: route11
   },
   "routes/api/listing/business_facility_features": {
     id: "routes/api/listing/business_facility_features",
@@ -2756,7 +3141,7 @@ const routes = {
     path: "api/listing/business_facility_features/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route9
+    module: route12
   },
   "routes/api/listing/listing_by_category": {
     id: "routes/api/listing/listing_by_category",
@@ -2764,7 +3149,7 @@ const routes = {
     path: "api/listing/listing_by_category/:category/:limit",
     index: void 0,
     caseSensitive: void 0,
-    module: route10
+    module: route13
   },
   "routes/api/listing/business_gallery": {
     id: "routes/api/listing/business_gallery",
@@ -2772,7 +3157,7 @@ const routes = {
     path: "api/listing/business_gallery/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route11
+    module: route14
   },
   "routes/api/listing/business_profile_image": {
     id: "routes/api/listing/business_profile_image",
@@ -2780,7 +3165,7 @@ const routes = {
     path: "api/listing/business_profile_image/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route12
+    module: route15
   },
   "routes/api/rating/business_ratings": {
     id: "routes/api/rating/business_ratings",
@@ -2788,7 +3173,7 @@ const routes = {
     path: "api/rating/business_ratings/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route13
+    module: route16
   },
   "routes/api/rating/ratings_reviews": {
     id: "routes/api/rating/ratings_reviews",
@@ -2796,7 +3181,7 @@ const routes = {
     path: "api/rating/ratings_reviews/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route14
+    module: route17
   }
 };
 export {

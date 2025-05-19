@@ -12,7 +12,7 @@ const Logo = ({ theme }: NavTheme) => {
         <div className={`flex place-items-center space-x-1`}>
             <Link to="/">
                 <div className={`${theme === 'light' ? 'bg-black text-white' : 'bg-white/90 text-black'}
-                relative w-8 h-8 
+                relative w-8 h-8 rounded-full overflow-hidden
                 `}>
                     <img
                         src="/images/comcerc-logo.png"

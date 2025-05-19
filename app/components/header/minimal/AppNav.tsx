@@ -33,11 +33,8 @@ const AppNav = ({
               h-full flex place-items-center place-content-between
               `}>
                 <Logo theme={_theme} />
-                <CenterNav theme={_theme} navBg={navBg} />
-                <div className={`flex place-items-center gap-4`}>
-                    <UserMenu theme={_theme} />
-                    <Hamburger theme={_theme} openNav={openNav} navBg={navBg} />
-                </div>
+
+
             </div>
 
         </div>

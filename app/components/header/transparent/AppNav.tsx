@@ -3,6 +3,9 @@ import Logo from '../Logo'
 import SigninMenu from '../Hamburger'
 import { NavProps } from '~/lib/types'
 import CenterNav from './CenterNav'
+import UserMenu from '../usermenu/UserMenu'
+import Hamburger from '../Hamburger'
+
 
 
 const AppNav = ({ openNav }: NavProps) => {
@@ -27,8 +30,10 @@ const AppNav = ({ openNav }: NavProps) => {
               `}>
                 <Logo theme='dark' />
                 <CenterNav navBg={navBg} />
-                <div>
-                    <SigninMenu openNav={openNav} navBg={navBg} />
+
+                <div className={`flex place-items-center gap-4`}>
+                    <UserMenu theme={"dark"} />
+                    <Hamburger theme={"dark"} openNav={openNav} navBg={navBg} />
                 </div>
             </div>
 

@@ -16,5 +16,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
 
         route("api/rating/business_ratings/:business_guid", "routes/api/rating/business_ratings.tsx");
         route("api/rating/ratings_reviews/:business_guid", "routes/api/rating/ratings_reviews.tsx");
+
+        route("*", "routes/_404.tsx");
     });
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { BiUser } from 'react-icons/bi'
 import DropDown from './DropDown'
 import { useAuth } from '~/context/AuthContext'
+import { Link } from '@remix-run/react'
 
 const UserMenu = ({ theme }: any) => {
     const [open, setOpen] = useState(false)
@@ -25,13 +26,15 @@ const UserMenu = ({ theme }: any) => {
                 relative cursor-pointer`}>
                         <BiUser className={`object-cover w-[70%] h-[70%]`} />
                     </button> :
-                    <div className={`rounded-full border-[1px] px-3
+                    <Link to={`/web/signin`}>
+                        <div className={`rounded-full border-[1px] px-3
                      text-[13px] py-[5px] cursor-pointer
                     ${theme === "dark" && 'text-white border-gray-400/80 hover:bg-white hover:text-blue-800'}
-                    ${theme !== "dark" && 'hover:text-gray-700 border-gray-500/50 hover:border-yellow-600 hover:shadow-lg hover:bg-yellow-200'}
+                    ${theme !== "dark" && 'text-white border-gray-500/50 hover:text-white/60 hover:shadow-lg bg-yellow-800'}
                     `}>
-                        Sign in
-                    </div>
+                            Sign in
+                        </div>
+                    </Link>
             }
 
             <DropDown open={open} />

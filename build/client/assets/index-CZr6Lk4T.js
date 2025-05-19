@@ -13,7 +13,7 @@ import{j as e,L as l}from"./components-UScJPEQZ.js";import{R as s}from"./Respons
                                             place-items-center mt-[20px] `,children:e.jsx(l,{className:"w-[85%]",to:"/web/signin",children:e.jsx("div",{className:`border-b w-full
                                                     px-[0px] py-1 text-[14px]
                                                     outline-none hover:underline`,children:"Already have and account? Sign in"})})}),e.jsx("div",{className:`w-full flex flex-col 
-                                            place-items-center mt-[20px]`,children:e.jsx(l,{to:"/web/signin",className:"w-[85%]",children:e.jsxs("button",{className:`w-full 
+                                            place-items-center mt-[20px]`,children:e.jsx(l,{to:"/web/signup",className:"w-[85%]",children:e.jsxs("button",{className:`w-full 
                                                 py-[2px] text-[14px] rounded-full text-center
                                                 text-blue-700 hover:bg-gray-100`,children:["No account yet? ",e.jsx("span",{className:"text-black",children:"Create an account"})]})})})]})})]}),x=()=>e.jsx("div",{className:`bg-black w-full 
         bg-[url('https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=1200')]

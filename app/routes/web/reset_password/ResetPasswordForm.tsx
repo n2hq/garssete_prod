@@ -67,7 +67,7 @@ const ResetPasswordForm = () => {
 
                     <div className={`w-full flex flex-col 
                                             place-items-center mt-[20px]`}>
-                        <Link to={`/web/signin`} className={`w-[85%]`}>
+                        <Link to={`/web/signup`} className={`w-[85%]`}>
                             <button
                                 className={`w-full 
                                                 py-[2px] text-[14px] rounded-full text-center

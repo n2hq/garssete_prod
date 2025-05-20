@@ -8,9 +8,12 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/signin", "routes/web/signin/index.tsx");
         route("/web/signup", "routes/web/signup/index.tsx");
         route("/web/reset_password", "routes/web/reset_password/index.tsx");
+        route("/web/account", "routes/web/account/index.tsx");
 
 
-
+        {/** user */ }
+        route("api/user/signin", "routes/api/user/signin.tsx");
+        route("api/user/verifytoken", "routes/api/user/verifytoken.tsx")
 
         route("api/listing/:guid_or_username", "routes/api/listing/listing.tsx");
         route("api/listing/search", "routes/api/listing/search.tsx");

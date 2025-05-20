@@ -30,7 +30,7 @@ const UserMenu = ({ theme }: any) => {
                         <div className={`rounded-full border-[1px] px-3
                      text-[13px] py-[5px] cursor-pointer
                     ${theme === "dark" && 'text-white border-gray-400/80 hover:bg-white hover:text-blue-800'}
-                    ${theme !== "dark" && 'text-white border-gray-500/50 hover:text-white/60 hover:shadow-lg bg-yellow-800'}
+                    ${theme !== "dark" && 'text-white border-gray-500/50 hover:text-white/60 hover:shadow-lg bg-blue-800'}
                     `}>
                             Sign in
                         </div>

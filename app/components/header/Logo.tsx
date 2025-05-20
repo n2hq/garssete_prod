@@ -15,7 +15,7 @@ const Logo = ({ theme }: NavTheme) => {
                 relative w-8 h-8 rounded-full overflow-hidden
                 `}>
                     <img
-                        src="/images/comcerc-logo.png"
+                        src={`${theme === "dark" ? "/images/comcerc-logo-light.png" : "/images/comcerc-logo.png"}`}
                         alt="comcerc"
                         className={`object-cover w-full hfull`}
                     />
@@ -23,7 +23,7 @@ const Logo = ({ theme }: NavTheme) => {
             </Link>
 
             <Link to="/">
-                <span className={`${theme === 'light' ? 'text-black' : 'text-white/90'}
+                <span className={`${theme === 'light' ? 'text-blue-900' : 'text-white/90'}
                 font-[700] text-2xl tracking-tight relative
                 `}>
                     comcerc

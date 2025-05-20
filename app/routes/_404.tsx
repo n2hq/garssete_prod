@@ -8,7 +8,7 @@ export function loader() {
 export default function NotFound() {
     return (
         <div>
-            <ResponsiveNav theme={'light'} />
+            <ResponsiveNav theme={'dark'} />
             <div className={`min-h-screen flex items-center justify-center 
         text-center px-4 text-black`}>
                 <div className={`flex place-content-center place-items-center gap-3

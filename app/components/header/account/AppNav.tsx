@@ -27,9 +27,10 @@ const AppNav = ({
     return (
         <div className={`${_theme === 'dark' ? 'bg-blue-800' : 'bg-white'}
         fixed h-[60px] z-[300] w-full px-[15px]
-        transition ease-in-out duration-0`}>
+        transition ease-in-out duration-0
+        shadow-sm  border-b`}>
 
-            <div className={`max-w-[1100px] mx-auto w-full
+            <div className={` mx-auto w-full
               h-full flex place-items-center place-content-between
               `}>
                 <Logo theme={_theme} />

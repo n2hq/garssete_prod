@@ -22,7 +22,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const verifyToken = async (accessToken: string) => {
         try {
-            let verifyep = '/api/users/verifytoken'
+            let verifyep = '/api/user/verifytoken'
             let vep = SITE_BASE_URL + verifyep
             const response = await fetch(vep, {
                 method: 'POST',
@@ -88,7 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     let [loading, setLoading] = useState(true)
 
     const baseurl = SITE_BASE_URL
-    const endpoint = '/api/users/signin'
+    const endpoint = '/api/user/signin'
     const requesturl = baseurl + endpoint
     const navigator = useNavigate()
 

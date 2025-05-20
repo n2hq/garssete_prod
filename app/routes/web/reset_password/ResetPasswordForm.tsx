@@ -5,20 +5,20 @@ import Logo from '~/components/header/Logo'
 const ResetPasswordForm = () => {
     return (
         <div className={`w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
-        mt-[80px] mb-[20px] `}>
+        mt-[150px] mb-[20px] `}>
             <div className={`hidden lg:block `}>
 
             </div>
             <div className={`place-content-center flex lg:place-content-end col-span-12 md:col-span-1`}>
                 <div className={`w-[350px] bg-white h-full rounded-2xl
                     flex flex-col place-items-center pt-[40px] pb-[40px]
-                    px-[10px] shadow-lg shadow-gray-500`}>
+                    px-[10px] `}>
                     <div className=''>
                         <Logo theme='light' />
                     </div>
 
                     <div className={`text-[22px] text-center
-                        mt-[50px] font-bold text-blue-800`}>
+                        mt-[30px] font-bold text-blue-800`}>
                         Forgot Password?
                     </div>
 
@@ -28,7 +28,7 @@ const ResetPasswordForm = () => {
                     </div>
 
                     <div className={`w-full flex flex-col 
-                        place-items-center mt-[50px]`}>
+                        place-items-center mt-[30px]`}>
                         <input
                             placeholder='Email address'
                             type="text"

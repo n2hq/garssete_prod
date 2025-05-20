@@ -293,3 +293,7 @@ export const getBusinessFeatures = async (businessGuid: string | null): Promise<
         return undefined
     }
 }
+
+export const generate7DigitNumber = (): number => {
+    return Math.floor(1000000 + Math.random() * 9000000); // Range: 1000000 - 9999999
+};

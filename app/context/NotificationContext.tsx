@@ -157,7 +157,7 @@ export const Confirm = ({ handleClose, working, message, handleConfirmCancel, se
                 `}>
             <div className={`w-[90%] sm:w-[500px] h-auto bg-white 
                         overflow-hidden rounded-md relative shadow-2xl shadow-black/50`}>
-                <div className={`px-4 py-3 border-b-[1px] font-bold text-[17px] bg-yellow-300
+                <div className={`px-4 py-3 border-b-[1px] font-bold text-[17px] bg-gray-100
                             w-full`}>
                     Confirm
                 </div>
@@ -194,7 +194,7 @@ export const Notify = ({ working, notifyMessage }: any) => {
                 `}>
             <div className={`w-[90%] sm:w-[500px] h-auto bg-white 
                         overflow-hidden rounded-md relative shadow-2xl shadow-black/50`}>
-                <div className={`px-4 py-3 border-b-[1px] font-bold text-[17px] bg-yellow-300
+                <div className={`px-4 py-3 border-b-[1px] font-bold text-[17px] bg-gray-100
                             w-full`}>
 
                     Processing...
@@ -223,7 +223,7 @@ export const Alert = ({ handleClose, working, message, title }: any) => {
                 `}>
             <div className={`w-[90%] sm:w-[500px] h-auto bg-white 
                         overflow-hidden rounded-md relative shadow-2xl shadow-black/50`}>
-                <div className={`px-4 py-3 border-b-[1px] font-bold text-[17px] bg-yellow-300
+                <div className={`px-4 py-3 border-b-[1px] font-bold text-[17px] bg-gray-100
                             w-full`}>
                     {title}
                 </div>
@@ -263,7 +263,7 @@ export const AlertReload = ({ handleClose, working, message, title }: any) => {
                 `}>
             <div className={`w-[90%] sm:w-[500px] h-auto bg-white 
                         overflow-hidden rounded-md relative shadow-2xl shadow-black/50`}>
-                <div className={`px-4 py-3 border-b-[1px] font-bold text-[17px] bg-yellow-300
+                <div className={`px-4 py-3 border-b-[1px] font-bold text-[17px] bg-gray-100
                             w-full`}>
                     {title}
                 </div>
@@ -298,7 +298,7 @@ export const AlertCancel = ({ handleClose, working, message, title }: any) => {
                 `}>
             <div className={`w-[90%] sm:w-[500px] h-auto bg-white 
                         overflow-hidden rounded-md relative shadow-2xl shadow-black/50`}>
-                <div className={`px-4 py-3 border-b-[1px] font-bold text-[17px] bg-yellow-300
+                <div className={`px-4 py-3 border-b-[1px] font-bold text-[17px] bg-gray-100
                             w-full`}>
                     {title}
                 </div>

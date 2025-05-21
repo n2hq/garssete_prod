@@ -17,6 +17,7 @@ const index = () => {
     const [userProfileImageData, setUserProfileImageData] = useState<any | null>(null)
     const [categories, setCategories] = useState<any | null>(null)
     const [data, setData] = useState<any | null>(null)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function getAllData(guid: string) {
@@ -62,10 +63,16 @@ const index = () => {
         userProfile
     ])
 
+    useEffect(() => {
+        setLoading(false)
+    }, [])
+
+
 
     return (
         <AccountLayout>
             <ContentLayout title={'Account Profile'}>
+                {loading ? 'Loading...' : ''}
                 <div className={`font-semibold mb-2 text-md`}>
                     {userProfile?.first_name} {userProfile?.lastname}
                 </div>

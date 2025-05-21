@@ -14,6 +14,7 @@ const EmailForm = ({ loaderData, user }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
+    const [loading, setLoading] = useState(true)
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -72,6 +73,8 @@ const EmailForm = ({ loaderData, user }: any) => {
         resolver: zodResolver(EmailSchema)
     })
 
+
+    { loading ? 'Loading...' : '' }
 
     return (
         <form onSubmit={handleSubmit(handleEmailChangeRequest)}>

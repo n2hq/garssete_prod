@@ -24,6 +24,7 @@ const categoryJson = [
 const ProfileForm = ({ loaderData, user, userProfileData }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
+
     const notification = useNotification()
 
     const countries = loaderData.countries
@@ -121,6 +122,8 @@ const ProfileForm = ({ loaderData, user, userProfileData }: any) => {
             setValue("city_id", "")
         }
     }, [newStateCode])
+
+
 
 
     return (

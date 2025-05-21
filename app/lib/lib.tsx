@@ -299,9 +299,9 @@ export const generate7DigitNumber = (): number => {
 };
 
 export const getCountries = async (): Promise<Country[] | undefined> => {
-    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+
     const endpoint = "/api/util/country"
-    const url = BASE_URL + endpoint
+    const url = config.BASE_URL + endpoint
 
     try {
         const response = await fetch(url, {
@@ -321,20 +321,17 @@ export const getCountries = async (): Promise<Country[] | undefined> => {
             }
         })
 
-        console.log(finaldata)
 
-        return new Promise((resolve) => setTimeout(() => {
-            resolve(data)
-        }, 10))
+        return data
     } catch (error: any) {
         return undefined
     }
 }
 
 export const getStates = async (countryCode: string | null): Promise<State[] | undefined> => {
-    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+
     const endpoint = "/api/util/state?country_code=" + countryCode
-    const url = BASE_URL + endpoint
+    const url = config.BASE_URL + endpoint
 
     try {
         const response = await fetch(url, {
@@ -357,9 +354,9 @@ export const getStates = async (countryCode: string | null): Promise<State[] | u
 }
 
 export const getCities = async (countryCode: string | null, stateCode: string | null): Promise<City[] | undefined> => {
-    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+
     const endpoint = "/api/util/city?country_code=" + countryCode + "&state_code=" + stateCode
-    const url = BASE_URL + endpoint
+    const url = config.BASE_URL + endpoint
 
     try {
         const response = await fetch(url, {
@@ -382,11 +379,9 @@ export const getCities = async (countryCode: string | null, stateCode: string | 
 }
 
 export const getCategories = async (): Promise<Category[] | undefined> => {
-    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
-    const endpoint = "/api/util/category"
-    const url = BASE_URL + endpoint
 
-    console.log(url)
+    const endpoint = "/api/util/category"
+    const url = config.BASE_URL + endpoint
     try {
         const response = await fetch(url, {
             method: "GET",
@@ -423,6 +418,31 @@ export const getUserProfile = async (guid: string | null): Promise<UserProfile[]
         }
 
         const data: UserProfile[] = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getUserProfileImageData = async (guid: string | null): Promise<UserProfile[] | undefined> => {
+
+    const endpoint = "/api/user/user_profile_image/" + guid
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
 
         return new Promise((resolve) => setTimeout(() => {
             resolve(data)

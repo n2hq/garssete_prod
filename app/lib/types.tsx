@@ -227,3 +227,14 @@ export const VerifiedStatus = {
     OK: true,
     PENDING: false
 }
+
+export const RequestType = {
+    PASSWORD_RESET: "password_reset",
+    CHANGE_PASSWORD: "change_password",
+    CHANGE_EMAIL: "change_email"
+}
+
+export const RequestStatus = {
+    OPEN: "open",
+    CLOSED: "closed"
+}

@@ -8,6 +8,8 @@ import ProfileSchema from './ProfileSchema'
 import { getCities, getStates, headers } from '~/lib/lib'
 import { MdEditSquare } from 'react-icons/md'
 import ImgComponent from './ImgComponent'
+import { formWrapperClass, inputHeadingClass, inputWrapperClass } from '~/lib/css'
+import { useNotification } from '~/context/NotificationContext'
 
 const categoryJson = [
     {
@@ -19,17 +21,18 @@ const categoryJson = [
         name: "Services"
     }
 ]
-const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }: any) => {
+const ProfileForm = ({ loaderData, user, userProfileData }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
+    const notification = useNotification()
 
     const countries = loaderData.countries
     let [states, setStates] = useState(loaderData.states)
     let [cities, setCities] = useState(loaderData.cities)
-    const categories = loaderData.categories.data
+    const categories = loaderData.categories
 
-    const [countryCode, setCountryCode] = useState(loaderData.userProfileData.country_code)
-    const [stateCode, setStateCode] = useState(loaderData.userProfileData.state_code)
+    const [countryCode, setCountryCode] = useState(loaderData.userProfileData?.country_code)
+    const [stateCode, setStateCode] = useState(loaderData.userProfileData?.state_code)
 
     const [newCountryCode, setNewCountryCode] = useState('')
     const [newStateCode, setNewStateCode] = useState('')
@@ -63,9 +66,10 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
 
     const handleUpdateUser: SubmitHandler<any> = async (data: any) => {
         setWorking(true)
+        notification.notify('Updating user profile...')
         await new Promise((resolve) => setTimeout(resolve, 1000));
         const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
-        const endpoint = "/api/users/" + user.guid
+        const endpoint = "/api/user/" + user.guid
         const url = BASE_URL + endpoint
 
         try {
@@ -79,11 +83,11 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                 var respObj = await response.json()
                 throw new Error(`Error Code: ${response.status} - ${respObj.error}`)
             } else {
-                alert('Update is Successfully!')
+                notification.alertReload('Success', 'Update is Successful!')
             }
         }
         catch (error: any) {
-            alert(error.message)
+            notification.alertCancel('Error', error.message)
             return undefined
         }
         finally {
@@ -121,9 +125,9 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
 
     return (
         <>
-            <div className='form__wrapper__class'>
-                <div className='input__wrapper_class flex flex-col place-items-center md:place-items-start'>
-                    <div className='input__heading__class'>
+            <div className={formWrapperClass}>
+                <div className={`${inputWrapperClass} flex flex-col place-items-center`}>
+                    <div className={inputHeadingClass}>
                         Add/Change Photo
                     </div>
                     <div className='mt-4'>
@@ -136,9 +140,11 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                 </div>
             </div>
 
+            <hr />
             <form onSubmit={handleSubmit(handleUpdateUser)}>
 
-                <div className='form__wrapper__class -mt-0'>
+                <div className={`${formWrapperClass} mt-0  rounded-lg pt-4
+                 max-w-[400px] w-full mx-auto `}>
                     <Input
                         controlTitle={"First Name"}
                         controlName={"first_name"}
@@ -146,6 +152,7 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                         register={register}
                         changeHandler={changeHandler}
                         error={errors.first_name}
+                        controlInformation={`Please enter your first name. First name is compulsory. `}
                     />
 
                     <Input
@@ -155,6 +162,7 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                         register={register}
                         changeHandler={changeHandler}
                         error={errors.lastname}
+                        controlInformation={`Please enter your last name. Last name is compulsory. `}
                     />
 
                     <Select
@@ -166,6 +174,7 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                         changeHandler={changeHandler}
                         error={errors.country_code}
                         setCode={resetStates}
+                        controlInformation={`Please select country. `}
                     />
 
                     <Select
@@ -176,6 +185,7 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                         register={register}
                         changeHandler={changeHandler}
                         setCode={resetCities}
+                        controlInformation={`Please select state. `}
                     />
 
                     <Select
@@ -185,6 +195,7 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                         selectJson={cities}
                         register={register}
                         changeHandler={changeHandler}
+                        controlInformation={`Please select a city. `}
                     />
 
                     <Input
@@ -193,6 +204,7 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                         controlPlaceholder={"Enter zip code"}
                         register={register}
                         changeHandler={changeHandler}
+                        controlInformation={`Please a zipcode. `}
                     />
 
 
@@ -202,6 +214,7 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                         controlPlaceholder={"Enter phone number"}
                         register={register}
                         changeHandler={changeHandler}
+                        controlInformation={`Please enter a phone or mobile. `}
                     />
 
 
@@ -211,6 +224,7 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                         controlPlaceholder={"Enter address"}
                         register={register}
                         changeHandler={changeHandler}
+                        controlInformation={`Please enter an address. `}
                     />
 
                     <Input
@@ -219,6 +233,7 @@ const ProfileForm = ({ loaderData, user, userProfileData, userProfileImageData }
                         controlPlaceholder={"Enter address"}
                         register={register}
                         changeHandler={changeHandler}
+                        controlInformation={`E.g. Off Brian's Boulevard or Avenue. `}
                     />
 
                     <Button working={working} />

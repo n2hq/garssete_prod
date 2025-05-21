@@ -1,0 +1,1 @@
+import{j as t}from"./components-UScJPEQZ.js";import{A as o,C as r}from"./ContentLayout-CO-DDPSz.js";import"./MobileNav-BzWLh9uv.js";import"./index-DOwvlINV.js";import"./UserMenu-VTcL3ELE.js";import"./AuthContext-DP2umk9J.js";const p=()=>t.jsx(o,{children:t.jsx(r,{title:"Reset Password",children:"Reset Password"})});export{p as default};

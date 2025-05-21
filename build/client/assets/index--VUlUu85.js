@@ -1,1 +1,0 @@
-import{j as t}from"./components-UScJPEQZ.js";import{A as r,C as o}from"./ContentLayout-bnaZEuDE.js";import"./MobileNav-CZmBy4tC.js";import"./index-DOwvlINV.js";import"./UserMenu-B4UA3JnZ.js";import"./AuthContext-D-Wk8Hfz.js";const d=()=>t.jsx(r,{children:t.jsx(o,{title:"Email Address",children:"Email Address"})});export{d as default};

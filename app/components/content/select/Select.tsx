@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MdError } from 'react-icons/md'
+import { controlInformationClass, inputClass, inputControlWrapper, inputHeadingClass } from '~/lib/css'
 
 const Select = ({
     controlName,
@@ -9,7 +10,8 @@ const Select = ({
     register,
     changeHandler,
     error,
-    setCode
+    setCode,
+    controlInformation
 }: any) => {
     const [ready, setReady] = useState(false)
 
@@ -23,11 +25,18 @@ const Select = ({
 
     return (
         <>
-            <div className='input__wrapper_class'>
-                <div className='input__heading__class'>
-                    {controlTitle}
+            <div className={inputControlWrapper}>
+                <div className={inputHeadingClass}>
+                    <div className={`mb-0`}>
+                        {controlTitle}
+                    </div>
+                    {
+                        controlInformation?.length > 1 && <div className={controlInformationClass}>
+                            {controlInformation}
+                        </div>
+                    }
                 </div>
-                <div className='input__control__wrapper'>
+                <div className='w-[90%]'>
                     {
                         ready && <select
                             {...register(controlName, {
@@ -38,7 +47,7 @@ const Select = ({
                                     }
                                 }
                             })}
-                            className='input__class'
+                            className={inputClass}
 
                         >
                             <option value="">{controlPlaceholder}</option>

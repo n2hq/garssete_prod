@@ -20,6 +20,10 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/user/verifytoken", "routes/api/user/verifytoken.tsx");
         route("api/user/:guid", "routes/api/user/user.tsx");
 
+        route("api/user/user_profile_image/:guid", "routes/api/user/user_profile_image.tsx");
+        route("api/user/change_email_request", "routes/api/user/change_email_request.tsx");
+
+
         route("api/listing/:guid_or_username", "routes/api/listing/listing.tsx");
         route("api/listing/search", "routes/api/listing/search.tsx");
         route("api/listing/featured_listing", "routes/api/listing/featured_listing.tsx");
@@ -30,6 +34,11 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
 
         route("api/rating/business_ratings/:business_guid", "routes/api/rating/business_ratings.tsx");
         route("api/rating/ratings_reviews/:business_guid", "routes/api/rating/ratings_reviews.tsx");
+
+        route("api/util/state", "routes/api/util/state.tsx");
+        route("api/util/country", "routes/api/util/country.tsx");
+        route("api/util/city", "routes/api/util/city.tsx");
+        //route("api/util/category", "routes/api/util/category.tsx");
 
         route("*", "routes/_404.tsx");
     });

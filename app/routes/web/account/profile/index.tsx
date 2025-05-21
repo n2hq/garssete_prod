@@ -5,40 +5,81 @@ import ImgComponent from './assets/ImgComponent'
 import ProfileForm from './assets/ProfileForm'
 import { LoaderFunction } from '@remix-run/node'
 import { useAuth } from '~/context/AuthContext'
-import { getUserProfile } from '~/lib/lib'
+import { getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData } from '~/lib/lib'
 
 
 const index = () => {
     const { user } = useAuth()
     const [userProfile, setUserProfile] = useState<any | null>(null)
+    const [states, setStates] = useState<any | null>(null)
+    const [countries, setCountries] = useState<any | null>(null)
+    const [cities, setCities] = useState<any | null>(null)
+    const [userProfileImageData, setUserProfileImageData] = useState<any | null>(null)
+    const [categories, setCategories] = useState<any | null>(null)
+    const [data, setData] = useState<any | null>(null)
 
     useEffect(() => {
-        async function getUserProfileData(guid: string) {
+        async function getAllData(guid: string) {
             const userProfileData = await getUserProfile(guid || "")
+            const countries = await getCountries()
+            const userObject: any = userProfileData
+            const states = await getStates(userObject.country_code || "")
+            const cities = await getCities(userObject.country_code || "", userObject.state_code || "")
+            const categories = await getCategories()
+            const userProfileImageData = await getUserProfileImageData(guid || "")
             setUserProfile(userProfileData)
+            setCountries(countries)
+            setStates(states)
+            setCities(cities)
+            setUserProfileImageData(userProfileImageData)
+            setCategories(categories)
         }
+
         if (user?.guid) {
-            getUserProfileData(user?.guid)
+            getAllData(user?.guid)
         }
     }, [user?.guid])
 
     useEffect(() => {
-        if (userProfile !== null) {
-            alert(JSON.stringify(userProfile))
+        if (userProfile && countries && states && cities && userProfileImageData && userProfile) {
+            const data = {
+                userProfile,
+                countries,
+                states,
+                cities,
+                userProfileImageData,
+                categories
+            }
+
+            setData(data)
         }
-    }, [userProfile])
+    }, [
+        categories,
+        countries,
+        states,
+        cities,
+        userProfileImageData,
+        userProfile
+    ])
+
+
     return (
         <AccountLayout>
             <ContentLayout title={'Account Profile'}>
                 <div className={`font-semibold mb-2 text-md`}>
-                    John Doe
+                    {userProfile?.first_name} {userProfile?.lastname}
                 </div>
-                <div className={``}>
-                    <ImgComponent
-                        user={null}
-                        userProfileImageData={null}
+
+
+                {
+                    data && <ProfileForm
+                        loaderData={data}
+                        user={user}
+                        userProfileData={data.userProfile}
                     />
-                </div>
+                }
+
+
                 <div>
 
                 </div>

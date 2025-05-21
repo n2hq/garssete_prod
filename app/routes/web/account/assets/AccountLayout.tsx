@@ -3,8 +3,9 @@ import ResponsiveNav from '~/components/header/account/ResponsiveNav'
 import LeftNav from './LeftNav'
 import { FaTimes } from 'react-icons/fa'
 import Sidebar from './Sidebar'
-import { CgChevronLeft, CgChevronRight } from 'react-icons/cg'
-import { BiChevronLeft, BiChevronRight, BiMenu, BiX } from 'react-icons/bi'
+import { CgChevronLeft, CgChevronRight, CgMenu } from 'react-icons/cg'
+import { BiChevronLeft, BiChevronRight, BiMenu, BiMenuAltLeft, BiX } from 'react-icons/bi'
+import { BsMenuButton } from 'react-icons/bs'
 
 const AccountLayout = ({ children }: any) => {
     const [show, setShow] = useState(true)
@@ -27,14 +28,14 @@ const AccountLayout = ({ children }: any) => {
 
             <button
                 onClick={handleShow}
-                className={`text-2xl text-white bg-red-700 p-2 
+                className={`text-xl text-white bg-blue-700 p-2 
                 rounded-full hover:bg-gray-700 shadow-lg top-[72px]
                 ${show ? 'left-[295px]' : 'left-[15px]'}
                 focus:outline-none fixed z-50 top-[60px]
                 transition-all duration-300 ease-in-out
                 hidden md:block`}
             >
-                <CgChevronRight className={`${show ? 'rotate-180 transition-all duration-300 ease-in-out' : 'rotate-0 transition-all duration-300 ease-in-out'}`} />
+                <CgMenu className={`${show ? 'rotate-0 transition-all duration-300 ease-in-out' : 'rotate-90 transition-all duration-300 ease-in-out'}`} />
             </button>
 
             {/** layout */}

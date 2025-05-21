@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { MdError } from 'react-icons/md'
+import { controlInformationClass, inputClass, inputClassError, inputControlWrapper, inputHeadingClass } from '~/lib/css'
 
 const Input = ({
     controlName,
     controlType,
     controlPlaceholder,
     controlTitle,
+    controlInformation,
     register,
     changeHandler,
     error,
@@ -27,24 +29,33 @@ const Input = ({
     }, [inputWidth])
     return (
         <>
-            <div className='input__wrapper_class'>
-                <div className='input__heading__class'>
-                    {controlTitle}
+            <div className={inputControlWrapper}>
+                <div className={inputHeadingClass}>
+                    <div className={`mb-0`}>
+                        {controlTitle}
+                    </div>
+                    {
+                        controlInformation?.length > 1 && <div className={controlInformationClass}>
+                            {controlInformation}
+                        </div>
+                    }
                 </div>
-                <div className={`w-[100%] sm:w-[70%] md:w-[65%] lg:w-[60%] ${wrapperWidth}`}>
+
+                <div className={`w-[100%]`}>
                     <input
                         {...register(controlName, {
                             onChange: changeHandler
                         })}
                         type={controlType ? controlType : 'text'}
-                        className={`input__class ${disabled && 'bg-gray-200/80'}`}
+                        className={`${inputClass} ${disabled && 'bg-gray-200/80'}`}
                         placeholder={controlPlaceholder}
                         disabled={disabled}
                     />
+
                     {
                         error &&
                         (
-                            <div className={`input__class__error`}>
+                            <div className={`${inputClassError}`}>
                                 <MdError className='text-lg' />
                                 {error.message}
                             </div>

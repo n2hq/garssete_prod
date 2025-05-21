@@ -53,7 +53,7 @@ const moreTools = [
 const LeftNav = () => {
     const [expanded, setExpanded] = useState(true)
     return (
-        <div className={`mt-[80px] mx-[15px] relative`}>
+        <div className={`mt-[0px] mx-[15px] relative`}>
             <div className={`font-bold text-[18px]`}>
                 Manage Account
             </div>
@@ -92,10 +92,10 @@ const LeftNav = () => {
                                 <div className={` flex place-items-center gap-3
                         hover:bg-gray-200/60 py-1 rounded`}>
                                     <div className={`w-[40px] h-[40px] rounded-full
-                    place-content-center place-items-center border-gray-300 text-[25px]`}>
+                    place-content-center place-items-center border-gray-300 text-[23px]`}>
                                         {link.icon}
                                     </div>
-                                    <div>
+                                    <div className={`text-[16px]`}>
                                         {link.title}
                                     </div>
                                 </div>
@@ -126,10 +126,10 @@ const LeftNav = () => {
                                 <div className={` flex place-items-center gap-3
                         hover:bg-gray-200/60 py-1 rounded`}>
                                     <div className={`w-[40px] h-[40px] rounded-full
-                    place-content-center place-items-center border-gray-300 text-[25px]`}>
+                    place-content-center place-items-center border-gray-300 text-[23px]`}>
                                         {link.icon}
                                     </div>
-                                    <div>
+                                    <div className={`text-[16px]`}>
                                         {link.title}
                                     </div>
                                 </div>

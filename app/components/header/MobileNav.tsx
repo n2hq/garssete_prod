@@ -3,8 +3,14 @@ import Logo from './Logo'
 import { HiPlay } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
 import { MobileNavProps } from '~/lib/types'
-import { navlinks } from '~/lib/json'
+import { mobileLinks, navlinks } from '~/lib/json'
 import { Link } from '@remix-run/react'
+import LeftNav from '~/routes/web/account/assets/LeftNav'
+import { CgChevronRight } from 'react-icons/cg'
+
+
+
+
 const MobileNav = ({
     showNav,
     closeNav
@@ -22,14 +28,11 @@ const MobileNav = ({
                 {/** navlinks */}
                 <div className={`${navOpen} transform transition-all duration-500
                 delay-0 fixed  justify-start  h-full
-                w-[320px] md:w-[400px] bg-white z-[4001] ${showNav ? 'shadow-lg shadow-black/50' : ''}
-                  `}>
+                w-[400px] md:w-[400px] bg-white z-[4001] ${showNav ? 'shadow-lg shadow-black/50' : ''}
+                overflow-y-auto
+                `}>
                     <div className={`bg-white pt-4 pb-4`}>
-                        <div className={`${showNav ? 'flex' : 'hidden'} w-12 h-10 bg-black  
-                        place-content-center place-items-center
-                        absolute top-0 right-[-48px]`}>
-                            <FaTimes className={`text-[21px] text-white`} />
-                        </div>
+
 
                         <div className={`pl-8 md:pl-12`}>
                             <Logo theme='light' />
@@ -38,27 +41,44 @@ const MobileNav = ({
 
                     <hr className={` border-t-[1px] border-yellow-500/20`} />
 
-                    <div className={`flex flex-col mt-10`}>
+                    <div className={`flex flex-col mt-10 mx-[15px]`}>
                         {
-                            navlinks.map((link, index) => {
+                            mobileLinks.map((link, index) => {
                                 return (
-                                    <Link key={index} to={link.url}>
-                                        <p className={`text-[17px] hover:font-bold
-                                        py-3  w-full text-black
-                                        font-medium hover:text-black
-                                        pl-8 md:pl-12 hover:bg-black/10 flex
-                                        place-items-center gap-x-2
-                                        `}>
-                                            {link.label}
-                                            <HiPlay className={`text-[11px] text-red-500`} />
-                                        </p>
-                                    </Link>
+                                    <div className={`mt-[0px]`}>
+                                        <Link to={link.link}>
+                                            <div className={` flex place-items-center gap-3
+                                                hover:bg-gray-200/60 py-1 rounded
+                                                place-content-between pr-1`}>
+                                                <div className={`w-[40px] h-[40px] rounded-full
+                                            place-content-center place-items-center border-gray-300 text-[22px]`}>
+                                                    {link.icon}
+                                                </div>
+                                                <div className={`text-[15px] grow`}>
+                                                    {link.title}
+                                                </div>
+                                                <div className={`text-[17px]`}>
+                                                    <CgChevronRight />
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </div>
                                 )
                             })
                         }
                     </div>
 
-                    <div className={`absolute bottom-0 h-4 bg-black w-full`}></div>
+                    <div>
+                        <hr className={`mt-[20px]`} />
+                        <div className={`mt-[20px]`}></div>
+
+                        <LeftNav />
+                    </div>
+
+                    <div className={`mt-20`}>
+
+                    </div>
+
                 </div>
             </div>
         </>

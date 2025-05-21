@@ -10,11 +10,15 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/reset_password", "routes/web/reset_password/index.tsx");
         route("/web/account", "routes/web/account/index.tsx");
         route("/web/account/profile", "routes/web/account/profile/index.tsx");
-
+        route("/web/account/email_address", "routes/web/account/email_address/index.tsx");
+        route("/web/account/change_password", "routes/web/account/change_password/index.tsx");
+        route("/web/account/reset_password", "routes/web/account/reset_password/index.tsx");
+        route("/web/account/deactivate_profile", "routes/web/account/deactivate_profile/index.tsx");
 
         {/** user */ }
         route("api/user/signin", "routes/api/user/signin.tsx");
-        route("api/user/verifytoken", "routes/api/user/verifytoken.tsx")
+        route("api/user/verifytoken", "routes/api/user/verifytoken.tsx");
+        route("api/user/:guid", "routes/api/user/user.tsx");
 
         route("api/listing/:guid_or_username", "routes/api/listing/listing.tsx");
         route("api/listing/search", "routes/api/listing/search.tsx");

@@ -1,7 +1,0 @@
-import{j as e,L as d,r as l}from"./components-UScJPEQZ.js";import{n as h,L as p,M as m}from"./MobileNav-Xai8Apa9.js";import{U as u,H as f}from"./UserMenu-CX6q_oAm.js";const v=({theme:a,navBg:r})=>e.jsx(e.Fragment,{children:e.jsx("div",{className:"hidden lg:flex place-items-center space-x-14 h-full ",children:h.map((s,o)=>e.jsx(d,{to:s.url,children:e.jsx("span",{className:`${a==="light"?"text-black":"text-white"}
-                                font-normal tracking-tight text-[13px] font-sans
-                                hover:text-black/40`,children:s.label})},o))})}),j=({theme:a,openNav:r,navBg:s,setNavBg:o,setTheme:c,_theme:t})=>{const[n]=l.useState(1);return l.useEffect(()=>{const i=()=>{window.scrollY>=n&&c("dark"),window.scrollY<n&&c("light")};window.onscroll=()=>i()},[n]),e.jsx("div",{className:`${t==="dark"?"bg-blue-800":"bg-white"}
-        fixed h-[60px] z-[300] w-full px-[15px]
-        transition ease-in-out duration-0`,children:e.jsxs("div",{className:`max-w-[1100px] mx-auto w-full
-              h-full flex place-items-center place-content-between
-              `,children:[e.jsx(p,{theme:t}),e.jsx(v,{theme:t,navBg:s}),e.jsxs("div",{className:"flex place-items-center gap-4",children:[e.jsx(u,{theme:t}),e.jsx(f,{theme:t,openNav:r,navBg:s})]})]})})},b=({theme:a})=>{const[r,s]=l.useState(!1),[o,c]=l.useState(!1),[t,n]=l.useState(a),i=()=>s(!0),x=()=>s(!1);return e.jsxs("div",{children:[e.jsx(j,{theme:a,openNav:i,navBg:o,setNavBg:c,setTheme:n,_theme:t}),e.jsx(m,{showNav:r,closeNav:x})]})};export{b as R};

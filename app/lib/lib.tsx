@@ -1,4 +1,4 @@
-import { Rating } from "./types"
+import { Category, City, Country, Rating, State, UserProfile } from "./types"
 import CryptoJS from 'crypto-js'
 
 export const config = {
@@ -297,3 +297,137 @@ export const getBusinessFeatures = async (businessGuid: string | null): Promise<
 export const generate7DigitNumber = (): number => {
     return Math.floor(1000000 + Math.random() * 9000000); // Range: 1000000 - 9999999
 };
+
+export const getCountries = async (): Promise<Country[] | undefined> => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = "/api/util/country"
+    const url = BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: Country[] = await response.json();
+        const finaldata: any = data.map((country) => {
+            return {
+                name: country.name,
+                id: country.id
+            }
+        })
+
+        console.log(finaldata)
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getStates = async (countryCode: string | null): Promise<State[] | undefined> => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = "/api/util/state?country_code=" + countryCode
+    const url = BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: State[] = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getCities = async (countryCode: string | null, stateCode: string | null): Promise<City[] | undefined> => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = "/api/util/city?country_code=" + countryCode + "&state_code=" + stateCode
+    const url = BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: City[] = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getCategories = async (): Promise<Category[] | undefined> => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = "/api/util/category"
+    const url = BASE_URL + endpoint
+
+    console.log(url)
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: Category[] = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getUserProfile = async (guid: string | null): Promise<UserProfile[] | undefined> => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = "/api/user/" + guid
+    const url = BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: UserProfile[] = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}

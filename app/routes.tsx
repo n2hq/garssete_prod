@@ -9,6 +9,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/signup", "routes/web/signup/index.tsx");
         route("/web/reset_password", "routes/web/reset_password/index.tsx");
         route("/web/account", "routes/web/account/index.tsx");
+        route("/web/account/profile", "routes/web/account/profile/index.tsx");
 
 
         {/** user */ }

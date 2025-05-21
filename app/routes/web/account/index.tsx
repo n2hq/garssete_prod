@@ -1,6 +1,6 @@
 import React from 'react'
 import ResponsiveNav from '~/components/header/account/ResponsiveNav'
-import AccountLayout from './AccountLayout'
+import AccountLayout from './assets/AccountLayout'
 
 const index = () => {
     return (

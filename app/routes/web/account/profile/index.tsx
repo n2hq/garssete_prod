@@ -72,25 +72,23 @@ const index = () => {
     return (
         <AccountLayout>
             <ContentLayout title={'Account Profile'}>
-                {userProfile === null ? 'Loading...' : ''}
-
-                <div className={`font-semibold mb-2 text-md`}>
-                    {userProfile?.first_name} {userProfile?.lastname}
-                </div>
-
-
                 {
-                    data && <ProfileForm
-                        loaderData={data}
-                        user={user}
-                        userProfileData={data.userProfile}
-                    />
+                    userProfile && data && user ?
+                        <div>
+                            <div className={`font-semibold mb-2 text-md`}>
+                                {userProfile?.first_name} {userProfile?.lastname}
+                            </div>
+
+                            <ProfileForm
+                                loaderData={data}
+                                user={user}
+                                userProfileData={data.userProfile}
+                            />
+                        </div> :
+                        <div>
+                            Loading...
+                        </div>
                 }
-
-
-                <div>
-
-                </div>
             </ContentLayout>
         </AccountLayout>
     )

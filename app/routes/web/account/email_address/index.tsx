@@ -9,6 +9,7 @@ const index = () => {
     const { user } = useAuth()
     const [userProfile, setUserProfile] = useState<any | null>(null)
     const [data, setData] = useState<any | null>(null)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function getAllData(guid: string) {
@@ -32,6 +33,21 @@ const index = () => {
     }, [
         userProfile
     ])
+
+    useEffect(() => {
+        if (data) {
+            setLoading(false)
+        }
+    }, [data])
+
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="text-lg">Loading...</div>
+            </div>
+        )
+    }
 
     return (
         <AccountLayout>

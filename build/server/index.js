@@ -2193,7 +2193,7 @@ const Related = ({
     }) })
   ] }) });
 };
-const loader$i = async ({ request, params }) => {
+const loader$j = async ({ request, params }) => {
   const id = params.id || null;
   let listing = await getPage(id);
   const gallery = await getBusinessGallery(listing.gid);
@@ -2235,7 +2235,7 @@ const index$a = () => {
 const route4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$a,
-  loader: loader$i
+  loader: loader$j
 }, Symbol.toStringTag, { value: "Module" }));
 const CenterNav$1 = ({ navBg }) => {
   return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx("div", { className: `hidden lg:flex place-items-center space-x-14 h-full `, children: navlinks.map((link, index2) => {
@@ -2334,7 +2334,7 @@ const route2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   default: Index,
   meta
 }, Symbol.toStringTag, { value: "Module" }));
-function loader$h() {
+function loader$i() {
   return null;
 }
 function NotFound() {
@@ -2354,7 +2354,7 @@ function NotFound() {
 const route3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: NotFound,
-  loader: loader$h
+  loader: loader$i
 }, Symbol.toStringTag, { value: "Module" }));
 const Feature = ({ feature }) => {
   return /* @__PURE__ */ jsxs("div", { id: feature.gid, className: `pb-4 pt-3`, children: [
@@ -2577,7 +2577,7 @@ const LatestBusinesses = ({
     })) })
   ] });
 };
-const loader$g = async ({ request, params }) => {
+const loader$h = async ({ request, params }) => {
   const url = new URL(request.url);
   const query2 = url.searchParams.get("q") || "";
   let data = await getSearch(query2);
@@ -2645,7 +2645,7 @@ const index$9 = () => {
 const route5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$9,
-  loader: loader$g
+  loader: loader$h
 }, Symbol.toStringTag, { value: "Module" }));
 const AppNav$1 = ({
   theme,
@@ -2966,7 +2966,7 @@ const route7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   __proto__: null,
   default: index$7
 }, Symbol.toStringTag, { value: "Module" }));
-const ResetPasswordForm = () => {
+const ResetPasswordForm$1 = () => {
   return /* @__PURE__ */ jsxs("div", { className: `w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
         mt-[150px] mb-[20px] `, children: [
     /* @__PURE__ */ jsx("div", { className: `hidden lg:block ` }),
@@ -3035,7 +3035,7 @@ const ResetPasswordForm = () => {
 const ResetPasswordBody = () => {
   return /* @__PURE__ */ jsx("div", { className: `bg-black w-full 
         bg-[url('https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=1200')]
-        bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(ResetPasswordForm, {}) });
+        bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(ResetPasswordForm$1, {}) });
 };
 const index$6 = () => {
   return /* @__PURE__ */ jsxs("div", { children: [
@@ -3890,6 +3890,7 @@ const ChangePasswordForm = ({ loaderData, user }) => {
   var _a;
   const [formdata, setFormdata] = useState(null);
   const [working, setWorking] = useState(false);
+  const notification = useNotification();
   const changeHandler = (e) => {
     let value = e.target.value;
     let name = e.target.name;
@@ -3903,8 +3904,9 @@ const ChangePasswordForm = ({ loaderData, user }) => {
   const handleEmailChangeRequest = async (data) => {
     var _a2;
     setWorking(true);
+    notification.notify("In progress...");
     await new Promise((resolve) => setTimeout(resolve, 1e3));
-    const endpoint = "/api/users/change_password/" + ((_a2 = loaderData.userProfile) == null ? void 0 : _a2.user_guid);
+    const endpoint = "/api/user/change_password/" + ((_a2 = loaderData.userProfile) == null ? void 0 : _a2.user_guid);
     const url = config.BASE_URL + endpoint;
     data["password"] = data == null ? void 0 : data.newpassword;
     delete data["oldpassword"];
@@ -3918,13 +3920,13 @@ const ChangePasswordForm = ({ loaderData, user }) => {
       });
       if (!response.ok) {
         let error = response.json().then((data2) => {
-          alert(data2.error);
+          notification.alertCancel("", data2.message);
         });
       } else {
-        alert("Password Successfully Changed! Use new password on next login");
+        notification.alertReload("Success", "Password Successfully Changed! Use new password on next login");
       }
     } catch (error) {
-      return void 0;
+      notification.alertCancel("", error.message);
     } finally {
       setWorking(false);
     }
@@ -4030,8 +4032,123 @@ const route12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   __proto__: null,
   default: index$2
 }, Symbol.toStringTag, { value: "Module" }));
+const ResetPasswordSchema = z.object({
+  email: z.string({ message: "Please enter an email." }).min(1, { message: "Email must not be empty" }).email({ message: "Please enter a valid email" })
+});
+const ResetPasswordForm = ({ loaderData, user }) => {
+  var _a;
+  const [formdata, setFormdata] = useState(null);
+  const [working, setWorking] = useState(false);
+  const notification = useNotification();
+  const changeHandler = (e) => {
+    let value = e.target.value;
+    let name = e.target.name;
+    setFormdata((previousValue) => {
+      return {
+        ...previousValue,
+        [name]: value
+      };
+    });
+  };
+  const handleSendResetEmail = async (data) => {
+    setWorking(true);
+    notification.notify("Sending reset password request.");
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    const endpoint = "/api/user/reset_password_request";
+    const url = config.BASE_URL + endpoint;
+    data["owner"] = loaderData.userProfile.user_guid;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(data)
+      });
+      if (!response.ok) {
+        let error = response.json().then((data2) => {
+          notification.alertCancel("Error handling request", data2.message);
+        });
+      } else {
+        notification.alertReload("Success!", "Request Initiated. Please check your email to continue.");
+      }
+    } catch (error) {
+      notification.alertCancel("Error handling request", error.message);
+    } finally {
+      setWorking(false);
+    }
+  };
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    watch,
+    setError,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    defaultValues: loaderData.userProfile,
+    resolver: zodResolver(ResetPasswordSchema)
+  });
+  return /* @__PURE__ */ jsx("form", { onSubmit: handleSubmit(handleSendResetEmail), children: /* @__PURE__ */ jsx("div", { className: `${formWrapperClass} mt-0  
+                        rounded-lg pt-4 max-w-[500px] w-full mx-auto`, children: /* @__PURE__ */ jsxs("div", { className: inputWrapperClass, children: [
+    /* @__PURE__ */ jsx("div", { className: " text-xl text-gray-700 font-semibold border-b pb-1", children: "Reset Password" }),
+    /* @__PURE__ */ jsxs("div", { className: " pt-3 pb-4 text-[13px] leading-5", children: [
+      /* @__PURE__ */ jsx("b", { children: (_a = loaderData.userProfile) == null ? void 0 : _a.email }),
+      " is your current email. It will be used be used for password resets or changes."
+    ] }),
+    /* @__PURE__ */ jsx("div", { className: `mt-[20px]` }),
+    /* @__PURE__ */ jsx(
+      Input,
+      {
+        controlTitle: "Your Email Address",
+        controlPlaceholder: "Retype new password",
+        controlName: "email",
+        controlType: "text",
+        disabled: true,
+        register,
+        changeHandler,
+        error: errors.email
+      }
+    ),
+    /* @__PURE__ */ jsx(Button, { working, value: "Send Reset Email" })
+  ] }) }) });
+};
 const index$1 = () => {
-  return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsx(ContentLayout, { title: "Reset Password", children: "Reset Password" }) });
+  const { user } = useAuth();
+  const [userProfile, setUserProfile] = useState(null);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    async function getAllData(guid) {
+      const userProfileData = await getUserProfile(guid || "");
+      setUserProfile(userProfileData);
+    }
+    if (user == null ? void 0 : user.guid) {
+      getAllData(user == null ? void 0 : user.guid);
+    }
+  }, [user == null ? void 0 : user.guid]);
+  useEffect(() => {
+    if (userProfile) {
+      const data2 = {
+        userProfile
+      };
+      setData(data2);
+    }
+  }, [
+    userProfile
+  ]);
+  useEffect(() => {
+    if (data) {
+      setLoading(false);
+    }
+  }, [data]);
+  if (loading) {
+    return /* @__PURE__ */ jsx("div", { className: "flex justify-center items-center h-screen", children: /* @__PURE__ */ jsx("div", { className: "text-lg", children: "Loading..." }) });
+  }
+  return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsxs(ContentLayout, { title: "Reset Password", children: [
+    userProfile === null ? "Loading..." : "",
+    /* @__PURE__ */ jsx("div", { className: `font-semibold mb-2 text-md`, children: userProfile == null ? void 0 : userProfile.email }),
+    data && /* @__PURE__ */ jsx(ResetPasswordForm, { loaderData: data, user })
+  ] }) });
 };
 const route13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
@@ -4091,13 +4208,13 @@ async function query(sql, values = []) {
   }
 }
 const JWT_SECRET$1 = "2454522643636363463643565346346";
-const loader$f = async ({ request, params }) => {
+const loader$g = async ({ request, params }) => {
   return DoResponse({
     success: false,
     message: "method not allowed"
   }, 405);
 };
-const action$3 = async ({ request }) => {
+const action$5 = async ({ request }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 405);
@@ -4155,11 +4272,11 @@ const action$3 = async ({ request }) => {
 };
 const route15 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$3,
-  loader: loader$f
+  action: action$5,
+  loader: loader$g
 }, Symbol.toStringTag, { value: "Module" }));
 const JWT_SECRET = "2454522643636363463643565346346";
-async function action$2({ request, params }) {
+async function action$4({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 405);
@@ -4178,9 +4295,9 @@ async function action$2({ request, params }) {
 }
 const route16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$2
+  action: action$4
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$e = async ({ request, params }) => {
+const loader$f = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -4207,7 +4324,7 @@ const loader$e = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const action$1 = async ({ request, params }) => {
+const action$3 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -4308,8 +4425,172 @@ const action$1 = async ({ request, params }) => {
 };
 const route17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$1,
+  action: action$3,
+  loader: loader$f
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$e = async ({ request, params }) => {
+  const contentType = request.headers.get("Content-Type");
+  if (contentType !== "application/json") {
+    return DoResponse(
+      { error: "Invalid content type. Expected JSON." }
+    );
+  }
+};
+async function action$2({ request, params }) {
+  const contentType = request.headers.get("Content-Type");
+  if (contentType !== "application/json") {
+    return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
+  }
+  if (request.method === "PUT") {
+    try {
+      const body = await request.json();
+      let userGuid = params.guid;
+      if (!body.password) {
+        return DoResponse({ error: "Enter password!" }, 400);
+      }
+      {
+      }
+      let rows = await query(`SELECT * FROM tbl_user WHERE user_guid = ?`, [userGuid]);
+      if (rows.length <= 0) {
+        return DoResponse(
+          {
+            exists: false,
+            message: "User with id does not exist!"
+          },
+          404
+        );
+      }
+      const user = rows[0];
+      {
+      }
+      const password = body.password;
+      const hashedPassword = HashPwd(password);
+      {
+      }
+      let result = await query(
+        `UPDATE tbl_user 
+                    SET
+                    password = ? 
+                    WHERE
+                    user_guid = ?`,
+        [hashedPassword, userGuid]
+      );
+      const data = {
+        success: true,
+        message: "password change is successful"
+      };
+      return DoResponse(data, 200);
+    } catch (error) {
+      return DoResponse({ error: error.message }, 500);
+    }
+  }
+  return DoResponse({ error: "method not allowed" }, 200);
+}
+const route18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$2,
   loader: loader$e
+}, Symbol.toStringTag, { value: "Module" }));
+async function action$1({ request }) {
+  const contentType = request.headers.get("Content-Type");
+  if (contentType !== "application/json") {
+    return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
+  }
+  if (request.method === "POST") {
+    try {
+      const body = await request.json();
+      if (!body.email) {
+        return DoResponse({ error: "Enter email!" }, 400);
+      }
+      {
+      }
+      let rows = await query(
+        `SELECT * FROM tbl_user 
+                WHERE 
+                email = ?`,
+        [body.email]
+      );
+      if (rows.length <= 0) {
+        return DoResponse(
+          {
+            exists: false,
+            message: "User with email does not exist!"
+          },
+          409
+        );
+      }
+      const user = rows[0];
+      {
+      }
+      const title = "Password Request";
+      const type = RequestType.PASSWORD_RESET;
+      const owner = user.user_guid;
+      const guid = crypto.randomUUID();
+      const status = RequestStatus.OPEN;
+      {
+      }
+      rows = await query(`SELECT * FROM tbl_requests 
+                WHERE owner = ?
+                AND status = ?
+                AND type = ?`, [owner, status, type]);
+      if (rows.length > 0) {
+        {
+        }
+        console.log(`UPDATE tbl_requests 
+                    SET
+                    title = '${title}',
+                    type = '${type}',
+                    guid = '${guid}',
+                    status = '${status}'
+                    WHERE
+                    owner = '${owner}'
+                    AND
+                    type = '${type}'
+                    AND
+                    status = '${status}'`);
+        const result = await query(
+          `UPDATE tbl_requests 
+                    SET
+                    title = ?,
+                    type = ?,
+                    guid = ?,
+                    status = ?
+                    WHERE
+                    owner = ?
+                    AND
+                    type = ?
+                    AND
+                    status = ?`,
+          [title, type, guid, status, owner, type, status]
+        );
+      } else {
+        {
+        }
+        const result = await query(
+          `INSERT INTO tbl_requests 
+                    (title, type, owner, guid, status) values (?, ?, ?, ?, ?)`,
+          [title, type, owner, guid, status]
+        );
+      }
+      const data = {
+        success: true,
+        message: "password reset initiated. check email to continue.",
+        title,
+        type,
+        owner,
+        guid,
+        status
+      };
+      return DoResponse(data, 200);
+    } catch (error) {
+      return DoResponse({ message: error.message }, 500);
+    }
+  }
+  return DoResponse({ message: "method not allowed" }, 200);
+}
+const route19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$1
 }, Symbol.toStringTag, { value: "Module" }));
 const loader$d = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
@@ -4327,7 +4608,7 @@ const loader$d = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const route18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route20 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$d
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4409,13 +4690,12 @@ async function action({ request }) {
       };
       return DoResponse(data, 200);
     } catch (error) {
-      console.log(error.message + ">>>]");
-      return DoResponse({ error: error.message }, 500);
+      return DoResponse({ message: error.message }, 500);
     }
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route21 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   action
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4444,7 +4724,7 @@ const loader$c = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route20 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route22 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$c
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4506,7 +4786,7 @@ const loader$b = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route21 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route23 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$b
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4538,7 +4818,7 @@ const loader$a = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route22 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route24 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$a
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4564,7 +4844,7 @@ const loader$9 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route23 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route25 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$9
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4600,7 +4880,7 @@ const loader$8 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route24 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route26 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$8
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4616,7 +4896,7 @@ const loader$7 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route25 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route27 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$7
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4635,7 +4915,7 @@ const loader$6 = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const route26 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route28 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$6
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4669,7 +4949,7 @@ const loader$5 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route27 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route29 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$5
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4692,7 +4972,7 @@ const loader$4 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route28 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route30 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$4
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4720,7 +5000,7 @@ const loader$3 = async ({ request, params }) => {
     return DoResponse(states, 200);
   }
 };
-const route29 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route31 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$3
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4745,7 +5025,7 @@ const loader$2 = async ({ request, params }) => {
     return DoResponse(countries, 200);
   }
 };
-const route30 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route32 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$2
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4781,7 +5061,7 @@ const loader$1 = async ({ request, params }) => {
     return DoResponse(cities, 200);
   }
 };
-const route31 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route33 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$1
 }, Symbol.toStringTag, { value: "Module" }));
@@ -4800,11 +5080,11 @@ const loader = async ({ request, params }) => {
     return GetResponse(rows, true, 200);
   }
 };
-const route32 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route34 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-DWm6wvRw.js", "imports": ["/assets/components-UScJPEQZ.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-XEcANbwT.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/AuthContext-DP2umk9J.js", "/assets/SliderContext-DKePQ7XB.js", "/assets/index-DOwvlINV.js"], "css": ["/assets/root-CQxoliwR.css"] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Dl_fYE5z.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/LatestStarRating-C7RA25d2.js", "/assets/ResponsiveNav-CA-uVDjy.js", "/assets/SliderContext-DKePQ7XB.js", "/assets/AuthContext-DP2umk9J.js", "/assets/index-DFVatVxl.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/SearchBox-zAwg0FZa.js", "/assets/UserMenu-Bxj1AbP9.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-DndF_dds.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/SearchBox-zAwg0FZa.js", "/assets/index-DOwvlINV.js", "/assets/AuthContext-DP2umk9J.js"], "css": [] }, "routes/_404": { "id": "routes/_404", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_404-CRsR0J6r.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-CA-uVDjy.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/AuthContext-DP2umk9J.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Dl_fYE5z.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/LatestStarRating-C7RA25d2.js", "/assets/ResponsiveNav-CA-uVDjy.js", "/assets/SliderContext-DKePQ7XB.js", "/assets/AuthContext-DP2umk9J.js", "/assets/index-DFVatVxl.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/SearchBox-zAwg0FZa.js", "/assets/UserMenu-Bxj1AbP9.js"], "css": [] }, "routes/web/search/index": { "id": "routes/web/search/index", "parentId": "root", "path": "/web/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BmZ3_JWp.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-CA-uVDjy.js", "/assets/AuthContext-DP2umk9J.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/LatestStarRating-C7RA25d2.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/SearchBox-zAwg0FZa.js"], "css": [] }, "routes/web/signin/index": { "id": "routes/web/signin/index", "parentId": "root", "path": "/web/signin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D1ZtbDlp.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-HfGYhkGW.js", "/assets/index-DFVatVxl.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/AuthContext-DP2umk9J.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/index-DOwvlINV.js"], "css": [] }, "routes/web/signup/index": { "id": "routes/web/signup/index", "parentId": "root", "path": "/web/signup", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D90EEWvd.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-HfGYhkGW.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js"], "css": [] }, "routes/web/reset_password/index": { "id": "routes/web/reset_password/index", "parentId": "root", "path": "/web/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DfHdeHrw.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-HfGYhkGW.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js"], "css": [] }, "routes/web/account/index": { "id": "routes/web/account/index", "parentId": "root", "path": "/web/account", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DggkmG_l.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/AuthContext-DP2umk9J.js"], "css": [] }, "routes/web/account/profile/index": { "id": "routes/web/account/profile/index", "parentId": "root", "path": "/web/account/profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B9zsaqnS.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/index-DFVatVxl.js", "/assets/Input-BLmtOyFp.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/AuthContext-DP2umk9J.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/index-DOwvlINV.js"], "css": [] }, "routes/web/account/email_address/index": { "id": "routes/web/account/email_address/index", "parentId": "root", "path": "/web/account/email_address", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BdBMTKxA.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/AuthContext-DP2umk9J.js", "/assets/index-DFVatVxl.js", "/assets/Input-BLmtOyFp.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js"], "css": [] }, "routes/web/account/change_password/index": { "id": "routes/web/account/change_password/index", "parentId": "root", "path": "/web/account/change_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-vMTd84Jm.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/AuthContext-DP2umk9J.js", "/assets/index-DFVatVxl.js", "/assets/Input-BLmtOyFp.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js"], "css": [] }, "routes/web/account/reset_password/index": { "id": "routes/web/account/reset_password/index", "parentId": "root", "path": "/web/account/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Cp0ALBBJ.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/AuthContext-DP2umk9J.js"], "css": [] }, "routes/web/account/deactivate_profile/index": { "id": "routes/web/account/deactivate_profile/index", "parentId": "root", "path": "/web/account/deactivate_profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BsTa0Acw.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/AuthContext-DP2umk9J.js"], "css": [] }, "routes/api/user/signin": { "id": "routes/api/user/signin", "parentId": "root", "path": "api/user/signin", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/signin-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verifytoken": { "id": "routes/api/user/verifytoken", "parentId": "root", "path": "api/user/verifytoken", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verifytoken-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user": { "id": "routes/api/user/user", "parentId": "root", "path": "api/user/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user_profile_image": { "id": "routes/api/user/user_profile_image", "parentId": "root", "path": "api/user/user_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email_request": { "id": "routes/api/user/change_email_request", "parentId": "root", "path": "api/user/change_email_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/state": { "id": "routes/api/util/state", "parentId": "root", "path": "api/util/state", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/state-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country": { "id": "routes/api/util/country", "parentId": "root", "path": "api/util/country", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/city": { "id": "routes/api/util/city", "parentId": "root", "path": "api/util/city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/city-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/category": { "id": "routes/api/util/category", "parentId": "root", "path": "api/util/category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-5b8d0ab8.js", "version": "5b8d0ab8" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-DWm6wvRw.js", "imports": ["/assets/components-UScJPEQZ.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-XEcANbwT.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/AuthContext-DP2umk9J.js", "/assets/SliderContext-DKePQ7XB.js", "/assets/index-DOwvlINV.js"], "css": ["/assets/root-CQxoliwR.css"] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Dl_fYE5z.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/LatestStarRating-C7RA25d2.js", "/assets/ResponsiveNav-CA-uVDjy.js", "/assets/SliderContext-DKePQ7XB.js", "/assets/AuthContext-DP2umk9J.js", "/assets/index-DFVatVxl.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/SearchBox-zAwg0FZa.js", "/assets/UserMenu-Bxj1AbP9.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-DndF_dds.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/SearchBox-zAwg0FZa.js", "/assets/index-DOwvlINV.js", "/assets/AuthContext-DP2umk9J.js"], "css": [] }, "routes/_404": { "id": "routes/_404", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_404-CRsR0J6r.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-CA-uVDjy.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/AuthContext-DP2umk9J.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Dl_fYE5z.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/LatestStarRating-C7RA25d2.js", "/assets/ResponsiveNav-CA-uVDjy.js", "/assets/SliderContext-DKePQ7XB.js", "/assets/AuthContext-DP2umk9J.js", "/assets/index-DFVatVxl.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/SearchBox-zAwg0FZa.js", "/assets/UserMenu-Bxj1AbP9.js"], "css": [] }, "routes/web/search/index": { "id": "routes/web/search/index", "parentId": "root", "path": "/web/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BmZ3_JWp.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-CA-uVDjy.js", "/assets/AuthContext-DP2umk9J.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/LatestStarRating-C7RA25d2.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/SearchBox-zAwg0FZa.js"], "css": [] }, "routes/web/signin/index": { "id": "routes/web/signin/index", "parentId": "root", "path": "/web/signin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D1ZtbDlp.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-HfGYhkGW.js", "/assets/index-DFVatVxl.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/AuthContext-DP2umk9J.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/index-DOwvlINV.js"], "css": [] }, "routes/web/signup/index": { "id": "routes/web/signup/index", "parentId": "root", "path": "/web/signup", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D90EEWvd.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-HfGYhkGW.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js"], "css": [] }, "routes/web/reset_password/index": { "id": "routes/web/reset_password/index", "parentId": "root", "path": "/web/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DfHdeHrw.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ResponsiveNav-HfGYhkGW.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js"], "css": [] }, "routes/web/account/index": { "id": "routes/web/account/index", "parentId": "root", "path": "/web/account", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DggkmG_l.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/AuthContext-DP2umk9J.js"], "css": [] }, "routes/web/account/profile/index": { "id": "routes/web/account/profile/index", "parentId": "root", "path": "/web/account/profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B9zsaqnS.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/index-DFVatVxl.js", "/assets/Input-BLmtOyFp.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/AuthContext-DP2umk9J.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/index-DOwvlINV.js"], "css": [] }, "routes/web/account/email_address/index": { "id": "routes/web/account/email_address/index", "parentId": "root", "path": "/web/account/email_address", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BdBMTKxA.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/AuthContext-DP2umk9J.js", "/assets/index-DFVatVxl.js", "/assets/Input-BLmtOyFp.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js"], "css": [] }, "routes/web/account/change_password/index": { "id": "routes/web/account/change_password/index", "parentId": "root", "path": "/web/account/change_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DGho2dln.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/AuthContext-DP2umk9J.js", "/assets/index-DFVatVxl.js", "/assets/Input-BLmtOyFp.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js"], "css": [] }, "routes/web/account/reset_password/index": { "id": "routes/web/account/reset_password/index", "parentId": "root", "path": "/web/account/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-zdXPmsXa.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/AuthContext-DP2umk9J.js", "/assets/index-DFVatVxl.js", "/assets/Input-BLmtOyFp.js", "/assets/NotificationContext-LbrYtE65.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js"], "css": [] }, "routes/web/account/deactivate_profile/index": { "id": "routes/web/account/deactivate_profile/index", "parentId": "root", "path": "/web/account/deactivate_profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BsTa0Acw.js", "imports": ["/assets/components-UScJPEQZ.js", "/assets/ContentLayout-CH9JGj2M.js", "/assets/MobileNav-aPg5T7ro.js", "/assets/index-DOwvlINV.js", "/assets/UserMenu-Bxj1AbP9.js", "/assets/AuthContext-DP2umk9J.js"], "css": [] }, "routes/api/user/signin": { "id": "routes/api/user/signin", "parentId": "root", "path": "api/user/signin", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/signin-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verifytoken": { "id": "routes/api/user/verifytoken", "parentId": "root", "path": "api/user/verifytoken", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verifytoken-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user": { "id": "routes/api/user/user", "parentId": "root", "path": "api/user/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_password": { "id": "routes/api/user/change_password", "parentId": "root", "path": "api/user/change_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password_request": { "id": "routes/api/user/reset_password_request", "parentId": "root", "path": "api/user/reset_password_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user_profile_image": { "id": "routes/api/user/user_profile_image", "parentId": "root", "path": "api/user/user_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email_request": { "id": "routes/api/user/change_email_request", "parentId": "root", "path": "api/user/change_email_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/state": { "id": "routes/api/util/state", "parentId": "root", "path": "api/util/state", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/state-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country": { "id": "routes/api/util/country", "parentId": "root", "path": "api/util/country", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/city": { "id": "routes/api/util/city", "parentId": "root", "path": "api/util/city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/city-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/category": { "id": "routes/api/util/category", "parentId": "root", "path": "api/util/category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-a386e4f0.js", "version": "a386e4f0" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";
@@ -4957,13 +5237,29 @@ const routes = {
     caseSensitive: void 0,
     module: route17
   },
+  "routes/api/user/change_password": {
+    id: "routes/api/user/change_password",
+    parentId: "root",
+    path: "api/user/change_password/:guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route18
+  },
+  "routes/api/user/reset_password_request": {
+    id: "routes/api/user/reset_password_request",
+    parentId: "root",
+    path: "api/user/reset_password_request",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route19
+  },
   "routes/api/user/user_profile_image": {
     id: "routes/api/user/user_profile_image",
     parentId: "root",
     path: "api/user/user_profile_image/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route18
+    module: route20
   },
   "routes/api/user/change_email_request": {
     id: "routes/api/user/change_email_request",
@@ -4971,7 +5267,7 @@ const routes = {
     path: "api/user/change_email_request",
     index: void 0,
     caseSensitive: void 0,
-    module: route19
+    module: route21
   },
   "routes/api/listing/listing": {
     id: "routes/api/listing/listing",
@@ -4979,7 +5275,7 @@ const routes = {
     path: "api/listing/:guid_or_username",
     index: void 0,
     caseSensitive: void 0,
-    module: route20
+    module: route22
   },
   "routes/api/listing/search": {
     id: "routes/api/listing/search",
@@ -4987,7 +5283,7 @@ const routes = {
     path: "api/listing/search",
     index: void 0,
     caseSensitive: void 0,
-    module: route21
+    module: route23
   },
   "routes/api/listing/featured_listing": {
     id: "routes/api/listing/featured_listing",
@@ -4995,7 +5291,7 @@ const routes = {
     path: "api/listing/featured_listing",
     index: void 0,
     caseSensitive: void 0,
-    module: route22
+    module: route24
   },
   "routes/api/listing/business_facility_features": {
     id: "routes/api/listing/business_facility_features",
@@ -5003,7 +5299,7 @@ const routes = {
     path: "api/listing/business_facility_features/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route23
+    module: route25
   },
   "routes/api/listing/listing_by_category": {
     id: "routes/api/listing/listing_by_category",
@@ -5011,7 +5307,7 @@ const routes = {
     path: "api/listing/listing_by_category/:category/:limit",
     index: void 0,
     caseSensitive: void 0,
-    module: route24
+    module: route26
   },
   "routes/api/listing/business_gallery": {
     id: "routes/api/listing/business_gallery",
@@ -5019,7 +5315,7 @@ const routes = {
     path: "api/listing/business_gallery/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route25
+    module: route27
   },
   "routes/api/listing/business_profile_image": {
     id: "routes/api/listing/business_profile_image",
@@ -5027,7 +5323,7 @@ const routes = {
     path: "api/listing/business_profile_image/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route26
+    module: route28
   },
   "routes/api/rating/business_ratings": {
     id: "routes/api/rating/business_ratings",
@@ -5035,7 +5331,7 @@ const routes = {
     path: "api/rating/business_ratings/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route27
+    module: route29
   },
   "routes/api/rating/ratings_reviews": {
     id: "routes/api/rating/ratings_reviews",
@@ -5043,7 +5339,7 @@ const routes = {
     path: "api/rating/ratings_reviews/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route28
+    module: route30
   },
   "routes/api/util/state": {
     id: "routes/api/util/state",
@@ -5051,7 +5347,7 @@ const routes = {
     path: "api/util/state",
     index: void 0,
     caseSensitive: void 0,
-    module: route29
+    module: route31
   },
   "routes/api/util/country": {
     id: "routes/api/util/country",
@@ -5059,7 +5355,7 @@ const routes = {
     path: "api/util/country",
     index: void 0,
     caseSensitive: void 0,
-    module: route30
+    module: route32
   },
   "routes/api/util/city": {
     id: "routes/api/util/city",
@@ -5067,7 +5363,7 @@ const routes = {
     path: "api/util/city",
     index: void 0,
     caseSensitive: void 0,
-    module: route31
+    module: route33
   },
   "routes/api/util/category": {
     id: "routes/api/util/category",
@@ -5075,7 +5371,7 @@ const routes = {
     path: "api/util/category",
     index: void 0,
     caseSensitive: void 0,
-    module: route32
+    module: route34
   }
 };
 export {

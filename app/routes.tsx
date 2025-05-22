@@ -19,6 +19,8 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/user/signin", "routes/api/user/signin.tsx");
         route("api/user/verifytoken", "routes/api/user/verifytoken.tsx");
         route("api/user/:guid", "routes/api/user/user.tsx");
+        route("api/user/change_password/:guid", "routes/api/user/change_password.tsx");
+        route("api/user/reset_password_request", "routes/api/user/reset_password_request.tsx");
 
         route("api/user/user_profile_image/:guid", "routes/api/user/user_profile_image.tsx");
         route("api/user/change_email_request", "routes/api/user/change_email_request.tsx");

@@ -5,17 +5,16 @@ import Button from '~/components/content/button/Button'
 import Input from '~/components/content/input/Input'
 import Select from '~/components/content/select/Select'
 import { config, headers } from '~/lib/lib'
-import EmailSchema from './EmailSchema'
+import ResetPasswordSchema from './ResetPasswordSchema'
 import { formWrapperClass, inputWrapperClass } from '~/lib/css'
 import { useNotification } from '~/context/NotificationContext'
 
-const EmailForm = ({ loaderData, user }: any) => {
 
+
+const ResetPasswordForm = ({ loaderData, user }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
-    const [loading, setLoading] = useState(true)
-
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -29,14 +28,15 @@ const EmailForm = ({ loaderData, user }: any) => {
         })
     }
 
-    const handleEmailChangeRequest: SubmitHandler<any> = async (data: any) => {
+    const handleSendResetEmail: SubmitHandler<any> = async (data: any) => {
+
         setWorking(true)
-        notification.notify('', 'Updating email...')
+        notification.notify('Sending reset password request.')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        const endpoint = "/api/user/change_email_request"
+        const endpoint = "/api/user/reset_password_request"
         const url = config.BASE_URL + endpoint
-        data["guid"] = loaderData.userProfile?.user_guid
+        data["owner"] = loaderData.userProfile.user_guid
 
         try {
             const response = await fetch(url, {
@@ -47,15 +47,16 @@ const EmailForm = ({ loaderData, user }: any) => {
 
             if (!response.ok) {
                 let error = response.json().then((data) => {
-                    notification.alertCancel('Error', data.error)
+                    notification.alertCancel('Error handling request', data.message)
+
                 })
 
             } else {
-                notification.alertCancel('Email Change Request', 'Email Change Request Successfully Sent!')
+                notification.alertReload('Success!', 'Request Initiated. Please check your email to continue.')
             }
 
-        } catch (error) {
-            return undefined
+        } catch (error: any) {
+            notification.alertCancel('Error handling request', error.message)
         } finally {
             setWorking(false)
         }
@@ -70,50 +71,40 @@ const EmailForm = ({ loaderData, user }: any) => {
         setError,
         formState: { errors, isSubmitting }
     } = useForm<any>({
-        defaultValues: (loaderData.listing),
-        resolver: zodResolver(EmailSchema)
+        defaultValues: (loaderData.userProfile),
+        resolver: zodResolver(ResetPasswordSchema)
     })
 
 
-    { loading ? 'Loading...' : '' }
-
     return (
-        <form onSubmit={handleSubmit(handleEmailChangeRequest)}>
-            <div className={`${formWrapperClass} mt-0  rounded-lg pt-4
-                             max-w-[500px] w-full mx-auto`}>
+        <form onSubmit={handleSubmit(handleSendResetEmail)}>
+            <div className={`${formWrapperClass} mt-0  
+                        rounded-lg pt-4 max-w-[500px] w-full mx-auto`}>
                 <div className={inputWrapperClass}>
                     <div className=' text-xl text-gray-700 font-semibold border-b pb-1'>
-                        Current email
+                        Reset Password
                     </div>
                     <div className=' pt-3 pb-4 text-[13px] leading-5'>
-                        <span className=' font-semibold'>[{loaderData.userProfile?.email}]</span> will be used for account-related notifications and can be used for password resets.
-                    </div>
-                    <div className='border-[1px] rounded-[8px] px-3 py-3 bg-gray-100'>
-                        {loaderData.userProfile?.email} &nbsp;
+                        <b>{loaderData.userProfile?.email}</b> is your current email. It will be used be used for password resets or changes.
                     </div>
 
                     <div className={`mt-[20px]`}></div>
                     <Input
-                        controlTitle={"Update Email"}
-                        controlPlaceholder={"Enter new email address"}
+                        controlTitle={"Your Email Address"}
+                        controlPlaceholder={"Retype new password"}
                         controlName={"email"}
+                        controlType={"text"}
+                        disabled={true}
                         register={register}
                         changeHandler={changeHandler}
                         error={errors.email}
-                        width={100}
-                        controlInformation={`Enter a new email address.`}
                     />
 
-                    <Button working={working} />
-
+                    <Button working={working} value={"Send Reset Email"} />
                 </div>
-
-
-
-
             </div>
         </form>
     )
 }
 
-export default EmailForm
+export default ResetPasswordForm

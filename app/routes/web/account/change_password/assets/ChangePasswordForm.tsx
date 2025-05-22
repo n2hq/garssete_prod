@@ -7,11 +7,14 @@ import Select from '~/components/content/select/Select'
 import { config, headers } from '~/lib/lib'
 import ChangePasswordSchema from './ChangePasswordSchema'
 import { formWrapperClass, inputWrapperClass } from '~/lib/css'
+import { useNotification } from '~/context/NotificationContext'
 
 
 const ChangePasswordForm = ({ loaderData, user }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
+    const notification = useNotification()
+
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -27,9 +30,10 @@ const ChangePasswordForm = ({ loaderData, user }: any) => {
 
     const handleEmailChangeRequest: SubmitHandler<any> = async (data: any) => {
         setWorking(true)
+        notification.notify('In progress...')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        const endpoint = "/api/users/change_password/" + loaderData.userProfile?.user_guid
+        const endpoint = "/api/user/change_password/" + loaderData.userProfile?.user_guid
         const url = config.BASE_URL + endpoint
         data["password"] = data?.newpassword
 
@@ -46,15 +50,16 @@ const ChangePasswordForm = ({ loaderData, user }: any) => {
 
             if (!response.ok) {
                 let error = response.json().then((data) => {
-                    alert(data.error)
+
+                    notification.alertCancel('', data.message)
                 })
 
             } else {
-                alert('Password Successfully Changed! Use new password on next login')
+                notification.alertReload('Success', 'Password Successfully Changed! Use new password on next login')
             }
 
-        } catch (error) {
-            return undefined
+        } catch (error: any) {
+            notification.alertCancel('', error.message)
         } finally {
             setWorking(false)
         }

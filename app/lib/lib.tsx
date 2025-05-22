@@ -468,3 +468,27 @@ export const getUserProfileImageData = async (guid: string | null): Promise<User
         return undefined
     }
 }
+
+export const getPortfolio = async (guid: string): Promise<any | null> => {
+    let businessesEndpoint = `/api/listing/owner/${guid}`
+    let url = config.BASE_URL + businessesEndpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        })
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return null
+    }
+}

@@ -2,21 +2,23 @@ import React, { useEffect, useState } from 'react'
 import AccountLayout from '../assets/AccountLayout'
 import ContentLayout from '../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
-import { getUserProfile } from '~/lib/lib'
-import ChangePasswordForm from '../change_password/assets/ChangePasswordForm'
-import DeactivateUserForm from './assets/DeactivateProfileForm'
-import DeactivateProfileForm from './assets/DeactivateProfileForm'
+import { getPortfolio, getUserProfile } from '~/lib/lib'
+import Portfolio from './assets/Portfolio'
+
 
 const index = () => {
     const { user } = useAuth()
     const [userProfile, setUserProfile] = useState<any | null>(null)
+    const [portfolio, setPortfolio] = useState<any | null>(null)
     const [data, setData] = useState<any | null>(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function getAllData(guid: string) {
-            const userProfileData = await getUserProfile(guid || "")
-            setUserProfile(userProfileData)
+            const userProfile: any = await getUserProfile(guid || "")
+            const portfolio: any = await getPortfolio(guid || "")
+            setUserProfile(userProfile)
+            setPortfolio(portfolio)
         }
 
         if (user?.guid) {
@@ -25,19 +27,23 @@ const index = () => {
     }, [user?.guid])
 
     useEffect(() => {
-        if (userProfile) {
+        if (userProfile && portfolio) {
             const data = {
-                userProfile,
+                userProfile: userProfile,
+                portfolio: portfolio.data
             }
             setData(data)
+            //alert(JSON.stringify(data.portfolio.data))
         }
     }, [
-        userProfile
+        userProfile,
+        portfolio
     ])
 
     useEffect(() => {
-        if (data) {
+        if (data !== null) {
             setLoading(false)
+
         }
     }, [data])
 
@@ -49,18 +55,25 @@ const index = () => {
             </div>
         )
     }
+
     return (
         <AccountLayout>
-            <ContentLayout title={userProfile.active ? 'Deactivate Profile' : 'Activate Profile'}>
+            <ContentLayout title={'Email Address'}>
+
                 {userProfile === null ? 'Loading...' : ''}
 
                 <div className={`font-semibold mb-2 text-md`}>
                     {userProfile?.email}
                 </div>
 
+                <div className={`mt-[20px]`}></div>
                 {
-                    data && <DeactivateProfileForm loaderData={data} user={user} />
+                    data !== null &&
+                    <Portfolio user={data.userProfile} portfolio={data.portfolio} />
                 }
+                {/*  {
+                    data && <EmailForm loaderData={data} user={user} />
+                } */}
             </ContentLayout>
         </AccountLayout>
     )

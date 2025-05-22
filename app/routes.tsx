@@ -3,7 +3,7 @@ import { DefineRoutesFunction } from '@remix-run/dev/dist/config/routes';
 export function setupRoutes(defineRoutes: DefineRoutesFunction) {
     return defineRoutes((route) => {
         route("/", "routes/_index.tsx");
-        route("/:id", "routes/listing/index.tsx");
+
         route("/web/search", "routes/web/search/index.tsx");
         route("/web/signin", "routes/web/signin/index.tsx");
         route("/web/signup", "routes/web/signup/index.tsx");
@@ -15,15 +15,21 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/account/reset_password", "routes/web/account/reset_password/index.tsx");
         route("/web/account/deactivate_profile", "routes/web/account/deactivate_profile/index.tsx");
 
+        {/** account portfolio */ }
+        route("/web/account/portfolio", "routes/web/account/portfolio/index.tsx");
+
         {/** user */ }
         route("api/user/signin", "routes/api/user/signin.tsx");
         route("api/user/verifytoken", "routes/api/user/verifytoken.tsx");
         route("api/user/:guid", "routes/api/user/user.tsx");
         route("api/user/change_password/:guid", "routes/api/user/change_password.tsx");
         route("api/user/reset_password_request", "routes/api/user/reset_password_request.tsx");
-
+        route("api/user/activate_deactivate/:guid", "routes/api/user/activate_deactivate.tsx");
         route("api/user/user_profile_image/:guid", "routes/api/user/user_profile_image.tsx");
         route("api/user/change_email_request", "routes/api/user/change_email_request.tsx");
+
+
+
 
 
         route("api/listing/:guid_or_username", "routes/api/listing/listing.tsx");
@@ -33,6 +39,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/listing/listing_by_category/:category/:limit", "routes/api/listing/listing_by_category.tsx");
         route("api/listing/business_gallery/:business_guid", "routes/api/listing/business_gallery.tsx");
         route("api/listing/business_profile_image/:guid", "routes/api/listing/business_profile_image.tsx");
+        route("api/listing/owner/:guid", "routes/api/listing/owner/index.tsx");
 
         route("api/rating/business_ratings/:business_guid", "routes/api/rating/business_ratings.tsx");
         route("api/rating/ratings_reviews/:business_guid", "routes/api/rating/ratings_reviews.tsx");
@@ -42,6 +49,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/util/city", "routes/api/util/city.tsx");
         route("api/util/category", "routes/api/util/category.tsx");
 
+        route("/:id", "routes/listing/index.tsx");
         route("*", "routes/_404.tsx");
     });
 }

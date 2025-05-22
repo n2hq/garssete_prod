@@ -87,7 +87,7 @@ const LeftNav = () => {
             {
                 mainLink.map((link, index) => {
                     return (
-                        <div className={`mt-[0px]`}>
+                        <div key={index} className={`mt-[0px]`}>
                             <Link to={link.link}>
                                 <div className={` flex place-items-center gap-3
                         hover:bg-gray-200/60 py-1 rounded`}>
@@ -121,7 +121,7 @@ const LeftNav = () => {
             {
                 moreTools.map((link, index) => {
                     return (
-                        <div className={`mt-[0px]`}>
+                        <div key={index} className={`mt-[0px]`}>
                             <Link to={link.link}>
                                 <div className={` flex place-items-center gap-3
                         hover:bg-gray-200/60 py-1 rounded`}>

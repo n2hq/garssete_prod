@@ -8,6 +8,8 @@ import { useAuth } from '~/context/AuthContext'
 import { getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData } from '~/lib/lib'
 
 
+
+
 const index = () => {
     const { user } = useAuth()
     const [userProfile, setUserProfile] = useState<any | null>(null)
@@ -42,7 +44,7 @@ const index = () => {
     }, [user?.guid])
 
     useEffect(() => {
-        if (userProfile && countries && states && cities && userProfileImageData && userProfile) {
+        if (userProfile && countries && states && cities && userProfileImageData && categories) {
             const data = {
                 userProfile,
                 countries,
@@ -64,8 +66,19 @@ const index = () => {
     ])
 
     useEffect(() => {
-        setLoading(false)
-    }, [])
+        if (data) {
+            setLoading(false)
+        }
+    }, [data])
+
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="text-lg">Loading...</div>
+            </div>
+        )
+    }
 
 
 
@@ -73,7 +86,7 @@ const index = () => {
         <AccountLayout>
             <ContentLayout title={'Account Profile'}>
                 {
-                    userProfile && data && user ?
+                    userProfile && data && user && !loading ?
                         <div>
                             <div className={`font-semibold mb-2 text-md`}>
                                 {userProfile?.first_name} {userProfile?.lastname}

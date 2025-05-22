@@ -1,4 +1,4 @@
-import{j as s,r}from"./components-UScJPEQZ.js";import{b}from"./MobileNav-BzWLh9uv.js";const n="mb-8 w-[100%] sm:w-[100%] md:w-[80%] lg:w-[80%] xl:w-[90%]",g="text-black ml-1.5 mb-2 font-semibold",h=`w-full text-gray-400 
+import{j as s,r}from"./components-UScJPEQZ.js";import{b}from"./MobileNav-aPg5T7ro.js";const n="mb-8 w-[100%] sm:w-[100%] md:w-[80%] lg:w-[80%] xl:w-[90%]",g="text-black ml-1.5 mb-2 font-semibold",h=`w-full text-gray-400 
 mt-[-2px] text-[12px] font-normal leading-[1.2em]`,w=`border-[1px] border-gray-500/20 w-full px-3 py-2 rounded 
  bg-gray-100`,f=`w-full mt-0 text-[13px] bg-red-100/50 
 py-2 px-3 rounded-sm flex place-items-center gap-1`,C="w-[100%] mx-auto mt-10 flex flex-col items-center",W="mb-8 w-[100%] sm:w-[100%] md:w-[80%] lg:w-[80%] xl:w-[80%]",$=({working:e,value:t})=>s.jsx(s.Fragment,{children:s.jsxs("div",{className:n,children:[s.jsx("div",{children:s.jsx("button",{className:`border-[1px] border-none bg-blue-900 

@@ -24,6 +24,23 @@ export function DoResponse(json: any, code: number = 500) {
     )
 }
 
+export function GetResponse(data: any, success: boolean = false, code: number = 200) {
+
+    const response = {
+        success: success,
+        rspcode: code,
+        data: data
+    }
+
+    return new Response(
+        JSON.stringify(response),
+        {
+            status: code,
+            headers: headers
+        }
+    )
+}
+
 export const HashPwd = (input: string): any => {
     return CryptoJS.SHA256(input).toString();
 }

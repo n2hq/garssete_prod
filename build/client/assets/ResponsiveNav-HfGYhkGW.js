@@ -1,4 +1,4 @@
-import{r as t,j as e}from"./components-UScJPEQZ.js";import{L as p,M as v}from"./MobileNav-BzWLh9uv.js";const u=({theme:n,openNav:c,navBg:l,setNavBg:i,setTheme:a,_theme:o})=>{const[s]=t.useState(1);return t.useEffect(()=>{const r=()=>{window.scrollY>=s&&a("dark"),window.scrollY<s&&a("light")};window.onscroll=()=>r()},[s]),e.jsx("div",{className:`${o==="dark"?"bg-gray-800":"bg-white"}
+import{r as t,j as e}from"./components-UScJPEQZ.js";import{L as p,M as v}from"./MobileNav-aPg5T7ro.js";const u=({theme:n,openNav:c,navBg:l,setNavBg:i,setTheme:a,_theme:o})=>{const[s]=t.useState(1);return t.useEffect(()=>{const r=()=>{window.scrollY>=s&&a("dark"),window.scrollY<s&&a("light")};window.onscroll=()=>r()},[s]),e.jsx("div",{className:`${o==="dark"?"bg-gray-800":"bg-white"}
         fixed h-[60px] z-[300] w-full px-[15px]
         transition ease-in-out duration-0`,children:e.jsx("div",{className:`max-w-[1100px] mx-auto w-full
               h-full flex place-items-center place-content-between

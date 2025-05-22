@@ -72,7 +72,8 @@ const index = () => {
     return (
         <AccountLayout>
             <ContentLayout title={'Account Profile'}>
-                {loading ? 'Loading...' : ''}
+                {userProfile === null ? 'Loading...' : ''}
+
                 <div className={`font-semibold mb-2 text-md`}>
                     {userProfile?.first_name} {userProfile?.lastname}
                 </div>

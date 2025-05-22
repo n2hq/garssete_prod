@@ -36,6 +36,9 @@ const index = () => {
     return (
         <AccountLayout>
             <ContentLayout title={'Email Address'}>
+
+                {userProfile === null ? 'Loading...' : ''}
+
                 <div className={`font-semibold mb-2 text-md`}>
                     {userProfile?.email}
                 </div>

@@ -1,4 +1,4 @@
-export const inputControlWrapper = `mb-8 w-[100%] sm:w-[100%] md:w-[80%] lg:w-[80%] xl:w-[90%]`
+export const inputControlWrapper = `mb-8 w-[100%]`
 
 export const inputHeadingClass = `text-black ml-1.5 mb-2 font-semibold`
 
@@ -11,6 +11,9 @@ export const inputClass = `border-[1px] border-gray-500/20 w-full px-3 py-2 roun
 export const inputClassError = `w-full mt-0 text-[13px] bg-red-100/50 
 py-2 px-3 rounded-sm flex place-items-center gap-1`
 
-export const formWrapperClass = `w-[100%] mx-auto mt-10 flex flex-col items-center`
+export const formWrapperClass = `w-full mx-auto mt-10 flex flex-col items-center`
 
-export const inputWrapperClass = `mb-8 w-[100%] sm:w-[100%] md:w-[80%] lg:w-[80%] xl:w-[80%]`
+export const inputWrapperClass = `mb-8 w-[100%] `
+
+export const textAreaClass = `border-[1px] border-gray-500/30 w-full px-3 py-2 
+rounded bg-gray-100/40 h-[250px] text-[14px]`

@@ -1,5 +1,6 @@
 import React from 'react'
 import { MdError } from 'react-icons/md'
+import { inputControlWrapper, inputHeadingClass } from '~/lib/css'
 
 const Textarea = ({
     controlName,
@@ -11,8 +12,8 @@ const Textarea = ({
 }: any) => {
     return (
         <>
-            <div className='textarea__wrapper_class'>
-                <div className='input__heading__class'>
+            <div className={inputControlWrapper}>
+                <div className={inputHeadingClass}>
                     {controlTitle}
                 </div>
                 <div>

@@ -3,7 +3,7 @@ import { DefineRoutesFunction } from '@remix-run/dev/dist/config/routes';
 export function setupRoutes(defineRoutes: DefineRoutesFunction) {
     return defineRoutes((route) => {
         route("/", "routes/_index.tsx");
-
+        route("/:id", "routes/listing/index.tsx");
         route("/web/search", "routes/web/search/index.tsx");
         route("/web/signin", "routes/web/signin/index.tsx");
         route("/web/signup", "routes/web/signup/index.tsx");
@@ -17,6 +17,8 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
 
         {/** account portfolio */ }
         route("/web/account/portfolio", "routes/web/account/portfolio/index.tsx");
+        route("/web/account/portfolio/business/:business_guid", "routes/web/account/portfolio/business/index.tsx");
+        route("/web/account/create_business", "routes/web/account/create_business/index.tsx");
 
         {/** user */ }
         route("api/user/signin", "routes/api/user/signin.tsx");
@@ -31,7 +33,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
 
 
 
-
+        route("api/listing", "routes/api/listing/index.tsx");
         route("api/listing/:guid_or_username", "routes/api/listing/listing.tsx");
         route("api/listing/search", "routes/api/listing/search.tsx");
         route("api/listing/featured_listing", "routes/api/listing/featured_listing.tsx");
@@ -49,7 +51,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/util/city", "routes/api/util/city.tsx");
         route("api/util/category", "routes/api/util/category.tsx");
 
-        route("/:id", "routes/listing/index.tsx");
+
         route("*", "routes/_404.tsx");
     });
 }

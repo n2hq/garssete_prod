@@ -1,0 +1,3 @@
+import{r as n,j as e}from"./components-BAvBE3fA.js";const c=({query:t})=>{const[s,r]=n.useState(""),o=a=>{r(a.target.value)};return n.useEffect(()=>{t!=null&&r(t)},[t]),e.jsx(e.Fragment,{children:e.jsx("form",{action:"/search",method:"get",children:e.jsx("div",{className:"mx-[15px]",children:e.jsxs("div",{className:`max-w-[800px] mx-auto w-full
+                        bg-blue-100 rounded flex gap-x-0 overflow-hidden`,children:[e.jsx("input",{name:"q",value:s,onChange:a=>o(a),type:"text",className:"grow bg-white p-3 outline-none",placeholder:"Enter an address, city, state or country"}),e.jsx("button",{type:"submit",className:`text-black px-4 bg-gray-200 rounded-r
+                                border-none font-bold`,children:"Submit"})]})})})})};export{c as S};

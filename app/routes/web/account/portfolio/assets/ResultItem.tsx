@@ -15,11 +15,9 @@ const ResultItem = ({ listing, index }: any) => {
 
     return (
 
-        <div className={` cursor-pointer my-2`} onClick={(e) => {
-            window.location.href = `/${listing.gid}`
-        }}>
-            <div className={`flex rounded rounded-l-full gap-x-2 p-2
-             hover:bg-blue-800 hover:text-white border shadow shadow-gray-300
+        <div className={` cursor-pointer my-2`}>
+            <div className={`flex rounded  gap-x-2 p-2
+             hover:bg-blue-800 hover:text-white border shadow-md shadow-gray-200
              ${isOdd(index) ? 'bg-blue-50' : ''}
                 `}>
                 {/** left */}
@@ -35,7 +33,7 @@ const ResultItem = ({ listing, index }: any) => {
 
                 {/** right */}
                 <div className=' w-full'>
-                    <Link to={`/account/web/portfolio/${listing.gid}`}>
+                    <Link to={`/web/account/portfolio/business/${listing.gid}`}>
                         <div className={`md:flex md:place-content-between 
                 w-full md:gap-x-[4px]`}>
                             {/** left */}

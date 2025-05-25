@@ -1,4 +1,4 @@
-import { Category, City, Country, Rating, State, UserProfile } from "./types"
+import { Category, City, ContactType, Country, Rating, State, UserProfile } from "./types"
 import CryptoJS from 'crypto-js'
 
 export const config = {
@@ -50,6 +50,35 @@ export const GenerateRandomHash = () => {
     const hash = CryptoJS.SHA256(randomBytes).toString();
     return hash
 };
+
+
+export const getBusinessProfile = async (criteria: string | null): Promise<ContactType[] | null> => {
+
+    const endpoint = "/api/listing/" + criteria
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin': '*'
+            },
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: ContactType[] = await response.json();
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        console.log(error.message)
+        return null
+    }
+}
 
 export const getSearch: any = async (criteria: string) => {
 

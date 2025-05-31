@@ -91,7 +91,7 @@ const Recents = ({
             <div className={`max-w-[1100px] mx-auto w-full`}>
                 <div className={`mt-10 pt-5`}>
                     <div className={` mb-[20px] border-b pb-4 `}>
-                        <div className={`font-semibold text-2xl flex place-content-center
+                        <div className={`font-black text-2xl flex place-content-center
                         tracking-tight`}>
                             {ti}
                         </div>

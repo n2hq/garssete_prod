@@ -249,7 +249,7 @@ export const HomepageHero = () => {
           flex place-content-center place-items-center px-[15px]`}>
           <div
             className={`mt-6 bg-white/30 py-3
-          max-w-[800px] mx-auto w-full rounded-lg`}
+          max-w-[800px] mx-auto w-full rounded-lg z-[500]`}
           >
             <SearchBox />
           </div>
@@ -306,7 +306,8 @@ export const FrontPageCategories = () => {
     <div className={`w-full relative mt-[50px] px-[15px]`}>
       <div className={`max-w-[1100px] mx-auto w-full`}>
         <div className={`relative font-sans text-2xl
-        text-center font-bold mb-8 border-b pb-5`}>
+        text-center font-black mb-8 border-b pb-5
+        tracking-tight`}>
           Categories
         </div>
 

@@ -34,7 +34,7 @@ const SearchPagination = <T,>({
 
     return (
         <div>
-            <div className={` divide-y z-0`}>
+            <div className={` divide-y z-0 divide-gray-500`}>
                 {
                     currentItems.map((item, index) => {
                         return (

@@ -39,7 +39,7 @@ const ResultItem = ({ listing }: any) => {
                         <div className={`w-full md:w-[60%]`}>
                             <Link to={`/${listing.gid}`} onClick={(e: any) => e.stopPropagation()}>
                                 <div className={`font-bold text-[17px] text-brown-800
-                    leading-[1.1em] hover:underline text-blue-900`}>
+                    leading-[1.1em] hover:underline text-[#001e5a]`}>
                                     {listing.title}
                                 </div>
                             </Link>
@@ -54,13 +54,9 @@ const ResultItem = ({ listing }: any) => {
                             </div>
                             <div className={`font-normal text-[13px] 
                                     flex place-items-center gap-1 mt-[3px]`}>
-                                <Link
-                                    className={`hover:underline text-blue-700`}
-                                    to={listing.website !== null ? listing.website : "#top"} onClick={(e: any) => e.stopPropagation()}>
-                                    Website
-                                </Link>
-                                <span><FiArrowRight /></span>
-                                <div className={`capitalize flex place-items-center gap-1`}>
+
+                                <div className={`capitalize flex place-items-center gap-1
+                                    text-black underline`}>
                                     {listing.category}
                                 </div>
                             </div>

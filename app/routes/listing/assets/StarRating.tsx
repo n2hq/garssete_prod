@@ -38,13 +38,13 @@ const StarRating = ({
                 {stars}
             </div>
             <div className={`text-gray-400`}>
-                <BiSolidRightArrow className={`text-[15px] text-yellow-400`} />
+                <BiSolidRightArrow className={`text-[15px] text-green-700`} />
             </div>
             <div className={` text-sm`}>
                 Rating: {rating}
             </div>
             <div className={`text-gray-400`}>
-                <BiSolidRightArrow className={`text-[15px] text-yellow-400`} />
+                <BiSolidRightArrow className={`text-[15px] text-green-700`} />
             </div>
             <div className={`text-sm`}>
                 Reviews: {Number(ratingsData.rating_count)}

@@ -3,7 +3,7 @@ import React from 'react'
 const Header = ({ listing }: any) => {
     return (
         <>
-            <div className={`text-[24px] font-bold mt-[5px] leading-7`}>
+            <div className={`text-[19px] md:text-[24px] font-bold mt-[5px] leading-7`}>
                 {listing?.title}
             </div>
             <div className={`text-[13px] mt-1.5 leading-[1.2em]`}>

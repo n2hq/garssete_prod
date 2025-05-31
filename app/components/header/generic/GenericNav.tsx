@@ -35,11 +35,11 @@ const GenericNav = () => {
 
     return (
         <div>
-            <div className={`px-[15px] z-[10] fixed w-full
+            <div className={`px-[10px] z-[10] fixed w-full
         bg-white border-b-[5px] border-green-500`}>
                 <div className={`max-w-[1100px] mx-auto w-full`}>
                     <div className={`w-full flex place-content-between
-                    h-[60px] gap-x-5`}>
+                    h-[60px] gap-x-2`}>
 
                         {/** left */}
                         <div className={`flex place-items-center
@@ -49,7 +49,7 @@ const GenericNav = () => {
 
                         {/** center */}
                         <div className={`flex place-items-center
-                        gap-5 grow`}>
+                        gap-1 grow`}>
                             <div className={`w-full`}>
                                 <form
                                     action='/web/search'
@@ -106,7 +106,7 @@ const GenericNav = () => {
 
                         {/** right */}
                         <div className={`flex place-items-center
-                        gap-4`}>
+                        gap-1 md:gap-4`}>
                             <UserMenu theme={'light'} />
                             <Hamburger
                                 theme={'light'}

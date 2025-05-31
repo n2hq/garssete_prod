@@ -1,6 +1,6 @@
 import React from 'react';
 import { BiArrowFromBottom, BiArrowToTop, BiRightArrow, BiSolidRightArrow, BiUpArrow } from 'react-icons/bi';
-import { BsStar, BsStarFill } from 'react-icons/bs';
+import { BsCircle, BsCircleFill, BsStar, BsStarFill } from 'react-icons/bs';
 
 type StarRatingProps = {
     rating: number; // rating between 0 and 5
@@ -18,14 +18,15 @@ const StarRating = ({
     for (let i = 1; i <= maxStars; i++) {
         if (i <= rating) {
             stars.push(
-                <span key={i} className="text-yellow-500 text-md">
-                    <BsStarFill />
+                <span key={i} className="text-green-700 text-md">
+                    <BsCircleFill />
                 </span>
             );
         } else {
             stars.push(
-                <span key={i} className="text-yellow-500 text-md">
-                    <BsStar />
+                <span key={i} className={`text-green-700 text-md rounded-full
+                overflow-hidden`}>
+                    <BsCircle className={`bg-green-100`} />
                 </span>
             );
         }

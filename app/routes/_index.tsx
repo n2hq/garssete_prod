@@ -318,7 +318,7 @@ export const FrontPageCategories = () => {
               <div key={index}>
                 <Link to={`${category.link}`}>
                   <div className={`border-[1px] h-[200px]
-                rounded hover:cursor-pointer
+                rounded hover:cursor-pointer border-gray-300
                 hover:shadow-none flex flex-col
                place-items-center place-content-center
                gap-y-2 shadow-lg`}>

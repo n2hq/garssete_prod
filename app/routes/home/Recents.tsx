@@ -124,7 +124,7 @@ const Recents = ({
                                             </Link>
                                         </div>
                                         <div className={`mt-1 text-[15px] tracking-tight 
-                                     truncate`}>
+                                     truncate font-bold`}>
                                             {data.title}
                                         </div>
 

@@ -11,6 +11,8 @@ import BusinessFeatures from './BusinessFeatures';
 import ShortDescription from './ShortDescription';
 import UserReviews from './BusinessRatings';
 import BusinessRatings from './BusinessRatings';
+import ImageBlock from './ImageBlock';
+import { list } from 'postcss';
 
 
 const BusinessLayout = ({
@@ -27,15 +29,24 @@ const BusinessLayout = ({
                 {
                     listing && <Header listing={listing} />
                 }
-                <div className={`grid grid-cols-12 mt-4 gap-0 md:gap-12 relative`}>
+                <div className={`grid grid-cols-12 mt-4 gap-0 md:gap-6 relative`}>
                     <div className={` col-span-12 lg:col-span-8`}>
+
                         {
+                            images && listing &&
+                            <ImageBlock
+                                images={images}
+                                listing={listing}
+                            />
+                        }
+
+                        {/*  {
                             images && listing &&
                             <Masonry
                                 images={images}
                                 listing={listing}
                             />
-                        }
+                        } */}
 
                         <div className={`lg:hidden mt-5 mb-5`}>
                             {listing && <Address businessProfile={listing} />}

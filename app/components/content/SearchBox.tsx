@@ -31,8 +31,8 @@ const SearchBox = ({ query }: any) => {
                         />
                         <button
                             type='submit'
-                            className={`text-black px-4 bg-gray-200 rounded-r
-                                border-none font-bold`}
+                            className={`text-black bg-gray-200 rounded-r
+                                border-none font-bold w-[100px]`}
                         >
                             Submit
                         </button>

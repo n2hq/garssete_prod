@@ -55,7 +55,7 @@ const BusinessLayout = ({
 
                     <div className={`col-span-12 lg:col-span-4 hidden lg:block`}>
                         <div className={` sticky top-[100px]`}>
-                            <Address />
+                            {listing && <Address businessProfile={listing} />}
                             <Review />
                         </div>
 

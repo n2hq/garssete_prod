@@ -11,7 +11,7 @@ const Portfolio = ({ user, portfolio }: any) => {
                 portfolio?.length > 0 ?
                     <PortfolioPagination
                         data={portfolio}
-                        itemsPerPage={10}
+                        itemsPerPage={7}
                     /> :
                     <div className={`flex place-items-center rounded
                             place-content-center p-5 border capitalize`}>

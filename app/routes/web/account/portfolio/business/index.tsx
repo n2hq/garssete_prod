@@ -6,6 +6,7 @@ import { LoaderFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import { getBusinessProfile, getBusinessProfileImageData, getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData } from '~/lib/lib'
 import BusinessProfileForm from './assets/BusinessProfileForm'
+import BusinessMenu from './assets/BusinessMenu'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const business_guid = params.business_guid
@@ -117,6 +118,12 @@ const index = () => {
                         <div className={`font-semibold mb-2 text-md`}>
                             {data?.businessProfile?.title}
                         </div>
+
+                        {
+                            businessGuid && userGuid &&
+                            <BusinessMenu guid={businessGuid} userGuid={userGuid} />
+                        }
+
                         <BusinessProfileForm
                             data={data}
                         />

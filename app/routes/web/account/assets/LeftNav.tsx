@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import React, { useState } from 'react'
 import { BiBriefcase, BiBriefcaseAlt2, BiSolidBriefcase, BiUser, BiUserCheck } from 'react-icons/bi'
 import { BsPersonFill, BsPersonFillGear } from 'react-icons/bs'
@@ -52,6 +52,8 @@ const moreTools = [
 
 const LeftNav = () => {
     const [expanded, setExpanded] = useState(true)
+    const location = useLocation();
+
     return (
         <div className={`mt-[0px] mx-[15px] relative`}>
             <div className={`font-bold text-[18px]`}>
@@ -90,7 +92,9 @@ const LeftNav = () => {
                         <div key={index} className={`mt-[0px]`}>
                             <Link to={link.link}>
                                 <div className={` flex place-items-center gap-3
-                        hover:bg-gray-200/60 py-1 rounded`}>
+                        hover:bg-gray-200/60 py-1 rounded
+                        ${location.pathname.startsWith(link.link) && 'bg-[#2e374a]/15'}`}>
+
                                     <div className={`w-[40px] h-[40px] rounded-full
                     place-content-center place-items-center border-gray-300 text-[23px]`}>
                                         {link.icon}
@@ -124,7 +128,8 @@ const LeftNav = () => {
                         <div key={index} className={`mt-[0px]`}>
                             <Link to={link.link}>
                                 <div className={` flex place-items-center gap-3
-                        hover:bg-gray-200/60 py-1 rounded`}>
+                        hover:bg-gray-200/60 py-1 rounded
+                        ${location.pathname.startsWith(link.link) && 'bg-[#2e374a]/15'}`}>
                                     <div className={`w-[40px] h-[40px] rounded-full
                     place-content-center place-items-center border-gray-300 text-[23px]`}>
                                         {link.icon}

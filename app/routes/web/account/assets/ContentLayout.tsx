@@ -6,7 +6,8 @@ const ContentLayout = ({ children, title }: any) => {
             <div className={`font-semibold text-lg`}>
                 {title}
             </div>
-            <div className={`mt-4 bg-white px-[15px] py-4 rounded-lg shadow-md `}>
+            <div className={`mt-4 bg-white px-[15px] pt-4 
+                rounded-lg shadow-md pb-8 `}>
                 {children}
             </div>
         </div>

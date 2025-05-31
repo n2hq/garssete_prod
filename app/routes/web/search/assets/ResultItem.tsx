@@ -1,24 +1,35 @@
 import { Link } from '@remix-run/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsBank } from 'react-icons/bs'
 import { FiArrowRight } from 'react-icons/fi'
 import { RiDoubleQuotesL } from 'react-icons/ri'
+import { config } from '~/lib/lib'
 
 const ResultItem = ({ listing }: any) => {
-    const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+
+    const [imgscr, setImgsrc] = useState('')
+
+    useEffect(() => {
+        if (listing?.image_url === "" || listing?.image_url === null) {
+            setImgsrc(`https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif`)
+        } else {
+            setImgsrc(config.IMG_BASE_URL + listing.image_url)
+        }
+    }, [listing])
 
     return (
 
-        <div className={` cursor-pointer mt-4`} onClick={(e) => {
+        <div className={` cursor-pointer mt-4 z-0 pb-4`} onClick={(e) => {
             window.location.href = `/${listing.gid}`
         }}>
-            <div className={`flex rounded-sm gap-4`}>
-                <div className={`relative min-w-[100px] w-[100px] h-[100px]`}>
+            <div className={`flex rounded-sm gap-4 z-0`}>
+                <div className={`relative min-w-[100px] w-[100px] h-[100px] border
+                    bg-white z-0`}>
                     <img
-                        src={IMG_BASE_URL + listing.image_url}
+                        src={imgscr}
                         alt={listing.title}
                         className={`object-cover w-full h-full text-sm
-                            rounded `}
+                            rounded z-0`}
                     />
                 </div>
                 <div className=' w-full'>
@@ -101,9 +112,9 @@ const ResultItem = ({ listing }: any) => {
 
                 </div>
             </div>
-            <div className={`mt-2 md:mt-3 mb-2 text-[13px] leading-[1.2em]
-                    flex place-content-start`}>
-                <div className={`relative top-[-3px]`}>
+            <div className={`mt-2 md:mt-3 mb-0 text-[13px] leading-[1.2em]
+                    md:flex place-content-start hidden`}>
+                <div className={`relative top-[-3px] z-0 flex`}>
                     <RiDoubleQuotesL className={`tracking-tighter text-[20px]`} />
                 </div>
                 <div>

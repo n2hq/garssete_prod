@@ -11,11 +11,13 @@ import { formWrapperClass } from '~/lib/css.js'
 import TextareaWithWordLimit from '~/components/content/textarea/TextareaWithWordLimit.js'
 import CreatePageSchema from './CreatePageSchema.js'
 import { useNotification } from '~/context/NotificationContext.js'
+import { useNavigate, useNavigation } from '@remix-run/react'
 
 const CreatePageForm = ({ data, user }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
+    const navigator = useNavigate()
 
     const countries = data.countries
     let [states, setStates] = useState(data.states)
@@ -60,8 +62,8 @@ const CreatePageForm = ({ data, user }: any) => {
         notification.notify('Creating page...')
         await new Promise((resolve) => setTimeout(resolve, 1000));
         datar["owner"] = user.guid
-        alert(JSON.stringify(datar))
-        return false
+        //alert(JSON.stringify(datar))
+        //return false
 
         const endpoint = "/api/listing"
         const url = config.BASE_URL + endpoint
@@ -77,11 +79,22 @@ const CreatePageForm = ({ data, user }: any) => {
 
             if (!response.ok) {
                 var respObj = await response.json()
-                throw new Error(`Error Code: ${response.status} - ${respObj.error}`)
+                throw new Error(`Error Code: ${response.status} - ${respObj.message}`)
             } else {
                 //alert('Successfully added!')
-                if (notification.notify('Page Created. Redirecting...')) {
-                    await new Promise((resolve) => setTimeout(resolve, 1000));
+                const handleOption = async (value: boolean) => {
+                    if (value) {
+                        notification.cancel()
+                    } else {
+                        window.location.href = ("/web/account/portfolio")
+                        await new Promise((resolve) => setTimeout(resolve, 1000));
+                        notification.cancel()
+
+                    }
+                }
+
+                if (notification.confirm('Page Created. Do you wish to create another page?', handleOption)) {
+
                 }
 
             }

@@ -9,6 +9,7 @@ import { getBusinessGallery, getPage, getRatingsReviews, getSearch } from '~/lib
 import BusinessLayout from './assets/BusinessLayout'
 import Footer from '~/components/footer/Footer'
 import Related from './assets/Related'
+import GenericNav from '~/components/header/generic/GenericNav'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const id = params.id || null
@@ -32,8 +33,9 @@ const index = () => {
     return (
         <RatingProvider>
             <GalleryProvider>
-                <ResponsiveNav theme='light' />
-                <SearchHead />
+                {/* <ResponsiveNav theme='light' /> */}
+                <GenericNav />
+
                 {
                     listing.gid !== null && listing.gid !== undefined &&
                     < BusinessLayout

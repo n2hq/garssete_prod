@@ -15,6 +15,8 @@ import "nprogress/nprogress.css"
 import { NotificationProvider } from "./context/NotificationContext";
 import { AuthProvider } from "./context/AuthContext";
 import { SliderProvider } from "./context/SliderContext";
+import { AddPhotoDialogProvider } from "./context/AddPhotoDialogContext";
+import { EditPhotoDialogProvider } from "./context/EditPhotoDialogContext";
 
 
 export const links: LinksFunction = () => [
@@ -63,9 +65,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <NotificationProvider>
           <SliderProvider>
-            <AuthProvider>
-              {children}
-            </AuthProvider>
+            <EditPhotoDialogProvider>
+              <AddPhotoDialogProvider>
+                <AuthProvider>
+                  {children}
+                </AuthProvider>
+              </AddPhotoDialogProvider>
+            </EditPhotoDialogProvider>
           </SliderProvider>
         </NotificationProvider>
         <ScrollRestoration />

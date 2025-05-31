@@ -3,6 +3,7 @@ import Logo from '../Logo'
 import CenterNav from './CenterNav'
 import Hamburger from '../Hamburger'
 import UserMenu from '../usermenu/UserMenu'
+import { useLocation } from '@remix-run/react'
 
 
 
@@ -25,15 +26,17 @@ const AppNav = ({
     }, [scrollHeight])
 
     return (
-        <div className={`${_theme === 'dark' ? 'bg-blue-800' : 'bg-white'}
+        <div className={`${_theme === 'light' ? 'bg-transparent' : 'bg-[#001e5a]'}
         fixed h-[60px] z-[300] w-full px-[15px]
         transition ease-in-out duration-0`}>
 
-            <div className={`max-w-[1100px] mx-auto w-full
+            <div className={`max-w-[1100px] mx-auto w-full gap-5
               h-full flex place-items-center place-content-between
               `}>
                 <Logo theme={_theme} />
-                <CenterNav theme={_theme} navBg={navBg} />
+                <div className={` w-full`}>
+                    <CenterNav theme={_theme} navBg={navBg} />
+                </div>
                 <div className={`flex place-items-center gap-4`}>
                     <UserMenu theme={_theme} />
                     <Hamburger theme={_theme} openNav={openNav} navBg={navBg} />

@@ -521,3 +521,195 @@ export const getPortfolio = async (guid: string): Promise<any | null> => {
         return null
     }
 }
+
+export const getOperatingHours = async (businessGuid: string | null, userGuid: string | null): Promise<UserProfile[] | undefined> => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = `/api/listing/operating_hours?business_guid=${businessGuid}&user_guid=${userGuid}`
+    const url = BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        console.log(error.message)
+        return undefined
+    }
+}
+
+export const saveOperatingHours = async (openStatus: any, workingHours: any, businessGuid: any, userGuid: any) => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = `/api/listing/operating_hours?business_guid=${businessGuid}&user_guid=${userGuid}`
+    const url = BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "PUT",
+            headers: headers,
+            body: JSON.stringify({ openStatus, workingHours })
+        })
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getGallery = async (businessGuid: string | null, userGuid: string | null): Promise<UserProfile[] | undefined> => {
+
+    const endpoint = `/api/listing/gallery/${businessGuid}/${userGuid}`
+    const url = config.BASE_URL + endpoint
+    console.log(url)
+    console.log("|||")
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const deleteGalleryImage = async (guid: string | null, bid: string | null, image_guid: string | null): Promise<any | undefined> => {
+    const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+    const endpoint = `/delete_business_gallery_pic`
+    const url = IMG_BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = {
+            status: true
+        }
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getSysFacilityFeatures = async (): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/sys_facility_features`
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getSelectedFacilityFeatures = async (userGuid: string | null, businessGuid: string | null): Promise<any | undefined> => {
+    const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
+    const endpoint = `/api/listing/selected_facility_features/${userGuid}/${businessGuid}`
+    const url = BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getBusiness = async (userGuid: string | null, businessGuid: string | null): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/activate/${userGuid}/${businessGuid}`
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}

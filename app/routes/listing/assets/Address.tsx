@@ -8,7 +8,7 @@ import { GrLocation, GrMapLocation } from 'react-icons/gr'
 import { IoMdGlobe } from 'react-icons/io'
 import { MdEmail, MdLocationPin, MdOutline3gMobiledata, MdPhone, MdWeb } from 'react-icons/md'
 
-const Address = () => {
+const Address = ({ businessProfile }: any) => {
     return (
         <div className={`bg-blue-50/50 rounded-[5px] overflow-hidden  px-0 pt-0 pb-5 w-full`}>
             <div className={`font-bold text-[18px] border-b pb-2 
@@ -27,28 +27,55 @@ const Address = () => {
                         <div className={`col-span-1 `}>
                             <MdLocationPin className={`text-[22px]`} />
                         </div>
-                        <div className={`col-span-11 leading-[1.2em] ml-2`}>
-                            13 West Bestern Street, 23897, New York City, USA
+                        <div className={`col-span-11 leading-[1.2em] ml-2
+                            text-[13px]`}>
+                            {
+                                businessProfile?.address_one + ", "
+                            }
+                            {
+                                businessProfile?.address_two !== null ?
+                                    businessProfile?.address_two + ", " :
+                                    ""
+                            }
+                            {
+                                businessProfile?.city_name !== null ?
+                                    businessProfile?.city_name + ", " :
+                                    ""
+                            }
+                            {
+                                businessProfile?.state_name !== null ?
+                                    businessProfile?.state_name + ", " :
+                                    ""
+                            }
+                            {
+                                businessProfile?.zipcode !== null ?
+                                    businessProfile?.zipcode + ", " :
+                                    ""
+                            }
+                            {
+                                businessProfile?.country_name
+                            }
+
                         </div>
                     </div>
                 </div>
 
                 <div className={`  w-full`}>
 
-                    <Link to={`tel:+154983459`}>
+                    <Link to={`tel:${businessProfile?.phone}`}>
                         <div className={`grid grid-cols-12`}>
                             <div className={`col-span-1`}>
                                 <MdPhone className={`text-[22px]`} />
                             </div>
                             <div className={`col-span-11 leading-[1.2em] ml-2`}>
-                                +1 54 98 345 9
+                                {businessProfile?.phone}
                             </div>
                         </div>
                     </Link>
                 </div>
 
                 <div className={`  w-full`}>
-                    <Link to={`http://www.google.com/entry/permit`}>
+                    <Link to={`${businessProfile?.website}`}>
                         <div className={`grid grid-cols-12`}>
                             <div className={`col-span-1 relative top-0
                             `}>
@@ -65,7 +92,7 @@ const Address = () => {
                 </div>
 
                 <div className={`  w-full`}>
-                    <Link to={`mailto:info@comcerc.com`}>
+                    <Link to={`mailto:${businessProfile?.email_address}`}>
                         <div className={`grid grid-cols-12`}>
                             <div className={`col-span-1 relative top-0
                             `}>

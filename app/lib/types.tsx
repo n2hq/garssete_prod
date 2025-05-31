@@ -238,3 +238,9 @@ export const RequestStatus = {
     OPEN: "open",
     CLOSED: "closed"
 }
+
+export interface BusinessHours {
+    day: string;
+    open: string;
+    close: string;
+}

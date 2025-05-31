@@ -10,14 +10,19 @@ const ResultItem = ({ listing, index }: any) => {
         return num % 2 !== 0;
     }
 
-    const url = config.IMG_BASE_URL + listing.image_url
+    let url = config.IMG_BASE_URL + listing.image_url
+
+    if (listing?.image_url === "" || listing?.image_url === null) {
+        url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDKSPXOSoC8KuJCf_1dyELpZOsYINbk51FqA&s"
+    }
+
 
 
     return (
 
         <div className={` cursor-pointer my-2`}>
             <div className={`flex rounded  gap-x-2 p-2
-             hover:bg-blue-800 hover:text-white border shadow-md shadow-gray-200
+             hover:bg-blue-700 hover:text-white  
              ${isOdd(index) ? 'bg-blue-50' : ''}
                 `}>
                 {/** left */}
@@ -33,7 +38,7 @@ const ResultItem = ({ listing, index }: any) => {
 
                 {/** right */}
                 <div className=' w-full'>
-                    <Link to={`/web/account/portfolio/business/${listing.gid}`}>
+                    <Link to={`/web/account/portfolio/${listing.gid}`}>
                         <div className={`md:flex md:place-content-between 
                 w-full md:gap-x-[4px]`}>
                             {/** left */}

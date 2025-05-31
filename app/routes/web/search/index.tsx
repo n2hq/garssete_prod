@@ -10,6 +10,7 @@ import LatestBusinesses from './assets/LatestBusinesses'
 import Footer from '~/components/footer/Footer'
 import { navlinks } from '~/lib/json'
 import SearchHead from '~/components/content/SearchHead'
+import GenericNav from '~/components/header/generic/GenericNav'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
@@ -48,8 +49,10 @@ const index = () => {
 
     return (
         <div>
-            <ResponsiveNav theme='light' />
-            <SearchHead query={query} />
+            {/* <ResponsiveNav theme='light' />
+            <SearchHead query={query} /> */}
+            <GenericNav />
+
 
             <div className={`px-[15px] border-b`}>
                 <div className={`max-w-[1100px] mx-auto w-full`}>
@@ -104,7 +107,7 @@ const index = () => {
                 />
             </ResultLayout>
 
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

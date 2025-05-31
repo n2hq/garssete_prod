@@ -1,15 +1,27 @@
 import React from 'react'
 import Logo from './Logo'
-import { HiPlay } from 'react-icons/hi2'
+import { HiHome, HiPlay } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
 import { MobileNavProps } from '~/lib/types'
 import { mobileLinks, navlinks } from '~/lib/json'
-import { Link } from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import LeftNav from '~/routes/web/account/assets/LeftNav'
 import { CgChevronRight } from 'react-icons/cg'
+import { BiSearch } from 'react-icons/bi'
 
 
-
+const cnLinks = [
+    {
+        title: "Home",
+        link: "/",
+        icon: <HiHome />
+    },
+    {
+        title: "Page Search",
+        link: "/web/search",
+        icon: <BiSearch />
+    }
+]
 
 const MobileNav = ({
     showNav,
@@ -17,6 +29,8 @@ const MobileNav = ({
 }: MobileNavProps) => {
     const navOpen = showNav ? 'translate-x-0' : 'translate-x-[-100%]'
     const bgOverlay = showNav ? 'block' : 'hidden'
+
+    const location = useLocation();
 
     return (
         <>
@@ -43,13 +57,14 @@ const MobileNav = ({
 
                     <div className={`flex flex-col mt-10 mx-[15px]`}>
                         {
-                            mobileLinks.map((link, index) => {
+                            cnLinks.map((link, index) => {
                                 return (
                                     <div key={index} className={`mt-[0px]`}>
                                         <Link to={link.link}>
                                             <div className={` flex place-items-center gap-3
                                                 hover:bg-gray-200/60 py-1 rounded
-                                                place-content-between pr-1`}>
+                                                place-content-between pr-1
+                                                ${location.pathname === link.link && 'bg-[#2e374a]/15'}`}>
                                                 <div className={`w-[40px] h-[40px] rounded-full
                                             place-content-center place-items-center border-gray-300 text-[22px]`}>
                                                     {link.icon}

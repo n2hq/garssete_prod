@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ResponsiveNav from '~/components/header/account/ResponsiveNav'
 import LeftNav from './LeftNav'
 import { FaTimes } from 'react-icons/fa'
@@ -6,9 +6,14 @@ import Sidebar from './Sidebar'
 import { CgChevronLeft, CgChevronRight, CgMenu } from 'react-icons/cg'
 import { BiChevronLeft, BiChevronRight, BiMenu, BiMenuAltLeft, BiX } from 'react-icons/bi'
 import { BsMenuButton } from 'react-icons/bs'
+import { useAuth } from '~/context/AuthContext'
+import { useLocation, useNavigate } from '@remix-run/react'
+import AccountNav from '~/components/header/account/AccountNav'
 
 const AccountLayout = ({ children }: any) => {
     const [show, setShow] = useState(true)
+    const { user } = useAuth()
+    const [loading, setLoading] = useState(true)
 
     const handleShow = () => {
         if (show === false) {
@@ -19,12 +24,31 @@ const AccountLayout = ({ children }: any) => {
 
     }
 
+    useEffect(() => {
+        if (user?.guid !== null && user?.guid !== undefined && user?.guid !== "") {
+
+            setLoading(false)
+        } else {
+            window.location.href = "/web/signin"
+        }
+    }, [user])
+
+
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="text-lg">Loadings...</div>
+            </div>
+        )
+    }
+
     return (
         <div className={`h-screen flex flex-col relative`}>
 
 
             {/** top navbar */}
-            <ResponsiveNav theme={"dark"} />
+            <AccountNav />
 
             <button
                 onClick={handleShow}
@@ -39,7 +63,7 @@ const AccountLayout = ({ children }: any) => {
             </button>
 
             {/** layout */}
-            <div className={`flex flex-1 pt-[60px] h-full
+            <div className={`flex flex-1 pt-[65px] h-full
                 overflow-hidden`}>
                 {/** sidebar */}
                 <aside

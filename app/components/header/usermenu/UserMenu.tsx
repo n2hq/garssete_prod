@@ -27,8 +27,9 @@ const UserMenu = ({ theme }: any) => {
                         <BiUser className={`object-cover w-[70%] h-[70%]`} />
                     </button> :
                     <Link to={`/web/signin`}>
-                        <div className={`rounded-full border-[1px] px-3
-                     text-[13px] py-[5px] cursor-pointer
+                        <div className={` border-[1px] px-3 rounded-full flex
+                        justify-center  content-center
+                     text-[13px] py-[5px] cursor-pointer w-[80px] text-center
                     ${theme === "dark" && 'text-white border-gray-400/80 hover:bg-white hover:text-blue-800'}
                     ${theme !== "dark" && 'text-white border-gray-500/50 hover:text-white/60 hover:shadow-lg bg-blue-800'}
                     `}>

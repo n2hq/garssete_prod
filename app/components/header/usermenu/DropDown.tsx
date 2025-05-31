@@ -12,8 +12,9 @@ const DropDown = ({ open }: any) => {
                 <div className={`absolute`}>
                     <div className={`relative`}>
                         <div className={`absolute right-[-25px] top-[5px]`}>
-                            <div className={`w-[250px] bg-white rounded p-[5px] shadow-lg
-                                shadow-gray-300`}>
+                            <div className={`w-[250px] bg-white rounded p-[5px] 
+                            shadow-lg
+                                shadow-black/30`}>
                                 <AccountUser />
                                 <div className={`px-[10px] my-1`}>
                                     <hr />

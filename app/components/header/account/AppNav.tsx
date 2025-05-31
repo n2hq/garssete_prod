@@ -25,10 +25,10 @@ const AppNav = ({
     }, [scrollHeight])
 
     return (
-        <div className={`${_theme === 'dark' ? 'bg-blue-800' : 'bg-white'}
+        <div className={`${_theme === 'dark' ? 'bg-[#001e5a]' : 'bg-white'}
         fixed h-[60px] z-[300] w-full px-[15px]
         transition ease-in-out duration-0
-        shadow-sm  border-b`}>
+        `}>
 
             <div className={` mx-auto w-full
               h-full flex place-items-center place-content-between

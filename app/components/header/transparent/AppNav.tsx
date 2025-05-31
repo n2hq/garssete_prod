@@ -26,7 +26,8 @@ const AppNav = ({ openNav }: NavProps) => {
         transition-all ease-in-out duration-0`}>
 
             <div className={`max-w-[1100px] mx-auto w-full
-              h-full flex place-items-center place-content-between
+              h-full flex place-items-center 
+              place-content-between gap-5
               `}>
                 <Logo theme='dark' />
                 <CenterNav navBg={navBg} />

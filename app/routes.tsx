@@ -17,8 +17,15 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
 
         {/** account portfolio */ }
         route("/web/account/portfolio", "routes/web/account/portfolio/index.tsx");
-        route("/web/account/portfolio/business/:business_guid", "routes/web/account/portfolio/business/index.tsx");
+        route("/web/account/portfolio/:business_guid", "routes/web/account/portfolio/business/index.tsx");
         route("/web/account/create_business", "routes/web/account/create_business/index.tsx");
+
+        {/** portfolio business */ }
+        route("/web/account/portfolio/:business_guid/:user_guid/settings", "routes/web/account/portfolio/business/settings/index.tsx");
+        route("/web/account/portfolio/:business_guid/:user_guid/gallery", "routes/web/account/portfolio/business/gallery/index.tsx");
+        route("/web/account/portfolio/:business_guid/:user_guid/facilities", "routes/web/account/portfolio/business/facilities/index.tsx");
+        route("/web/account/portfolio/:business_guid/:user_guid/activate", "routes/web/account/portfolio/business/activate/index.tsx");
+
 
         {/** user */ }
         route("api/user/signin", "routes/api/user/signin.tsx");
@@ -42,6 +49,13 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/listing/business_gallery/:business_guid", "routes/api/listing/business_gallery.tsx");
         route("api/listing/business_profile_image/:guid", "routes/api/listing/business_profile_image.tsx");
         route("api/listing/owner/:guid", "routes/api/listing/owner/index.tsx");
+
+        route("api/listing/operating_hours", "routes/api/listing/operating_hours.tsx");
+        route("api/listing/gallery/:business_guid/:user_guid", "routes/api/listing/gallery.tsx");
+        route("api/listing/sys_facility_features", "routes/api/listing/sys_facility_features/index.tsx");
+        route("api/listing/selected_facility_features/:user_guid/:business_guid", "routes/api/listing/selected_facility_features/selected_facility_features.tsx");
+        route("api/listing/selected_facility_features", "routes/api/listing/selected_facility_features/index.tsx");
+        route("api/listing/activate/:user_guid/:business_guid", "routes/api/listing/activate/activate.tsx");
 
         route("api/rating/business_ratings/:business_guid", "routes/api/rating/business_ratings.tsx");
         route("api/rating/ratings_reviews/:business_guid", "routes/api/rating/ratings_reviews.tsx");

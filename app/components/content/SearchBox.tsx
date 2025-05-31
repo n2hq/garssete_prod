@@ -25,7 +25,8 @@ const SearchBox = ({ query }: any) => {
                             value={queryParam}
                             onChange={(e) => changeHandler(e)}
                             type="text"
-                            className={`grow bg-white p-3 outline-none`}
+                            className={`grow bg-white p-3 outline-none
+                                border-l border-b border-t`}
                             placeholder='Enter an address, city, state or country'
                         />
                         <button

@@ -8,7 +8,7 @@ const Hero = () => {
         relative bg-[url('/images/hero.jpg')] bg-cover bg-center`}>
 
             { /**black overlay */}
-            <div className=' absolute inset-0 bg-black opacity-50'></div>
+            <div className=' absolute inset-0 bg-black/0'></div>
 
             {/** texts */}
             <div className={`flex justify-center items-center flex-col

@@ -61,7 +61,11 @@ const LatestBusinesses = ({
                                             <img
                                                 className={`object-cover w-full h-full
                                                     text-sm`}
-                                                src={IMG_BASE_URL + data?.image_url}
+                                                src={
+                                                    data?.image_url ?
+                                                        IMG_BASE_URL + data?.image_url :
+                                                        'https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif'
+                                                }
                                                 alt={data.title}
                                             />
                                         </div>

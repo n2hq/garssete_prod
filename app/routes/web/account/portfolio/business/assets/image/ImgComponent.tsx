@@ -11,7 +11,7 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
     if (businessProfileImageData.image_url) {
         imgconst = config.IMG_BASE_URL + businessProfileImageData.image_url
     } else {
-        imgconst = 'https://trendyblinds.ca/wp-content/uploads/2023/09/3.-3D-WALLPAPER-SKU0015.jpg'
+        imgconst = '/images/placeholder-blue.png'
     }
 
     const [imgSrc, setImgSrc] = useState<any>(imgconst)
@@ -50,6 +50,8 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
 
             const endpoint = "/business_profile_pic_upload"
             const url = config.IMG_BASE_URL + endpoint
+
+
 
 
             try {

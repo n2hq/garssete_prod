@@ -109,7 +109,7 @@ export const HeaderNav = () => {
 
 const heroimgs = [
   {
-    img: "/images/dubai7star.jpeg"
+    img: "images/dubai7star.jpeg"
   },
   {
     img: "https://r4.wallpaperflare.com/wallpaper/791/501/238/new-york-city-buildings-wallpaper-51351344a10dae2b3cd90e3cb71d503d.jpg"

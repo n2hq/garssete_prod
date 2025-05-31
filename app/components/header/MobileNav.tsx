@@ -8,6 +8,7 @@ import { Link, useLocation } from '@remix-run/react'
 import LeftNav from '~/routes/web/account/assets/LeftNav'
 import { CgChevronRight } from 'react-icons/cg'
 import { BiSearch } from 'react-icons/bi'
+import { useAuth } from '~/context/AuthContext'
 
 
 const cnLinks = [
@@ -29,6 +30,7 @@ const MobileNav = ({
 }: MobileNavProps) => {
     const navOpen = showNav ? 'translate-x-0' : 'translate-x-[-100%]'
     const bgOverlay = showNav ? 'block' : 'hidden'
+    const { user } = useAuth()
 
     const location = useLocation();
 
@@ -87,7 +89,9 @@ const MobileNav = ({
                         <hr className={`mt-[20px]`} />
                         <div className={`mt-[20px]`}></div>
 
-                        <LeftNav />
+                        {
+                            user && <LeftNav />
+                        }
                     </div>
 
                     <div className={`mt-20`}>

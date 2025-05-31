@@ -3,6 +3,7 @@ import Logo from '../Logo'
 import CenterNav from './CenterNav'
 import Hamburger from '../Hamburger'
 import UserMenu from '../usermenu/UserMenu'
+import { WhiteLogo } from '../WhiteLogo'
 
 
 
@@ -32,7 +33,7 @@ const AppNav = ({
             <div className={`max-w-[1100px] mx-auto w-full
               h-full flex place-items-center place-content-between
               `}>
-                <Logo theme={_theme} />
+                <WhiteLogo />
 
 
             </div>

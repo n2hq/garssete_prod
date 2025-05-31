@@ -14,6 +14,9 @@ import { Link } from "@remix-run/react";
 import UserMenu from "~/components/header/usermenu/UserMenu";
 import Hamburger from "~/components/header/Hamburger";
 import MobileNav from "~/components/header/MobileNav";
+import Footer from "~/components/footer/Footer";
+import { WhiteLogo } from "~/components/header/WhiteLogo";
+import Recents from "./home/Recents";
 
 
 export const meta: MetaFunction = () => {
@@ -29,7 +32,14 @@ export default function Index() {
       {/** header nav */}
       <HeaderNav />
       <HomepageHero />
+      <Recents
+        category={'services'}
+        limit={8}
+        title={`Recent Listings`}
+        subtitle={"Recent businesses or entities added by date."}
+      />
       <FrontPageCategories />
+      <Footer />
     </div>
   );
 }
@@ -67,9 +77,7 @@ export const HeaderNav = () => {
           {/** left */}
           <div className={`font-bold font-sans 
           flex place-items-center text-2xl`}>
-            <div className={`relative top-[-3px]`}>
-              Gr<i>ü</i>the
-            </div>
+            <WhiteLogo />
           </div>
 
           {/** center */}
@@ -101,13 +109,13 @@ export const HeaderNav = () => {
 
 const heroimgs = [
   {
-    img: "/images/bbscape.jpg"
+    img: "/images/dubai7star.jpeg"
   },
   {
-    img: "https://cdn.sanity.io/images/s3y3vcno/production/1a48c7e51fec90eee45cb991f46117cf49fc094e-1920x1280.jpg?auto=format"
+    img: "https://r4.wallpaperflare.com/wallpaper/791/501/238/new-york-city-buildings-wallpaper-51351344a10dae2b3cd90e3cb71d503d.jpg"
   },
   {
-    img: "https://graymalin.com/cdn/shop/files/Summer_in_Chicago_ttpnef.jpg?v=1712257046&width=1920"
+    img: "https://c0.wallpaperflare.com/path/494/492/40/signage-brand-cyan-yellow-5d1465fafe2d1f3e8deff1bbe07c71ce.jpg"
   }
 ]
 export const HomepageHero = () => {
@@ -189,7 +197,7 @@ export const HomepageHero = () => {
   return (
     <>
       <div className={`relative`}>
-        <div className={` w-auto h-screen flex 
+        <div className={` w-full h-[500px] flex 
           overflow-hidden z-0
           `}>
           {
@@ -202,8 +210,8 @@ export const HomepageHero = () => {
                   alt=""
                   style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                   className={`object-cover w-full h-full 
-                                            block flex-shrink-0 flex-grow-0 transition-transform
-                                            ease-in-out duration-1000`}
+                      block flex-shrink-0 flex-grow-0 transition-transform
+                      ease-in-out duration-1000`}
                 />
               )
             })
@@ -237,7 +245,7 @@ export const HomepageHero = () => {
             </div>
           </button>
         </div>
-        <div className={`z-100 absolute top-0 w-full h-screen 
+        <div className={`z-100 absolute top-0 w-full h-[500px] 
           flex place-content-center place-items-center px-[15px]`}>
           <div
             className={`mt-6 bg-white/30 py-3
@@ -295,10 +303,10 @@ const categories = [
 ]
 export const FrontPageCategories = () => {
   return (
-    <div className={`w-full relative mt-8 px-[15px]`}>
+    <div className={`w-full relative mt-[50px] px-[15px]`}>
       <div className={`max-w-[1100px] mx-auto w-full`}>
-        <div className={`relative font-sans text-[26px]
-        text-center font-bold mb-8`}>
+        <div className={`relative font-sans text-2xl
+        text-center font-bold mb-8 border-b pb-5`}>
           Categories
         </div>
 

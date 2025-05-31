@@ -107,7 +107,7 @@ const index = () => {
                 />
             </ResultLayout>
 
-            {/* <Footer /> */}
+            <Footer />
         </div>
     )
 }

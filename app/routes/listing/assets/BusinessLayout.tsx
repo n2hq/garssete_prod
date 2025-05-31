@@ -38,7 +38,7 @@ const BusinessLayout = ({
                         }
 
                         <div className={`lg:hidden mt-5 mb-5`}>
-                            <Address />
+                            {listing && <Address businessProfile={listing} />}
                             {
                                 listing && <Review listing={listing} />
                             }

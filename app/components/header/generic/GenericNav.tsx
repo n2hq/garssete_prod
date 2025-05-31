@@ -5,6 +5,7 @@ import Hamburger from '../Hamburger'
 import { Link, useLocation } from '@remix-run/react'
 import MobileNav from '../MobileNav'
 import UserMenu from '../usermenu/UserMenu'
+import { WhiteLogo } from '../WhiteLogo'
 
 const navlnk = [
     {
@@ -43,13 +44,7 @@ const GenericNav = () => {
                         {/** left */}
                         <div className={`flex place-items-center
                         `}>
-                            <Link to={`/`}>
-                                <div className={`font-black text-2xl
-                                    tracking-tight`}>
-
-                                    Gr<i>ü</i>the
-                                </div>
-                            </Link>
+                            <WhiteLogo />
                         </div>
 
                         {/** center */}
@@ -135,3 +130,4 @@ const GenericNav = () => {
 }
 
 export default GenericNav
+

@@ -56,6 +56,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/listing/selected_facility_features/:user_guid/:business_guid", "routes/api/listing/selected_facility_features/selected_facility_features.tsx");
         route("api/listing/selected_facility_features", "routes/api/listing/selected_facility_features/index.tsx");
         route("api/listing/activate/:user_guid/:business_guid", "routes/api/listing/activate/activate.tsx");
+        route("api/listing/recents", "routes/api/listing/recents.tsx");
 
         route("api/rating/business_ratings/:business_guid", "routes/api/rating/business_ratings.tsx");
         route("api/rating/ratings_reviews/:business_guid", "routes/api/rating/ratings_reviews.tsx");

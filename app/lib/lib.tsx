@@ -713,3 +713,30 @@ export const getBusiness = async (userGuid: string | null, businessGuid: string 
         return undefined
     }
 }
+
+export const getRecents = async (): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/recents`
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}

@@ -3,6 +3,8 @@ import HomeNav from './zassets/header/HomeNav'
 import { HeaderNav } from './zassets/header/HeaderNav'
 import { HomepageHero } from './zassets/header/HomepageHero'
 import Recents from './home/Recents'
+import { FrontPageCategories } from './zassets/FrontPageCategories'
+import Footer from '~/components/footer/Footer'
 
 const _index = () => {
   return (
@@ -22,6 +24,9 @@ const _index = () => {
         title={`Recent Listings`}
         subtitle={"Recent businesses or entities added by date."}
       />
+
+      <FrontPageCategories />
+      <Footer />
     </div>
   )
 }

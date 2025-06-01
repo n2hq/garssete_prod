@@ -30,8 +30,8 @@ const HomeNav = () => {
     return (
         <div className={`shadow-md pb-3`}>
             <div className={`flex place-content-between
-                 fixed w-full mx-auto
-                 px-[12px] h-[50px]`}>
+                 fixed w-full mx-auto bg-white
+                 px-[12px] h-[50px] z-[600]`}>
                 <div className={`h-full w-[150px]   
                     flex place-items-center`}>
                     <HamburgerMenu theme={"light"} openNav={openNav} navBg={navBg} />

@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useAuth } from '~/context/AuthContext'
 import { useNotification } from '~/context/NotificationContext'
 import { useRating } from '~/context/RatingContext'
-import { ListingType } from '~/lib/Interfaces'
-import { getRating } from '~/lib/Lib'
+import { ListingType } from '~/lib/types'
+import { getRating } from '~/lib/lib'
 
 const Review = ({ listing }: any) => {
     const rating = useRating()
@@ -64,13 +64,15 @@ const Review = ({ listing }: any) => {
 
 
     return (
-        <div className={`mx-auto w-full sm:w-[60%] lg:w-full mt-3`}>
-            <button
-                onClick={() => handleShow()}
-                className={`bg-blue-500 text-white flex flex-col
-                items-center py-2 w-full `}>
-                Write Review
-            </button>
+        <div className={`w-full mt-0 `}>
+            <div className={``}>
+                <button
+                    onClick={() => handleShow()}
+                    className={`bg-blue-500 text-white flex flex-col
+                items-center pt-[2px] pb-[3px] w-full `}>
+                    Write Review
+                </button>
+            </div>
         </div>
     )
 }

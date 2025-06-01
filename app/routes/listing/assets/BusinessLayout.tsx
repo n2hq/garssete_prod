@@ -34,29 +34,31 @@ const BusinessLayout = ({
                 </div>
             </div>
 
-            <div className={`bg-black h-fit md:hidden
+            {
+                images?.length > 0 && listing &&
+                <div className={`bg-black h-fit md:hidden
                 mt-4`}>
-                {
-                    images && listing &&
                     <ListingCarousel
                         images={images}
                         listing={listing}
                     />
-                }
-            </div>
 
-            <div className={`px-[15px]`}>
+                </div>
+            }
+
+
+            <div className={`px-[0px] md:pt-4`}>
                 <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
 
-                    <div className={`grid grid-cols-12 mt-4 gap-0 md:gap-6 relative
+                    <div className={`grid grid-cols-12 gap-0 md:gap-0 relative
                     `}>
                         <div className={` col-span-12 lg:col-span-8`}>
 
 
 
-                            <div className={`hidden md:block`}>
+                            <div className={`hidden md:block mt-0`}>
                                 {
-                                    images && listing &&
+                                    images?.length > 0 && listing &&
                                     <ImageBlock
                                         images={images}
                                         listing={listing}
@@ -73,19 +75,21 @@ const BusinessLayout = ({
                         } */}
 
                             <div className={``}>
-                                <div className={`lg:hidden mt-5 mb-5`}>
+                                <div className={`lg:hidden mt-0 mb-5`}>
                                     {listing && <Address businessProfile={listing} />}
-                                    {
+                                    {/* {
                                         listing && <Review listing={listing} />
-                                    }
+                                    } */}
 
                                 </div>
 
-                                <ShortDescription listing={listing} />
-                                <BusinessFeatures listing={listing} />
-                                <Description listing={listing} />
+                                <div className={`px-[15px] md:px-[0px]`}>
+                                    <ShortDescription listing={listing} />
+                                    <BusinessFeatures listing={listing} />
+                                    <Description listing={listing} />
 
-                                {listing && <BusinessRatings listing={listing} />}
+                                    {listing && <BusinessRatings listing={listing} />}
+                                </div>
                             </div>
 
                         </div>
@@ -93,9 +97,8 @@ const BusinessLayout = ({
                         <div className={`col-span-12 lg:col-span-4 hidden lg:block`}>
                             <div className={` sticky top-[100px]`}>
                                 {listing && <Address businessProfile={listing} />}
-                                <Review />
+                                {/* <Review /> */}
                             </div>
-
                         </div>
                     </div>
 

@@ -87,51 +87,58 @@ const Related = ({
     }, [limit, category])
 
     return (
-        <div className={`w-[95%] md:w-[90%] xl:w-[80%] mx-auto`}>
-            <div className={`mt-10 border-t pt-5`}>
-                <div className={` mb-[20px] `}>
-                    <div className={`font-semibold text-xl`}>
-                        {ti}
+        <div className={`px-[15px]`}>
+            <div className={`max-w-[1100px] mx-auto w-full`}>
+                <div className={`mt-10 border-t pt-5`}>
+                    <div className={` mb-[20px] `}>
+                        <div className={`font-semibold text-xl`}>
+                            {ti}
+                        </div>
+                        <div className={`text-sm -mt-[2px]`}>
+                            {st}
+                        </div>
                     </div>
-                    <div className={`text-sm -mt-[2px]`}>
-                        {st}
-                    </div>
-                </div>
 
-                <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-4`}>
-                    {
-                        listings?.map((data: any, index: number) => {
-                            return (
-                                <div key={index}>
-                                    <div>
-                                        <Link to={`/${data.gid}`}>
-                                            <div className={`relative h-[180px]`}>
-                                                <img
-                                                    className={`object-cover w-full h-full
+                    <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-4`}>
+                        {
+                            listings?.map((data: any, index: number) => {
+                                return (
+                                    <div key={index}>
+                                        <div>
+                                            <Link to={`/${data.gid}`}>
+                                                <div className={`relative h-[120px]
+                                                    md:h-[180px]`}>
+                                                    <img
+                                                        className={`object-cover w-full h-full
                                                     text-sm`}
-                                                    src={IMG_BASE_URL + data?.image_url}
-                                                    alt={data.title}
-                                                />
-                                            </div>
-                                        </Link>
-                                    </div>
-                                    <div className={`mt-1 text-[15px] tracking-tight 
+                                                        src={
+                                                            data?.image_url ?
+                                                                IMG_BASE_URL + data?.image_url :
+                                                                'images/placeholder.gif'
+                                                        }
+                                                        alt={data.title}
+                                                    />
+                                                </div>
+                                            </Link>
+                                        </div>
+                                        <div className={`mt-1 text-[15px] tracking-tight 
                                      truncate`}>
-                                        {data.title}
-                                    </div>
+                                            {data.title}
+                                        </div>
 
-                                    <div className={`mt-1`}>
-                                        <LatestStarRating rating={data.avg_rating} />
-                                    </div>
+                                        <div className={`mt-1`}>
+                                            <LatestStarRating rating={data.avg_rating} />
+                                        </div>
 
-                                    <div className={`text-[11px] mt-[5px] tracking-tight
+                                        <div className={`text-[11px] mt-[5px] tracking-tight
                                     leading-[1.2em]`}>
-                                        {data.short_description.substring(0, 100)}
+                                            {data.short_description.substring(0, 100)}
+                                        </div>
                                     </div>
-                                </div>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         </div>

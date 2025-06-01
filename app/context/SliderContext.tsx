@@ -24,6 +24,23 @@ export const SliderProvider = ({ children }: any) => {
     const counter = useRef(0)
     let slideIncrement = 0
 
+    const handleTouchStart = (e: any) => {
+        slideStep.current = e.touches[0].clientX;
+    }
+
+    const handleTouchEnd = (e: any) => {
+        const endX = e.changedTouches[0].clientX;
+        const deltaX = slideStep.current - endX;
+
+        if (deltaX > 50) {
+            // swipe left
+            setCurrentSlide((i: any) => (i + 1) % slides.length);
+        } else if (deltaX < -50) {
+            // swipe right
+            setCurrentSlide((i: any) => (i - 1 + slides.length) % slides.length);
+        }
+    };
+
     const handleClose = () => { setDialog(false) }
     const handleOpen = () => { setDialog(true) }
 
@@ -67,6 +84,8 @@ export const SliderProvider = ({ children }: any) => {
 
                                         return (
                                             <img
+                                                onTouchStart={handleTouchStart}
+                                                onTouchEnd={handleTouchEnd}
                                                 key={index}
                                                 src={IMG_BASE_URL + slide.image_url}
                                                 alt=""

@@ -13,6 +13,7 @@ import UserReviews from './BusinessRatings';
 import BusinessRatings from './BusinessRatings';
 import ImageBlock from './ImageBlock';
 import { list } from 'postcss';
+import { ListingCarousel } from './ListingCarousel';
 
 
 const BusinessLayout = ({
@@ -22,8 +23,8 @@ const BusinessLayout = ({
 }: any) => {
     return (
         <div className={``}>
-            <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
-                <div className={`px-[15px]`}>
+            <div className={`px-[15px] w-full`}>
+                <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
                     {
                         ratingsData && <StarRating ratingsData={ratingsData} rating={Number(ratingsData.rating_average)} />
                     }
@@ -31,25 +32,39 @@ const BusinessLayout = ({
                         listing && <Header listing={listing} />
                     }
                 </div>
-                <div className={`grid grid-cols-12 mt-4 gap-0 md:gap-6 relative
+            </div>
+
+            <div className={`bg-black h-fit md:hidden
+                mt-4`}>
+                {
+                    images && listing &&
+                    <ListingCarousel
+                        images={images}
+                        listing={listing}
+                    />
+                }
+            </div>
+
+            <div className={`px-[15px]`}>
+                <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
+
+                    <div className={`grid grid-cols-12 mt-4 gap-0 md:gap-6 relative
                     `}>
-                    <div className={` col-span-12 lg:col-span-8`}>
+                        <div className={` col-span-12 lg:col-span-8`}>
 
-                        <div className={`bg-black h-[200px]`}>
 
-                        </div>
 
-                        <div className={`hidden md:block`}>
-                            {
-                                images && listing &&
-                                <ImageBlock
-                                    images={images}
-                                    listing={listing}
-                                />
-                            }
-                        </div>
+                            <div className={`hidden md:block`}>
+                                {
+                                    images && listing &&
+                                    <ImageBlock
+                                        images={images}
+                                        listing={listing}
+                                    />
+                                }
+                            </div>
 
-                        {/*  {
+                            {/*  {
                             images && listing &&
                             <Masonry
                                 images={images}
@@ -57,33 +72,34 @@ const BusinessLayout = ({
                             />
                         } */}
 
-                        <div className={`px-[15px]`}>
-                            <div className={`lg:hidden mt-5 mb-5`}>
-                                {listing && <Address businessProfile={listing} />}
-                                {
-                                    listing && <Review listing={listing} />
-                                }
+                            <div className={``}>
+                                <div className={`lg:hidden mt-5 mb-5`}>
+                                    {listing && <Address businessProfile={listing} />}
+                                    {
+                                        listing && <Review listing={listing} />
+                                    }
 
+                                </div>
+
+                                <ShortDescription listing={listing} />
+                                <BusinessFeatures listing={listing} />
+                                <Description listing={listing} />
+
+                                {listing && <BusinessRatings listing={listing} />}
                             </div>
 
-                            <ShortDescription listing={listing} />
-                            <BusinessFeatures listing={listing} />
-                            <Description listing={listing} />
-
-                            {listing && <BusinessRatings listing={listing} />}
                         </div>
 
-                    </div>
+                        <div className={`col-span-12 lg:col-span-4 hidden lg:block`}>
+                            <div className={` sticky top-[100px]`}>
+                                {listing && <Address businessProfile={listing} />}
+                                <Review />
+                            </div>
 
-                    <div className={`col-span-12 lg:col-span-4 hidden lg:block`}>
-                        <div className={` sticky top-[100px]`}>
-                            {listing && <Address businessProfile={listing} />}
-                            <Review />
                         </div>
-
                     </div>
+
                 </div>
-
             </div>
         </div>
     )

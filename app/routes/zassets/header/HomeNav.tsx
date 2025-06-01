@@ -48,15 +48,18 @@ const HomeNav = () => {
             <div className={`h-[50px]`}></div>
 
             <div className={`px-[12px]`}>
-                <div className={`bg-gray-100 w-full rounded-full h-[40px]
+                <form action="/web/search">
+                    <div className={`bg-gray-100 w-full rounded-full h-[40px]
                     flex place-items-center px-2 gap-2`}>
-                    <BiSearch className={`h-[20px] w-[20px]`} />
-                    <input
-                        type="text"
-                        className={`bg-transparent w-full outline-none
+                        <BiSearch className={`h-[20px] w-[20px]`} />
+                        <input
+                            type="text"
+                            name="q"
+                            className={`bg-transparent w-full outline-none
                             h-full flex place-content-center`}
-                    />
-                </div>
+                        />
+                    </div>
+                </form>
             </div>
         </div>
     )

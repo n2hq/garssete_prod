@@ -9,6 +9,7 @@ import LeftNav from '~/routes/web/account/assets/LeftNav'
 import { CgChevronRight } from 'react-icons/cg'
 import { BiSearch } from 'react-icons/bi'
 import { useAuth } from '~/context/AuthContext'
+import { WhiteLogo } from './WhiteLogo'
 
 
 const cnLinks = [
@@ -44,14 +45,14 @@ const MobileNav = ({
                 {/** navlinks */}
                 <div className={`${navOpen} transform transition-all duration-500
                 delay-0 fixed  justify-start  h-full
-                w-[400px] md:w-[400px] bg-white z-[4001] ${showNav ? 'shadow-lg shadow-black/50' : ''}
+                w-[350px] md:w-[400px] bg-white z-[4001] ${showNav ? 'shadow-lg shadow-black/50' : ''}
                 overflow-y-auto
                 `}>
                     <div className={`bg-white pt-4 pb-4`}>
 
 
                         <div className={`pl-8 md:pl-12`}>
-                            <Logo theme='light' />
+                            <WhiteLogo />
                         </div>
                     </div>
 

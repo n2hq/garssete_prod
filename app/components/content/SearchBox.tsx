@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { BiSearch } from 'react-icons/bi';
 
 const SearchBox = ({ query }: any) => {
     const [queryParam, setQueryParam] = useState('')
@@ -16,25 +17,27 @@ const SearchBox = ({ query }: any) => {
 
     return (
         <>
-            <form action="/search" method='get'>
+            <form action="/web/search" method='get'>
                 <div className={`mx-[15px]`}>
                     <div className={`max-w-[800px] mx-auto w-full
-                        bg-blue-100 rounded flex gap-x-0 overflow-hidden`}>
+                        bg-white rounded-full flex overflow-hidden
+                        p-[5px] gap-x-1`}>
                         <input
                             name='q'
                             value={queryParam}
                             onChange={(e) => changeHandler(e)}
                             type="text"
-                            className={`grow bg-white p-3 outline-none
-                                border-l border-b border-t`}
+                            className={`w-full p-3 outline-none
+                                bg-blue-100 rounded-full`}
                             placeholder='Enter an address, city, state or country'
                         />
                         <button
                             type='submit'
-                            className={`text-black bg-gray-200 rounded-r
-                                border-none font-bold w-[100px]`}
+                            className={`text-black bg-blue-500 rounded-full
+                                border-none font-bold overflow-hidden min-w-[50px] w-[50px]
+                                h-[50px] flex justify-center items-center`}
                         >
-                            Submit
+                            <BiSearch />
                         </button>
                     </div>
                 </div>

@@ -1,0 +1,1 @@
+import{j as t}from"./jsx-runtime-0DLF9kdB.js";import{H as s}from"./WhiteLogo-rEYCCE-c.js";const m=({theme:r,openNav:e,navBg:i})=>t.jsx(t.Fragment,{children:t.jsx("div",{className:"flex items-center",children:t.jsx(s,{onClick:e,className:`${r==="light"?"text-black":"text-white"} w-8 h-8 cursor-pointer`})})});export{m as H};

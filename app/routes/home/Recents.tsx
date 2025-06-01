@@ -109,7 +109,7 @@ const Recents = ({
                                     <div key={index}>
                                         <div>
                                             <Link to={`/${data.gid}`}>
-                                                <div className={`relative h-[180px]`}>
+                                                <div className={`relative h-[120px] md:h-[180px]`}>
                                                     <img
                                                         className={`object-cover w-full h-full
                                                     text-sm`}

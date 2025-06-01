@@ -2,6 +2,7 @@ import React from 'react'
 import HomeNav from './zassets/header/HomeNav'
 import { HeaderNav } from './zassets/header/HeaderNav'
 import { HomepageHero } from './zassets/header/HomepageHero'
+import Recents from './home/Recents'
 
 const _index = () => {
   return (
@@ -12,9 +13,15 @@ const _index = () => {
       <div className='hidden md:block'>
         <HeaderNav />
       </div>
-      <div className={`md:block`}>
+      <div className={`hidden md:block`}>
         <HomepageHero />
       </div>
+      <Recents
+        category={'services'}
+        limit={8}
+        title={`Recent Listings`}
+        subtitle={"Recent businesses or entities added by date."}
+      />
     </div>
   )
 }

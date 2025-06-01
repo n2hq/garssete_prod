@@ -33,6 +33,24 @@ export const ListingCarousel = ({ images, listing }: any) => {
     const slideStep = useRef(0)
     const counter = useRef(0)
     let slideIncrement = 0
+
+    const handleTouchStart = (e: any) => {
+        slideStep.current = e.touches[0].clientX;
+    }
+
+    const handleTouchEnd = (e: any) => {
+        const endX = e.changedTouches[0].clientX;
+        const deltaX = slideStep.current - endX;
+
+        if (deltaX > 50) {
+            // swipe left
+            setCurrentSlide((i: any) => (i + 1) % images.length);
+        } else if (deltaX < -50) {
+            // swipe right
+            setCurrentSlide((i: any) => (i - 1 + images.length) % images.length);
+        }
+    };
+
     const [slides, setSlides] = useState<any | null>(null)
 
     let timeoutId = useRef<NodeJS.Timeout | null>(null);
@@ -156,6 +174,8 @@ export const ListingCarousel = ({ images, listing }: any) => {
 
                             return (
                                 <img
+                                    onTouchStart={handleTouchStart}
+                                    onTouchEnd={handleTouchEnd}
                                     onMouseDown={(e) => showCarousel(index)}
                                     key={index}
                                     src={config.IMG_BASE_URL + slide.image_url}

@@ -75,7 +75,7 @@ const BusinessLayout = ({
                         } */}
 
                             <div className={``}>
-                                <div className={`lg:hidden mt-0 mb-5`}>
+                                <div className={`lg:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
                                     {listing && <Address businessProfile={listing} />}
                                     {/* {
                                         listing && <Review listing={listing} />

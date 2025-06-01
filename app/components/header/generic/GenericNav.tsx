@@ -42,7 +42,7 @@ const GenericNav = () => {
                     h-[60px] gap-x-2`}>
 
                         {/** left */}
-                        <div className={`flex place-items-center
+                        <div className={`flex place-items-center text-[#451a79]
                         `}>
                             <WhiteLogo />
                         </div>

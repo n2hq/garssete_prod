@@ -21,24 +21,33 @@ const BusinessLayout = ({
     ratingsData
 }: any) => {
     return (
-        <div className={`px-[15px]`}>
+        <div className={``}>
             <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
-                {
-                    ratingsData && <StarRating ratingsData={ratingsData} rating={Number(ratingsData.rating_average)} />
-                }
-                {
-                    listing && <Header listing={listing} />
-                }
-                <div className={`grid grid-cols-12 mt-4 gap-0 md:gap-6 relative`}>
+                <div className={`px-[15px]`}>
+                    {
+                        ratingsData && <StarRating ratingsData={ratingsData} rating={Number(ratingsData.rating_average)} />
+                    }
+                    {
+                        listing && <Header listing={listing} />
+                    }
+                </div>
+                <div className={`grid grid-cols-12 mt-4 gap-0 md:gap-6 relative
+                    `}>
                     <div className={` col-span-12 lg:col-span-8`}>
 
-                        {
-                            images && listing &&
-                            <ImageBlock
-                                images={images}
-                                listing={listing}
-                            />
-                        }
+                        <div className={`bg-black h-[200px]`}>
+
+                        </div>
+
+                        <div className={`hidden md:block`}>
+                            {
+                                images && listing &&
+                                <ImageBlock
+                                    images={images}
+                                    listing={listing}
+                                />
+                            }
+                        </div>
 
                         {/*  {
                             images && listing &&
@@ -48,19 +57,21 @@ const BusinessLayout = ({
                             />
                         } */}
 
-                        <div className={`lg:hidden mt-5 mb-5`}>
-                            {listing && <Address businessProfile={listing} />}
-                            {
-                                listing && <Review listing={listing} />
-                            }
+                        <div className={`px-[15px]`}>
+                            <div className={`lg:hidden mt-5 mb-5`}>
+                                {listing && <Address businessProfile={listing} />}
+                                {
+                                    listing && <Review listing={listing} />
+                                }
 
+                            </div>
+
+                            <ShortDescription listing={listing} />
+                            <BusinessFeatures listing={listing} />
+                            <Description listing={listing} />
+
+                            {listing && <BusinessRatings listing={listing} />}
                         </div>
-
-                        <ShortDescription listing={listing} />
-                        <BusinessFeatures listing={listing} />
-                        <Description listing={listing} />
-
-                        {listing && <BusinessRatings listing={listing} />}
 
                     </div>
 

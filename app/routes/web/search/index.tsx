@@ -11,6 +11,7 @@ import Footer from '~/components/footer/Footer'
 import { navlinks } from '~/lib/json'
 import SearchHead from '~/components/content/SearchHead'
 import GenericNav from '~/components/header/generic/GenericNav'
+import HomeNav from '~/routes/zassets/header/HomeNav'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
@@ -51,7 +52,12 @@ const index = () => {
         <div>
             {/* <ResponsiveNav theme='light' />
             <SearchHead query={query} /> */}
-            <GenericNav />
+            <div className={`hidden md:block`}>
+                <GenericNav />
+            </div>
+            <div className={`md:hidden`}>
+                <HomeNav />
+            </div>
 
 
             <div className={`px-[15px] border-b`}>
@@ -79,33 +85,45 @@ const index = () => {
                 </div>
             </div>
 
-
-            <ResultLayout>
+            <div className={`md:hidden px-[12px] mt-8`}>
                 {
                     data.length > 0 ?
                         <SearchPagination
                             data={data}
                             itemsPerPage={20}
                         /> :
-                        <div className={`flex place-items-center rounded
-                            place-content-center p-5 border capitalize`}>
-                            <span>no record</span>
-                        </div>
+                        <div>hm</div>
                 }
+            </div>
 
-                <LatestBusinesses
-                    category={'entertainment'}
-                    limit={5}
-                    title={"Entertainment"}
-                    subtitle={"Entertainment based businesses added in the last 7 days"}
-                />
-                <LatestBusinesses
-                    category={'services'}
-                    limit={5}
-                    title={"Services"}
-                    subtitle={"Services based businesses added in the last 7 days"}
-                />
-            </ResultLayout>
+            <div className={`hidden md:block`}>
+                <ResultLayout>
+                    {
+                        data.length > 0 ?
+                            <SearchPagination
+                                data={data}
+                                itemsPerPage={20}
+                            /> :
+                            <div className={`flex place-items-center rounded
+                            place-content-center p-5 border capitalize`}>
+                                <span>no record</span>
+                            </div>
+                    }
+
+                    <LatestBusinesses
+                        category={'entertainment'}
+                        limit={5}
+                        title={"Entertainment"}
+                        subtitle={"Entertainment based businesses added in the last 7 days"}
+                    />
+                    <LatestBusinesses
+                        category={'services'}
+                        limit={5}
+                        title={"Services"}
+                        subtitle={"Services based businesses added in the last 7 days"}
+                    />
+                </ResultLayout>
+            </div>
 
             <Footer />
         </div>

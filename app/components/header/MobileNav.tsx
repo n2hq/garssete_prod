@@ -10,6 +10,10 @@ import { CgChevronRight } from 'react-icons/cg'
 import { BiSearch } from 'react-icons/bi'
 import { useAuth } from '~/context/AuthContext'
 import { WhiteLogo } from './WhiteLogo'
+import { FcCancel } from 'react-icons/fc'
+import { GiCancel } from 'react-icons/gi'
+import { TiCancelOutline } from 'react-icons/ti'
+import { IoClose } from 'react-icons/io5'
 
 
 const cnLinks = [
@@ -45,20 +49,32 @@ const MobileNav = ({
                 {/** navlinks */}
                 <div className={`${navOpen} transform transition-all duration-500
                 delay-0 fixed  justify-start  h-full
-                w-[350px] md:w-[400px] bg-white z-[4001] ${showNav ? 'shadow-lg shadow-black/50' : ''}
+                w-full md:w-[400px] bg-white z-[4001] ${showNav ? 'shadow-lg shadow-black/50' : ''}
                 overflow-y-auto
                 `}>
                     <div className={`bg-white pt-4 pb-4`}>
 
 
-                        <div className={`pl-8 md:pl-12`}>
-                            <WhiteLogo />
+                        <div className={`px-4 md:pl-12 text-[#6001d2]
+                            flex place-content-between h-[60px] 
+                            `}>
+                            <div className={`h-full flex justify-center items-center`}>
+                                <WhiteLogo />
+                            </div>
+                            <div className={`h-full flex justify-center items-center`}>
+                                <div
+                                    onClick={closeNav}
+                                    className={`w-[40px] h-[40px] bg-blue-200
+                                    rounded-full flex justify-center items-center`}>
+                                    <IoClose className={`text-[20px]`} />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <hr className={` border-t-[1px] border-yellow-500/20`} />
 
-                    <div className={`flex flex-col mt-10 mx-[15px]`}>
+                    <div className={`flex flex-col mt-5 mx-[15px]`}>
                         {
                             cnLinks.map((link, index) => {
                                 return (

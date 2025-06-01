@@ -6,7 +6,7 @@ export const WhiteLogo = () => {
         <Link to={`/`}>
             <div className={`font-black text-2xl
                 cursor-pointer tracking-tight relative
-                top-[-1px]`}>
+                top-[-1px] `}>
 
                 Gr<i>ü</i>the
             </div>

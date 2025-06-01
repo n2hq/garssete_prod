@@ -10,6 +10,7 @@ import BusinessLayout from './assets/BusinessLayout'
 import Footer from '~/components/footer/Footer'
 import Related from './assets/Related'
 import GenericNav from '~/components/header/generic/GenericNav'
+import HomeNav from '../zassets/header/HomeNav'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const id = params.id || null
@@ -34,7 +35,12 @@ const index = () => {
         <RatingProvider>
             <GalleryProvider>
                 {/* <ResponsiveNav theme='light' /> */}
-                <GenericNav />
+                <div className={`hidden md:block`}>
+                    <GenericNav />
+                </div>
+                <div className={`md:hidden`}>
+                    <HomeNav />
+                </div>
 
                 {
                     listing.gid !== null && listing.gid !== undefined &&

@@ -18,7 +18,7 @@ import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{r as a,u as f,L as x}from".
                 ${t?"left-[295px]":"left-[15px]"}
                 focus:outline-none fixed z-50 top-[60px]
                 transition-all duration-300 ease-in-out
-                hidden md:block`,children:e.jsx(v,{className:`${t?"rotate-0 transition-all duration-300 ease-in-out":"rotate-90 transition-all duration-300 ease-in-out"}`})}),e.jsxs("div",{className:`flex flex-1 pt-[65px] h-full
+                hidden md:block`,children:e.jsx(v,{className:`${t?"rotate-0 transition-all duration-300 ease-in-out":"rotate-90 transition-all duration-300 ease-in-out"}`})}),e.jsxs("div",{className:`flex flex-1 md:mt-[65px] h-full
                 overflow-hidden`,children:[e.jsxs("aside",{className:`bg-gray-50 text-gray-900 
                         h-full overflow-y-auto transition-all z-30
                         duration-300 ease-in-out border-r shadow-md

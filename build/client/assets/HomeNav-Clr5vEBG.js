@@ -3,6 +3,6 @@ import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{r as s}from"./components-kA
                  px-[12px] h-[50px] z-[600]`,children:[e.jsx("div",{className:`h-full w-[150px]   
                     flex place-items-center `,children:e.jsx(j,{theme:"light",openNav:i,navBg:o})}),e.jsx("div",{className:`h-full flex w-full text-[#6001d2]
                     place-content-center place-items-center`,children:e.jsx(d,{})}),e.jsx("div",{className:`h-full w-[150px] 
-                    flex place-items-center place-content-end`,children:e.jsx(h,{theme:"light"})})]}),e.jsx("div",{className:"h-[50px]"}),e.jsx("div",{className:"px-[12px]",children:e.jsx("form",{action:"/web/search",children:e.jsxs("div",{className:`bg-gray-100 w-full rounded-full h-[38px]
+                    flex place-items-center place-content-end`,children:e.jsx(h,{theme:"light"})})]}),e.jsx("div",{className:"h-[50px]"}),e.jsx("div",{className:"px-[12px]",children:e.jsx("form",{action:"/web/search",children:e.jsxs("div",{className:`bg-gray-200/60 w-full rounded-full h-[38px]
                     flex place-items-center px-2 gap-2`,children:[e.jsx(u,{className:"h-[20px] w-[20px]"}),e.jsx("input",{type:"text",name:"q",className:`bg-transparent w-full outline-none
                             h-full flex place-content-center`})]})})})]})]})};export{H};

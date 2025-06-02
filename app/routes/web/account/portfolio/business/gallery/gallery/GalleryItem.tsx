@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BiEdit, BiEditAlt } from 'react-icons/bi'
 import { IoClose } from 'react-icons/io5'
-import Carousel from '~/routes/account/pages/business/pages/gallery/gallery/carousel/Carousel'
+import Carousel from './carousel/Carousel'
 import GalleryItemMenu from './GalleryItemMenu'
 
 const GalleryItem = ({
@@ -54,7 +54,7 @@ const GalleryItem = ({
 
                 <div
                     onMouseDown={(e) => showCarousel(itemIndex)}
-                    className={`relative h-[170px] xl:h-[160px]
+                    className={`relative h-[100px] md:h-[170px] xl:h-[160px]
                          rounded-md overflow-hidden -z-10
                     `}>
                     <img

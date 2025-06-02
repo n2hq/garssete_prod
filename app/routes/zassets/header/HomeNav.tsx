@@ -55,7 +55,7 @@ const HomeNav = () => {
 
                 <div className={`px-[12px]`}>
                     <form action="/web/search">
-                        <div className={`bg-gray-100 w-full rounded-full h-[35px]
+                        <div className={`bg-gray-100 w-full rounded-full h-[38px]
                     flex place-items-center px-2 gap-2`}>
                             <BiSearch className={`h-[20px] w-[20px]`} />
                             <input

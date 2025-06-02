@@ -137,7 +137,7 @@ export const ListingCarousel = ({ images, listing }: any) => {
         prev();
 
         timeoutId.current = setTimeout(() => {
-            next();
+            //next();
             //handleNext(); // Continue the loop if needed
         }, 15000);
     }

@@ -6,6 +6,7 @@ import Recents from './home/Recents'
 import { FrontPageCategories } from './zassets/FrontPageCategories'
 import Footer from '~/components/footer/Footer'
 import { MetaFunction } from '@remix-run/react'
+import { HomepageCarousel } from './zassets/HomeCarousel'
 
 export const meta: MetaFunction = () => {
   return [
@@ -22,6 +23,11 @@ const _index = () => {
       </div>
       <div className='hidden md:block'>
         <HeaderNav />
+      </div>
+
+      {/** hero or carousel */}
+      <div className={`md:hidden`}>
+        <HomepageCarousel />
       </div>
       <div className={`hidden md:block`}>
         <HomepageHero />

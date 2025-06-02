@@ -156,14 +156,19 @@ export const HomepageCarousel = () => {
 
                                     <div className={`z-[300] absolute 
                                          w-full text-center top-[33%]
-                                          text-white 
-                                         px-[40px] py-[10px] `}>
-                                        <div className={`text-[13px]`}>
-                                            {slide.topTitle}
-                                        </div>
-                                        <div className={`text-[22px] mt-[0px]
+                                          text-white  
+                                          py-[10px] `}>
+                                        <div className={`max-w-[70%] mx-auto w-full
+                                            `}>
+                                            <div className={`text-[13px]`}>
+                                                {slide.topTitle}
+                                            </div>
+                                            <div className={`text-[22px] mt-[0px]
                                             leading-[1.2em] font-bold`}>
-                                            {slide.title}
+                                                <div>
+                                                    {slide.title}
+                                                </div>
+                                            </div>
                                         </div>
 
                                     </div>

@@ -4,7 +4,7 @@ import SearchBox from "~/components/content/SearchBox"
 
 const heroimgs = [
     {
-        img: "images/dubai7star.jpeg",
+        img: "https://mediaoffice.ae/-/media/2025/february/09-02/04/9f895655-09cf-440c-ad2e-d0cd4f8542b0.jpg",
         title: "Discover Businesses Across the Globe",
         topTitle: "Discover. Connect. Grow"
     },
@@ -155,13 +155,13 @@ export const HomepageCarousel = () => {
                                     </div>
 
                                     <div className={`z-[300] absolute 
-                                         w-full text-center top-[40%]
+                                         w-full text-center top-[33%]
                                           text-white 
-                                         px-[20px] py-[10px] `}>
+                                         px-[40px] py-[10px] `}>
                                         <div className={`text-[13px]`}>
                                             {slide.topTitle}
                                         </div>
-                                        <div className={`text-[22px] mt-[10px]
+                                        <div className={`text-[22px] mt-[0px]
                                             leading-[1.2em] font-bold`}>
                                             {slide.title}
                                         </div>

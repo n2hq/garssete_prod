@@ -5,6 +5,14 @@ import { HomepageHero } from './zassets/header/HomepageHero'
 import Recents from './home/Recents'
 import { FrontPageCategories } from './zassets/FrontPageCategories'
 import Footer from '~/components/footer/Footer'
+import { MetaFunction } from '@remix-run/react'
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Grüthe | Business Directory, Travel, Real Estate, Hotels & Restaurants!" },
+    { name: "Gr<i>ü</i>the", content: "Welcome to Grüthe!" },
+  ];
+};
 
 const _index = () => {
   return (

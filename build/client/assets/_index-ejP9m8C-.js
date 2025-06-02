@@ -47,9 +47,9 @@ import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{H as N}from"./HomeNav-CpLui
                                         `},x),e.jsx("div",{className:`z-100 absolute top-0 w-full 
                 h-[280px] md:h-[500px] flex place-content-center
                 place-items-center px-[15px] bg-black/20`}),e.jsx("div",{className:`z-[300] absolute 
-                                         w-full text-center top-[33%]
+                                         w-full text-center top-[43%]
                                           text-white  
-                                          py-[10px] `,children:e.jsxs("div",{className:`max-w-[70%] mx-auto w-full
+                                          py-[10px] `,children:e.jsxs("div",{className:`max-w-[65%] mx-auto w-full
                                             `,children:[e.jsx("div",{className:"text-[13px]",children:s.topTitle}),e.jsx("div",{className:`text-[22px] mt-[0px]
                                             leading-[1.2em] font-bold`,children:e.jsx("div",{children:s.title})})]})})]}))}),e.jsxs("div",{className:"z-[300]",children:[e.jsx("button",{onMouseDown:h,className:`block absolute top-0 bottom-0 
                         z-[300] p-[1rem] cursor-pointer left-0 group h-full 

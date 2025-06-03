@@ -47,7 +47,7 @@ const BusinessLayout = ({
             }
 
 
-            <div className={`px-[0px] md:pt-4`}>
+            <div className={` md:pt-4 md:px-[12px]`}>
                 <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
 
                     <div className={`grid grid-cols-12 gap-0 md:gap-0 relative
@@ -75,7 +75,7 @@ const BusinessLayout = ({
                         } */}
 
                             <div className={``}>
-                                <div className={`lg:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
+                                <div className={`md:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
                                     {listing && <Address businessProfile={listing} />}
                                     {/* {
                                         listing && <Review listing={listing} />

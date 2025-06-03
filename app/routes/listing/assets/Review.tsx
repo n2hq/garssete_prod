@@ -16,6 +16,7 @@ const Review = ({ listing }: any) => {
 
             rating.setListing(listing)
             getRating(user.guid, listing.gid).then((data) => {
+
                 if (data?.length !== 0) {
                     rating.reset(data)
                     rating.setRatingData(data)

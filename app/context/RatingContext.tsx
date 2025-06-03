@@ -188,7 +188,7 @@ export default function RatingProvider({ children }: any) {
                 show && <div className={`flex w-screen h-screen bg-black/40 z-[3000] 
                 fixed top-0 left-0 right-0 bottom-0 place-items-center place-content-center`}>
                     <div className={`w-[450px] h-fit mx-auto p-6 bg-white rounded-xl shadow-md space-y-6`}>
-                        <h2 className="text-2xl font-bold">Create/Edit Rating</h2>
+                        <h2 className="text-xl font-bold">Create/Edit Rating</h2>
                         <form onSubmit={handleSubmit(postRating)} className="space-y-4">
                             <div>
                                 <label className="block mb-1 text-sm font-semibold">Full Name</label>
@@ -197,12 +197,13 @@ export default function RatingProvider({ children }: any) {
                                         onChange: changeHandler
                                     })}
                                     type="text"
-                                    className="w-full px-3 py-2 border rounded-md"
+                                    className={`w-full px-3 py-2 border rounded-md
+                                        text-sm`}
                                     placeholder="Enter Business GUID"
 
                                 />
                                 {errors.fullname?.message && (
-                                    <div className="text-red-500 mt-1 text-sm">
+                                    <div className={`text-red-500 mt-1 text-sm`}>
                                         {errors.fullname.message.toString()}
                                     </div>
                                 )}
@@ -218,7 +219,8 @@ export default function RatingProvider({ children }: any) {
                                         }
                                     })}
                                     /* onChange={(e) => setStars(Number(e.target.value))} */
-                                    className="w-full px-3 py-2 border rounded-md"
+                                    className={`w-full px-3 py-2 border rounded-md
+                                        text-sm`}
                                 >
                                     {[5, 4, 3, 2, 1].map((s) => (
                                         <option key={s} value={s}>
@@ -255,7 +257,8 @@ export default function RatingProvider({ children }: any) {
                                         }
                                     })}
                                     onKeyDown={handleKeyDown}
-                                    className="w-full px-3 py-2 border rounded-md text-sm"
+                                    className={`w-full px-3 py-2 border rounded-md 
+                                        text-sm`}
                                     placeholder="Write your review..."
                                     rows={4}
                                 />
@@ -275,14 +278,15 @@ export default function RatingProvider({ children }: any) {
                                 <button
                                     onClick={() => setShow(false)}
                                     className={`w-full bg-red-200 rounded-md
-                                        hover:bg-red-100`}
+                                        hover:bg-red-100 text-sm`}
                                 >
                                     Close
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={working}
-                                    className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
+                                    className={`w-full bg-blue-600 text-white py-2 
+                                        rounded-md hover:bg-blue-700 text-sm`}
                                 >
                                     {working ? 'Submitting...' : 'Submit Rating'}
                                 </button>

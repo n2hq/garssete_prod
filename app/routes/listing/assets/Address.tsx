@@ -120,7 +120,10 @@ const Address = ({ businessProfile }: any) => {
 
                         <div className={`bg-blue-500 mt-[40px] mx-[15px]
                         text-white text-center py-2 rounded`}>
-                            <Review />
+                            {
+                                businessProfile &&
+                                <Review listing={businessProfile} />
+                            }
                         </div>
                     </div>
                 </div>

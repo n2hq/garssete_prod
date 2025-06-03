@@ -22,16 +22,25 @@ const ResultMobile = ({ listing, index }: any) => {
         >
             <div className={`w-full h-fit my-4`}>
                 <div className={`flex gap-3`}>
+                    {/** left */}
                     <div className={`w-[100px] min-w-[100px]
-                    bg-black z-0 h-[110px] border border-gray-50
-                    rounded-md overflow-hidden`}>
+                    bg-black z-0 h-[110px]
+                    rounded-md overflow-hidden
+                    relative`}>
                         <img
                             src={imgscr}
                             alt={listing?.title}
-                            className={`object-cover w-full h-full text-sm
-                            rounded z-0 opacity-90`}
+                            className={`object-cover w-full h-full 
+                                text-sm rounded z-[0]`}
                         />
+                        <div className={`w-full h-[40%]
+                            absolute z-[10] bottom-0 
+                            bg-gradient-to-t from-gray-700
+                            to-transparent
+                            `}></div>
                     </div>
+
+                    {/** right */}
                     <div className={`flex-1 min-w-0 `}>
                         {/** title */}
                         <div className={`text-[19px] 
@@ -46,7 +55,8 @@ const ResultMobile = ({ listing, index }: any) => {
                             <div>{listing?.average_rating}</div>
                             <div>({formatNumber(listing?.total_reviews)})</div>
                         </div>
-                        <div className={`capitalize mt-1`}>
+                        <div className={`capitalize mt-1
+                            text-[14px] underline`}>
                             {listing?.category}
                         </div>
                         {

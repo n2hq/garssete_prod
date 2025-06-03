@@ -1,4 +1,4 @@
-import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{R as t}from"./ResponsiveNav-fmr_Rt-J.js";import{L as s}from"./Logo-Bqbb4Qu7.js";import{L as l}from"./components-kAvIA9Ge.js";import"./MobileNav-WD4SLO32.js";import"./index-BKi4tw_A.js";const x=()=>e.jsxs("div",{className:`w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
+import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{R as t}from"./ResponsiveNav-X4cxxKEh.js";import{L as s}from"./Logo-Bqbb4Qu7.js";import{L as l}from"./components-kAvIA9Ge.js";import"./MobileNav-BlYgvI7F.js";import"./index-BKi4tw_A.js";const x=()=>e.jsxs("div",{className:`w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
         mt-[150px] mb-[20px] `,children:[e.jsx("div",{className:"hidden lg:block "}),e.jsx("div",{className:"place-content-center flex lg:place-content-end col-span-12 md:col-span-1",children:e.jsxs("div",{className:`w-[350px] bg-white h-full rounded-2xl
                     flex flex-col place-items-center pt-[40px] pb-[40px]
                     px-[10px]`,children:[e.jsx("div",{className:"",children:e.jsx(s,{theme:"light"})}),e.jsx("div",{className:`text-[22px] text-center

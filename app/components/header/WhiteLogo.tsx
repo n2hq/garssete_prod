@@ -6,9 +6,9 @@ export const WhiteLogo = () => {
         <Link to={`/`}>
             <div className={`font-black text-[25px]
                 cursor-pointer tracking-tight relative
-                top-[-1px] text-red-800`}>
+                top-[-1px] `}>
 
-                Gr<i className={``}>ü</i>the
+                Gr<i>ü</i>the
             </div>
         </Link>
     )

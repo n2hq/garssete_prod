@@ -109,7 +109,7 @@ const ResultItem = ({ listing }: any) => {
                 </div>
             </div>
             <div className={`mt-2 md:mt-3 mb-0 text-[13px] leading-[1.2em]
-                    md:flex place-content-start hidden`}>
+                    flex place-content-start`}>
                 <div className={`relative top-[-3px] z-0 flex`}>
                     <RiDoubleQuotesL className={`tracking-tighter text-[20px]`} />
                 </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ResultItem from './ResultItem'
+import ResultMobile from './ResultMobile';
 
 interface PaginationProps<T> {
     data: [];
@@ -39,7 +40,12 @@ const SearchPagination = <T,>({
                     currentItems.map((item, index) => {
                         return (
                             <div key={index}>
-                                <ResultItem listing={item} />
+                                <div className={`md:hidden`}>
+                                    <ResultMobile listing={item} index={index} />
+                                </div>
+                                <div className={`hidden md:block`}>
+                                    <ResultItem listing={item} />
+                                </div>
                             </div>
                         )
                     })

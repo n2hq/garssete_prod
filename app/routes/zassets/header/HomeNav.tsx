@@ -55,14 +55,17 @@ const HomeNav = () => {
 
                 <div className={`px-[12px]`}>
                     <form action="/web/search">
-                        <div className={`bg-gray-200/60 w-full rounded-full h-[38px]
-                    flex place-items-center px-2 gap-2`}>
+                        <div className={`bg-gray-100 w-full rounded-full h-[38px]
+                    flex place-items-center px-2 gap-2 border
+                    border-gray-400/20`}>
                             <BiSearch className={`h-[20px] w-[20px]`} />
                             <input
                                 type="text"
                                 name="q"
+                                placeholder={`Restaurants, Hotels, Cities, Real Estates`}
                                 className={`bg-transparent w-full outline-none
-                            h-full flex place-content-center`}
+                            h-full flex place-content-center text-[14px]
+                            `}
                             />
                         </div>
                     </form>

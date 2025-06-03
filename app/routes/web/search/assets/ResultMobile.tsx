@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { config } from '~/lib/lib'
+import { config, formatNumber } from '~/lib/lib'
 import StarRating from './ResultItemStarRating'
 import RatingBox from './RatingBox'
 import { BsBank } from 'react-icons/bs'
@@ -22,7 +22,7 @@ const ResultMobile = ({ listing, index }: any) => {
         >
             <div className={`w-full h-fit my-4`}>
                 <div className={`flex gap-3`}>
-                    <div className={`w-[100px] min-w-[110px]
+                    <div className={`w-[100px] min-w-[100px]
                     bg-black z-0 h-[110px] 
                     rounded overflow-hidden`}>
                         <img
@@ -40,11 +40,11 @@ const ResultMobile = ({ listing, index }: any) => {
                     `}>
                             {index + 1}. {listing?.title}
                         </div>
-                        <div className={`mt-2 flex gap-2
+                        <div className={`mt-2 flex gap-1
                          place-items-center`}>
                             <RatingBox rating={listing?.average_rating} />
                             <div>{listing?.average_rating}</div>
-                            <div>({listing?.total_reviews} reviews)</div>
+                            <div>({formatNumber(listing?.total_reviews)})</div>
                         </div>
                         <div className={`capitalize mt-1`}>
                             {listing?.category}

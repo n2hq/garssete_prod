@@ -740,3 +740,16 @@ export const getRecents = async (): Promise<any | undefined> => {
         return undefined
     }
 }
+
+export const formatNumber = (num: number): string => {
+    if (num >= 1_000_000_000) {
+        return Math.floor(num / 1_000_000_000) + 'b';
+    }
+    if (num >= 1_000_000) {
+        return Math.floor(num / 1_000_000) + 'm';
+    }
+    if (num >= 1_000) {
+        return Math.floor(num / 1_000) + 'k';
+    }
+    return num.toString();
+}

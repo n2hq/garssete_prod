@@ -25,9 +25,9 @@ import{j as s}from"./jsx-runtime-0DLF9kdB.js";import{L as p,r as l,c as _,B as k
                     bg-black z-0 h-[110px]
                     rounded-md overflow-hidden
                     relative`,children:[s.jsx("img",{src:a,alt:e==null?void 0:e.title,className:`object-cover w-full h-full 
-                                text-sm rounded z-[0]`}),s.jsx("div",{className:`w-full h-[40%]
+                                text-sm rounded z-[0]`}),s.jsx("div",{className:`w-full h-[60%]
                             absolute z-[10] bottom-0 
-                            bg-gradient-to-t from-gray-700
+                            bg-gradient-to-t from-gray-500
                             to-transparent
                             `})]}),s.jsxs("div",{className:"flex-1 min-w-0 ",children:[s.jsxs("div",{className:`text-[19px] 
                     font-bold leading-[1.2em]

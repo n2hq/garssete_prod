@@ -33,9 +33,9 @@ const ResultMobile = ({ listing, index }: any) => {
                             className={`object-cover w-full h-full 
                                 text-sm rounded z-[0]`}
                         />
-                        <div className={`w-full h-[40%]
+                        <div className={`w-full h-[60%]
                             absolute z-[10] bottom-0 
-                            bg-gradient-to-t from-gray-700
+                            bg-gradient-to-t from-gray-500
                             to-transparent
                             `}></div>
                     </div>

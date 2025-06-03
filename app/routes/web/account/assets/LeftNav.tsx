@@ -7,6 +7,7 @@ import { FaTimes } from 'react-icons/fa'
 import { HiMiniBriefcase } from 'react-icons/hi2'
 import { MdCancel, MdEmail, MdOutlineAttachEmail, MdPassword, MdWifiPassword } from 'react-icons/md'
 import { RiBriefcase4Line, RiProfileLine } from 'react-icons/ri'
+import { useAuth } from '~/context/AuthContext'
 
 const mainLink = [
     {
@@ -53,6 +54,7 @@ const moreTools = [
 const LeftNav = () => {
     const [expanded, setExpanded] = useState(true)
     const location = useLocation();
+    const { user } = useAuth()
 
     return (
         <div className={`mt-[0px] mx-[15px] relative`}>
@@ -72,9 +74,15 @@ const LeftNav = () => {
                           overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}
                       `}
                 >
-                    <div className="leading-4">
-                        <h4 className="font-semibold">John Doe</h4>
-                        <span className="text-xs text-gray-600">johndoe@gmail.com</span>
+                    <div className="leading-4 flex-1 min-w-0">
+                        <h4 className={`font-semibold truncate
+                            overflow-hidden`}>
+                            {user?.first_name} {user?.last_name}
+                        </h4>
+                        <div className={`text-xs text-gray-600
+                            truncate overflow-hidden`}>
+                            {user?.email}
+                        </div>
                     </div>
                     <CgMoreVertical size={20} />
                 </div>

@@ -29,7 +29,7 @@ const ResultMobile = ({ listing, index }: any) => {
                             src={imgscr}
                             alt={listing?.title}
                             className={`object-cover w-full h-full text-sm
-                            rounded z-0`}
+                            rounded z-0 opacity-90`}
                         />
                     </div>
                     <div className={`flex-1 min-w-0 `}>

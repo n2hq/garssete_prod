@@ -24,7 +24,7 @@ import{j as s}from"./jsx-runtime-0DLF9kdB.js";import{L as p,r as l,c as _,B as k
                             place-content-center`,children:[s.jsx("div",{className:"absolute inset-0 bg-red-500 z-0",style:{width:`${c}%`}}),s.jsx(L,{className:"relative z-10 w-4 h-4 text-white",fill:"currentColor"})]},a)})})}const A=({listing:e,index:r})=>{var t;const[a,c]=l.useState("");return l.useEffect(()=>{(e==null?void 0:e.image_url)===""||(e==null?void 0:e.image_url)===null?c("https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif"):c(f.IMG_BASE_URL+e.image_url)},[e]),s.jsx(p,{to:`/${e.gid}`,className:"cursor-pointer",children:s.jsxs("div",{className:"w-full h-fit my-4",children:[s.jsxs("div",{className:"flex gap-3",children:[s.jsx("div",{className:`w-[100px] min-w-[100px]
                     bg-black z-0 h-[110px] border border-gray-50
                     rounded-md overflow-hidden`,children:s.jsx("img",{src:a,alt:e==null?void 0:e.title,className:`object-cover w-full h-full text-sm
-                            rounded z-0`})}),s.jsxs("div",{className:"flex-1 min-w-0 ",children:[s.jsxs("div",{className:`text-[19px] 
+                            rounded z-0 opacity-90`})}),s.jsxs("div",{className:"flex-1 min-w-0 ",children:[s.jsxs("div",{className:`text-[19px] 
                     font-bold leading-[1.2em]
                     truncate overflow-hidden
                     `,children:[r+1,". ",e==null?void 0:e.title]}),s.jsxs("div",{className:`mt-2 flex gap-1

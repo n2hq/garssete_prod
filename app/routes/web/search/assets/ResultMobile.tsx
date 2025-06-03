@@ -23,8 +23,8 @@ const ResultMobile = ({ listing, index }: any) => {
             <div className={`w-full h-fit my-4`}>
                 <div className={`flex gap-3`}>
                     <div className={`w-[100px] min-w-[100px]
-                    bg-black z-0 h-[110px] 
-                    rounded overflow-hidden`}>
+                    bg-black z-0 h-[110px] border border-gray-50
+                    rounded-md overflow-hidden`}>
                         <img
                             src={imgscr}
                             alt={listing?.title}

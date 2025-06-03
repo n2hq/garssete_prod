@@ -1,6 +1,6 @@
 import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{r as l,u as p,L as d}from"./components-kAvIA9Ge.js";import{e as h}from"./index-B9N273Tc.js";import{U as u,H as f}from"./Hamburger-CleV0Nrg.js";import{W as g,M as w}from"./MobileNav-LIsZBRvf.js";const v=[{title:"Search",lnk:"/web/search"},{title:"Hotels",lnk:"/web/search?q=hotels"},{title:"Travel",lnk:"/web/search?q=travel"}],H=()=>{const[n,r]=l.useState(!1),[c,b]=l.useState(!1),[j,N]=l.useState("light"),o=()=>r(!0),i=()=>r(!1),s=p(),x=new URLSearchParams(s.search).get("q")||"";return e.jsxs("div",{children:[e.jsx("div",{className:`px-[10px] z-[10] fixed w-full
         bg-white border-b-[5px] border-blue-500`,children:e.jsx("div",{className:"max-w-[1100px] mx-auto w-full",children:e.jsxs("div",{className:`w-full flex place-content-between
-                    h-[60px] gap-x-2`,children:[e.jsx("div",{className:`flex place-items-center text-[#451a79]
+                    h-[60px] gap-x-2`,children:[e.jsx("div",{className:`flex place-items-center text-[#6001d2]
                         `,children:e.jsx(g,{})}),e.jsxs("div",{className:`flex place-items-center
                         gap-1 grow`,children:[e.jsx("div",{className:"w-full",children:e.jsxs("form",{action:"/web/search",className:`w-full flex rounded-full border px-1
                                 border-gray-300 overflow-hidden bg-white

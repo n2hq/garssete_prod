@@ -10,7 +10,7 @@ import { BiSearch } from 'react-icons/bi'
 import MobileNav from '~/components/header/MobileNav'
 
 const HomeNav = () => {
-    const [scrollHeight,] = useState(1)
+    const [scrollHeight, setScrollHeight] = useState(1)
     const [theme, setTheme] = useState('')
     const [isScroll, setIsScroll] = useState(false)
     const [showNav, setShowNav] = useState(false)
@@ -24,6 +24,7 @@ const HomeNav = () => {
         const handler = () => {
             if (window.scrollY >= scrollHeight) { setIsScroll(true) }
             if ((window.scrollY < scrollHeight)) { setIsScroll(false) }
+            setScrollHeight(window.scrollY)
         }
         window.onscroll = () => handler()
     }, [scrollHeight])
@@ -35,7 +36,7 @@ const HomeNav = () => {
                 closeNav={closeNav}
             />
             <div className={`shadow-md pb-3`}>
-                <div className={`flex place-content-between
+                <div className={`${scrollHeight > 50 ? 'shadow-md' : ''} flex place-content-between
                  fixed w-full mx-auto bg-white
                  px-[15px] h-[50px] z-[600]`}>
                     <div className={`h-full w-[150px]   

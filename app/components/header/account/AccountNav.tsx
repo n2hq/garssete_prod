@@ -42,7 +42,7 @@ const AccountNav = () => {
                         `}>
                             <Link to={`/`}>
                                 <div className={`font-black text-2xl
-                                    tracking-tight`}>
+                                    tracking-tight text-[#6001d2]`}>
 
                                     Gr<i>ü</i>the
                                 </div>

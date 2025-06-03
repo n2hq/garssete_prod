@@ -753,3 +753,8 @@ export const formatNumber = (num: number): string => {
     }
     return num.toString();
 }
+
+export function getFirstChar(word: string): string {
+    if (!word || typeof word !== "string") return "";
+    return word.trim().charAt(0);
+}

@@ -8,6 +8,7 @@ import { HiMiniBriefcase } from 'react-icons/hi2'
 import { MdCancel, MdEmail, MdOutlineAttachEmail, MdPassword, MdWifiPassword } from 'react-icons/md'
 import { RiBriefcase4Line, RiProfileLine } from 'react-icons/ri'
 import { useAuth } from '~/context/AuthContext'
+import { getFirstChar } from '~/lib/lib'
 
 const mainLink = [
     {
@@ -63,11 +64,15 @@ const LeftNav = () => {
             </div>
 
             <div className={` flex mt-8 pt-3`}>
-                <img
-                    src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
-                    alt=""
-                    className="w-10 h-10 rounded-md"
-                />
+                <div
+                    className={`w-10 h-10 rounded-md
+                        bg-blue-200 flex justify-center
+                        items-center font-semibold
+                        text-blue-800 text-[17px]`}
+                >
+                    {getFirstChar(user?.first_name)}
+                    {getFirstChar(user?.last_name)}
+                </div>
                 <div
                     className={`
                           flex justify-between items-center

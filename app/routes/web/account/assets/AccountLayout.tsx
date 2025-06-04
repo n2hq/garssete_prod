@@ -9,7 +9,7 @@ import { BsMenuButton } from 'react-icons/bs'
 import { useAuth } from '~/context/AuthContext'
 import { useLocation, useNavigate } from '@remix-run/react'
 import AccountNav from '~/components/header/account/AccountNav'
-import HomeNav from '~/routes/zassets/header/HomeNav'
+import HomeNav from '~/routes/assets/header/HomeNav'
 
 const AccountLayout = ({ children }: any) => {
     const [show, setShow] = useState(true)

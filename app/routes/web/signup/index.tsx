@@ -1,6 +1,6 @@
 import React from 'react'
 import ResponsiveNav from '~/components/header/minimal/ResponsiveNav'
-import SignupBody from './SignupBody'
+import SignupBody from './assets/SignupBody'
 
 
 const index = () => {

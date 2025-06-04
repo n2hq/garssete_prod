@@ -20,6 +20,7 @@ export interface IAddUser {
     email: string
     first_name: string
     password: string
+    lastname: string
 }
 
 export interface IUser {

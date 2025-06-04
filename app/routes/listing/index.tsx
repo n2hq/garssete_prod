@@ -10,7 +10,7 @@ import BusinessLayout from './assets/BusinessLayout'
 import Footer from '~/components/footer/Footer'
 import Related from './assets/Related'
 import GenericNav from '~/components/header/generic/GenericNav'
-import HomeNav from '../zassets/header/HomeNav'
+import HomeNav from '../assets/header/HomeNav'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const id = params.id || null

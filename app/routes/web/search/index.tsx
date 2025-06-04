@@ -11,7 +11,7 @@ import Footer from '~/components/footer/Footer'
 import { navlinks } from '~/lib/json'
 import SearchHead from '~/components/content/SearchHead'
 import GenericNav from '~/components/header/generic/GenericNav'
-import HomeNav from '~/routes/zassets/header/HomeNav'
+import HomeNav from '~/routes/assets/header/HomeNav'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);

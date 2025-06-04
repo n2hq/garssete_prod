@@ -1,12 +1,12 @@
 import React from 'react'
-import HomeNav from './zassets/header/HomeNav'
-import { HeaderNav } from './zassets/header/HeaderNav'
-import { HomepageHero } from './zassets/header/HomepageHero'
+import HomeNav from './assets/header/HomeNav'
+import { HeaderNav } from './assets/header/HeaderNav'
+import { HomepageHero } from './assets/header/HomepageHero'
 import Recents from './home/Recents'
-import { FrontPageCategories } from './zassets/FrontPageCategories'
+import { FrontPageCategories } from './assets/FrontPageCategories'
 import Footer from '~/components/footer/Footer'
 import { MetaFunction } from '@remix-run/react'
-import { HomepageCarousel } from './zassets/HomeCarousel'
+import { HomepageCarousel } from './assets/HomeCarousel'
 
 export const meta: MetaFunction = () => {
   return [

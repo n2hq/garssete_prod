@@ -1,4 +1,4 @@
-import{j as s}from"./jsx-runtime-0DLF9kdB.js";import{i as c,a as j,c as o,b,d as g}from"./css-DMkAD1zc.js";import{r as i}from"./components-kAvIA9Ge.js";import{f}from"./index-B9N273Tc.js";const y=({working:e,value:t})=>s.jsx(s.Fragment,{children:s.jsxs("div",{className:c,children:[s.jsx("div",{children:s.jsx("button",{className:`border-[1px] border-none bg-blue-900 
+import{j as s}from"./jsx-runtime-0DLF9kdB.js";import{i as c,a as j,c as o,b,d as g}from"./css-DPrdeFsB.js";import{r as i}from"./components-kAvIA9Ge.js";import{f}from"./index-B9N273Tc.js";const y=({working:e,value:t})=>s.jsx(s.Fragment,{children:s.jsxs("div",{className:c,children:[s.jsx("div",{children:s.jsx("button",{className:`border-[1px] border-none bg-blue-900 
                             w-full  
                             py-2.5 rounded text-white mt-1 shadow-lg shadow-blue-400
                             cursor-pointer ${e&&"bg-blue-500 cursor-default"}`,disabled:e,children:e?"Submitting...":`${t||"Submit"}`})}),s.jsx("div",{className:`mt-4 text-[.7em] leading-[1.2em] 

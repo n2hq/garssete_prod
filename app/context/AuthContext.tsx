@@ -146,7 +146,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const resetpw = async (data: any) => {
 
         const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
-        const endpoint = "/api/users/reset_password_request"
+        const endpoint = "/api/user/reset_password_request"
         const url = BASE_URL + endpoint
 
         try {

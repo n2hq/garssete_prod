@@ -3,16 +3,20 @@ import CryptoJS from 'crypto-js'
 
 export const config = {
     BASE_URL: import.meta.env.VITE_SITE_BASE_URL,
-    IMG_BASE_URL: import.meta.env.VITE_IMG_BASE_URL
+    IMG_BASE_URL: import.meta.env.VITE_IMG_BASE_URL,
+    MAIL_SERVICE: import.meta.env.VITE_MAIL_SERVICE,
+    SITENAME: import.meta.env.VITE_SITENAME,
+    FORMATTED_SITENAME: `<b>Grüthe</b>`
 }
 
 export const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Origin": "*",  // Allow all origins
+    "Access-Control-Allow-Methods": "*",  // Allow specific methods
+    "Access-Control-Allow-Headers": "Content-Type, Authorization", // Allow specific headers
+    "Access-Control-Allow-Credentials": "true", // Optional: if using cookies/auth
     "Content-Type": "application/json",
-    "cache": "no-store"
-}
+    "Cache-Control": "no-store" // Note: "cache" isn't valid; use "Cache-Control"
+};
 
 export function DoResponse(json: any, code: number = 500) {
     return new Response(
@@ -757,4 +761,38 @@ export const formatNumber = (num: number): string => {
 export function getFirstChar(word: string): string {
     if (!word || typeof word !== "string") return "";
     return word.trim().charAt(0);
+}
+
+export function toSentenceCase(text: string): string {
+    return text
+        .toLowerCase()
+        .replace(/([^.!?]*[.!?])(\s+|$)/g, (match) =>
+            match.charAt(0).toUpperCase() + match.slice(1)
+        );
+}
+
+export const sendEmail = async (data: any) => {
+    const endpoint = config.MAIL_SERVICE
+
+    const qs = new URLSearchParams(data).toString();
+    const url = endpoint + "?" + qs
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        })
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
 }

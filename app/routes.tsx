@@ -28,6 +28,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
 
 
         {/** user */ }
+        route("api/user", "routes/api/user/index.tsx");
         route("api/user/signin", "routes/api/user/signin.tsx");
         route("api/user/verifytoken", "routes/api/user/verifytoken.tsx");
         route("api/user/:guid", "routes/api/user/user.tsx");

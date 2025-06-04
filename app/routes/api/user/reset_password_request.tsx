@@ -1,8 +1,9 @@
 import { ActionFunctionArgs } from "@remix-run/node";
 import { query } from "../DB";
-import { DoResponse, GenerateRandomHash, HashPwd } from "~/lib/lib"
+import { config, DoResponse, GenerateRandomHash, HashPwd, sendEmail } from "~/lib/lib"
 import { IAddUser, LoginType, ResetPasswordType } from "~/lib/types";
 import { RequestType, RequestStatus } from "~/lib/types";
+import { getResetPwdEmail } from "~/lib/emails";
 
 export async function action({ request }: ActionFunctionArgs) {
     const contentType = request.headers.get("Content-Type")
@@ -87,6 +88,14 @@ export async function action({ request }: ActionFunctionArgs) {
                     (title, type, owner, guid, status) values (?, ?, ?, ?, ?)`,
                     [title, type, owner, guid, status])
             }
+
+            const emailData = {
+                subject: `${config.SITENAME} Password Reset`,
+                to: body.email,
+                msg: getResetPwdEmail(user.first_name, owner, guid)
+            }
+
+            sendEmail(emailData)
 
             const data = {
                 success: true,

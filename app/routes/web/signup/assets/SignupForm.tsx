@@ -16,6 +16,7 @@ const SignupForm = () => {
     const notification = useNotification()
     const navigate = useNavigate()
     const [signedup, setSignedup] = useState(false)
+    const successMsg = `Signup is successful! Please check email provided to complete signup.`
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -36,7 +37,7 @@ const SignupForm = () => {
 
 
         const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
-        const endpoint = "/api/users"
+        const endpoint = "/api/user"
         const url = BASE_URL + endpoint
 
 
@@ -54,7 +55,8 @@ const SignupForm = () => {
                 var respObj = await response.json()
                 throw new Error(`Error Code: ${response.status} - ${respObj.message || respObj.error}`)
             } else {
-                notification.alertCancel('', 'Signup success. Please check your email to complete signup.')
+                {/** signup is successful */ }
+                notification.alertCancel('', successMsg)
                 //navigate("/signup/code")
                 setSignedup(true)
             }
@@ -104,100 +106,115 @@ const SignupForm = () => {
                             Get a <b className='font-bold text-black'>Gr<i>u</i>the</b> account
                         </div>
 
-                        <div className={`w-full flex flex-col 
+                        <section
+                            id='signup-section'
+                            className={`w-full ${signedup && 'hidden'}`}
+                        >
+                            <div className={`w-full flex flex-col 
                         place-items-center mt-[30px]`}>
-                            <input
-                                {...register('first_name', {
-                                    onChange: changeHandler
-                                })}
-                                placeholder='First name'
-                                type="text"
-                                className={`border-b w-[85%]
+                                <input
+                                    {...register('first_name', {
+                                        onChange: changeHandler
+                                    })}
+                                    placeholder='First name'
+                                    type="text"
+                                    className={`border-b w-[85%]
                                 px-[0px] py-1 text-[15px]
                                 outline-none`}
-                            />
-                            {
-                                errors?.first_name &&
-                                <div className={`text-sm text-red-500 ml-[1px]
+                                />
+                                {
+                                    errors?.first_name &&
+                                    <div className={`text-sm text-red-500 ml-[1px]
                                 leading-[1.2em] mt-1`}>
-                                    {errors?.first_name?.message}
-                                </div>
-                            }
-                        </div>
+                                        {errors?.first_name?.message}
+                                    </div>
+                                }
+                            </div>
 
-                        <div className={`w-full flex flex-col 
+                            <div className={`w-full flex flex-col 
                         place-items-center mt-[15px]`}>
-                            <input
-                                {...register('lastname', {
-                                    onChange: changeHandler
-                                })}
-                                placeholder='Last name'
-                                type="text"
-                                className={`border-b w-[85%]
+                                <input
+                                    {...register('lastname', {
+                                        onChange: changeHandler
+                                    })}
+                                    placeholder='Last name'
+                                    type="text"
+                                    className={`border-b w-[85%]
                                 px-[0px] py-1 text-[15px]
                                 outline-none`}
-                            />
-                            {
-                                errors?.lastname &&
-                                <div className={`text-sm text-red-500 ml-[1px]
+                                />
+                                {
+                                    errors?.lastname &&
+                                    <div className={`text-sm text-red-500 ml-[1px]
                                 leading-[1.2em] mt-1`}>
-                                    {errors?.lastname?.message}
-                                </div>
-                            }
-                        </div>
+                                        {errors?.lastname?.message}
+                                    </div>
+                                }
+                            </div>
 
-                        <div className={`w-full flex flex-col 
+                            <div className={`w-full flex flex-col 
                         place-items-center mt-[15px]`}>
-                            <input
-                                {...register('email', {
-                                    onChange: changeHandler
-                                })}
-                                placeholder='Email address'
-                                type="text"
-                                className={`border-b w-[85%]
+                                <input
+                                    {...register('email', {
+                                        onChange: changeHandler
+                                    })}
+                                    placeholder='Email address'
+                                    type="text"
+                                    className={`border-b w-[85%]
                                 px-[0px] py-1 text-[15px]
                                 outline-none`}
-                            />
-                            {
-                                errors?.email &&
-                                <div className={`text-sm text-red-500 ml-[1px]
+                                />
+                                {
+                                    errors?.email &&
+                                    <div className={`text-sm text-red-500 ml-[1px]
                                 leading-[1.2em] mt-1`}>
-                                    {errors?.email?.message}
-                                </div>
-                            }
-                        </div>
+                                        {errors?.email?.message}
+                                    </div>
+                                }
+                            </div>
 
-                        <div className={`w-full flex flex-col 
+                            <div className={`w-full flex flex-col 
                         place-items-center mt-[15px] `}>
-                            <input
-                                {...register('password', {
-                                    onChange: changeHandler
-                                })}
-                                placeholder='Password'
-                                type="password"
-                                className={`border-b w-[85%]
+                                <input
+                                    {...register('password', {
+                                        onChange: changeHandler
+                                    })}
+                                    placeholder='Password'
+                                    type="password"
+                                    className={`border-b w-[85%]
                                 px-[0px] py-1 text-[15px]
                                 outline-none`}
-                            />
-                            {
-                                errors?.password &&
-                                <div className={`text-sm text-red-500 ml-[1px]
+                                />
+                                {
+                                    errors?.password &&
+                                    <div className={`text-sm text-red-500 ml-[1px]
                                 leading-[1.2em] mt-1`}>
-                                    {errors?.password?.message}
-                                </div>
-                            }
-                        </div>
+                                        {errors?.password?.message}
+                                    </div>
+                                }
+                            </div>
 
-                        <div className={`w-full flex flex-col 
+                            <div className={`w-full flex flex-col 
                         place-items-center mt-[25px]`}>
-                            <button
-                                className={`w-[85%] bg-blue-600
+                                <button
+                                    className={`w-[85%] bg-blue-600
                             py-[12px] text-[15px] rounded-full
                             text-white hover:bg-blue-700`}
-                            >
-                                Create an account
-                            </button>
-                        </div>
+                                >
+                                    Create an account
+                                </button>
+                            </div>
+                        </section>
+
+                        <section
+                            className={`${signedup ? 'block' : 'hidden'}
+                            text-black. w-[90%] text-[17px] text-center
+                            mt-[50px] mb-[25px] 
+                            bg-yellow-50 text-yellow-900 px-1.5 py-2
+                            rounded`}
+                        >
+                            {successMsg}
+                        </section>
 
                         <div className={`w-full flex flex-col 
                         place-items-center mt-[20px] `}>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Logo from './Logo'
 import { HiHome, HiPlay } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
@@ -38,6 +38,23 @@ const MobileNav = ({
     const { user } = useAuth()
 
     const location = useLocation();
+
+    {/** handle escape button */ }
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                closeNav()
+            }
+        }
+
+        if (showNav) {
+            document.addEventListener('keydown', handleKeyDown)
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [showNav, closeNav])
 
     return (
         <>

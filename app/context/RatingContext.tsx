@@ -182,6 +182,22 @@ export default function RatingProvider({ children }: any) {
 
     }
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setShow(false);
+            }
+        };
+
+        if (show) {
+            document.addEventListener('keydown', handleKeyDown);
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [show]);
+
     return (
         <RatingContext.Provider value={vals}>
             {

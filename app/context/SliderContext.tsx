@@ -69,6 +69,22 @@ export const SliderProvider = ({ children }: any) => {
         setListing
     }
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                handleClose()
+            }
+        }
+
+        if (dialog) {
+            document.addEventListener('keydown', handleKeyDown)
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [dialog])
+
     return (
         <SliderContext.Provider value={vals}>
             {

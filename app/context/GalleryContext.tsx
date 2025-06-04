@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { FcCancel } from "react-icons/fc";
 import { IoClose } from "react-icons/io5";
 import { useSliderContext } from "./SliderContext";
@@ -45,6 +45,22 @@ export const GalleryProvider = ({ children }: any) => {
         slider.setSelectedSlide(index + 1)
         slider.setGallery(gallery)
     }
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                handleClose()
+            }
+        }
+
+        if (show) {
+            document.addEventListener('keydown', handleKeyDown)
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [show])
     return (
         <GalleryContext.Provider value={vals}>
             {

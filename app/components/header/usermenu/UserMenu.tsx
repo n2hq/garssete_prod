@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiUser } from 'react-icons/bi'
 import DropDown from './DropDown'
 import { useAuth } from '~/context/AuthContext'
@@ -14,6 +14,23 @@ const UserMenu = ({ theme }: any) => {
         setOpen(false)
     }
 
+    {/** handle escape */ }
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                setOpen(false)
+            }
+        }
+
+        if (open) {
+            document.addEventListener('keydown', handleKeyDown)
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [open])
+
     return (
         <div>
             {
@@ -21,6 +38,7 @@ const UserMenu = ({ theme }: any) => {
                     <button
                         onClick={(e) => showMenu()}
                         onBlur={(e) => closeMenu()}
+
                         className={`w-[25px] h-[25px] bg-gray-400 hover:bg-gray-300 rounded-full text-white
                 flex place-items-center place-content-center text-[13px]
                 relative cursor-pointer`}>

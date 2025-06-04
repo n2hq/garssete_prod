@@ -7,6 +7,8 @@ import { useNotification } from '~/context/NotificationContext'
 import { LoginData } from '~/lib/types'
 import SigninSchema from './SigninSchema'
 import { useForm } from 'react-hook-form'
+import { WhiteLogo } from '~/components/header/WhiteLogo'
+import { whiteLogoColor } from '~/lib/css'
 
 const SigninForm = () => {
     const [formdata, setFormdata] = useState<any | null>(null)
@@ -76,18 +78,18 @@ const SigninForm = () => {
                     <div className={`w-[350px] bg-white h-full rounded-2xl
                     flex flex-col place-items-center pt-[40px] pb-[40px]
                     px-[10px] `}>
-                        <div className=''>
-                            <Logo theme='light' />
+                        <div className={whiteLogoColor}>
+                            <WhiteLogo />
                         </div>
 
                         <div className={`text-[22px] text-center
-                        mt-[30px] font-bold text-blue-800`}>
+                        mt-[30px] font-bold text-black`}>
                             Sign in to your account
                         </div>
 
                         <div className={`text-[15px] text-center
                         mt-[0px] font-light text-black`}>
-                            using your Comcerc account
+                            using your <b className='font-bold text-black'>Gr<i>u</i>the</b> account
                         </div>
 
                         <div className={`w-full flex flex-col 

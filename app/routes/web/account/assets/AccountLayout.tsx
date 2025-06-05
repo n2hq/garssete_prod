@@ -70,7 +70,7 @@ const AccountLayout = ({ children }: any) => {
             </button>
 
             {/** layout */}
-            <div className={`flex flex-1 md:mt-[65px] h-full
+            <div className={`flex flex-1 md:mt-[60px] h-full
                 overflow-hidden`}>
                 {/** sidebar */}
                 <aside

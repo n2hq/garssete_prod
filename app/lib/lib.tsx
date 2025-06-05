@@ -6,7 +6,15 @@ export const config = {
     IMG_BASE_URL: import.meta.env.VITE_IMG_BASE_URL,
     MAIL_SERVICE: import.meta.env.VITE_MAIL_SERVICE,
     SITENAME: import.meta.env.VITE_SITENAME,
-    FORMATTED_SITENAME: `<b>Grüthe</b>`
+    FORMATTED_SITENAME: `<b>Grüthe</b>`,
+}
+
+export const getSiteLogo = () => {
+    return (
+        <b>
+            Gr<i>ú</i>the
+        </b>
+    )
 }
 
 export const headers = {

@@ -159,7 +159,7 @@ const SigninForm = () => {
                                                 py-[2px] text-[14px] rounded-full text-center
                                                 text-blue-700 hover:bg-gray-100`}
                                 >
-                                    Not account yet? Create an account
+                                    Don't have account yet? Sign up!
                                 </button>
                             </Link>
 

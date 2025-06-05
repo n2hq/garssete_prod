@@ -4,6 +4,7 @@ import { FaHouse } from 'react-icons/fa6'
 import Logo from '../header/Logo'
 import { Link } from '@remix-run/react'
 import { WhiteLogo } from '../header/WhiteLogo'
+import { getSiteLogo } from '~/lib/lib'
 
 const discover = [
     {
@@ -40,7 +41,7 @@ const Footer = () => {
                     </div>
                     <hr className={`border-b-0 border-t-[1px] border-gray-500/50`} />
                     <p className=' text-center mt-4 text-sm text-white/60 font-extralight'>
-                        Copyright 2025 &copy; | <a href='/'><b className={`text-white`}>Gr<i>ü</i>the.com</b></a>
+                        Copyright 2025 &copy; | <a href='/'><span className={`text-white`}>{getSiteLogo()}</span></a>
                     </p>
                 </div>
             </div>

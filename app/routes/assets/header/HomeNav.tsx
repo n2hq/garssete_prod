@@ -38,7 +38,7 @@ const HomeNav = () => {
             <div className={`shadow-md pb-3`}>
                 <div className={`${scrollHeight > 50 ? 'shadow-md' : ''} flex place-content-between
                  fixed w-full mx-auto bg-white
-                 px-[15px] h-[50px] z-[600]`}>
+                 px-[15px] h-[50px] z-[1000]`}>
                     <div className={`h-full w-[150px]   
                     flex place-items-center `}>
                         <HamburgerMenu theme={"light"} openNav={openNav} navBg={navBg} />

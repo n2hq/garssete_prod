@@ -1,1 +1,0 @@
-import{j as t}from"./jsx-runtime-0DLF9kdB.js";import{A as o,C as r}from"./ContentLayout-Dn78VBwf.js";import"./components-kAvIA9Ge.js";import"./MobileNav-CLmV9V7l.js";import"./index-DH32Dgz8.js";import"./Hamburger-DiDLOwFG.js";import"./HomeNav-B9UZLzFB.js";const u=()=>t.jsx(o,{children:t.jsx(r,{title:"Account Profile",children:"Account Profile"})});export{u as default};

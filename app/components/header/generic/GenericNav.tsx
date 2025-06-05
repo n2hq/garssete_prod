@@ -36,7 +36,7 @@ const GenericNav = () => {
     return (
         <div>
             <div className={`px-[10px] z-[10] fixed w-full
-        bg-white border-b-[5px] border-blue-500`}>
+        bg-white shadow-md `}>
                 <div className={`max-w-[1100px] mx-auto w-full`}>
                     <div className={`w-full flex place-content-between
                     h-[60px] gap-x-2`}>
@@ -81,15 +81,14 @@ const GenericNav = () => {
                                     navlnk.map((link, index) => {
                                         const url = location.pathname + location.search
 
-                                        console.log(url)
                                         return (
                                             <Link
                                                 key={index}
                                                 className={`text-[14px] hover:bg-gray-200/50
-                                                px-[10px] py-[6px] rounded
+                                                px-[10px] py-[6px] rounded-full
                                                 font-semibold
                                                 ${link.lnk.toString() === (url) &&
-                                                    url.toString() !== "" && 'bg-green-200'}
+                                                    url.toString() !== "" && 'bg-blue-100'}
                                                     
                                                 `}
 

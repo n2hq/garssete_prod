@@ -5,6 +5,7 @@ import Hamburger from '../Hamburger'
 import { Link, useLocation } from '@remix-run/react'
 import MobileNav from '../MobileNav'
 import UserMenu from '../usermenu/UserMenu'
+import { WhiteLogo } from '../WhiteLogo'
 
 const navlnk = [
     {
@@ -31,8 +32,8 @@ const AccountNav = () => {
 
     return (
         <div>
-            <div className={`px-[15px] z-[10] fixed w-full
-        bg-white border-b-[5px] border-blue-500`}>
+            <div className={`px-[15px] z-[1000] fixed w-full
+        bg-white shadow-md`}>
                 <div className={`w-full mx-auto`}>
                     <div className={`w-full flex place-content-between
                     h-[60px] gap-x-5`}>
@@ -41,11 +42,7 @@ const AccountNav = () => {
                         <div className={`flex place-items-center
                         `}>
                             <Link to={`/`}>
-                                <div className={`font-black text-2xl
-                                    tracking-tight text-[#6001d2]`}>
-
-                                    Gr<i>ü</i>the
-                                </div>
+                                <WhiteLogo />
                             </Link>
                         </div>
 

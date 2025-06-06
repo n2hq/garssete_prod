@@ -158,7 +158,7 @@ export const HomepageHero = () => {
                             Find The Best Businesses
                         </div>
                         <div className={`text-center text-lg text-white
-                            font-thin mb-[20px]`}>
+                            font-extralight mb-[20px]`}>
                             Across Different Industries Around the World
                         </div>
                         <SearchBox />

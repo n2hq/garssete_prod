@@ -50,7 +50,7 @@ const ResultItem = ({ listing }: any) => {
                                 <div className={`flex place-items-center
                                 gap-1 text-black/60 text-[13px]`}>
                                     <div>{formatNumber(Number(listing?.average_rating))}</div>
-                                    <div>({formatNumber(listing?.total_reviews)})</div>
+                                    <div>({formatNumber(listing?.total_reviews)} reviews)</div>
                                 </div>
                             </div>
                             <div className={`font-normal text-[13px] leading-[1.2em] mt-[5px]

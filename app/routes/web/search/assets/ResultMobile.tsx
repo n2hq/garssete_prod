@@ -21,7 +21,7 @@ const ResultMobile = ({ listing, index }: any) => {
             className={`cursor-pointer`}
         >
             <div className={`w-full h-fit my-4`}>
-                <div className={`flex gap-3`}>
+                <div className={`flex gap-2`}>
                     {/** left */}
                     <div className={`w-[100px] min-w-[100px]
                     bg-black z-0 h-[110px]
@@ -54,8 +54,8 @@ const ResultMobile = ({ listing, index }: any) => {
                             <RatingBox rating={listing?.average_rating} />
                             <div className={`flex place-items-center
                                 gap-1 text-black/60 text-[13px]`}>
-                                <div>{listing?.average_rating}</div>
-                                <div>({formatNumber(listing?.total_reviews)})</div>
+                                <div>{formatNumber(Number(listing?.average_rating))} |</div>
+                                <div>{formatNumber(555000)} reviews</div>
                             </div>
                         </div>
                         <div className={`capitalize mt-1

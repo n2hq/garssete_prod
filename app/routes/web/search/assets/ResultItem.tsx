@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { BsBank } from 'react-icons/bs'
 import { FiArrowRight } from 'react-icons/fi'
 import { RiDoubleQuotesL } from 'react-icons/ri'
-import { config } from '~/lib/lib'
+import { config, formatNumber } from '~/lib/lib'
+import RatingBox from './RatingBox'
 
 const ResultItem = ({ listing }: any) => {
 
@@ -43,7 +44,13 @@ const ResultItem = ({ listing }: any) => {
                                     {listing.title}
                                 </div>
                             </Link>
-                            <div className={`font-normal text-[13px] leading-[1.2em] mt-[2px]
+                            <div className={`mt-2 flex gap-1
+                                                     place-items-center`}>
+                                <RatingBox rating={listing?.average_rating} />
+                                <div>{listing?.average_rating}</div>
+                                <div>({formatNumber(listing?.total_reviews)})</div>
+                            </div>
+                            <div className={`font-normal text-[13px] leading-[1.2em] mt-[5px]
                     `}>
 
                                 {
@@ -52,6 +59,7 @@ const ResultItem = ({ listing }: any) => {
                                         ''
                                 }
                             </div>
+
                             <div className={`font-normal text-[13px] 
                                     flex place-items-center gap-1 mt-[3px]`}>
 

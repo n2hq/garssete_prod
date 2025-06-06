@@ -3,14 +3,14 @@ import { BiBullseye, BiHome, BiSpa } from "react-icons/bi"
 import { CgShoppingCart } from "react-icons/cg"
 import { FaCarSide } from "react-icons/fa"
 import { GiStarGate } from "react-icons/gi"
-import { MdRealEstateAgent } from "react-icons/md"
+import { MdMusicNote, MdRealEstateAgent } from "react-icons/md"
 import { RiRestaurantFill } from "react-icons/ri"
 import { getCategories } from "~/lib/lib"
 
 const categories = [
     {
         title: "Restaurants",
-        link: "/web/search?q=restaurants",
+        link: "/web/search?q=restaurant",
         icon: <RiRestaurantFill />
     },
     {
@@ -24,9 +24,9 @@ const categories = [
         icon: <GiStarGate />
     },
     {
-        title: "Active Life",
-        link: "/web/search?q=nightlife",
-        icon: <BiBullseye />
+        title: "Entertainment",
+        link: "/web/search?q=entertainment",
+        icon: <MdMusicNote />
     },
     {
         title: "Beauty & Spa",

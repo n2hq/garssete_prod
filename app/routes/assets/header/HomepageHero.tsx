@@ -4,13 +4,16 @@ import SearchBox from "~/components/content/SearchBox"
 
 const heroimgs = [
     {
-        img: "images/dubai7star.jpeg"
+        img: "https://smartmag.theme-sphere.com/rtl/wp-content/uploads/sites/34/2022/11/Depositphotos_410258952_XL-1.jpg"
     },
     {
-        img: "https://r4.wallpaperflare.com/wallpaper/791/501/238/new-york-city-buildings-wallpaper-51351344a10dae2b3cd90e3cb71d503d.jpg"
+        img: "https://smartmag.theme-sphere.com/news/wp-content/uploads/sites/11/2021/02/daniel-korpai-seLBnDRB6_M-unsplash-1-scaled.jpg"
     },
     {
-        img: "https://c0.wallpaperflare.com/path/494/492/40/signage-brand-cyan-yellow-5d1465fafe2d1f3e8deff1bbe07c71ce.jpg"
+        img: "https://demo.tagdiv.com/newspaper_free_news_pro/wp-content/uploads/2023/12/3.jpg"
+    },
+    {
+        img: "https://demo.tagdiv.com/newspaper_free_news_pro/wp-content/uploads/2023/12/2.jpg"
     }
 ]
 export const HomepageHero = () => {
@@ -84,7 +87,7 @@ export const HomepageHero = () => {
         }
 
         if (slides) {
-            startSlide(slides)
+            //startSlide(slides)
         }
 
     }, [slides])
@@ -92,7 +95,7 @@ export const HomepageHero = () => {
     return (
         <>
             <div className={`relative`}>
-                <div className={` w-full h-[300px] md:h-[500px] flex 
+                <div className={` w-full h-screen flex 
           overflow-hidden z-0
           `}>
                     {
@@ -100,6 +103,7 @@ export const HomepageHero = () => {
 
                             return (
                                 <img
+                                    onClick={() => { alert('here') }}
                                     key={index}
                                     src={slide.img}
                                     alt=""
@@ -115,16 +119,18 @@ export const HomepageHero = () => {
 
                 <div className={`w-full h-[70%]
           absolute z-[200] top-0
-          bg-gradient-to-b
+          bg-gradient-to-b 
      from-black/60 to-transparent`}></div>
 
-                <div className={`z-[300]`}>
+                <div className={`z-[300]`}
+
+                >
                     <button onMouseDown={handlePrev} className={`block absolute top-0 bottom-0 
                                                   z-[300] p-[1rem] cursor-pointer left-0 group h-full 
                                                         transition duration-1000 ease-in-out`}>
-                        <div className={`w-[50px] h-[50px] bg-white/60 rounded-full 
+                        <div className={`w-[50px] h-[50px] bg-white/30 rounded-full 
             place-content-center place-items-center group-hover:bg-white/30
-            z-[300] transition duration-500 ease-in-out relative top-[100px]`}>
+            z-[300] transition duration-500 ease-in-out relative `}>
                             <BiChevronLeft className=' stroke-white fill-black w-[2rem] h-[2rem]' />
                         </div>
 
@@ -132,20 +138,29 @@ export const HomepageHero = () => {
                     <button onMouseDown={handleNext} className={`block absolute top-0 bottom-0 
                                                         z-[300]    p-[1rem] cursor-pointer right-0 group 
                                                              transition duration-1000 ease-in-out`}>
-                        <div className={`w-[50px] h-[50px] bg-white/60 rounded-full 
+                        <div className={`w-[50px] h-[50px] bg-white/30 rounded-full 
             flex place-content-center place-items-center group-hover:bg-white/30
             z-[300]   transition duration-500 ease-in-out
-            relative top-[100px]`}>
+            relative `}>
                             <BiChevronRight className=' stroke-white fill-black w-[2rem] h-[2rem]' />
                         </div>
                     </button>
                 </div>
-                <div className={`z-100 absolute top-0 w-full h-[300px] md:h-[500px] 
+
+                <div className={`z-[100] absolute top-0 w-full h-full
           flex place-content-center place-items-center px-[15px]`}>
                     <div
                         className={` 
           max-w-[800px] mx-auto w-full z-[300]`}
                     >
+                        <div className={`text-center text-5xl text-white
+                            font-thin mb-[0px]`}>
+                            Find The Best Businesses
+                        </div>
+                        <div className={`text-center text-lg text-white
+                            font-thin mb-[20px]`}>
+                            Across Different Industries Around the World
+                        </div>
                         <SearchBox />
                     </div>
                 </div>

@@ -35,7 +35,7 @@ const HomeNav = () => {
                 showNav={showNav}
                 closeNav={closeNav}
             />
-            <div className={`shadow-md pb-3`}>
+            <div className={`shadow-md pb-3 z-[1000]`}>
                 <div className={`${scrollHeight > 50 ? 'shadow-md' : ''} flex place-content-between
                  fixed w-full mx-auto bg-white
                  px-[15px] h-[50px] z-[1000]`}>
@@ -54,7 +54,7 @@ const HomeNav = () => {
                 </div>
                 <div className={`h-[50px]`}></div>
 
-                <div className={`px-[12px]`}>
+                <div className={`px-[12px] w-full bg-white`}>
                     <form action="/web/search">
                         <div className={`bg-gray-100 w-full rounded-full h-[38px]
                     flex place-items-center px-2 gap-2 border

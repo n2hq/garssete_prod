@@ -18,10 +18,10 @@ export default function RatingBox({ rating }: RatingBoxProps) {
                             place-content-center`}
                     >
                         <div
-                            className="absolute inset-0 bg-red-500 z-0"
+                            className="absolute inset-0 bg-red-500 z-[0]"
                             style={{ width: `${fillPercent}%` }}
                         />
-                        <Star className="relative z-10 w-4 h-4 text-white" fill="currentColor" />
+                        <Star className="relative z-[0] w-4 h-4 text-white" fill="currentColor" />
                     </div>
                 )
             })}

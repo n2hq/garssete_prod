@@ -9,7 +9,7 @@ const heroimgs = [
         topTitle: "Discover. Connect. Grow"
     },
     {
-        img: "https://r4.wallpaperflare.com/wallpaper/791/501/238/new-york-city-buildings-wallpaper-51351344a10dae2b3cd90e3cb71d503d.jpg",
+        img: "https://spotlightthe.me/crush/wp-content/uploads/sites/17/demo-image-00015-3840x2048.jpg",
         title: "Connect with potential clients",
         topTitle: "Discover. Connect. Grow"
     },
@@ -125,6 +125,7 @@ export const HomepageCarousel = () => {
 
                             return (
                                 <div
+                                    key={index}
                                     className={`w-full h-full block 
                                         flex-shrink-0 flex-grow-0 
                                         transition-transform

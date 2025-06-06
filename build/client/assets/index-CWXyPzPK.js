@@ -1,0 +1,23 @@
+import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{R as j}from"./ResponsiveNav-CGQABT1g.js";import{z as i,u as v,s as N}from"./index-CLh2UBG4.js";import{r as p,b as y,L as u}from"./components-kAvIA9Ge.js";import{u as S}from"./index-iHLp7q33.js";import{u as P}from"./NotificationContext-BQR_c_qI.js";import{W as k}from"./MobileNav-8pObxhVZ.js";import{w as C}from"./css-DPrdeFsB.js";const E=/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/,F=i.object({username:i.string({message:"Please enter an email"}).min(7,{message:"Email must be greater than 7 characters"}).email({message:"Please enter a valid email"}),password:i.string({message:"Please enter a password"}).min(8,"Password must be at least 8 characters").regex(E,"Please enter a valid password")}),L=()=>{const[R,h]=p.useState(null),{signin:g}=S(),[_,o]=p.useState(!1),a=P(),f=y(),c=t=>{let l=t.target.value,n=t.target.name;h(m=>({...m,[n]:l}))},w=async t=>{o(!0),a.notify(),await new Promise(r=>setTimeout(r,1e3));const l=t.username,n=t.password,d=await g({email:l,password:n});d===!0?(a.cancel(),f("/")):a.alertCancel("Complete Your Signup",d.message),await new Promise(r=>setTimeout(r,1e3)),o(!1)},{register:x,handleSubmit:b,getValues:z,watch:A,setError:T,formState:{errors:s,isSubmitting:V}}=v({defaultValues:{},resolver:N(F)});return e.jsxs("div",{className:`w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
+        mt-[100px] mb-[20px] `,children:[e.jsx("div",{className:"hidden lg:block "}),e.jsx("div",{className:"place-content-center flex lg:place-content-end col-span-12 md:col-span-1",children:e.jsx("form",{onSubmit:b(w),children:e.jsxs("div",{className:`w-[350px] bg-white h-full rounded-2xl
+                    flex flex-col place-items-center pt-[40px] pb-[40px]
+                    px-[10px] `,children:[e.jsx("div",{className:C,children:e.jsx(k,{})}),e.jsx("div",{className:`text-[22px] text-center
+                        mt-[30px] font-bold text-black`,children:"Sign in to your account"}),e.jsxs("div",{className:`text-[15px] text-center
+                        mt-[0px] font-light text-black`,children:["using your ",e.jsxs("b",{className:"font-bold text-black",children:["Gr",e.jsx("i",{children:"u"}),"the"]})," account"]}),e.jsxs("div",{className:`w-full flex flex-col 
+                        place-items-center mt-[30px]`,children:[e.jsx("input",{...x("username",{onChange:c}),placeholder:"Email address",type:"text",className:`border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`}),e.jsx("div",{className:"w-[85%]",children:(s==null?void 0:s.username)&&e.jsx("div",{className:"ml-1 text-red-600 text-[13px]",children:s.username.message})})]}),e.jsxs("div",{className:`w-full flex flex-col 
+                        place-items-center mt-[15px] `,children:[e.jsx("input",{...x("password",{onChange:c}),placeholder:"Password",type:"password",className:`border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`}),e.jsx("div",{className:"w-[85%]",children:(s==null?void 0:s.password)&&e.jsx("div",{className:"ml-1 text-red-600 text-[13px]",children:s.password.message})})]}),e.jsx("div",{className:`w-full flex flex-col 
+                        place-items-center mt-[25px]`,children:e.jsx("button",{className:`w-[85%] bg-blue-600
+                            py-[12px] text-[15px] rounded-full
+                            text-white hover:bg-blue-700`,children:"Sign in"})}),e.jsx("div",{className:`w-full flex flex-col 
+                                            place-items-center mt-[20px] `,children:e.jsx(u,{className:"w-[85%]",to:"/web/reset_password",children:e.jsx("div",{className:`border-b w-full
+                                                    px-[0px] py-1 text-[14px]
+                                                    outline-none hover:underline`,children:"Forgot Password?"})})}),e.jsx("div",{className:`w-full flex flex-col 
+                                            place-items-center mt-[20px]`,children:e.jsx(u,{to:"/web/signup",className:"w-[85%]",children:e.jsx("button",{className:`w-full 
+                                                py-[2px] text-[14px] rounded-full text-center
+                                                text-blue-700 hover:bg-gray-100`,children:"Don't have account yet? Sign up!"})})})]})})})]})},W=()=>e.jsx("div",{className:`bg-white w-full 
+        md:bg-[url('https://images.pexels.com/photos/823696/pexels-photo-823696.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')]
+        bg-cover bg-center min-h-screen flex place-content-center`,children:e.jsx(L,{})}),I=()=>e.jsxs("div",{children:[e.jsx(j,{theme:"light"}),e.jsx(W,{})]});export{I as default};

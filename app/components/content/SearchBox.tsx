@@ -20,7 +20,7 @@ const SearchBox = ({ query }: any) => {
             <form action="/web/search" method='get'>
                 <div className={`mx-[15px]`}>
                     <div className={`max-w-[800px] mx-auto w-full
-                        bg-white rounded-full flex overflow-hidden
+                        bg-white rounded-md flex overflow-hidden
                         p-[5px] gap-x-1`}>
                         <input
                             name='q'
@@ -28,12 +28,12 @@ const SearchBox = ({ query }: any) => {
                             onChange={(e) => changeHandler(e)}
                             type="text"
                             className={`w-full p-3 outline-none
-                                bg-blue-100 rounded-full`}
+                                 rounded`}
                             placeholder='Enter an address, city, state or country'
                         />
                         <button
                             type='submit'
-                            className={`text-black bg-blue-500 rounded-full
+                            className={`text-white bg-blue-500 rounded-md
                                 border-none font-bold overflow-hidden min-w-[50px] w-[50px]
                                 h-[50px] flex justify-center items-center`}
                         >

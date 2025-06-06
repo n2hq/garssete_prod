@@ -85,7 +85,7 @@ const GenericNav = () => {
                                             <Link
                                                 key={index}
                                                 className={`text-[14px] hover:bg-gray-200/50
-                                                px-[10px] py-[6px] rounded-full
+                                                px-[10px] py-[6px] rounded
                                                 font-semibold
                                                 ${link.lnk.toString() === (url) &&
                                                     url.toString() !== "" && 'bg-blue-100'}

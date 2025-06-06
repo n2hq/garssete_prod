@@ -40,7 +40,7 @@ const AccountNav = () => {
 
                         {/** left */}
                         <div className={`flex place-items-center
-                        `}>
+                        text-[#6001d2]`}>
                             <Link to={`/`}>
                                 <WhiteLogo />
                             </Link>

@@ -12,7 +12,8 @@ export const config = {
 export const getSiteLogo = () => {
     return (
         <b>
-            Gr<i>ú</i>the
+
+            Gestte
         </b>
     )
 }

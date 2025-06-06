@@ -110,16 +110,16 @@ export const HomepageHero = () => {
                                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                                     className={`object-cover w-full h-full 
                       block flex-shrink-0 flex-grow-0 transition-transform
-                      ease-in-out duration-1000`}
+                      ease-in-out duration-1000 z-[10]`}
                                 />
                             )
                         })
                     }
                 </div>
 
-                <div className={`w-full h-[70%]
+                <div className={`w-full h-[30%]
           absolute z-[200] top-0
-          bg-gradient-to-b 
+          bg-gradient-to-b
      from-black/60 to-transparent`}></div>
 
                 <div className={`z-[300]`}

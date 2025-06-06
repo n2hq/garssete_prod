@@ -14,46 +14,61 @@ const SocialMedia = ({ listing }: any) => {
     useEffect(() => {
         const getSocialMedia = (listing: any) => {
 
-            const socialData = [
-                {
+            const socials = []
+            if (listing?.fbsocial) {
+                socials.push({
                     media: listing?.fbsocial,
                     icon: <FaFacebookSquare />,
                     name: 'Facebook',
                     link: `https://facebook.com/${listing?.fbsocial}`
-                },
-                {
+                })
+            }
+
+            if (listing?.fbsocial) {
+                socials.push({
                     media: listing?.xsocial,
                     icon: <BsTwitterX />,
                     name: 'Twitter',
                     link: `https://facebook.com/${listing?.xsocial}`
-                },
-                {
+                })
+            }
+
+            if (listing?.linksocial) {
+                socials.push({
                     media: listing?.linksocial,
                     icon: <BsLinkedin />,
                     name: 'LinkedIn',
                     link: `${listing?.linksocial}`
-                },
-                {
+                })
+            }
+
+            if (listing?.website) {
+                socials.push({
                     media: listing?.website,
                     icon: <CgWebsite />,
                     name: 'Website',
                     link: `${listing?.website}`
-                },
-                {
+                })
+            }
+
+            if (listing?.email_address) {
+                socials.push({
                     media: listing?.email_address,
                     icon: <MdEmail />,
                     name: 'Email Address',
                     link: `mailto:${listing?.email_address}`
-                },
-                {
+                })
+            }
+
+            if (listing?.phone) {
+                socials.push({
                     media: listing?.phone,
                     icon: <BsPhone />,
                     name: 'Phone',
                     link: `tel:${listing?.phone}`
-                }
-            ]
-
-            setSocial(socialData)
+                })
+            }
+            setSocial(socials)
         }
 
         if (listing !== null) {

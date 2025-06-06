@@ -14,7 +14,7 @@ const Address = ({ businessProfile }: any) => {
         <div className={`w-full`}>
             <div className=' md:mx-[25px] md:bg-[#006ce4]/10
             md:rounded-[5px] overflow-hidden pt-[30px]
-            pb-[15px] bg-[red] text-white md:black
+            pb-[15px] bg-[black] text-white md:black
             md:text-black'>
                 <div className={`font-bold text-[15px] pb-2 
                    px-[20px]`}>

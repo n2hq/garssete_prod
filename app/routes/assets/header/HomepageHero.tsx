@@ -201,8 +201,8 @@ export const HomepageHero = () => {
                         className={` 
           max-w-[800px] mx-auto w-full z-[100]`}
                     >
-                        <div className={`text-center text-5xl text-white
-                            font-extralight mb-[0px]`}>
+                        <div className={`text-center text-5xl text-white/80
+                            font-extralight mb-[0px] tracking-wide`}>
                             Find The Best Businesses
                         </div>
                         <div className={`text-center text-lg text-white

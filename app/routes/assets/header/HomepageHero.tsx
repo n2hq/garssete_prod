@@ -4,6 +4,9 @@ import SearchBox from "~/components/content/SearchBox"
 
 const heroimgs = [
     {
+        img: "https://spotlightthe.me/supercharged/wp-content/uploads/sites/18/demo-image-00013.jpg"
+    },
+    {
         img: "https://smartmag.theme-sphere.com/rtl/wp-content/uploads/sites/34/2022/11/Depositphotos_410258952_XL-1.jpg"
     },
     {
@@ -14,6 +17,15 @@ const heroimgs = [
     },
     {
         img: "https://demo.tagdiv.com/newspaper_free_news_pro/wp-content/uploads/2023/12/2.jpg"
+    },
+    {
+        img: "https://smartmag.theme-sphere.com/trendy/wp-content/uploads/sites/5/2017/01/shutterstock_275843885.jpg"
+    },
+    {
+        img: "https://smartmag.theme-sphere.com/trendy/wp-content/uploads/sites/5/2017/01/shutterstock_362198879.jpg"
+    },
+    {
+        img: "https://smartmag.theme-sphere.com/social-life/wp-content/uploads/sites/17/2021/02/deanna-alys-xQwRvghauaU-unsplash-1.jpg"
     }
 ]
 export const HomepageHero = () => {
@@ -52,7 +64,7 @@ export const HomepageHero = () => {
 
         timeoutId.current = setTimeout(() => {
             //next();
-            handleNext(); // Continue the loop if needed
+            //handleNext(); // Continue the loop if needed
         }, 15000);
     }
 
@@ -66,7 +78,7 @@ export const HomepageHero = () => {
         prev();
 
         timeoutId.current = setTimeout(() => {
-            next();
+            //next();
             //handleNext(); // Continue the loop if needed
         }, 15000);
     }

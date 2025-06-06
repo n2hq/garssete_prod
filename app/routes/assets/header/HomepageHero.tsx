@@ -37,6 +37,24 @@ export const HomepageHero = () => {
 
     let timeoutId = useRef<NodeJS.Timeout | null>(null);
 
+    const handleTouchStart = (e: any) => {
+        slideStep.current = e.touches[0].clientX;
+    }
+
+    const handleTouchEnd = (e: any) => {
+        const endX = e.changedTouches[0].clientX;
+        const deltaX = slideStep.current - endX;
+
+        if (deltaX > 50) {
+            // swipe left
+            setCurrentSlide((i: any) => (i + 1) % heroimgs.length);
+        } else if (deltaX < -50) {
+            // swipe right
+            setCurrentSlide((i: any) => (i - 1 + heroimgs.length) % heroimgs.length);
+        }
+    };
+
+
     useEffect(() => {
         setSlides(heroimgs)
     }, [])
@@ -108,31 +126,49 @@ export const HomepageHero = () => {
         <>
             <div className={`relative`}>
                 <div className={` w-full h-screen flex 
-          overflow-hidden z-0 bg-black
+          overflow-hidden  bg-black z-[20]
           `}>
                     {
                         slides?.map((slide: any, index: any) => {
 
                             return (
-                                <img
-                                    onClick={() => { alert('here') }}
+                                <div
+                                    onClick={() => { alert('hello') }}
                                     key={index}
-                                    src={slide.img}
-                                    alt=""
+                                    className={`w-full h-full block 
+                                        flex-shrink-0 flex-grow-0 
+                                        transition-transform
+                                        ease-in-out relative z-[20]
+                                        duration-1000 cursor-pointer`
+                                    }
+                                    onTouchStart={handleTouchStart}
+                                    onTouchEnd={handleTouchEnd}
+
                                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                                    className={`object-cover w-full h-full 
+
+                                >
+                                    <img
+
+                                        key={index}
+                                        src={slide.img}
+                                        alt=""
+
+                                        className={`object-cover w-full h-full 
                       block flex-shrink-0 flex-grow-0 transition-transform
                       ease-in-out duration-1000 z-[10] opacity-[70%] `}
-                                />
+                                    />
+                                </div>
                             )
                         })
                     }
                 </div>
 
-                <div className={`w-full h-[30%]
+                {/* <div className={`w-full h-[30%]
           absolute z-[200] top-0
-          bg-gradient-to-b
-     from-black/60 to-transparent`}></div>
+          bg-gradient-to-b bg-blue-50
+     from-black/60 to-transparent`}
+                    onClick={() => { alert('hhe') }}
+                ></div> */}
 
                 <div className={`z-[300]`}
 
@@ -159,11 +195,11 @@ export const HomepageHero = () => {
                     </button>
                 </div>
 
-                <div className={`z-[100] absolute top-0 w-full h-full
+                <div className={` absolute top-0 w-full h-full
           flex place-content-center place-items-center px-[15px]`}>
                     <div
                         className={` 
-          max-w-[800px] mx-auto w-full z-[300]`}
+          max-w-[800px] mx-auto w-full z-[100]`}
                     >
                         <div className={`text-center text-5xl text-white
                             font-extralight mb-[0px]`}>

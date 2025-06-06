@@ -116,7 +116,7 @@ export const HomepageCarousel = () => {
         <>
             <div className={`relative`}>
                 <div
-                    onClick={() => { console.log('z') }}
+
                     className={` w-full h-[280px] md:h-[500px] flex 
           overflow-hidden z-[10]
           `}>

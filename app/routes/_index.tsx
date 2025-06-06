@@ -26,8 +26,10 @@ const _index = () => {
       </div>
 
       {/** hero or carousel */}
-
-      <div className={`h-full`}>
+      {/* <div className={`md:hidden`}>
+        <HomepageCarousel />
+      </div> */}
+      <div className={``}>
         <HomepageHero />
       </div>
       <Recents

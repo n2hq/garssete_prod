@@ -47,8 +47,11 @@ const ResultItem = ({ listing }: any) => {
                             <div className={`mt-2 flex gap-1
                                                      place-items-center`}>
                                 <RatingBox rating={listing?.average_rating} />
-                                <div>{listing?.average_rating}</div>
-                                <div>({formatNumber(listing?.total_reviews)})</div>
+                                <div className={`flex place-items-center
+                                gap-1 text-black/60 text-[13px]`}>
+                                    <div>{formatNumber(Number(listing?.average_rating))}</div>
+                                    <div>({formatNumber(listing?.total_reviews)})</div>
+                                </div>
                             </div>
                             <div className={`font-normal text-[13px] leading-[1.2em] mt-[5px]
                     `}>

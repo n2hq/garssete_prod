@@ -52,8 +52,11 @@ const ResultMobile = ({ listing, index }: any) => {
                         <div className={`mt-2 flex gap-1
                          place-items-center`}>
                             <RatingBox rating={listing?.average_rating} />
-                            <div>{listing?.average_rating}</div>
-                            <div>({formatNumber(listing?.total_reviews)})</div>
+                            <div className={`flex place-items-center
+                                gap-1 text-black/60 text-[13px]`}>
+                                <div>{listing?.average_rating}</div>
+                                <div>({formatNumber(listing?.total_reviews)})</div>
+                            </div>
                         </div>
                         <div className={`capitalize mt-1
                             text-[14px] underline`}>

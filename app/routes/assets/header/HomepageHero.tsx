@@ -96,7 +96,7 @@ export const HomepageHero = () => {
         <>
             <div className={`relative`}>
                 <div className={` w-full h-screen flex 
-          overflow-hidden z-0
+          overflow-hidden z-0 bg-black
           `}>
                     {
                         slides?.map((slide: any, index: any) => {
@@ -110,7 +110,7 @@ export const HomepageHero = () => {
                                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                                     className={`object-cover w-full h-full 
                       block flex-shrink-0 flex-grow-0 transition-transform
-                      ease-in-out duration-1000 z-[10]`}
+                      ease-in-out duration-1000 z-[10] opacity-[70%] `}
                                 />
                             )
                         })

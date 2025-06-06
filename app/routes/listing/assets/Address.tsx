@@ -12,9 +12,10 @@ import Review from './Review'
 const Address = ({ businessProfile }: any) => {
     return (
         <div className={`w-full`}>
-            <div className=' md:mx-[25px] bg-[#006ce4]/10
+            <div className=' md:mx-[25px] md:bg-[#006ce4]/10
             md:rounded-[5px] overflow-hidden pt-[30px]
-            pb-[15px]'>
+            pb-[15px] bg-[red] text-white md:black
+            md:text-black'>
                 <div className={`font-bold text-[15px] pb-2 
                    px-[20px]`}>
                     Property Address
@@ -23,7 +24,7 @@ const Address = ({ businessProfile }: any) => {
 
                 <div className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 
                 text-[14px]  tracking-tight
-                md:space-x-4 lg:space-x-0 text-black/80 font-sans
+                md:space-x-4 lg:space-x-0 md:text-black/80 font-sans
                 `}
                 >
 

@@ -14,6 +14,10 @@ import BusinessRatings from './BusinessRatings';
 import ImageBlock from './ImageBlock';
 import { list } from 'postcss';
 import { ListingCarousel } from './ListingCarousel';
+import BusinessPhrases from './BusinessPhrases';
+import Products from './Products';
+import Services from './Services';
+import SocialMedia from './SocialMedia';
 
 
 const BusinessLayout = ({
@@ -85,8 +89,19 @@ const BusinessLayout = ({
 
                                 <div className={`px-[15px] md:px-[0px]`}>
                                     <ShortDescription listing={listing} />
+
+                                    {listing && <SocialMedia listing={listing} />}
+
                                     <BusinessFeatures listing={listing} />
+                                    {listing && <BusinessPhrases listing={listing} />}
+
+                                    {listing && <Products listing={listing} />}
+
+                                    {listing && <Services listing={listing} />}
+
                                     <Description listing={listing} />
+
+
 
                                     {listing && <BusinessRatings listing={listing} />}
                                 </div>

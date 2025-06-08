@@ -22,7 +22,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             a.media_id, b.description, a.user_description, 
             a.business_guid, b.name, b.base_url, b.media_icon
             FROM 
-            tbl_selected_socials a, tbl_sys_socials b 
+            tbl_selected_social_media a, tbl_sys_social_media b 
             WHERE a.media_id = b.media_id 
             AND
             a.business_guid = ?`,

@@ -10548,7 +10548,7 @@ const loader$c = async ({ request, params }) => {
   params.buid;
   params.user_guid;
   try {
-    const rawdata = await query(`SELECT * FROM tbl_sys_socials`);
+    const rawdata = await query(`SELECT * FROM tbl_sys_social_media`);
     console.log(rawdata);
     return DoResponse(rawdata, 200);
   } catch (error) {
@@ -10565,7 +10565,7 @@ const loader$b = async ({ request, params }) => {
   const userGuid = params.user_guid;
   try {
     const rawdata = await query(
-      `SELECT * FROM tbl_selected_socials 
+      `SELECT * FROM tbl_selected_social_media 
             WHERE
             user_guid = ?
             AND
@@ -10607,7 +10607,7 @@ async function action$2({ request, params }) {
       const businessGuid = body.business_guid;
       const selected = body.selected;
       console.log(body);
-      await query(`DELETE FROM tbl_selected_socials 
+      await query(`DELETE FROM tbl_selected_social_media 
                 WHERE 
                 user_guid = ? 
                 AND 
@@ -10618,7 +10618,7 @@ async function action$2({ request, params }) {
           try {
             const guid = crypto.randomUUID();
             await query(
-              `INSERT INTO tbl_selected_socials 
+              `INSERT INTO tbl_selected_social_media 
                     (user_guid, business_guid, media_id, user_description, guid) VALUES (?, ?, ?, ?, ?)`,
               [userGuid, businessGuid, media.media_id, media.user_description, guid]
             );
@@ -10655,7 +10655,7 @@ const loader$9 = async ({ request, params }) => {
             a.media_id, b.description, a.user_description, 
             a.business_guid, b.name, b.base_url, b.media_icon
             FROM 
-            tbl_selected_socials a, tbl_sys_socials b 
+            tbl_selected_social_media a, tbl_sys_social_media b 
             WHERE a.media_id = b.media_id 
             AND
             a.business_guid = ?`,

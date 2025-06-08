@@ -17,7 +17,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const userGuid = params.user_guid
 
     try {
-        const rawdata: any = await query(`SELECT * FROM tbl_selected_socials 
+        const rawdata: any = await query(`SELECT * FROM tbl_selected_social_media 
             WHERE
             user_guid = ?
             AND

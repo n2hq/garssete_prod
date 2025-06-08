@@ -45,7 +45,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
 
             // Clear old features
-            await query(`DELETE FROM tbl_selected_socials 
+            await query(`DELETE FROM tbl_selected_social_media 
                 WHERE 
                 user_guid = ? 
                 AND 
@@ -57,7 +57,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
                 const vals = selected.map(async (media: any) => {
                     try {
                         const guid = crypto.randomUUID()
-                        await query(`INSERT INTO tbl_selected_socials 
+                        await query(`INSERT INTO tbl_selected_social_media 
                     (user_guid, business_guid, media_id, user_description, guid) VALUES (?, ?, ?, ?, ?)`,
                             [userGuid, businessGuid, media.media_id, media.user_description, guid])
                     } catch (error: any) {

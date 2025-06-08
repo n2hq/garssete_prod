@@ -42,7 +42,7 @@ const GenericNav = () => {
                     h-[60px] gap-x-2`}>
 
                         {/** left */}
-                        <div className={`flex place-items-center text-[#6001d2]
+                        <div className={`flex place-items-center text-black
                         `}>
                             <WhiteLogo />
                         </div>
@@ -67,7 +67,7 @@ const GenericNav = () => {
 
                                     <button
                                         type='submit'
-                                        className={`bg-red-600 min-w-[30px] w-[30px] h-[30px]
+                                        className={`bg-blue-500 min-w-[30px] w-[60px] h-[30px]
                                         flex place-items-center place-content-center
                                         rounded-full text-white`}
                                     >
@@ -85,10 +85,10 @@ const GenericNav = () => {
                                             <Link
                                                 key={index}
                                                 className={`text-[14px] hover:bg-gray-200/50
-                                                px-[10px] py-[6px] rounded
+                                                px-[10px] py-[6px] rounded-full
                                                 font-semibold
                                                 ${link.lnk.toString() === (url) &&
-                                                    url.toString() !== "" && 'bg-blue-100'}
+                                                    url.toString() !== "" && 'bg-gray-700 text-white'}
                                                     
                                                 `}
 

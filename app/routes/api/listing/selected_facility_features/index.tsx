@@ -40,7 +40,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
             const userGuid = body.user_guid
             const businessGuid = body.business_guid
             const selected = body.selected
-            console.log(body)
+            //console.log(body)
             //return DoResponse(body, 200)
 
 

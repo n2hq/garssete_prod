@@ -4,7 +4,7 @@ import SearchBox from "~/components/content/SearchBox"
 
 const heroimgs = [
     {
-        img: "https://spotlightthe.me/supercharged/wp-content/uploads/sites/18/demo-image-00013.jpg"
+        img: "https://consultix.radiantthemes.com/demo-six/wp-content/uploads/sites/7/2018/02/slider-1.jpg"
     },
     {
         img: "https://smartmag.theme-sphere.com/rtl/wp-content/uploads/sites/34/2022/11/Depositphotos_410258952_XL-1.jpg"
@@ -133,7 +133,7 @@ export const HomepageHero = () => {
 
                             return (
                                 <div
-                                    onClick={() => { alert('hello') }}
+
                                     key={index}
                                     className={`w-full h-full block 
                                         flex-shrink-0 flex-grow-0 

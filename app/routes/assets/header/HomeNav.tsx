@@ -43,7 +43,7 @@ const HomeNav = () => {
                     flex place-items-center `}>
                         <HamburgerMenu theme={"light"} openNav={openNav} navBg={navBg} />
                     </div>
-                    <div className={`h-full flex w-full text-[#6001d2]
+                    <div className={`h-full flex w-full 
                     place-content-center place-items-center`}>
                         <WhiteLogo />
                     </div>

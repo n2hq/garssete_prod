@@ -25,7 +25,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/account/portfolio/:business_guid/:user_guid/gallery", "routes/web/account/portfolio/business/gallery/index.tsx");
         route("/web/account/portfolio/:business_guid/:user_guid/facilities", "routes/web/account/portfolio/business/facilities/index.tsx");
         route("/web/account/portfolio/:business_guid/:user_guid/activate", "routes/web/account/portfolio/business/activate/index.tsx");
-
+        route("/web/account/portfolio/:business_guid/:user_guid/social_media", "routes/web/account/portfolio/business/social_media/index.tsx");
 
         {/** user */ }
         route("api/user", "routes/api/user/index.tsx");
@@ -56,6 +56,13 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/listing/sys_facility_features", "routes/api/listing/sys_facility_features/index.tsx");
         route("api/listing/selected_facility_features/:user_guid/:business_guid", "routes/api/listing/selected_facility_features/selected_facility_features.tsx");
         route("api/listing/selected_facility_features", "routes/api/listing/selected_facility_features/index.tsx");
+
+        route("api/listing/sys_social_media", "routes/api/listing/sys_social_media/index.tsx");
+        route("api/listing/selected_social_media/:user_guid/:business_guid", "routes/api/listing/selected_social_media/selected_social_media.tsx");
+        route("api/listing/selected_social_media", "routes/api/listing/selected_social_media/index.tsx");
+
+        route("api/listing/business_social_media/:business_guid", "routes/api/listing/business_social_media.tsx");
+
         route("api/listing/activate/:user_guid/:business_guid", "routes/api/listing/activate/activate.tsx");
         route("api/listing/recents", "routes/api/listing/recents.tsx");
 

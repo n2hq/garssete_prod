@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, LoaderFunction } from "@remix-run/node"
 import { query } from "../../DB"
-import { ListingType } from "~/lib/Interfaces"
-import { DoResponse, GenerateRandomHash } from "~/lib/Lib"
+import { ListingType } from "~/lib/types"
+import { DoResponse, GenerateRandomHash } from "~/lib/lib"
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {

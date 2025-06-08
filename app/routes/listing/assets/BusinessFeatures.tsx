@@ -13,7 +13,7 @@ const BusinessFeatures = ({ listing }: any) => {
     }, [listing.business_guid])
     return (
         <div className=' mt-12'>
-            <div className={` font-bold text-xl`}>
+            <div className={` font-bold text-xl border-b`}>
                 Features
             </div>
 
@@ -25,7 +25,8 @@ const BusinessFeatures = ({ listing }: any) => {
                                 <div className={`font-bold`}>
                                     {feature.name}
                                 </div>
-                                <div className={`text-sm mt-[-2px] text-gray-500 leading-[1.2em] tracking-normal`}>
+                                <div className={`text-sm mt-[-2px] text-black
+                                    tracking-normal leading-snug`}>
                                     {feature.user_description || feature.description}
                                 </div>
                             </div>

@@ -16,6 +16,10 @@ const settingsLinks = [
         link: "/facilities"
     },
     {
+        title: "Socials Media",
+        link: "/social_media"
+    },
+    {
         title: "Activate",
         link: "/activate"
     },

@@ -245,3 +245,15 @@ export interface BusinessHours {
     open: string;
     close: string;
 }
+
+
+export type RatingDisplayType = {
+    totalReviews: number,
+    category: string,
+    rating: number,
+    ratingCount: number
+}
+
+export type RatingDisplayProp = {
+    data?: RatingDisplayType
+}

@@ -12,10 +12,11 @@ import Review from './Review'
 const Address = ({ businessProfile }: any) => {
     return (
         <div className={`w-full`}>
-            <div className=' md:mx-[25px] md:bg-[#006ce4]/10
-            md:rounded-[5px] overflow-hidden pt-[30px]
-            pb-[15px] bg-[black] text-white md:black
-            md:text-black'>
+
+            <div className='  md:bg-white
+            md:rounded overflow-hidden pt-[30px]
+            pb-[15px] bg-[blue]/0 text-black md:black
+            md:text-black  border-[1px] border-gray-300/70'>
                 <div className={`font-bold text-[15px] pb-2 
                    px-[20px]`}>
                     Property Address

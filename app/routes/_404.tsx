@@ -1,3 +1,4 @@
+import GenericNav from "~/components/header/generic/GenericNav";
 import ResponsiveNav from "~/components/header/lite/ResponsiveNav"
 
 export function loader() {
@@ -8,9 +9,9 @@ export function loader() {
 export default function NotFound() {
     return (
         <div>
-            <ResponsiveNav theme={'dark'} />
+            <GenericNav />
             <div className={`min-h-screen flex items-center justify-center 
-        text-center px-4 text-black`}>
+        text-center px-4 text-black fixed top-0 w-full`}>
                 <div className={`flex place-content-center place-items-center gap-3
                 h-[50px]`}>
                     <div className={`text-2xl font-bold text-red-600 h-full

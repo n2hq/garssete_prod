@@ -18,4 +18,6 @@ export const inputWrapperClass = `mb-8 w-[100%] `
 export const textAreaClass = `border-[1px] border-gray-500/30 w-full px-3 py-2 
 rounded bg-gray-100/40 h-[250px] text-[14px]`
 
-export const whiteLogoColor = `text-[#6001d2]`
+//export const whiteLogoColor = `text-[#6001d2]`
+
+export const whiteLogoColor = ``

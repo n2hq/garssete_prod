@@ -15,7 +15,8 @@ const Products = ({ listing }: any) => {
     }, [listing])
     return (
         <div className='mt-12'>
-            <div className={`font-bold text-lg`}>
+            <div className={`font-bold text-lg
+                border-b`}>
                 Products
             </div>
 

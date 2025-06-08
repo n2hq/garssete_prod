@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from './Header'
 import Masonry from './Masonry';
 import PreDescription from './ShortDescription';
@@ -18,6 +18,8 @@ import BusinessPhrases from './BusinessPhrases';
 import Products from './Products';
 import Services from './Services';
 import SocialMedia from './SocialMedia';
+import RatingDisplay from './RatingDisplay';
+import { RatingDisplayType } from '~/lib/types';
 
 
 const BusinessLayout = ({
@@ -25,6 +27,19 @@ const BusinessLayout = ({
     images,
     ratingsData
 }: any) => {
+
+    const [ratingDisplayData, setRatingDisplayData] = useState<RatingDisplayType>()
+    useEffect(() => {
+        if (listing && ratingsData) {
+            setRatingDisplayData({
+                totalReviews: 0,
+                category: listing?.category,
+                rating: ratingsData.rating_average,
+                ratingCount: ratingsData.rating_count
+            })
+        }
+        console.log(JSON.stringify(listing.category))
+    }, [listing, ratingsData])
     return (
         <div className={``}>
             <div className={`px-[15px] w-full`}>
@@ -54,7 +69,7 @@ const BusinessLayout = ({
             <div className={` md:pt-4 md:px-[12px]`}>
                 <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
 
-                    <div className={`grid grid-cols-12 gap-0 md:gap-0 relative
+                    <div className={`grid grid-cols-12 gap-0 md:gap-4 relative
                     `}>
                         <div className={` col-span-12 lg:col-span-8`}>
 
@@ -80,6 +95,7 @@ const BusinessLayout = ({
 
                             <div className={``}>
                                 <div className={`md:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
+                                    {ratingDisplayData && <RatingDisplay data={ratingDisplayData} />}
                                     {listing && <Address businessProfile={listing} />}
                                     {/* {
                                         listing && <Review listing={listing} />
@@ -92,7 +108,8 @@ const BusinessLayout = ({
 
                                     {listing && <SocialMedia listing={listing} />}
 
-                                    <BusinessFeatures listing={listing} />
+                                    {listing && <BusinessFeatures listing={listing} />}
+
                                     {listing && <BusinessPhrases listing={listing} />}
 
                                     {listing && <Products listing={listing} />}
@@ -110,7 +127,10 @@ const BusinessLayout = ({
                         </div>
 
                         <div className={`col-span-12 lg:col-span-4 hidden lg:block`}>
+
+
                             <div className={` sticky top-[100px]`}>
+                                {ratingDisplayData && <RatingDisplay data={ratingDisplayData} />}
                                 {listing && <Address businessProfile={listing} />}
                                 {/* <Review /> */}
                             </div>

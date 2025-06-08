@@ -11,10 +11,10 @@ export const config = {
 
 export const getSiteLogo = () => {
     return (
-        <b>
-
-            Gestte
-        </b>
+        <span className={`font-[800] text-[26px]
+         italic`}>
+            nostte.
+        </span>
     )
 }
 
@@ -330,6 +330,33 @@ export const getBusinessFeatures = async (businessGuid: string | null): Promise<
     const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
     const endpoint = `/api/listing/business_facility_features/${businessGuid}`
     const url = BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getSocialMediaByBusinessGuid = async (businessGuid: string | null): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/business_social_media/${businessGuid}`
+    const url = config.BASE_URL + endpoint
 
 
     try {
@@ -677,6 +704,60 @@ export const getSelectedFacilityFeatures = async (userGuid: string | null, busin
     const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
     const endpoint = `/api/listing/selected_facility_features/${userGuid}/${businessGuid}`
     const url = BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getSysSocialMedia = async (): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/sys_social_media`
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getSelectedSocialMedia = async (userGuid: string | null, businessGuid: string | null): Promise<any | undefined> => {
+
+    const endpoint = `/api/listing/selected_social_media/${userGuid}/${businessGuid}`
+    const url = config.BASE_URL + endpoint
 
 
     try {

@@ -34,7 +34,8 @@ const AppNav = ({
         transition ease-in-out duration-0`}>
 
             <div className={`max-w-[1100px] mx-auto w-full 
-              h-full flex place-items-center place-content-between ${whiteLogoColor}
+              h-full flex place-items-center place-content-between
+              ${whiteLogoColor}
               `}>
                 <WhiteLogo />
 

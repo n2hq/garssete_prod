@@ -1,46 +1,62 @@
 import { Link } from '@remix-run/react'
 import { list } from 'postcss'
 import React, { useEffect, useState } from 'react'
-import { BsFacebook, BsLinkedin, BsPhone, BsTwitterX } from 'react-icons/bs'
+import { BsFacebook, BsInstagram, BsLinkedin, BsPhone, BsPinterest, BsTwitterX } from 'react-icons/bs'
 import { CgWebsite } from 'react-icons/cg'
-import { FaFacebook, FaFacebookSquare } from 'react-icons/fa'
+import { FaFacebook, FaFacebookSquare, FaPinterestSquare, FaVimeoSquare, FaYoutubeSquare } from 'react-icons/fa'
 import { MdEmail, MdFacebook } from 'react-icons/md'
-import { config, getBusinessProfileImageData } from '~/lib/lib'
+import { config, getBusinessProfileImageData, getSocialMediaByBusinessGuid } from '~/lib/lib'
 
 const SocialMedia = ({ listing }: any) => {
     const [img, setImg] = useState('')
     const [social, setSocial] = useState<any | null>(null)
 
+    function getIcon(media: any) {
+        let icon = null
+
+        switch (media?.media_id) {
+            case "facebook":
+                icon = <FaFacebookSquare />
+                break;
+            case "twitterx":
+                icon = <BsTwitterX />
+                break;
+            case "linkedin":
+                icon = <BsLinkedin />
+                break;
+            case "instagram":
+                icon = <BsInstagram />
+                break;
+            case "pinterest":
+                icon = <FaPinterestSquare />
+                break;
+            case "youtube":
+                icon = <FaYoutubeSquare />
+                break;
+            case "vimeo":
+                icon = <FaVimeoSquare />
+                break;
+
+
+        }
+        return icon
+    }
     useEffect(() => {
-        const getSocialMedia = (listing: any) => {
-
+        const getSocialMedia = async (listing: any) => {
             const socials = []
-            if (listing?.fbsocial) {
-                socials.push({
-                    media: listing?.fbsocial,
-                    icon: <FaFacebookSquare />,
-                    name: 'Facebook',
-                    link: `https://facebook.com/${listing?.fbsocial}`
-                })
-            }
 
-            if (listing?.fbsocial) {
-                socials.push({
-                    media: listing?.xsocial,
-                    icon: <BsTwitterX />,
-                    name: 'Twitter',
-                    link: `https://facebook.com/${listing?.xsocial}`
-                })
-            }
+            const socialMedia = await getSocialMediaByBusinessGuid(listing.gid)
+            socialMedia.map((media: any, index: number) => {
 
-            if (listing?.linksocial) {
                 socials.push({
-                    media: listing?.linksocial,
-                    icon: <BsLinkedin />,
-                    name: 'LinkedIn',
-                    link: `${listing?.linksocial}`
+                    media: media?.name,
+                    icon: getIcon(media),
+                    name: media?.name,
+                    link: `${media?.base_url}${media?.user_description}`
                 })
-            }
+            })
+
+
 
             if (listing?.website) {
                 socials.push({
@@ -79,7 +95,7 @@ const SocialMedia = ({ listing }: any) => {
 
     return (
         <div className='mt-12'>
-            <div className={`font-bold text-lg`}>
+            <div className={`font-bold text-lg border-b`}>
                 Social Media
             </div>
 
@@ -90,11 +106,12 @@ const SocialMedia = ({ listing }: any) => {
                         social !== null &&
                         social?.map((socialMedia: any, index: number) => {
                             return (
-                                <Link to={socialMedia?.link}>
+                                <Link key={index} to={socialMedia?.link}>
                                     <div key={index}
-                                        className={`border px-[5px] py-[2px] rounded
-                                    cursor-pointer flex place-items-center
-                                    gap-1 border-gray-400 
+                                        className={`border px-[8px] py-[2px] 
+                                    cursor-pointer flex place-items-center rounded-full
+                                    gap-1 border-gray-400 bg-white hover:bg-black
+                                    text-black hover:text-white
                                     hover:shadow-md`}
                                     >
                                         <span className={`text-[12px]`}>

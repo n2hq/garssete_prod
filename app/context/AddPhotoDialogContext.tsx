@@ -5,9 +5,9 @@ const AddPhotoDialogContext = createContext<any | null>(null)
 
 export function useAddPhotoDialogContext() {
     const context = useContext(AddPhotoDialogContext)
-    if (!context) {
+    /* if (!context) {
         throw new Error("useAddPhotoDialogContext must be used within an AuthProvider")
-    }
+    } */
     return context
 }
 

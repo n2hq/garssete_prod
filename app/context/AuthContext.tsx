@@ -8,12 +8,18 @@ const AuthContext = createContext<AuthContextType | null>(null)
 
 const SITE_BASE_URL = import.meta.env.VITE_SITE_BASE_URL
 
-export function useAuth() {
+/* export function useAuth() {
     const context = useContext(AuthContext)
+
     if (!context) {
+
         throw new Error("useAuth must be used within an AuthProvider")
     }
     return context
+} */
+
+export function useAuth() {
+    return useContext(AuthContext);
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {

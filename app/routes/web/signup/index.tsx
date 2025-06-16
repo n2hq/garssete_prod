@@ -6,7 +6,7 @@ import SignupBody from './assets/SignupBody'
 const index = () => {
     return (
         <div>
-            <ResponsiveNav theme='light' />
+            {/* <ResponsiveNav theme='light' /> */}
             <SignupBody />
         </div>
     )

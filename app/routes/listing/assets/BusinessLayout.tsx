@@ -20,6 +20,9 @@ import Services from './Services';
 import SocialMedia from './SocialMedia';
 import RatingDisplay from './RatingDisplay';
 import { RatingDisplayType } from '~/lib/types';
+import RatingBox from '~/routes/web/search/assets/RatingBox';
+import { formatNumber } from '~/lib/lib';
+import RatingBoxRounded from './RatingBoxRounded';
 
 
 const BusinessLayout = ({
@@ -44,9 +47,20 @@ const BusinessLayout = ({
         <div className={``}>
             <div className={`px-[15px] w-full`}>
                 <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
+
+
                     {
-                        ratingsData && <StarRating ratingsData={ratingsData} rating={Number(ratingsData.rating_average)} />
+                        ratingsData &&
+                        <div className={`mt-4 flex gap-2 place-items-center`}>
+                            <RatingBoxRounded rating={ratingsData?.rating_average} />
+                            <div className={`flex place-items-center place-content-center
+                                    gap-1 text-black/60 text-[14px]`}>
+                                <div>{formatNumber(Number(ratingsData?.rating_average))}</div>
+                                <div>(<span className='underline'>{formatNumber(ratingsData?.rating_count)} reviews</span>)</div>
+                            </div>
+                        </div>
                     }
+
                     {
                         listing && <Header listing={listing} />
                     }

@@ -7,7 +7,11 @@ import Portfolio from './assets/Portfolio'
 
 
 const index = () => {
-    const { user } = useAuth()
+    const auth = useAuth()
+    if (!auth) { return null }
+
+
+    const { user } = auth
     const [userProfile, setUserProfile] = useState<any | null>(null)
     const [portfolio, setPortfolio] = useState<any | null>(null)
     const [data, setData] = useState<any | null>(null)
@@ -58,12 +62,12 @@ const index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={'Email Address'}>
+            <ContentLayout title={'My Portfolio'}>
 
                 {userProfile === null ? 'Loading...' : ''}
 
                 <div className={`font-semibold mb-2 text-md`}>
-                    {userProfile?.email}
+                    {userProfile?.first_name} {userProfile?.lastname}
                 </div>
 
                 <div className={`mt-[20px]`}></div>

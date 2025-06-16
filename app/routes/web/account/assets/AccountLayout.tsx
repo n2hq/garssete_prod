@@ -6,14 +6,14 @@ import Sidebar from './Sidebar'
 import { CgChevronLeft, CgChevronRight, CgMenu } from 'react-icons/cg'
 import { BiChevronLeft, BiChevronRight, BiMenu, BiMenuAltLeft, BiX } from 'react-icons/bi'
 import { BsMenuButton } from 'react-icons/bs'
-import { useAuth } from '~/context/AuthContext'
 import { useLocation, useNavigate } from '@remix-run/react'
 import AccountNav from '~/components/header/account/AccountNav'
 import HomeNav from '~/routes/assets/header/HomeNav'
+import { useAuth } from '~/context/AuthContext'
 
 const AccountLayout = ({ children }: any) => {
     const [show, setShow] = useState(true)
-    const { user } = useAuth()
+    const auth = useAuth()
     const [loading, setLoading] = useState(true)
 
     const handleShow = () => {
@@ -26,13 +26,13 @@ const AccountLayout = ({ children }: any) => {
     }
 
     useEffect(() => {
-        if (user?.guid !== null && user?.guid !== undefined && user?.guid !== "") {
+        if (auth?.user?.guid !== null && auth?.user?.guid !== undefined && auth?.user?.guid !== "") {
 
             setLoading(false)
         } else {
             window.location.href = "/web/signin"
         }
-    }, [user])
+    }, [auth?.user])
 
 
 

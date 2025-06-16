@@ -65,7 +65,7 @@ const AccountNav = () => {
 
                                     <button
                                         type='submit'
-                                        className={`bg-red-600 min-w-[30px] w-[30px] h-[30px]
+                                        className={`bg-blue-600 min-w-[60px] w-[60px] h-[30px]
                                         flex place-items-center place-content-center
                                         rounded-full text-white`}
                                     >

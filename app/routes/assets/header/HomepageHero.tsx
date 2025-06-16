@@ -202,7 +202,7 @@ export const HomepageHero = () => {
           max-w-[800px] mx-auto w-full z-[100]`}
                     >
                         <div className={`text-center text-5xl text-white
-                            font-extralight mb-[0px] tracking-wide`}>
+                            font-extralight mb-[0px] tracking-wide font-poppins`}>
                             Find The Best Businesses
                         </div>
                         <div className={`text-center text-lg text-white

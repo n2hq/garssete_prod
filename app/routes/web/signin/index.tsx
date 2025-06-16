@@ -5,7 +5,7 @@ import SigninBody from './SigninBody'
 const index = () => {
     return (
         <div>
-            <ResponsiveNav theme='light' />
+            {/* <ResponsiveNav theme='light' /> */}
             <SigninBody />
         </div>
     )

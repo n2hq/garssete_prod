@@ -10,9 +10,9 @@ export default GalleryContext
 export function useGallery() {
     const context = useContext(GalleryContext)
 
-    if (!context) {
+    /* if (!context) {
         throw new Error("useGallery must be used within a GalleryProvider")
-    }
+    } */
     return context
 }
 

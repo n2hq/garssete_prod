@@ -8,9 +8,9 @@ const EditPhotoDialogContext = createContext<any | null>(null)
 
 export function useEditPhotoDialogContext() {
     const context = useContext(EditPhotoDialogContext)
-    if (!context) {
+    /* if (!context) {
         throw new Error("useEditPhotoDialogContext must be used within an EditPhotoDialogProvider")
-    }
+    } */
     return context
 }
 

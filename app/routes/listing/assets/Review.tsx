@@ -6,8 +6,8 @@ import { ListingType } from '~/lib/types'
 import { getRating } from '~/lib/lib'
 
 const Review = ({ listing }: any) => {
-    const rating = useRating()
-    const { user } = useAuth()
+    const rating = useRating()!
+    const { user } = useAuth()!
     const notification = useNotification()
 
 

@@ -6,9 +6,9 @@ const NotificationContext = createContext<any | null>(null)
 
 export function useNotification() {
     const context = useContext(NotificationContext)
-    if (!context) {
+    /* if (!context) {
         throw new Error("useNotification must be used within a NotificationProvider")
-    }
+    } */
     return context
 }
 

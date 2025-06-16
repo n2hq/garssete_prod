@@ -11,7 +11,7 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
     if (businessProfileImageData.image_url) {
         imgconst = config.IMG_BASE_URL + businessProfileImageData.image_url
     } else {
-        imgconst = '/images/placeholder-blue.png'
+        imgconst = '/images/imgplaceholder.jpg'
     }
 
     const [imgSrc, setImgSrc] = useState<any>(imgconst)

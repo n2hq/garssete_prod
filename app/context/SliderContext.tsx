@@ -6,9 +6,9 @@ const SliderContext = createContext<any | null>(null)
 
 export function useSliderContext() {
     const context = useContext(SliderContext)
-    if (!context) {
+    /* if (!context) {
         throw new Error("useSliderContext must be used within a SliderProvider")
-    }
+    } */
     return context
 }
 

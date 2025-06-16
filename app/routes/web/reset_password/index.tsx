@@ -6,7 +6,7 @@ import ResetPasswordBody from './ResetPasswordBody'
 const index = () => {
     return (
         <div>
-            <ResponsiveNav theme='light' />
+            {/* <ResponsiveNav theme='light' /> */}
             <ResetPasswordBody />
         </div>
     )

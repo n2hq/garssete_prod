@@ -22,7 +22,7 @@ const index = () => {
     const auth = useAuth();
 
     const businessGuid = loaderData.business_guid
-    const userGuid = auth.user?.guid
+    const userGuid = auth?.user?.guid
 
     const [loading, setLoading] = useState(true)
     const [userProfile, setUserProfile] = useState<any | null>(null)

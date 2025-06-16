@@ -11,9 +11,9 @@ export const config = {
 
 export const getSiteLogo = () => {
     return (
-        <span className={`font-[800] text-[26px]
-         italic`}>
-            nostte.
+        <span className={`font-normal text-[26px] 
+         `}>
+            Garssete
         </span>
     )
 }

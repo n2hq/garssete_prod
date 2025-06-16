@@ -13,7 +13,7 @@ const ResultItem = ({ listing, index }: any) => {
     let url = config.IMG_BASE_URL + listing.image_url
 
     if (listing?.image_url === "" || listing?.image_url === null) {
-        url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDKSPXOSoC8KuJCf_1dyELpZOsYINbk51FqA&s"
+        url = "/images/imgplaceholder.jpg"
     }
 
 
@@ -22,7 +22,7 @@ const ResultItem = ({ listing, index }: any) => {
 
         <div className={` cursor-pointer my-2`}>
             <div className={`flex rounded  gap-x-2 p-2
-             hover:bg-blue-700 hover:text-white  
+             hover:bg-blue-100 hover:shadow-md  
              ${isOdd(index) ? 'bg-blue-50' : ''}
                 `}>
                 {/** left */}
@@ -64,7 +64,7 @@ const ResultItem = ({ listing, index }: any) => {
                                 sm:block`}>
                                 <div className={`flex flex-col 
                     place-items-end place-content-end
-                        font-semibold text-[15px] tracking-tighter`}>
+                        font-bold text-[14px] tracking-tighter`}>
                                     {listing.phone}
                                 </div>
                                 <div className={`flex flex-col text-end text-[12px]

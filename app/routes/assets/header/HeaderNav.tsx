@@ -30,14 +30,14 @@ export const HeaderNav = () => {
       px-[15px] 
      transition-all duration-1000 ease-in-out
      flex flex-col place-content-center
-     ${isScroll && 'bg-black/50'}
+     ${isScroll && 'bg-black/90'}
      `}>
                 <div className={`max-w-[1100px] 
       mx-auto w-full text-white relative gap-x-3
         flex place-content-between h-full`}>
                     {/** left */}
                     <div className={`font-bold font-sans 
-          flex place-items-center text-2xl w-[100px]
+          flex place-items-center text-2xl w-fit
            `}>
                         <DarkLogo />
                     </div>

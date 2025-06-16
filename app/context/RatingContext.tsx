@@ -15,9 +15,9 @@ const RatingContext = createContext<any | null>(null)
 export function useRating() {
     const context = useContext(RatingContext)
 
-    if (!context) {
+    /* if (!context) {
         throw new Error("useRating must be used within a RatingProvider")
-    }
+    } */
     return context
 }
 
@@ -58,7 +58,9 @@ export default function RatingProvider({ children }: any) {
 
     const [stars, setStars] = useState<number>(5);
 
-    let { user } = useAuth()
+    const auth = useAuth()
+    if (!auth) { return null }
+    let { user } = auth
 
     const [formdata, setFormdata] = useState<any | null>(null)
 

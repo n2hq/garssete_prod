@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { useNotification } from "./NotificationContext";
+import { headers } from "~/lib/lib";
 
 const AddPhotoDialogContext = createContext<any | null>(null)
 
@@ -51,10 +52,7 @@ export function AddPhotoDialogProvider({ children }: any) {
             try {
                 const response = await fetch(url, {
                     method: "POST",
-                    headers: {
-                        "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods": "*"
-                    },
+                    headers: headers,
                     body: (formData)
                 })
 

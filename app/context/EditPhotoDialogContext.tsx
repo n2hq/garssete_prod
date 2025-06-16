@@ -75,10 +75,7 @@ export function EditPhotoDialogProvider({ children }: any) {
         try {
             const response = await fetch(url, {
                 method: "POST",
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "*"
-                },
+                headers: headers,
                 body: (formData)
             })
 

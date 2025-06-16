@@ -41,9 +41,7 @@ const AccountNav = () => {
                         {/** left */}
                         <div className={`flex place-items-center
                         `}>
-                            <Link to={`/`}>
-                                <WhiteLogo />
-                            </Link>
+                            <WhiteLogo />
                         </div>
 
                         {/** center */}
@@ -79,20 +77,22 @@ const AccountNav = () => {
                                     navlnk.map((link, index) => {
                                         const url = location.search
                                         const final = decodeURI(url)
-                                        console.log(final)
+
                                         return (
-                                            <Link
-                                                key={index}
-                                                className={`text-[14px] hover:bg-gray-200/50
+                                            <div key={index}>
+                                                <Link
+
+                                                    className={`text-[14px] hover:bg-gray-200/50
                                                 px-[10px] py-[6px] rounded
                                                 font-semibold
                                                 ${link.lnk.toString().includes(final) &&
-                                                    final.toString() !== "" && 'bg-green-200'}`}
-                                                to={link.lnk}>
-                                                {
-                                                    link.title
-                                                }
-                                            </Link>
+                                                        final.toString() !== "" && 'bg-green-200'}`}
+                                                    to={link.lnk}>
+                                                    {
+                                                        link.title
+                                                    }
+                                                </Link>
+                                            </div>
                                         )
                                     })
                                 }

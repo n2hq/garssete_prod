@@ -4,7 +4,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             .flex_container{
-                font-size:17px; 
                 display:flex; 
                 justify-content:center; 
                 align-items:center; 
@@ -15,7 +14,9 @@
                 width:auto; 
                 height:100px; 
                 text-align:center; 
-                line-height:100px
+                line-height:100px;
+                font-family:'Arial';
+                font-size:17px; 
             }
         </style>
     </head>

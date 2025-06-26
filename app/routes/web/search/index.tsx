@@ -92,8 +92,24 @@ const index = () => {
                             data={data}
                             itemsPerPage={20}
                         /> :
-                        <div>hm</div>
+                        <div className={`flex place-items-center rounded
+                            place-content-center p-5 border capitalize`}>
+                            <span>no record</span>
+                        </div>
                 }
+
+                <LatestBusinesses
+                    category={'entertainment'}
+                    limit={5}
+                    title={"Entertainment"}
+                    subtitle={"Entertainment based businesses added in the last 7 days"}
+                />
+                <LatestBusinesses
+                    category={'services'}
+                    limit={5}
+                    title={"Services"}
+                    subtitle={"Services based businesses added in the last 7 days"}
+                />
             </div>
 
             <div className={`hidden md:block`}>

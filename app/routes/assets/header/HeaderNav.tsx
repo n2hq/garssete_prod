@@ -33,7 +33,7 @@ export const HeaderNav = () => {
      ${isScroll && 'bg-black/90'}
      `}>
                 <div className={`max-w-[1100px] 
-      mx-auto w-full text-white relative gap-x-3
+      mx-auto w-full text-white relative gap-x-8
         flex place-content-between h-full`}>
                     {/** left */}
                     <div className={`font-bold font-sans 

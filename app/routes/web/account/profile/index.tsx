@@ -11,7 +11,11 @@ import { getCategories, getCities, getCountries, getStates, getUserProfile, getU
 
 
 const index = () => {
-    const { user } = useAuth()
+    const auth = useAuth()
+    if (!auth) { return null }
+    const { user } = auth
+
+
     const [userProfile, setUserProfile] = useState<any | null>(null)
     const [states, setStates] = useState<any | null>(null)
     const [countries, setCountries] = useState<any | null>(null)
@@ -70,6 +74,9 @@ const index = () => {
             setLoading(false)
         }
     }, [data])
+
+
+
 
 
     if (loading) {

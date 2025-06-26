@@ -20,6 +20,7 @@ const index = () => {
 
     const loaderData: any = useLoaderData()
     const auth = useAuth();
+    if (!auth) { return null }
 
     const businessGuid = loaderData.business_guid
     const userGuid = auth?.user?.guid

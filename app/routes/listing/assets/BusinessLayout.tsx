@@ -120,6 +120,8 @@ const BusinessLayout = ({
                                 <div className={`px-[15px] md:px-[0px]`}>
                                     <ShortDescription listing={listing} />
 
+                                    <Description listing={listing} />
+
                                     {listing && <SocialMedia listing={listing} />}
 
                                     {listing && <BusinessFeatures listing={listing} />}
@@ -130,7 +132,7 @@ const BusinessLayout = ({
 
                                     {listing && <Services listing={listing} />}
 
-                                    <Description listing={listing} />
+
 
 
 

@@ -9,6 +9,7 @@ import { MdCancel, MdEmail, MdOutlineAttachEmail, MdPassword, MdWifiPassword } f
 import { RiBriefcase4Line, RiProfileLine } from 'react-icons/ri'
 import { useAuth } from '~/context/AuthContext'
 import { getFirstChar } from '~/lib/lib'
+import { UserProfile, UserProfileProps } from '~/lib/types'
 
 const mainLink = [
     {
@@ -32,7 +33,7 @@ const mainLink = [
         link: '/web/account/reset_password'
     },
     {
-        title: "Deactivate Profile",
+        title: "(De)Activate Profile",
         icon: <BsPersonFill />,
         link: '/web/account/deactivate_profile'
     }
@@ -52,10 +53,12 @@ const moreTools = [
     }
 ]
 
-const LeftNav = () => {
+const LeftNav = ({ userProfile }: UserProfileProps) => {
     const [expanded, setExpanded] = useState(true)
     const location = useLocation();
-    const { user } = useAuth()
+    const auth = useAuth()
+    if (!auth) { return null }
+    const { user } = auth
 
     return (
         <div className={`mt-[0px] mx-[15px] relative`}>
@@ -139,19 +142,33 @@ const LeftNav = () => {
                 moreTools.map((link, index) => {
                     return (
                         <div key={index} className={`mt-[0px]`}>
-                            <Link to={link.link}>
-                                <div className={` flex place-items-center gap-3
+                            {
+                                !userProfile?.active && link.title === `Create Business` ?
+                                    <div className={` flex place-items-center gap-3
+                        hover:bg-gray-200/60 py-1 rounded text-gray-400
+                        ${location.pathname.startsWith(link.link) && 'bg-[#2e374a]/15'}`}>
+                                        <div className={`w-[40px] h-[40px] rounded-full
+                    place-content-center place-items-center border-gray-300 text-[23px]`}>
+                                            {link.icon}
+                                        </div>
+                                        <div className={`text-[16px]`}>
+                                            {link.title}
+                                        </div>
+                                    </div> :
+                                    <Link to={link.link}>
+                                        <div className={` flex place-items-center gap-3
                         hover:bg-gray-200/60 py-1 rounded
                         ${location.pathname.startsWith(link.link) && 'bg-[#2e374a]/15'}`}>
-                                    <div className={`w-[40px] h-[40px] rounded-full
+                                            <div className={`w-[40px] h-[40px] rounded-full
                     place-content-center place-items-center border-gray-300 text-[23px]`}>
-                                        {link.icon}
-                                    </div>
-                                    <div className={`text-[16px]`}>
-                                        {link.title}
-                                    </div>
-                                </div>
-                            </Link>
+                                                {link.icon}
+                                            </div>
+                                            <div className={`text-[16px]`}>
+                                                {link.title}
+                                            </div>
+                                        </div>
+                                    </Link>
+                            }
                         </div>
                     )
                 })

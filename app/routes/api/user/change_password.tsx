@@ -1,8 +1,9 @@
 import { ActionFunctionArgs, LoaderFunction } from "@remix-run/node";
 import { query } from "../DB";
-import { DoResponse, GenerateRandomHash, HashPwd } from "~/lib/lib"
+import { DoResponse, GenerateRandomHash, HashPwd, sendEmail } from "~/lib/lib"
 import { IAddUser, LoginType, ResetPasswordType } from "~/lib/types";
 import { RequestStatus, RequestType } from "~/lib/types";
+import { getChangePasswordEmail } from "~/lib/emails";
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const contentType = request.headers.get("Content-Type")
@@ -56,6 +57,15 @@ export async function action({ request, params }: ActionFunctionArgs) {
                     WHERE
                     user_guid = ?`,
                 [hashedPassword, userGuid])
+
+            const owner = user?.user_guid
+            const emailData = {
+                subject: `Password Change`,
+                to: user?.email,
+                msg: getChangePasswordEmail(user.first_name)
+            }
+
+            await sendEmail(emailData)
 
             const data = {
                 success: true,

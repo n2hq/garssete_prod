@@ -7,6 +7,7 @@ import { getCategories, getCities, getCountries, getStates } from '~/lib/lib'
 
 const index = () => {
     const auth = useAuth()
+    if (!auth) { return null }
     const [user, setUser] = useState<any | null>(null)
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState<any | null>(null)
@@ -48,6 +49,7 @@ const index = () => {
             setLoading(false)
         }
     }, [countries, user])
+
 
 
     if (loading) {

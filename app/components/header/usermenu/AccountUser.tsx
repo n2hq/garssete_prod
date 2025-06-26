@@ -1,10 +1,14 @@
 import { Link } from '@remix-run/react'
 import React, { useEffect, useState } from 'react'
+import { BiImage, BiUser } from 'react-icons/bi'
+import { IoImage } from 'react-icons/io5'
 import { useAuth } from '~/context/AuthContext'
 import { config, getUserProfile, getUserProfileImageData } from '~/lib/lib'
 
 const AccountUser = () => {
-    const { user } = useAuth()
+    const auth = useAuth()
+    if (!auth) { return null }
+    const { user } = auth
     const [name, setName] = useState('')
     const [userProfileImgData, setUserProfileImgData] = useState<any | null>(null)
 
@@ -30,17 +34,21 @@ const AccountUser = () => {
         <Link to={`/web/account/profile`}>
             <div className={`flex hover:bg-gray-100 px-[10px] py-[5px] 
         hover:cursor-pointer gap-2 place-items-center`}>
-                <div className={`bg-black relative h-[30px] w-[30px] rounded-full
-                    overflow-hidden`}>
-                    <img
-                        className={`object-cover w-full h-full`}
-                        src={
-                            userProfileImgData?.image_url ?
-                                config.IMG_BASE_URL + userProfileImgData?.image_url :
-                                'https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif'
-                        }
-                        alt=""
-                    />
+                <div className={` relative h-[30px] w-[30px] rounded-full
+                    overflow-hidden flex place-content-center place-items-center
+                    bg-black/20`}>
+                    {
+                        userProfileImgData?.image_url ?
+                            <img
+                                className={`object-cover w-full h-full`}
+                                src={
+                                    config.IMG_BASE_URL + userProfileImgData?.image_url
+                                }
+                                alt=""
+                            /> :
+                            <BiUser className={`object-cover w-[70%] h-[70%]`} />
+                    }
+
                 </div>
                 <div className={`truncate text-[13px] inline-block
                     text-gray-500`}>

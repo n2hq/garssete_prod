@@ -34,9 +34,17 @@ const EmailForm = ({ loaderData, user }: any) => {
         notification.notify('', 'Updating email...')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
+        if (data["email"] === loaderData.userProfile?.email) {
+            notification.alertCancel('Email is the same.', 'Enter a different email to continue.')
+            setWorking(false)
+            return false;
+        }
+
         const endpoint = "/api/user/change_email_request"
         const url = config.BASE_URL + endpoint
         data["guid"] = loaderData.userProfile?.user_guid
+
+
 
         try {
             const response = await fetch(url, {

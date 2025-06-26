@@ -6,6 +6,7 @@ import { useParams } from '@remix-run/react'
 import BusinessMenu from '../assets/BusinessMenu'
 import AddPhoto from './gallery/AddPhoto'
 import Gallery from './gallery/Gallery'
+import { useAuth } from '~/context/AuthContext'
 
 const index = () => {
     const [businessGuid, setBusinessGuid] = useState('')
@@ -15,6 +16,8 @@ const index = () => {
     const [loading, setLoading] = useState(true)
     const { business_guid, user_guid } = useParams();
     const [businessProfile, setBusinessProfile] = useState<any | null>(null)
+    const auth = useAuth()
+    if (!auth) { return null }
 
     useEffect(() => {
         const getAllData = async (businessGuid: string, userGuid: string) => {
@@ -46,6 +49,8 @@ const index = () => {
             setLoading(false)
         }
     }, [businessGuid, userGuid, gallery, businessProfile])
+
+
 
     if (loading) {
         return (

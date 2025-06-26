@@ -146,7 +146,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem("authTokens")
-        window.location.reload()
+        //window.location.reload()
     }
 
     const resetpw = async (data: any) => {

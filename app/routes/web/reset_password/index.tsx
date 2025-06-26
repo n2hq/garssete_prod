@@ -1,7 +1,7 @@
 import React from 'react'
 import ResponsiveNav from '~/components/header/minimal/ResponsiveNav'
-import SigninBody from './ResetPasswordBody'
-import ResetPasswordBody from './ResetPasswordBody'
+import SigninBody from './assets/ResetPasswordBody'
+import ResetPasswordBody from './assets/ResetPasswordBody'
 
 const index = () => {
     return (

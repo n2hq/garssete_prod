@@ -9,6 +9,7 @@ import AccountLayout from '../../../assets/AccountLayout'
 import ContentLayout from '../../../assets/ContentLayout'
 import BusinessWorkingHours from './assets/BusinessWorkingHours'
 import BusinessMenu from '../assets/BusinessMenu'
+import { useAuth } from '~/context/AuthContext'
 
 const index = () => {
     const [loading, setLoading] = useState(true)
@@ -27,6 +28,8 @@ const index = () => {
     const [businessProfile, setBusinessProfile] = useState<any | null>(null)
 
     const { business_guid, user_guid } = useParams();
+
+    const auth = useAuth()
 
     useEffect(() => {
         const getAllData = async (businessGuid: string, userGuid: string) => {
@@ -71,6 +74,8 @@ const index = () => {
         defaultValues: ({}),
         resolver: zodResolver(SettingsSchema)
     })
+
+
 
     if (loading) {
         return (

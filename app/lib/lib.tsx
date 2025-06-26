@@ -6,12 +6,12 @@ export const config = {
     IMG_BASE_URL: import.meta.env.VITE_IMG_BASE_URL,
     MAIL_SERVICE: import.meta.env.VITE_MAIL_SERVICE,
     SITENAME: import.meta.env.VITE_SITENAME,
-    FORMATTED_SITENAME: `<b>Grüthe</b>`,
+    FORMATTED_SITENAME: import.meta.env.VITE_SITENAME,
 }
 
 export const getSiteLogo = () => {
     return (
-        <span className={`font-normal text-[26px] 
+        <span className={`font-normal 
          `}>
             Garssete
         </span>
@@ -859,6 +859,33 @@ export function toSentenceCase(text: string): string {
         .replace(/([^.!?]*[.!?])(\s+|$)/g, (match) =>
             match.charAt(0).toUpperCase() + match.slice(1)
         );
+}
+
+export const changeEmail = async (guid: string | null, email: string | null): Promise<any | undefined> => {
+
+    const endpoint = `/api/user/change_email?guid=${guid}&email=${email}`
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "PUT",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = {
+            status: true
+        }
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
 }
 
 export const sendEmail = async (data: any) => {

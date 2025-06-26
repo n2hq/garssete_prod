@@ -10,10 +10,18 @@ import { useLocation, useNavigate } from '@remix-run/react'
 import AccountNav from '~/components/header/account/AccountNav'
 import HomeNav from '~/routes/assets/header/HomeNav'
 import { useAuth } from '~/context/AuthContext'
+import { UserProfile } from '~/lib/types'
+import { getUserProfile } from '~/lib/lib'
+import { FiAlertCircle, FiAlertTriangle } from 'react-icons/fi'
 
 const AccountLayout = ({ children }: any) => {
     const [show, setShow] = useState(true)
+    const [userProfile, setUserProfile] = useState<any | null>(null)
+
     const auth = useAuth()
+    if (!auth) { return null }
+
+
     const [loading, setLoading] = useState(true)
 
     const handleShow = () => {
@@ -30,10 +38,30 @@ const AccountLayout = ({ children }: any) => {
 
             setLoading(false)
         } else {
+
             window.location.href = "/web/signin"
         }
     }, [auth?.user])
 
+    useEffect(() => {
+        const getData = async (guid: string) => {
+            const userProfile = await getUserProfile(guid || "")
+            setUserProfile(userProfile)
+        }
+
+        if (auth?.user) {
+            getData(auth?.user.guid)
+        }
+
+    }, [auth?.user])
+
+
+    useEffect(() => {
+        const tokens = localStorage.getItem("authTokens")
+        if (tokens === null || tokens === undefined || tokens === '') {
+            window.location.href = '/web/signin'
+        }
+    }, [])
 
 
     if (loading) {
@@ -81,7 +109,7 @@ const AccountLayout = ({ children }: any) => {
                         ${show ? 'w-[350px] min-w-[350px]' : 'w-0 min-w-0 overflow-hidden'}`}
                 >
                     <div className={`mt-[20px]`}></div>
-                    <LeftNav />
+                    <LeftNav userProfile={userProfile} />
                     <div className={`h-[20px]`}></div>
                 </aside>
 
@@ -90,6 +118,16 @@ const AccountLayout = ({ children }: any) => {
                 <div className={`flex-1 overflow-y-auto bg-gray-100 py-6 px-[15px]`}>
                     <div className={`max-w-[100%] md:max-w-[80%] mx-auto w-full  
                         `}>
+                        {
+                            !userProfile?.active &&
+                            <div className={`mb-4 flex place-items-center gap-2 text-red-600
+                            w-full border pb-2 leading-[1.2em] rounded p-2 bg-white `}>
+                                <FiAlertTriangle className={`min-h-[32px] min-w-[32px]`} />
+                                <div>
+                                    You are currently deactivated. Some operations like creating new business cannot be performed. Activate your profile to continue.
+                                </div>
+                            </div>
+                        }
                         {children}
                     </div>
                 </div>

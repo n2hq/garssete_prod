@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { BiUser } from 'react-icons/bi'
 import { MdEditSquare } from 'react-icons/md'
 import { useNotification } from '~/context/NotificationContext'
 import { headers } from '~/lib/lib'
@@ -11,8 +12,6 @@ const ImgComponent = ({ user, userProfileImageData }: any) => {
 
     if (userProfileImageData?.image_url) {
         imgconst = IMG_BASE_URL + userProfileImageData.image_url
-    } else {
-        imgconst = 'https://trendyblinds.ca/wp-content/uploads/2023/09/3.-3D-WALLPAPER-SKU0015.jpg'
     }
 
 
@@ -89,12 +88,19 @@ const ImgComponent = ({ user, userProfileImageData }: any) => {
         <div className={`w-[50%] mx-auto flex flex-col 
         place-content-center place-items-center`}>
             <div className={`relative bg-blue-100 w-[150px] 
-                h-[150px] z-40 rounded-full overflow-hidden`}>
-                <img
-                    src={imgSrc}
-                    alt="Click to upload"
-                    className=' object-cover w-full h-full z-0 absolute'
-                />
+                h-[150px] z-40 rounded-full overflow-hidden
+                flex place-content-center place-items-center`}>
+
+                {
+                    imgSrc !== "" ?
+                        <img
+                            src={imgSrc}
+                            alt="Click to upload"
+                            className=' object-cover w-full h-full z-0 absolute'
+                        /> :
+                        <BiUser className={`object-cover w-[70%] h-[70%]`} />
+                }
+
                 <input type="file"
                     accept='image/*'
                     ref={fileInputRef}

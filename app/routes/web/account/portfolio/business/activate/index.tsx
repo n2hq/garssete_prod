@@ -6,6 +6,7 @@ import { getBusinessProfile } from '~/lib/lib'
 import AccountLayout from '../../../assets/AccountLayout'
 import ContentLayout from '../../../assets/ContentLayout'
 import BusinessMenu from '../assets/BusinessMenu'
+import { useAuth } from '~/context/AuthContext'
 
 
 const index = () => {
@@ -15,6 +16,8 @@ const index = () => {
     const [userGuid, setUserGuid] = useState('')
     const { business_guid, user_guid } = useParams();
     const [businessProfile, setBusinessProfile] = useState<any | null>(null)
+    const auth = useAuth()
+    if (!auth) { return null }
 
     useEffect(() => {
         const getAllData = async (businessGuid: string, userGuid: string) => {
@@ -48,6 +51,8 @@ const index = () => {
         userGuid,
         businessProfile
     ])
+
+
 
     if (loading) {
         return (

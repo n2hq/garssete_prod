@@ -3,9 +3,7 @@ import { BiChevronLeft, BiChevronRight } from "react-icons/bi"
 import SearchBox from "~/components/content/SearchBox"
 
 const heroimgs = [
-    {
-        img: "https://consultix.radiantthemes.com/demo-six/wp-content/uploads/sites/7/2018/02/slider-1.jpg"
-    },
+
     {
         img: "https://smartmag.theme-sphere.com/rtl/wp-content/uploads/sites/34/2022/11/Depositphotos_410258952_XL-1.jpg"
     },

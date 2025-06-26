@@ -6,7 +6,9 @@ import { getUserProfile } from '~/lib/lib'
 import ResetPasswordForm from './assets/ResetPasswordForm'
 
 const index = () => {
-    const { user } = useAuth()
+    const auth = useAuth()
+    if (!auth) { return null }
+    const { user } = auth
     const [userProfile, setUserProfile] = useState<any | null>(null)
     const [data, setData] = useState<any | null>(null)
     const [loading, setLoading] = useState(true)
@@ -38,6 +40,8 @@ const index = () => {
             setLoading(false)
         }
     }, [data])
+
+
 
 
     if (loading) {

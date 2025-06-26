@@ -73,9 +73,9 @@ export const GalleryProvider = ({ children }: any) => {
 
                     <div
                         onMouseDown={(e) => e.stopPropagation()}
-                        className={`w-[95%] sm:w-[95%] md:w-[80%] max-h-[80%] mx-auto
-                         bg-white rounded-lg shadow-lg shadow-black/50 space-y-6
-                         z-[3100] overflow-hidden`}>
+                        className={`min-w-[95%] w-[95%] sm:w-[95%] md:w-[80%] h-[80%] max-h-[80%] 
+                            mx-auto bg-white rounded-lg shadow-lg shadow-black/50 
+                            space-y-6 z-[3100] overflow-hidden`}>
 
                         <div className={`w-full h-full`}>
                             <div className={`border-b py-3 px-3`}>
@@ -84,24 +84,26 @@ export const GalleryProvider = ({ children }: any) => {
                                     Gallery for {listing && listing?.title}
                                 </div>
                             </div>
-                            <div className={`grid grid-cols-4 md:grid-cols-6 gap-2 
+                            <div className={` 
                                 h-full overflow-y-auto pt-2 px-2 pb-2
-                                bg-gray-800 `}>
-                                {gallery &&
-                                    gallery?.map((image: any, index: number) => {
-                                        return (
-                                            <div
-                                                onClick={() => showCarousel(index)}
-                                                className={`relative hover:cursor-pointer
+                                bg-white `}>
+                                <div className={`grid grid-cols-4 md:grid-cols-6 gap-2`}>
+                                    {gallery &&
+                                        gallery?.map((image: any, index: number) => {
+                                            return (
+                                                <div
+                                                    onClick={() => showCarousel(index)}
+                                                    className={`relative hover:cursor-pointer
                                                  bg-red-200 h-[80px] md:h-[100px] lg:h-[120px] rounded-md
                                                  overflow-hidden`}>
-                                                <img
-                                                    className={`object-cover w-full h-full`}
-                                                    src={IMG_BASE_URL + image.image_url} alt="" />
-                                            </div>
-                                        )
-                                    })
-                                }
+                                                    <img
+                                                        className={`object-cover w-full h-full`}
+                                                        src={IMG_BASE_URL + image.image_url} alt="" />
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

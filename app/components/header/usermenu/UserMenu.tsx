@@ -8,6 +8,8 @@ const UserMenu = ({ theme }: any) => {
     const [open, setOpen] = useState(false)
     const auth = useAuth()
 
+    if (!auth) { return null }
+
     const showMenu = () => setOpen(true)
     const closeMenu = async () => {
         await new Promise((resolve) => setTimeout(resolve, 300));

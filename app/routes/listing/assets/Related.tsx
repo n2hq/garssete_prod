@@ -62,6 +62,7 @@ const Related = ({
     const [ti, setTi] = useState('')
     const [st, setSt] = useState('')
     const [listings, setListings] = useState<any[]>([])
+    const [userId, setUserId] = useState('')
     const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
 
     useEffect(() => {
@@ -86,6 +87,8 @@ const Related = ({
         }
     }, [limit, category])
 
+
+
     return (
         <div className={`px-[15px]`}>
             <div className={`max-w-[1100px] mx-auto w-full`}>
@@ -102,10 +105,16 @@ const Related = ({
                     <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-4`}>
                         {
                             listings?.map((data: any, index: number) => {
+                                let userId = ''
+                                if (data?.username) {
+                                    userId = data?.username
+                                } else {
+                                    userId = data?.gid
+                                }
                                 return (
                                     <div key={index}>
                                         <div>
-                                            <Link to={`/${data.gid}`}>
+                                            <Link to={`/${userId}`}>
                                                 <div className={`relative h-[120px]
                                                     md:h-[180px]`}>
                                                     <img

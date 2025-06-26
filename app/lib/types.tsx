@@ -257,3 +257,12 @@ export type RatingDisplayType = {
 export type RatingDisplayProp = {
     data?: RatingDisplayType
 }
+
+export type ResetPasswordNewType = {
+    password: string
+    password2: string
+}
+
+export type UserProfileProps = {
+    userProfile: UserProfile;
+}

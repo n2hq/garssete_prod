@@ -9,6 +9,7 @@ import RatingBox from './RatingBox'
 const ResultItem = ({ listing }: any) => {
 
     const [imgscr, setImgsrc] = useState('')
+    const [userId, setUserId] = useState('')
 
     useEffect(() => {
         if (listing?.image_url === "" || listing?.image_url === null) {
@@ -16,12 +17,18 @@ const ResultItem = ({ listing }: any) => {
         } else {
             setImgsrc(config.IMG_BASE_URL + listing.image_url)
         }
+
+        if (listing?.username !== "" && listing?.username !== null && listing?.username !== undefined) {
+            setUserId(listing?.username)
+        } else {
+            setUserId(listing?.gid)
+        }
     }, [listing])
 
     return (
 
         <div className={` cursor-pointer mt-4 z-0 pb-4`} onClick={(e) => {
-            window.location.href = `/${listing.gid}`
+            window.location.href = `/${userId}`
         }}>
             <div className={`flex rounded-sm gap-4 z-0`}>
                 <div className={`relative min-w-[100px] w-[100px] h-[100px] border
@@ -38,7 +45,7 @@ const ResultItem = ({ listing }: any) => {
                 w-full md:gap-x-[4px]`}>
                         {/** left */}
                         <div className={`w-full md:w-[60%]`}>
-                            <Link to={`/${listing.gid}`} onClick={(e: any) => e.stopPropagation()}>
+                            <Link to={`/${userId}`} onClick={(e: any) => e.stopPropagation()}>
                                 <div className={`font-bold text-[17px] text-brown-800
                     leading-[1.1em] hover:underline text-[#001e5a]`}>
                                     {listing.title}
@@ -50,7 +57,9 @@ const ResultItem = ({ listing }: any) => {
                                 <div className={`flex place-items-center
                                 gap-1 text-black/60 text-[13px]`}>
                                     <div>{formatNumber(Number(listing?.average_rating))}</div>
-                                    <div>({formatNumber(listing?.total_reviews)} reviews)</div>
+                                    <div>
+                                        ({`${formatNumber(listing?.total_reviews)} review${Number(listing?.total_reviews) > 1 ? 's' : ''}`})
+                                    </div>
                                 </div>
                             </div>
                             <div className={`font-normal text-[13px] leading-[1.2em] mt-[5px]

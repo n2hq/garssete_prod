@@ -30,7 +30,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             ci.name AS city_name,
             b.image_url AS image_url,
             ROUND(AVG(r.rating), 1) AS average_rating,
-            COUNT(r.id) AS total_reviews
+            COUNT(DISTINCT r.id) AS total_reviews
             FROM tbl_dir d
             LEFT JOIN tbl_country co ON d.country_code = co.iso2
             LEFT JOIN tbl_state st ON d.state_code = st.iso2
@@ -49,24 +49,22 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
         if (criteria === "" || criteria === null || criteria === undefined) {
             rawdata = await query(`SELECT
-            d.*,
-            co.name AS country_name,
-            st.name AS state_name,
-            ci.name AS city_name,
-            b.image_url AS image_url,
-            ROUND(AVG(r.rating), 1) AS average_rating,
-            COUNT(r.id) AS total_reviews
-            FROM tbl_dir d
-            LEFT JOIN tbl_country co ON d.country_code = co.iso2
-            LEFT JOIN tbl_state st ON d.state_code = st.iso2
-            LEFT JOIN tbl_city ci ON d.city_id = ci.id
-            LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
-            LEFT JOIN tbl_rating r ON d.gid = r.business_guid
-            GROUP BY 
-            d.gid
-            ORDER BY
-            d.date_created ASC
-            LIMIT 0, 50;`)
+                d.*,
+                co.name AS country_name,
+                st.name AS state_name,
+                ci.name AS city_name,
+                b.image_url AS image_url,
+                ROUND(AVG(r.rating), 1) AS average_rating,
+                COUNT(DISTINCT r.id) AS total_reviews
+                FROM tbl_dir d
+                LEFT JOIN tbl_country co ON d.country_code = co.iso2
+                LEFT JOIN tbl_state st ON d.state_code = st.iso2
+                LEFT JOIN tbl_city ci ON d.city_id = ci.id
+                LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
+                LEFT JOIN tbl_rating r ON d.gid = r.business_guid
+                GROUP BY d.gid
+                ORDER BY d.date_created ASC
+                LIMIT 0, 50;`)
         }
 
         const listings = rawdata.map((listing: any) => {

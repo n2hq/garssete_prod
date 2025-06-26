@@ -35,7 +35,10 @@ const MobileNav = ({
 }: MobileNavProps) => {
     const navOpen = showNav ? 'translate-x-0' : 'translate-x-[-100%]'
     const bgOverlay = showNav ? 'block' : 'hidden'
-    const { user } = useAuth()
+
+    const auth = useAuth()
+    if (!auth) { return null }
+    const { user } = auth
 
     const location = useLocation();
 

@@ -6,7 +6,7 @@ import Logo from '~/components/header/Logo'
 import { WhiteLogo } from '~/components/header/WhiteLogo'
 import { useNotification } from '~/context/NotificationContext'
 import { whiteLogoColor } from '~/lib/css'
-import { headers } from '~/lib/lib'
+import { config, headers } from '~/lib/lib'
 import { IAddUser } from '~/lib/types'
 import SignupSchema from './SignupSchema'
 
@@ -103,7 +103,7 @@ const SignupForm = () => {
 
                         <div className={`text-[15px] text-center
                         mt-[0px] font-light text-black`}>
-                            Get a <b className='font-bold text-black'>Gr<i>u</i>the</b> account
+                            Get a <b className='font-bold text-black'>{config.SITENAME}</b> account
                         </div>
 
                         <section
@@ -208,9 +208,9 @@ const SignupForm = () => {
 
                         <section
                             className={`${signedup ? 'block' : 'hidden'}
-                            text-black. w-[90%] text-[17px] text-center
-                            mt-[50px] mb-[25px] 
-                            bg-yellow-50 text-yellow-900 px-1.5 py-2
+                            text-black. w-[90%] text-[16px] text-center
+                            mt-[50px] mb-[25px] leading-[1.4em]
+                            bg-yellow-50 text-yellow-900 px-1.5 py-4
                             rounded`}
                         >
                             {successMsg}

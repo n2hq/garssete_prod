@@ -95,7 +95,7 @@ export async function action({ request }: ActionFunctionArgs) {
                 msg: getResetPwdEmail(user.first_name, owner, guid)
             }
 
-            sendEmail(emailData)
+            await sendEmail(emailData)
 
             const data = {
                 success: true,

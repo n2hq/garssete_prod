@@ -27,6 +27,12 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/account/portfolio/:business_guid/:user_guid/activate", "routes/web/account/portfolio/business/activate/index.tsx");
         route("/web/account/portfolio/:business_guid/:user_guid/social_media", "routes/web/account/portfolio/business/social_media/index.tsx");
 
+
+        {/** landing */ }
+        route("/web/landing/change_email", "routes/web/landing/change_email/index.tsx")
+        route("/web/landing/reset_password/:guid", "routes/web/landing/reset_password/index.tsx")
+        route("/web/landing/complete_signup/:guid", "routes/web/landing/complete_signup/index.tsx")
+
         {/** user */ }
         route("api/user", "routes/api/user/index.tsx");
         route("api/user/signin", "routes/api/user/signin.tsx");
@@ -34,11 +40,12 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/user/:guid", "routes/api/user/user.tsx");
         route("api/user/change_password/:guid", "routes/api/user/change_password.tsx");
         route("api/user/reset_password_request", "routes/api/user/reset_password_request.tsx");
+        route("api/user/reset_password/:guid", "routes/api/user/reset_password.tsx");
         route("api/user/activate_deactivate/:guid", "routes/api/user/activate_deactivate.tsx");
         route("api/user/user_profile_image/:guid", "routes/api/user/user_profile_image.tsx");
         route("api/user/change_email_request", "routes/api/user/change_email_request.tsx");
-
-
+        route("api/user/change_email", "routes/api/user/change_email.tsx");
+        route("api/user/verify_signup/:user_hash", "routes/api/user/verify_signup.tsx");
 
 
         route("api/listing", "routes/api/listing/index.tsx");

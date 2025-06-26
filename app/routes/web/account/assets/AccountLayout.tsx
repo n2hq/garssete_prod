@@ -17,6 +17,8 @@ import { FiAlertCircle, FiAlertTriangle } from 'react-icons/fi'
 const AccountLayout = ({ children }: any) => {
     const [show, setShow] = useState(true)
     const [userProfile, setUserProfile] = useState<any | null>(null)
+    const [userActive, setUserActive] = useState<any | false>(true)
+    const [inactiveMessage, setInactiveMessage] = useState<any | null>(null)
 
     const auth = useAuth()
     if (!auth) { return null }
@@ -63,6 +65,25 @@ const AccountLayout = ({ children }: any) => {
         }
     }, [])
 
+    useEffect(() => {
+        if (Boolean(userProfile)) {
+            setUserActive(Boolean(userProfile?.active))
+        }
+    }, [userProfile])
+
+    useEffect(() => {
+        if (userActive === false) {
+            const info = <div className={`mb-4 flex place-items-center gap-2 text-red-600
+                            w-full border pb-2 leading-[1.2em] rounded p-2 bg-white `}>
+                <FiAlertTriangle className={`min-h-[32px] min-w-[32px]`} />
+                <div>
+                    You are currently deactivated. Some operations like creating new business cannot be performed. Activate your profile to continue.
+                </div>
+            </div>
+            setInactiveMessage(info)
+        }
+    }, [userActive])
+
 
     if (loading) {
         return (
@@ -71,6 +92,8 @@ const AccountLayout = ({ children }: any) => {
             </div>
         )
     }
+
+
 
     return (
         <div className={`h-screen flex flex-col relative`}>
@@ -119,14 +142,7 @@ const AccountLayout = ({ children }: any) => {
                     <div className={`max-w-[100%] md:max-w-[80%] mx-auto w-full  
                         `}>
                         {
-                            !userProfile?.active &&
-                            <div className={`mb-4 flex place-items-center gap-2 text-red-600
-                            w-full border pb-2 leading-[1.2em] rounded p-2 bg-white `}>
-                                <FiAlertTriangle className={`min-h-[32px] min-w-[32px]`} />
-                                <div>
-                                    You are currently deactivated. Some operations like creating new business cannot be performed. Activate your profile to continue.
-                                </div>
-                            </div>
+                            inactiveMessage
                         }
                         {children}
                     </div>

@@ -5,25 +5,25 @@ import SearchBox from "~/components/content/SearchBox"
 const heroimgs = [
 
     {
-        img: "https://smartmag.theme-sphere.com/rtl/wp-content/uploads/sites/34/2022/11/Depositphotos_410258952_XL-1.jpg"
+        img: "/images/hero/man_with_reading_glasses.jpg"
     },
     {
-        img: "https://smartmag.theme-sphere.com/news/wp-content/uploads/sites/11/2021/02/daniel-korpai-seLBnDRB6_M-unsplash-1-scaled.jpg"
+        img: "/images/hero/mobile_device.jpg"
     },
     {
-        img: "https://demo.tagdiv.com/newspaper_free_news_pro/wp-content/uploads/2023/12/3.jpg"
+        img: "/images/hero/business_man.jpg"
     },
     {
-        img: "https://demo.tagdiv.com/newspaper_free_news_pro/wp-content/uploads/2023/12/2.jpg"
+        img: "/images/hero/realtor_in_dark.jpg"
     },
     {
-        img: "https://smartmag.theme-sphere.com/trendy/wp-content/uploads/sites/5/2017/01/shutterstock_275843885.jpg"
+        img: "/images/hero/lady_eating.jpg"
     },
     {
-        img: "https://smartmag.theme-sphere.com/trendy/wp-content/uploads/sites/5/2017/01/shutterstock_362198879.jpg"
+        img: "/images/hero/bedroom_furniture.jpg"
     },
     {
-        img: "https://smartmag.theme-sphere.com/social-life/wp-content/uploads/sites/17/2021/02/deanna-alys-xQwRvghauaU-unsplash-1.jpg"
+        img: "/images/hero/perfume.jpg"
     }
 ]
 export const HomepageHero = () => {

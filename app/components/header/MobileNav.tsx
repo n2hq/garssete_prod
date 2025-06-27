@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from './Logo'
 import { HiHome, HiPlay } from 'react-icons/hi2'
 import { FaTimes } from 'react-icons/fa'
@@ -14,6 +14,7 @@ import { FcCancel } from 'react-icons/fc'
 import { GiCancel } from 'react-icons/gi'
 import { TiCancelOutline } from 'react-icons/ti'
 import { IoClose } from 'react-icons/io5'
+import { getUserProfile } from '~/lib/lib'
 
 
 const cnLinks = [
@@ -23,7 +24,7 @@ const cnLinks = [
         icon: <HiHome />
     },
     {
-        title: "Page Search",
+        title: "Search",
         link: "/web/search",
         icon: <BiSearch />
     }
@@ -35,6 +36,7 @@ const MobileNav = ({
 }: MobileNavProps) => {
     const navOpen = showNav ? 'translate-x-0' : 'translate-x-[-100%]'
     const bgOverlay = showNav ? 'block' : 'hidden'
+    const [userProfile, setUserProfile] = useState<any | null>(null)
 
     const auth = useAuth()
     if (!auth) { return null }
@@ -59,6 +61,18 @@ const MobileNav = ({
         }
     }, [showNav, closeNav])
 
+    useEffect(() => {
+        const getData = async (guid: string) => {
+            const userProfile = await getUserProfile(guid || "")
+            setUserProfile(userProfile)
+        }
+
+        if (auth?.user) {
+            getData(auth?.user.guid)
+        }
+
+    }, [auth?.user])
+
     return (
         <>
             <div>
@@ -75,7 +89,7 @@ const MobileNav = ({
                     <div className={`bg-white pt-4 pb-4`}>
 
 
-                        <div className={`px-4 md:pl-12 text-[#6001d2]
+                        <div className={`px-4 md:pl-12 
                             flex place-content-between h-[60px] 
                             `}>
                             <div className={`h-full flex justify-center items-center`}>
@@ -127,7 +141,7 @@ const MobileNav = ({
                         <div className={`mt-[20px]`}></div>
 
                         {
-                            user && <LeftNav />
+                            user && <LeftNav userProfile={userProfile} />
                         }
                     </div>
 

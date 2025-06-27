@@ -8,10 +8,8 @@ export const WhiteLogo = () => {
         <Link to={`/`}>
             <div className={` text-[24px]
                 cursor-pointer tracking-tighter relative
-                top-[-1px] ${whiteLogoColor} font-poppins`}>
-                {/* <img src="/images/gruthe4.png" alt=""
-                    className={`h-[22px] `}
-                /> */}
+                top-[-1px] ${whiteLogoColor} font-poppins font-bold`}>
+
                 {getSiteLogo()}
             </div>
         </Link>

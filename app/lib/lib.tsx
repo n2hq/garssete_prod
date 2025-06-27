@@ -11,7 +11,7 @@ export const config = {
 
 export const getSiteLogo = () => {
     return (
-        <span className={`font-normal 
+        <span className={` 
          `}>
             Garssete
         </span>

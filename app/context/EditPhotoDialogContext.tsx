@@ -160,8 +160,8 @@ export function EditPhotoDialogProvider({ children }: any) {
                     <div className={`fixed w-screen h-screen z-[3000] 
                  top-0 left-0 right-0 bottom-0 bg-black/30
                 place-content-center place-items-center`}>
-                        <div className={`relative w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-hidden z-[3100] `}
+                        <div className={`relative max-w-[90%] w-[90%] h-[80%] bg-white 
+                        rounded-[8px] overflow-hidden z-[3100] mx-auto `}
 
                         >
                             <div className={`w-full h-full overflow-y-auto`}>

@@ -14,10 +14,12 @@ const GalleryItem = ({
     const [menu, setMenu] = useState<any>(false)
 
     const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+
     let imgconst = ""
 
     if (item.image_url) {
         imgconst = IMG_BASE_URL + item.image_url
+        //alert(imgconst)
     } else {
         imgconst = 'https://trendyblinds.ca/wp-content/uploads/2023/09/3.-3D-WALLPAPER-SKU0015.jpg'
     }

@@ -2,16 +2,16 @@ import React, { useRef, useState } from 'react'
 import { BiUser } from 'react-icons/bi'
 import { MdEditSquare } from 'react-icons/md'
 import { useNotification } from '~/context/NotificationContext'
-import { headers } from '~/lib/lib'
+import { config, headers } from '~/lib/lib'
 
 const ImgComponent = ({ user, userProfileImageData }: any) => {
-    const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+
     const notification = useNotification()
 
     let imgconst = ""
 
     if (userProfileImageData?.image_url) {
-        imgconst = IMG_BASE_URL + userProfileImageData.image_url
+        imgconst = config.IMG_BASE_URL + userProfileImageData.image_url
     }
 
 
@@ -47,19 +47,17 @@ const ImgComponent = ({ user, userProfileImageData }: any) => {
             formData.append('guid', user.user_guid)
 
 
-            const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+
             const endpoint = "/user_profile_pic_upload"
-            const url = IMG_BASE_URL + endpoint
+            //const url = IMG_BASE_URL + endpoint
+            const url = config.IMG_BASE_URL + endpoint
 
 
             try {
                 const response = await fetch(url, {
                     method: "POST",
-                    headers: {
-                        "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods": "*"
-                    },
-                    body: (formData)
+
+                    body: formData
                 })
 
                 if (!response.ok) {

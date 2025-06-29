@@ -4,8 +4,8 @@
 set -e
 
 echo "🛠  Building project..."
-#npm run build:test
-npm run build:prod
+npm run build:test
+#npm run build:prod
 
 echo "📦  Staging changes..."
 git add .

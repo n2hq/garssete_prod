@@ -60,7 +60,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
             const owner = user?.user_guid
             const emailData = {
-                subject: `Password Change`,
+                subject: `Garssete Password Change`,
                 to: user?.email,
                 msg: getChangePasswordEmail(user.first_name)
             }

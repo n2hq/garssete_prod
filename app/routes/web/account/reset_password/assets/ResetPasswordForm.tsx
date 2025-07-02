@@ -4,10 +4,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import Button from '~/components/content/button/Button'
 import Input from '~/components/content/input/Input'
 import Select from '~/components/content/select/Select'
-import { config, headers } from '~/lib/lib'
+import { config, headers, toSentenceCase } from '~/lib/lib'
 import ResetPasswordSchema from './ResetPasswordSchema'
 import { formWrapperClass, inputWrapperClass } from '~/lib/css'
 import { useNotification } from '~/context/NotificationContext'
+import { useAuth } from '~/context/AuthContext'
 
 
 
@@ -15,6 +16,8 @@ const ResetPasswordForm = ({ loaderData, user }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
+    const auth = useAuth()
+    if (!auth) { return null }
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -34,7 +37,27 @@ const ResetPasswordForm = ({ loaderData, user }: any) => {
         notification.notify('Sending reset password request.')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        const endpoint = "/api/user/reset_password_request"
+        const email = auth?.user?.email
+
+        const datr = {
+            email: email,
+
+        }
+
+
+        const res = await auth.resetpw(datr)
+
+        if (JSON.stringify(res).includes('Error')) {
+            setWorking(false)
+            notification.alertCancel('', toSentenceCase(res))
+        } else {
+            notification.alertCancel('', toSentenceCase(res))
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            setWorking(false)
+            //setRecoverySent(true)
+        }
+
+        /* const endpoint = "/api/user/reset_password_request"
         const url = config.BASE_URL + endpoint
         data["owner"] = loaderData.userProfile.user_guid
 
@@ -59,7 +82,7 @@ const ResetPasswordForm = ({ loaderData, user }: any) => {
             notification.alertCancel('Error handling request', error.message)
         } finally {
             setWorking(false)
-        }
+        } */
     }
 
     const {

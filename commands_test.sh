@@ -13,11 +13,11 @@ git add .
 echo "✅  Committing changes..."
 git commit -m "update commit"
 
-echo "🌿  Renaming branch to main..."
-git branch -M main
+echo "🌿  Renaming branch to test..."
+git branch -M test
 
-echo "🚀  Pushing to origin/main..."
-git push -u origin main
+echo "🚀  Pushing to origin/test..."
+git push -u origin test
 
 echo "🎉  Done!"
 

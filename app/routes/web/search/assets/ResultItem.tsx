@@ -8,12 +8,12 @@ import RatingBox from './RatingBox'
 
 const ResultItem = ({ listing }: any) => {
 
-    const [imgscr, setImgsrc] = useState('')
+    const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
 
     useEffect(() => {
         if (listing?.image_url === "" || listing?.image_url === null) {
-            setImgsrc(`https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif`)
+            //setImgsrc(`/images/placeholder.gif`)
         } else {
             setImgsrc(config.IMG_BASE_URL + listing.image_url)
         }
@@ -32,13 +32,15 @@ const ResultItem = ({ listing }: any) => {
         }}>
             <div className={`flex rounded-sm gap-4 z-0`}>
                 <div className={`relative min-w-[100px] w-[100px] h-[100px] border
-                    bg-white z-0`}>
-                    <img
+                    bg-white z-0 bg-cover bg-center`}
+                    style={{ backgroundImage: `url(${imgscr})` }}
+                >
+                    {/* <img
                         src={imgscr}
                         alt={listing.title}
                         className={`object-cover w-full h-full text-sm
                             rounded z-0`}
-                    />
+                    /> */}
                 </div>
                 <div className=' w-full'>
                     <div className={`md:flex md:place-content-between 

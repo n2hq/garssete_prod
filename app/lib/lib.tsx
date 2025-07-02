@@ -13,7 +13,7 @@ export const getSiteLogo = () => {
     return (
         <span className={` 
          `}>
-            Garssete
+            Garssetes
         </span>
     )
 }

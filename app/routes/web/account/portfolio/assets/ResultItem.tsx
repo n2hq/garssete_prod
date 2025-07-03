@@ -43,17 +43,23 @@ const ResultItem = ({ listing, index }: any) => {
                 w-full md:gap-x-[4px]`}>
                             {/** left */}
                             <div className={`w-full md:w-[60%]`}>
-                                <div className={`font-semibold text-[15px] text-brown-800
+                                <div className={`font-normal text-[15px] text-brown-800
                     leading-[1.1em]  mt-[2px]`}>
                                     {listing.title}
                                 </div>
 
-                                <div className={`font-normal text-[13px] 
+                                <div className={`font-normal text-[11.5px] 
                                     flex place-items-center gap-1 mt-[0px]`}>
 
                                     <div className={`capitalize flex place-items-center gap-1`}>
                                         {listing.category}
                                     </div>
+
+                                </div>
+
+                                <div className={`font-normal text-[11px] 
+                                    flex place-items-center gap-1 mt-[-5px]`}>
+                                    {Boolean(listing.active_status) ? 'Active' : 'Inactive'}
                                 </div>
 
 

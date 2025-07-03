@@ -41,6 +41,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             (d.title RLIKE ?
             OR d.short_description RLIKE ?
             OR d.category RLIKE ?)
+            AND 
+            d.active_status = true
             GROUP BY 
             d.gid
             ORDER BY
@@ -62,6 +64,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 LEFT JOIN tbl_city ci ON d.city_id = ci.id
                 LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
                 LEFT JOIN tbl_rating r ON d.gid = r.business_guid
+                WHERE d.active_status = true
                 GROUP BY d.gid
                 ORDER BY d.date_created ASC
                 LIMIT 0, 50;`)

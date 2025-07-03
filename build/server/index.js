@@ -9506,9 +9506,9 @@ const route27 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
 let cachedPool = global.mysqlPool || null;
 const DATABASE_HOST = "localhost";
 const DATABASE_PORT = "3306";
-const DATABASE_NAME = "comvoinh_dbdirprod";
+const DATABASE_NAME = "comvoinh_dbdirpro";
 const DATABASE_PASS = "Querty123$$$$";
-const DATABASE_USER = "comvoinh_dbdirprod";
+const DATABASE_USER = "comvoinh_dbdirpro";
 if (!cachedPool) {
   cachedPool = global.mysqlPool = mysql.createPool({
     host: DATABASE_HOST,

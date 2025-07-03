@@ -28,6 +28,8 @@ if (!cachedPool) {
 
 export async function getConnection(): Promise<PoolConnection> {
     console.log(DATABASE_HOST)
+    console.log(DATABASE_USER)
+    console.log(DATABASE_PASS)
     console.log('hello')
     return cachedPool!.getConnection()
 }

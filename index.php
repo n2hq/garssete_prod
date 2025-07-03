@@ -1,3 +1,23 @@
+<?php
+$dbuser = "comvoinh_dbdirpro";
+$dbhost = "localhost";
+$dbpass = "Querty123$$$$";
+$dbname = "comvoinh_dbdirpro";
+$dbport = 3306;
+
+$conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("❌ Connection failed: " . $conn->connect_error);
+}
+
+$msg = "✅ ";
+
+echo "✅ Connected successfully!";
+
+
+?>
 <html>
     <head>
         <title>Garssete - Home</title>
@@ -23,7 +43,7 @@
     <body>
     <div class="flex_container">
         <div class="centered_div">
-            Hang on for a minute and refresh...
+            <?php echo $msg; ?>Maintenance1...
         </div>
     </div>
 

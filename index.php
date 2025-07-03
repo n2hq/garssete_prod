@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 
 $msg = "✅ ";
 
-echo "✅ Connected successfully!";
+//echo "✅ Connected successfully!";
 
 
 ?>
@@ -43,7 +43,7 @@ echo "✅ Connected successfully!";
     <body>
     <div class="flex_container">
         <div class="centered_div">
-            <?php echo $msg; ?>Maintenance1...
+            <?php echo $msg; ?>Maintenance...
         </div>
     </div>
 

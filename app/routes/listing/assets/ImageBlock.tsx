@@ -19,6 +19,7 @@ const ImageBlock = ({ images, listing }: any) => {
     const slider = useSliderContext()
     const gallery = useGallery()
 
+    const [placeholder, setPlaceholder] = useState('images/abstract_placeholder.jpg')
     const [shortGallery, setShortGallery] = useState<Image[]>([])
 
     useEffect(() => {
@@ -69,7 +70,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         src={
                             images[0]?.image_url !== undefined && images[0]?.image_url !== null ?
                                 config.IMG_BASE_URL + images[0]?.image_url :
-                                'https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif'
+                                placeholder
                         }
                         alt=""
                         className={`object-cover h-full w-full`}
@@ -84,7 +85,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         src={
                             images[1]?.image_url !== undefined && images[1]?.image_url !== null ?
                                 config.IMG_BASE_URL + images[1]?.image_url :
-                                'https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif'
+                                placeholder
                         }
                         alt=""
                         className={`object-cover h-full w-full`}
@@ -99,7 +100,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         src={
                             images[2]?.image_url !== undefined && images[2]?.image_url !== null ?
                                 config.IMG_BASE_URL + images[2]?.image_url :
-                                'https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif'
+                                placeholder
                         }
                         alt=""
                         className={`object-cover h-full w-full`}

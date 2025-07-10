@@ -9,7 +9,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         const id = params.guid_or_username
         const isFeatured = true
 
-        const rows: any = await query(`SELECT DISTINCT
+        const rows: any = await query(`SELECT 
             d.*,
             co.name AS country_name,
             st.name AS state_name,

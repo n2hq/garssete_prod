@@ -11017,7 +11017,7 @@ const loader$o = async ({ request, params }) => {
   try {
     const id = params.guid_or_username;
     const isFeatured = true;
-    const rows = await query(`SELECT DISTINCT
+    const rows = await query(`SELECT 
             d.*,
             co.name AS country_name,
             st.name AS state_name,

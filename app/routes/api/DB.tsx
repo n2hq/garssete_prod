@@ -37,7 +37,7 @@ export async function getConnection(): Promise<PoolConnection> {
 export async function query<T = any>(sql: string, values: any[] = []): Promise<any> {
     const connection = await getConnection()
     try {
-        const [results] = await connection.execute<any>(sql, values)
+        const [results] = await connection.query<any>(sql, values)
         connection.commit()
         return results
     } finally {

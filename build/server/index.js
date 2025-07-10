@@ -9534,7 +9534,7 @@ async function getConnection() {
 async function query(sql, values = []) {
   const connection = await getConnection();
   try {
-    const [results] = await connection.execute(sql, values);
+    const [results] = await connection.query(sql, values);
     connection.commit();
     return results;
   } finally {

@@ -37,7 +37,7 @@ const SearchPagination = <T,>({
         <div>
             <div className={` divide-y z-0 divide-gray-500`}>
                 {
-                    currentItems.map((item, index) => {
+                    currentItems?.map((item, index) => {
                         return (
                             <div key={index}>
                                 <div className={`md:hidden`}>

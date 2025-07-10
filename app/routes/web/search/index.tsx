@@ -87,7 +87,7 @@ const index = () => {
 
             <div className={`md:hidden px-[12px] mt-8`}>
                 {
-                    data.length > 0 ?
+                    data?.length > 0 ?
                         <SearchPagination
                             data={data}
                             itemsPerPage={20}

@@ -9,8 +9,14 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         const id = params.guid_or_username
         const isFeatured = true
 
-        const rows: any = await query(`SELECT 
-            d.*,
+        const rows: any = await query(`SELECT
+            d.gid,
+            d.title,
+            d.short_description,
+            d.phone,
+            d.address_one,
+            d.address_two,
+            d.website,
             co.name AS country_name,
             st.name AS state_name,
             ci.name AS city_name,
@@ -21,7 +27,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             LEFT JOIN tbl_city ci ON d.city_id = ci.id
             LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
             WHERE 
-            d.featured = ?
+            d.featured = true
             GROUP BY 
             d.gid
             ORDER BY RAND()

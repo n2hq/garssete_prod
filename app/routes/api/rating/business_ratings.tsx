@@ -31,7 +31,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             co.iso2 = st.country_code
             AND 
             st.iso2 = ci.state_code`, [businessGuid]) */
-        const rows: any = await query(`SELECT DISTINCT
+        const rows: any = await query(`SELECT
                 r.rating,
                 r.fullname,
                 r.comment,
@@ -48,8 +48,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 LEFT JOIN tbl_state st ON u.state_code = st.iso2
                 LEFT JOIN tbl_city ci ON u.city_id = ci.id
                 WHERE r.business_guid = ?
-                GROUP BY 
-                r.rating_guid`, [businessGuid])
+                `, [businessGuid])
 
         if ((rows as any[]).length <= 0) { return DoResponse([], 200) }
 

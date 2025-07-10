@@ -11865,7 +11865,7 @@ const route61 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
 const loader$5 = async ({ request, params }) => {
   try {
     const businessGuid = params.business_guid;
-    const rows = await query(`SELECT DISTINCT
+    const rows = await query(`SELECT
                 r.rating,
                 r.fullname,
                 r.comment,
@@ -11882,8 +11882,7 @@ const loader$5 = async ({ request, params }) => {
                 LEFT JOIN tbl_state st ON u.state_code = st.iso2
                 LEFT JOIN tbl_city ci ON u.city_id = ci.id
                 WHERE r.business_guid = ?
-                GROUP BY 
-                r.rating_guid`, [businessGuid]);
+                `, [businessGuid]);
     if (rows.length <= 0) {
       return DoResponse([], 200);
     }

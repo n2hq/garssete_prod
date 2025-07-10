@@ -23,7 +23,7 @@ export const loader: LoaderFunction = async ({ params }) => {
       ) AS avg_ratings ON d.gid = avg_ratings.business_guid
       LEFT JOIN tbl_business_profile_image b ON b.business_guid = d.gid
       WHERE d.category = ?
-      LIMIT 0, ?
+      LIMIT ?
     `, [category, limit]);
 
         if (rows.length === 0) {

@@ -11034,7 +11034,7 @@ const loader$o = async ({ request, params }) => {
             d.gid
             ORDER BY RAND()
             ASC
-            LIMIT 0, 3
+            LIMIT 3
             `, [isFeatured]);
     if (rows.length <= 0) {
       return DoResponse({}, 200);

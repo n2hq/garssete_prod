@@ -11077,35 +11077,32 @@ const route44 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   __proto__: null,
   loader: loader$n
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$m = async ({ request, params }) => {
+const loader$m = async ({ params }) => {
   try {
     const category = params.category;
-    let limit = Number(params.limit);
-    if (isNaN(limit) || limit < 1) {
-      limit = 5;
+    const limitRaw = params.limit;
+    const limit = Math.max(parseInt(limitRaw ?? "5", 10), 1);
+    const rows = await query(`
+      SELECT 
+        d.*, 
+        avg_ratings.avg_rating,
+        b.image_url
+      FROM tbl_dir d
+      LEFT JOIN (
+          SELECT business_guid, AVG(rating) AS avg_rating
+          FROM tbl_rating
+          GROUP BY business_guid
+      ) AS avg_ratings ON d.gid = avg_ratings.business_guid
+      LEFT JOIN tbl_business_profile_image b ON b.business_guid = d.gid
+      WHERE d.category = ?
+      LIMIT 0, ?
+    `, [category, limit]);
+    if (rows.length === 0) {
+      return DoResponse([], 200);
     }
-    const rows = await query(`SELECT 
-            d.*, 
-            avg_ratings.avg_rating,
-            b.image_url
-            FROM tbl_dir d
-            LEFT JOIN (
-                SELECT business_guid, AVG(rating) AS avg_rating
-                FROM tbl_rating
-                GROUP BY business_guid
-            ) AS avg_ratings ON d.gid = avg_ratings.business_guid
-            LEFT JOIN tbl_business_profile_image b ON b.business_guid = d.gid
-            WHERE d.category = ?
-            LIMIT 0, ?`, [category, limit]);
-    if (rows.length <= 0) {
-      return DoResponse({}, 200);
-    }
-    const listings = rows.map((listing) => {
-      return listing;
-    });
-    return DoResponse(listings, 200);
+    return DoResponse(rows, 200);
   } catch (error) {
-    return DoResponse({ "error": error.message }, 500);
+    return DoResponse({ error: error.message }, 500);
   }
 };
 const route45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({

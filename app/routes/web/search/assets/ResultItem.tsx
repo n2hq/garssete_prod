@@ -15,6 +15,7 @@ const ResultItem = ({ listing }: any) => {
         if (listing?.image_url === "" || listing?.image_url === null) {
             //setImgsrc(`/images/placeholder.gif`)
         } else {
+            console.log(config.IMG_BASE_URL)
             setImgsrc(config.IMG_BASE_URL + listing.image_url)
         }
 

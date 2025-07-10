@@ -6,7 +6,7 @@ module.exports = {
             args: "start",
             env: {
                 NODE_ENV: "production",
-                PORT: $APP_PORT
+                PORT: 3393
             },
             watch: false,
             max_memory_restart: "500M"

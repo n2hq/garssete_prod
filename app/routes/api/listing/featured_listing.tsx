@@ -9,7 +9,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         const id = params.guid_or_username
         const isFeatured = true
 
-        const rows: any = await query(`SELECT
+        const rows: any = await query(`SELECT 
             d.gid,
             d.title,
             d.short_description,
@@ -29,7 +29,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             WHERE 
             d.featured = true
             GROUP BY 
-            d.gid
+            d.gid, d.title,  d.short_description, d.phone,
+            d.address_one, d.address_two, d.website
             ORDER BY RAND()
             ASC
             LIMIT 3

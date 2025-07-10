@@ -3,11 +3,11 @@ import { query } from "../DB"
 import { DoResponse } from "~/lib/lib"
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-    const contentType = request.headers.get("Content-Type")
+    /* const contentType = request.headers.get("Content-Type")
 
     if (contentType !== "application/json") {
         return new Response(JSON.stringify({ error: "Invalid content type. Expected JSON." }))
-    }
+    } */
 
     try {
         const category = params.category

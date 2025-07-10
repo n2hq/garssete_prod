@@ -53,12 +53,15 @@ const index = () => {
 
 
 
-                <Related
-                    category={listing?.category}
-                    limit={6}
-                    title={`Related: ${listing?.category}`}
-                    subtitle={"Related based on the same category."}
-                />
+                {
+                    listing &&
+                    <Related
+                        category={listing?.category}
+                        limit={6}
+                        title={`Related: ${listing?.category}`}
+                        subtitle={"Related based on the same category."}
+                    />
+                }
                 <Footer />
             </GalleryProvider>
         </RatingProvider>

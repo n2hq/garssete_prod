@@ -1,7 +1,7 @@
 import { LoaderFunction } from "@remix-run/node"
-import { DoResponse } from "~/lib/Lib"
+import { DoResponse } from "~/lib/lib"
 import { query } from "../DB"
-import { Country, State } from "~/lib/Interfaces"
+import { Country, State } from "~/lib/types"
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const contentType = request.headers.get("Content-Type")

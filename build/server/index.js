@@ -11038,7 +11038,7 @@ const loader$o = async ({ request, params }) => {
             d.featured = true
             GROUP BY 
             d.gid, d.title,  d.short_description, d.phone,
-            d.address_one, d.address_two, d.website
+            d.address_one, d.address_two, d.website, co.name, st.name, ci.name, b.image_url
             ORDER BY RAND()
             ASC
             LIMIT 3

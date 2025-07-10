@@ -23,6 +23,7 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  base: '/',
   server: {//dev server
     host: true, // allow external access
     allowedHosts: ["garssete.gasimg.com"], // <-- your domain here

@@ -11,7 +11,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     try {
         const category = params.category
-        const limit: number = Number(params.limit) || 5
+        ///const limit: number = Number(params.limit) || 5
+
+        let limit = Number(params.limit);
+        if (isNaN(limit) || limit < 1) {
+            limit = 5;
+        }
+
 
 
 

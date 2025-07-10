@@ -11080,7 +11080,10 @@ const route44 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
 const loader$m = async ({ request, params }) => {
   try {
     const category = params.category;
-    const limit = Number(params.limit) || 5;
+    let limit = Number(params.limit);
+    if (isNaN(limit) || limit < 1) {
+      limit = 5;
+    }
     const rows = await query(`SELECT 
             d.*, 
             avg_ratings.avg_rating,

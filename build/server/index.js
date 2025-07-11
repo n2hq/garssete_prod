@@ -11899,18 +11899,23 @@ const loader$5 = async ({ request, params }) => {
   try {
     const businessGuid = params.business_guid;
     const rows = await query(`
-            SELECT 
-            r.fullname,
-            CONCAT(d.address_two, ', ', d.state_code) AS city_state,
-            d.country_code,
+            SELECT
+            r.rating_guid,
             r.rating,
+            r.fullname,
             r.comment,
             r.created_at,
-            r.updated_at
-            FROM tbl_rating r
-            JOIN tbl_dir d ON r.business_guid = d.gid
-            WHERE d.gid = ?
-            ORDER BY r.created_at DESC;
+            r.updated_at,
+            
+            -- Location data pulled safely via scalar subqueries
+            (SELECT name FROM tbl_country co WHERE co.iso2 = u.country_code LIMIT 1) AS country_name,
+            (SELECT name FROM tbl_state st WHERE st.iso2 = u.state_code LIMIT 1) AS state_name,
+            (SELECT name FROM tbl_city ci WHERE ci.id = u.city_id LIMIT 1) AS city_name
+
+        FROM tbl_rating r
+        LEFT JOIN tbl_user u ON r.user_guid = u.user_guid
+        WHERE r.business_guid = ?
+        ORDER BY r.created_at DESC;
                 `, [businessGuid]);
     if (rows.length <= 0) {
       return DoResponse([], 200);

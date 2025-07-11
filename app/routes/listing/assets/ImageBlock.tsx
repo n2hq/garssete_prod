@@ -145,7 +145,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         src={
                             images[5]?.image_url !== undefined && images[5]?.image_url !== null ?
                                 config.IMG_BASE_URL + images[5]?.image_url :
-                                'https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif'
+                                placeholder
                         }
                         alt=""
                         className={`object-cover h-full w-full`}
@@ -159,7 +159,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         src={
                             images[6]?.image_url !== undefined && images[6]?.image_url !== null ?
                                 config.IMG_BASE_URL + images[6]?.image_url :
-                                'https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif'
+                                placeholder
                         }
                         alt=""
                         className={`object-cover h-full w-full`}

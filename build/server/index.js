@@ -11016,7 +11016,7 @@ const loader$p = async ({ request, params }) => {
 
                 WHERE d.active_status = true
                 ORDER BY d.date_created ASC
-                LIMIT 0, 50`);
+                LIMIT 50`);
     }
     const listings = rawdata.map((listing) => {
       delete listing.date_created;

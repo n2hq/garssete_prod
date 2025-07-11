@@ -10982,6 +10982,7 @@ const loader$p = async ({ request, params }) => {
             LIMIT 0, 50`, [criteria, criteria, criteria]);
     if (criteria === "" || criteria === null || criteria === void 0) {
       rawdata = await query(`SELECT
+                d.id,
                 d.gid,
                 d.title,
                 d.short_description,
@@ -11006,7 +11007,7 @@ const loader$p = async ({ request, params }) => {
                 LEFT JOIN tbl_rating r ON d.gid = r.business_guid
                 WHERE d.active_status = true
                 GROUP BY 
-                d.gid, d.title, d.short_description, d.phone, d.category, 
+                d.id, d.gid, d.title, d.short_description, d.phone, d.category, 
                 d.established, d.address_one, d.address_two, d.website, d.date_created,
                 co.name, st.name, ci.name, b.image_url
                 ORDER BY d.date_created ASC

@@ -51,6 +51,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
         if (criteria === "" || criteria === null || criteria === undefined) {
             rawdata = await query(`SELECT
+                d.id,
                 d.gid,
                 d.title,
                 d.short_description,
@@ -75,7 +76,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 LEFT JOIN tbl_rating r ON d.gid = r.business_guid
                 WHERE d.active_status = true
                 GROUP BY 
-                d.gid, d.title, d.short_description, d.phone, d.category, 
+                d.id, d.gid, d.title, d.short_description, d.phone, d.category, 
                 d.established, d.address_one, d.address_two, d.website, d.date_created,
                 co.name, st.name, ci.name, b.image_url
                 ORDER BY d.date_created ASC

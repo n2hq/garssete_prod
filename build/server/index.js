@@ -10991,6 +10991,7 @@ const loader$p = async ({ request, params }) => {
                 d.address_one,
                 d.address_two,
                 d.website,
+                d.date_created,
                 co.name AS country_name,
                 st.name AS state_name,
                 ci.name AS city_name,

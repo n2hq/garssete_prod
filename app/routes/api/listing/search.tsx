@@ -76,7 +76,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 GROUP BY 
                 d.gid, d.title, d.short_description, d.phone, d.category, 
                 d.established, d.address_one, d.address_two, d.website, 
-                st.name, ci.name, b.image_url
+                co.name, st.name, ci.name, b.image_url
                 ORDER BY d.date_created ASC
                 LIMIT 50;`)
         }

@@ -1112,6 +1112,9 @@ const sendEmail = async (data) => {
     return void 0;
   }
 };
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 const AuthContext = createContext(null);
 const SITE_BASE_URL = "https://garssete.gasimg.com";
 function useAuth() {
@@ -10955,8 +10958,12 @@ const loader$p = async ({ request, params }) => {
     let criteria = url.searchParams.get("q");
     if (criteria === "" || criteria === null || criteria === void 0) {
       criteria = "";
+    } else {
+      criteria = escapeRegex(criteria);
     }
-    let sqlc = `SELECT
+    let rawdata = null;
+    if (!criteria || criteria.trim() === "" || criteria === null || criteria === void 0) {
+      rawdata = await query(`SELECT
                 d.id,
                 d.gid,
                 d.title,
@@ -10988,15 +10995,11 @@ const loader$p = async ({ request, params }) => {
                     GROUP BY business_guid
                 ) r ON d.gid = r.business_guid
 
-                WHERE
-                (d.title RLIKE ?
-                OR d.short_description RLIKE ?
-                OR d.category RLIKE ?)
-                AND
-                d.active_status = true
+                WHERE d.active_status = true
                 ORDER BY d.date_created ASC
-                LIMIT 50`;
-    let rawdata = await query(`SELECT
+                LIMIT 50`);
+    } else {
+      rawdata = await query(`SELECT
                 d.id,
                 d.gid,
                 d.title,
@@ -11036,42 +11039,6 @@ const loader$p = async ({ request, params }) => {
                 d.active_status = true
                 ORDER BY d.date_created ASC
                 LIMIT 50`, [criteria, criteria, criteria]);
-    if (criteria === "" || criteria === null || criteria === void 0) {
-      rawdata = await query(`SELECT
-                d.id,
-                d.gid,
-                d.title,
-                d.short_description,
-                d.phone,
-                d.category,
-                d.established,
-                d.address_one,
-                d.address_two,
-                d.website,
-                d.date_created,
-                (SELECT name FROM tbl_country co WHERE co.iso2 = d.country_code LIMIT 1) AS country_name,
-                (SELECT name FROM tbl_state st WHERE st.iso2 = d.state_code LIMIT 1) AS state_name,
-                (SELECT name FROM tbl_city ci WHERE ci.id = d.city_id LIMIT 1) AS city_name,
-                b.image_url,
-                r.average_rating,
-                r.total_reviews
-
-                FROM tbl_dir d
-
-                LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
-
-                LEFT JOIN (
-                    SELECT 
-                        business_guid,
-                        ROUND(AVG(rating), 1) AS average_rating,
-                        COUNT(*) AS total_reviews
-                    FROM tbl_rating
-                    GROUP BY business_guid
-                ) r ON d.gid = r.business_guid
-
-                WHERE d.active_status = true
-                ORDER BY d.date_created ASC
-                LIMIT 50`);
     }
     const listings = rawdata.map((listing) => {
       delete listing.date_created;

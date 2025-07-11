@@ -913,3 +913,9 @@ export const sendEmail = async (data: any) => {
         return undefined
     }
 }
+
+
+export function escapeRegex(str: string): string {
+    // Escape characters with special meaning in regex
+    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}

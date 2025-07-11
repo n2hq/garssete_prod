@@ -10982,7 +10982,15 @@ const loader$p = async ({ request, params }) => {
             LIMIT 0, 50`, [criteria, criteria, criteria]);
     if (criteria === "" || criteria === null || criteria === void 0) {
       rawdata = await query(`SELECT
-                d.*,
+                d.gid,
+                d.title,
+                d.short_description,
+                d.phone,
+                d.category,
+                d.established,
+                d.address_one,
+                d.address_two,
+                d.website,
                 co.name AS country_name,
                 st.name AS state_name,
                 ci.name AS city_name,
@@ -10996,9 +11004,11 @@ const loader$p = async ({ request, params }) => {
                 LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
                 LEFT JOIN tbl_rating r ON d.gid = r.business_guid
                 WHERE d.active_status = true
-                GROUP BY d.gid
+                GROUP BY 
+                d.gid, d.title, d.short_description, d.phone, d.category, 
+                d.established, d.address_one, d.address_two, d.website
                 ORDER BY d.date_created ASC
-                LIMIT 0, 50;`);
+                LIMIT 50;`);
     }
     const listings = rawdata.map((listing) => {
       delete listing.date_created;

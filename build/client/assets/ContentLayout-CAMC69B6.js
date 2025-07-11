@@ -17,11 +17,11 @@ import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{r as t,u as v,L as w}from".
                 rounded-full hover:bg-gray-700 shadow-lg top-[72px]
                 ${l?"left-[295px]":"left-[15px]"}
                 focus:outline-none fixed z-50 top-[60px]
-                transition-all duration-300 ease-in-out
+                transition-all duration-1000 ease-in-out
                 hidden md:block`,children:e.jsx(y,{className:`${l?"rotate-0 transition-all duration-300 ease-in-out":"rotate-90 transition-all duration-300 ease-in-out"}`})}),e.jsxs("div",{className:`flex flex-1 md:mt-[60px] h-full
                 overflow-hidden`,children:[e.jsxs("aside",{className:`bg-gray-50 text-gray-900 
                         h-full overflow-y-auto transition-all z-30
-                        duration-300 ease-in-out border-r shadow-md
+                        duration-1000 ease-in-out border-r shadow-md
                         hidden md:block
                         ${l?"w-[350px] min-w-[350px]":"w-0 min-w-0 overflow-hidden"}`,children:[e.jsx("div",{className:"mt-[20px]"}),e.jsx(S,{userProfile:i}),e.jsx("div",{className:"h-[20px]"})]}),e.jsx("div",{className:"flex-1 overflow-y-auto bg-gray-100 py-6 px-[15px]",children:e.jsxs("div",{className:`max-w-[100%] md:max-w-[80%] mx-auto w-full  
                         `,children:[m,n]})})]})]})},D=({children:n,title:l})=>e.jsxs("div",{children:[e.jsx("div",{className:"font-semibold text-lg",children:l}),e.jsx("div",{className:`mt-4 bg-white px-[15px] pt-4 

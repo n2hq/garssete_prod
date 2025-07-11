@@ -114,7 +114,7 @@ const AccountLayout = ({ children }: any) => {
                 rounded-full hover:bg-gray-700 shadow-lg top-[72px]
                 ${show ? 'left-[295px]' : 'left-[15px]'}
                 focus:outline-none fixed z-50 top-[60px]
-                transition-all duration-300 ease-in-out
+                transition-all duration-1000 ease-in-out
                 hidden md:block`}
             >
                 <CgMenu className={`${show ? 'rotate-0 transition-all duration-300 ease-in-out' : 'rotate-90 transition-all duration-300 ease-in-out'}`} />
@@ -127,7 +127,7 @@ const AccountLayout = ({ children }: any) => {
                 <aside
                     className={`bg-gray-50 text-gray-900 
                         h-full overflow-y-auto transition-all z-30
-                        duration-300 ease-in-out border-r shadow-md
+                        duration-1000 ease-in-out border-r shadow-md
                         hidden md:block
                         ${show ? 'w-[350px] min-w-[350px]' : 'w-0 min-w-0 overflow-hidden'}`}
                 >

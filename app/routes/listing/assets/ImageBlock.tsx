@@ -61,7 +61,7 @@ const ImageBlock = ({ images, listing }: any) => {
         <div className='w-full h-auto mb-[32px] flex flex-col gap-2'>
             <div className={`h-[350px]
                 grid grid-cols-12 gap-[3px]`}>
-                <div className={`col-span-7 bg-red-300
+                <div className={`col-span-7 bg-black
                     row-span-2 rounded overflow-hidden
                     relative cursor-pointer`}
                     onMouseDown={(e) => showCarousel(0)}
@@ -76,7 +76,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         className={`object-cover h-full w-full`}
                     />
                 </div>
-                <div className={`col-span-5 bg-blue-300
+                <div className={`col-span-5 bg-black
                     rounded overflow-hidden
                     relative cursor-pointer`}
                     onMouseDown={(e) => showCarousel(1)}
@@ -91,7 +91,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         className={`object-cover h-full w-full`}
                     />
                 </div>
-                <div className={`col-span-5 bg-green-300
+                <div className={`col-span-5 bg-black
                     rounded overflow-hidden
                     relative cursor-pointer`}
                     onMouseDown={(e) => showCarousel(2)}
@@ -110,7 +110,7 @@ const ImageBlock = ({ images, listing }: any) => {
 
             <div className={`grid grid-cols-5 gap-[5px] mt-[-3px]`}>
                 <div className={`rounded overflow-hidden
-                    relative cursor-pointer h-[100px]`}
+                    relative cursor-pointer h-[100px] bg-black`}
                     onMouseDown={(e) => showCarousel(3)}
                 >
                     <img
@@ -124,7 +124,7 @@ const ImageBlock = ({ images, listing }: any) => {
                     />
                 </div>
                 <div className={`rounded overflow-hidden
-                    relative cursor-pointer h-[100px]`}
+                    relative cursor-pointer h-[100px] bg-black`}
                     onMouseDown={(e) => showCarousel(4)}
                 >
                     <img

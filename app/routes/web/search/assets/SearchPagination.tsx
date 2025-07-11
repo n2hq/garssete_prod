@@ -44,7 +44,9 @@ const SearchPagination = <T,>({
                                     <ResultMobile listing={item} index={index} />
                                 </div>
                                 <div className={`hidden md:block`}>
-                                    <ResultItem listing={item} />
+                                    {
+                                        item && <ResultItem listing={item} />
+                                    }
                                 </div>
                             </div>
                         )

@@ -54,9 +54,9 @@ const ResultMobile = ({ listing, index }: any) => {
                             <RatingBox rating={listing?.average_rating} />
                             <div className={`flex place-items-center
                                 gap-1 text-black/60 text-[13px]`}>
-                                <div>{formatNumber(Number(listing?.average_rating))},</div>
+                                <div>{(Number(listing?.average_rating))},</div>
                                 <div className={`leading-[1.2em]`}>
-                                    ({`${formatNumber(listing?.total_reviews)} review${Number(listing?.total_reviews) > 1 ? 's' : ''}`})
+                                    ({`${(listing?.total_reviews)} review${Number(listing?.total_reviews) > 1 ? 's' : ''}`})
                                 </div>
                             </div>
                         </div>

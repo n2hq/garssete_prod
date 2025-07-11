@@ -7,7 +7,7 @@ import { config, formatNumber } from '~/lib/lib'
 import RatingBox from './RatingBox'
 
 const ResultItem = ({ listing }: any) => {
-
+    console.log(listing)
     const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
 
@@ -59,9 +59,9 @@ const ResultItem = ({ listing }: any) => {
                                 <RatingBox rating={listing?.average_rating} />
                                 <div className={`flex place-items-center
                                 gap-1 text-black/60 text-[13px]`}>
-                                    <div>{formatNumber(Number(listing?.average_rating))}</div>
+                                    <div>{listing?.average_rating}</div>
                                     <div>
-                                        ({`${formatNumber(listing?.total_reviews)} review${Number(listing?.total_reviews) > 1 ? 's' : ''}`})
+                                        ({`${(listing?.total_reviews)} review${Number(listing?.total_reviews) > 1 ? 's' : ''}`})
                                     </div>
                                 </div>
                             </div>

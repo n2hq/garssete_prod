@@ -51,17 +51,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
         if (criteria === "" || criteria === null || criteria === undefined) {
             rawdata = await query(`SELECT
-                d.id,
-                d.gid,
-                d.title,
-                d.short_description,
-                d.phone,
-                d.category,
-                d.established,
-                d.address_one,
-                d.address_two,
-                d.website,
-                d.date_created,
+                d.*,
                 co.name AS country_name,
                 st.name AS state_name,
                 ci.name AS city_name,
@@ -75,12 +65,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
                 LEFT JOIN tbl_rating r ON d.gid = r.business_guid
                 WHERE d.active_status = true
-                GROUP BY 
-                d.id, d.gid, d.title, d.short_description, d.phone, d.category, 
-                d.established, d.address_one, d.address_two, d.website, d.date_created,
-                co.name, st.name, ci.name, b.image_url
+                GROUP BY d.gid
                 ORDER BY d.date_created ASC
-                LIMIT 50;`)
+                LIMIT 0, 50;`)
         }
 
         const listings = rawdata.map((listing: any) => {

@@ -10982,17 +10982,7 @@ const loader$p = async ({ request, params }) => {
             LIMIT 0, 50`, [criteria, criteria, criteria]);
     if (criteria === "" || criteria === null || criteria === void 0) {
       rawdata = await query(`SELECT
-                d.id,
-                d.gid,
-                d.title,
-                d.short_description,
-                d.phone,
-                d.category,
-                d.established,
-                d.address_one,
-                d.address_two,
-                d.website,
-                d.date_created,
+                d.*,
                 co.name AS country_name,
                 st.name AS state_name,
                 ci.name AS city_name,
@@ -11006,12 +10996,9 @@ const loader$p = async ({ request, params }) => {
                 LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
                 LEFT JOIN tbl_rating r ON d.gid = r.business_guid
                 WHERE d.active_status = true
-                GROUP BY 
-                d.id, d.gid, d.title, d.short_description, d.phone, d.category, 
-                d.established, d.address_one, d.address_two, d.website, d.date_created,
-                co.name, st.name, ci.name, b.image_url
+                GROUP BY d.gid
                 ORDER BY d.date_created ASC
-                LIMIT 50;`);
+                LIMIT 0, 50;`);
     }
     const listings = rawdata.map((listing) => {
       delete listing.date_created;
@@ -11038,21 +11025,10 @@ const loader$o = async ({ request, params }) => {
             d.phone,
             d.address_one,
             d.address_two,
-            d.website,
-            co.name AS country_name,
-            st.name AS state_name,
-            ci.name AS city_name,
-            b.image_url AS image_url 
+            d.website
             FROM tbl_dir d
-            LEFT JOIN tbl_country co ON d.country_code = co.iso2
-            LEFT JOIN tbl_state st ON d.state_code = st.iso2
-            LEFT JOIN tbl_city ci ON d.city_id = ci.id
-            LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
             WHERE 
             d.featured = true
-            GROUP BY 
-            d.gid, d.title,  d.short_description, d.phone,
-            d.address_one, d.address_two, d.website, co.name, st.name, ci.name, b.image_url
             ORDER BY RAND()
             ASC
             LIMIT 3

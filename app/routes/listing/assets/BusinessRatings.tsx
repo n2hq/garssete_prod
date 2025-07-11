@@ -63,16 +63,22 @@ const BusinessRatings = ({ listing }: any) => {
                                         <div className={`text-sm font-bold`}>
                                             {review.fullname}
                                         </div>
-                                        <div className={`text-[12px]`}>
-                                            {
-                                                `${review?.city_name}, ${review?.state_name}`
-                                            }
-                                        </div>
-                                        <div className={`text-[12px]`}>
-                                            {
-                                                `${review?.country_name}`
-                                            }
-                                        </div>
+                                        {
+                                            review?.city_name !== null && review?.state_name &&
+                                            <div className={`text-[12px]`}>
+                                                {
+                                                    `${review?.city_name}, ${review?.state_name}`
+                                                }
+                                            </div>
+                                        }
+                                        {
+                                            review?.country_name !== null &&
+                                            <div className={`text-[12px]`}>
+                                                {
+                                                    `${review?.country_name}`
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                                 <div className={`mt-2`}>
@@ -96,7 +102,7 @@ const BusinessRatings = ({ listing }: any) => {
                     })
                 }
             </div>
-        </div>
+        </div >
     )
 }
 

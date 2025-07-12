@@ -82,12 +82,12 @@ const ImageBlock = ({ images, listing }: any) => {
                     rounded overflow-hidden
                     relative cursor-pointer`}
                     onMouseDown={(e) => showCarousel(1)}
+                    style={{ backgroundImage: `url(${placeholder})` }}
                 >
                     <img
                         src={
-                            images[1]?.image_url !== undefined && images[1]?.image_url !== null ?
-                                config.IMG_BASE_URL + images[1]?.image_url :
-                                placeholder
+                            images[1]?.image_url !== undefined && images[1]?.image_url !== null &&
+                            config.IMG_BASE_URL + images[1]?.image_url
                         }
                         alt=""
                         className={`object-cover h-full w-full`}
@@ -97,12 +97,12 @@ const ImageBlock = ({ images, listing }: any) => {
                     rounded overflow-hidden
                     relative cursor-pointer`}
                     onMouseDown={(e) => showCarousel(2)}
+                    style={{ backgroundImage: `url(${placeholder})` }}
                 >
                     <img
                         src={
-                            images[2]?.image_url !== undefined && images[2]?.image_url !== null ?
-                                config.IMG_BASE_URL + images[2]?.image_url :
-                                placeholder
+                            images[2]?.image_url !== undefined && images[2]?.image_url !== null &&
+                            config.IMG_BASE_URL + images[2]?.image_url
                         }
                         alt=""
                         className={`object-cover h-full w-full`}

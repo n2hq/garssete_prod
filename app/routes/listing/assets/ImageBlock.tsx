@@ -61,9 +61,11 @@ const ImageBlock = ({ images, listing }: any) => {
         <div className='w-full h-auto mb-[32px] flex flex-col gap-2'>
             <div className={`h-[350px]
                 grid grid-cols-12 gap-[3px]`}>
-                <div className={`col-span-7 bg-black
+                <div
+                    className={`col-span-7 bg-black
                     row-span-2 rounded overflow-hidden
                     relative cursor-pointer`}
+                    style={{ backgroundImage: `url(${placeholder})` }}
                     onMouseDown={(e) => showCarousel(0)}
                 >
                     <img

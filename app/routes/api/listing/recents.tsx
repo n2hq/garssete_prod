@@ -21,6 +21,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 GROUP BY business_guid
             ) AS avg_ratings ON d.gid = avg_ratings.business_guid
             LEFT JOIN tbl_business_profile_image b ON b.business_guid = d.gid
+            WHERE d.active_status = true
             ORDER BY 
             date_created
             LIMIT 0, 8

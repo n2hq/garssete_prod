@@ -61,11 +61,9 @@ const ImageBlock = ({ images, listing }: any) => {
         <div className='w-full h-auto mb-[32px] flex flex-col gap-2'>
             <div className={`h-[350px]
                 grid grid-cols-12 gap-[3px]`}>
-                <div
-                    className={`col-span-7 bg-black
+                <div className={`col-span-7 bg-black
                     row-span-2 rounded overflow-hidden
                     relative cursor-pointer`}
-                    style={{ backgroundImage: `url(${placeholder})` }}
                     onMouseDown={(e) => showCarousel(0)}
                 >
                     <img
@@ -79,30 +77,30 @@ const ImageBlock = ({ images, listing }: any) => {
                     />
                 </div>
                 <div className={`col-span-5 bg-black
-                    rounded overflow-hidden
+                    rounded overflow-hidden h-full
                     relative cursor-pointer`}
                     onMouseDown={(e) => showCarousel(1)}
-                    style={{ backgroundImage: `url(${placeholder})` }}
                 >
                     <img
                         src={
-                            images[1]?.image_url !== undefined && images[1]?.image_url !== null &&
-                            config.IMG_BASE_URL + images[1]?.image_url
+                            images[1]?.image_url !== undefined && images[1]?.image_url !== null ?
+                                config.IMG_BASE_URL + images[1]?.image_url :
+                                placeholder
                         }
                         alt=""
                         className={`object-cover h-full w-full`}
                     />
                 </div>
                 <div className={`col-span-5 bg-black
-                    rounded overflow-hidden
+                    rounded overflow-hidden h-full
                     relative cursor-pointer`}
                     onMouseDown={(e) => showCarousel(2)}
-                    style={{ backgroundImage: `url(${placeholder})` }}
                 >
                     <img
                         src={
-                            images[2]?.image_url !== undefined && images[2]?.image_url !== null &&
-                            config.IMG_BASE_URL + images[2]?.image_url
+                            images[2]?.image_url !== undefined && images[2]?.image_url !== null ?
+                                config.IMG_BASE_URL + images[2]?.image_url :
+                                placeholder
                         }
                         alt=""
                         className={`object-cover h-full w-full`}

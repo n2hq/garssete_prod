@@ -1,0 +1,10 @@
+import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{r as t}from"./components-DN9bEK-g.js";import{a as m,M as p,U as d}from"./MobileNav-DJH3Rdvg.js";import{W as f}from"./WhiteLogo-Cu01ZesL.js";import{e as u}from"./index-LR3hoYX8.js";const w=({theme:s,openNav:l,navBg:r})=>e.jsx(e.Fragment,{children:e.jsx("div",{className:"flex items-center space-x-0",children:e.jsx(m,{onClick:l,className:`${s==="light"?"text-black":"text-white"} w-8 h-8 cursor-pointer`})})}),E=()=>{const[s,l]=t.useState(1),[r,j]=t.useState(""),[v,a]=t.useState(!1),[n,c]=t.useState(!1),[o,N]=t.useState(!1),i=()=>c(!0),x=()=>c(!1);return t.useEffect(()=>{const h=()=>{window.scrollY>=s&&a(!0),window.scrollY<s&&a(!1),l(window.scrollY)};window.onscroll=()=>h()},[s]),e.jsxs("div",{children:[e.jsx(p,{showNav:n,closeNav:x}),e.jsxs("div",{className:"shadow-md pb-3 z-[1000]",children:[e.jsxs("div",{className:`${s>50?"shadow-md":""} flex place-content-between
+                 fixed w-full mx-auto bg-white
+                 px-[15px] h-[50px] z-[1000]`,children:[e.jsx("div",{className:`h-full w-[150px]   
+                    flex place-items-center `,children:e.jsx(w,{theme:"light",openNav:i,navBg:o})}),e.jsx("div",{className:`h-full flex w-full 
+                    place-content-center place-items-center`,children:e.jsx(f,{})}),e.jsx("div",{className:`h-full w-[150px] 
+                    flex place-items-center place-content-end`,children:e.jsx(d,{theme:"light"})})]}),e.jsx("div",{className:"h-[50px]"}),e.jsx("div",{className:"px-[12px] w-full bg-white",children:e.jsx("form",{action:"/web/search",children:e.jsxs("div",{className:`bg-gray-100 w-full rounded-full h-[38px]
+                    flex place-items-center px-2 gap-2 border
+                    border-gray-400/20`,children:[e.jsx(u,{className:"h-[20px] w-[20px]"}),e.jsx("input",{type:"text",name:"q",placeholder:"Restaurants, Hotels, Cities, Real Estates",className:`bg-transparent w-full outline-none
+                            h-full flex place-content-center text-[14px]
+                            `})]})})})]})]})};export{E as H};

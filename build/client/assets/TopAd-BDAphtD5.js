@@ -1,0 +1,4 @@
+import{j as a}from"./jsx-runtime-0DLF9kdB.js";import{r as l}from"./components-DN9bEK-g.js";const r=[{id:1,url:"/",label:"Home"},{id:2,url:"/web/search",label:"Search"},{id:3,url:"/web/search?q=hotels",label:"Hotels"},{id:4,url:"/web/search?q=travel",label:"Travel"},{id:5,url:"/web/search?q=real estate",label:"Real Estate"},{id:6,url:"/web/search?q=services",label:"Services"}],e={clientId:"ca-pub-xxxxxxxxxxxxxxxx",adslot:"1234567890",format:"auto",responsive:"true"};function o(){return l.useEffect(()=>{},[]),a.jsxs("div",{className:`max-w-[1000px] min-h-[90px] bg-blue-50
+                mx-auto w-full mt-4 flex place-items-center 
+                place-content-center font-light text-[14px]
+                `,children:["Ads by google",a.jsx("ins",{className:"adsbygoogle",style:{display:"block"},"data-ad-client":e.clientId,"data-ad-slot":e.adslot,"data-ad-format":e.format,"data-full-width-responsive":e.responsive})]})}export{o as T,r as n};

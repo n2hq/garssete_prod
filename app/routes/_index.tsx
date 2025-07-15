@@ -7,11 +7,12 @@ import { FrontPageCategories } from './assets/FrontPageCategories'
 import Footer from '~/components/footer/Footer'
 import { MetaFunction } from '@remix-run/react'
 import { HomepageCarousel } from './assets/HomeCarousel'
+import { TopAd } from '~/components/content/ads/TopAd'
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Grüthe | Business Directory, Travel, Real Estate, Hotels & Restaurants!" },
-    { name: "Gr<i>ü</i>the", content: "Welcome to Grüthe!" },
+    { title: "Garssete | Business Directory, Travel, Real Estate, Hotels & Restaurants!" },
+    { name: "Garssete", content: "Welcome to Garssete!" },
   ];
 };
 
@@ -38,6 +39,9 @@ const _index = () => {
         title={`Recent Listings`}
         subtitle={"Recent businesses or entities added by date."}
       />
+
+      <div className={`mt-[48px]`}></div>
+      <TopAd />
 
       <FrontPageCategories />
       <Footer />

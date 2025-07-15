@@ -12,6 +12,7 @@ import { navlinks } from '~/lib/json'
 import SearchHead from '~/components/content/SearchHead'
 import GenericNav from '~/components/header/generic/GenericNav'
 import HomeNav from '~/routes/assets/header/HomeNav'
+import { TopAd } from '~/components/content/ads/TopAd'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
@@ -84,6 +85,8 @@ const index = () => {
                     </div>
                 </div>
             </div>
+
+            <TopAd />
 
             <div className={`md:hidden px-[12px] mt-8`}>
                 {

@@ -11,6 +11,7 @@ import Footer from '~/components/footer/Footer'
 import Related from './assets/Related'
 import GenericNav from '~/components/header/generic/GenericNav'
 import HomeNav from '../assets/header/HomeNav'
+import { TopAd } from '~/components/content/ads/TopAd'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const id = params.id || null
@@ -41,6 +42,8 @@ const index = () => {
                 <div className={`md:hidden`}>
                     <HomeNav />
                 </div>
+
+                <TopAd />
 
                 {
                     listing.gid !== null && listing.gid !== undefined &&

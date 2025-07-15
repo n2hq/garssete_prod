@@ -6,7 +6,7 @@ export function TopAd() {
     const [adsLoaded, setAdsLoaded] = useState(false);
 
     useEffect(() => {
-        if (import.meta.env.VITE_ENV === "prod") {
+        if (import.meta.env.VITE_ENV === "prod" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
             try {
                 // Ensure AdSense script is loaded
                 if (typeof window !== "undefined") {
@@ -21,12 +21,10 @@ export function TopAd() {
         }
     }, []);
 
-    if (import.meta.env.VITE_ENV !== "prod") {
-        return null; // Don't render ads in development
-    }
+
 
     if (import.meta.env.VITE_ENV !== "prod" || !adsLoaded) {
-        return null;
+        return null; // Don't render ads in development
     }
 
     return (

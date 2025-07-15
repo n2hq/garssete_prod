@@ -132,11 +132,11 @@ const BusinessLayout = ({
 
                                     {listing && <Services listing={listing} />}
 
-                                    {/*
 
 
 
-                                    {listing && <BusinessRatings listing={listing} />} */}
+
+                                    {listing && <BusinessRatings listing={listing} />}
                                 </div>
                             </div>
 

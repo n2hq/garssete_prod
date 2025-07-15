@@ -4,7 +4,7 @@ import { adInfo } from "~/lib/json";
 
 export function TopAd() {
     useEffect(() => {
-        if (import.meta.env.VITE_NODE_ENV === "prod") {
+        if (import.meta.env.VITE_ENV === "prod") {
             try {
                 // @ts-ignore
                 (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -14,9 +14,9 @@ export function TopAd() {
         }
     }, []);
 
-    /* if (import.meta.env.VITE_NODE_ENV !== "prod") {
+    if (import.meta.env.VITE_ENV !== "prod") {
         return null; // Don't render ads in development
-    } */
+    }
 
     return (
         <div

@@ -122,7 +122,7 @@ const BusinessLayout = ({
 
                                     <Description listing={listing} />
 
-                                    {listing && <SocialMedia listing={listing} />}
+                                    {/* {listing && <SocialMedia listing={listing} />}
 
                                     {listing && <BusinessFeatures listing={listing} />}
 
@@ -136,7 +136,7 @@ const BusinessLayout = ({
 
 
 
-                                    {listing && <BusinessRatings listing={listing} />}
+                                    {listing && <BusinessRatings listing={listing} />} */}
                                 </div>
                             </div>
 

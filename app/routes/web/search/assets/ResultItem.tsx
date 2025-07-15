@@ -7,7 +7,7 @@ import { config, formatNumber } from '~/lib/lib'
 import RatingBox from './RatingBox'
 
 const ResultItem = ({ listing }: any) => {
-    console.log(listing)
+    //console.log(listing)
     const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
 
@@ -15,7 +15,7 @@ const ResultItem = ({ listing }: any) => {
         if (listing?.image_url === "" || listing?.image_url === null) {
             //setImgsrc(`/images/placeholder.gif`)
         } else {
-            console.log(config.IMG_BASE_URL)
+            //console.log(config.IMG_BASE_URL)
             setImgsrc(config.IMG_BASE_URL + listing.image_url)
         }
 

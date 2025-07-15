@@ -7,22 +7,24 @@ import { config, formatNumber } from '~/lib/lib'
 import RatingBox from './RatingBox'
 
 const ResultItem = ({ listing }: any) => {
-    //console.log(listing)
+    console.log(listing?.image_url)
     const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
 
     useEffect(() => {
-        if (listing?.image_url === "" || listing?.image_url === null) {
-            //setImgsrc(`/images/placeholder.gif`)
-        } else {
-            //console.log(config.IMG_BASE_URL)
-            setImgsrc(config.IMG_BASE_URL + listing.image_url)
-        }
+        if (listing) {
+            if (listing?.image_url === "" || listing?.image_url === null) {
+                //setImgsrc(`/images/placeholder.gif`)
+            } else {
+                //console.log(config.IMG_BASE_URL)
+                setImgsrc(config.IMG_BASE_URL + listing?.image_url)
+            }
 
-        if (listing?.username !== "" && listing?.username !== null && listing?.username !== undefined) {
-            setUserId(listing?.username)
-        } else {
-            setUserId(listing?.gid)
+            if (listing?.username !== "" && listing?.username !== null && listing?.username !== undefined) {
+                setUserId(listing?.username)
+            } else {
+                setUserId(listing?.gid)
+            }
         }
     }, [listing])
 

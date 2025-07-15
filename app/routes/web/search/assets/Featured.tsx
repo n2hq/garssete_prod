@@ -49,7 +49,7 @@ const Featured = () => {
     useEffect(() => {
         const getFeatured = async () => {
             const data = await getFeaturedListing()
-            console.log(data)
+            //console.log(data)
             setFeatured(data)
         }
 

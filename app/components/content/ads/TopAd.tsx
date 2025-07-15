@@ -1,21 +1,32 @@
 // app/components/AdComponent.tsx
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { adInfo } from "~/lib/json";
 
 export function TopAd() {
+    const [adsLoaded, setAdsLoaded] = useState(false);
+
     useEffect(() => {
         if (import.meta.env.VITE_ENV === "prod") {
             try {
-                // @ts-ignore
-                (window.adsbygoogle = window.adsbygoogle || []).push({});
+                // Ensure AdSense script is loaded
+                if (typeof window !== "undefined") {
+                    // @ts-ignore
+                    (window.adsbygoogle = window.adsbygoogle || []).push({});
+                    setAdsLoaded(true);
+                }
             } catch (e) {
                 console.error("AdSense error:", e);
             }
+
         }
     }, []);
 
     if (import.meta.env.VITE_ENV !== "prod") {
         return null; // Don't render ads in development
+    }
+
+    if (import.meta.env.VITE_ENV !== "prod" || !adsLoaded) {
+        return null;
     }
 
     return (

@@ -1,0 +1,4 @@
+import{j as a}from"./jsx-runtime-0DLF9kdB.js";import{r as e}from"./components-DN9bEK-g.js";const c=[{id:1,url:"/",label:"Home"},{id:2,url:"/web/search",label:"Search"},{id:3,url:"/web/search?q=hotels",label:"Hotels"},{id:4,url:"/web/search?q=travel",label:"Travel"},{id:5,url:"/web/search?q=real estate",label:"Real Estate"},{id:6,url:"/web/search?q=services",label:"Services"}],o={adslot:"1234567890"},r={adslot:"1234567890"};function i(){const[s,t]=e.useState(!1);return e.useEffect(()=>{try{typeof window<"u"&&((window.adsbygoogle=window.adsbygoogle||[]).push({}),t(!0))}catch(l){console.error("AdSense error:",l)}},[]),s?a.jsxs("div",{className:`max-w-[1000px] min-h-[90px] bg-blue-50
+                mx-auto w-full mt-4 flex place-items-center 
+                place-content-center font-light text-[14px]
+                `,children:["Ads by google",o.adslot!==r.adslot]}):null}export{i as T,c as n};

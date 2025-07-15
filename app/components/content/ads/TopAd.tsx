@@ -1,6 +1,6 @@
 // app/components/AdComponent.tsx
 import { useEffect, useState } from "react";
-import { adInfo } from "~/lib/json";
+import { adInfo, testAdInfo } from "~/lib/json";
 
 export function TopAd() {
     const [adsLoaded, setAdsLoaded] = useState(false);
@@ -36,14 +36,16 @@ export function TopAd() {
                 place-content-center font-light text-[14px]
                 `}
         >Ads by google
-            <ins
-                className="adsbygoogle"
-                style={{ display: "block" }}
-                data-ad-client={adInfo.clientId}
-                data-ad-slot={adInfo.adslot}
-                data-ad-format={adInfo.format}
-                data-full-width-responsive={adInfo.responsive}
-            ></ins>
+            {
+                adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId &&
+                <ins
+                    className="adsbygoogle"
+                    style={{ display: "block" }}
+                    data-ad-client={adInfo.clientId}
+                    data-ad-slot={adInfo.adslot}
+                    data-ad-format={adInfo.format}
+                    data-full-width-responsive={adInfo.responsive}
+                ></ins>}
         </div>
     );
 }

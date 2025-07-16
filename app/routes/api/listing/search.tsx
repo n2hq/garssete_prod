@@ -32,6 +32,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 d.id,
                 d.gid,
                 d.title,
+                d.username,
                 d.short_description,
                 d.phone,
                 d.category,
@@ -66,6 +67,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         } else {
             rawdata = await query(`SELECT
                 d.id,
+                d.username,
                 d.gid,
                 d.title,
                 d.short_description,

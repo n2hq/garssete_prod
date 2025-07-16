@@ -57,7 +57,7 @@ const BusinessRatings = ({ listing }: any) => {
                                 <div className={`flex place-items-start gap-2`}>
                                     <div className={`w-[30px] h-[30px] rounded-full
                                         bg-black overflow-hidden`}>
-                                        <img src={config.IMG_BASE_URL + review.image_url} alt="" />
+                                        <img src={config.IMG_BASE_URL + review?.image_url} alt="" />
                                     </div>
                                     <div className={`flex flex-col`}>
                                         <div className={`text-sm font-bold`}>

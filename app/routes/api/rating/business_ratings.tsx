@@ -39,6 +39,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             r.comment,
             r.created_at,
             r.updated_at,
+            up.image_url,
             
             -- Location data pulled safely via scalar subqueries
             (SELECT name FROM tbl_country co WHERE co.iso2 = u.country_code LIMIT 1) AS country_name,
@@ -47,6 +48,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
         FROM tbl_rating r
         LEFT JOIN tbl_user u ON r.user_guid = u.user_guid
+        LEFT JOIN tbl_user_profile_image up ON up.user_guid = u.user_guid
         WHERE r.business_guid = ?
         ORDER BY r.created_at DESC;
                 `, [businessGuid])

@@ -146,8 +146,8 @@ const BusinessLayout = ({
 
 
                             <div className={` sticky top-[100px]`}>
-                                {/* {ratingDisplayData && <RatingDisplay data={ratingDisplayData} />}
-                                {listing && <Address businessProfile={listing} />} */}
+                                {ratingDisplayData && <RatingDisplay data={ratingDisplayData} />}
+                                {listing && <Address businessProfile={listing} />}
                                 {/* <Review /> */}
                             </div>
                         </div>

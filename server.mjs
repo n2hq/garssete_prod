@@ -46,7 +46,7 @@ app.use(morgan("tiny"));
 // handle SSR requests
 app.all("*", remixHandler);
 
-const port = process.env.PORT || PORT;
+const port = process.env.VITE_PORT || PORT;
 app.listen(port, () =>
   console.log(`Express server listening at http://localhost:${port}`)
 );

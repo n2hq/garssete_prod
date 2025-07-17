@@ -8,6 +8,7 @@
     "build:prod": "env-cmd -f ./env/.env.prod remix vite:build",
     "dev": "env-cmd -f ./env/.env.dev node ./server.mjs",
     "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "test": "cross-env NODE_ENV=test node ./server.mjs",
     "start": "cross-env NODE_ENV=production node ./server.mjs",
     "typecheck": "tsc"
   },

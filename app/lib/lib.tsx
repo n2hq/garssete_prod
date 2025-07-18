@@ -621,8 +621,8 @@ export const getGallery = async (businessGuid: string | null, userGuid: string |
 
     const endpoint = `/api/listing/gallery/${businessGuid}/${userGuid}`
     const url = config.BASE_URL + endpoint
-    console.log(url)
-    console.log("|||")
+    //console.log(url)
+    //console.log("|||")
 
     try {
         const response = await fetch(url, {

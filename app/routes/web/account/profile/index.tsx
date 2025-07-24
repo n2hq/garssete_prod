@@ -6,6 +6,7 @@ import ProfileForm from './assets/ProfileForm'
 import { LoaderFunction } from '@remix-run/node'
 import { useAuth } from '~/context/AuthContext'
 import { getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData } from '~/lib/lib'
+import CardTitle from '../assets/CardTitle'
 
 
 
@@ -95,9 +96,13 @@ const index = () => {
                 {
                     userProfile && data && user && !loading ?
                         <div>
-                            <div className={`font-semibold mb-2 text-md`}>
+
+
+                            <CardTitle
+                                baseUrl='/web/account/profile'
+                                guid={''}>
                                 {userProfile?.first_name} {userProfile?.lastname}
-                            </div>
+                            </CardTitle>
 
                             <ProfileForm
                                 loaderData={data}

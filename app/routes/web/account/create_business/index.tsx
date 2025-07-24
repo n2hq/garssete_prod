@@ -4,6 +4,7 @@ import AccountLayout from '../assets/AccountLayout'
 import { useAuth } from '~/context/AuthContext'
 import CreatePageForm from './assets/CreatePageForm'
 import { getCategories, getCities, getCountries, getStates } from '~/lib/lib'
+import CardTitle from '../assets/CardTitle'
 
 const index = () => {
     const auth = useAuth()
@@ -63,12 +64,14 @@ const index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={'Create Page'}>
+            <ContentLayout title={'Create Business'}>
                 {
                     data && <div>
-                        <div className={`font-semibold mb-2 text-md`}>
-                            Create a page
-                        </div>
+                        <CardTitle
+                            baseUrl='/web/account/profile'
+                            guid={''}>
+                            Go to Profile
+                        </CardTitle>
                         <CreatePageForm data={data} user={user} />
                     </div>
                 }

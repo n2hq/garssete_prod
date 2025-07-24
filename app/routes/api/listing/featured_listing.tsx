@@ -16,7 +16,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             d.phone,
             d.address_one,
             d.address_two,
-            d.website
+            d.website,
+            d.username
             FROM tbl_dir d
             WHERE 
             d.featured = true

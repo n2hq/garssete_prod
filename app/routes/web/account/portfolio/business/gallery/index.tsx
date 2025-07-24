@@ -7,6 +7,7 @@ import BusinessMenu from '../assets/BusinessMenu'
 import AddPhoto from './gallery/AddPhoto'
 import Gallery from './gallery/Gallery'
 import { useAuth } from '~/context/AuthContext'
+import CardTitle from '../../../assets/CardTitle'
 
 const index = () => {
     const [businessGuid, setBusinessGuid] = useState('')
@@ -62,9 +63,12 @@ const index = () => {
     return (
         <AccountLayout>
             <ContentLayout title={'Gallery Settings'}>
-                <div className={`font-semibold mb-2 text-md`}>
+                <CardTitle
+                    baseUrl='/web/account/portfolio/'
+                    guid={businessGuid}>
                     {data?.businessProfile?.title}
-                </div>
+                </CardTitle>
+
 
                 {
                     businessGuid && userGuid &&

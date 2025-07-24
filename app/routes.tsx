@@ -4,6 +4,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
     return defineRoutes((route) => {
         route("/", "routes/_index.tsx");
         route("/:id", "routes/listing/index.tsx");
+        route("/landing", "routes/landing/index.tsx");
         route("/web/search", "routes/web/search/index.tsx");
         route("/web/signin", "routes/web/signin/index.tsx");
         route("/web/signup", "routes/web/signup/index.tsx");
@@ -14,6 +15,9 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/account/change_password", "routes/web/account/change_password/index.tsx");
         route("/web/account/reset_password", "routes/web/account/reset_password/index.tsx");
         route("/web/account/deactivate_profile", "routes/web/account/deactivate_profile/index.tsx");
+        route("/web/terms", "routes/web/terms/index.tsx");
+        route("/web/privacy", "routes/web/privacy/index.tsx");
+        route("/web/contact", "routes/web/contact/index.tsx");
 
         {/** account portfolio */ }
         route("/web/account/portfolio", "routes/web/account/portfolio/index.tsx");

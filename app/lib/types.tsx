@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export type NavProps = {
     openNav: () => void
     navBg: boolean
@@ -265,4 +267,10 @@ export type ResetPasswordNewType = {
 
 export type UserProfileProps = {
     userProfile: UserProfile;
+}
+
+export interface CardTitleProp {
+    children: ReactNode,
+    guid: string,
+    baseUrl: string
 }

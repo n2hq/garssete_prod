@@ -11,8 +11,9 @@ import AccountNav from '~/components/header/account/AccountNav'
 import HomeNav from '~/routes/assets/header/HomeNav'
 import { useAuth } from '~/context/AuthContext'
 import { UserProfile } from '~/lib/types'
-import { getUserProfile } from '~/lib/lib'
+import { appConfig, getUserProfile } from '~/lib/lib'
 import { FiAlertCircle, FiAlertTriangle } from 'react-icons/fi'
+import SearchNavbar from '~/components/header/new/SearchNavbar'
 
 const AccountLayout = ({ children }: any) => {
     const [show, setShow] = useState(true)
@@ -101,27 +102,33 @@ const AccountLayout = ({ children }: any) => {
 
             {/** top navbar */}
 
+            <SearchNavbar />
+            <div className={`h-[${appConfig.NAVBAR_HEIGHT}px]`}></div>
+
             <div className={`md:hidden`}>
+
                 <HomeNav />
             </div>
-            <div className='hidden md:block'>
+
+
+            {/* <div className='hidden md:block'>
                 <AccountNav />
-            </div>
+            </div> */}
 
             <button
                 onClick={handleShow}
                 className={`text-xl text-white bg-blue-700 p-2 
                 rounded-full hover:bg-gray-700 shadow-lg top-[72px]
                 ${show ? 'left-[295px]' : 'left-[15px]'}
-                focus:outline-none fixed z-50 top-[60px]
+                focus:outline-none fixed z-50 top-[60px] 
                 transition-all duration-1000 ease-in-out
                 hidden md:block`}
             >
-                <CgMenu className={`${show ? 'rotate-0 transition-all duration-300 ease-in-out' : 'rotate-90 transition-all duration-300 ease-in-out'}`} />
+                <CgMenu className={`${show ? 'rotate-0 transition-all duration-1000 ease-in-out' : 'rotate-90 transition-all duration-1000 ease-in-out'}`} />
             </button>
 
             {/** layout */}
-            <div className={`flex flex-1 md:mt-[60px] h-full
+            <div className={`flex flex-1 md:mt-[${appConfig.NAVBAR_HEIGHT}px] h-full
                 overflow-hidden`}>
                 {/** sidebar */}
                 <aside

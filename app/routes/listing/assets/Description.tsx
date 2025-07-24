@@ -15,7 +15,7 @@ const Description = ({ listing }: any) => {
     }, [listing])
     return (
         <div className='mt-12'>
-            <div className={`font-bold text-lg border-b`}>
+            <div className={`font-bold text-xl border-b`}>
                 About this business
             </div>
             <div className={`flex place-items-start place-content-start

@@ -1,5 +1,6 @@
 import GenericNav from "~/components/header/generic/GenericNav";
 import ResponsiveNav from "~/components/header/lite/ResponsiveNav"
+import SearchNavbar from "~/components/header/new/SearchNavbar";
 
 export function loader() {
     //throw new Response("Not Found", { status: 404 });
@@ -9,7 +10,7 @@ export function loader() {
 export default function NotFound() {
     return (
         <div>
-            <GenericNav />
+            <SearchNavbar />
             <div className={`min-h-screen flex items-center justify-center 
         text-center px-4 text-black fixed top-0 w-full`}>
                 <div className={`flex place-content-center place-items-center gap-3

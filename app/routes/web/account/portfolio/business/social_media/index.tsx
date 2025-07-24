@@ -5,6 +5,7 @@ import AccountLayout from '../../../assets/AccountLayout'
 import ContentLayout from '../../../assets/ContentLayout'
 import BusinessMenu from '../assets/BusinessMenu'
 import SocialMedia from './assets/SocialMedia'
+import CardTitle from '../../../assets/CardTitle'
 
 const index = () => {
     const [businessGuid, setBusinessGuid] = useState('')
@@ -67,9 +68,12 @@ const index = () => {
     return (
         <AccountLayout>
             <ContentLayout title={'Social Media'}>
-                <div className={`font-semibold mb-2 text-md`}>
+                <CardTitle
+                    baseUrl='/web/account/portfolio/'
+                    guid={businessGuid}
+                >
                     {data?.businessProfile?.title}
-                </div>
+                </CardTitle>
 
                 {
                     businessGuid && userGuid &&

@@ -13,6 +13,11 @@ import SearchHead from '~/components/content/SearchHead'
 import GenericNav from '~/components/header/generic/GenericNav'
 import HomeNav from '~/routes/assets/header/HomeNav'
 import { TopAd } from '~/components/content/ads/TopAd'
+import SearchNavbar from '~/components/header/new/SearchNavbar'
+import Layout from '~/routes/asset/NormalLayout'
+import VerticalHeight from '~/routes/asset/VerticalHeight'
+import CallToActionSection from '~/routes/landing/assets/CallToActionSection'
+import FooterSection from '~/routes/landing/assets/FooterSection'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
@@ -50,16 +55,11 @@ const index = () => {
 
 
     return (
-        <div>
-            {/* <ResponsiveNav theme='light' />
-            <SearchHead query={query} /> */}
-            <div className={`hidden md:block`}>
-                <GenericNav />
-            </div>
+        <Layout>
+           
             <div className={`md:hidden`}>
-                <HomeNav />
+                    <HomeNav />
             </div>
-
 
             <div className={`px-[15px] border-b`}>
                 <div className={`max-w-[1100px] mx-auto w-full`}>
@@ -78,7 +78,7 @@ const index = () => {
                              pt-0 pb-2 md:pt-3 md:pb-3 `}>
                             {
                                 navlinks.map((link, index) => {
-                                    return (<Link to={`${link.url}`} key={index} className={`text-[14px]`}>{link.label}</Link>)
+                                    return (<Link to={`${link.url}`} key={index} className={``}>{link.label}</Link>)
                                 })
                             }
                         </div>
@@ -86,6 +86,8 @@ const index = () => {
                 </div>
             </div>
 
+            
+            
             <TopAd />
 
             <div className={`md:hidden px-[12px] mt-8`}>
@@ -144,8 +146,10 @@ const index = () => {
                 </ResultLayout>
             </div>
 
-            <Footer />
-        </div>
+            <VerticalHeight />
+            <CallToActionSection />
+            <FooterSection />
+        </Layout>
     )
 }
 

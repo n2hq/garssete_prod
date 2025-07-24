@@ -115,7 +115,7 @@ const LeftNav = ({ userProfile }: UserProfileProps) => {
                     place-content-center place-items-center border-gray-300 text-[23px]`}>
                                         {link.icon}
                                     </div>
-                                    <div className={`text-[16px]`}>
+                                    <div className={`text-[13px]`}>
                                         {link.title}
                                     </div>
                                 </div>
@@ -151,7 +151,7 @@ const LeftNav = ({ userProfile }: UserProfileProps) => {
                     place-content-center place-items-center border-gray-300 text-[23px]`}>
                                             {link.icon}
                                         </div>
-                                        <div className={`text-[16px]`}>
+                                        <div className={`text-[13px]`}>
                                             {link.title}
                                         </div>
                                     </div> :
@@ -163,7 +163,7 @@ const LeftNav = ({ userProfile }: UserProfileProps) => {
                     place-content-center place-items-center border-gray-300 text-[23px]`}>
                                                 {link.icon}
                                             </div>
-                                            <div className={`text-[16px]`}>
+                                            <div className={`text-[13px]`}>
                                                 {link.title}
                                             </div>
                                         </div>

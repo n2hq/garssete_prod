@@ -7,6 +7,8 @@ import { useLoaderData } from '@remix-run/react'
 import { getBusinessProfile, getBusinessProfileImageData, getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData } from '~/lib/lib'
 import BusinessProfileForm from './assets/BusinessProfileForm'
 import BusinessMenu from './assets/BusinessMenu'
+import CardTitle from '../../assets/CardTitle'
+
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const business_guid = params.business_guid
@@ -116,9 +118,11 @@ const index = () => {
             <ContentLayout title={'Update Business'}>
                 {
                     data && <div>
-                        <div className={`font-semibold mb-2 text-md`}>
+                        <CardTitle
+                            baseUrl='/web/account/portfolio/'
+                            guid={businessGuid}>
                             {data?.businessProfile?.title}
-                        </div>
+                        </CardTitle>
 
                         {
                             businessGuid && userGuid &&

@@ -9,6 +9,10 @@ export const config = {
     FORMATTED_SITENAME: import.meta.env.VITE_SITENAME,
 }
 
+export const appConfig = {
+    NAVBAR_HEIGHT: 50
+}
+
 export const getSiteLogo = () => {
     return (
         <span className={` 

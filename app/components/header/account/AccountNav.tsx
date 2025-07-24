@@ -33,7 +33,7 @@ const AccountNav = () => {
     return (
         <div>
             <div className={`px-[15px] z-[1000] fixed w-full
-        bg-white shadow-md`}>
+        bg-white shadow-lg`}>
                 <div className={`w-full mx-auto`}>
                     <div className={`w-full flex place-content-between
                     h-[60px] gap-x-5`}>

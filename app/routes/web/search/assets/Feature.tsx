@@ -5,7 +5,7 @@ const Feature = ({ feature }: any) => {
 
     return (
         <div id={feature.gid} className={`pb-4 pt-3`}>
-            <Link to={`/${feature.gid}`}>
+            <Link to={`/${feature?.username ? feature?.username : feature?.gid}`}>
                 <div className={`text-[15px] tracking-normal 
                 text-blue-700 font-normal`}>
                     {feature.title}
@@ -15,7 +15,7 @@ const Feature = ({ feature }: any) => {
                 tracking-tight mt-[2px]`}>
                 {feature.phone}
             </div>
-            <div className={`font-normal text-[13px] 
+            <div className={`font-normal  
                 tracking-normal mt-[2px] leading-[1.3em]
                 text-black`}>
                 {feature.short_description.substring(0, 80)}
@@ -25,7 +25,7 @@ const Feature = ({ feature }: any) => {
                 text-brown-700`}>
                 {feature.address_one}
             </div>
-            <div className={`text-[13px] font-normal 
+            <div className={` font-semibold  
                 tracking-tight mt-[8px] text-blue-800`}>
                 <Link to={feature.website ? feature.website : `#${feature.gid}`}>
                     Website

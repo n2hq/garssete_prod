@@ -7,19 +7,29 @@ import { RiDoubleQuotesL } from 'react-icons/ri'
 import { Link } from '@remix-run/react'
 
 const ResultMobile = ({ listing, index }: any) => {
-    const [imgscr, setImgsrc] = useState('')
+    const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
+    const [userId, setUserId] = useState('')
 
     useEffect(() => {
-        if (listing?.image_url === "" || listing?.image_url === null) {
-            setImgsrc(`https://accuvice.ng/wp-content/uploads/2016/06/placeholder.gif`)
-        } else {
-            setImgsrc(config.IMG_BASE_URL + listing.image_url)
-        }
-    }, [listing])
+            if (listing) {
+                if (listing?.image_url === "" || listing?.image_url === null) {
+                    //setImgsrc(`/images/placeholder.gif`)
+                } else {
+                    //console.log(config.IMG_BASE_URL)
+                    setImgsrc(config.IMG_BASE_URL + listing?.image_url)
+                }
+    
+                if (listing?.username !== "" && listing?.username !== null && listing?.username !== undefined) {
+                    setUserId(listing?.username)
+                } else {
+                    setUserId(listing?.gid)
+                }
+            }
+        }, [listing])
     return (
-        <Link to={`/${listing.gid}`}
-            className={`cursor-pointer`}
-        >
+        <div className={` cursor-pointer mt-6 z-0 pb-6`} onClick={(e) => {
+            window.location.href = `/${userId}`
+        }}>
             <div className={`w-full h-fit my-4`}>
                 <div className={`flex gap-2`}>
                     {/** left */}
@@ -96,7 +106,7 @@ const ResultMobile = ({ listing, index }: any) => {
                     </div>
                 </div>
             </div>
-        </Link>
+        </div>
     )
 }
 

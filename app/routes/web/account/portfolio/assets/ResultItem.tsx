@@ -42,23 +42,21 @@ const ResultItem = ({ listing, index }: any) => {
                         <div className={`md:flex md:place-content-between 
                 w-full md:gap-x-[4px]`}>
                             {/** left */}
-                            <div className={`w-full md:w-[60%]`}>
-                                <div className={`font-normal text-[15px] text-brown-800
-                    leading-[1.1em]  mt-[2px]`}>
+                            <div className={`w-full md:w-[60%] -space-y-1`}>
+                                <div className={`font-normal text-[14px] text-brown-800 `}>
                                     {listing.title}
                                 </div>
 
-                                <div className={`font-normal text-[11.5px] 
-                                    flex place-items-center gap-1 mt-[0px]`}>
+                                <div className={`font-normal text-[11.5px] flex place-items-center gap-1`}>
 
-                                    <div className={`capitalize flex place-items-center gap-1`}>
+                                    <div className={`capitalize flex place-items-center `}>
                                         {listing.category}
                                     </div>
 
                                 </div>
 
                                 <div className={`font-normal text-[11px] 
-                                    flex place-items-center gap-1 mt-[-5px]`}>
+                                    flex place-items-center gap-1 `}>
                                     {Boolean(listing.active_status) ? 'Active' : 'Inactive'}
                                 </div>
 
@@ -68,9 +66,7 @@ const ResultItem = ({ listing, index }: any) => {
                             {/** right */}
                             <div className={`w-full lg:w-[40%] hidden 
                                 sm:block`}>
-                                <div className={`flex flex-col 
-                    place-items-end place-content-end
-                        font-bold text-[14px] tracking-tighter`}>
+                                <div className={`flex flex-col place-items-end place-content-end font-normal text-black tracking-tighter`}>
                                     {listing.phone}
                                 </div>
                                 <div className={`flex flex-col text-end text-[12px]

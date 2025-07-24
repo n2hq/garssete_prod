@@ -4,6 +4,7 @@ import ContentLayout from '../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
 import { getUserProfile } from '~/lib/lib'
 import ResetPasswordForm from './assets/ResetPasswordForm'
+import CardTitle from '../assets/CardTitle'
 
 const index = () => {
     const auth = useAuth()
@@ -57,9 +58,13 @@ const index = () => {
             <ContentLayout title={'Reset Password'}>
                 {userProfile === null ? 'Loading...' : ''}
 
-                <div className={`font-semibold mb-2 text-md`}>
+                <CardTitle
+                    baseUrl='/web/account/profile'
+                    guid={''}>
                     {userProfile?.email}
-                </div>
+                </CardTitle>
+
+
 
                 {
                     data && <ResetPasswordForm loaderData={data} user={user} />

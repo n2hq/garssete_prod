@@ -30,10 +30,11 @@ const ResultItem = ({ listing }: any) => {
 
     return (
 
-        <div className={` cursor-pointer mt-4 z-0 pb-4`} onClick={(e) => {
+        <div className={` cursor-pointer mt-6 z-0 pb-6`} onClick={(e) => {
             window.location.href = `/${userId}`
         }}>
             <div className={`flex rounded-sm gap-4 z-0`}>
+                {/** left */}
                 <div className={`relative min-w-[100px] w-[100px] h-[100px] border
                     bg-white z-0 bg-cover bg-center`}
                     style={{ backgroundImage: `url(${imgscr})` }}
@@ -45,6 +46,8 @@ const ResultItem = ({ listing }: any) => {
                             rounded z-0`}
                     /> */}
                 </div>
+
+                {/** right */}
                 <div className=' w-full'>
                     <div className={`md:flex md:place-content-between 
                 w-full md:gap-x-[4px]`}>

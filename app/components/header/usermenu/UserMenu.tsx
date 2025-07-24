@@ -41,20 +41,15 @@ const UserMenu = ({ theme }: any) => {
                         onClick={(e) => showMenu()}
                         onBlur={(e) => closeMenu()}
 
-                        className={`w-[25px] h-[25px] bg-gray-400 hover:bg-gray-300 rounded-full text-white
+                        className={`w-[30px] h-[30px] bg-gray-400 hover:bg-gray-300 rounded-full text-white
                 flex place-items-center place-content-center text-[13px]
                 relative cursor-pointer`}>
-                        <BiUser className={`object-cover w-[70%] h-[70%]`} />
+                        <BiUser className={`object-cover w-[80%] h-[80%]`} />
                     </button> :
                     <Link to={`/web/signin`}>
-                        <div className={` border-[1px] px-3 rounded-full flex
-                        justify-center  content-center
-                     text-[13px] py-[5px] cursor-pointer w-[80px] text-center
-                    ${theme === "dark" && 'text-white border-gray-400/80 hover:bg-white hover:text-blue-800'}
-                    ${theme !== "dark" && 'text-white border-gray-500/50 hover:text-white/60 hover:shadow-lg bg-blue-800'}
-                    `}>
-                            Sign in
-                        </div>
+                        <button className={`text-white border-white/50 border bg-transparent hover:bg-white/80 hover:text-black text-[12px] rounded-none px-3 py-[5px] tracking-tigher`}>
+                            Sign In
+                    </button>
                     </Link>
             }
 

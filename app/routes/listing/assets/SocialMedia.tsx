@@ -95,7 +95,7 @@ const SocialMedia = ({ listing }: any) => {
 
     return (
         <div className='mt-12'>
-            <div className={`font-bold text-lg border-b`}>
+            <div className={`font-bold text-xl border-b`}>
                 Social Media
             </div>
 

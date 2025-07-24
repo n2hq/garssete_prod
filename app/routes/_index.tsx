@@ -8,6 +8,13 @@ import Footer from '~/components/footer/Footer'
 import { MetaFunction } from '@remix-run/react'
 import { HomepageCarousel } from './assets/HomeCarousel'
 import { TopAd } from '~/components/content/ads/TopAd'
+import Layout from './landing/assets/layout'
+import Navbar from '~/components/header/new/Navbar'
+import HeroSection from './landing/assets/HeroSection'
+import FeaturesSection from './landing/assets/FeaturesSection'
+import DiscoverSection from './landing/assets/DiscoverSection'
+import CallToActionSection from './landing/assets/CallToActionSection'
+import FooterSection from './landing/assets/FooterSection'
 
 export const meta: MetaFunction = () => {
   return [
@@ -18,34 +25,14 @@ export const meta: MetaFunction = () => {
 
 const _index = () => {
   return (
-    <div className=' h-screen '>
-      <div className={`md:hidden`}>
-        <HomeNav />
-      </div>
-      <div className='hidden md:block'>
-        <HeaderNav />
-      </div>
-
-      {/** hero or carousel */}
-      {/* <div className={`md:hidden`}>
-        <HomepageCarousel />
-      </div> */}
-      <div className={``}>
-        <HomepageHero />
-      </div>
-      <Recents
-        category={'services'}
-        limit={8}
-        title={`Recent Listings`}
-        subtitle={"Recent businesses or entities added by date."}
-      />
-
-      <div className={`mt-[48px]`}></div>
-      <TopAd />
-
-      <FrontPageCategories />
-      <Footer />
-    </div>
+      <Layout>
+        <Navbar />
+          <HeroSection />
+          <FeaturesSection />
+          <DiscoverSection />
+          <CallToActionSection />
+          <FooterSection />
+    </Layout>
   )
 }
 

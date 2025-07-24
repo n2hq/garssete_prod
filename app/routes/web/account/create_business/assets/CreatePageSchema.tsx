@@ -76,9 +76,22 @@ const CreatePageSchema = z.object({
         .min(1, { message: "Zipcode must not be empty" })
         .max(7, { message: "Zipcode must not be more than 7 characters" }),
 
-    short_description: z.string({ message: "Please enter business phrase" })
-        .min(3, { message: "Short Description must not be less than 3 characters" })
-        .max(1000, { message: "Short Description must not be more than 1000 characters" }),
+    short_description: z
+        .string()
+        .refine(
+            (val) => {
+                const words = val.trim().split(/\s+/).filter(Boolean)
+                return words.length >= 30
+            },
+            { message: 'You must write at least 30 words.' }
+        )
+        .refine(
+            (val) => {
+                const words = val.trim().split(/\s+/).filter(Boolean)
+                return words.length <= 50
+            },
+            { message: 'You can only write up to 50 words.' }
+        ),
 
     email_address: z.string({ message: "Please enter an email." })
         .min(1, { message: "Email must not be empty" })

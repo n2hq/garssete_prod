@@ -36,7 +36,7 @@ const GenericNav = () => {
     return (
         <div>
             <div className={`px-[10px] z-[10] fixed w-full
-        bg-white shadow-md `}>
+        bg-white shadow-lg `}>
                 <div className={`max-w-[1100px] mx-auto w-full`}>
                     <div className={`w-full flex place-content-between
                     h-[60px] gap-x-2`}>

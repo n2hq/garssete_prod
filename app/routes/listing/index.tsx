@@ -12,6 +12,11 @@ import Related from './assets/Related'
 import GenericNav from '~/components/header/generic/GenericNav'
 import HomeNav from '../assets/header/HomeNav'
 import { TopAd } from '~/components/content/ads/TopAd'
+import SearchNavbar from '~/components/header/new/SearchNavbar'
+import Layout from '../asset/NormalLayout'
+import CallToActionSection from '../landing/assets/CallToActionSection'
+import FooterSection from '../landing/assets/FooterSection'
+import VerticalHeight from '../asset/VerticalHeight'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const id = params.id || null
@@ -35,10 +40,9 @@ const index = () => {
     return (
         <RatingProvider>
             <GalleryProvider>
-                {/* <ResponsiveNav theme='light' /> */}
-                <div className={`hidden md:block`}>
-                    <GenericNav />
-                </div>
+                <Layout>
+                    
+                
                 <div className={`md:hidden`}>
                     <HomeNav />
                 </div>
@@ -64,9 +68,13 @@ const index = () => {
                         title={`Related: ${listing?.category}`}
                         subtitle={"Related based on the same category."}
                     />
-                }
-                <Footer />
+                    }
+                <VerticalHeight />
+                <CallToActionSection />
+                <FooterSection />
+            </Layout>
             </GalleryProvider>
+            
         </RatingProvider>
     )
 }

@@ -7,14 +7,16 @@ import { mobileLinks, navlinks } from '~/lib/json'
 import { Link, useLocation } from '@remix-run/react'
 import LeftNav from '~/routes/web/account/assets/LeftNav'
 import { CgChevronRight } from 'react-icons/cg'
-import { BiSearch } from 'react-icons/bi'
+import { BiBriefcase, BiSearch } from 'react-icons/bi'
 import { useAuth } from '~/context/AuthContext'
 import { WhiteLogo } from './WhiteLogo'
 import { FcCancel } from 'react-icons/fc'
-import { GiCancel } from 'react-icons/gi'
+import { GiCancel, GiContract, GiPadlock } from 'react-icons/gi'
 import { TiCancelOutline } from 'react-icons/ti'
 import { IoClose } from 'react-icons/io5'
 import { getUserProfile } from '~/lib/lib'
+import { GrContact } from 'react-icons/gr'
+import { MdContacts } from 'react-icons/md'
 
 
 const cnLinks = [
@@ -27,7 +29,23 @@ const cnLinks = [
         title: "Search",
         link: "/web/search",
         icon: <BiSearch />
+    },
+    {
+        title: "Terms",
+        link: "/web/terms",
+        icon: <BiBriefcase />
+    },
+    {
+        title: "Privacy",
+        link: "/web/privacy",
+        icon: <GiPadlock />
+    },
+    {
+        title: "Contact",
+        link: "/web/contact",
+        icon: <MdContacts />
     }
+
 ]
 
 const MobileNav = ({
@@ -119,10 +137,10 @@ const MobileNav = ({
                                                 place-content-between pr-1
                                                 ${location.pathname === link.link && 'bg-[#2e374a]/15'}`}>
                                                 <div className={`w-[40px] h-[40px] rounded-full
-                                            place-content-center place-items-center border-gray-300 text-[22px]`}>
+                                            place-content-center place-items-center border-gray-300 text-[20px]`}>
                                                     {link.icon}
                                                 </div>
-                                                <div className={`text-[15px] grow`}>
+                                                <div className={`text-[13px] grow`}>
                                                     {link.title}
                                                 </div>
                                                 <div className={`text-[17px]`}>

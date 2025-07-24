@@ -6,6 +6,7 @@ import ContentLayout from '../../../assets/ContentLayout'
 import BusinessMenu from '../assets/BusinessMenu'
 import FacilityFeatures from './assets/FactilityFeatures'
 import { useAuth } from '~/context/AuthContext'
+import CardTitle from '../../../assets/CardTitle'
 
 const index = () => {
     const [businessGuid, setBusinessGuid] = useState('')
@@ -72,9 +73,12 @@ const index = () => {
     return (
         <AccountLayout>
             <ContentLayout title={'Facility Features'}>
-                <div className={`font-semibold mb-2 text-md`}>
+                <CardTitle
+                    baseUrl='/web/account/portfolio/'
+                    guid={businessGuid}
+                >
                     {data?.businessProfile?.title}
-                </div>
+                </CardTitle>
 
                 {
                     businessGuid && userGuid &&

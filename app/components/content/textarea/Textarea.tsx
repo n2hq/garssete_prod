@@ -1,6 +1,6 @@
 import React from 'react'
 import { MdError } from 'react-icons/md'
-import { inputControlWrapper, inputHeadingClass } from '~/lib/css'
+import { inputControlWrapper, inputHeadingClass, textAreaClass } from '~/lib/css'
 
 const Textarea = ({
     controlName,
@@ -21,7 +21,7 @@ const Textarea = ({
                         {...register(controlName, {
                             onChange: changeHandler
                         })}
-                        className='textarea__class'
+                        className={textAreaClass}
                         placeholder={controlPlaceholder}
                     />
                     {

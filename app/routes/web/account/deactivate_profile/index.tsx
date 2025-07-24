@@ -6,6 +6,7 @@ import { getUserProfile } from '~/lib/lib'
 import ChangePasswordForm from '../change_password/assets/ChangePasswordForm'
 import DeactivateUserForm from './assets/DeactivateProfileForm'
 import DeactivateProfileForm from './assets/DeactivateProfileForm'
+import CardTitle from '../assets/CardTitle'
 
 const index = () => {
     const auth = useAuth()
@@ -57,9 +58,11 @@ const index = () => {
             <ContentLayout title={userProfile.active ? 'Deactivate Profile' : 'Activate Profile'}>
                 {userProfile === null ? 'Loading...' : ''}
 
-                <div className={`font-semibold mb-2 text-md`}>
+                <CardTitle
+                    baseUrl='/web/account/profile'
+                    guid={''}>
                     {userProfile?.email}
-                </div>
+                </CardTitle>
 
                 {
                     data && <DeactivateProfileForm loaderData={data} user={user} />

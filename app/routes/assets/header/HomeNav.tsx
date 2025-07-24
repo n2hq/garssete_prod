@@ -35,24 +35,9 @@ const HomeNav = () => {
                 showNav={showNav}
                 closeNav={closeNav}
             />
-            <div className={`shadow-md pb-3 z-[1000]`}>
-                <div className={`${scrollHeight > 50 ? 'shadow-md' : ''} flex place-content-between
-                 fixed w-full mx-auto bg-white
-                 px-[15px] h-[50px] z-[1000]`}>
-                    <div className={`h-full w-[150px]   
-                    flex place-items-center `}>
-                        <HamburgerMenu theme={"light"} openNav={openNav} navBg={navBg} />
-                    </div>
-                    <div className={`h-full flex w-full 
-                    place-content-center place-items-center`}>
-                        <WhiteLogo />
-                    </div>
-                    <div className={`h-full w-[150px] 
-                    flex place-items-center place-content-end`}>
-                        <UserMenu theme={"light"} />
-                    </div>
-                </div>
-                <div className={`h-[50px]`}></div>
+            <div className={`shadow-lg pb-3 z-[1000]`}>
+                
+                <div className={`h-[10px]`}></div>
 
                 <div className={`px-[12px] w-full bg-white`}>
                     <form action="/web/search">

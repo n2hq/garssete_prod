@@ -10,3 +10,5 @@ npm install --save-dev @types/aos
 npm i react-hook-form zod @hookform/resolvers
 npm install nprogress
 npm install --save-dev @types/nprogress
+npm i framer-motion
+npm i @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/react-fontawesome --legacy-peer-deps

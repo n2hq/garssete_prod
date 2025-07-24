@@ -36,14 +36,14 @@ const BusinessMenu = ({ title, guid, userGuid }: any) => {
         setShowSettings(false)
     }
     return (
-        <div className=' flex place-content-between w-full  px-4 py-3 mt-1 z-[3000]'>
+        <div className=' flex place-content-between w-full  px-4 py-3 mt-1 z-[10]'>
             <div className='  rounded-lg text-xl text-black font-normal'>
                 {title}
             </div>
 
             <div className={`relative flex flex-col place-items-center place-content-end 
                 bg-blue-200 w-[180px]  gap-3  text-gray-500 font-light font-sans
-                z-[100]
+                z-[10]
                 
                 `}>
                 <button
@@ -67,7 +67,7 @@ const BusinessMenu = ({ title, guid, userGuid }: any) => {
                                      ${location.pathname === url && 'bg-gray-300/30'}
                                      `}>
                                         <Link to={`${url}`}>
-                                            <p>
+                                            <p className={`text-lg tracking-tight`}>
                                                 {item.title}
                                             </p>
                                         </Link>

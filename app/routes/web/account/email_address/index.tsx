@@ -4,6 +4,7 @@ import ContentLayout from '../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
 import { getUserProfile } from '~/lib/lib'
 import EmailForm from './assets/EmailForm'
+import CardTitle from '../assets/CardTitle'
 
 const index = () => {
     const auth = useAuth()
@@ -58,8 +59,14 @@ const index = () => {
 
                 {userProfile === null ? 'Loading...' : ''}
 
-                <div className={`font-semibold mb-2 text-md`}>
+                <CardTitle
+                    baseUrl='/web/account/profile'
+                    guid={''}>
                     {userProfile?.email}
+                </CardTitle>
+
+                <div className={`font-semibold mb-2 text-md`}>
+
                 </div>
 
                 {

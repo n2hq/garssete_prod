@@ -9,7 +9,7 @@ const DropDown = ({ open }: any) => {
         <div>
             {
                 open &&
-                <div className={`absolute`}>
+                <div className={`absolute z-[1000]`}>
                     <div className={`relative`}>
                         <div className={`absolute right-[-25px] top-[5px]`}>
                             <div className={`w-[250px] bg-white rounded p-[5px] 

@@ -25,8 +25,7 @@ const BusinessFeatures = ({ listing }: any) => {
                                 <div className={`font-bold`}>
                                     {feature.name}
                                 </div>
-                                <div className={`text-sm mt-[-2px] text-black
-                                    tracking-normal leading-snug`}>
+                                <div className={` mt-[-2px] text-black tracking-normal leading-snug`}>
                                     {feature.user_description || feature.description}
                                 </div>
                             </div>

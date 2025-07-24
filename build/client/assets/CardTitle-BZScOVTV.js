@@ -1,0 +1,1 @@
+import{j as r}from"./jsx-runtime-0DLF9kdB.js";import{L as o}from"./components-DN9bEK-g.js";const i=s=>r.jsx("div",{className:"font-semibold mb-2 text-xl",children:r.jsx(o,{to:`${s.baseUrl}${s.guid}`,children:s.children})});export{i as C};

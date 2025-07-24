@@ -10,6 +10,7 @@ import ContentLayout from '../../../assets/ContentLayout'
 import BusinessWorkingHours from './assets/BusinessWorkingHours'
 import BusinessMenu from '../assets/BusinessMenu'
 import { useAuth } from '~/context/AuthContext'
+import CardTitle from '../../../assets/CardTitle'
 
 const index = () => {
     const [loading, setLoading] = useState(true)
@@ -89,9 +90,12 @@ const index = () => {
     return (
         <AccountLayout>
             <ContentLayout title={'Settings'}>
-                <div className={`font-semibold mb-2 text-md`}>
+                <CardTitle
+                    baseUrl='/web/account/portfolio/'
+                    guid={businessGuid}
+                >
                     {data?.businessProfile?.title}
-                </div>
+                </CardTitle>
                 {
                     businessGuid && userGuid &&
                     <BusinessMenu guid={businessGuid} userGuid={userGuid} />

@@ -59,13 +59,13 @@ const BusinessRatings = ({ listing }: any) => {
                                         bg-black overflow-hidden`}>
                                         <img src={config.IMG_BASE_URL + review?.image_url} alt="" />
                                     </div>
-                                    <div className={`flex flex-col`}>
-                                        <div className={`text-sm font-bold`}>
+                                    <div className={`flex flex-col -space-y-1.5`}>
+                                        <div className={`text-lg font-bold`}>
                                             {review.fullname}
                                         </div>
                                         {
                                             review?.city_name !== null && review?.state_name &&
-                                            <div className={`text-[12px]`}>
+                                            <div className={`text-[11px]`}>
                                                 {
                                                     `${review?.city_name}, ${review?.state_name}`
                                                 }
@@ -73,7 +73,7 @@ const BusinessRatings = ({ listing }: any) => {
                                         }
                                         {
                                             review?.country_name !== null &&
-                                            <div className={`text-[12px]`}>
+                                            <div className={`text-[11px]`}>
                                                 {
                                                     `${review?.country_name}`
                                                 }

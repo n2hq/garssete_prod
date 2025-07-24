@@ -41,7 +41,7 @@ const BusinessLayout = ({
                 ratingCount: ratingsData.rating_count
             })
         }
-        console.log(JSON.stringify(listing.category))
+        //console.log(JSON.stringify(listing.category))
     }, [listing, ratingsData])
     return (
         <div className={``}>

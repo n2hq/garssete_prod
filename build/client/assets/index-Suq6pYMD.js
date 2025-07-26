@@ -33,5 +33,5 @@ import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{z as a,u as P,s as k}from".
                         place-items-center mt-[20px]`,children:e.jsx(j,{to:"/web/signin",className:"w-[85%]",children:e.jsxs("button",{className:`w-full 
                             py-[2px] text-[14px] rounded-full text-center
                             text-blue-700 hover:bg-gray-100`,children:["Alread have an account? ",e.jsx("span",{children:"Sign in"})]})})})]})})})]})},R=()=>e.jsx("div",{className:`bg-white w-full 
-        md:bg-[url('https://images.pexels.com/photos/823696/pexels-photo-823696.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')]
+        md:bg-[url('/images/landscapex.jpeg')]
         bg-cover bg-center min-h-screen flex place-content-center`,children:e.jsx(B,{})}),D=()=>e.jsx("div",{children:e.jsx(R,{})});export{D as default};

@@ -78,7 +78,7 @@ const ResetPasswordForm = () => {
 
     return (
         <div className={`w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
-        mt-[100px] mb-[20px]  `}>
+        mt-[100px] mb-[20px] z-[10] `}>
             <div className={`hidden lg:block `}>
 
             </div>

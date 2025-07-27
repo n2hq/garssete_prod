@@ -4,7 +4,7 @@ import SigninForm from './SigninForm'
 const SigninBody = () => {
     return (
         <div className={`bg-white w-full 
-        md:bg-[url('/images/sideviewcar.jpg')]
+        md:bg-[url('/images/oiltanker.jpg')]
         bg-cover bg-center min-h-screen flex place-content-center`}>
             <SigninForm />
         </div>

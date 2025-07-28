@@ -72,6 +72,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                 msg: getSignupEmail(firstName, userGuid)
             }
 
+            console.log(emailData)
+
             await sendEmail(emailData)
 
             return DoResponse({ message: "Please check your email to complete signup." }, 500)

@@ -1,8 +1,10 @@
 import { ActionFunctionArgs, LoaderFunction } from "@remix-run/node"
-import { DoResponse, generate7DigitNumber, HashPwd, headers } from "~/lib/lib"
+import { config, DoResponse, generate7DigitNumber, HashPwd, headers, sendEmail } from "~/lib/lib"
 import { IUser, LoginType, VerifiedStatus } from "~/lib/types"
 import { query } from "../DB"
 import jwt from 'jsonwebtoken'
+import { getSignupEmail } from "~/lib/emails"
+
 
 const JWT_SECRET = import.meta.env.VITE_JWT_SECRET as string
 
@@ -59,6 +61,18 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                     verifyCode,
                     rows[0].user_hash
                 ])
+
+            let userInfo = user[0]
+            let firstName = userInfo.first_name
+            let userGuid = userInfo.user_guid
+
+            const emailData = {
+                subject: `${config.SITENAME} Account Signup`,
+                to: body.email,
+                msg: getSignupEmail(firstName, userGuid)
+            }
+
+            await sendEmail(emailData)
 
             return DoResponse({ message: "Please check your email to complete signup." }, 500)
         }

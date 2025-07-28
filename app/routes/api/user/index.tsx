@@ -73,7 +73,7 @@ export async function action({ request }: ActionFunctionArgs) {
                 msg: getSignupEmail(body.first_name, userGuid)
             }
 
-            sendEmail(emailData)
+            await sendEmail(emailData)
 
 
             const data = {

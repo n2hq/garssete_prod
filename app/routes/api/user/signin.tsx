@@ -62,7 +62,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
                     rows[0].user_hash
                 ])
 
-            let userInfo = user[0]
+            let userInfo = rows[0]
             let firstName = userInfo.first_name
             let userGuid = userInfo.user_guid
 

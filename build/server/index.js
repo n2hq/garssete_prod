@@ -1111,6 +1111,7 @@ const sendEmail = async (data) => {
     }
     const data2 = await response.json();
     return new Promise((resolve) => setTimeout(() => {
+      console.log(data2);
       resolve(data2);
     }, 10));
   } catch (error) {

@@ -911,6 +911,7 @@ export const sendEmail = async (data: any) => {
         const data: any = await response.json();
 
         return new Promise((resolve) => setTimeout(() => {
+            console.log(data)
             resolve(data)
         }, 10))
     } catch (error: any) {

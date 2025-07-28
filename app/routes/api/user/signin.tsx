@@ -76,7 +76,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
             await sendEmail(emailData)
 
-            return DoResponse({ message: "Please check your email to complete signup." }, 500)
+            return DoResponse({ message: "Please check your email to complete signup." }, 200)
         }
 
         const JWT_INFO = {

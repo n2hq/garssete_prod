@@ -4,7 +4,7 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer, useNavigate, Outlet, useNavigation, Meta, Links, ScrollRestoration, Scripts, useLocation, Link, useLoaderData, useSearchParams, useParams } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import { useContext, createContext, useState, useEffect, useRef } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 import NProgress from "nprogress";
 import { FaSpinner, FaSignOutAlt, FaCarSide, FaMobile, FaQuestion, FaBriefcase, FaVimeoSquare, FaYoutubeSquare, FaPinterestSquare, FaFacebookSquare, FaCheck } from "react-icons/fa";
 import CryptoJS from "crypto-js";
@@ -10643,7 +10643,7 @@ const action$h = async ({ request }) => {
       };
       console.log(emailData);
       await sendEmail(emailData);
-      return DoResponse({ message: "Please check your email to complete signup." }, 500);
+      return DoResponse({ message: "Please check your email to complete signup." }, 200);
     }
     const JWT_INFO = {
       guid: user.user_guid,

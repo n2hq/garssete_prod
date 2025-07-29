@@ -908,11 +908,11 @@ export const sendEmail = async (data: any) => {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const data: any = await response.json();
+        const rsp: any = await response.json();
 
         return new Promise((resolve) => setTimeout(() => {
-            console.log(data)
-            resolve(data)
+            console.log(rsp)
+            resolve(rsp)
         }, 10))
     } catch (error: any) {
         return undefined

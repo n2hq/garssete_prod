@@ -23,7 +23,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
     const query = url.searchParams.get("q") || "";
     let data = await getSearch(query)
-    console.log(data)
+    //console.log(data)
     //let realestate = await getListingByCategory('automotive', 4)
 
 
@@ -45,7 +45,7 @@ const index = () => {
 
     useEffect(() => {
         if (query) {
-            alert(query)
+            //alert(query)
             setQueryParam(query)
         }
     }, [query])

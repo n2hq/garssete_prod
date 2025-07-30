@@ -100,8 +100,10 @@ export const getBusinessProfile = async (criteria: string | null): Promise<Conta
 export const getSearch: any = async (criteria: string) => {
 
     const endpoint = "/api/listing/search?q=" + criteria
-    const url = config.BASE_URL + endpoint
 
+    console.log(criteria)
+    const url = config.BASE_URL + endpoint
+    console.log(url)
 
 
     try {

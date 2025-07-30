@@ -23,7 +23,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
     const query = url.searchParams.get("q") || "";
     let data = await getSearch(query)
-
+    console.log(data)
     //let realestate = await getListingByCategory('automotive', 4)
 
 
@@ -45,9 +45,16 @@ const index = () => {
 
     useEffect(() => {
         if (query) {
+            alert(query)
             setQueryParam(query)
         }
     }, [query])
+
+    useEffect(() => {
+        if (data) {
+            console.log(data)
+        }
+    }, [data])
     //const [searchParams] = useSearchParams();
 
     //const query = data.query
@@ -56,9 +63,9 @@ const index = () => {
 
     return (
         <Layout>
-           
+
             <div className={`md:hidden`}>
-                    <HomeNav />
+                <HomeNav />
             </div>
 
             <div className={`px-[15px] border-b`}>
@@ -86,8 +93,8 @@ const index = () => {
                 </div>
             </div>
 
-            
-            
+
+
             <TopAd />
 
             <div className={`md:hidden px-[12px] mt-8`}>

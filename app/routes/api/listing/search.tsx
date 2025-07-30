@@ -27,7 +27,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
         let rawdata: any = null
 
-        if (!criteria || criteria.trim() === "" || criteria === null || criteria === undefined) {
+        if (!criteria || criteria.trim() === "" || criteria === null || criteria === undefined || criteria === "") {
             rawdata = await query(`SELECT
                 d.id,
                 d.gid,
@@ -114,7 +114,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             return (listing)
         })
 
-        console.log(listings)
+        //console.log(listings)
 
         return DoResponse(listings, 200)
 

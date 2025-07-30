@@ -11926,6 +11926,7 @@ const loader$p = async ({ request, params }) => {
       delete listing.last_updated;
       return listing;
     });
+    console.log(listings);
     return DoResponse(listings, 200);
   } catch (error) {
     return DoResponse({ "error": error.message }, 500);

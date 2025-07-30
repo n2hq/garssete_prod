@@ -4,7 +4,7 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer, useNavigate, Outlet, useNavigation, Meta, Links, ScrollRestoration, Scripts, useLocation, Link, useLoaderData, useSearchParams, useParams } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import { createContext, useContext, useState, useEffect, useRef } from "react";
+import { useContext, createContext, useState, useEffect, useRef } from "react";
 import NProgress from "nprogress";
 import { FaSpinner, FaSignOutAlt, FaCarSide, FaMobile, FaQuestion, FaBriefcase, FaVimeoSquare, FaYoutubeSquare, FaPinterestSquare, FaFacebookSquare, FaCheck } from "react-icons/fa";
 import CryptoJS from "crypto-js";
@@ -11929,6 +11929,7 @@ const loader$p = async ({ request, params }) => {
     console.log(listings);
     return DoResponse(listings, 200);
   } catch (error) {
+    console.log(error.message);
     return DoResponse({ "error": error.message }, 500);
   }
 };

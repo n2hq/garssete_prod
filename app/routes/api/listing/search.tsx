@@ -119,6 +119,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         return DoResponse(listings, 200)
 
     } catch (error: any) {
+        console.log(error.message)
         return DoResponse({ "error": error.message }, 500)
     }
 

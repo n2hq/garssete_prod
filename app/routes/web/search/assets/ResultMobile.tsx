@@ -11,30 +11,30 @@ const ResultMobile = ({ listing, index }: any) => {
     const [userId, setUserId] = useState('')
 
     useEffect(() => {
-            if (listing) {
-                if (listing?.image_url === "" || listing?.image_url === null) {
-                    //setImgsrc(`/images/placeholder.gif`)
-                } else {
-                    //console.log(config.IMG_BASE_URL)
-                    setImgsrc(config.IMG_BASE_URL + listing?.image_url)
-                }
-    
-                if (listing?.username !== "" && listing?.username !== null && listing?.username !== undefined) {
-                    setUserId(listing?.username)
-                } else {
-                    setUserId(listing?.gid)
-                }
+        if (listing) {
+            if (listing?.image_url === "" || listing?.image_url === null) {
+                //setImgsrc(`/images/placeholder.gif`)
+            } else {
+                //console.log(config.IMG_BASE_URL)
+                setImgsrc(config.IMG_BASE_URL + listing?.image_url)
             }
-        }, [listing])
+
+            if (listing?.username !== "" && listing?.username !== null && listing?.username !== undefined) {
+                setUserId(listing?.username)
+            } else {
+                setUserId(listing?.gid)
+            }
+        }
+    }, [listing])
     return (
         <div className={` cursor-pointer mt-6 z-0 pb-6`} onClick={(e) => {
             window.location.href = `/${userId}`
         }}>
             <div className={`w-full h-fit my-4`}>
-                <div className={`flex gap-2`}>
+                <div className={`flex gap-4`}>
                     {/** left */}
                     <div className={`w-[100px] min-w-[100px]
-                    bg-black z-0 h-[110px]
+                    bg-black z-0 h-[80px]
                     rounded-md overflow-hidden
                     relative`}>
                         <img

@@ -35,8 +35,8 @@ const ResultItem = ({ listing }: any) => {
         }}>
             <div className={`flex rounded-sm gap-4 z-0`}>
                 {/** left */}
-                <div className={`relative min-w-[100px] w-[100px] h-[100px] border
-                    bg-white z-0 bg-cover bg-center`}
+                <div className={`relative min-w-[170px] w-[100px] h-[100px] border
+                    bg-white z-0 bg-cover bg-center rounded-lg`}
                     style={{ backgroundImage: `url(${imgscr})` }}
                 >
                     {/* <img

@@ -94,7 +94,7 @@ const ResultItem = ({ listing }: any) => {
                                     <div>
                                         <BsBank />
                                     </div>
-                                    <div className={`flex flex-col gap-y-0 leading-3`}>
+                                    <div className={`flex flex-col gap-y-[3px] leading-3`}>
                                         <div className={`text-[12px] font-bold`}>
                                             Since {listing?.established}
                                         </div>

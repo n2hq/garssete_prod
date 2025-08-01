@@ -66,7 +66,7 @@ const ResultItem = ({ listing }: any) => {
                                 gap-1 text-black/60 text-[13px]`}>
                                     <div>{listing?.average_rating}</div>
                                     <div>
-                                        ({`${(listing?.total_reviews)} review${Number(listing?.total_reviews) > 1 ? 's' : ''}`})
+                                        ({`${listing?.total_reviews === null ? 0 : listing?.total_reviews} review${Number(listing?.total_reviews) > 1 ? 's' : ''}`})
                                     </div>
                                 </div>
                             </div>

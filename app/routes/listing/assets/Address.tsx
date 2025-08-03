@@ -8,6 +8,7 @@ import { GrLocation, GrMapLocation } from 'react-icons/gr'
 import { IoMdGlobe } from 'react-icons/io'
 import { MdEmail, MdLocationPin, MdOutline3gMobiledata, MdPhone, MdWeb } from 'react-icons/md'
 import Review from './Review'
+import ClaimBusiness from './ClaimBusiness'
 
 const Address = ({ businessProfile }: any) => {
     return (
@@ -126,7 +127,11 @@ const Address = ({ businessProfile }: any) => {
                                 businessProfile &&
                                 <Review listing={businessProfile} />
                             }
+
+
                         </div>
+
+
                     </div>
                 </div>
             </div>

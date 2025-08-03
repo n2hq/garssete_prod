@@ -112,6 +112,7 @@ const BusinessLayout = ({
                                 <div className={`md:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
                                     {ratingDisplayData && <RatingDisplay data={ratingDisplayData} />}
                                     {listing && <Address businessProfile={listing} />}
+                                    {listing && <ClaimBusiness listing={listing} />}
                                     {/* {
                                         listing && <Review listing={listing} />
                                     } */}
@@ -149,7 +150,7 @@ const BusinessLayout = ({
                             <div className={` sticky top-[100px]`}>
                                 {ratingDisplayData && <RatingDisplay data={ratingDisplayData} />}
                                 {listing && <Address businessProfile={listing} />}
-                                <ClaimBusiness listing={listing} />
+                                {listing && <ClaimBusiness listing={listing} />}
                                 {/* <Review /> */}
                             </div>
                         </div>

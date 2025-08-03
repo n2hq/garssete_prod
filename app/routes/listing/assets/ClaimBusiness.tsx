@@ -24,7 +24,7 @@ const ClaimBusiness = ({ listing }: any) => {
             {
                 ownerRole === "admin" &&
                 <div className={` mt-8 `}>
-                    <Link to={`/`}>
+                    <Link to={`/web/contact`}>
                         <div className={`px-3 text-[14px] text-center border py-[15px] rounded underline underline-offset-2 hover:text-blue-500 bg-blue-50 mx-[15px] md:mx-[0px]
                             mb-[40px] md:mb-[40px]`}>
                             Is this your business? Claim it for free!

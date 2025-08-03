@@ -6,7 +6,7 @@ const ClaimBusiness = ({ listing }: any) => {
     const [ownerRole, setOwnerRole] = useState('user')
     useEffect(() => {
         if (listing?.owner) {
-
+            alert('here')
             getUserProfile(listing?.owner).then((data) => {
                 let user: any = data
                 setOwnerRole(user.role)

@@ -3,7 +3,7 @@ import React from 'react'
 const ResourceNotFound = () => {
     return (
         <div className={`flex place-content-center place-items-center w-full min-h-[700px] text-[13px] flex-col space-y-4`}>
-            <div className={`font-bold text-2xl`}>
+            <div className={`font-bold text-[16px]`}>
                 Resource Not Found</div>
             <button
                 onClick={() => { window.history.back(-1) }}

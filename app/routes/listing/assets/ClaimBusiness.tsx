@@ -9,6 +9,7 @@ const ClaimBusiness = ({ listing }: any) => {
             await getUserProfile(owner).then((data) => {
                 let user: any = data
                 setOwnerRole(user.role)
+                console.log(user.role)
             })
 
         }

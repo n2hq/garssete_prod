@@ -33,7 +33,9 @@ export const InfoTerms = () => {
         <div className={`markdown prose dark:prose-invert w-full break-words light space-y-4`}>
 
             <h2 data-start="208" data-end="235" className={`text-xl`}>
-                <strong data-start="211" data-end="235">Terms and Conditions</strong>
+                <strong data-start="211" data-end="235"
+                    className={`text-2xl`}
+                >Terms and Conditions</strong>
             </h2>
             <p data-start="237" data-end="270">
                 <strong data-start="237" data-end="256">Effective Date:</strong> 12 July 2025

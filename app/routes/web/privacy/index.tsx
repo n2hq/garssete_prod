@@ -33,7 +33,9 @@ export const InfoPrivacy = () => {
         <div className={`markdown prose dark:prose-invert w-full break-words light space-y-4`}>
 
             <h2 data-start="193" data-end="214" className={`text-xl`}>
-                <strong data-start="196" data-end="214">Privacy Policy</strong>
+                <strong data-start="196" data-end="214"
+                    className={`text-2xl`}
+                >Privacy Policy</strong>
             </h2>
             <p data-start="216" data-end="249">
                 <strong data-start="216" data-end="235">Effective Date:</strong> 23 Jul 2025

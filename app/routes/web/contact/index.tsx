@@ -30,10 +30,14 @@ export default index
 
 export const InfoContact = () => {
     return (
-        <div className={`markdown prose dark:prose-invert w-full break-words light space-y-4`}>
+        <div className={`markdown prose dark:prose-invert w-full break-words light space-y-4 text-[13px]`}>
 
             <h2 data-start="208" data-end="235" className={`text-xl`}>
-                <strong data-start="211" data-end="235">Contact Us</strong>
+                <strong data-start="211" data-end="235"
+                    className={`text-2xl`}
+                >
+                    Contact Us
+                </strong>
             </h2>
 
             <p data-start="272" data-end="485">
@@ -52,7 +56,7 @@ export const InfoContact = () => {
             <p data-start="523" data-end="707">
                 <ul>
                     <li>
-                        info@garssete.com
+                        support@garssete.com
                     </li>
                     <li>
                         https://x.com/garssete
@@ -60,6 +64,27 @@ export const InfoContact = () => {
                     <li>
                         https://facebook.com/garssete
                     </li>
+                </ul>
+            </p>
+
+            <hr data-start="709" data-end="712" />
+            <h3 data-start="492" data-end="522">
+                <strong data-start="496" data-end="522"
+                    className={`text-lg text-blue-500 underline`}
+                >
+                    Claim Your Business
+                </strong>
+            </h3>
+            <p data-start="272" data-end="485">
+                Please sign up and then send an email to <strong>support@garssete.com</strong> to claim your business for free!
+            </p>
+            <p data-start="523" data-end="707">
+                <ul>
+                    <li>
+                        <strong>Email:</strong>
+                        <span className={`underline`}>support@garssete.com</span>
+                    </li>
+
                 </ul>
             </p>
 

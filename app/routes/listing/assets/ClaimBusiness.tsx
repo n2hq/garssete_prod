@@ -5,13 +5,18 @@ import { getUserProfile } from '~/lib/lib'
 const ClaimBusiness = ({ listing }: any) => {
     const [ownerRole, setOwnerRole] = useState('user')
     useEffect(() => {
-        if (listing?.owner) {
-            alert('here')
-            getUserProfile(listing?.owner).then((data) => {
+        const getOwnerRole = async (owner: string) => {
+            await getUserProfile(owner).then((data) => {
                 let user: any = data
                 setOwnerRole(user.role)
             })
+
         }
+
+        if (listing?.owner) {
+            getOwnerRole(listing?.owner)
+        }
+
     }, [listing])
     return (
         <>

@@ -23,6 +23,7 @@ import { RatingDisplayType } from '~/lib/types';
 import RatingBox from '~/routes/web/search/assets/RatingBox';
 import { formatNumber } from '~/lib/lib';
 import RatingBoxRounded from './RatingBoxRounded';
+import ClaimBusiness from './ClaimBusiness';
 
 
 const BusinessLayout = ({
@@ -148,6 +149,7 @@ const BusinessLayout = ({
                             <div className={` sticky top-[100px]`}>
                                 {ratingDisplayData && <RatingDisplay data={ratingDisplayData} />}
                                 {listing && <Address businessProfile={listing} />}
+                                <ClaimBusiness listing={listing} />
                                 {/* <Review /> */}
                             </div>
                         </div>

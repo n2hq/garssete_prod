@@ -19,50 +19,50 @@ const itemVariants = {
     visible: {
         opacity: 1,
         y: 0,
-        
+
     },
 }
 
 const getFeatures = () => {
-    
+
     return [
         {
             imageSrc: `/images/landing-search3.png`,
             title: "List Your Business",
             description: "Create a detailed listing with your services, contact details, and branding. Let the world know what makes your business unique.",
-            linkText: "Explore",
-            linkHref: "/explore"
+            linkText: "Sign In",
+            linkHref: "/web/signin"
         },
         {
             imageSrc: `/images/landing-search${2}.png`,
             title: "Connect with Partners",
             description: "Our global directory connects you with international clients, investors, and collaborators who are actively searching for businesses like yours.",
             linkText: "Search",
-            linkHref: "/search"
+            linkHref: "/web/search"
         },
         {
             imageSrc: `/images/landing-search${1}.png`,
-             title: "Grow Beyond Borders",
+            title: "Grow Beyond Borders",
             description: "Gain visibility in new markets and watch your business thrive. With more eyes on your listing, the potential for growth is limitless.",
             linkText: "Discover",
-            linkHref: "/discover"
+            linkHref: "/web/search"
         }
     ]
 }
 
 const FeaturesSection = () => {
-  return (
-      <motion.div
-          initial="hidden"
-          whileInView={"visible"}
-          viewport={{ once: true }}
-          variants={containerVariants}
-          className={`py-24 px-6 sm:px-8 lg:px-12
+    return (
+        <motion.div
+            initial="hidden"
+            whileInView={"visible"}
+            viewport={{ once: true }}
+            variants={containerVariants}
+            className={`py-24 px-6 sm:px-8 lg:px-12
             xl:px-16 bg-white`}
-      >
-          <div className={`max-w-4xl xl:max-w-[1000px]
+        >
+            <div className={`max-w-4xl xl:max-w-[1000px]
             mx-auto`}>
-              <motion.div
+                <motion.div
                     variants={itemVariants}
                     className={`my-12 text-center`}
                 >
@@ -78,26 +78,26 @@ const FeaturesSection = () => {
                         Quickly list your business and get discovered by potential clients and partners worldwide. Our intuitive platform helps your business stand out and grow without barriers. Start your journey today!
                     </p>
                 </motion.div>
-              <div className={`grid grid-cols-1 md:grid-cols-3
+                <div className={`grid grid-cols-1 md:grid-cols-3
                 gap-8 lg:gap-12 xl:gap-16`}>
-                  {
-                      getFeatures().map((feature:any, index:any) => {
-                          return <motion.div key={index}
-                          variants={itemVariants}>
-                              <FeatureCard
-                                  imageSrc={feature.imageSrc}
-                                  title={feature.title}
-                                  description={feature.description}
-                                  linkText={feature.linkText}
-                                  linkHref={feature.linkHref}
-                              />
-                          </motion.div>
-                      })
-                  }
-              </div>
-          </div>
-    </motion.div>
-  )
+                    {
+                        getFeatures().map((feature: any, index: any) => {
+                            return <motion.div key={index}
+                                variants={itemVariants}>
+                                <FeatureCard
+                                    imageSrc={feature.imageSrc}
+                                    title={feature.title}
+                                    description={feature.description}
+                                    linkText={feature.linkText}
+                                    linkHref={feature.linkHref}
+                                />
+                            </motion.div>
+                        })
+                    }
+                </div>
+            </div>
+        </motion.div>
+    )
 }
 
 export default FeaturesSection
@@ -115,7 +115,7 @@ const FeatureCard = ({
     description: string,
     linkText: string,
     linkHref: string
-    }) => {
+}) => {
     return <div className={`text-center`}>
         <div className={`p-4 rounded-lg mb-4 flex items-center justify-center h-48 `}>
             <img
@@ -134,9 +134,9 @@ const FeatureCard = ({
         </p>
         <Link to={linkHref}
             className={`inline-block border border-gray-300 rounded px-4 py-2 hover:bg-gray-100`}
-            preventScrollReset    
+            preventScrollReset
         >
-        {linkText}
+            {linkText}
         </Link>
     </div>
 }

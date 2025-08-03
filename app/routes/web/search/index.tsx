@@ -50,11 +50,7 @@ const index = () => {
         }
     }, [query])
 
-    useEffect(() => {
-        if (data) {
-            console.log(data)
-        }
-    }, [data])
+
     //const [searchParams] = useSearchParams();
 
     //const query = data.query

@@ -17,6 +17,7 @@ import Layout from '../asset/NormalLayout'
 import CallToActionSection from '../landing/assets/CallToActionSection'
 import FooterSection from '../landing/assets/FooterSection'
 import VerticalHeight from '../asset/VerticalHeight'
+import ResourceNotFound from './assets/ResourceNotFound'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const id = params.id || null
@@ -40,7 +41,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
     const profileImageLink = config.IMG_BASE_URL + profileImageData?.image_url
     const mimetype = profileImageData?.mimetype
-    console.log(profileImageData)
+    //console.log(profileImageData)
 
     const getKeyWords = (texts: string | null): string[] | null => {
         if (texts === null || texts === undefined || texts === "") {
@@ -86,12 +87,12 @@ const index = () => {
     const gallery: any = data.gallery
     const ratingsData: any = data.ratingsData
 
+    console.log(listing)
+
     return (
         <RatingProvider>
             <GalleryProvider>
                 <Layout>
-
-
                     <div className={`md:hidden`}>
                         <HomeNav />
                     </div>
@@ -110,13 +111,14 @@ const index = () => {
 
 
                     {
-                        listing &&
-                        <Related
-                            category={listing?.category}
-                            limit={6}
-                            title={`Related: ${listing?.category}`}
-                            subtitle={"Related based on the same category."}
-                        />
+                        listing?.category !== undefined ?
+                            <Related
+                                category={listing?.category}
+                                limit={6}
+                                title={`Related: ${listing?.category}`}
+                                subtitle={"Related based on the same category."}
+                            /> :
+                            <ResourceNotFound />
                     }
                     <VerticalHeight />
                     <CallToActionSection />

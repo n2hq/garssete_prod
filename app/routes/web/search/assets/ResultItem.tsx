@@ -7,7 +7,7 @@ import { config, formatNumber } from '~/lib/lib'
 import RatingBox from './RatingBox'
 
 const ResultItem = ({ listing }: any) => {
-    console.log(listing?.username)
+    //console.log(listing?.username)
     const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
 

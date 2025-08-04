@@ -8,15 +8,13 @@ import RatingBox from './RatingBox'
 
 const ResultItem = ({ listing }: any) => {
     //console.log(listing?.username)
-    const [placeholder, setPlaceholder] = useState('/image/placeholder2.jpg')
+    const [placeholder, setPlaceholder] = useState('/image/imgplaceholder2.jpg')
     const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
 
     useEffect(() => {
         if (listing) {
-            if (listing?.image_url === "" || listing?.image_url === null) {
-                //setImgsrc(`/images/placeholder.gif`)
-            } else {
+            if (listing?.image_url !== "" || listing?.image_url !== null) {
                 //console.log(config.IMG_BASE_URL)
                 setImgsrc(config.IMG_BASE_URL + listing?.image_url)
             }
@@ -37,7 +35,7 @@ const ResultItem = ({ listing }: any) => {
             <div className={`flex rounded-sm gap-4 z-0`}>
                 {/** left */}
                 <div className={`relative min-w-[170px] w-[100px] h-[100px] border
-                    bg-white z-0 bg-cover bg-center rounded-lg shadow-md`}
+                    bg-white z-0 bg-cover bg-center rounded-lg shadow-md overflow-hidden`}
                     style={{ backgroundImage: `url(${placeholder})` }}
                 >
                     <img
@@ -46,6 +44,11 @@ const ResultItem = ({ listing }: any) => {
                         className={`object-cover w-full h-full text-sm
                             rounded z-0`}
                     />
+                    <div className={`w-full h-[50%]
+                            absolute z-[10] bottom-0 
+                            bg-gradient-to-t from-black/40
+                            to-transparent
+                            `}></div>
                 </div>
 
                 {/** right */}

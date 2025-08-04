@@ -7,14 +7,14 @@ import { RiDoubleQuotesL } from 'react-icons/ri'
 import { Link } from '@remix-run/react'
 
 const ResultMobile = ({ listing, index }: any) => {
+    const [placeholder, setPlaceholder] = useState('/images/imgplaceholder2.jpg')
     const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
 
     useEffect(() => {
         if (listing) {
-            if (listing?.image_url === "" || listing?.image_url === null) {
-                //setImgsrc(`/images/placeholder.gif`)
-            } else {
+            if (listing?.image_url !== "" || listing?.image_url !== null) {
+
                 //console.log(config.IMG_BASE_URL)
                 setImgsrc(config.IMG_BASE_URL + listing?.image_url)
             }
@@ -36,7 +36,9 @@ const ResultMobile = ({ listing, index }: any) => {
                     <div className={`w-[100px] min-w-[100px]
                     bg-black z-0 h-[80px]
                     rounded-md overflow-hidden
-                    relative`}>
+                    relative`}
+                        style={{ backgroundImage: `url(${placeholder})` }}
+                    >
                         <img
                             src={imgscr}
                             alt={listing?.title}

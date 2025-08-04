@@ -1,19 +1,20 @@
 import { Link } from '@remix-run/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { BsBank } from 'react-icons/bs'
 import { FiArrowRight } from 'react-icons/fi'
 import { RiDoubleQuotesL } from 'react-icons/ri'
 import { config } from '~/lib/lib'
 
 const ResultItem = ({ listing, index }: any) => {
+    const [placeholder, setPlaceholder] = useState('/image/imgplaceholder2.jpg')
     function isOdd(num: number): boolean {
         return num % 2 !== 0;
     }
 
-    let url = config.IMG_BASE_URL + listing.image_url
+    let imgsrc = config.IMG_BASE_URL + listing?.image_url
 
     if (listing?.image_url === "" || listing?.image_url === null) {
-        url = "/images/imgplaceholder.jpg"
+        imgsrc = "/images/imgplaceholder.jpg"
     }
 
 
@@ -27,13 +28,21 @@ const ResultItem = ({ listing, index }: any) => {
                 `}>
                 {/** left */}
                 <div className={`relative min-w-[50px] w-[50px] h-[50px]
-                    rounded-full overflow-hidden border`}>
+                    rounded-full overflow-hidden border bg-transparent bg-cover bg-center`}
+                    style={{ backgroundImage: `url(${placeholder})` }}
+                >
                     <img
-                        src={url}
+                        src={imgsrc}
                         alt={listing.title}
                         className={`object-cover w-full h-full text-sm
                              `}
+                        style={{ backgroundImage: `url(${placeholder})` }}
                     />
+                    <div className={`w-full h-[50%]
+                            absolute z-[10] bottom-0 
+                            bg-gradient-to-t from-black/40
+                            to-transparent
+                            `}></div>
                 </div>
 
                 {/** right */}

@@ -34,7 +34,7 @@ const ResultMobile = ({ listing, index }: any) => {
                 <div className={`flex gap-4`}>
                     {/** left */}
                     <div className={`w-[100px] min-w-[100px]
-                    bg-black z-0 h-[80px]
+                    bg-transparent z-0 h-[80px]
                     rounded-md overflow-hidden
                     relative`}
                         style={{ backgroundImage: `url(${placeholder})` }}

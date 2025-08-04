@@ -8,6 +8,7 @@ import RatingBox from './RatingBox'
 
 const ResultItem = ({ listing }: any) => {
     //console.log(listing?.username)
+    const [placeholder, setPlaceholder] = useState('/image/placeholder2.jpg')
     const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
 
@@ -37,14 +38,14 @@ const ResultItem = ({ listing }: any) => {
                 {/** left */}
                 <div className={`relative min-w-[170px] w-[100px] h-[100px] border
                     bg-white z-0 bg-cover bg-center rounded-lg shadow-md`}
-                    style={{ backgroundImage: `url(${imgscr})` }}
+                    style={{ backgroundImage: `url(${placeholder})` }}
                 >
-                    {/* <img
+                    <img
                         src={imgscr}
                         alt={listing.title}
                         className={`object-cover w-full h-full text-sm
                             rounded z-0`}
-                    /> */}
+                    />
                 </div>
 
                 {/** right */}

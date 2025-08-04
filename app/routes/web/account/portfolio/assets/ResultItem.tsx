@@ -29,14 +29,13 @@ const ResultItem = ({ listing, index }: any) => {
                 {/** left */}
                 <div className={`relative min-w-[50px] w-[50px] h-[50px]
                     rounded-full overflow-hidden border bg-transparent bg-cover bg-center`}
-
+                    style={{ backgroundImage: `url(${placeholder})` }}
                 >
                     <img
                         src={imgsrc}
                         alt={listing.title}
                         className={`object-cover w-full h-full text-sm
                              `}
-                        style={{ backgroundImage: `url(${placeholder})` }}
                     />
                     <div className={`w-full h-[50%]
                             absolute z-[10] bottom-0 

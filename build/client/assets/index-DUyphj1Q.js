@@ -2,8 +2,8 @@ import{j as r}from"./jsx-runtime-0DLF9kdB.js";import{r as d,L as j}from"./compon
              hover:bg-blue-100 hover:shadow-md  
              ${c(a)?"bg-blue-50":""}
                 `,children:[r.jsxs("div",{className:`relative min-w-[50px] w-[50px] h-[50px]
-                    rounded-full overflow-hidden border bg-transparent bg-cover bg-center`,children:[r.jsx("img",{src:l,alt:e.title,className:`object-cover w-full h-full text-sm
-                             `,style:{backgroundImage:`url(${o})`}}),r.jsx("div",{className:`w-full h-[50%]
+                    rounded-full overflow-hidden border bg-transparent bg-cover bg-center`,style:{backgroundImage:`url(${o})`},children:[r.jsx("img",{src:l,alt:e.title,className:`object-cover w-full h-full text-sm
+                             `}),r.jsx("div",{className:`w-full h-[50%]
                             absolute z-[10] bottom-0 
                             bg-gradient-to-t from-black/40
                             to-transparent

@@ -6,7 +6,7 @@ import { RiDoubleQuotesL } from 'react-icons/ri'
 import { config } from '~/lib/lib'
 
 const ResultItem = ({ listing, index }: any) => {
-    const [placeholder, setPlaceholder] = useState('/image/imgplaceholder2.jpg')
+    const [placeholder, setPlaceholder] = useState('/images/imgplaceholder2.jpg')
     function isOdd(num: number): boolean {
         return num % 2 !== 0;
     }
@@ -29,7 +29,7 @@ const ResultItem = ({ listing, index }: any) => {
                 {/** left */}
                 <div className={`relative min-w-[50px] w-[50px] h-[50px]
                     rounded-full overflow-hidden border bg-transparent bg-cover bg-center`}
-                    style={{ backgroundImage: `url(${placeholder})` }}
+
                 >
                     <img
                         src={imgsrc}

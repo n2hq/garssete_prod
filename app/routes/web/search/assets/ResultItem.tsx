@@ -8,7 +8,7 @@ import RatingBox from './RatingBox'
 
 const ResultItem = ({ listing }: any) => {
     //console.log(listing?.username)
-    const [placeholder, setPlaceholder] = useState('/image/imgplaceholder2.jpg')
+    const [placeholder, setPlaceholder] = useState('/images/imgplaceholder2.jpg')
     const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
 

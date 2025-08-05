@@ -68,9 +68,8 @@ export const GalleryProvider = ({ children }: any) => {
                 <div
                     onMouseDown={(e) => setShow(false)}
                     className={`flex w-screen h-screen bg-black/40 
-                        z-[3000] fixed top-0 left-0 right-0 bottom-0
+                        z-[20000] fixed top-0 left-0 right-0 bottom-0
                         place-items-center place-content-center px-[15px]`}>
-
                     <div
                         onMouseDown={(e) => e.stopPropagation()}
                         className={`min-w-[95%] w-[95%] sm:w-[95%] md:w-[80%] h-[80%] max-h-[80%] 

@@ -31,9 +31,9 @@ const ResultMobile = ({ listing, index }: any) => {
             window.location.href = `/${userId}`
         }}>
             <div className={`w-full h-fit my-4`}>
-                <div className={`flex gap-4`}>
+                <div className={`flex gap-[10px]`}>
                     {/** left */}
-                    <div className={`w-[100px] min-w-[100px]
+                    <div className={`w-[90px] min-w-[90px]
                     bg-transparent z-0 h-[80px]
                     rounded-md overflow-hidden
                     relative`}
@@ -47,7 +47,7 @@ const ResultMobile = ({ listing, index }: any) => {
                         />
                         <div className={`w-full h-[40%]
                             absolute z-[10] bottom-0 
-                            bg-gradient-to-t from-black/80
+                            bg-gradient-to-t from-black/40
                             to-transparent
                             `}></div>
                     </div>
@@ -82,7 +82,7 @@ const ResultMobile = ({ listing, index }: any) => {
                                 <div>
                                     <BsBank />
                                 </div>
-                                <div className={`flex flex-col gap-y-0 leading-3`}>
+                                <div className={`flex flex-col gap-y-1 leading-3`}>
                                     <div className={`text-[12px] font-bold`}>
                                         Since {listing?.established}
                                     </div>

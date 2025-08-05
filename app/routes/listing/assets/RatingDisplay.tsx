@@ -25,24 +25,23 @@ const RatingDisplay = ({ data }: RatingDisplayProp) => {
         } else {
             getRatingVal(0)
         }
-    },[data])
+    }, [data])
 
     return (
         <div className={`
              md:border py-[12px] px-[12px] md:mb-3  rounded`}>
             <div className={`flex place-content-between gap-1
-                                        `}>
-                <div className={`flex flex-col place-items-center -space-y-1.5`}>
-                    <div className={`font-sans text-[15px] font-bold text-blue-800 `}>
-                        Category
-                    </div>
+                `}>
+                <div className={`flex flex-col place-items-center -space-y-1.5
+                    place-content-start w-full `}>
+                    <div className={`font-sans text-[13px] font-semibold text-blue-900 flex place-items-start  w-full -ml-[1.5px]`}>Category</div>
                     <div className={` font-normal text-black capitalize text-[11px] tracking-normal  w-full`}>
                         {data?.category}
                     </div>
                 </div>
                 <div className={`w-full flex flex-col place-items-end place-content-center -space-y-2 `}>
                     <div className={`font-bold tracking-tighter text-[12px] font-sans text-black `}>
-                       {ratingText}
+                        {ratingText}
                     </div>
                     <div className={`text-[11px] `}>
                         {formatNumber(Number(data?.ratingCount))} reviews

@@ -60,9 +60,9 @@ const ImageBlock = ({ images, listing }: any) => {
     return (
         <div className='w-full h-auto mb-[32px] flex flex-col gap-2'>
             <div className={`h-[350px]
-                grid grid-cols-12 gap-[3px]`}>
+                grid grid-cols-12 gap-[7px]`}>
                 <div className={`col-span-7 bg-black
-                    row-span-2 rounded overflow-hidden
+                    row-span-2 rounded-xl overflow-hidden
                     relative cursor-pointer`}
                     onMouseDown={(e) => showCarousel(0)}
                 >
@@ -77,7 +77,7 @@ const ImageBlock = ({ images, listing }: any) => {
                     />
                 </div>
                 <div className={`col-span-5 bg-black
-                    rounded overflow-hidden h-full
+                    rounded-xl overflow-hidden h-full
                     relative cursor-pointer`}
                     onMouseDown={(e) => showCarousel(1)}
                 >
@@ -92,7 +92,7 @@ const ImageBlock = ({ images, listing }: any) => {
                     />
                 </div>
                 <div className={`col-span-5 bg-black
-                    rounded overflow-hidden h-full
+                    rounded-xl overflow-hidden h-full
                     relative cursor-pointer`}
                     onMouseDown={(e) => showCarousel(2)}
                 >
@@ -108,8 +108,8 @@ const ImageBlock = ({ images, listing }: any) => {
                 </div>
             </div>
 
-            <div className={`grid grid-cols-5 gap-[5px] mt-[-3px]`}>
-                <div className={`rounded overflow-hidden
+            <div className={`grid grid-cols-5 gap-[7px] mt-[2px]`}>
+                <div className={`rounded-xl overflow-hidden
                     relative cursor-pointer h-[100px] bg-black`}
                     onMouseDown={(e) => showCarousel(3)}
                 >
@@ -123,7 +123,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         className={`object-cover h-full w-full`}
                     />
                 </div>
-                <div className={`rounded overflow-hidden
+                <div className={`rounded-xl overflow-hidden
                     relative cursor-pointer h-[100px] bg-black`}
                     onMouseDown={(e) => showCarousel(4)}
                 >
@@ -137,7 +137,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         className={`object-cover h-full w-full`}
                     />
                 </div>
-                <div className={`rounded overflow-hidden
+                <div className={`rounded-xl overflow-hidden
                     relative bg-black cursor-pointer h-[100px]`}
                     onMouseDown={(e) => showCarousel(5)}
                 >
@@ -151,7 +151,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         className={`object-cover h-full w-full`}
                     />
                 </div>
-                <div className={`rounded overflow-hidden
+                <div className={`rounded-xl overflow-hidden
                     relative bg-black cursor-pointer h-[100px]`}
                     onMouseDown={(e) => showCarousel(6)}
                 >
@@ -165,7 +165,7 @@ const ImageBlock = ({ images, listing }: any) => {
                         className={`object-cover h-full w-full`}
                     />
                 </div>
-                <div className={`rounded overflow-hidden
+                <div className={`rounded-xl overflow-hidden
                     relative bg-black text-white cursor-pointer
                     flex place-content-center place-items-center h-[100px]`}
                     onMouseDown={(e) => showGallery(0)}

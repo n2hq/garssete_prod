@@ -89,7 +89,7 @@ export const SliderProvider = ({ children }: any) => {
         <SliderContext.Provider value={vals}>
             {
                 dialog &&
-                <div className={`flex w-screen h-screen bg-white z-[5000] 
+                <div className={`flex w-screen h-screen bg-white z-[20001] 
                 fixed top-0 left-0 right-0 bottom-0 `}>
                     <div className={`grid grid-cols-12 gap-0 `}>
                         <div className={`col-span-12 md:col-span-9 w-full h-full relative bg-black flex`}>

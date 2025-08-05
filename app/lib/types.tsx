@@ -274,3 +274,12 @@ export interface CardTitleProp {
     guid: string,
     baseUrl: string
 }
+
+export interface ComponentProp {
+    title: string
+}
+
+export interface SectionProp {
+    title: string,
+    subtitle: string
+}

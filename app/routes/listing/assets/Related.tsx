@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from '@remix-run/react'
 import { getListingByCategory } from '~/lib/lib'
 import LatestStarRating from '~/routes/web/search/assets/LatestStarRating'
+import SectionTitle from './SectionTitle'
 
 const latestData = [
     {
@@ -94,12 +95,11 @@ const Related = ({
             <div className={`max-w-[1100px] mx-auto w-full`}>
                 <div className={`mt-10 border-t pt-5`}>
                     <div className={` mb-[20px] `}>
-                        <div className={`font-semibold text-xl`}>
-                            {ti}
-                        </div>
-                        <div className={`text-sm -mt-[2px]`}>
-                            {st}
-                        </div>
+                        <SectionTitle
+                            title={ti}
+                            subtitle={st}
+                        />
+
                     </div>
 
                     <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-4`}>

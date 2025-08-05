@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ListingType } from '~/lib/types'
 import { getBusinessFeatures } from '~/lib/lib'
+import ComponentTitle from './ComponentTitle'
 
 const BusinessFeatures = ({ listing }: any) => {
     const [features, setFeatures] = useState<any>(undefined)
@@ -13,9 +14,7 @@ const BusinessFeatures = ({ listing }: any) => {
     }, [listing.business_guid])
     return (
         <div className=' mt-12'>
-            <div className={` font-bold text-xl border-b`}>
-                Features
-            </div>
+            <ComponentTitle title='Features' />
 
             <div className={`grid grid-cols-2 gap-4 mt-3`}>
                 {

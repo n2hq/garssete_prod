@@ -6,6 +6,7 @@ import { CgWebsite } from 'react-icons/cg'
 import { FaFacebook, FaFacebookSquare, FaPinterestSquare, FaVimeoSquare, FaYoutubeSquare } from 'react-icons/fa'
 import { MdEmail, MdFacebook } from 'react-icons/md'
 import { config, getBusinessProfileImageData, getSocialMediaByBusinessGuid } from '~/lib/lib'
+import ComponentTitle from './ComponentTitle'
 
 const SocialMedia = ({ listing }: any) => {
     const [img, setImg] = useState('')
@@ -95,9 +96,7 @@ const SocialMedia = ({ listing }: any) => {
 
     return (
         <div className='mt-12'>
-            <div className={`font-bold text-xl border-b`}>
-                Social Media
-            </div>
+            <ComponentTitle title='Social Media' />
 
 
             <div className={`flex flex-col gap-y-5 text-[14px] mt-4 whitespace-pre-wrap`}>

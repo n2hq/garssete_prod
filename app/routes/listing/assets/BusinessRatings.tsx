@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { config, getBusinessRatings, getLocalDate, getRatingsReviews } from '~/lib/lib'
 import StarRating from './StarRating'
 import SingleStarRating from './SingleStarRating'
+import ComponentTitle from './ComponentTitle'
 
 const BusinessRatings = ({ listing }: any) => {
 
@@ -37,7 +38,7 @@ const BusinessRatings = ({ listing }: any) => {
 
     return (
         <div className={`mt-12`}>
-            <div className={`text-xl font-bold`}>Reviews</div>
+            <ComponentTitle title='Reviews' />
 
             <div className={`-mt-1 text-[14px] flex flex-col -gap-y-1 font-light`}>
                 <div className={`font-bold`}>Overall Rating:</div>

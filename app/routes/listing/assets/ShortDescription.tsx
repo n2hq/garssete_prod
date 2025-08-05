@@ -1,11 +1,12 @@
 import React from 'react'
+import ComponentTitle from './ComponentTitle'
 
 const ShortDescription = ({ listing }: any) => {
     return (
         <div className={`mt-4`}>
-            <div className={`text-xl font-bold`}>Intro</div>
+            <ComponentTitle title='Intro' />
 
-            <div className={` text-[14px] flex flex-col gap-y-4 whitespace-pre-wrap`}>
+            <div className={` text-[14px] flex flex-col gap-y-4 whitespace-pre-wrap `}>
                 {listing.short_description}
             </div>
         </div>

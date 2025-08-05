@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { config, getBusinessProfileImageData } from '~/lib/lib'
+import ComponentTitle from './ComponentTitle'
 
 const BusinessPhrases = ({ listing }: any) => {
     const [img, setImg] = useState('')
@@ -15,10 +16,7 @@ const BusinessPhrases = ({ listing }: any) => {
     }, [listing])
     return (
         <div className='mt-12'>
-            <div className={`font-bold text-xl
-                border-b`}>
-                Business Phrases
-            </div>
+            <ComponentTitle title='Business Phrases' />
 
 
             <div className={`flex flex-col gap-y-5 text-[14px] mt-4 whitespace-pre-wrap`}>

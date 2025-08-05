@@ -24,6 +24,7 @@ import RatingBox from '~/routes/web/search/assets/RatingBox';
 import { formatNumber } from '~/lib/lib';
 import RatingBoxRounded from './RatingBoxRounded';
 import ClaimBusiness from './ClaimBusiness';
+import LocationWithHours from './LocationWithHours';
 
 
 const BusinessLayout = ({
@@ -122,11 +123,16 @@ const BusinessLayout = ({
                                 <div className={`px-[15px] md:px-[0px]`}>
                                     <ShortDescription listing={listing} />
 
+                                    {
+                                        listing && <LocationWithHours listing={listing} />
+                                    }
+
                                     <Description listing={listing} />
 
                                     {listing && <SocialMedia listing={listing} />}
 
                                     {listing && <BusinessFeatures listing={listing} />}
+
 
                                     {listing && <BusinessPhrases listing={listing} />}
 

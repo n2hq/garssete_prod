@@ -1,11 +1,11 @@
 import { LoaderFunction, MetaFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import SearchHead from '~/components/content/SearchHead'
 import ResponsiveNav from '~/components/header/lite/ResponsiveNav'
 import { GalleryProvider } from '~/context/GalleryContext'
 import RatingProvider from '~/context/RatingContext'
-import { config, getBusinessGallery, getBusinessProfileImageData, getPage, getRatingsReviews, getSearch } from '~/lib/lib'
+import { config, getBusinessGallery, getBusinessProfileImageData, getOperatingHours, getPage, getRatingsReviews, getSearch } from '~/lib/lib'
 import BusinessLayout from './assets/BusinessLayout'
 import Footer from '~/components/footer/Footer'
 import Related from './assets/Related'
@@ -87,7 +87,6 @@ const index = () => {
     const gallery: any = data.gallery
     const ratingsData: any = data.ratingsData
 
-    console.log(listing)
 
     return (
         <RatingProvider>

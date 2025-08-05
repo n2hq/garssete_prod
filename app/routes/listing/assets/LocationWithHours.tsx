@@ -139,7 +139,7 @@ const LocationWithHours = ({ listing }: any) => {
                     <div className={`col-span-6`}>
                         <div className={``}>
                             {
-                                openStatus === "no_hours" || openStatus === "" &&
+                                openStatus === "no_hours" || openStatus === null &&
                                 <div>
                                     No hours selected.
                                 </div>

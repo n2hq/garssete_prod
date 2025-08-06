@@ -46,6 +46,10 @@ const LocationWithHours = ({ listing }: any) => {
     const [operatingHours, setOperatingHours] = useState<any | undefined>(undefined)
     const [opHours, setOpHours] = useState<any>(null)
     const [openStatus, setopenStatus] = useState('')
+    const [address, setAddress] = useState('')
+    const [addressLink, setAddressLink] = useState('')
+
+
 
 
     useEffect(() => {
@@ -106,6 +110,25 @@ const LocationWithHours = ({ listing }: any) => {
 
         }
     }, [businessGuid, userGuid])
+
+    useEffect(() => {
+        let getListingAddress = async (listing: any) => {
+            let address = listing?.address_one ? listing?.address_one : ''
+            address += listing?.address_two ? ', ' + listing?.address_two : ''
+            address += listing?.city_name ? ', ' + listing?.city_name : ''
+            address += listing?.state_name ? ', ' + listing?.state_name : ''
+            address += listing?.zipcode ? ' ' + listing?.zipcode : ''
+            address += listing?.country_code ? ' ' + listing?.country_code : ''
+
+            let addressLink = `https://www.google.com/maps?q=${encodeURI(address)}`
+            setAddress(address)
+            setAddressLink(addressLink)
+        }
+
+        if (listing !== null) {
+            getListingAddress(listing)
+        }
+    }, [listing])
     return (
         <div className='mt-12'>
             <ComponentTitle title='Location and Hours' />
@@ -122,17 +145,16 @@ const LocationWithHours = ({ listing }: any) => {
                         </div>
                         <div className=' grid grid-cols-2 gap-6 mt-3'>
                             <div>
-                                1919 Mission St
-                                San Francisco, CA 94103
-                                16th St & 15th St
-                                Mission
+                                {address}
                             </div>
                             <div>
-                                <button className='w-[100%] bg-gray-100 border-[1px] border-gray-300'>
-                                    <div className='text-[14px]  font-sans font-bold text-black  py-1 '>
-                                        Get Directions
-                                    </div>
-                                </button>
+                                <a href={`${addressLink}`} target="_blank">
+                                    <button className='w-[100%] bg-gray-100 border-[1px] border-gray-300'>
+                                        <div className='text-[14px]  font-sans font-bold text-black  py-1 '>
+                                            Get Directions
+                                        </div>
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </div>

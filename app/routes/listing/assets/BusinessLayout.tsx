@@ -146,7 +146,7 @@ const BusinessLayout = ({
                         } */}
 
                             <div className={``}>
-                                <div className={`md:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
+                                <div className={`lg:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
                                     {ratingDisplayData && <RatingDisplay data={ratingDisplayData} />}
                                     {listing && <Address businessProfile={listing} />}
                                     {listing && <ClaimBusiness listing={listing} />}

@@ -29,7 +29,7 @@ const RatingDisplay = ({ data }: RatingDisplayProp) => {
 
     return (
         <div className={`md:border py-[12px] px-[12px] md:mb-3  
-        rounded bg-blue-100`}>
+        rounded bg-blue-50`}>
             <div className={`flex place-content-between gap-1
                 `}>
                 <div className={`flex flex-col place-items-center -space-y-1.5

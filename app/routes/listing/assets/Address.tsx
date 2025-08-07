@@ -18,9 +18,10 @@ const Address = ({ businessProfile }: any) => {
             md:rounded overflow-hidden pt-[30px]
             pb-[15px] bg-[blue]/0 text-black md:black
             md:text-black  border-[1px] border-gray-300/70'>
-                <div className={`font-bold text-[15px] pb-2 
-                   px-[20px]`}>
-                    Property Address
+                <div className={`font-normal text-[19px] 
+                   px-[10px] tracking-tight w-fit border rounded-md
+                   ml-[20px] bg-blue-900 text-white`}>
+                    Business Contact
                 </div>
                 <div className='h-[25px]'></div>
 
@@ -37,7 +38,7 @@ const Address = ({ businessProfile }: any) => {
                                 <div className={`col-span-1 `}>
                                     <MdLocationPin className={`text-[20px]`} />
                                 </div>
-                                <div className={`col-span-11 leading-[1.2em] ml-2
+                                <div className={`col-span-11 leading-[1.4em] ml-2
                             text-[12px]`}>
                                     {
                                         businessProfile?.address_one + ", "
@@ -121,7 +122,7 @@ const Address = ({ businessProfile }: any) => {
                     </div>
                     <div>
 
-                        <div className={`bg-blue-500 mt-[40px] mx-[15px]
+                        <div className={`bg-blue-500 mt-[30px] mx-[15px]
                         text-white text-center py-2 rounded`}>
                             {
                                 businessProfile &&

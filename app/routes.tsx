@@ -84,6 +84,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
 
         route("api/util/state", "routes/api/util/state.tsx");
         route("api/util/country", "routes/api/util/country.tsx");
+        route("api/util/country_locale", "routes/api/util/country_locale.tsx");
         route("api/util/city", "routes/api/util/city.tsx");
         route("api/util/category", "routes/api/util/category.tsx");
 

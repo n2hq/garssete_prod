@@ -38,7 +38,7 @@ const hours = [
 
 
 
-const LocationWithHours = ({ listing }: any) => {
+const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
     const [dense, setDense] = React.useState(true);
     const [secondary, setSecondary] = React.useState(false);
     const [businessGuid, setBusinessGuid] = useState('')
@@ -48,6 +48,7 @@ const LocationWithHours = ({ listing }: any) => {
     const [openStatus, setopenStatus] = useState('')
     const [address, setAddress] = useState('')
     const [addressLink, setAddressLink] = useState('')
+    const [opHoursStatus, setOpHoursStatus] = useState<any | undefined>(undefined)
 
 
 
@@ -103,7 +104,7 @@ const LocationWithHours = ({ listing }: any) => {
         if (businessGuid && userGuid) {
             getOpHours(businessGuid, userGuid).then((data) => {
 
-                console.log(data)
+                //console.log(data)
                 constructHours(data)
                 //setOperatingHours(data)
             })
@@ -129,6 +130,15 @@ const LocationWithHours = ({ listing }: any) => {
             getListingAddress(listing)
         }
     }, [listing])
+
+    useEffect(() => {
+        if (operatingHoursStatus !== undefined) {
+            setOpHoursStatus(operatingHoursStatus);
+
+        }
+    }, [operatingHoursStatus])
+
+
     return (
         <div className='mt-12'>
             <ComponentTitle title='Location and Hours' />
@@ -206,6 +216,10 @@ const LocationWithHours = ({ listing }: any) => {
                                                                 {item?.hours}
                                                             </span>
                                                             <span>
+                                                                {
+                                                                    opHoursStatus.today === item?.day &&
+                                                                    (opHoursStatus.isOpen ? 'Open Now' : 'Close Now')
+                                                                }
                                                                 {/* {item?.status} */}
                                                             </span>
                                                         </div>

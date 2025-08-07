@@ -3,6 +3,14 @@ import { DoResponse } from "~/lib/lib"
 import { query } from "../DB"
 import { Country, State } from "~/lib/types"
 
+const getZoneData = (zone: string) => {
+    const temp = [{ "zoneName": "Asia/Baku", "gmtOffset": 14400, "gmtOffsetName": "UTC+04:00", "abbreviation": "AZT", "tzName": "Azerbaijan Time" }]
+
+    const obj = JSON.parse(zone)
+
+    return obj
+}
+
 export const loader: LoaderFunction = async ({ request, params }) => {
     /* const contentType = request.headers.get("Content-Type")
 
@@ -21,11 +29,23 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         }
 
         const countries: any = rows.map((country: any) => {
+            const zoneData = getZoneData(country?.timezones)
+            const zone = zoneData[0]
             return ({
-                name: country.name,
-                id: country.iso2
+                id: country.iso2,
+                countryCode: country.iso2,
+                callCode: country.phonecode,
+                countryName: country.name,
+                gmtOffset: zone?.gmtOffset,
+                gmtOffsetName: zone?.gmtOffsetName,
+                abbreviation: zone?.abbreviation,
+                timezoneName: zone?.tzName,
+                zoneName: zone?.zoneName
             })
         })
+
+
+
 
         return DoResponse(countries, 200)
     }

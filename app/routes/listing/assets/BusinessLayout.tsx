@@ -25,6 +25,7 @@ import { formatNumber } from '~/lib/lib';
 import RatingBoxRounded from './RatingBoxRounded';
 import ClaimBusiness from './ClaimBusiness';
 import LocationWithHours from './LocationWithHours';
+import { ReportTime } from '~/lib/ReportTime';
 
 
 const BusinessLayout = ({
@@ -34,6 +35,8 @@ const BusinessLayout = ({
 }: any) => {
 
     const [ratingDisplayData, setRatingDisplayData] = useState<RatingDisplayType>()
+    const [operatingHoursStatus, setOperatingHoursStatus] = useState<any | undefined>(undefined)
+
     useEffect(() => {
         if (listing && ratingsData) {
             setRatingDisplayData({
@@ -45,6 +48,15 @@ const BusinessLayout = ({
         }
         //console.log(JSON.stringify(listing.category))
     }, [listing, ratingsData])
+
+    useEffect(() => {
+        if (listing) {
+            ReportTime(listing).then((data) => {
+                setOperatingHoursStatus(data);
+            })
+
+        }
+    }, [listing])
     return (
         <div className={``}>
             <div className={`px-[15px] w-full`}>
@@ -65,6 +77,30 @@ const BusinessLayout = ({
 
                     {
                         listing && <Header listing={listing} />
+                    }
+
+                    {
+                        operatingHoursStatus !== undefined &&
+                        <div className={`mt-[4px] leading-[1.2em]`}>
+                            {
+                                operatingHoursStatus.openStatus === "selected_hours" ?
+                                    <div>
+                                        {operatingHoursStatus.todayHoursFormatted} / {operatingHoursStatus.abbreviation} {operatingHoursStatus.gmtOffsetName}
+                                    </div> :
+                                    <div>
+                                        {
+                                            operatingHoursStatus.openStatus === "always_open" && 'Always Open'
+                                        }
+                                        {
+                                            operatingHoursStatus.openStatus === "permanently_closed" && 'Permanently Closed'
+                                        }
+                                        {
+                                            operatingHoursStatus.openStatus === "temporarily_closed" && 'Temporarily Closed'
+                                        }
+                                    </div>
+                            }
+
+                        </div>
                     }
                 </div>
             </div>
@@ -124,7 +160,7 @@ const BusinessLayout = ({
                                     <ShortDescription listing={listing} />
 
                                     {
-                                        listing && <LocationWithHours listing={listing} />
+                                        listing && operatingHoursStatus && <LocationWithHours listing={listing} operatingHoursStatus={operatingHoursStatus} />
                                     }
 
                                     <Description listing={listing} />

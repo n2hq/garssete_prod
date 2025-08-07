@@ -3,7 +3,7 @@ import AccountLayout from '../../assets/AccountLayout'
 import ContentLayout from '../../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
 import { LoaderFunction } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { Link, useLoaderData } from '@remix-run/react'
 import { getBusinessProfile, getBusinessProfileImageData, getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData } from '~/lib/lib'
 import BusinessProfileForm from './assets/BusinessProfileForm'
 import BusinessMenu from './assets/BusinessMenu'
@@ -123,6 +123,18 @@ const index = () => {
                             guid={businessGuid}>
                             {data?.businessProfile?.title}
                         </CardTitle>
+
+                        <div className={`bg-blue-100 w-full px-2 py-2
+                            flex place-content-end rounded-lg`}>
+                            <Link to={`/${businessProfile?.gid}`}
+
+                            >
+                                <button className={`px-3 border border-black
+                                    py-2 rounded-full hover:bg-white`}>
+                                    Preview
+                                </button>
+                            </Link>
+                        </div>
 
                         {
                             businessGuid && userGuid &&

@@ -77,15 +77,12 @@ function formatTime(time24: string): string {
 }
 
 export const getLocationAndBusinessStatus = async (listing: any) => {
-
-
-
     const countryCode: string = listing?.country_code
 
     const data = await getCountriesWithTimezone(countryCode)
     const country = getCountryTimezoneData(countryCode, data)
 
-
+    console.log(country)
 
     const operatingHours: any = await getOperatingHours(listing?.gid, listing?.owner)
     console.log(operatingHours)
@@ -95,16 +92,15 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
     country["openStatus"] = operatingHours?.open_status
 
 
-    const now = new Date();
-    const dayIndex = now.getDay(); // 0 = Sunday, ..., 6 = Saturday
     const dayMap = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    const nowUTC = new Date();
+    const offsetMs = country.gmtOffset * 1000;
+    const localTime = new Date(nowUTC.getTime() + offsetMs);
+
+    const dayIndex = localTime.getDay(); // 0 = Sunday, ..., 6 = Saturday
     const today = dayMap[dayIndex];
-
-    const location = country
-
-    if (!location) return { message: 'Country not found' };
-
-    const todayHoursEntry = location.hours.find((entry: any) => entry.day === today);
+    const todayHoursEntry = country.hours.find((entry: any) => entry.day === today);
 
     let isOpen = false;
     let todayHoursFormatted = 'Closed Today';
@@ -114,19 +110,19 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
         const [openHour, openMinute] = openStr.split(':').map(Number);
         const [closeHour, closeMinute] = closeStr.split(':').map(Number);
 
-        const openTime = new Date(now);
+        const openTime = new Date(localTime);
         openTime.setHours(openHour, openMinute, 0, 0);
 
-        const closeTime = new Date(now);
+        const closeTime = new Date(localTime);
         closeTime.setHours(closeHour, closeMinute, 0, 0);
 
-        isOpen = now >= openTime && now <= closeTime;
+        isOpen = localTime >= openTime && localTime <= closeTime;
 
         todayHoursFormatted = `${isOpen ? 'Open Now' : 'Closed Now'}: ${today}, ${formatTime(openStr)} - ${formatTime(closeStr)}`;
     }
 
     return {
-        ...location,
+        ...country,
         isOpen,
         todayHoursFormatted,
         today

@@ -202,9 +202,10 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                                             return (
                                                 <li
                                                     key={index}
-                                                    className={`w-full`}
+                                                    className={`w-full ${item?.hours === 'null - null' && 'hidden'} `}
                                                 >
-                                                    <div className={`grid grid-cols-12 py-2 `}>
+                                                    <div className={`grid grid-cols-12 py-2 
+                                                        `}>
                                                         <div className={` col-span-2 flex flex-col
                                                         place-items-start`}>
                                                             {item?.day}
@@ -218,7 +219,7 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                                                             <span>
                                                                 {
                                                                     opHoursStatus.today === item?.day &&
-                                                                    (opHoursStatus.isOpen ? 'Open Now' : 'Close Now')
+                                                                    (opHoursStatus.isOpen ? 'Open Now' : 'Closed Now')
                                                                 }
                                                                 {/* {item?.status} */}
                                                             </span>

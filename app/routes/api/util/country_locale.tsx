@@ -4,7 +4,7 @@ import { query } from "../DB"
 import { Country, State } from "~/lib/types"
 
 const getZoneData = (zone: string) => {
-    const temp = [{ "zoneName": "Asia/Baku", "gmtOffset": 14400, "gmtOffsetName": "UTC+04:00", "abbreviation": "AZT", "tzName": "Azerbaijan Time" }]
+
 
     const obj = JSON.parse(zone)
 
@@ -31,6 +31,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         const countries: any = rows.map((country: any) => {
             const zoneData = getZoneData(country?.timezones)
             const zone = zoneData[0]
+
             return ({
                 id: country.iso2,
                 countryCode: country.iso2,

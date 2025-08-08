@@ -15,7 +15,7 @@ const HeroSection = () => {
         className={`object-cover object-center w-full h-full`}
       />
 
-      <div className={`absolute inset-0 bg-gradient-to-b from-black to-blue-700/40`}>
+      <div className={`absolute inset-0 bg-gradient-to-b from-black/80 to-black/20`}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

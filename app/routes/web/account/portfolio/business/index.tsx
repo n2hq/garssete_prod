@@ -118,14 +118,20 @@ const index = () => {
             <ContentLayout title={'Update Business'}>
                 {
                     data && <div>
-                        <CardTitle
-                            baseUrl='/web/account/portfolio/'
-                            guid={businessGuid}>
-                            {data?.businessProfile?.title}
-                        </CardTitle>
 
-                        <div className={`bg-blue-100 w-full px-2 py-2
-                            flex place-content-end rounded-lg`}>
+
+                        <div className={`bg-blue-100 w-full px-2 
+                            flex place-content-between rounded-lg
+                            place-items-center h-[50px]`}>
+                            <div className={`h-full flex
+                                place-items-center`}>
+                                <CardTitle
+                                    baseUrl='/web/account/portfolio/'
+                                    guid={businessGuid}>
+                                    {data?.businessProfile?.title}
+                                </CardTitle>
+                            </div>
+
                             <Link to={`/${businessProfile?.gid}`}
 
                             >

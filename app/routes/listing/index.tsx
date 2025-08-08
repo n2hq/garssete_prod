@@ -13,7 +13,7 @@ import GenericNav from '~/components/header/generic/GenericNav'
 import HomeNav from '../assets/header/HomeNav'
 import { TopAd } from '~/components/content/ads/TopAd'
 import SearchNavbar from '~/components/header/new/SearchNavbar'
-import Layout from '../asset/NormalLayout'
+import Layout from '../asset/SearchLayout'
 import CallToActionSection from '../landing/assets/CallToActionSection'
 import FooterSection from '../landing/assets/FooterSection'
 import VerticalHeight from '../asset/VerticalHeight'
@@ -92,9 +92,7 @@ const index = () => {
         <RatingProvider>
             <GalleryProvider>
                 <Layout>
-                    <div className={`md:hidden`}>
-                        <HomeNav />
-                    </div>
+
 
                     <TopAd />
 

@@ -53,19 +53,11 @@ export const InfoContact = () => {
                 Please use the following links below to contact us. We will reply within 24 hours of your request. Most times we respond almost immediately.
             </p>
             <hr data-start="709" data-end="712" />
-            <p data-start="523" data-end="707">
-                <ul>
-                    <li>
-                        support@garssete.com
-                    </li>
-                    <li>
-                        https://x.com/garssete
-                    </li>
-                    <li>
-                        https://facebook.com/garssete
-                    </li>
-                </ul>
-            </p>
+            <ul>
+                <li>support@garssete.com</li>
+                <li>https://x.com/garssete</li>
+                <li>https://facebook.com/garssete</li>
+            </ul>
 
             <hr data-start="709" data-end="712" />
             <h3 data-start="492" data-end="522">
@@ -78,15 +70,13 @@ export const InfoContact = () => {
             <p data-start="272" data-end="485">
                 Please sign up and then send an email to <strong>support@garssete.com</strong> to claim your business for free!
             </p>
-            <p data-start="523" data-end="707">
-                <ul>
-                    <li>
-                        <strong>Email:</strong>
-                        <span className={`underline`}>support@garssete.com</span>
-                    </li>
+            <ul>
+                <li>
+                    <strong>Email:</strong>
+                    <span className={`underline`}>support@garssete.com</span>
+                </li>
 
-                </ul>
-            </p>
+            </ul>
 
 
 

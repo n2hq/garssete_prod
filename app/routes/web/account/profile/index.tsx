@@ -12,9 +12,20 @@ import CardTitle from '../assets/CardTitle'
 
 
 const index = () => {
+
+    useEffect(() => {
+        const tokens = localStorage.getItem("authTokens")
+        if (tokens === null) {
+            window.location.href = "/web/signin"
+        }
+    }, [])
+
     const auth = useAuth()
     if (!auth) { return null }
+
     const { user } = auth
+
+
 
 
     const [userProfile, setUserProfile] = useState<any | null>(null)
@@ -83,10 +94,11 @@ const index = () => {
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen">
-                <div className="text-lg">Loading...</div>
+                <div className="text-lg">Garssete</div>
             </div>
         )
     }
+
 
 
 

@@ -10,7 +10,7 @@ export const config = {
 }
 
 export const appConfig = {
-    NAVBAR_HEIGHT: 50
+    NAVBAR_HEIGHT: 60
 }
 
 export const getSiteLogo = () => {

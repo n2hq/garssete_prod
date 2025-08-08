@@ -51,12 +51,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     useEffect(() => {
+
         const tokens = localStorage.getItem("authTokens")
         {/** setAuthTokens */ }
         if (tokens !== null) {
             const authTokens = JSON.parse(tokens) as AuthTokens
             setAuthTokens(authTokens)
         } else {
+
             setAuthTokens(null)
         }
 
@@ -146,7 +148,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem("authTokens")
-        //window.location.reload()
+        window.location.reload()
     }
 
     const resetpw = async (data: any) => {

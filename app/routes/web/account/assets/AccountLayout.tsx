@@ -9,11 +9,13 @@ import { BsMenuButton } from 'react-icons/bs'
 import { useLocation, useNavigate } from '@remix-run/react'
 import AccountNav from '~/components/header/account/AccountNav'
 import HomeNav from '~/routes/assets/header/HomeNav'
-import { useAuth } from '~/context/AuthContext'
+import { AuthProvider, useAuth } from '~/context/AuthContext'
 import { UserProfile } from '~/lib/types'
 import { appConfig, getUserProfile } from '~/lib/lib'
 import { FiAlertCircle, FiAlertTriangle } from 'react-icons/fi'
 import SearchNavbar from '~/components/header/new/SearchNavbar'
+import SrchNavbar from '~/components/header/new/SrchNavbar'
+import { AuthContextType } from '~/lib/types'
 
 const AccountLayout = ({ children }: any) => {
     const [show, setShow] = useState(true)
@@ -21,8 +23,12 @@ const AccountLayout = ({ children }: any) => {
     const [userActive, setUserActive] = useState<any | false>(true)
     const [inactiveMessage, setInactiveMessage] = useState<any | null>(null)
 
+    const tokens = localStorage.getItem("authTokens")
+
     const auth = useAuth()
+
     if (!auth) { return null }
+
 
 
     const [loading, setLoading] = useState(true)
@@ -61,6 +67,7 @@ const AccountLayout = ({ children }: any) => {
 
     useEffect(() => {
         const tokens = localStorage.getItem("authTokens")
+
         if (tokens === null || tokens === undefined || tokens === '') {
             window.location.href = '/web/signin'
         }
@@ -86,7 +93,9 @@ const AccountLayout = ({ children }: any) => {
     }, [userActive])
 
 
+
     if (loading) {
+
         return (
             <div className="flex justify-center items-center h-screen">
                 <div className="text-lg">Loading...</div>
@@ -96,13 +105,15 @@ const AccountLayout = ({ children }: any) => {
 
 
 
+
+
     return (
         <div className={`h-screen flex flex-col relative`}>
 
 
             {/** top navbar */}
 
-            <SearchNavbar />
+            <SrchNavbar />
             <div className={`h-[${appConfig.NAVBAR_HEIGHT}px]`}></div>
 
             <div className={`md:hidden`}>

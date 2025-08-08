@@ -47,9 +47,9 @@ const UserMenu = ({ theme }: any) => {
                         <BiUser className={`object-cover w-[80%] h-[80%]`} />
                     </button> :
                     <Link to={`/web/signin`}>
-                        <button className={`text-white border-white/50 border bg-transparent hover:bg-white/80 hover:text-black text-[12px] rounded-none px-3 py-[5px] tracking-tigher`}>
+                        <button className={`text-black border-white/50 border rounded border-gray-600 bg-gray-200 hover:bg-white/80 hover:text-black text-[12px] px-3 py-[5px] tracking-tigher font-bold`}>
                             Sign In
-                    </button>
+                        </button>
                     </Link>
             }
 

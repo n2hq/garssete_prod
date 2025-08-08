@@ -21,10 +21,10 @@ const ResultItem = ({ listing, index }: any) => {
 
     return (
 
-        <div className={` cursor-pointer my-2`}>
+        <div className={` cursor-pointer my-0`}>
             <div className={`flex rounded  gap-x-2 p-2
-             hover:bg-blue-100 hover:shadow-md  
-             ${isOdd(index) ? 'bg-blue-50' : ''}
+             hover:bg-blue-50  
+             ${isOdd(index) ? '' : ''}
                 `}>
                 {/** left */}
                 <div className={`relative min-w-[50px] w-[50px] h-[50px]

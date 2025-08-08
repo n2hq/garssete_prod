@@ -22,7 +22,7 @@ const SearchNavbar = () => {
             className={`fixed top-0 left-0 w-full z-[10000] shadow-xl`}
             style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}
         >
-            <div className={`flex justify-between items-center w-full h-full py-3 px-8 bg-gray-800 text-white gap-3`}>
+            <div className={`flex justify-between items-center w-full h-full py-3 px-8 bg-black text-white gap-3`}>
                 <div className={`flex items-center gap-4 md:gap-6`}>
                     <Link to={`/`}
                         className={`cursor-pointer hover:!text-gray-300`}
@@ -64,6 +64,7 @@ const SearchNavbar = () => {
                         </button>
                     </div>
                 </form>
+
 
                 <div className={`flex items-center gap-4`}>
 

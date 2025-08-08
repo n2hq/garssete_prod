@@ -34,7 +34,7 @@ const PortfolioPagination = <T,>({
 
     return (
         <div>
-            <div className={``}>
+            <div className={`divide-gray-500/20 divide-y-[1px]`}>
                 {
                     currentItems.map((item, index) => {
                         return (

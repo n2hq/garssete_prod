@@ -32,7 +32,7 @@ const SrchNavbar = () => {
 
     return (
         <div>
-            <div className={` bg-black text-white  fixed top-0 left-0 w-full z-[10000] shadow-xl px-4 sm:px-6`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
+            <div className={` bg-[#001e5a] text-white  fixed top-0 left-0 w-full z-[10000] shadow-xl px-4 sm:px-6`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
                 <div className="max-w-full mx-auto flex items-center justify-between h-full gap-4">
 
                     {/* Left - Logo and Menu Button */}

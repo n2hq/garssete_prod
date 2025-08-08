@@ -31,12 +31,12 @@ const HomeNav = () => {
 
     return (
         <div>
-            <MobileNav
+            {/* <MobileNav
                 showNav={showNav}
                 closeNav={closeNav}
-            />
+            /> */}
             <div className={`shadow-lg pb-3 z-[1000]`}>
-                
+
                 <div className={`h-[10px]`}></div>
 
                 <div className={`px-[12px] w-full bg-white`}>

@@ -37,7 +37,13 @@ const SrchNavbar = () => {
 
                     {/* Left - Logo and Menu Button */}
                     <div className="flex items-center gap-2 lg:border-r border-blue-700 pr-4">
-                        <HamburgerSecondary theme='dark' openNav={() => setShowNav(true)} navBg={false} />
+                        <img
+                            src={`/images/logo.svg`}
+                            alt="Garssete"
+                            width={30}
+                            height={30}
+                            className={`w-[25px] h-[25px]`}
+                        />
                         <Link to="/" className="text-xl font-extrabold tracking-tight">
                             GARSSETE
                         </Link>
@@ -54,8 +60,9 @@ const SrchNavbar = () => {
                     </div>
 
                     {/* Right - UserMenu */}
-                    <div className="flex items-center lg:border-l border-blue-700 pl-4">
+                    <div className="flex items-center lg:border-l border-blue-700 pl-4 gap-2">
                         <UserMenu theme='light' />
+                        <HamburgerSecondary theme='dark' openNav={() => setShowNav(true)} navBg={false} />
                     </div>
                 </div>
 

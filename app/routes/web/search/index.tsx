@@ -12,9 +12,10 @@ import { navlinks } from '~/lib/json'
 import SearchHead from '~/components/content/SearchHead'
 import GenericNav from '~/components/header/generic/GenericNav'
 import HomeNav from '~/routes/assets/header/HomeNav'
+
 import { TopAd } from '~/components/content/ads/TopAd'
 import SearchNavbar from '~/components/header/new/SearchNavbar'
-import Layout from '~/routes/asset/NormalLayout'
+import SearchLayout from '~/routes/asset/SearchLayout'
 import VerticalHeight from '~/routes/asset/VerticalHeight'
 import CallToActionSection from '~/routes/landing/assets/CallToActionSection'
 import FooterSection from '~/routes/landing/assets/FooterSection'
@@ -58,11 +59,8 @@ const index = () => {
 
 
     return (
-        <Layout>
+        <SearchLayout>
 
-            <div className={`md:hidden`}>
-                <HomeNav />
-            </div>
 
             <div className={`px-[15px] border-b`}>
                 <div className={`max-w-[1100px] mx-auto w-full`}>
@@ -152,7 +150,7 @@ const index = () => {
             <VerticalHeight />
             <CallToActionSection />
             <FooterSection />
-        </Layout>
+        </SearchLayout>
     )
 }
 

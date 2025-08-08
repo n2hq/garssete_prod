@@ -25,13 +25,13 @@ export const meta: MetaFunction = () => {
 
 const _index = () => {
   return (
-      <Layout>
-        <Navbar />
-          <HeroSection />
-          <FeaturesSection />
-          <DiscoverSection />
-          <CallToActionSection />
-          <FooterSection />
+    <Layout>
+      <Navbar />
+      <HeroSection />
+      <FeaturesSection />
+      <DiscoverSection />
+      <CallToActionSection />
+      <FooterSection />
     </Layout>
   )
 }

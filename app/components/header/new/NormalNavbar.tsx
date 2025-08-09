@@ -24,7 +24,7 @@ const acctLnks = [
     { title: "Account", lnk: "/web/account/profile", icon: <TbPasswordUser /> },
 ]
 
-const SrchNavbar = () => {
+const NormalNavbar = () => {
     const [showNav, setShowNav] = useState(false)
     const location = useLocation()
     const params = new URLSearchParams(location.search)
@@ -67,28 +67,7 @@ const SrchNavbar = () => {
                     </div>
                 </div>
 
-                <div className={`md:hidden shadow-lg pb-3 z-[1000] bg-white`}>
 
-                    <div className={`h-[10px]`}></div>
-
-                    <div className={`px-[12px] w-full bg-white`}>
-                        <form action="/web/search">
-                            <div className={`bg-gray-100 w-full rounded-full h-[38px]
-                                    flex place-items-center px-2 gap-2 border
-                                    border-gray-400/20`}>
-                                <BiSearch className={`h-[20px] w-[20px]`} />
-                                <input
-                                    type="text"
-                                    name="q"
-                                    placeholder={`Restaurants, Hotels, Cities, Real Estates`}
-                                    className={`bg-transparent w-full outline-none
-                                            h-full flex place-content-center text-[14px]
-                                            `}
-                                />
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
 
             {/** mobile only searchbar */}
@@ -105,7 +84,7 @@ const SrchNavbar = () => {
     )
 }
 
-export default SrchNavbar
+export default NormalNavbar
 
 
 

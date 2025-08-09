@@ -93,7 +93,7 @@ const MobileNav = ({
 
     return (
         <>
-            <div>
+            <div className={`-mt-[2px]`}>
 
                 {/**overlay */}
                 <div onClick={closeNav} className={`transform ${bgOverlay} fixed transition-all duration-500 inset-0 z-[4000] bg-black opacity-20 w-full`}></div>

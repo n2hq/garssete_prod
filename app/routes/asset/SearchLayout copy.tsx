@@ -10,13 +10,12 @@ const SearchLayout = ({ children }: { children: React.ReactNode }) => {
         <div className={`h-full w-full`}>
             <SrchNavbar />
 
-            {/*  <div className={`md:hidden mt-[${appConfig.NAVBAR_HEIGHT}px] fixed w-full
+            <div className={`md:hidden mt-[${appConfig.NAVBAR_HEIGHT}px] fixed w-full
             bg-white z-[3000]`}>
                 <HomeNav />
             </div>
-            */}
-
-            <main className={`h-full flex w-full flex-col mt-[120px] md:mt-[60px]`}>
+            <div className={`h-[120px] md:h-[60px]`}></div>
+            <main className={`h-full flex w-full flex-col `}>
 
                 {children}
             </main>

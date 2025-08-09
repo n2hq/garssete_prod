@@ -66,7 +66,10 @@ const SrchNavbar = () => {
                         <HamburgerSecondary theme='dark' openNav={() => setShowNav(true)} navBg={false} />
                     </div>
                 </div>
-
+                <MobileNav
+                    showNav={showNav}
+                    closeNav={closeNav}
+                />
                 <div className={`md:hidden shadow-lg pb-3 z-[1000] bg-white`}>
 
                     <div className={`h-[10px]`}></div>
@@ -89,18 +92,12 @@ const SrchNavbar = () => {
                         </form>
                     </div>
                 </div>
-            </div>
-
-            {/** mobile only searchbar */}
-            <div className={`md:hidden  fixed w-full
-            bg-white z-[3000]`}>
 
 
             </div>
-            <MobileNav
-                showNav={showNav}
-                closeNav={closeNav}
-            />
+
+
+
         </div>
     )
 }

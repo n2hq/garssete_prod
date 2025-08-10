@@ -60,17 +60,27 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
         }
     }, [listing])
 
+    const constructDailyHour = (start: string, end: string) => {
+        if (start === "Closed" || end == "Closed") {
+            return "Closed"
+        } else {
+            return `${start} - ${end}`
+        }
+    }
+
     const constructHours = (operatingHours: any) => {
         const opHours = []
         setopenStatus(operatingHours?.open_status)
 
+
+
         opHours.push({
             day: "Mon",
-            hours: `${operatingHours.monday_from} - ${operatingHours.monday_to}`
+            hours: constructDailyHour(operatingHours.monday_from, operatingHours.monday_to)
         })
         opHours.push({
             day: "Tue",
-            hours: `${operatingHours.tuesday_from} - ${operatingHours.tuesday_to}`
+            hours: constructDailyHour(operatingHours.tuesday_from, operatingHours.tuesday_to)
         })
         opHours.push({
             day: "Wed",
@@ -218,8 +228,9 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                                                             </span>
                                                             <span>
                                                                 {
-                                                                    opHoursStatus.today === item?.day &&
-                                                                    (opHoursStatus.isOpen ? 'Open Now' : 'Closed Now')
+                                                                    item?.hours.includes("Closed") ? '' :
+                                                                        opHoursStatus.today === item?.day &&
+                                                                        (opHoursStatus.isOpen ? 'Open Now' : 'Closed Now')
                                                                 }
                                                                 {/* {item?.status} */}
                                                             </span>

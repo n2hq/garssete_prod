@@ -25,6 +25,14 @@ const getCountryTimezoneData = (countryCode: string, countries: any) => {
     return countries.find((country: any) => country?.countryCode === countryCode);
 }
 
+const constructDailyHour = (start: string, end: string) => {
+    if (start === "Closed" || end == "Closed") {
+        return "Closed"
+    } else {
+        return `${start} - ${end}`
+    }
+}
+
 const reConstructHours = (operatingHours: any) => {
 
     const opHours = []
@@ -32,32 +40,32 @@ const reConstructHours = (operatingHours: any) => {
 
     opHours.push({
         day: "Mon",
-        hours: `${operatingHours.monday_from} - ${operatingHours.monday_to}`
+        hours: constructDailyHour(operatingHours.monday_from, operatingHours.monday_to)
     })
     opHours.push({
         day: "Tue",
-        hours: `${operatingHours.tuesday_from} - ${operatingHours.tuesday_to}`
+        hours: constructDailyHour(operatingHours.tuesday_from, operatingHours.tuesday_to)
     })
     opHours.push({
         day: "Wed",
-        hours: `${operatingHours.wednesday_from} - ${operatingHours.wednesday_to}`
+        hours: constructDailyHour(operatingHours.wednesday_from, operatingHours.wednesday_to)
     })
     opHours.push({
         day: "Thu",
-        hours: `${operatingHours.thursday_from} - ${operatingHours.thursday_to}`
+        hours: constructDailyHour(operatingHours.thursday_from, operatingHours.thursday_to)
     })
     opHours.push({
         day: "Fri",
-        hours: `${operatingHours.friday_from} - ${operatingHours.friday_to}`
+        hours: constructDailyHour(operatingHours.friday_from, operatingHours.friday_to)
     })
     opHours.push({
         day: "Sat",
-        hours: `${operatingHours.saturday_from} - ${operatingHours.saturday_to}`
+        hours: constructDailyHour(operatingHours.saturday_from, operatingHours.saturday_to)
     })
 
     opHours.push({
         day: "Sun",
-        hours: `${operatingHours.sunday_from} - ${operatingHours.sunday_to}`
+        hours: constructDailyHour(operatingHours.sunday_from, operatingHours.sunday_to)
     })
 
     //console.log(opHours)

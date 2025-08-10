@@ -12,7 +12,7 @@ const ChangeEmailFail = ({ guid }: any) => {
         <div className=' flex place-content-center place-items-center w-full'>
             <div className=' max-w-[300px]'>
                 <div className=' text-xl leading-[1.2em] text-center font-light '>
-                    Link Has Expired.
+                    Email has been changed!
                 </div>
 
                 <div className={`mt-4 flex place-items-center place-content-center`}>
@@ -24,7 +24,7 @@ const ChangeEmailFail = ({ guid }: any) => {
 
 
                 <div className=' mt-6 text-[15px] '>
-                    Try changing your email again.
+                    Sign in with your new email. If your email is not changed, please signin again with the old email and try again.
                 </div>
                 <div className=' mt-4'>
                     <Link to={`/web/account/email_address`}

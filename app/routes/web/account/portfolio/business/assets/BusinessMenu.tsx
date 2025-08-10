@@ -36,26 +36,26 @@ const BusinessMenu = ({ title, guid, userGuid }: any) => {
         setShowSettings(false)
     }
     return (
-        <div className=' flex place-content-between w-full  px-4 py-3 mt-1 z-[10]'>
+        <div className=' flex place-content-between w-full  px-4 py-3 mt-1 z-[1000]'>
             <div className='  rounded-lg text-xl text-black font-normal'>
                 {title}
             </div>
 
             <div className={`relative flex flex-col place-items-center place-content-end 
                 bg-blue-200 w-[180px]  gap-3  text-gray-500 font-light font-sans
-                z-[10]
+                
                 
                 `}>
                 <button
                     className={`rounded-md cursor-pointer w-full bg-blue-900
-                         text-white shadow-md shadow-blue-400 py-1`}
+                         text-white shadow-md shadow-blue-400 py-1 `}
                     onMouseDown={() => displaySettings()}
                     onBlur={() => hideSettings()}
                 >
                     Settings
                 </button>
 
-                <div className={`${showSettings ? 'block' : 'hidden'} absolute w-full top-8 rounded-lg 
+                <div className={`${showSettings ? 'block' : 'hidden'} absolute w-full top-8 rounded-lg z-[10000]
                 border-[1px] border-gray-100 bg-white shadow-lg  `}>
                     <div className='divide-y-[1px] divide-gray-500/20 '>
                         {

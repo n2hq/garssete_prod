@@ -14,6 +14,7 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
         imgconst = '/images/imgplaceholder.jpg'
     }
 
+
     const [imgSrc, setImgSrc] = useState<any>(imgconst)
     const [selectedFile, setSelectedFile] = useState<any>(null)
     const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -29,6 +30,7 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
         const file = event.target.files?.[0]
 
         if (file) {
+
             const imageUrl = URL.createObjectURL(file)
             setImgSrc(imageUrl)
             setSelectedFile(file)
@@ -40,9 +42,10 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
         setWorking(true)
         notification.notify('Working...')
         await new Promise((resolve) => setTimeout(resolve, 1000));
+        const formData = new FormData();
 
         if (isImgSelected) {
-            const formData = new FormData();
+
             formData.append('file', selectedFile);
             formData.append('guid', user.user_guid)
             formData.append('bid', listing.gid)
@@ -50,9 +53,6 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
 
             const endpoint = "/business_profile_pic_upload"
             const url = config.IMG_BASE_URL + endpoint
-
-
-
 
             try {
                 const response = await fetch(url, {

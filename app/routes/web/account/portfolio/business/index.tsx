@@ -122,9 +122,9 @@ const index = () => {
 
                         <div className={`bg-blue-100 w-full px-2 
                             flex place-content-between rounded-lg
-                            place-items-center h-[50px]`}>
-                            <div className={`h-full flex
-                                place-items-center`}>
+                            place-items-center h-auto py-2 gap-[5px]
+                            leading-[1.5em]`}>
+                            <div className={`h-full`}>
                                 <CardTitle
                                     baseUrl='/web/account/portfolio/'
                                     guid={businessGuid}>

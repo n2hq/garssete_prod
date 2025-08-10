@@ -167,9 +167,12 @@ const ImageBlock = ({ images, listing }: any) => {
                 </div>
                 <div className={`rounded-xl overflow-hidden
                     relative bg-black text-white cursor-pointer
-                    flex place-content-center place-items-center h-[100px]`}
+                    flex place-content-center place-items-center h-[100px]
+                    bg-cover`}
                     onMouseDown={(e) => showGallery(0)}
+                    style={{ backgroundImage: `url("/images/abstract_placeholder.jpg")` }}
                 >
+                    <div className={` absolute top-0 left-0 right-0 bottom-0 bg-black/20`}></div>
                     {images?.length > 7 ? `+${images.length - 7}` : 'View all'}
                 </div>
             </div>

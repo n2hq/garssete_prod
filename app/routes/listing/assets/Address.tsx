@@ -39,7 +39,7 @@ const Address = ({ businessProfile }: any) => {
                                     <MdLocationPin className={`text-[20px]`} />
                                 </div>
                                 <div className={`col-span-11 leading-[1.4em] ml-2
-                            text-[13px]`}>
+                            text-[15px] md:text-[13px]`}>
                                     {
                                         businessProfile?.address_one + ", "
                                     }
@@ -79,7 +79,7 @@ const Address = ({ businessProfile }: any) => {
                                         <MdPhone className={`text-[20px]`} />
                                     </div>
                                     <div className={`col-span-11 leading-[1.2em] ml-2
-                                    text-[13px]`}>
+                                    text-[15px] md:text-[13px]`}>
                                         {businessProfile?.phone}
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@ const Address = ({ businessProfile }: any) => {
                                         <MdOutline3gMobiledata className={`text-[22px]`} />
                                     </div>
                                     <div className={`col-span-11 leading-[1.2em] ml-2 top-0
-                            flex place-items-center text-[13px]`}>
+                            flex place-items-centertext-[15px] md:text-[13px]`}>
 
                                         <div className={`w-full  truncate`}>
                                             {
@@ -115,7 +115,7 @@ const Address = ({ businessProfile }: any) => {
                                         <MdEmail className={`text-[20px]`} />
                                     </div>
                                     <div className={`col-span-11 leading-[1.2em] ml-2 top-0
-                            flex place-items-center text-[13px]`}>
+                            flex place-items-center text-[15px] md:text-[13px]`}>
 
                                         Email Address
 

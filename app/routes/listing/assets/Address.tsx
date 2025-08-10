@@ -96,7 +96,11 @@ const Address = ({ businessProfile }: any) => {
                                     <div className={`col-span-11 leading-[1.2em] ml-2 top-0
                             flex place-items-center text-[12px]`}>
 
-                                        Website
+                                        <div className={`w-full  truncate`}>
+                                            {
+                                                businessProfile?.website || "No Website"
+                                            }
+                                        </div>
 
                                     </div>
                                 </div>

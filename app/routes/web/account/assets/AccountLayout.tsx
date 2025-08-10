@@ -112,7 +112,7 @@ const AccountLayout = ({ children }: any) => {
 
 
             {/** top navbar */}
-            <div className={`h-[${appConfig.NAVBAR_HEIGHT}px]`}></div>
+            <div className={`h-[${appConfig.NAVBAR_HEIGHT}px] md:h-[0px]`}></div>
             <SrchNavbar />
 
             <div className={`md:hidden`}>

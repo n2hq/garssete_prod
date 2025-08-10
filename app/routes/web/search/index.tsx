@@ -78,7 +78,7 @@ const index = () => {
                             col-span-12 md:col-span-8 truncate md:place-content-end
                              pt-0 pb-2 md:pt-3 md:pb-3 `}>
                             {
-                                navlinks.map((link, index) => {
+                                navlinks?.map((link, index) => {
                                     return (<Link to={`${link.url}`} key={index} className={``}>{link.label}</Link>)
                                 })
                             }

@@ -60,7 +60,7 @@ const reConstructHours = (operatingHours: any) => {
         hours: `${operatingHours.sunday_from} - ${operatingHours.sunday_to}`
     })
 
-    console.log(opHours)
+    //console.log(opHours)
 
     return {
         opHours: opHours,
@@ -82,10 +82,10 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
     const data = await getCountriesWithTimezone(countryCode)
     const country = getCountryTimezoneData(countryCode, data)
 
-    console.log(country)
+    //console.log(country)
 
     const operatingHours: any = await getOperatingHours(listing?.gid, listing?.owner)
-    console.log(operatingHours)
+    //console.log(operatingHours)
     const reconstructed = reConstructHours(operatingHours)
     const opHours = reconstructed.opHours
     country["hours"] = opHours

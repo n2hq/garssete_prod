@@ -5,11 +5,16 @@ import { useAuth } from '~/context/AuthContext'
 import { getUserProfile } from '~/lib/lib'
 import EmailForm from './assets/EmailForm'
 import CardTitle from '../assets/CardTitle'
+import { redirect } from '@remix-run/react'
 
 const index = () => {
     const auth = useAuth()
     if (!auth) { return null }
+
     const { user } = auth
+
+
+
     const [userProfile, setUserProfile] = useState<any | null>(null)
     const [data, setData] = useState<any | null>(null)
     const [loading, setLoading] = useState(true)

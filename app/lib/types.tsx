@@ -70,9 +70,10 @@ export type AuthUser = {
 
 export type AuthContextType = {
     user: AuthUser
-    signin: (data: LoginType) => Promise<any>;
-    signout: () => void;
-    resetpw: (data: any) => any;
+    signin: (data: LoginType) => Promise<any>
+    signoutNoReload: () => void
+    signoutReload: () => void
+    resetpw: (data: any) => any
 };
 
 export type AuthTokens = {

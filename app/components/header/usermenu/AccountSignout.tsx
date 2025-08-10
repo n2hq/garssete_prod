@@ -3,12 +3,20 @@ import { FaSignOutAlt } from 'react-icons/fa'
 import { FcSettings } from 'react-icons/fc'
 import { useAuth } from '~/context/AuthContext'
 
+
+
 const AccountSignout = () => {
-    const { signout } = useAuth()
+
+    const auth = useAuth()
+
+
+    if (!auth) { return null }
+
+    const { signoutReload } = auth
 
     return (
         <div
-            onClick={() => signout()}
+            onClick={() => signoutReload()}
             className={`flex hover:bg-gray-100 px-[10px] py-[5px] 
         hover:cursor-pointer gap-2 place-items-center`}>
             <div className={`bg-gray-200 h-[30px] w-[30px] rounded-full

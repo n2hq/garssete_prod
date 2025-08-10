@@ -7,12 +7,12 @@ import { GiCancel } from 'react-icons/gi'
 import { MdCancel, MdOutlineCancel } from 'react-icons/md'
 import { TbCancel, TbFlagCancel } from 'react-icons/tb'
 
-const ChangeEmailFail = ({ guid }: any) => {
+const ChangeEmailFail = () => {
     return (
         <div className=' flex place-content-center place-items-center w-full'>
             <div className=' max-w-[300px]'>
                 <div className=' text-xl leading-[1.2em] text-center font-light '>
-                    Email has been changed!
+                    Link Has Expired.
                 </div>
 
                 <div className={`mt-4 flex place-items-center place-content-center`}>
@@ -24,9 +24,9 @@ const ChangeEmailFail = ({ guid }: any) => {
 
 
                 <div className=' mt-6 text-[15px] '>
-                    Sign in with your new email. If your email is not changed, please signin again with the old email and try again.
+                    Try changing your email again.
                 </div>
-                <div className=' mt-4'>
+                {/* <div className=' mt-4'>
                     <Link to={`/web/account/email_address`}
                         className={`text-2xl mb-2 pb-1 
                             flex content-center items-center gap-2 hover:underline`}
@@ -36,7 +36,7 @@ const ChangeEmailFail = ({ guid }: any) => {
                         </span>
                         <BsArrowRight className=' relative top-[1px]' />
                     </Link>
-                </div>
+                </div> */}
 
             </div>
         </div>

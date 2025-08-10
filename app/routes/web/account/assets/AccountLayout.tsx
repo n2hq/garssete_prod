@@ -6,7 +6,7 @@ import Sidebar from './Sidebar'
 import { CgChevronLeft, CgChevronRight, CgMenu } from 'react-icons/cg'
 import { BiChevronLeft, BiChevronRight, BiMenu, BiMenuAltLeft, BiX } from 'react-icons/bi'
 import { BsMenuButton } from 'react-icons/bs'
-import { useLocation, useNavigate } from '@remix-run/react'
+import { redirect, useLocation, useNavigate } from '@remix-run/react'
 import AccountNav from '~/components/header/account/AccountNav'
 import HomeNav from '~/routes/assets/header/HomeNav'
 import { AuthProvider, useAuth } from '~/context/AuthContext'
@@ -23,12 +23,18 @@ const AccountLayout = ({ children }: any) => {
     const [userActive, setUserActive] = useState<any | false>(true)
     const [inactiveMessage, setInactiveMessage] = useState<any | null>(null)
 
-    const tokens = localStorage.getItem("authTokens")
+
 
     const auth = useAuth()
-
     if (!auth) { return null }
 
+    //console.log(auth)
+
+    useEffect(() => {
+        if (auth.user === null) {
+            window.location.href = ("/web/signin")
+        }
+    }, [auth])
 
 
     const [loading, setLoading] = useState(true)

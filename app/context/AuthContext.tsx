@@ -88,7 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         {/** time the signout 12 hours */ }
         let timeoutDuration = 1000 * 60 * 60 * 12
         let interval = setInterval(() => {
-            signout()
+            signoutNoReload()
         }, timeoutDuration)
         return () => clearInterval(interval)
     }, [])
@@ -144,7 +144,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
     }
 
-    const signout = () => {
+    const signoutNoReload = () => {
+        setAuthTokens(null)
+        setUser(null)
+        localStorage.removeItem("authTokens")
+        //window.location.reload()
+    }
+
+    const signoutReload = () => {
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem("authTokens")
@@ -192,7 +199,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     let cdata = {
         user: user,
         signin: signin,
-        signout: signout,
+        signoutNoReload: signoutNoReload,
+        signoutReload: signoutReload,
         resetpw: resetpw
     }
 

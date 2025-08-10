@@ -1,11 +1,12 @@
 import { Link } from '@remix-run/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { WhiteLogo } from '~/components/header/WhiteLogo'
 import { whiteLogoColor } from '~/lib/css'
 import ChangeEmailFail from './ChangeEmailFail'
 import ChangeEmailSuccess from './ChangeEmailSuccess'
 
 const ChangeEmailForm = ({ guid, email, response }: any) => {
+
     return (
         <div className={`w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
         mt-[100px] mb-[20px]  `}>
@@ -35,13 +36,17 @@ const ChangeEmailForm = ({ guid, email, response }: any) => {
                             <div className={`w-full flex flex-col 
                         place-items-center mt-[30px]`}>
 
-
-
                                 {
+                                    response.success ?
+                                        <ChangeEmailSuccess email={email} message={response.message} /> :
+                                        <ChangeEmailFail />
+                                }
+
+                                {/* {
                                     response === undefined ?
                                         <ChangeEmailFail guid={guid} /> :
                                         <ChangeEmailSuccess email={email} />
-                                }
+                                } */}
 
                             </div>
 

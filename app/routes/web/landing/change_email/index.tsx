@@ -6,7 +6,8 @@ import { changeEmail, DoResponse } from '~/lib/lib'
 import ChangeEmailFail from './assets/ChangeEmailFail'
 import ChangeEmailSuccess from './assets/ChangeEmailSuccess'
 import { useAuth } from '~/context/AuthContext'
-import ResetPasswordBody from './assets/ResetPasswordBody'
+import ResetPasswordBody from './assets/ChangeEmailBody'
+import ChangeEmailBody from './assets/ChangeEmailBody'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
 
@@ -32,25 +33,23 @@ const index = () => {
 
     useEffect(() => {
         if (auth?.user) {
-            auth?.signout()
+            auth?.signoutNoReload()
         }
     }, [auth])
 
     return (
         <div>
-            {
-                loaderData?.guid && loaderData?.email && loaderData &&
-                <ResetPasswordBody
-                    userGuid={loaderData?.guid}
-                    email={loaderData?.email}
-                    response={loaderData?.response}
-                />
-            }
-            {/*  {
-                loaderData.response === undefined ?
-                    <ChangeEmailFail guid={loaderData.guid} /> :
-                    <ChangeEmailSuccess email={loaderData.email} />
-            } */}
+            <div>
+                {
+                    loaderData?.guid && loaderData?.email && loaderData &&
+                    <ChangeEmailBody
+                        userGuid={loaderData?.guid}
+                        email={loaderData?.email}
+                        response={loaderData?.response}
+                    />
+                }
+
+            </div>
         </div>
     )
 }

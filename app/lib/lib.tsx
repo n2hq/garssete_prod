@@ -867,7 +867,7 @@ export function toSentenceCase(text: string): string {
         );
 }
 
-export const changeEmail = async (guid: string | null, email: string | null): Promise<any | undefined> => {
+export const changeEmail = async (guid: string, email: string): Promise<any> => {
 
     const endpoint = `/api/user/change_email?guid=${guid}&email=${email}`
     const url = config.BASE_URL + endpoint
@@ -878,15 +878,10 @@ export const changeEmail = async (guid: string | null, email: string | null): Pr
             headers: headers,
         }
         )
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = {
-            status: true
-        }
+        const data: any = await response.json();
 
         return new Promise((resolve) => setTimeout(() => {
+
             resolve(data)
         }, 10))
     } catch (error: any) {

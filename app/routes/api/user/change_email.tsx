@@ -39,6 +39,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
             if ((rows as any[]).length <= 0) {
                 return DoResponse(
                     {
+                        success: false,
                         exists: false,
                         message: "User with id does not exist!"
                     },
@@ -60,7 +61,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
             if ((rows as any[]).length <= 0) {
                 return DoResponse(
                     {
-                        exists: false,
+                        success: false,
                         message: "Request has expired!"
                     },
                     404

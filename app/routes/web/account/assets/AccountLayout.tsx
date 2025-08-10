@@ -23,7 +23,7 @@ const AccountLayout = ({ children }: any) => {
     const [userActive, setUserActive] = useState<any | false>(true)
     const [inactiveMessage, setInactiveMessage] = useState<any | null>(null)
 
-
+    //const tokens = localStorage.getItem("authTokens")
 
     const auth = useAuth()
     if (!auth) { return null }
@@ -32,7 +32,9 @@ const AccountLayout = ({ children }: any) => {
 
     useEffect(() => {
         if (auth.user === null) {
+
             window.location.href = ("/web/signin")
+
         }
     }, [auth])
 

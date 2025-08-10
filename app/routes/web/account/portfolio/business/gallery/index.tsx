@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AccountLayout from '../../../assets/AccountLayout'
 import ContentLayout from '../../../assets/ContentLayout'
-import { getBusinessGallery, getBusinessProfile, getGallery } from '~/lib/lib'
+import { getBusinessGallery, getBusinessProfile, getGallery, IsAuthenticated } from '~/lib/lib'
 import { useParams } from '@remix-run/react'
 import BusinessMenu from '../assets/BusinessMenu'
 import AddPhoto from './gallery/AddPhoto'
@@ -10,6 +10,10 @@ import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
 
 const index = () => {
+    useEffect(() => {
+        IsAuthenticated(localStorage)
+    }, [])
+
     const [businessGuid, setBusinessGuid] = useState('')
     const [userGuid, setUserGuid] = useState('')
     const [gallery, setGallery] = useState<any | null>(null)

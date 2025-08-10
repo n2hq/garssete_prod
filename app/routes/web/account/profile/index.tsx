@@ -5,8 +5,9 @@ import ImgComponent from './assets/ImgComponent'
 import ProfileForm from './assets/ProfileForm'
 import { LoaderFunction } from '@remix-run/node'
 import { useAuth } from '~/context/AuthContext'
-import { getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData } from '~/lib/lib'
+import { getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData, IsAuthenticated } from '~/lib/lib'
 import CardTitle from '../assets/CardTitle'
+
 
 
 
@@ -14,10 +15,7 @@ import CardTitle from '../assets/CardTitle'
 const index = () => {
 
     useEffect(() => {
-        const tokens = localStorage.getItem("authTokens")
-        if (tokens === null) {
-            window.location.href = "/web/signin"
-        }
+        IsAuthenticated(localStorage)
     }, [])
 
     const auth = useAuth()

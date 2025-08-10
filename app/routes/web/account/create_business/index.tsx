@@ -3,10 +3,14 @@ import ContentLayout from '../assets/ContentLayout'
 import AccountLayout from '../assets/AccountLayout'
 import { useAuth } from '~/context/AuthContext'
 import CreatePageForm from './assets/CreatePageForm'
-import { getCategories, getCities, getCountries, getStates } from '~/lib/lib'
+import { getCategories, getCities, getCountries, getStates, IsAuthenticated } from '~/lib/lib'
 import CardTitle from '../assets/CardTitle'
 
 const index = () => {
+    useEffect(() => {
+        IsAuthenticated(localStorage)
+    }, [])
+
     const auth = useAuth()
     if (!auth) { return null }
     const [user, setUser] = useState<any | null>(null)

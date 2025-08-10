@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react'
 import AccountLayout from '../assets/AccountLayout'
 import ContentLayout from '../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
-import { getPortfolio, getUserProfile } from '~/lib/lib'
+import { getPortfolio, getUserProfile, IsAuthenticated } from '~/lib/lib'
 import Portfolio from './assets/Portfolio'
 import CardTitle from '../assets/CardTitle'
 
 
 const index = () => {
+    useEffect(() => {
+        IsAuthenticated(localStorage)
+    }, [])
+
     const auth = useAuth()
     if (!auth) { return null }
 

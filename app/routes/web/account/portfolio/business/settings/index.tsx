@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useParams } from '@remix-run/react'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { getBusinessProfile, getOperatingHours } from '~/lib/lib'
+import { getBusinessProfile, getOperatingHours, IsAuthenticated } from '~/lib/lib'
 import { BusinessHours } from '~/lib/types'
 import SettingsSchema from './assets/SettingsSchema'
 import AccountLayout from '../../../assets/AccountLayout'
@@ -13,6 +13,10 @@ import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
 
 const index = () => {
+    useEffect(() => {
+        IsAuthenticated(localStorage)
+    }, [])
+
     const [loading, setLoading] = useState(true)
     const [businessGuid, setBusinessGuid] = useState('')
     const [userGuid, setUserGuid] = useState('')

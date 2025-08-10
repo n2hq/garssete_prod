@@ -921,3 +921,10 @@ export function escapeRegex(str: string): string {
     // Escape characters with special meaning in regex
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
+
+export const IsAuthenticated = (localStorage: any) => {
+    const tokens = localStorage.getItem("authTokens")
+    if (tokens === null) {
+        window.location.href = "/web/signin"
+    }
+}

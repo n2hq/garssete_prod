@@ -2,18 +2,27 @@ import React, { useEffect, useState } from 'react'
 import AccountLayout from '../assets/AccountLayout'
 import ContentLayout from '../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
-import { getUserProfile } from '~/lib/lib'
+import { getUserProfile, IsAuthenticated } from '~/lib/lib'
 import EmailForm from './assets/EmailForm'
 import CardTitle from '../assets/CardTitle'
 import { redirect } from '@remix-run/react'
 
 const index = () => {
+    useEffect(() => {
+        IsAuthenticated(localStorage)
+    }, [])
+
     const auth = useAuth()
     if (!auth) { return null }
 
     const { user } = auth
 
-
+    /* useEffect(() => {
+        const tokens = localStorage.getItem("authTokens")
+        if (tokens === null) {
+            window.location.href = "/web/signin"
+        }
+    }, []) */
 
     const [userProfile, setUserProfile] = useState<any | null>(null)
     const [data, setData] = useState<any | null>(null)

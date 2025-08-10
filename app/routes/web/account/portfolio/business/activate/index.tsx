@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import Activate from './Activate'
 import { useParams } from '@remix-run/react'
-import { getBusinessProfile } from '~/lib/lib'
+import { getBusinessProfile, IsAuthenticated } from '~/lib/lib'
 import AccountLayout from '../../../assets/AccountLayout'
 import ContentLayout from '../../../assets/ContentLayout'
 import BusinessMenu from '../assets/BusinessMenu'
@@ -11,6 +11,10 @@ import CardTitle from '../../../assets/CardTitle'
 
 
 const index = () => {
+    useEffect(() => {
+        IsAuthenticated(localStorage)
+    }, [])
+
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState<any | null>(null)
     const [businessGuid, setBusinessGuid] = useState('')

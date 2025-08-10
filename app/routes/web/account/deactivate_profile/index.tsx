@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react'
 import AccountLayout from '../assets/AccountLayout'
 import ContentLayout from '../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
-import { getUserProfile } from '~/lib/lib'
+import { getUserProfile, IsAuthenticated } from '~/lib/lib'
 import ChangePasswordForm from '../change_password/assets/ChangePasswordForm'
 import DeactivateUserForm from './assets/DeactivateProfileForm'
 import DeactivateProfileForm from './assets/DeactivateProfileForm'
 import CardTitle from '../assets/CardTitle'
 
 const index = () => {
+    useEffect(() => {
+        IsAuthenticated(localStorage)
+    }, [])
+
     const auth = useAuth()
     if (!auth) { return null }
     const { user } = auth

@@ -57,10 +57,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (tokens !== null) {
             const authTokens = JSON.parse(tokens) as AuthTokens
             setAuthTokens(authTokens)
-        } else {
+        }
+
+        if (tokens === null) {
 
             setAuthTokens(null)
+            //window.location.href = "/web/signin"
+
         }
+
 
         {/** setUser */ }
         if (tokens) {

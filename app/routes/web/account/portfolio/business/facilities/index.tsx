@@ -1,6 +1,6 @@
 import { useParams } from '@remix-run/react'
 import React, { useEffect, useState } from 'react'
-import { getBusinessProfile, getSelectedFacilityFeatures, getSysFacilityFeatures } from '~/lib/lib'
+import { getBusinessProfile, getSelectedFacilityFeatures, getSysFacilityFeatures, IsAuthenticated } from '~/lib/lib'
 import AccountLayout from '../../../assets/AccountLayout'
 import ContentLayout from '../../../assets/ContentLayout'
 import BusinessMenu from '../assets/BusinessMenu'
@@ -9,6 +9,10 @@ import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
 
 const index = () => {
+    useEffect(() => {
+        IsAuthenticated(localStorage)
+    }, [])
+
     const [businessGuid, setBusinessGuid] = useState('')
     const [userGuid, setUserGuid] = useState('')
     const [facilityFeatures, setFacilityFeatures] = useState<any | null>(null)

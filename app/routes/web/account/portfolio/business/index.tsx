@@ -4,7 +4,7 @@ import ContentLayout from '../../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
 import { LoaderFunction } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import { getBusinessProfile, getBusinessProfileImageData, getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData } from '~/lib/lib'
+import { getBusinessProfile, getBusinessProfileImageData, getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData, IsAuthenticated } from '~/lib/lib'
 import BusinessProfileForm from './assets/BusinessProfileForm'
 import BusinessMenu from './assets/BusinessMenu'
 import CardTitle from '../../assets/CardTitle'
@@ -19,6 +19,10 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return data
 }
 const index = () => {
+    useEffect(() => {
+
+        IsAuthenticated(localStorage)
+    }, [])
 
     const loaderData: any = useLoaderData()
     const auth = useAuth();

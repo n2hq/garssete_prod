@@ -9,6 +9,7 @@ import CardTitle from '../assets/CardTitle'
 
 const index = () => {
     useEffect(() => {
+
         IsAuthenticated(localStorage)
     }, [])
 

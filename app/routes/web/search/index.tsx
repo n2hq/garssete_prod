@@ -62,7 +62,7 @@ const index = () => {
         <SearchLayout>
 
 
-            <div className={`px-[15px] border-b`}>
+            <div className={`px-[15px] bg-gray-100 `}>
                 <div className={`max-w-[1100px] mx-auto w-full`}>
                     <div className={` grid grid-cols-12 gap-x-2`}>
                         <div className={`flex place-items-center col-span-12 md:col-span-4 truncate
@@ -74,8 +74,8 @@ const index = () => {
                             </span>
                         </div>
 
-                        <div className={`space-x-6 flex place-items-center place-content-start
-                            col-span-12 md:col-span-8 truncate md:place-content-end
+                        <div className={`space-x-12 flex place-items-center place-content-start text-gray-500
+                            col-span-12 md:col-span-8 truncate md:place-content-end font-bold
                              pt-0 pb-2 md:pt-3 md:pb-3 `}>
                             {
                                 navlinks?.map((link, index) => {

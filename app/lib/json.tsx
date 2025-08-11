@@ -7,13 +7,13 @@ import { MdOutlineAttachEmail, MdPassword, MdTravelExplore, MdWifiPassword } fro
 export const navlinks = [
     {
         id: 1,
-        url: '/',
-        label: "Home"
+        url: '/web/search?q=entertainment',
+        label: "Entertainment"
     },
     {
         id: 2,
-        url: '/web/search',
-        label: "Search"
+        url: '/web/search?q=restaurant',
+        label: "Restaurant"
     },
     {
         id: 3,

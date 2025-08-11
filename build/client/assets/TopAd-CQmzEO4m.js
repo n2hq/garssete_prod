@@ -1,0 +1,4 @@
+import{j as a}from"./jsx-runtime-0DLF9kdB.js";import{r as e}from"./components-DN9bEK-g.js";const c=[{id:1,url:"/web/search?q=entertainment",label:"Entertainment"},{id:2,url:"/web/search?q=restaurant",label:"Restaurant"},{id:3,url:"/web/search?q=hotels",label:"Hotels"},{id:4,url:"/web/search?q=travel",label:"Travel"},{id:5,url:"/web/search?q=real estate",label:"Real Estate"},{id:6,url:"/web/search?q=services",label:"Services"}],s={adslot:"1234567890"},l={adslot:"1234567890"};function d(){const[t,r]=e.useState(!1);return e.useEffect(()=>{},[]),t?a.jsxs("div",{className:`max-w-[1000px] min-h-[90px] bg-blue-50
+                mx-auto w-full mt-4 flex place-items-center 
+                place-content-center font-light text-[14px]
+                `,children:["Ads by google",s.adslot!==l.adslot]}):null}export{d as T,c as n};

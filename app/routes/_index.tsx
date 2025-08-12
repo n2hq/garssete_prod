@@ -13,7 +13,7 @@ import Navbar from '~/components/header/new/Navbar'
 import HeroSection from './landing/assets/HeroSection'
 import FeaturesSection from './landing/assets/FeaturesSection'
 import DiscoverSection from './landing/assets/DiscoverSection'
-import CallToActionSection from './landing/assets/CallToActionSection'
+import CallToActionSection from '../components/content/CallToActionSection'
 import FooterSection from './landing/assets/FooterSection'
 
 export const meta: MetaFunction = () => {

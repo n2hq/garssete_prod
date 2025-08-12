@@ -2,7 +2,7 @@ import React from 'react'
 import { appConfig } from '~/lib/lib'
 import Layout from '~/routes/asset/NormalLayout'
 import VerticalHeight from '~/routes/asset/VerticalHeight'
-import CallToActionSection from '~/routes/landing/assets/CallToActionSection'
+import CallToActionSection from '~/components/content/CallToActionSection'
 import FooterSection from '~/routes/landing/assets/FooterSection'
 
 const index = () => {

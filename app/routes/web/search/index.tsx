@@ -17,7 +17,7 @@ import { TopAd } from '~/components/content/ads/TopAd'
 import SearchNavbar from '~/components/header/new/SearchNavbar'
 import SearchLayout from '~/routes/asset/SearchLayout'
 import VerticalHeight from '~/routes/asset/VerticalHeight'
-import CallToActionSection from '~/routes/landing/assets/CallToActionSection'
+import CallToActionSection from '~/components/content/CallToActionSection'
 import FooterSection from '~/routes/landing/assets/FooterSection'
 
 export const loader: LoaderFunction = async ({ request, params }) => {

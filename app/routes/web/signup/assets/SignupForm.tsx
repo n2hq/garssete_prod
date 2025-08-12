@@ -83,7 +83,7 @@ const SignupForm = () => {
 
     return (
         <div className={`w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
-        mt-[100px] mb-[20px] `}>
+        mt-[80px] mb-[20px] `}>
             <div className={`hidden lg:block `}>
 
             </div>

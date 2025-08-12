@@ -18,8 +18,9 @@ body {
 }
 
 #nprogress .bar {
-  background: rgba(0, 0, 255) !important;
+  background: red !important;
   height: 3px !important;
+  z-index: 200000;
 }
 
 /* Spinner customization */

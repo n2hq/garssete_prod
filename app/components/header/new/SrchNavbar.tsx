@@ -33,7 +33,7 @@ const SrchNavbar = () => {
 
     return (
         <div>
-            <div className={` bg-blue-100 text-black  fixed top-0 left-0 w-full z-[10000] shadow-sm`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
+            <div className={` bg-blue-100 text-black  fixed top-0 left-0 w-full z-[1000] shadow-sm`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
 
                 <MobileNav
                     showNav={showNav}
@@ -101,10 +101,7 @@ const SrchNavbar = () => {
 
             </div>
 
-            <MobileNav
-                showNav={showNav}
-                closeNav={closeNav}
-            />
+
 
         </div>
     )

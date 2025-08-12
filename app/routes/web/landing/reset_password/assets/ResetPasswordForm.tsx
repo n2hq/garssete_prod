@@ -111,7 +111,7 @@ const ResetPasswordForm = ({ guid }: any) => {
 
                         <div className={`text-[15px] text-center
                         mt-[0px] font-light text-black`}>
-                            enter your email address below
+                            Enter new password below!
                         </div>
 
                         <section className={`w-full

@@ -72,7 +72,7 @@ export const getChangePasswordEmail = (first_name: string) => {
 
         You recently changed your password.
 
-        If you didn't initiate this password change, please use the link below to change your password.
+        If you didn't initiate this password change, please use the link below to reset your password.
 
         ${host}/web/reset_password
 

@@ -37,7 +37,7 @@ const ResetPasswordForm = ({ loaderData, user }: any) => {
         notification.notify('Sending reset password request.')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        const email = auth?.user?.email
+        const email = auth?.user?.email.trim()
 
         const datr = {
             email: email,

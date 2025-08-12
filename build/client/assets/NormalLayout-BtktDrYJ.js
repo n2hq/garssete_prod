@@ -1,0 +1,1 @@
+import{j as a}from"./jsx-runtime-0DLF9kdB.js";import{N as s}from"./NormalNavbar-Bms_iU7e.js";import{a as o}from"./lib-Drj-iocb.js";const t=({children:l})=>a.jsxs("div",{className:"h-full w-full",children:[a.jsx(s,{}),a.jsx("main",{className:`h-full flex w-full flex-col mt-[${o.NAVBAR_HEIGHT}px]`,children:l})]});export{t as L};

@@ -26,6 +26,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     let [authTokens, setAuthTokens] = useState<AuthTokens | null>(null)
     let [user, setUser] = useState<any | null>(null)
 
+
     const verifyToken = async (accessToken: string) => {
         try {
             let verifyep = '/api/user/verifytoken'
@@ -211,7 +212,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return (
         <AuthContext.Provider value={cdata}>
-            {children}
+            {loading ? null : children}
         </AuthContext.Provider>
     )
 

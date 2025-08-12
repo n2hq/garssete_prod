@@ -63,7 +63,7 @@ const ChangeEmailForm = ({ guid, email, response }: any) => {
                                                     px-[0px] py-1 text-[14px]
                                                     outline-none hover:underline`}
                                 >
-                                    Already have and account? Sign in
+                                    Click here to sign in!
                                 </div>
                             </Link>
                         </div>

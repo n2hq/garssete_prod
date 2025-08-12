@@ -60,23 +60,23 @@ const index = () => {
 
     return (
         <SearchLayout>
-
-
             <div className={`px-[15px] bg-gray-100 `}>
                 <div className={`max-w-[1100px] mx-auto w-full`}>
-                    <div className={` grid grid-cols-12 gap-x-2`}>
+                    <div className={` grid grid-cols-12 gap-x-2 gap-y-2 md:gap-y-0`}>
                         <div className={`flex place-items-center col-span-12 md:col-span-4 truncate
                              pt-3 pb-0 md:pb-3 `}>
-                            <span className={`text-[18px] font-bold`}>
+                            <span className={`text-[17px] font-bold`}>
                                 {
                                     res.query?.length > 0 ? `Search for '${res.query}'` : `Browse Updates`
                                 }
                             </span>
                         </div>
 
-                        <div className={`space-x-12 flex place-items-center place-content-start text-gray-500
-                            col-span-12 md:col-span-8 truncate md:place-content-end font-bold
-                             pt-0 pb-2 md:pt-3 md:pb-3 `}>
+                        <div className={`flex place-items-center place-content-start
+                         text-gray-500 col-span-12 md:col-span-8 
+                            md:place-content-end font-bold pb-[15px] md:pb-[0px]
+                            gap-x-3 md:gap-x-12 flex-wrap md:flex-nowrap leading-[1.4em]
+                              `}>
                             {
                                 navlinks?.map((link, index) => {
                                     return (<Link to={`${link.url}`} key={index} className={``}>{link.label}</Link>)

@@ -7,6 +7,7 @@ export const config = {
     MAIL_SERVICE: import.meta.env.VITE_MAIL_SERVICE,
     SITENAME: import.meta.env.VITE_SITENAME,
     FORMATTED_SITENAME: import.meta.env.VITE_SITENAME,
+    SESSION_SECRET: import.meta.env.VITE_SESSION_SECRET
 }
 
 export const appConfig = {

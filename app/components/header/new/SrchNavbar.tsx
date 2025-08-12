@@ -33,7 +33,12 @@ const SrchNavbar = () => {
 
     return (
         <div>
-            <div className={` bg-[#001e5a] text-white  fixed top-0 left-0 w-full z-[10000] shadow-xl `} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
+            <div className={` bg-[#001e5a] text-white  fixed top-0 left-0 w-full z-[10000] shadow-sm`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
+
+                <MobileNav
+                    showNav={showNav}
+                    closeNav={closeNav}
+                />
                 <div className={`max-w-full mx-auto flex items-center justify-between h-full gap-4 px-4 sm:px-6`}>
 
                     {/* Left - Logo and Menu Button */}
@@ -65,11 +70,11 @@ const SrchNavbar = () => {
                         <UserMenu theme='light' />
                         <HamburgerSecondary theme='dark' openNav={() => setShowNav(true)} navBg={false} />
                     </div>
+
                 </div>
-                <MobileNav
-                    showNav={showNav}
-                    closeNav={closeNav}
-                />
+
+
+                {/** displays only on mobile */}
                 <div className={`md:hidden shadow-lg pb-3 z-[1000] bg-white`}>
 
                     <div className={`h-[10px]`}></div>
@@ -96,7 +101,10 @@ const SrchNavbar = () => {
 
             </div>
 
-
+            <MobileNav
+                showNav={showNav}
+                closeNav={closeNav}
+            />
 
         </div>
     )
@@ -147,7 +155,8 @@ export const NavLink = ({ link, index }: any) => {
 export const SearchBox = ({ query }: any) => {
     return (
         <form action="/web/search" className="text-sm w-full max-w-md">
-            <div className="flex items-center bg-white rounded-full px-4 py-1 gap-2">
+            <div className="flex items-center bg-gray-50 rounded-full pl-4 pr-1 py-1 gap-2
+            border-[1px] border-gray-500">
                 <input
                     name="q"
                     defaultValue={query}

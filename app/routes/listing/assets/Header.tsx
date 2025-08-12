@@ -10,7 +10,7 @@ const Header = ({ listing }: any) => {
 
             </div>
 
-            <div className={`mt-1.5 leading-[1.2em]`}>
+            <div className={`mt-1.5 leading-[1.3em]`}>
                 {listing?.address_one ? `${listing?.address_one}, ` : ''}
                 {listing?.address_two ? `${listing?.address_two}, ` : ''}
                 {listing?.city_name ? `${listing?.city_name}, ` : ''}

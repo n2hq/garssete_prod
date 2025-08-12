@@ -28,6 +28,8 @@ const getCountryTimezoneData = (countryCode: string, countries: any) => {
 const constructDailyHour = (start: string, end: string) => {
     if (start === "Closed" || end == "Closed") {
         return "Closed"
+    } else if (start === null || end === null) {
+        return "Not Set"
     } else {
         return `${start} - ${end}`
     }
@@ -111,8 +113,8 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
     const todayHoursEntry = country.hours.find((entry: any) => entry.day === today);
 
     let isOpen = false;
-    let todayHoursFormatted = 'Closed Today';
-
+    let todayHoursFormatted: any = <span>Closed Today</span>;
+    "Not Set"
     if (todayHoursEntry && todayHoursEntry.hours.includes('-')) {
         const [openStr, closeStr] = todayHoursEntry.hours.split(' - ');
         const [openHour, openMinute] = openStr.split(':').map(Number);
@@ -126,7 +128,34 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
 
         isOpen = localTime >= openTime && localTime <= closeTime;
 
-        todayHoursFormatted = `${isOpen ? 'Open Now' : 'Closed Now'}: ${today}, ${formatTime(openStr)} - ${formatTime(closeStr)}`;
+        const formattedLabel = (isOpen: boolean) => {
+            return `${isOpen ? 'Open Now' : 'Closed Now'}:`
+        }
+
+        //todayHoursFormatted = formattedLabel(isOpen) + ` ${today}, ${formatTime(openStr)} - ${formatTime(closeStr)}`;
+
+        todayHoursFormatted = <div className={`w-full flex gap-1.5 place-items-center flex-wrap`}>
+            <span className={`${isOpen ? 'bg-blue-500' : 'bg-red-500'} text-white px-1 py-[2px] rounded-md`}>{formattedLabel(isOpen)}</span>
+            <span>{today}, </span>
+            <span>{formatTime(openStr)}</span>
+            <span> {"-"} </span>
+            <span>{formatTime(closeStr)}</span>
+            <span>{"/"}</span>
+            <span>{country.abbreviation}</span>
+            <span>{country.gmtOffsetName}</span>
+        </div>
+
+
+    }
+
+
+    if (todayHoursEntry && todayHoursEntry.hours.includes('Not Set')) {
+        todayHoursFormatted = <div>
+            <span>Operating Hours: </span>
+            <span className={`bg-blue-700 rounded text-white px-1 py-[2px]`}>
+                open ended
+            </span>
+        </div>
     }
 
     return {

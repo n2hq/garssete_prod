@@ -85,7 +85,7 @@ const BusinessLayout = ({
                             {
                                 operatingHoursStatus.openStatus === "selected_hours" ?
                                     <div>
-                                        {operatingHoursStatus.todayHoursFormatted} / {operatingHoursStatus.abbreviation} {operatingHoursStatus.gmtOffsetName}
+                                        {operatingHoursStatus.todayHoursFormatted}
                                     </div> :
                                     <div>
                                         {

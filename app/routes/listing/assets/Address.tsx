@@ -90,7 +90,7 @@ const Address = ({ businessProfile }: any) => {
                                 flex place-items-center font-semibold`}>
 
                                 <a href={businessProfile?.website}>
-                                    Website
+                                    Go to Website
                                 </a>
                             </div>
 

@@ -68,7 +68,7 @@ const GalleryItem = ({
                 </div>
                 {
                     (item.image_title).length > 0 &&
-                    <div className={`text-[13px] mt-2 mb-1.5 leading-[1.2em] mx-[2px]`}>
+                    <div className={`text-[13px] mt-2 mb-1.5 leading-[1.2em] mx-[2px] line-clamp-2`}>
                         {item.image_title}
                     </div>
                 }

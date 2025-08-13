@@ -5,7 +5,7 @@ import AddPhoto from './AddPhoto'
 import AddPhotoDialog from './AddPhotoDialog'
 import { useSliderContext } from '~/context/SliderContext'
 
-const Gallery = ({ gallery, userGuid, businessGuid }: any) => {
+const Gallery = ({ gallery, userGuid, businessGuid, listing }: any) => {
     const [overlay, setOverlay] = useState(false)
     const [selectedSlide, setSelectedSlide] = useState<any>(0)
     const slider = useSliderContext()
@@ -19,6 +19,7 @@ const Gallery = ({ gallery, userGuid, businessGuid }: any) => {
         slider.setDialog(true)
         slider.setSelectedSlide(index + 1)
         slider.setGallery(gallery)
+        slider.setListing(listing)
     }
 
 

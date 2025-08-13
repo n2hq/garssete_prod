@@ -91,6 +91,7 @@ const index = () => {
                                 gallery={gallery}
                                 userGuid={userGuid}
                                 businessGuid={businessGuid}
+                                listing={businessProfile}
                             />
                         </div> :
                         (<div className=' mt-2 border-[1px] rounded-lg p-3 mb-6'>

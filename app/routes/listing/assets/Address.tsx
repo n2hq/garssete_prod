@@ -31,7 +31,7 @@ const Address = ({ businessProfile }: any) => {
                 text-[14px]  tracking-tight md:space-x-4 lg:space-x-0 md:text-black/80 font-sans`}
                 >
 
-                    <div className={`mx-[0px] divide-y-[1px] bg-blue-50/80`}>
+                    <div className={`mx-[0px] divide-y-[1px] `}>
 
                         {/** location */}
                         <div className={`flex w-full gap-3 py-3 px-3`}>
@@ -70,7 +70,7 @@ const Address = ({ businessProfile }: any) => {
                         </div>
 
                         {/** phone */}
-                        <div className={`flex w-full gap-3 py-3 px-3`}>
+                        <div className={`flex w-full gap-3 py-2.5 px-3`}>
                             <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
                                 <MdPhone className={`text-[20px] h-fit`} />
                             </div>
@@ -82,7 +82,7 @@ const Address = ({ businessProfile }: any) => {
                         </div>
 
                         {/** website */}
-                        <div className={`flex w-full gap-3 py-3 px-3`}>
+                        <div className={`flex w-full gap-3 py-2.5 px-3`}>
                             <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
                                 <CgWebsite className={`text-[20px] h-fit`} />
                             </div>
@@ -97,7 +97,7 @@ const Address = ({ businessProfile }: any) => {
                         </div>
 
                         {/** email */}
-                        <div className={`flex w-full gap-3 py-3 px-3`}>
+                        <div className={`flex w-full gap-3 py-2.5 px-3`}>
                             <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
                                 <MdEmail className={`text-[20px]`} />
                             </div>

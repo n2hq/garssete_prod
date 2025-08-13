@@ -146,7 +146,7 @@ export const SliderProvider = ({ children }: any) => {
                             <h1 className=' text-[22px] my-4 font-sans font-extrabold tracking-tight leading-[24px]'>Photos for {listing && listing.title}</h1>
                             <div className=' my-4 '>{currentSlide + 1} / {slides.length}</div>
                             <hr />
-                            <div className=' my-4'>{slides[currentSlide].image_title}</div>
+                            <div className=' my-4 whitespace-pre-line'>{slides[currentSlide].image_title}</div>
                         </div>
                     </div>
                 </div>

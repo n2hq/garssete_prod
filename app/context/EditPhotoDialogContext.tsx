@@ -180,8 +180,8 @@ export function EditPhotoDialogProvider({ children }: any) {
 
                                     <div
                                         className={`flex place-content-center place-items-center
-                                                                     bg-black/10 w-full h-full absolute z-0 top-0 object-cover
-                                                                     text-white/80 `}
+                                        bg-black/10 w-full h-full absolute z-0 top-0 object-cover
+                                        text-white/80 `}
                                         onMouseDown={handleImageClick}
                                     >
                                         <div className={`w-[60px] h-[60px] flex flex-col
@@ -194,14 +194,14 @@ export function EditPhotoDialogProvider({ children }: any) {
                                 </div>
 
                                 <div className={`h-[25%]`}>
-                                    <input
+
+                                    <textarea
                                         onChange={(e) => setImageTitle(e.target.value)}
                                         id='image_title'
                                         value={imageTitle}
                                         placeholder={`Enter picture description.`}
-                                        type="text"
-                                        className={`w-full bg-gray-100 px-3  h-[60px]`}
-                                    />
+                                        className={`w-full bg-gray-100 px-3  h-[100px] py-3`}
+                                    ></textarea>
 
                                     <div className={`flex place-content-end px-3 gap-2`}>
                                         <button

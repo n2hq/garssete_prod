@@ -100,7 +100,7 @@ export function AddPhotoDialogProvider({ children }: any) {
                 fixed top-0 left-0 right-0 bottom-0 bg-black/30
                 place-content-center place-items-center`}>
                     <div className={`relative w-[90%] h-[80%] bg-white 
-                        rounded-[8px] overflow-hidden z-[3000]`}
+                        rounded-[8px] overflow-x-hidden z-[3000]`}
                         onClick={(event) => {
                             event.preventDefault()
                         }}
@@ -115,12 +115,11 @@ export function AddPhotoDialogProvider({ children }: any) {
 
                         { /** description */}
                         <div>
-                            <input
+                            <textarea
                                 id='image_title'
                                 placeholder={`Enter picture description.`}
-                                type="text"
-                                className={`w-full bg-gray-100 px-3  h-[60px]`}
-                            />
+                                className={`w-full bg-gray-100 px-3  h-[100px] py-3`}
+                            ></textarea>
                         </div>
 
                         <div className={`flex place-content-end px-3 gap-2`}>

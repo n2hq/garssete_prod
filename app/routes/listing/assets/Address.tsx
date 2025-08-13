@@ -38,7 +38,7 @@ const Address = ({ businessProfile }: any) => {
                             <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md border-[1px]`}>
                                 <MdLocationPin className={`text-[20px]`} />
                             </div>
-                            <div className={` text-[13px] leading-[1.3em] line-clamp-2`}>
+                            <div className={` text-[13px] leading-[1.3em] `}>
                                 {
                                     businessProfile?.address_one + ", "
                                 }

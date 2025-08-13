@@ -4,7 +4,7 @@ import { BiLocationPlus } from 'react-icons/bi'
 import { CgWebsite } from 'react-icons/cg'
 import { FaInternetExplorer } from 'react-icons/fa'
 import { FaLocationPin } from 'react-icons/fa6'
-import { GrLocation, GrMapLocation } from 'react-icons/gr'
+import { GrLocation, GrLocationPin, GrMapLocation } from 'react-icons/gr'
 import { IoMdGlobe } from 'react-icons/io'
 import { MdEmail, MdLocationPin, MdOutline3gMobiledata, MdPhone, MdWeb } from 'react-icons/md'
 import Review from './Review'
@@ -15,114 +15,102 @@ const Address = ({ businessProfile }: any) => {
         <div className={`w-full`}>
 
             <div className='  md:bg-white
-            md:rounded overflow-hidden pt-[30px]
+            md:rounded overflow-hidden pt-[0px]
             pb-[15px] bg-[blue]/0 text-black md:black
             md:text-black  border-[1px] border-gray-300/70'>
+
                 <div className={`font-normal text-[19px] 
-                   px-[10px] tracking-tight w-fit border rounded-md
-                   ml-[20px] bg-blue-900 text-white`}>
+                   px-[10px] tracking-tight w-fit rounded-md
+                   ml-[20px] mt-[25px] bg-blue-900 text-white
+                   shadow-md shadow-gray-100`}>
                     Business Contact
                 </div>
-                <div className='h-[25px]'></div>
+                <div className='mt-[20px]'></div>
 
                 <div className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 
-                text-[14px]  tracking-tight
-                md:space-x-4 lg:space-x-0 md:text-black/80 font-sans
-                `}
+                text-[14px]  tracking-tight md:space-x-4 lg:space-x-0 md:text-black/80 font-sans`}
                 >
 
-                    <div className={`px-[20px] space-y-4 lg:space-y-4`}>
-                        <div className={` w-full`}>
+                    <div className={`mx-[0px] divide-y-[1px] bg-blue-50/80`}>
 
-                            <div className={`grid grid-cols-12`}>
-                                <div className={`col-span-1 `}>
-                                    <MdLocationPin className={`text-[20px]`} />
-                                </div>
-                                <div className={`col-span-11 leading-[1.4em] ml-2
-                            text-[15px] md:text-[13px]`}>
-                                    {
-                                        businessProfile?.address_one + ", "
-                                    }
-                                    {
-                                        businessProfile?.address_two !== null ?
-                                            businessProfile?.address_two + ", " :
-                                            ""
-                                    }
-                                    {
-                                        businessProfile?.city_name !== null ?
-                                            businessProfile?.city_name + ", " :
-                                            ""
-                                    }
-                                    {
-                                        businessProfile?.state_name !== null ?
-                                            businessProfile?.state_name + ", " :
-                                            ""
-                                    }
-                                    {
-                                        businessProfile?.zipcode !== null ?
-                                            businessProfile?.zipcode + ", " :
-                                            ""
-                                    }
-                                    {
-                                        businessProfile?.country_name
-                                    }
-
-                                </div>
+                        {/** location */}
+                        <div className={`flex w-full gap-3 py-3 px-3`}>
+                            <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md border-[1px]`}>
+                                <MdLocationPin className={`text-[20px]`} />
                             </div>
+                            <div className={` text-[13px] leading-[1.3em] line-clamp-2`}>
+                                {
+                                    businessProfile?.address_one + ", "
+                                }
+                                {
+                                    businessProfile?.address_two !== null ?
+                                        businessProfile?.address_two + ", " :
+                                        ""
+                                }
+                                {
+                                    businessProfile?.city_name !== null ?
+                                        businessProfile?.city_name + ", " :
+                                        ""
+                                }
+                                {
+                                    businessProfile?.state_name !== null ?
+                                        businessProfile?.state_name + ", " :
+                                        ""
+                                }
+                                {
+                                    businessProfile?.zipcode !== null ?
+                                        businessProfile?.zipcode + ", " :
+                                        ""
+                                }
+                                {
+                                    businessProfile?.country_name
+                                }
+                            </div>
+
                         </div>
 
-                        <div className={`  w-full`}>
+                        {/** phone */}
+                        <div className={`flex w-full gap-3 py-3 px-3`}>
+                            <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
+                                <MdPhone className={`text-[20px] h-fit`} />
+                            </div>
+                            <div className={` text-[13px] leading-[1.3em]
+                                flex place-items-center font-semibold`}>
+                                {businessProfile?.phone}
+                            </div>
 
-                            <Link to={`tel:${businessProfile?.phone}`}>
-                                <div className={`grid grid-cols-12`}>
-                                    <div className={`col-span-1`}>
-                                        <MdPhone className={`text-[20px]`} />
-                                    </div>
-                                    <div className={`col-span-11 leading-[1.2em] ml-2
-                                    text-[15px] md:text-[13px]`}>
-                                        {businessProfile?.phone}
-                                    </div>
-                                </div>
-                            </Link>
                         </div>
 
-                        <div className={`  w-full`}>
-                            <Link to={`${businessProfile?.website || "#"}`}>
-                                <div className={`grid grid-cols-12`}>
-                                    <div className={`col-span-1 relative top-0
-                            `}>
-                                        <MdOutline3gMobiledata className={`text-[22px]`} />
-                                    </div>
-                                    <div className={`col-span-11 leading-[1.2em] ml-2 top-0
-                            flex place-items-centertext-[15px] md:text-[13px]`}>
+                        {/** website */}
+                        <div className={`flex w-full gap-3 py-3 px-3`}>
+                            <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
+                                <CgWebsite className={`text-[20px] h-fit`} />
+                            </div>
+                            <div className={` text-[13px] leading-[1.3em]
+                                flex place-items-center font-semibold`}>
 
-                                        <div className={`w-full  truncate`}>
-                                            {
-                                                businessProfile?.website || "No Website"
-                                            }
-                                        </div>
+                                <a href={businessProfile?.website}>
+                                    Website
+                                </a>
+                            </div>
 
-                                    </div>
-                                </div>
-                            </Link>
                         </div>
 
-                        <div className={`  w-full`}>
-                            <Link to={`mailto:${businessProfile?.email_address}`}>
-                                <div className={`grid grid-cols-12`}>
-                                    <div className={`col-span-1 relative top-0
-                            `}>
-                                        <MdEmail className={`text-[20px]`} />
-                                    </div>
-                                    <div className={`col-span-11 leading-[1.2em] ml-2 top-0
-                            flex place-items-center text-[15px] md:text-[13px]`}>
+                        {/** email */}
+                        <div className={`flex w-full gap-3 py-3 px-3`}>
+                            <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
+                                <MdEmail className={`text-[20px]`} />
+                            </div>
+                            <div className={` text-[13px] leading-[1.3em]
+                                flex place-items-center font-semibold`}>
+                                <a href={`mailto:${businessProfile.email_address}`}>
+                                    Click to send email
+                                </a>
+                            </div>
 
-                                        Email Address
-
-                                    </div>
-                                </div>
-                            </Link>
                         </div>
+
+
                     </div>
                     <div>
 

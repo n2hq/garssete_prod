@@ -14,7 +14,7 @@ const BusinessFeatures = ({ listing }: any) => {
     }, [listing.business_guid])
     return (
         <div className=' mt-12'>
-            <ComponentTitle title='Features' />
+            <ComponentTitle title='Facility Features' />
 
             <div className={`grid grid-cols-2 gap-4 mt-3`}>
                 {

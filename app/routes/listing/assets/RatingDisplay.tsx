@@ -39,9 +39,9 @@ const RatingDisplay = ({ data }: RatingDisplayProp) => {
                         {data?.category}
                     </div>
                 </div>
-                <div className={`w-full flex flex-col place-items-end place-content-center -space-y-2 `}>
+                <div className={`w-full flex flex-col place-items-end place-content-center -space-y-1.5 `}>
                     <div className={`font-bold tracking-tighter text-[12px] font-sans text-black `}>
-                        {ratingText}
+                        {data?.ratingCount === 0 ? 'No reviews yet' : ratingText}
                     </div>
                     <div className={`text-[11px] `}>
                         {formatNumber(Number(data?.ratingCount))} reviews

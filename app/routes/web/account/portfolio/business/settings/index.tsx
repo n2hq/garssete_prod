@@ -11,6 +11,7 @@ import BusinessWorkingHours from './assets/BusinessWorkingHours'
 import BusinessMenu from '../assets/BusinessMenu'
 import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
+import BusinessHeader from '../assets/BusinessHeader'
 
 const index = () => {
     useEffect(() => {
@@ -93,13 +94,12 @@ const index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={'Settings'}>
-                <CardTitle
-                    baseUrl='/web/account/portfolio/'
-                    guid={businessGuid}
-                >
-                    {data?.businessProfile?.title}
-                </CardTitle>
+            <ContentLayout title={'Settings'}
+                businessGuid={businessGuid}
+                data={data}
+                businessProfile={businessProfile}
+            >
+
                 {
                     businessGuid && userGuid &&
                     <BusinessMenu guid={businessGuid} userGuid={userGuid} />

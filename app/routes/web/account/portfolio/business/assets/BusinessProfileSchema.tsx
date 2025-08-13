@@ -7,6 +7,9 @@ const urlvalidator = /^(?!https?)(?!www\.?).*\..+$/g
 
 const BusinessProfileSchema = z.object({
     username: z.any(),
+    email_address: z.string({ message: "Please enter an email." })
+        .min(1, { message: "Email must not be empty" })
+        .email({ message: "Please enter a valid email" }),
     title: z.string()
         .min(1, { message: "Enter a business name" })
         .min(3, { message: "Busines Name must not be less than 3 characters" })

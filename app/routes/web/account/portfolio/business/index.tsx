@@ -8,6 +8,7 @@ import { getBusinessProfile, getBusinessProfileImageData, getCategories, getCiti
 import BusinessProfileForm from './assets/BusinessProfileForm'
 import BusinessMenu from './assets/BusinessMenu'
 import CardTitle from '../../assets/CardTitle'
+import BusinessHeader from './assets/BusinessHeader'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -119,32 +120,14 @@ const index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={'Update Business'}>
+            <ContentLayout
+                title={'Update Business'}
+                businessGuid={businessGuid}
+                data={data}
+                businessProfile={businessProfile}
+            >
                 {
                     data && <div>
-
-
-                        <div className={`bg-blue-100 w-full px-2 
-                            flex place-content-between rounded-lg
-                            place-items-center h-auto py-2 gap-[5px]
-                            leading-[1.5em]`}>
-                            <div className={`h-full`}>
-                                <CardTitle
-                                    baseUrl='/web/account/portfolio/'
-                                    guid={businessGuid}>
-                                    {data?.businessProfile?.title}
-                                </CardTitle>
-                            </div>
-
-                            <Link to={`/${businessProfile?.gid}`}
-
-                            >
-                                <button className={`px-3 border border-black
-                                    py-2 rounded-full hover:bg-white`}>
-                                    Preview
-                                </button>
-                            </Link>
-                        </div>
 
                         {
                             businessGuid && userGuid &&

@@ -7,6 +7,7 @@ import BusinessMenu from '../assets/BusinessMenu'
 import FacilityFeatures from './assets/FactilityFeatures'
 import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
+import BusinessHeader from '../assets/BusinessHeader'
 
 const index = () => {
     useEffect(() => {
@@ -76,13 +77,13 @@ const index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={'Facility Features'}>
-                <CardTitle
-                    baseUrl='/web/account/portfolio/'
-                    guid={businessGuid}
-                >
-                    {data?.businessProfile?.title}
-                </CardTitle>
+            <ContentLayout
+                businessGuid={businessGuid}
+                data={data}
+                businessProfile={businessProfile}
+                title={'Facility Features'}>
+
+
 
                 {
                     businessGuid && userGuid &&

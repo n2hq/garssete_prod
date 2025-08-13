@@ -154,6 +154,16 @@ const BusinessProfileForm = ({ data }: any) => {
                         />
 
                         <Input
+                            controlTitle={"Email Address"}
+                            controlPlaceholder={"Enter email address"}
+                            controlName={"email_address"}
+                            register={register}
+                            changeHandler={changeHandler}
+                            error={errors.email_address}
+                            controlInformation={`Email address is compulsory.`}
+                        />
+
+                        <Input
                             controlTitle={"Business name"}
                             controlPlaceholder={"Enter business name"}
                             controlName={"title"}

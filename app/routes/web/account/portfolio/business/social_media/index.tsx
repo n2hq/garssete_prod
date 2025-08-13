@@ -71,13 +71,12 @@ const index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={'Social Media'}>
-                <CardTitle
-                    baseUrl='/web/account/portfolio/'
-                    guid={businessGuid}
-                >
-                    {data?.businessProfile?.title}
-                </CardTitle>
+            <ContentLayout title={'Social Media'}
+                businessGuid={businessGuid}
+                data={data}
+                businessProfile={businessProfile}
+            >
+
 
                 {
                     businessGuid && userGuid &&

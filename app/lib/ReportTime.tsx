@@ -135,7 +135,7 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
         //todayHoursFormatted = formattedLabel(isOpen) + ` ${today}, ${formatTime(openStr)} - ${formatTime(closeStr)}`;
 
         todayHoursFormatted = <div className={`w-full flex gap-1.5 place-items-center flex-wrap`}>
-            <span className={`${isOpen ? 'bg-blue-500' : 'bg-red-500'} text-white px-1 py-[2px] rounded-md`}>{formattedLabel(isOpen)}</span>
+            <span className={`${isOpen ? 'bg-blue-700' : 'bg-red-500'} text-white px-1 py-[2px] rounded-md`}>{formattedLabel(isOpen)}</span>
             <span>{today}, </span>
             <span>{formatTime(openStr)}</span>
             <span> {"-"} </span>
@@ -152,7 +152,7 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
     if (todayHoursEntry && todayHoursEntry.hours.includes('Not Set')) {
         todayHoursFormatted = <div>
             <span>Operating Hours: </span>
-            <span className={`bg-blue-700 rounded text-white px-1 py-[2px]`}>
+            <span className={`bg-blue-800 rounded text-white px-1 py-[2px]`}>
                 open ended
             </span>
         </div>

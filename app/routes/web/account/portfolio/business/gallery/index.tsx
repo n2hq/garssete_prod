@@ -8,6 +8,7 @@ import AddPhoto from './gallery/AddPhoto'
 import Gallery from './gallery/Gallery'
 import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
+import BusinessHeader from '../assets/BusinessHeader'
 
 const index = () => {
     useEffect(() => {
@@ -66,12 +67,12 @@ const index = () => {
     }
     return (
         <AccountLayout>
-            <ContentLayout title={'Gallery Settings'}>
-                <CardTitle
-                    baseUrl='/web/account/portfolio/'
-                    guid={businessGuid}>
-                    {data?.businessProfile?.title}
-                </CardTitle>
+            <ContentLayout title={'Gallery Settings'}
+                businessGuid={businessGuid}
+                data={data}
+                businessProfile={businessProfile}
+            >
+
 
 
                 {

@@ -69,12 +69,12 @@ const index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={`${Boolean(businessProfile.active_status) ? 'Deactivate' : 'Activate'} Business Profile`}>
-                <CardTitle
-                    baseUrl='/web/account/portfolio/'
-                    guid={businessGuid}>
-                    {data?.businessProfile?.title}
-                </CardTitle>
+            <ContentLayout title={`${Boolean(businessProfile.active_status) ? 'Deactivate' : 'Activate'} Business Profile`}
+                businessGuid={businessGuid}
+                data={data}
+                businessProfile={businessProfile}
+            >
+
                 {
                     businessGuid && userGuid &&
                     <BusinessMenu guid={businessGuid} userGuid={userGuid} />

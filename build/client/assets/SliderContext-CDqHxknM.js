@@ -3,7 +3,7 @@ import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{r as s}from"./components-DN
                                             block flex-shrink-0 flex-grow-0 transition-transform
                                             ease-in-out duration-1000`},r))}),e.jsx("button",{onMouseDown:N,className:`block absolute top-0 bottom-0 
                                                 p-[1rem] cursor-pointer left-0 group h-full 
-                                                transition duration-1000 ease-in-out`,children:e.jsx("div",{className:`w-[50px] h-[50px] bg-white/60 rounded-full place-content-center place-items-center group-hover:bg-white/30
+                                                transition duration-1000 ease-in-out`,children:e.jsx("div",{className:`w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`,children:e.jsx(E,{className:" stroke-white fill-black w-[2rem] h-[2rem]"})})}),e.jsx("button",{onMouseDown:S,className:`block absolute top-0 bottom-0 
                                                     p-[1rem] cursor-pointer right-0 group 
                                                      transition duration-1000 ease-in-out`,children:e.jsx("div",{className:`w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30

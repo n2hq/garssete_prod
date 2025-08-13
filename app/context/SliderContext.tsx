@@ -117,7 +117,7 @@ export const SliderProvider = ({ children }: any) => {
                             <button onMouseDown={prev} className={`block absolute top-0 bottom-0 
                                                 p-[1rem] cursor-pointer left-0 group h-full 
                                                 transition duration-1000 ease-in-out`}>
-                                <div className={`w-[50px] h-[50px] bg-white/60 rounded-full place-content-center place-items-center group-hover:bg-white/30
+                                <div className={`w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
                                                         transition duration-500 ease-in-out`}>
                                     <BiChevronLeft className=' stroke-white fill-black w-[2rem] h-[2rem]' />
                                 </div>

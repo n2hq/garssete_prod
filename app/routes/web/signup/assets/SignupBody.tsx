@@ -1,12 +1,12 @@
 import React from 'react'
 import SignupForm from './SignupForm'
-import mobileTab from "/images/mobiletab.jpg";
+
 
 
 const SignupBody = () => {
     return (
         <div className={`bg-white w-full 
-        md:bg-[url('${mobileTab}')]
+        md:bg-[url('/images/mobiletab.jpg')]
         bg-cover bg-center min-h-screen flex place-content-center`}>
             <SignupForm />
         </div>

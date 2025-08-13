@@ -37,13 +37,6 @@ const BusinessProfileSchema = z.object({
         .refine(
             (val) => {
                 const words = val.trim().split(/\s+/).filter(Boolean)
-                return words.length >= 100
-            },
-            { message: 'You must write at least 100 words.' }
-        )
-        .refine(
-            (val) => {
-                const words = val.trim().split(/\s+/).filter(Boolean)
                 return words.length <= 500
             },
             { message: 'You can only write up to 500 words.' }

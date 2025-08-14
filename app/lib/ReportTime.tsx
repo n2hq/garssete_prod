@@ -105,16 +105,16 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
     const dayMap = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     const nowUTC = new Date();
-    const offsetMs = country.gmtOffset * 1000;
-    const localTime = new Date(nowUTC.getTime());
-
+    const offsetMs = (country.gmtOffset - (3600 * 2)) * 1000;
+    const localTime = new Date(nowUTC.getTime() + offsetMs);
+    console.log(localTime)
     const dayIndex = localTime.getDay(); // 0 = Sunday, ..., 6 = Saturday
     const today = dayMap[dayIndex];
     const todayHoursEntry = country.hours.find((entry: any) => entry.day === today);
 
     let isOpen = false;
     let todayHoursFormatted: any = <span>Closed Today</span>;
-    "Not Set"
+
     if (todayHoursEntry && todayHoursEntry.hours.includes('-')) {
         const [openStr, closeStr] = todayHoursEntry.hours.split(' - ');
         const [openHour, openMinute] = openStr.split(':').map(Number);

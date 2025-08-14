@@ -94,18 +94,46 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             const open_status = body.openStatus as string === undefined ? ophour.open_status : body.openStatus
             const monday_from = workingHours.Monday.start as string === undefined ? ophour.monday_from : workingHours.Monday.start
             const monday_to = workingHours.Monday.end as string === undefined ? ophour.monday_to : workingHours.Monday.end
-            const tuesday_from = workingHours.Tuesday.start as string === undefined ? ophour.tuesday_from : workingHours.Tuesday.start
-            const tuesday_to = workingHours.Tuesday.end as string === undefined ? ophour.tuesday_to : workingHours.Tuesday.end
-            const wednesday_from = workingHours.Wednesday.start as string === undefined ? ophour.wednesday_from : workingHours.Wednesday.start
-            const wednesday_to = workingHours.Wednesday.end as string === undefined ? ophour.wednesday_to : workingHours.Wednesday.end
-            const thursday_from = workingHours.Thursday.start as string === undefined ? ophour.thursday_from : workingHours.Thursday.start
-            const thursday_to = workingHours.Thursday.end as string === undefined ? ophour.thursday_to : workingHours.Thursday.end
-            const friday_from = workingHours.Friday.start as string === undefined ? ophour.friday_from : workingHours.Friday.start
-            const friday_to = workingHours.Friday.end as string === undefined ? ophour.friday_to : workingHours.Friday.end
-            const saturday_from = workingHours.Saturday.start as string === undefined ? ophour.saturday_from : workingHours.Saturday.start
-            const saturday_to = workingHours.Saturday.end as string === undefined ? ophour.saturday_to : workingHours.Saturday.end
-            const sunday_from = workingHours.Sunday.start as string === undefined ? ophour.sunday_from : workingHours.Sunday.start
-            const sunday_to = workingHours.Sunday.end as string === undefined ? ophour.sunday_to : workingHours.Sunday.end
+            const tuesday_from = workingHours.Tuesday.start as string === undefined ?
+                ophour.tuesday_from : workingHours.Tuesday.start
+            const tuesday_to = workingHours.Tuesday.end as string === undefined ?
+                ophour.tuesday_to : workingHours.Tuesday.end
+            const wednesday_from = workingHours.Wednesday.start as string === undefined ?
+                ophour.wednesday_from : workingHours.Wednesday.start
+            const wednesday_to = workingHours.Wednesday.end as string === undefined ?
+                ophour.wednesday_to : workingHours.Wednesday.end
+            const thursday_from = workingHours.Thursday.start as string === undefined ?
+                ophour.thursday_from : workingHours.Thursday.start
+            const thursday_to = workingHours.Thursday.end as string === undefined ?
+                ophour.thursday_to : workingHours.Thursday.end
+            const friday_from = workingHours.Friday.start as string === undefined ?
+                ophour.friday_from : workingHours.Friday.start
+            const friday_to = workingHours.Friday.end as string === undefined ?
+                ophour.friday_to : workingHours.Friday.end
+            const saturday_from = workingHours.Saturday.start as string === undefined ?
+                ophour.saturday_from : workingHours.Saturday.start
+            const saturday_to = workingHours.Saturday.end as string === undefined ?
+                ophour.saturday_to : workingHours.Saturday.end
+            const sunday_from = workingHours.Sunday.start as string === undefined ?
+                ophour.sunday_from : workingHours.Sunday.start
+            const sunday_to = workingHours.Sunday.end as string === undefined ?
+                ophour.sunday_to : workingHours.Sunday.end
+
+
+
+            if (saturday_from === "" && saturday_to !== "") {
+                return DoResponse({
+                    success: false,
+                    message: "Please check Saturday Start and End times."
+                }, 500)
+            }
+
+            if (sunday_from === "" && sunday_to !== "") {
+                return DoResponse({
+                    success: false,
+                    message: "Please check Sunday Start and End times."
+                }, 500)
+            }
 
             const update = await query(
                 `UPDATE tbl_operating_hours SET

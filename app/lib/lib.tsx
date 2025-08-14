@@ -610,7 +610,11 @@ export const saveOperatingHours = async (openStatus: any, workingHours: any, bus
         })
 
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            await response.json().then((data) => {
+                console.log(data)
+                throw new Error(`HTTP error! Status: ${response.status}, ${data.message}`);
+            })
+
         }
 
         const data: any = await response.json();
@@ -620,7 +624,12 @@ export const saveOperatingHours = async (openStatus: any, workingHours: any, bus
             resolve(data)
         }, 10))
     } catch (error: any) {
-        return undefined
+        console.log(error.message)
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve({ message: error.message })
+        }, 10))
+
     }
 }
 

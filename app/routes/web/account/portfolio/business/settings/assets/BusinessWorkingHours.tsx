@@ -83,7 +83,7 @@ const BusinessWorkingHours = ({
         loadHours();
     }, [data.operatingHours]);
 
-    const handleTimeChange = (day: Day, type: "start" | "end", value: string) => {
+    const handleTimeChangeStart = (day: Day, type: "start" | "end", value: string) => {
         if (!workingHours) return;
 
         let startTime = type === "start" ? value : workingHours[day].start;
@@ -93,6 +93,32 @@ const BusinessWorkingHours = ({
             alert(`For ${day}, closing time must be later than opening time.`);
             return;
         }
+
+
+
+        setWorkingHours({
+            ...workingHours,
+            [day]: {
+                ...workingHours[day],
+                [type]: value,
+            },
+        });
+
+        onChange(workingHours)
+    };
+
+    const handleTimeChangeEnd = (day: Day, type: "start" | "end", value: string) => {
+        if (!workingHours) return;
+
+        let startTime = type === "start" ? value : workingHours[day].start;
+        let endTime = type === "end" ? value : workingHours[day].end;
+
+        if (endTime <= startTime && startTime !== "Closed") {
+            alert(`For ${day}, closing time must be later than opening time.`);
+            return;
+        }
+
+
 
 
 
@@ -123,15 +149,13 @@ const BusinessWorkingHours = ({
         try {
             const response: any = await saveOperatingHours(openStatus, workingHours, data.businessGuid, data.userGuid)
 
-            if (response === undefined) {
-                notification.alert("", "Save not successful!")
-            }
+            console.log(response)
+
+            notification.alert("", response.message)
+            setWorking(false)
         } catch (error: any) {
 
             notification.alert("", error.message)
-        } finally {
-            setWorking(false)
-            notification.alert("", "Save successful!")
         }
 
     }
@@ -177,7 +201,7 @@ const BusinessWorkingHours = ({
                                 <span className="w-24 font-semibold">{day}</span>
                                 <select
                                     value={workingHours[day as Day].start}
-                                    onChange={(e) => handleTimeChange(day as Day, "start", e.target.value)}
+                                    onChange={(e) => handleTimeChangeStart(day as Day, "start", e.target.value)}
                                     className="border p-2 rounded"
                                 >
                                     <option value="">From...</option>
@@ -190,7 +214,7 @@ const BusinessWorkingHours = ({
                                 <span>to</span>
                                 <select
                                     value={workingHours[day as Day].end}
-                                    onChange={(e) => handleTimeChange(day as Day, "end", e.target.value)}
+                                    onChange={(e) => handleTimeChangeEnd(day as Day, "end", e.target.value)}
                                     className="border p-2 rounded"
                                 >
                                     <option value="">To...</option>

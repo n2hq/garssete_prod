@@ -106,7 +106,7 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
 
     const nowUTC = new Date();
     const offsetMs = country.gmtOffset * 1000;
-    const localTime = new Date(nowUTC.getTime() + offsetMs);
+    const localTime = new Date(nowUTC.getTime());
 
     const dayIndex = localTime.getDay(); // 0 = Sunday, ..., 6 = Saturday
     const today = dayMap[dayIndex];

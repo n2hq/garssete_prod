@@ -68,6 +68,8 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
         }
     }
 
+
+
     const constructHours = (operatingHours: any) => {
         const opHours = []
         setopenStatus(operatingHours?.open_status)
@@ -84,24 +86,24 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
         })
         opHours.push({
             day: "Wed",
-            hours: `${operatingHours.wednesday_from} - ${operatingHours.wednesday_to}`
+            hours: constructDailyHour(operatingHours.wednesday_from, operatingHours.wednesday_to)
         })
         opHours.push({
             day: "Thu",
-            hours: `${operatingHours.thursday_from} - ${operatingHours.thursday_to}`
+            hours: constructDailyHour(operatingHours.thursday_from, operatingHours.thursday_to)
         })
         opHours.push({
             day: "Fri",
-            hours: `${operatingHours.friday_from} - ${operatingHours.friday_to}`
+            hours: constructDailyHour(operatingHours.friday_from, operatingHours.friday_to)
         })
         opHours.push({
             day: "Sat",
-            hours: `${operatingHours.saturday_from} - ${operatingHours.saturday_to}`
+            hours: constructDailyHour(operatingHours.saturday_from, operatingHours.saturday_to)
         })
 
         opHours.push({
             day: "Sun",
-            hours: `${operatingHours.sunday_from} - ${operatingHours.sunday_to}`
+            hours: constructDailyHour(operatingHours.sunday_from, operatingHours.sunday_to)
         })
         setOpHours(opHours)
     }
@@ -214,7 +216,7 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                                                     key={index}
                                                     className={`w-full ${item?.hours === 'null - null' && 'hidden'} `}
                                                 >
-                                                    <div className={`grid grid-cols-12 py-2 
+                                                    <div className={`grid grid-cols-12 py-1.5 
                                                         `}>
                                                         <div className={` col-span-2 flex flex-col
                                                         place-items-start`}>

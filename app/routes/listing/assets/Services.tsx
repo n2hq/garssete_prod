@@ -7,8 +7,11 @@ const Services = ({ listing }: any) => {
 
     useEffect(() => {
         const convertToList = (phrases: string) => {
-            const serviceList = phrases.split(",").map(item => item.trim());
-            setServiceList(serviceList)
+
+            if (phrases !== null && phrases !== "") {
+                const serviceList = phrases.split(",").map(item => item.trim());
+                setServiceList(serviceList)
+            }
         }
         if (listing !== null) {
             convertToList(listing?.services)

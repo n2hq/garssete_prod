@@ -7,8 +7,10 @@ const BusinessPhrases = ({ listing }: any) => {
 
     useEffect(() => {
         const convertToList = (phrases: string) => {
-            const phraseList = phrases.split(",").map(item => item.trim());
-            setPhrasesList(phraseList)
+            if (phrases !== null && phrases !== "") {
+                const phraseList = phrases.split(",").map(item => item.trim());
+                setPhrasesList(phraseList)
+            }
         }
         if (listing !== null) {
             convertToList(listing?.business_phrases)

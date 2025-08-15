@@ -7,8 +7,11 @@ const Products = ({ listing }: any) => {
 
     useEffect(() => {
         const convertToList = (phrases: string) => {
-            const productList = phrases.split(",").map(item => item.trim());
-            setProductList(productList)
+            if (phrases !== null && phrases !== "") {
+                const productList = phrases.split(",").map(item => item.trim());
+                setProductList(productList)
+            }
+
         }
         if (listing !== null) {
             convertToList(listing?.products)

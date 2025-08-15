@@ -18,6 +18,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             LEFT JOIN tbl_business_profile_image bi ON bi.business_guid = d.gid
             WHERE
             d.owner = ?
+            ORDER BY d.date_created
+            DESC
             `, [owner])
 
         if ((rows as any[]).length <= 0) { return DoResponse({}, 200) }

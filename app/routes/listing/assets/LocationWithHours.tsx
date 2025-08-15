@@ -173,7 +173,7 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                                 <a href={`${addressLink}`} target="_blank">
                                     <button className='w-[100%] bg-gray-100 border-[1px] border-gray-300'>
                                         <div className='text-[14px]  font-sans font-bold text-black  py-1 '>
-                                            Get Directions
+                                            View in Map
                                         </div>
                                     </button>
                                 </a>

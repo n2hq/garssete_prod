@@ -223,12 +223,12 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                                                             {item?.day}
                                                         </div>
                                                         <div className={`flex flex-row col-span-10
-                                                    place-items-end place-content-end md:place-content-start gap-3`}
+                                                    place-items-end place-content-end md:place-content-start gap-3 `}
                                                         >
                                                             <span>
                                                                 {item?.hours}
                                                             </span>
-                                                            <span>
+                                                            <span className={`${opHoursStatus.today === item?.day ? 'mr-[10px]' : ''}`}>
                                                                 {
                                                                     item?.hours.includes("Closed") ? '' :
                                                                         opHoursStatus.today === item?.day &&

@@ -45,6 +45,7 @@ const featuredData = [
 
 const Featured = () => {
     const [featured, setFeatured] = useState<any[]>([])
+    const [counter, setCounter] = useState(0);
 
     useEffect(() => {
         const getFeatured = async () => {
@@ -64,9 +65,13 @@ const Featured = () => {
                 {
                     featured?.length > 0 ?
                         featured?.map((feature: any, index: number) => {
+                            if (index > 2) {
+                                return null
+                            }
                             return (
                                 <Feature key={index} feature={feature} />
                             )
+
                         }) :
                         <div className={`text-[15px] mt-4`}>Loading...</div>
                 }

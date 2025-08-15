@@ -23,7 +23,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             d.featured = true
             ORDER BY RAND()
             ASC
-            LIMIT 3
             `, [isFeatured])
 
         if ((rows as any[]).length <= 0) { return DoResponse({}, 200) }

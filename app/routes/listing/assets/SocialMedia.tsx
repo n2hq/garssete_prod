@@ -109,8 +109,8 @@ const SocialMedia = ({ listing }: any) => {
                                     <div key={index}
                                         className={`border px-[8px] py-[2px] 
                                     cursor-pointer flex place-items-center rounded-full
-                                    gap-1 border-gray-400 bg-white hover:bg-black
-                                    text-black hover:text-white
+                                    gap-1 border-gray-400 bg-blue-50 hover:bg-blue-50
+                                    text-black hover:text-black
                                     hover:shadow-md`}
                                     >
                                         <span className={`text-[12px]`}>

@@ -3,15 +3,15 @@ import { config, getBusinessProfileImageData } from '~/lib/lib'
 import ComponentTitle from './ComponentTitle'
 
 const BusinessPhrases = ({ listing }: any) => {
-    const [img, setImg] = useState('')
+    const [phrasesList, setPhrasesList] = useState<any[]>([])
 
     useEffect(() => {
-        if (listing.gid) {
-            let imgdata = getBusinessProfileImageData(listing.gid)
-            imgdata.then((data) => {
-
-                setImg(config.IMG_BASE_URL + data.image_url)
-            })
+        const convertToList = (phrases: string) => {
+            const phraseList = phrases.split(",").map(item => item.trim());
+            setPhrasesList(phraseList)
+        }
+        if (listing !== null) {
+            convertToList(listing?.business_phrases)
         }
     }, [listing])
     return (
@@ -19,8 +19,16 @@ const BusinessPhrases = ({ listing }: any) => {
             <ComponentTitle title='Business Phrases' />
 
 
-            <div className={`flex flex-col gap-y-5 text-[14px] mt-4 whitespace-pre-wrap`}>
-                {listing?.business_phrases}
+            <div className={`flex gap-3 flex-wrap`}>
+                {
+                    phrasesList.map((phrase: any, index: number) => {
+                        return (
+                            <span className={`bg-blue-50 px-2 border py-1 border-gray-300 hover:shadow-md cursor-move`}>
+                                {phrase}
+                            </span>
+                        )
+                    })
+                }
             </div>
         </div>
     )

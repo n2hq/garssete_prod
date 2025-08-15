@@ -3,15 +3,15 @@ import { config, getBusinessProfileImageData } from '~/lib/lib'
 import ComponentTitle from './ComponentTitle'
 
 const Services = ({ listing }: any) => {
-    const [img, setImg] = useState('')
+    const [serviceList, setServiceList] = useState<any[]>([])
 
     useEffect(() => {
-        if (listing.gid) {
-            let imgdata = getBusinessProfileImageData(listing.gid)
-            imgdata.then((data) => {
-
-                setImg(config.IMG_BASE_URL + data.image_url)
-            })
+        const convertToList = (phrases: string) => {
+            const serviceList = phrases.split(",").map(item => item.trim());
+            setServiceList(serviceList)
+        }
+        if (listing !== null) {
+            convertToList(listing?.services)
         }
     }, [listing])
     return (
@@ -19,8 +19,16 @@ const Services = ({ listing }: any) => {
             <ComponentTitle title='Services' />
 
 
-            <div className={`flex flex-col gap-y-5 text-[14px] mt-4 whitespace-pre-wrap`}>
-                {listing?.services}
+            <div className={`flex gap-3 flex-wrap`}>
+                {
+                    serviceList.map((service: any, index: number) => {
+                        return (
+                            <span className={`bg-blue-50 px-2 border py-1 border-gray-300 hover:shadow-md cursor-move`}>
+                                {service}
+                            </span>
+                        )
+                    })
+                }
             </div>
         </div>
     )

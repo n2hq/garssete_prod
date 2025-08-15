@@ -1,4 +1,7 @@
-import { config, getOperatingHours, headers } from "./lib";
+import { config, getDateInTimeZone, getOperatingHours, headers } from "./lib";
+
+import tzLookup from 'tz-lookup';
+import { toZonedTime, fromZonedTime, formatInTimeZone } from "date-fns-tz"
 
 const getCountriesWithTimezone = async (countryCode: string) => {
     const endpoint = config.BASE_URL + "/api/util/country_locale"
@@ -92,7 +95,11 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
     const data = await getCountriesWithTimezone(countryCode)
     const country = getCountryTimezoneData(countryCode, data)
 
-    //console.log(country)
+
+
+
+
+
 
     const operatingHours: any = await getOperatingHours(listing?.gid, listing?.owner)
     //console.log(operatingHours)
@@ -105,10 +112,29 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
     const dayMap = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     const nowUTC = new Date();
-    const offsetMs = (country.gmtOffset - (3600 * 2)) * 1000;
+    const offsetMs = (country.gmtOffset) * 1000;
     const localTime = new Date(nowUTC.getTime() + offsetMs);
-    console.log(localTime)
-    const dayIndex = localTime.getDay(); // 0 = Sunday, ..., 6 = Saturday
+
+    const localTimeZone = tzLookup(listing.lat, listing.lng)
+
+    const adjustment = 0;//no adjustment
+    const timeObject = new Date(Date.now() - adjustment);
+
+    let localTimeObject: any = getDateInTimeZone(localTimeZone);
+
+
+
+
+
+
+    //console.log(localTimeObject)
+
+    //const localTimex = new Date(localTimeFormat.)
+
+
+    //console.log(format(estDate, "MM/dd/yyyy, hh:mm:ss a 'EST'", { timeZone: estTimeZone }));
+
+    const dayIndex = localTimeObject.getDay(); // 0 = Sunday, ..., 6 = Saturday
     const today = dayMap[dayIndex];
     const todayHoursEntry = country.hours.find((entry: any) => entry.day === today);
 
@@ -120,13 +146,13 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
         const [openHour, openMinute] = openStr.split(':').map(Number);
         const [closeHour, closeMinute] = closeStr.split(':').map(Number);
 
-        const openTime = new Date(localTime);
+        const openTime = new Date(localTimeObject);
         openTime.setHours(openHour, openMinute, 0, 0);
 
-        const closeTime = new Date(localTime);
+        const closeTime = new Date(localTimeObject);
         closeTime.setHours(closeHour, closeMinute, 0, 0);
 
-        isOpen = localTime >= openTime && localTime <= closeTime;
+        isOpen = localTimeObject >= openTime && localTimeObject <= closeTime;
 
         const formattedLabel = (isOpen: boolean) => {
             return `${isOpen ? 'Open Now' : 'Closed Now'}:`
@@ -144,8 +170,6 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
             <span>{country.abbreviation}</span>
             <span>{country.gmtOffsetName}</span>
         </div>
-
-
     }
 
 
@@ -158,11 +182,13 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
         </div>
     }
 
+    const localTimeString = localTimeObject.toString()
     return {
         ...country,
         isOpen,
         todayHoursFormatted,
-        today
+        today,
+        localTimeString
     };
 }
 

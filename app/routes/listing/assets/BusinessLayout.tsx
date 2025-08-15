@@ -52,6 +52,7 @@ const BusinessLayout = ({
     useEffect(() => {
         if (listing) {
             ReportTime(listing).then((data) => {
+                //console.log(data)
                 setOperatingHoursStatus(data);
             })
 
@@ -101,7 +102,11 @@ const BusinessLayout = ({
                             }
 
                         </div>
+
                     }
+                </div>
+                <div className={`max-w-[1100px] w-full mx-auto mt-1.5`}>
+                    <span className={`font-[500] uppercase`}>Current Time:</span> {operatingHoursStatus?.localTimeString}
                 </div>
             </div>
 

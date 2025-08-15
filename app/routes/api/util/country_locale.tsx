@@ -41,7 +41,10 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 gmtOffsetName: zone?.gmtOffsetName,
                 abbreviation: zone?.abbreviation,
                 timezoneName: zone?.tzName,
-                zoneName: zone?.zoneName
+                zoneName: zone?.zoneName,
+                timeZone: "mo",
+                lat: zone?.latitude,
+                lng: zone?.longitude
             })
         })
 

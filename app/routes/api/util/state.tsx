@@ -16,7 +16,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         const url = new URL(request.url);
         const countryCode = url.searchParams.get("country_code");
 
-        const rows: any = await query(`SELECT * FROM tbl_state WHERE country_code = ?`, [countryCode])
+        const rows: any = await query(`SELECT * FROM tbl_state WHERE country_code = ?
+            ORDER BY name ASC`, [countryCode])
 
         if ((rows as any[]).length <= 0) {
             return DoResponse([{}], 200)

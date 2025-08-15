@@ -2,6 +2,7 @@ import React from 'react'
 import StarRatingAlt from './StarRatingAlt'
 
 const Header = ({ listing }: any) => {
+
     return (
         <>
             <div className={`text-[19px] md:text-[24px]

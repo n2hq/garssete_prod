@@ -285,6 +285,7 @@ export const getPage: any = async (criteria: string) => {
         }
 
         const data: any = await response.json();
+
         return data
     } catch (error: any) {
         return ({ "message": error.message })
@@ -938,3 +939,34 @@ export const IsAuthenticated = (localStorage: any) => {
         window.location.href = "/web/signin"
     }
 }
+
+
+export function getDateInTimeZone(timeZone: any) {
+    //const now = new Date();
+    const adjustment = 0;
+    const timeObject = new Date(Date.now() - adjustment);
+
+    // Format to parts in target timezone
+    const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+    }).formatToParts(timeObject);
+
+    // Extract parts
+    const dateParts: any = {};
+    for (const { type, value } of parts) {
+        if (type !== "literal") dateParts[type] = value;
+    }
+
+    // Construct a Date from the parts (in local machine time)
+    return new Date(
+        `${dateParts.year}-${dateParts.month}-${dateParts.day}T${dateParts.hour}:${dateParts.minute}:${dateParts.second}`
+    );
+}
+

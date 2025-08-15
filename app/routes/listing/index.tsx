@@ -22,6 +22,7 @@ import ResourceNotFound from './assets/ResourceNotFound'
 export const loader: LoaderFunction = async ({ request, params }) => {
     const id = params.id || null
     let listing = await getPage(id)
+
     let profileImageData = await getBusinessProfileImageData(listing?.gid)
     const gallery = await getBusinessGallery(listing.gid)
     const ratingData = await getRatingsReviews(listing.gid)
@@ -87,6 +88,11 @@ const index = () => {
     const gallery: any = data.gallery
     const ratingsData: any = data.ratingsData
 
+    useEffect(() => {
+        if (listing) {
+            //console.log(listing)
+        }
+    }, [listing])
 
     return (
         <RatingProvider>

@@ -24,7 +24,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             WHERE
             country_code = ?
             AND
-            state_code = ?`, [countryCode, stateCode])
+            state_code = ?
+            ORDER BY name
+            ASC`, [countryCode, stateCode])
 
         if ((rows as any[]).length <= 0) {
             return DoResponse([{}], 200)

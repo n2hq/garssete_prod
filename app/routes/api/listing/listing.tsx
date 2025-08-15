@@ -14,10 +14,12 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             d.*,
             c.name AS country_name,
             s.name AS state_name,
+            s.latitude AS lat,
+            s.longitude as lng,
             ci.name AS city_name
             FROM tbl_dir d
             LEFT JOIN tbl_country c ON d.country_code = c.iso2 AND d.country_code IS NOT NULL AND d.country_code != ''
-            LEFT JOIN tbl_state s ON d.state_code = s.iso2 AND d.state_code IS NOT NULL AND d.state_code != ''
+            LEFT JOIN tbl_state s ON d.state_code = s.iso2 AND d.state_code IS NOT NULL AND d.state_code != '' AND d.country_code = s.country_code
             LEFT JOIN tbl_city ci ON d.city_id = ci.id AND d.city_id IS NOT NULL AND d.city_id != ''
             WHERE (d.gid = ? OR d.username = ?)
             `, [id, id])

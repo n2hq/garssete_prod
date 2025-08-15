@@ -106,7 +106,7 @@ const BusinessLayout = ({
                     }
                 </div>
                 <div className={`max-w-[1100px] w-full mx-auto mt-1.5`}>
-                    <span className={`font-[500] uppercase`}>Current Time:</span> {operatingHoursStatus?.localTimeText}
+                    {operatingHoursStatus?.localTimeText}
                 </div>
             </div>
 

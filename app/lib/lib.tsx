@@ -988,9 +988,12 @@ export function getDateInTimeZoneX(timeZone: any) {
         timeZoneName: "long"
     }).format(timeObject);
 
-
+    const displayFormattedTime = <span>
+        <span className={`font-[500] uppercase`}>Current Time:</span>
+        <span>{formattedTime}</span>
+    </span>
 
     // Construct a Date from the parts (in local machine time)
-    return formattedTime
+    return displayFormattedTime
 }
 

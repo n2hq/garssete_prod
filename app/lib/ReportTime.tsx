@@ -1,7 +1,6 @@
 import { config, getDateInTimeZone, getDateInTimeZoneX, getOperatingHours, headers } from "./lib";
 
 import tzLookup from 'tz-lookup';
-import { toZonedTime, fromZonedTime, formatInTimeZone } from "date-fns-tz"
 
 const getCountriesWithTimezone = async (countryCode: string) => {
     const endpoint = config.BASE_URL + "/api/util/country_locale"

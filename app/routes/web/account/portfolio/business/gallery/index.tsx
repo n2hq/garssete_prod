@@ -73,7 +73,11 @@ const index = () => {
                 businessProfile={businessProfile}
             >
 
-
+                <BusinessHeader
+                    businessGuid={businessGuid}
+                    data={data}
+                    businessProfile={businessProfile}
+                />
 
                 {
                     businessGuid && userGuid &&

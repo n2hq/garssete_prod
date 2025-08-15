@@ -10,11 +10,7 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title }:
 
             <div className={`mt-4 bg-white px-[15px] pt-4 
                 rounded-lg shadow-md pb-8 `}>
-                <BusinessHeader
-                    businessGuid={businessGuid}
-                    data={data}
-                    businessProfile={businessProfile}
-                />
+
                 {children}
             </div>
         </div>

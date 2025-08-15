@@ -8,6 +8,7 @@ import ContentLayout from '../../../assets/ContentLayout'
 import BusinessMenu from '../assets/BusinessMenu'
 import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
+import BusinessHeader from '../assets/BusinessHeader'
 
 
 const index = () => {
@@ -74,7 +75,11 @@ const index = () => {
                 data={data}
                 businessProfile={businessProfile}
             >
-
+                <BusinessHeader
+                    businessGuid={businessGuid}
+                    data={data}
+                    businessProfile={businessProfile}
+                />
                 {
                     businessGuid && userGuid &&
                     <BusinessMenu guid={businessGuid} userGuid={userGuid} />

@@ -6,6 +6,7 @@ import ContentLayout from '../../../assets/ContentLayout'
 import BusinessMenu from '../assets/BusinessMenu'
 import SocialMedia from './assets/SocialMedia'
 import CardTitle from '../../../assets/CardTitle'
+import BusinessHeader from '../assets/BusinessHeader'
 
 const index = () => {
     useEffect(() => {
@@ -77,7 +78,11 @@ const index = () => {
                 businessProfile={businessProfile}
             >
 
-
+                <BusinessHeader
+                    businessGuid={businessGuid}
+                    data={data}
+                    businessProfile={businessProfile}
+                />
                 {
                     businessGuid && userGuid &&
                     <BusinessMenu guid={businessGuid} userGuid={userGuid} />

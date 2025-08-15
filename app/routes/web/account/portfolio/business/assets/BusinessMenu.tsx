@@ -4,7 +4,7 @@ import { MdArrowBack, MdArrowForward, MdOutlineSafetyDivider, MdSafetyDivider } 
 
 const settingsLinks = [
     {
-        title: "Settings",
+        title: "Business Hours",
         link: "/settings"
     },
     {

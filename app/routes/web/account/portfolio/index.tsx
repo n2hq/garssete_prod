@@ -5,6 +5,7 @@ import { useAuth } from '~/context/AuthContext'
 import { getPortfolio, getUserProfile, IsAuthenticated } from '~/lib/lib'
 import Portfolio from './assets/Portfolio'
 import CardTitle from '../assets/CardTitle'
+import BusinessHeader from './business/assets/BusinessHeader'
 
 
 const index = () => {

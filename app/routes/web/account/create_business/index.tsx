@@ -3,8 +3,9 @@ import ContentLayout from '../assets/ContentLayout'
 import AccountLayout from '../assets/AccountLayout'
 import { useAuth } from '~/context/AuthContext'
 import CreatePageForm from './assets/CreatePageForm'
-import { getCategories, getCities, getCountries, getStates, IsAuthenticated } from '~/lib/lib'
+import { getCategories, getCities, getCountries, getStates, getUserProfile, IsAuthenticated } from '~/lib/lib'
 import CardTitle from '../assets/CardTitle'
+import CardHeader from '../portfolio/business/assets/CardHeader'
 
 const index = () => {
     useEffect(() => {
@@ -20,6 +21,7 @@ const index = () => {
     const [states, setStates] = useState<any | null>(null)
     const [cities, setCities] = useState<any | null>(null)
     const [categories, setCategories] = useState<any | null>(null)
+    const [userProfile, setUserProfile] = useState<any | null>(null)
 
     useEffect(() => {
         const getAllData = async (user: any) => {
@@ -27,6 +29,9 @@ const index = () => {
             const states = await getStates("")
             const cities = await getCities("", "")
             const categories = await getCategories()
+
+            const userProfileData = await getUserProfile(user?.guid || "")
+            setUserProfile(userProfileData)
 
             setCountries(countries)
             setStates(states)
@@ -71,11 +76,11 @@ const index = () => {
             <ContentLayout title={'Create Business'}>
                 {
                     data && <div>
-                        <CardTitle
-                            baseUrl='/web/account/profile'
-                            guid={''}>
-                            Go to Profile
-                        </CardTitle>
+                        <CardHeader
+                            base_url={'/web/account/profile'}
+                            title={userProfile?.email}
+
+                        />
                         <CreatePageForm data={data} user={user} />
                     </div>
                 }

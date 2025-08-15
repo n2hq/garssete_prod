@@ -214,7 +214,7 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                                             return (
                                                 <li
                                                     key={index}
-                                                    className={`w-full ${item?.hours === 'null - null' && 'hidden'} `}
+                                                    className={`w-full ${item?.hours.includes(null) && 'hidden'} `}
                                                 >
                                                     <div className={`grid grid-cols-12 py-1.5 
                                                         `}>
@@ -225,12 +225,12 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                                                         <div className={`flex flex-row col-span-10
                                                     place-items-end place-content-end md:place-content-start gap-3 `}
                                                         >
-                                                            <span>
+                                                            <span className={`${item?.hours.includes('Closed') && 'hidden'}`}>
                                                                 {item?.hours}
                                                             </span>
                                                             <span className={`${opHoursStatus.today === item?.day ? 'mr-[10px]' : ''}`}>
                                                                 {
-                                                                    item?.hours.includes("Closed") ? '' :
+                                                                    item?.hours.includes("Closed") ? 'Closed Now' :
                                                                         opHoursStatus.today === item?.day &&
                                                                         (opHoursStatus.isOpen ? 'Open Now' : 'Closed Now')
                                                                 }

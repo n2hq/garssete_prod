@@ -126,6 +126,13 @@ const index = () => {
                 data={data}
                 businessProfile={businessProfile}
             >
+
+                <BusinessHeader
+                    businessGuid={businessGuid}
+                    data={data}
+                    businessProfile={businessProfile}
+                />
+
                 {
                     data && <div>
 

@@ -6,6 +6,7 @@ import { getUserProfile, IsAuthenticated } from '~/lib/lib'
 import EmailForm from './assets/EmailForm'
 import CardTitle from '../assets/CardTitle'
 import { redirect } from '@remix-run/react'
+import CardHeader from '../portfolio/business/assets/CardHeader'
 
 const index = () => {
     useEffect(() => {
@@ -73,11 +74,13 @@ const index = () => {
 
                 {userProfile === null ? 'Loading...' : ''}
 
-                <CardTitle
-                    baseUrl='/web/account/profile'
-                    guid={''}>
-                    {userProfile?.email}
-                </CardTitle>
+                <CardHeader
+                    base_url={'/web/account/profile'}
+                    title={userProfile?.email}
+
+                />
+
+
 
                 <div className={`font-semibold mb-2 text-md`}>
 

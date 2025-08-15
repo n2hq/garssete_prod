@@ -6,6 +6,7 @@ import { getPortfolio, getUserProfile, IsAuthenticated } from '~/lib/lib'
 import Portfolio from './assets/Portfolio'
 import CardTitle from '../assets/CardTitle'
 import BusinessHeader from './business/assets/BusinessHeader'
+import CardHeader from './business/assets/CardHeader'
 
 
 const index = () => {
@@ -74,12 +75,12 @@ const index = () => {
 
                 {userProfile === null ? 'Loading...' : ''}
 
+                <CardHeader
+                    base_url={'/web/account/profile'}
+                    title={'Go to profile'}
 
-                <CardTitle
-                    baseUrl='/web/account/profile'
-                    guid={''}>
-                    Go to Profile
-                </CardTitle>
+                />
+
 
                 <div className={`mt-[20px]`}></div>
                 {

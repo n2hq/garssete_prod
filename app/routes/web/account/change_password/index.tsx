@@ -5,6 +5,7 @@ import { useAuth } from '~/context/AuthContext'
 import { getUserProfile, IsAuthenticated } from '~/lib/lib'
 import ChangePasswordForm from './assets/ChangePasswordForm'
 import CardTitle from '../assets/CardTitle'
+import CardHeader from '../portfolio/business/assets/CardHeader'
 
 const index = () => {
     useEffect(() => {
@@ -63,12 +64,13 @@ const index = () => {
             <ContentLayout title={'Change Password'}>
                 {userProfile === null ? 'Loading...' : ''}
 
+                <CardHeader
+                    base_url={'/web/account/profile'}
+                    title={userProfile?.email}
 
-                <CardTitle
-                    baseUrl='/web/account/profile'
-                    guid={''}>
-                    {userProfile?.email}
-                </CardTitle>
+                />
+
+
 
                 {
                     data && <ChangePasswordForm loaderData={data} user={user} />

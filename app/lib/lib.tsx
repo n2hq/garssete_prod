@@ -970,3 +970,27 @@ export function getDateInTimeZone(timeZone: any) {
     );
 }
 
+
+export function getDateInTimeZoneX(timeZone: any) {
+    //const now = new Date();
+    const adjustment = 0;
+    const timeObject = new Date(Date.now() - adjustment);
+
+    // Format to parts in target timezone
+    const formattedTime = new Intl.DateTimeFormat("en-US", {
+        timeZone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        timeZoneName: "long"
+    }).format(timeObject);
+
+
+
+    // Construct a Date from the parts (in local machine time)
+    return formattedTime
+}
+

@@ -1,4 +1,4 @@
-import { config, getDateInTimeZone, getOperatingHours, headers } from "./lib";
+import { config, getDateInTimeZone, getDateInTimeZoneX, getOperatingHours, headers } from "./lib";
 
 import tzLookup from 'tz-lookup';
 import { toZonedTime, fromZonedTime, formatInTimeZone } from "date-fns-tz"
@@ -122,12 +122,9 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
 
     let localTimeObject: any = getDateInTimeZone(localTimeZone);
 
+    let localTimeText = getDateInTimeZoneX(localTimeZone)
 
-
-
-
-
-    //console.log(localTimeObject)
+    console.log(localTimeObject)
 
     //const localTimex = new Date(localTimeFormat.)
 
@@ -188,9 +185,13 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
         isOpen,
         todayHoursFormatted,
         today,
-        localTimeString
+        localTimeString,
+        localTimeText
     };
 }
+
+
+
 
 export const ReportTime = async (listing: any) => {
     const locationDetails = getLocationAndBusinessStatus(listing)

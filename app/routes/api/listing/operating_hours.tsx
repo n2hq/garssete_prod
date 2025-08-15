@@ -179,7 +179,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
             return DoResponse({
                 success: true,
-                message: 'Request received successfully',
+                message: 'Business Hours Saved Successfully',
                 workingHours: {
                     businessGuid,
                     userGuid,

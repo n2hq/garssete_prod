@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { config, getBusinessProfileImageData } from '~/lib/lib'
 import ComponentTitle from './ComponentTitle'
+import StringToListMaker from '~/components/content/StringToListMaker'
 
 const Services = ({ listing }: any) => {
     const [serviceList, setServiceList] = useState<any[]>([])
@@ -24,13 +25,8 @@ const Services = ({ listing }: any) => {
 
             <div className={`flex gap-3 flex-wrap`}>
                 {
-                    serviceList.map((service: any, index: number) => {
-                        return (
-                            <span className={`bg-blue-50 px-2 border py-1 border-gray-300 hover:shadow-md cursor-move`}>
-                                {service}
-                            </span>
-                        )
-                    })
+                    listing?.services &&
+                    <StringToListMaker phrasesString={listing?.services} />
                 }
             </div>
         </div>

@@ -4,7 +4,7 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer, useNavigate, Outlet, useNavigation, Meta, Links, ScrollRestoration, Scripts, Link, useLocation, useLoaderData, useSearchParams, useParams } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import React, { createContext, useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, createContext, useState, useEffect, useRef } from "react";
 import NProgress from "nprogress";
 import { FaSpinner, FaSignOutAlt, FaCarSide, FaAngleDown, FaMobile, FaQuestion, FaBriefcase, FaVimeoSquare, FaYoutubeSquare, FaPinterestSquare, FaFacebookSquare, FaCheck } from "react-icons/fa";
 import CryptoJS from "crypto-js";
@@ -12667,7 +12667,7 @@ const loader$q = async ({ request, params }) => {
                 ) r ON d.gid = r.business_guid
 
                 WHERE d.active_status = true
-                ORDER BY d.date_created ASC
+                ORDER BY d.date_created DESC
                 LIMIT 50`);
     } else {
       rawdata = await query(`SELECT
@@ -12709,7 +12709,7 @@ const loader$q = async ({ request, params }) => {
                 OR d.category RLIKE ?)
                 AND
                 d.active_status = true
-                ORDER BY d.date_created ASC
+                ORDER BY d.date_created DESC
                 LIMIT 50`, [criteria, criteria, criteria]);
     }
     const listings = rawdata.map((listing) => {

@@ -62,7 +62,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 ) r ON d.gid = r.business_guid
 
                 WHERE d.active_status = true
-                ORDER BY d.date_created ASC
+                ORDER BY d.date_created DESC
                 LIMIT 50`)
         } else {
             rawdata = await query(`SELECT
@@ -104,7 +104,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 OR d.category RLIKE ?)
                 AND
                 d.active_status = true
-                ORDER BY d.date_created ASC
+                ORDER BY d.date_created DESC
                 LIMIT 50`, [criteria, criteria, criteria])
         }
 

@@ -163,9 +163,6 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
             <span>{formatTime(openStr)}</span>
             <span> {"-"} </span>
             <span>{formatTime(closeStr)}</span>
-            <span>{"/"}</span>
-            <span>{country.abbreviation}</span>
-            <span>{country.gmtOffsetName}</span>
         </div>
     }
 

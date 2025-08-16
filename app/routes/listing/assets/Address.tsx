@@ -74,7 +74,7 @@ const Address = ({ businessProfile }: any) => {
                             <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
                                 <MdPhone className={`text-[20px] h-fit`} />
                             </div>
-                            <div className={` text-[13px] leading-[1.3em]
+                            <div className={` text-[15px] md:text-[13px] leading-[1.3em]
                                 flex place-items-center font-semibold`}>
                                 {businessProfile?.phone}
                             </div>
@@ -86,7 +86,7 @@ const Address = ({ businessProfile }: any) => {
                             <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
                                 <CgWebsite className={`text-[20px] h-fit`} />
                             </div>
-                            <div className={` text-[13px] leading-[1.3em]
+                            <div className={` text-[15px] md:text-[13px] leading-[1.3em]
                                 flex place-items-center font-semibold
                                 line-clamp-1`}>
 
@@ -102,7 +102,7 @@ const Address = ({ businessProfile }: any) => {
                             <div className={`bg-blue-200/50 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
                                 <MdEmail className={`text-[20px]`} />
                             </div>
-                            <div className={` text-[13px] leading-[1.3em]
+                            <div className={` text-[15px] md:text-[13px] leading-[1.3em]
                                 flex place-items-center font-semibold
                                 line-clamp-1`}>
                                 <a href={`mailto:${businessProfile.email_address}`}>

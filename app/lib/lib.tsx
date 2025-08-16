@@ -988,8 +988,8 @@ export function getDateInTimeZoneX(timeZone: any) {
         timeZoneName: "long"
     }).format(timeObject);
 
-    const displayFormattedTime = <span>
-        <span className={`font-[500] uppercase`}>Current Time:</span>
+    const displayFormattedTime = <span className={`space-x-1 tracking-tight`}>
+        <span className={`font-[500] underline`}>Current Time:</span>
         <span>{formattedTime}</span>
     </span>
 

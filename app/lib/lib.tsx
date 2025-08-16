@@ -989,7 +989,7 @@ export function getDateInTimeZoneX(timeZone: any) {
     }).format(timeObject);
 
     const displayFormattedTime = <span className={`space-x-1 tracking-tight`}>
-        <span className={`font-[500] underline`}>Current Time:</span>
+        <span className={`font-bold underline`}>Local Time:</span>
         <span>{formattedTime}</span>
     </span>
 

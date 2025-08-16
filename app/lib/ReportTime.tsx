@@ -135,7 +135,7 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
     const todayHoursEntry = country.hours.find((entry: any) => entry.day === today);
 
     let isOpen = false;
-    let todayHoursFormatted: any = <span>Closed Today</span>;
+    let todayHoursFormatted: any = <span className={`px-2 py-1 bg-blue-600 rounded-md text-white`}>Status: Closed Today</span>;
 
     if (todayHoursEntry && todayHoursEntry.hours.includes('-')) {
         const [openStr, closeStr] = todayHoursEntry.hours.split(' - ');

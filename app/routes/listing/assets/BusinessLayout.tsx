@@ -82,7 +82,7 @@ const BusinessLayout = ({
 
                     {
                         operatingHoursStatus !== undefined &&
-                        <div className={`mt-[4px] leading-[1.2em]`}>
+                        <div className={`mt-[6px] leading-[1.2em]`}>
                             {
                                 operatingHoursStatus.openStatus === "selected_hours" ?
                                     <div>

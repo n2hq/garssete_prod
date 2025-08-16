@@ -91,7 +91,7 @@ const Address = ({ businessProfile }: any) => {
                                 line-clamp-1`}>
 
                                 <a href={businessProfile?.website}>
-                                    {businessProfile?.website}
+                                    {businessProfile?.website || 'No website'}
                                 </a>
                             </div>
 

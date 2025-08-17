@@ -6,6 +6,7 @@ import { FaFacebook, FaLinkedinIn, FaYoutubeSquare } from 'react-icons/fa'
 import { GrYoutube } from 'react-icons/gr'
 import RatingBox from './RatingBox'
 import RatingText from './RatingText'
+import Address from './Address'
 
 
 const Card = ({ listing }: any) => {
@@ -48,9 +49,9 @@ const Card = ({ listing }: any) => {
             {/** body */}
             <div>
                 <a href="">
-                    <div className={` h-auto flex place-content-between py-0 `}>
+                    <div className={` h-auto flex place-content-between py-4 `}>
                         {/** left */}
-                        <div className={`flex place-items-start w-[60%] flex-col py-[6px] pl-4`}>
+                        <div className={`flex place-items-start w-[60%] flex-col  pl-4`}>
                             <div className={`flex place-items-center  w-full gap-x-2`}>
                                 <div className={`text-[19px] flex`}>
                                     <RatingBox rating={listing?.average_rating} />
@@ -65,14 +66,16 @@ const Card = ({ listing }: any) => {
 
                             <div className={`flex place-items-center gap-1 mt-1`}>
                                 <BsBank />
-                                <span className={`mt-[1px] text-gray-500`}>Founded 1982</span>
+                                <span className={`mt-[1px] text-gray-500`}>Founded {listing?.established}</span>
                             </div>
                         </div>
 
                         {/** right */}
-                        <div className={`flex place-items-end flex-col w-[40%] text-end py-[4px] pr-4`}>
-                            <div>(+1) 48 944 4030</div>
-                            <div className={`text-[13px] leading-[1.2em] mt-1`}>13 Los Angeles Street, Bellefonte, Delaware, United States</div>
+                        <div className={`flex place-items-end flex-col w-[40%] text-end pr-4`}>
+                            <div className={`font-[600]`}>{listing?.phone}</div>
+                            <div className={`text-[12px] leading-[1.2em] mt-1`}>
+                                <Address listing={listing} />
+                            </div>
                         </div>
                     </div>
                 </a>

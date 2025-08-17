@@ -122,3 +122,32 @@ body {
   font-weight: 700;
   font-style: normal;
 }
+
+.scrollbar-hidden {
+  overflow-y: auto;
+  /* or overflow-x if horizontal */
+  scrollbar-width: none;
+  /* Firefox: hide scrollbar */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 0px;
+  /* Chrome/Safari: hide scrollbar */
+  height: 0px;
+}
+
+.scrollbar-hidden:hover {
+  scrollbar-width: thin;
+  /* Firefox: show thin scrollbar on hover */
+}
+
+.scrollbar-hidden:hover::-webkit-scrollbar {
+  width: 8px;
+  /* Chrome/Safari: show scrollbar on hover */
+  height: 8px;
+}
+
+.scrollbar-hidden:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}

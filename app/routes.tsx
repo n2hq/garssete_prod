@@ -6,6 +6,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/:id", "routes/listing/index.tsx");
         route("/landing", "routes/landing/index.tsx");
         route("/web/search", "routes/web/search/index.tsx");
+        route("/web/browse", "routes/web/browse/index.tsx");
         route("/web/signin", "routes/web/signin/index.tsx");
         route("/web/signup", "routes/web/signup/index.tsx");
         route("/web/reset_password", "routes/web/reset_password/index.tsx");

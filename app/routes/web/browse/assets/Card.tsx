@@ -23,7 +23,7 @@ const Card = ({ listing }: any) => {
 
                             </div>
                             <div className={`-space-y-1`}>
-                                <div className={`text-black text-lg font-semibold line-clamp-1`}>
+                                <div className={`text-black text-[16px] font-semibold line-clamp-1`}>
                                     {listing?.title}
                                 </div>
                                 <div className={`text-[12px] text-gray-500  capitalize`}>

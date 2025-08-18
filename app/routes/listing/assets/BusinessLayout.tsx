@@ -26,6 +26,8 @@ import RatingBoxRounded from './RatingBoxRounded';
 import ClaimBusiness from './ClaimBusiness';
 import LocationWithHours from './LocationWithHours';
 import { ReportTime } from '~/lib/ReportTime';
+import RatingBoxSquare from './RatingBoxSquare';
+
 
 
 const BusinessLayout = ({
@@ -67,7 +69,7 @@ const BusinessLayout = ({
                     {
                         ratingsData &&
                         <div className={`mt-4 flex gap-2 place-items-center`}>
-                            <RatingBoxRounded rating={ratingsData?.rating_average} />
+                            <RatingBoxSquare rating={Number(ratingsData?.rating_average)} />
                             <div className={`flex place-items-center place-content-center
                                     gap-1 text-black/60 text-[14px]`}>
                                 <div>{formatNumber(Number(ratingsData?.rating_average))}</div>

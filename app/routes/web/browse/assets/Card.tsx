@@ -136,7 +136,7 @@ const Card = ({ listing }: any) => {
                             </div>
 
                             {/** rating */}
-                            <div className={`flex place-items-center  w-full gap-x-2`}>
+                            <div className={`flex place-items-center  w-full gap-x-2 `}>
                                 <div className={`text-[19px] flex`}>
                                     <RatingBox rating={listing?.average_rating} />
                                 </div>

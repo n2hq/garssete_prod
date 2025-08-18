@@ -6,7 +6,7 @@ type RatingBoxProps = {
 
 export default function RatingBox({ rating }: RatingBoxProps) {
     return (
-        <div className="flex gap-[3px]">
+        <div className="flex gap-x-[3px]">
             {Array.from({ length: 5 }).map((_, i) => {
                 const fillPercent = Math.max(0, Math.min(1, rating - i)) * 100
 

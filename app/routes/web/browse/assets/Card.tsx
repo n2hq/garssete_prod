@@ -17,6 +17,13 @@ const Card = ({ listing }: any) => {
     const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
     const [socialMedia, setSocialMedia] = useState<any | null>(null)
+    const [listingWebsite, setListingWebsite] = useState('')
+
+    useEffect(() => {
+        if (listing?.website !== null && listing?.website !== '') {
+            setListingWebsite(listing?.website)
+        }
+    }, [listing])
 
     useEffect(() => {
         if (listing) {
@@ -165,7 +172,7 @@ const Card = ({ listing }: any) => {
 
                     {/** right */}
                     <div className={``}>
-                        <a href='/'>
+                        <a href={`${listingWebsite || listing?.username ? '/' + listing?.username : '/' + listing?.gid}`}>
                             Website
                         </a>
                     </div>

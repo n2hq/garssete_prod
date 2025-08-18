@@ -43,11 +43,12 @@ const RatingDisplay = ({ data }: RatingDisplayProp) => {
                         {data?.ratingCount === 0 ? 'No reviews yet' : ratingText}
                     </div>
                     <div className={`text-[11px] `}>
-                        {formatNumber(Number(data?.ratingCount))} reviews
+                        {formatNumber(Number(data?.ratingCount))} review
+                        {Number(data?.ratingCount) > 1 ? 's' : ''}
                     </div>
                 </div>
                 <div className={`flex place-items-center px-[3px]`}>
-                    <div className={`min-w-10 w-10 h-10 mt-[-1px] bg-blue-800 flex place-content-center text-white place-items-center rounded`}>
+                    <div className={`min-w-10 w-10 h-10 mt-[-1px] bg-blue-800 flex place-content-center text-white place-items-center rounded text-[15px]`}>
                         {formatNumber(Number(data?.rating))}
                     </div>
                 </div>

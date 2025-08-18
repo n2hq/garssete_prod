@@ -14,10 +14,10 @@ const Address = ({ businessProfile }: any) => {
     return (
         <div className={`w-full`}>
 
-            <div className='  md:bg-white
-            md:rounded overflow-hidden pt-[0px]
+            <div className={`md:bg-white
+            md:rounded-b overflow-hidden pt-[0px]
             pb-[15px] bg-[blue]/0 text-black md:black
-            md:text-black  border-[1px] border-gray-300/70'>
+            md:text-black  border-[1px] border-gray-300/70 border-t-0 rounded-t-none`}>
 
                 <div className={`font-normal text-[19px] 
                    px-[10px] tracking-tight w-fit rounded-md

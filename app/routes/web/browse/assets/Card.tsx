@@ -20,8 +20,15 @@ const Card = ({ listing }: any) => {
     const [listingWebsite, setListingWebsite] = useState('')
 
     useEffect(() => {
-        if (listing?.website !== null && listing?.website !== '') {
+        if (listing?.website) {
+
             setListingWebsite(listing?.website)
+        } else {
+            if (listing?.username === "" || listing?.username === null) {
+                setListingWebsite('/' + listing?.gid)
+            } else {
+                setListingWebsite('/' + listing?.username)
+            }
         }
     }, [listing])
 
@@ -172,7 +179,7 @@ const Card = ({ listing }: any) => {
 
                     {/** right */}
                     <div className={``}>
-                        <a href={`${listingWebsite || listing?.username ? '/' + listing?.username : '/' + listing?.gid}`}>
+                        <a href={`${listingWebsite}`}>
                             Website
                         </a>
                     </div>

@@ -44,6 +44,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 (SELECT name FROM tbl_country co WHERE co.iso2 = d.country_code LIMIT 1) AS country_name,
                 (SELECT name FROM tbl_state st WHERE st.iso2 = d.state_code AND st.country_code = d.country_code LIMIT 1) AS state_name,
                 (SELECT name FROM tbl_city ci WHERE ci.id = d.city_id LIMIT 1) AS city_name,
+                (SELECT GROUP_CONCAT(media_id) 
+ FROM tbl_selected_social_media sm 
+ WHERE d.gid = sm.business_guid) AS social_media,
                 b.image_url,
                 r.average_rating,
                 r.total_reviews
@@ -81,6 +84,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 (SELECT name FROM tbl_country co WHERE co.iso2 = d.country_code LIMIT 1) AS country_name,
                 (SELECT name FROM tbl_state st WHERE st.iso2 = d.state_code AND st.country_code = d.country_code LIMIT 1) AS state_name,
                 (SELECT name FROM tbl_city ci WHERE ci.id = d.city_id LIMIT 1) AS city_name,
+                (SELECT GROUP_CONCAT(media_id) 
+ FROM tbl_selected_social_media sm 
+ WHERE d.gid = sm.business_guid) AS social_media,
                 b.image_url,
                 r.average_rating,
                 r.total_reviews

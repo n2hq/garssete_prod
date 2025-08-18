@@ -1,12 +1,14 @@
 import React from 'react'
-import { BiBuilding, BiSolidStar, BiStar } from 'react-icons/bi'
+import { BiBuilding, BiPhone, BiSolidStar, BiStar } from 'react-icons/bi'
 import { BsBank, BsInstagram, BsLinkedin, BsPinterest, BsTwitterX, BsYoutube } from 'react-icons/bs'
-import { CgFacebook, CgTwitter } from 'react-icons/cg'
+import { CgFacebook, CgTwitter, CgWebsite } from 'react-icons/cg'
 import { FaFacebook, FaLinkedinIn, FaYoutubeSquare } from 'react-icons/fa'
 import { GrYoutube } from 'react-icons/gr'
 import RatingBox from './RatingBox'
 import RatingText from './RatingText'
 import Address from './Address'
+import { getCardIcon, strToList } from '~/lib/lib'
+import { MdEmail } from 'react-icons/md'
 
 
 const Card = ({ listing }: any) => {
@@ -41,6 +43,7 @@ const Card = ({ listing }: any) => {
                         {
                             listing?.short_description
                         }
+                        {listing?.social_media}
                     </div>
                 </a>
             </div>
@@ -88,25 +91,27 @@ const Card = ({ listing }: any) => {
                     {/** left */}
                     <div className={`flex place-items-center gap-4`}>
                         <a href="/">
-                            <CgFacebook size={20} />
+                            <MdEmail size={20} />
                         </a>
                         <a href="/">
-                            <BsTwitterX size={15} />
+                            <BiPhone size={20} />
                         </a>
-                        <a href="/">
-                            <BsInstagram size={15} />
-                        </a>
+                        {
+                            listing?.social_media !== null &&
+                            strToList(listing?.social_media).map((media: any, index: number) => {
+                                return (
+                                    <a href="">
+                                        {
+                                            getCardIcon(media)
+                                        }
+                                    </a>
+                                )
+                            })
+                        }
 
-                        <a href="/">
-                            <FaLinkedinIn size={15} />
-                        </a>
 
-                        <a href="/pinterest">
-                            <BsPinterest size={18} />
-                        </a>
-                        <a href="/">
-                            <GrYoutube size={20} />
-                        </a>
+
+
                     </div>
 
                     {/** right */}

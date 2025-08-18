@@ -1,5 +1,9 @@
+import { FaFacebookSquare, FaLinkedinIn, FaPinterestSquare, FaVimeoSquare, FaYoutubeSquare } from "react-icons/fa"
 import { Category, City, ContactType, Country, Rating, State, UserProfile } from "./types"
 import CryptoJS from 'crypto-js'
+import { BsInstagram, BsLinkedin, BsPinterest, BsTwitterX } from "react-icons/bs"
+import { CgFacebook } from "react-icons/cg"
+import { GrYoutube } from "react-icons/gr"
 
 export const config = {
     BASE_URL: import.meta.env.VITE_SITE_BASE_URL,
@@ -997,3 +1001,42 @@ export function getDateInTimeZoneX(timeZone: any) {
     return displayFormattedTime
 }
 
+
+export function getCardIcon(media: any) {
+    let icon = null
+
+    switch (media) {
+        case "facebook":
+            icon = <CgFacebook size={20} />
+            break;
+        case "twitterx":
+            icon = <BsTwitterX size={14} />
+            break;
+        case "linkedin":
+            icon = <FaLinkedinIn size={15} />
+            break;
+        case "instagram":
+            icon = <BsInstagram size={15} />
+            break;
+        case "pinterest":
+            icon = <BsPinterest size={18} />
+            break;
+        case "youtube":
+            icon = <GrYoutube size={20} />
+            break;
+        case "vimeo":
+            icon = <FaVimeoSquare size={18} />
+            break;
+
+
+    }
+    return icon
+}
+
+
+export function strToList(str: string) {
+    const list = str.split(",")
+        .map(item => item.trim())
+        .filter(item => item.length > 0);
+    return list
+}

@@ -71,7 +71,7 @@ const Card = ({ listing }: any) => {
 
     useEffect(() => {
         if (socialMedia !== null) {
-            console.log(socialMedia)
+            //console.log(socialMedia)
         }
     }, [socialMedia])
 

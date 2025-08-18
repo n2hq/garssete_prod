@@ -84,8 +84,15 @@ const Card = ({ listing }: any) => {
                     <div className={`flex place-content-between`}>
                         {/** left */}
                         <div className={`flex place-items-center gap-2`}>
-                            <div className={`h-[40px] w-[40px] rounded-full bg-black`}>
-
+                            <div className={`h-[40px] w-[40px] rounded bg-black bg-cover bg-center overflow-hidden`}
+                                style={{ backgroundImage: `url(${placeholder})` }}
+                            >
+                                <img
+                                    src={imgscr}
+                                    alt={listing.title}
+                                    className={`object-cover w-full h-full text-sm
+                            rounded z-0`}
+                                />
                             </div>
                             <div className={`-space-y-1`}>
                                 <div className={`text-black text-[16px] font-semibold line-clamp-1`}>
@@ -106,7 +113,7 @@ const Card = ({ listing }: any) => {
                         {
                             listing?.short_description
                         }
-                        {listing?.social_media}
+
                     </div>
                 </a>
             </div>
@@ -115,9 +122,20 @@ const Card = ({ listing }: any) => {
             {/** body */}
             <div>
                 <a href={`/${userId}`}>
-                    <div className={` h-auto flex place-content-between py-4 `}>
+                    <div className={` h-auto flex place-content-between `}>
                         {/** left */}
-                        <div className={`flex place-items-start w-[60%] flex-col  pl-4`}>
+                        <div className={`flex place-items-start w-[60%] flex-col  pl-4  pt-2 pb-4 space-y-[2px]`}>
+
+                            {/** founded */}
+                            <div className={`flex place-items-center gap-x-1`}>
+                                <BsBank />
+                                <span className={`mt-[1px] text-gray-500 space-x-2`}>
+                                    <span className={`font-bold`}>Founded:</span>
+                                    <span>{listing?.established}</span>
+                                </span>
+                            </div>
+
+                            {/** rating */}
                             <div className={`flex place-items-center  w-full gap-x-2`}>
                                 <div className={`text-[19px] flex`}>
                                     <RatingBox rating={listing?.average_rating} />
@@ -130,14 +148,11 @@ const Card = ({ listing }: any) => {
                                 </div>
                             </div>
 
-                            <div className={`flex place-items-center gap-1 mt-1`}>
-                                <BsBank />
-                                <span className={`mt-[1px] text-gray-500`}>Founded {listing?.established}</span>
-                            </div>
+
                         </div>
 
                         {/** right */}
-                        <div className={`flex place-items-end flex-col w-[40%] text-end pr-4`}>
+                        <div className={`flex place-items-end flex-col w-[40%] text-end pr-4 pt-2 pb-4`}>
                             <div className={`font-[600]`}>{listing?.phone}</div>
                             <div className={`text-[12px] leading-[1.2em] mt-1`}>
                                 <Address listing={listing} />

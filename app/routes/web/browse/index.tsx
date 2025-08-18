@@ -80,7 +80,7 @@ const index = () => {
     }, [query])
 
     return (
-        <div className='h-screen flex flex-col relative bg-gray-50'>
+        <div className='h-screen flex flex-col relative '>
             <SrchNavbar />
 
             {/** layout */}

@@ -10,15 +10,9 @@ import HamburgerSecondary from '../HamburgerSecondary'
 import MobileNav from '../MobileNav'
 import { BsHeart, BsSearchHeart } from 'react-icons/bs'
 import HomeNav from '~/routes/assets/header/HomeNav'
+import { lnks } from '~/lib/json'
 
-const lnks = [
-    { title: "Browse", lnk: "/web/browse", icon: <BsSearchHeart /> },
-    { title: "Terms", lnk: "/web/terms", icon: <BiBriefcase /> },
-    { title: "Privacy", lnk: "/web/privacy", icon: <TbWritingSign /> },
-    { title: "Contact", lnk: "/web/contact", icon: <BiCategory /> },
-    /* { title: "Shop", lnk: "/web/shop", icon: <FiShoppingCart /> },
-    { title: "Buy Now", lnk: "/web/buynow", icon: <FaBuysellads /> } */
-]
+
 
 const acctLnks = [
     { title: "Account", lnk: "/web/account/profile", icon: <TbPasswordUser /> },

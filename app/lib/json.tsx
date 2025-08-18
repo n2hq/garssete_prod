@@ -1,8 +1,9 @@
-import { BiHome, BiHotel, BiSearch } from "react-icons/bi"
-import { BsHouseAdd, BsPersonFill, BsPersonFillGear } from "react-icons/bs"
+import { BiBriefcase, BiCategory, BiHome, BiHotel, BiSearch } from "react-icons/bi"
+import { BsHouseAdd, BsPersonFill, BsPersonFillGear, BsSearchHeart } from "react-icons/bs"
 import { FcServices } from "react-icons/fc"
 import { HiHome } from "react-icons/hi2"
 import { MdOutlineAttachEmail, MdPassword, MdTravelExplore, MdWifiPassword } from "react-icons/md"
+import { TbWritingSign } from "react-icons/tb"
 
 export const navlinks = [
     {
@@ -84,3 +85,13 @@ export const testAdInfo = {
     format: "auto",
     responsive: "true"
 }
+
+
+export const lnks = [
+    { title: "Browse", lnk: "/web/browse", icon: <BsSearchHeart /> },
+    { title: "Terms", lnk: "/web/terms", icon: <BiBriefcase /> },
+    { title: "Privacy", lnk: "/web/privacy", icon: <TbWritingSign /> },
+    { title: "Contact", lnk: "/web/contact", icon: <BiCategory /> },
+    /* { title: "Shop", lnk: "/web/shop", icon: <FiShoppingCart /> },
+    { title: "Buy Now", lnk: "/web/buynow", icon: <FaBuysellads /> } */
+]

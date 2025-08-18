@@ -12,6 +12,7 @@ import TextareaWithWordLimit from '~/components/content/textarea/TextareaWithWor
 import CreatePageSchema from './CreatePageSchema.js'
 import { useNotification } from '~/context/NotificationContext.js'
 import { useNavigate, useNavigation } from '@remix-run/react'
+import { leftNavLinks } from '~/lib/json.js'
 
 const CreatePageForm = ({ data, user }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
@@ -22,7 +23,9 @@ const CreatePageForm = ({ data, user }: any) => {
     const countries = data.countries
     let [states, setStates] = useState(data.states)
     let [cities, setCities] = useState(data.cities)
-    const categories = data.categories.data
+    //const categories = data.categories.data
+    const categories = leftNavLinks
+    console.log(categories)
 
     const [countryCode, setCountryCode] = useState('')
     const [stateCode, setStateCode] = useState('')

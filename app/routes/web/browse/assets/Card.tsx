@@ -76,7 +76,7 @@ const Card = ({ listing }: any) => {
     }, [socialMedia])
 
     return (
-        <div className={`bg-blue-50/50 w-full h-auto md:rounded-md shadow-md overflow-hidden border  hover:bg-white hover:shadow-lg`}>
+        <div className={`bg-white w-full h-auto md:rounded-md shadow-md overflow-hidden border  hover:bg-blue-50 hover:shadow-lg`}>
             {/** header */}
             <div className={`bg-gray-50/30 py-3 px-4 border-b`}>
 

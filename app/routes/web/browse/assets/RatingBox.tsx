@@ -13,12 +13,12 @@ export default function RatingBox({ rating }: RatingBoxProps) {
                 return (
                     <div
                         key={i}
-                        className={`relative w-[20px] h-[20px] bg-red-200 rounded 
+                        className={`relative w-[20px] h-[20px] bg-red-300 rounded 
                             overflow-hidden flex place-items-center
                             place-content-center`}
                     >
                         <div
-                            className={`absolute inset-0 bg-green-500  z-[0]`}
+                            className={`absolute inset-0 bg-green-400  z-[0]`}
                             style={{ width: `${fillPercent}%` }}
                         />
                         <Star className="relative z-[0] w-[14px] h-[14px] text-black" fill="currentColor" />

@@ -1034,8 +1034,8 @@ export function getCardIcon(media: any) {
 }
 
 
-export function strToList(str: string) {
-    const list = str.split(",")
+export function strToList(str: string, separator: string) {
+    const list = str.split(separator)
         .map(item => item.trim())
         .filter(item => item.length > 0);
     return list

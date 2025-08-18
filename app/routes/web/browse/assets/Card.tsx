@@ -12,9 +12,11 @@ import { MdEmail } from 'react-icons/md'
 
 
 const Card = ({ listing }: any) => {
+
     const [placeholder, setPlaceholder] = useState('/images/imgplaceholder2.jpg')
     const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
     const [userId, setUserId] = useState('')
+    const [socialMedia, setSocialMedia] = useState<any | null>(null)
 
     useEffect(() => {
         if (listing) {
@@ -30,6 +32,34 @@ const Card = ({ listing }: any) => {
             }
         }
     }, [listing])
+
+    useEffect(() => {
+        if (listing?.social_media) {
+            let socialMedia: any = []
+            const separatedMedia = strToList(listing?.social_media, ",")
+
+            if (separatedMedia !== null) {
+
+                separatedMedia?.map((mediaString: any, index: number) => {
+                    const mediaInfo = strToList(mediaString, "$")
+                    const mediaObj = {
+                        mediaName: mediaInfo[0],
+                        mediaHandle: mediaInfo[1],
+                        baseUrl: mediaInfo[2]
+                    }
+                    socialMedia.push(mediaObj)
+                })
+            }
+            setSocialMedia(socialMedia)
+
+        }
+    }, [listing])
+
+    useEffect(() => {
+        if (socialMedia !== null) {
+            console.log(socialMedia)
+        }
+    }, [socialMedia])
 
     return (
         <div className={`bg-white w-full h-auto md:rounded-md shadow-md overflow-hidden border  hover:bg-blue-50 hover:shadow-lg`}>
@@ -109,19 +139,19 @@ const Card = ({ listing }: any) => {
 
                     {/** left */}
                     <div className={`flex place-items-center gap-4`}>
-                        <a href="/">
+                        <a href={`mailto:${listing?.email_address}`} key={34}>
                             <MdEmail size={20} />
                         </a>
-                        <a href="/">
+                        <a href={`tel:${listing?.phone}`} key={30}>
                             <BiPhone size={20} />
                         </a>
                         {
-                            listing?.social_media !== null &&
-                            strToList(listing?.social_media).map((media: any, index: number) => {
+                            socialMedia !== null &&
+                            socialMedia?.map((media: any, index: number) => {
                                 return (
-                                    <a href="">
+                                    <a href={`${media?.baseUrl}${media?.mediaHandle}`} key={index}>
                                         {
-                                            getCardIcon(media)
+                                            getCardIcon(media?.mediaName)
                                         }
                                     </a>
                                 )

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
-import { Link } from '@remix-run/react'
+import { Link, NavLink } from '@remix-run/react'
 import { getListingByCategory } from '~/lib/lib'
 import LatestStarRating from '~/routes/web/search/assets/LatestStarRating'
 import SectionTitle from './SectionTitle'
+import RatingBoxSquare from './RatingBoxSquare'
 
 const latestData = [
     {
@@ -114,9 +115,8 @@ const Related = ({
                                 return (
                                     <div key={index}>
                                         <div>
-                                            <Link to={`/${userId}`}>
-                                                <div className={`relative h-[120px]
-                                                    md:h-[180px]`}>
+                                            <NavLink to={`/${userId}`}>
+                                                <div className={`relative h-[120px] rounded-lg md:h-[180px] overflow-hidden`}>
                                                     <img
                                                         className={`object-cover w-full h-full
                                                     text-sm`}
@@ -128,7 +128,7 @@ const Related = ({
                                                         alt={data.title}
                                                     />
                                                 </div>
-                                            </Link>
+                                            </NavLink>
                                         </div>
                                         <div className={`mt-1 text-[15px] tracking-tight 
                                      truncate`}>
@@ -136,12 +136,12 @@ const Related = ({
                                         </div>
 
                                         <div className={`mt-1`}>
-                                            <LatestStarRating rating={data.avg_rating} />
+                                            <RatingBoxSquare rating={data.avg_rating} />
                                         </div>
 
-                                        <div className={`text-[11px] mt-[5px] tracking-tight
+                                        <div className={`text-[11px] mt-[5px] tracking-tight line-clamp-3
                                     leading-[1.2em]`}>
-                                            {data.short_description.substring(0, 100)}
+                                            {data.short_description}
                                         </div>
                                     </div>
                                 )

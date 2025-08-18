@@ -230,7 +230,7 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                                                             </span>
                                                             <span className={`${opHoursStatus.today === item?.day ? 'mr-[10px]' : ''}`}>
                                                                 {
-                                                                    item?.hours.includes("Closed") ? 'Closed Now' :
+                                                                    item?.hours.includes("Closed") ? 'Closed' :
                                                                         opHoursStatus.today === item?.day &&
                                                                         (opHoursStatus.isOpen ? 'Open Now' : 'Closed Now')
                                                                 }

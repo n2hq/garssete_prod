@@ -39,7 +39,7 @@ const Card = ({ listing }: any) => {
                             <div className={`font-bold rounded-sm border px-3 py-[2px]`}>View</div>
                         </div>
                     </div>
-                    <div className={`mt-[8px] text-[14px] text-gray-500 leading-[1.3em] line-clamp-3`}>
+                    <div className={`mt-[8px] text-[14px] md:text-[13px] text-gray-500 leading-[1.3em] line-clamp-3`}>
                         {
                             listing?.short_description
                         }

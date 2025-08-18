@@ -330,7 +330,7 @@ const BusinessProfileForm = ({ data }: any) => {
                             watch={watch}
                         />
 
-                        <Input
+                        {/* <Input
                             controlTitle={"Twitter"}
                             controlPlaceholder={"@handle"}
                             controlName={"xsocial"}
@@ -356,7 +356,7 @@ const BusinessProfileForm = ({ data }: any) => {
                             changeHandler={changeHandler}
                             error={errors.linksocial}
                         />
-
+ */}
                         <Input
                             controlTitle={"Website"}
                             controlPlaceholder={"Enter website"}

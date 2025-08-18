@@ -13,7 +13,7 @@ export default function RatingBox({ rating }: RatingBoxProps) {
                 return (
                     <div
                         key={i}
-                        className={`relative w-[20px] h-[20px] ${rating > 0 ? 'bg-red-300' : 'bg-gray-200'} rounded 
+                        className={`relative w-[20px] h-[20px] ${rating > 0 ? 'bg-blue-500' : 'bg-gray-200'} rounded 
                             overflow-hidden flex place-items-center
                             place-content-center`}
                     >

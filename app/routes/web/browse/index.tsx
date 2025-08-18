@@ -80,60 +80,65 @@ const index = () => {
     }, [query])
 
     return (
-        <div className='h-screen flex flex-col relative '>
+        <div className=' '>
             <SrchNavbar />
 
-            {/** layout */}
-            <div className={`grid grid-cols-12 h-full overflow-hidden mt-[120px] md:mt-[60px] gap-5 `}>
-                {/** left */}
-                <aside className={`col-span-3 h-full overflow-y-auto scrollbar-hidden pt-2 hidden lg:block`}>
-                    <div className={``}>
-                        <div className={`mt-3 text-[17px] mb-4 font-bold ml-6`}>
-                            Categories
+            <div className={`h-screen flex flex-col relative`}>
+                <div className={`mt-[120px] md:mt-[60px]`}>
+
+                </div>
+                {/** layout */}
+                <div className={`grid grid-cols-12 h-full overflow-hidden  gap-5 `}>
+                    {/** left */}
+                    <aside className={`col-span-3 h-full overflow-y-auto scrollbar-hidden pt-2 hidden lg:block`}>
+                        <div className={``}>
+                            <div className={`mt-3 text-[17px] mb-4 font-bold ml-6`}>
+                                Categories
+                            </div>
+                            <LeftNavForBrowse />
                         </div>
-                        <LeftNavForBrowse />
-                    </div>
-                </aside>
+                    </aside>
 
-                {/** right */}
-                <div className={`col-span-12 lg:col-span-9  overflow-y-auto w-full md:px-[15px]`}>
+                    {/** right */}
+                    <div className={`col-span-12 lg:col-span-9  overflow-y-auto w-full md:px-[15px]`}>
 
-                    {/** grid */}
-                    <div className={`grid grid-cols-12 gap-8`}>
+                        {/** grid */}
+                        <div className={`grid grid-cols-12 gap-8`}>
 
-                        {/** left */}
-                        <div className={`col-span-12 md:col-span-7  pt-3`}>
-                            <div className={`space-y-8`}>
+                            {/** left */}
+                            <div className={`col-span-12 md:col-span-7  pt-3`}>
+                                <div className={`space-y-8`}>
 
-                                {
-                                    data?.length > 0 ?
-                                        <SearchPagination
-                                            data={data}
-                                            itemsPerPage={20}
-                                        /> :
-                                        <div className={`flex place-items-center rounded
+                                    {
+                                        data?.length > 0 ?
+                                            <SearchPagination
+                                                data={data}
+                                                itemsPerPage={20}
+                                            /> :
+                                            <div className={`flex place-items-center rounded
                             place-content-center p-5 border capitalize`}>
-                                            <span>no record</span>
-                                        </div>
-                                }
+                                                <span>no record</span>
+                                            </div>
+                                    }
 
 
-                                <FooterCard />
+                                    <FooterCard />
+
+                                </div>
 
                             </div>
 
-                        </div>
+                            {/** right */}
+                            <div className={`hidden md:block md:col-span-5 pt-3  md:place-items-end  `}>
 
-                        {/** right */}
-                        <div className={`hidden md:block md:col-span-5 pt-3  md:place-items-end  `}>
-
-                            <div className={`w-full lg:w-[90%] sticky top-3`}>
-                                <Featured />
+                                <div className={`w-full lg:w-[90%] sticky top-3`}>
+                                    <Featured />
+                                </div>
                             </div>
                         </div>
+
+
                     </div>
-
-
                 </div>
             </div>
 

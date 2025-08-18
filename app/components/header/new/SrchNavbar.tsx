@@ -12,7 +12,7 @@ import { BsHeart, BsSearchHeart } from 'react-icons/bs'
 import HomeNav from '~/routes/assets/header/HomeNav'
 
 const lnks = [
-    { title: "Search", lnk: "/web/search", icon: <BsSearchHeart /> },
+    { title: "Browse", lnk: "/web/browse", icon: <BsSearchHeart /> },
     { title: "Terms", lnk: "/web/terms", icon: <BiBriefcase /> },
     { title: "Privacy", lnk: "/web/privacy", icon: <TbWritingSign /> },
     { title: "Contact", lnk: "/web/contact", icon: <BiCategory /> },

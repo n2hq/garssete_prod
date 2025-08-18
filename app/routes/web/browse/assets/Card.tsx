@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiBuilding, BiPhone, BiSolidStar, BiStar } from 'react-icons/bi'
 import { BsBank, BsInstagram, BsLinkedin, BsPinterest, BsTwitterX, BsYoutube } from 'react-icons/bs'
 import { CgFacebook, CgTwitter, CgWebsite } from 'react-icons/cg'
@@ -7,17 +7,36 @@ import { GrYoutube } from 'react-icons/gr'
 import RatingBox from './RatingBox'
 import RatingText from './RatingText'
 import Address from './Address'
-import { getCardIcon, strToList } from '~/lib/lib'
+import { config, getCardIcon, strToList } from '~/lib/lib'
 import { MdEmail } from 'react-icons/md'
 
 
 const Card = ({ listing }: any) => {
+    const [placeholder, setPlaceholder] = useState('/images/imgplaceholder2.jpg')
+    const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
+    const [userId, setUserId] = useState('')
+
+    useEffect(() => {
+        if (listing) {
+            if (listing?.image_url !== "" || listing?.image_url !== null) {
+                //console.log(config.IMG_BASE_URL)
+                setImgsrc(config.IMG_BASE_URL + listing?.image_url)
+            }
+
+            if (listing?.username !== "" && listing?.username !== null && listing?.username !== undefined) {
+                setUserId(listing?.username)
+            } else {
+                setUserId(listing?.gid)
+            }
+        }
+    }, [listing])
+
     return (
         <div className={`bg-white w-full h-auto md:rounded-md shadow-md overflow-hidden border  hover:bg-blue-50 hover:shadow-lg`}>
             {/** header */}
             <div className={`bg-gray-50/30 py-3 px-4 border-b`}>
 
-                <a href="/">
+                <a href={`/${userId}`}>
                     <div className={`flex place-content-between`}>
                         {/** left */}
                         <div className={`flex place-items-center gap-2`}>
@@ -51,7 +70,7 @@ const Card = ({ listing }: any) => {
 
             {/** body */}
             <div>
-                <a href="">
+                <a href={`/${userId}`}>
                     <div className={` h-auto flex place-content-between py-4 `}>
                         {/** left */}
                         <div className={`flex place-items-start w-[60%] flex-col  pl-4`}>

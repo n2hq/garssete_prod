@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "@remix-run/react";
 import Card from "./Card";
+import SearchAd from "~/components/content/ads/SearchAd";
 
 interface PaginationProps<T> {
     data: T[];
@@ -55,7 +56,14 @@ const SearchPagination = <T,>({
             <div className="space-y-6">
                 {currentItems?.map((item, index) => (
                     <div key={index}>
-                        <Card listing={item} index={index} />
+
+                        {
+                            (index + 1) % 6 ?
+                                <div>
+                                    <Card listing={item} index={index} />
+                                </div> :
+                                <SearchAd />
+                        }
                     </div>
                 ))}
             </div>

@@ -130,9 +130,9 @@ const Index = () => {
                             </div>
 
                             {/** right */}
-                            <div className={`hidden md:block md:col-span-5 pt-3  md:place-items-end  `}>
+                            <div className={`hidden md:block md:col-span-5 pt-3   `}>
 
-                                <div className={`w-full lg:w-[90%] sticky top-3`}>
+                                <div className={`w-full lg:w-[90%] sticky top-3 ml-auto`}>
                                     <Featured />
                                 </div>
                             </div>

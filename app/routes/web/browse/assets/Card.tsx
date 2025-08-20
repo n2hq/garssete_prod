@@ -193,7 +193,7 @@ const Card = ({ listing }: any) => {
                     </div>
 
                     {/** right */}
-                    <div className={``}>
+                    <div className={`border px-1.5 py-0.5 bg-blue-700 text-white rounded hover:shadow-lg`}>
                         <a href={`${listingWebsite}`}>
                             Website
                         </a>

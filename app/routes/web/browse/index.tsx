@@ -52,7 +52,7 @@ const dataCompanies = [
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
-    const query = url.searchParams.get("q") || "";
+    const query = url?.searchParams.get("q") || "";
     let data = await getSearch(query)
 
 
@@ -63,7 +63,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     return res;
 }
 
-const index = () => {
+const Index = () => {
 
     const res: any = useLoaderData()
     const [searchParams] = useSearchParams();
@@ -114,6 +114,7 @@ const index = () => {
                                             <SearchPagination
                                                 data={data}
                                                 itemsPerPage={20}
+                                                resetPageKey={query} // 👈 ensures reset when query changes
                                             /> :
                                             <div className={`flex place-items-center rounded
                             place-content-center p-5 border capitalize`}>
@@ -148,4 +149,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Index

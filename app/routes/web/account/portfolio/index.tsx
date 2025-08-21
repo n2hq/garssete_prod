@@ -13,7 +13,7 @@ import CardHeaderWithSearch from './business/assets/CardHeaderWithSearch'
 
 
 
-const index = () => {
+const Index = () => {
     useEffect(() => {
 
         IsAuthenticated(localStorage)
@@ -111,4 +111,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Index

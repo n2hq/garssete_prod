@@ -11,7 +11,7 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
     if (businessProfileImageData.image_url) {
         imgconst = config.IMG_BASE_URL + businessProfileImageData.image_url
     } else {
-        imgconst = '/images/imgplaceholder.jpg'
+        imgconst = '/images/placeholder-icon.webp'
     }
 
 
@@ -108,6 +108,7 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
                     <div className={`w-[50%] h-[50%] flex flex-col
                                     place-content-center place-items-center
                                     hover:cursor-pointer hover:bg-white/50
+                                    bg-blue-300/50
                                     rounded-full transition duration-300 ease-in-out`}>
                         <MdEditSquare className=' text-[30px]' />
                     </div>

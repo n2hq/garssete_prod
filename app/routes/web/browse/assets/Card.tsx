@@ -120,7 +120,7 @@ const Card = ({ listing }: any) => {
                         {
                             listing?.short_description
                         }
-                        {imgscr}
+
                     </div>
                 </a>
             </div>

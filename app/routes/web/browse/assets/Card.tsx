@@ -14,7 +14,7 @@ import { MdEmail } from 'react-icons/md'
 const Card = ({ listing }: any) => {
 
     const [placeholder, setPlaceholder] = useState('/images/imgplaceholder2.jpg')
-    const [imgscr, setImgsrc] = useState('/images/imgplaceholder2.jpg')
+    const [imgscr, setImgsrc] = useState('')
     const [userId, setUserId] = useState('')
     const [socialMedia, setSocialMedia] = useState<any | null>(null)
     const [listingWebsite, setListingWebsite] = useState('')
@@ -87,12 +87,15 @@ const Card = ({ listing }: any) => {
                             <div className={`h-[40px] w-[40px] rounded bg-black bg-cover bg-center overflow-hidden`}
                                 style={{ backgroundImage: `url(${placeholder})` }}
                             >
-                                <img
-                                    src={imgscr}
-                                    alt={""}
-                                    className={`object-cover w-full h-full text-sm
+                                {
+                                    imgscr !== '' &&
+                                    <img
+                                        src={imgscr}
+                                        alt={listing.title}
+                                        className={`object-cover w-full h-full text-sm
                             rounded z-0`}
-                                />
+                                    />
+                                }
                             </div>
                             <div className={`-space-y-1`}>
                                 <div className={`text-black text-[16px] font-semibold line-clamp-1`}>

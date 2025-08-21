@@ -550,8 +550,13 @@ export const getUserProfileImageData = async (guid: string | null): Promise<User
     }
 }
 
-export const getPortfolio = async (guid: string): Promise<any | null> => {
-    let businessesEndpoint = `/api/listing/owner/${guid}`
+export const getPortfolio = async (guid: string, q?: string): Promise<any | null> => {
+    let businessesEndpoint = `/api/listing/owner?guid=${guid}&q=${q}`
+
+    if (q && q.trim() !== "") {
+        businessesEndpoint += `&q=${encodeURIComponent(q)}`
+    }
+
     let url = config.BASE_URL + businessesEndpoint
 
     try {

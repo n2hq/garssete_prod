@@ -6,8 +6,8 @@ import { CardTitleProp } from '~/lib/types'
 const CardTitle = (cardTitle: CardTitleProp) => {
     return (
 
-        <div className={`font-[500] text-[16px] md:text-[19px]
-        font-poppins tracking-tight`}>
+        <div className={` text-[16px] md:text-[19px]
+        font-sans tracking-tight font-bold`}>
             <Link to={`${cardTitle.baseUrl}${cardTitle.guid}`}>
                 {cardTitle.children}
             </Link>

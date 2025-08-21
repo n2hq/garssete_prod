@@ -1,6 +1,6 @@
 import React from 'react'
 import CardTitle from '../../../assets/CardTitle'
-import { Link } from '@remix-run/react'
+import { Link, NavLink } from '@remix-run/react'
 
 const BusinessHeader = ({ businessGuid, data, businessProfile }: any) => {
     return (
@@ -17,14 +17,21 @@ const BusinessHeader = ({ businessGuid, data, businessProfile }: any) => {
                     </CardTitle>
                 </div>
 
-                <Link to={`/${businessProfile?.gid}`}
+                <div className={`space-x-2 `}>
+                    <NavLink to={`/web/account/portfolio`}
+                        className={`border border-gray-600 py-2.5 px-3 rounded-full hover:bg-white`}
+                    >
+                        Back to Portfolio
+                    </NavLink>
+                    <Link to={`/${businessProfile?.gid}`}
 
-                >
-                    <button className={`px-3 border border-black
+                    >
+                        <button className={`px-3 border border-black
                                     py-2 rounded-full hover:bg-white`}>
-                        Preview
-                    </button>
-                </Link>
+                            Preview
+                        </button>
+                    </Link>
+                </div>
             </div>
         </div>
     )

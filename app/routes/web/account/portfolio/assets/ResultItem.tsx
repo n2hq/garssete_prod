@@ -1,5 +1,5 @@
 import { Link } from '@remix-run/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsBank } from 'react-icons/bs'
 import { FiArrowRight } from 'react-icons/fi'
 import { RiDoubleQuotesL } from 'react-icons/ri'
@@ -7,41 +7,50 @@ import { config } from '~/lib/lib'
 
 const ResultItem = ({ listing, index }: any) => {
     const [placeholder, setPlaceholder] = useState('/images/imgplaceholder2.jpg')
+    const [imgsrc, setImgsrc] = useState(null)
     function isOdd(num: number): boolean {
         return num % 2 !== 0;
     }
 
-    let imgsrc = config.IMG_BASE_URL + listing?.image_url
 
-    if (listing?.image_url === "" || listing?.image_url === null) {
-        imgsrc = "/images/imgplaceholder.jpg"
-    }
+
+    useEffect(() => {
+        if (listing && listing?.image_url !== null) {
+            let imgsrc = config.IMG_BASE_URL + listing?.image_url
+            setImgsrc(imgsrc)
+        }
+    }, [listing])
+
+
 
 
 
     return (
 
         <div className={` cursor-pointer my-0`}>
-            <div className={`flex rounded  gap-x-2 p-2
+            <div className={`flex rounded  gap-x-2 py-2 px-1
              hover:bg-blue-50  
              ${isOdd(index) ? '' : ''}
                 `}>
                 {/** left */}
-                <div className={`relative min-w-[50px] w-[50px] h-[50px]
-                    rounded-full overflow-hidden border bg-transparent bg-cover bg-center`}
+                <div className={`relative min-w-[50px] w-[50px] h-[45px]
+                    rounded-md overflow-hidden border bg-transparent bg-cover bg-center`}
                     style={{ backgroundImage: `url(${placeholder})` }}
                 >
-                    <img
-                        src={imgsrc}
-                        alt={listing.title}
-                        className={`object-cover w-full h-full text-sm
+                    {
+                        imgsrc !== null &&
+                        <img
+                            src={imgsrc}
+                            alt={listing.title}
+                            className={`object-cover w-full h-full text-sm
                              `}
-                    />
-                    <div className={`w-full h-[50%]
+                        />
+                    }
+                    {/* <div className={`w-full h-[50%]
                             absolute z-[10] bottom-0 
                             bg-gradient-to-t from-black/40
                             to-transparent
-                            `}></div>
+                            `}></div> */}
                 </div>
 
                 {/** right */}
@@ -51,7 +60,7 @@ const ResultItem = ({ listing, index }: any) => {
                 w-full md:gap-x-[4px]`}>
                             {/** left */}
                             <div className={`w-full md:w-[60%] -space-y-1`}>
-                                <div className={`font-normal text-[14px] text-brown-800 `}>
+                                <div className={`font-bold text-[14px] text-brown-800 `}>
                                     {listing.title}
                                 </div>
 
@@ -74,7 +83,7 @@ const ResultItem = ({ listing, index }: any) => {
                             {/** right */}
                             <div className={`w-full lg:w-[40%] hidden 
                                 sm:block`}>
-                                <div className={`flex flex-col place-items-end place-content-end font-normal text-black tracking-tighter`}>
+                                <div className={`flex flex-col place-items-end place-content-end font-bold text-black tracking-tighter`}>
                                     {listing.phone}
                                 </div>
                                 <div className={`flex flex-col text-end text-[12px]

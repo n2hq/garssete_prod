@@ -7,6 +7,10 @@ import Portfolio from './assets/Portfolio'
 import CardTitle from '../assets/CardTitle'
 import BusinessHeader from './business/assets/BusinessHeader'
 import CardHeader from './business/assets/CardHeader'
+import { useLocation } from '@remix-run/react'
+import { PortfolioSearchBox } from './business/assets/PortfolioSearchBox'
+import CardHeaderWithSearch from './business/assets/CardHeaderWithSearch'
+
 
 
 const index = () => {
@@ -25,24 +29,31 @@ const index = () => {
     const [data, setData] = useState<any | null>(null)
     const [loading, setLoading] = useState(true)
 
+    const location = useLocation()
+    const params = new URLSearchParams(location.search)
+    const q = params?.get("q") || ""
+
     useEffect(() => {
-        async function getAllData(guid: string) {
+        async function getAllData(guid: string, q: string) {
+            console.log(guid)
             const userProfile: any = await getUserProfile(guid || "")
-            const portfolio: any = await getPortfolio(guid || "")
+            const portfolio: any = await getPortfolio(guid || "", q || "")
+            console.log(portfolio)
             setUserProfile(userProfile)
             setPortfolio(portfolio)
         }
 
         if (user?.guid) {
-            getAllData(user?.guid)
+
+            getAllData(user?.guid, q)
         }
-    }, [user?.guid])
+    }, [user?.guid, q])
 
     useEffect(() => {
         if (userProfile && portfolio) {
             const data = {
                 userProfile: userProfile,
-                portfolio: portfolio.data
+                portfolio: portfolio
             }
             setData(data)
             //alert(JSON.stringify(data.portfolio.data))
@@ -75,11 +86,16 @@ const index = () => {
 
                 {userProfile === null ? 'Loading...' : ''}
 
-                <CardHeader
-                    base_url={'/web/account/profile'}
-                    title={'Go to profile'}
+                <CardHeaderWithSearch
+                    base_url={'/web/account/portfolio'}
+                    title={'Portfolio'}
+                    q={q}
 
                 />
+
+                <div className={`flex place-items-center place-content-center mt-3`}>
+
+                </div>
 
 
                 <div className={`mt-[20px]`}></div>

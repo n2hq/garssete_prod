@@ -70,32 +70,37 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 LIMIT 50`)
         } else {
             rawdata = await query(`SELECT
-                d.id,
-                d.username,
-                d.gid,
-                d.title,
-                d.short_description,
-                d.phone,
-                d.category,
-                d.established,
-                d.address_one,
-                d.address_two,
-                d.website,
-                d.date_created,
-                (SELECT name FROM tbl_country co WHERE co.iso2 = d.country_code LIMIT 1) AS country_name,
-                (SELECT name FROM tbl_state st WHERE st.iso2 = d.state_code AND st.country_code = d.country_code LIMIT 1) AS state_name,
-                (SELECT name FROM tbl_city ci WHERE ci.id = d.city_id LIMIT 1) AS city_name,
-                (SELECT GROUP_CONCAT(CONCAT(sm.media_id, '$', sm.user_description, '$', sysm.base_url) SEPARATOR ', ')
- FROM tbl_selected_social_media sm, tbl_sys_social_media sysm 
- WHERE d.gid = sm.business_guid AND sm.media_id = sysm.media_id) AS social_media,
-                b.image_url,
-                r.average_rating,
-                r.total_reviews
-
+                    d.id,
+                    d.username,
+                    d.gid,
+                    d.title,
+                    d.short_description,
+                    d.phone,
+                    d.category,
+                    d.established,
+                    d.address_one,
+                    d.address_two,
+                    d.website,
+                    d.date_created,
+                    co.name AS country_name,
+                    st.name AS state_name,
+                    ci.name AS city_name,
+                    (SELECT GROUP_CONCAT(CONCAT(sm.media_id, '$', sm.user_description, '$', sysm.base_url) SEPARATOR ', ')
+                    FROM tbl_selected_social_media sm
+                    JOIN tbl_sys_social_media sysm ON sm.media_id = sysm.media_id
+                    WHERE d.gid = sm.business_guid) AS social_media,
+                    b.image_url,
+                    r.average_rating,
+                    r.total_reviews
                 FROM tbl_dir d
-
-                LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
-
+                LEFT JOIN tbl_country co 
+                    ON co.iso2 = d.country_code
+                LEFT JOIN tbl_state st 
+                    ON st.iso2 = d.state_code AND st.country_code = d.country_code
+                LEFT JOIN tbl_city ci 
+                    ON ci.id = d.city_id
+                LEFT JOIN tbl_business_profile_image b 
+                    ON d.gid = b.business_guid
                 LEFT JOIN (
                     SELECT 
                         business_guid,
@@ -104,15 +109,19 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                     FROM tbl_rating
                     GROUP BY business_guid
                 ) r ON d.gid = r.business_guid
-
                 WHERE
-                (d.title RLIKE ?
-                OR d.short_description RLIKE ?
-                OR d.category RLIKE ?)
-                AND
-                d.active_status = true
+                    (
+                        d.title RLIKE ?
+                        OR d.short_description RLIKE ?
+                        OR d.category RLIKE ?
+                        OR co.name RLIKE ?
+                        OR st.name RLIKE ?
+                        OR ci.name RLIKE ?
+                    )
+                    AND d.active_status = true
                 ORDER BY d.date_created DESC
-                LIMIT 50`, [criteria, criteria, criteria])
+                LIMIT 50;
+`, [criteria, criteria, criteria, criteria, criteria, criteria])
         }
 
         const listings = rawdata.map((listing: any) => {

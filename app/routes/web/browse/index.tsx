@@ -8,12 +8,13 @@ import BrowseLayout from '~/routes/asset/BrowseLayout';
 import Card from './assets/Card';
 import LeftNavForBrowse from './assets/LeftNavForBrowse';
 import SrchNavbar from '~/components/header/new/SrchNavbar';
-import Featured from '../search/assets/Featured';
+
 import VerticalHeight from '~/routes/asset/VerticalHeight';
 import CallToActionSection from '~/components/content/CallToActionSection';
 import FooterSection from '~/routes/landing/assets/FooterSection';
 import FooterCard from './assets/FooterCard';
 import SearchPagination from './assets/SearchPagination';
+import Featured from './assets/Featured';
 
 const dataCompanies = [
     {

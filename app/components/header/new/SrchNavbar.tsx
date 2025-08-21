@@ -145,7 +145,7 @@ export const NavLink = ({ link, index }: any) => {
 
 export const SearchBox = ({ query }: any) => {
     return (
-        <form action="/web/search" className="text-sm w-full max-w-md">
+        <form action="/web/browse" className="text-sm w-full max-w-md">
             <div className="flex items-center bg-gray-50 rounded-full pl-4 pr-1 py-1 gap-2
             border-[1px] border-gray-500">
                 <input

@@ -1,7 +1,7 @@
 import React from 'react'
 import SrchNavbar from '~/components/header/new/SrchNavbar'
 
-const browse = () => {
+const Browse = () => {
     return (
         <div>
             <SrchNavbar />
@@ -28,4 +28,4 @@ const browse = () => {
     )
 }
 
-export default browse
+export default Browse

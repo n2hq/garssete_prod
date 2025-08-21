@@ -34,7 +34,7 @@ const Card = ({ listing }: any) => {
 
     useEffect(() => {
         if (listing) {
-            if (listing?.image_url !== "" || listing?.image_url !== null) {
+            if (listing?.image_url !== "" || listing?.image_url !== null || listing?.image_url !== undefined) {
                 //console.log(config.IMG_BASE_URL)
                 setImgsrc(config.IMG_BASE_URL + listing?.image_url)
             }

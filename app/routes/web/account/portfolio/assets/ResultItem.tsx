@@ -6,7 +6,7 @@ import { RiDoubleQuotesL } from 'react-icons/ri'
 import { config } from '~/lib/lib'
 
 const ResultItem = ({ listing, index }: any) => {
-    const [placeholder, setPlaceholder] = useState('/images/imgplaceholder2.jpg')
+    const [placeholder, setPlaceholder] = useState('/images/placeholder-icon.webp')
     const [imgsrc, setImgsrc] = useState(null)
     function isOdd(num: number): boolean {
         return num % 2 !== 0;

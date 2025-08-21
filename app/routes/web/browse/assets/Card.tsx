@@ -89,7 +89,7 @@ const Card = ({ listing }: any) => {
                             >
                                 <img
                                     src={imgscr}
-                                    alt={listing.title}
+                                    alt={""}
                                     className={`object-cover w-full h-full text-sm
                             rounded z-0`}
                                 />

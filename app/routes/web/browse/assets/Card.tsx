@@ -13,7 +13,7 @@ import { MdEmail } from 'react-icons/md'
 
 const Card = ({ listing }: any) => {
 
-    const [placeholder, setPlaceholder] = useState('/images/imgplaceholder2.jpg')
+    const [placeholder, setPlaceholder] = useState('/images/placeholder-icon.webp')
     const [imgscr, setImgsrc] = useState('')
     const [userId, setUserId] = useState('')
     const [socialMedia, setSocialMedia] = useState<any | null>(null)
@@ -34,7 +34,7 @@ const Card = ({ listing }: any) => {
 
     useEffect(() => {
         if (listing) {
-            if (listing?.image_url !== "" || listing?.image_url !== null || listing?.image_url !== undefined) {
+            if (listing?.image_url !== "" && listing?.image_url !== null && listing?.image_url !== undefined) {
                 //console.log(config.IMG_BASE_URL)
                 setImgsrc(config.IMG_BASE_URL + listing?.image_url)
             }
@@ -95,11 +95,15 @@ const Card = ({ listing }: any) => {
                                         className={`object-cover w-full h-full text-sm
                             rounded z-0`}
                                     />
+
                                 }
+
                             </div>
+
                             <div className={`-space-y-1`}>
                                 <div className={`text-black text-[16px] font-semibold line-clamp-1`}>
                                     {listing?.title}
+
                                 </div>
                                 <div className={`text-[12px] text-gray-500  capitalize`}>
                                     {listing?.category}
@@ -116,7 +120,7 @@ const Card = ({ listing }: any) => {
                         {
                             listing?.short_description
                         }
-
+                        {imgscr}
                     </div>
                 </a>
             </div>

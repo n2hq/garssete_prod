@@ -74,7 +74,7 @@ const ResultItem = ({ listing, index }: any) => {
 
                                 <div className={`font-normal text-[11px] 
                                     flex place-items-center gap-1 `}>
-                                    {Boolean(listing.active_status) ? 'Active' : 'Inactive'}
+                                    {Boolean(listing?.active_status) ? 'Active' : 'Inactive'}
                                 </div>
 
 

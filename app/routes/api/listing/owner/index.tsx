@@ -46,6 +46,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 d.address_one,
                 d.address_two,
                 d.website,
+                d.active_status,
                 d.date_created,
                 (SELECT name FROM tbl_country co WHERE co.iso2 = d.country_code LIMIT 1) AS country_name,
                 (SELECT name FROM tbl_state st WHERE st.iso2 = d.state_code AND st.country_code = d.country_code LIMIT 1) AS state_name,
@@ -86,6 +87,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                     d.address_one,
                     d.address_two,
                     d.website,
+                    d.active_status,
                     d.date_created,
                     co.name AS country_name,
                     st.name AS state_name,
@@ -135,7 +137,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             return (listing)
         })
 
-        //console.log(listings)
+        //console.log(listings[0].active_status)
 
         return DoResponse(listings, 200)
 

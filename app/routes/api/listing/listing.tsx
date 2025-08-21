@@ -67,6 +67,8 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             }
 
 
+
+
             {/** assign values for update */ }
             let email_address = body.email_address as string === undefined ? listing.email_address : body.email_address
             let title: string = body.title === undefined ? (listing.title) as string : body.title as string
@@ -98,6 +100,32 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
             let city_id = body.city_id as string === undefined ? listing.city_id : body.city_id
             let website = body.website as string === undefined ? listing.website : body.website
+
+            {/** check if username has not been taken */ }
+            if (username !== "" && username !== null) {
+                if (username === listing?.username) {
+                    // do nothing
+                }
+
+                {/** a new username is being submitted */ }
+                if (username !== listing?.username) {
+                    {/** check if some other user has the username */ }
+                    let checkSql = `SELECT * FROM tbl_dir d 
+                        WHERE d.username = '${username}'
+                        AND
+                        d.gid != '${listing?.gid}'`
+
+                    const checkUsernameResult = await query(checkSql)
+                    if ((checkUsernameResult as any[]).length > 0) {
+
+                        return DoResponse({
+                            success: false,
+                            error: "Username is unavailable"
+                        }, 500)
+
+                    }
+                }
+            }
 
             let sql = `UPDATE tbl_dir SET
                 title = '${title}',

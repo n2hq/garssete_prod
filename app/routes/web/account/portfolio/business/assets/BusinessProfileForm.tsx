@@ -16,6 +16,7 @@ const BusinessProfileForm = ({ data }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
+    const [errorMsg, setErrorMsg] = useState<any>(null)
 
     const countries = data.countries
     let [states, setStates] = useState(data.states)
@@ -73,13 +74,16 @@ const BusinessProfileForm = ({ data }: any) => {
             })
 
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                const errorData = await response.text();
+                const errorObject = JSON.parse(errorData)
+                throw new Error(`${errorObject.error}`);
+
             } else {
                 notification.alertReload('Success!', 'Successfully updated!')
             }
 
         } catch (error: any) {
-            notification.alertCancel('Error!', error.message)
+            notification.alertCancel('Unsuccessful', error.message)
         } finally {
             setWorking(false)
         }

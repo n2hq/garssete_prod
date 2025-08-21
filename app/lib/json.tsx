@@ -2,7 +2,7 @@ import { BiBriefcase, BiCategory, BiFoodMenu, BiHome, BiHotel, BiSearch } from "
 import { BsHouseAdd, BsPersonFill, BsPersonFillGear, BsSearchHeart } from "react-icons/bs"
 import { CgAirplane, CgChart, CgFeed, CgPrinter, CgShoppingBag, CgShoppingCart } from "react-icons/cg"
 import { FaSchool } from "react-icons/fa"
-import { FcAutomotive, FcLandscape, FcServices } from "react-icons/fc"
+import { FcAutomotive, FcBusiness, FcBusinessman, FcLandscape, FcServices } from "react-icons/fc"
 import { GiHealthNormal, GiHumanTarget } from "react-icons/gi"
 import { GrCloudComputer, GrLanguage, GrRestaurant } from "react-icons/gr"
 import { HiHome } from "react-icons/hi2"
@@ -231,7 +231,12 @@ export const leftNavLinks = [
         name: "Community & Government",
         id: "community and government",
         icon: <RiGovernmentFill size={20} />
-    }
+    },
+    {
+        name: "General Trading",
+        id: "general trading",
+        icon: <FcBusiness size={20} />
+    },
 
 
 ]

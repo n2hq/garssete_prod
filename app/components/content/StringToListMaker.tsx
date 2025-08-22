@@ -17,8 +17,8 @@ const StringToListMaker = ({ phrasesString }: any) => {
             {
                 phrasesList?.map((phrase: any, index: number) => {
                     return (
-                        <span key={index} className={`bg-blue-50 px-2 border py-1 border-gray-300 hover:shadow-none cursor-move
-                        rounded-full shadow-sm shadow-gray-500`}>
+                        <span key={index} className={`bg-blue-50 px-2 border py-1 border-gray-300 hover:shadow-lg cursor-move
+                        rounded-md shadow-none shadow-gray-500`}>
                             {phrase}
                         </span>
                     )

@@ -58,11 +58,15 @@ const SearchPagination = <T,>({
                     <div key={index}>
 
                         {
-                            (index + 1) % 6 ?
+                            (index + 1) % 2 ?
                                 <div>
                                     <Card listing={item} index={index} />
                                 </div> :
-                                <SearchAd />
+                                <>
+                                    <Card listing={item} index={index} />
+                                    <SearchAd />
+
+                                </>
                         }
                     </div>
                 ))}

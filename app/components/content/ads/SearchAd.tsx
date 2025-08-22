@@ -5,7 +5,7 @@ const SearchAd = () => {
     const [adsLoaded, setAdsLoaded] = useState(false);
 
     useEffect(() => {
-        if (import.meta.env.VITE_ENV === "prod" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
+        if (import.meta.env.VITE_ENV === "dev" && adInfo.adslot !== testAdInfo.adslot && adInfo.clientId !== testAdInfo.clientId) {
             try {
                 // Ensure AdSense script is loaded
                 if (typeof window !== "undefined") {
@@ -22,7 +22,7 @@ const SearchAd = () => {
 
 
 
-    if (import.meta.env.VITE_ENV !== "prod" || !adsLoaded) {
+    if (import.meta.env.VITE_ENV !== "dev" || !adsLoaded) {
         return null; // Don't render ads in development
     }
 

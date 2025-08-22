@@ -132,7 +132,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             return (listing)
         })
 
-        //console.log(listings)
+        console.log(listings)
 
         return DoResponse(listings, 200)
 

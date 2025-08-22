@@ -108,7 +108,7 @@ const SocialMedia = ({ listing }: any) => {
                                 <Link key={index} to={socialMedia?.link}>
                                     <div key={index}
                                         className={`border px-[8px] py-[2px] 
-                                    cursor-pointer flex place-items-center rounded-full
+                                    cursor-pointer flex place-items-center rounded-md
                                     gap-1 border-gray-400 bg-blue-50 hover:bg-blue-50
                                     text-black hover:text-black
                                     hover:shadow-md`}

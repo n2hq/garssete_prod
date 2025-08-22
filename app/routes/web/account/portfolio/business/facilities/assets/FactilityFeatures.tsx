@@ -152,20 +152,27 @@ const FacilityFeatures = ({
                                         className="hidden"
                                     />
                                     <div
-                                        className={`w-5 h-5 border-2 rounded ${feature.active ? 'bg-green-500' : 'bg-white'
+                                        className={`w-5 h-5 border-2 rounded ${feature.active ? 'bg-blue-700' : 'bg-white'
                                             }`}
                                     ></div>
                                 </div>
                                 <div className=' w-full'>
-                                    <p className="font-medium ">{feature.name}</p>
+                                    <p className={`font-medium flex place-items-center gap-2 text-lg`}>
+                                        <span className={`text-lg`}>
+                                            {feature.icon}
+                                        </span>
+                                        <span>
+                                            {feature.name}
+                                        </span>
+                                    </p>
                                     <p className="text-xs ">{feature.description}</p>
                                     <div className=' w-full h-[100px] mt-1 rounded overflow-hidden'>
                                         <textarea
                                             onChange={(e) => handleDescriptionChange(feature.feature_id, e.target.value)}
                                             className={`w-full h-full bg-gray-100
-                                            border p-3 text-sm`}>
-                                            {feature.user_description}
-                                        </textarea>
+                                            border p-3 text-sm`}
+                                            value={feature.user_description}
+                                        ></textarea>
                                     </div>
                                 </div>
                             </label>

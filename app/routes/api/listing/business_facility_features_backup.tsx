@@ -16,20 +16,20 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     const businessGuid = params.business_guid
 
-    const selectedFeatureQuery = `SELECT
-        a.feature_id, a.user_description, a.business_guid
-        FROM 
-        tbl_selected_facility_features a 
-        WHERE 
-        a.business_guid = ?`
+
 
     try {
-        const rawdata: any = await query(selectedFeatureQuery,
+        const rawdata: any = await query(`SELECT 
+            a.feature_id, b.description, a.user_description, 
+            a.business_guid, b.name 
+            FROM 
+            tbl_selected_facility_features a, tbl_sys_facility_features b 
+            WHERE a.feature_id = b.feature_id 
+            AND
+            a.business_guid = ?`,
             [
                 businessGuid
             ])
-
-        console.log(rawdata)
 
         return DoResponse(rawdata, 200)
 

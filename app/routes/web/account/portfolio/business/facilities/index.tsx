@@ -8,6 +8,7 @@ import FacilityFeatures from './assets/FactilityFeatures'
 import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
 import BusinessHeader from '../assets/BusinessHeader'
+import { facilityFeatures as faciFeatures } from '~/lib/json/facility_features'
 
 const index = () => {
     useEffect(() => {
@@ -31,7 +32,7 @@ const index = () => {
             setBusinessGuid(businessGuid)
             setUserGuid(userGuid)
             const facilityFeatures = await getSysFacilityFeatures()
-            setFacilityFeatures(facilityFeatures)
+            setFacilityFeatures(faciFeatures)
             const selectedFacilityFeatures = await getSelectedFacilityFeatures(userGuid, businessGuid)
             setSelectedFacilityFeatures(selectedFacilityFeatures)
             const businessProfile = await getBusinessProfile(businessGuid || "")
@@ -40,7 +41,7 @@ const index = () => {
         if (business_guid && user_guid) {
             getAllData(business_guid, user_guid)
         }
-    }, [business_guid, user_guid])
+    }, [business_guid, user_guid, faciFeatures])
 
     useEffect(() => {
 

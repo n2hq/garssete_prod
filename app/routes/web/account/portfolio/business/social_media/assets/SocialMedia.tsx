@@ -166,9 +166,9 @@ const SocialMedia = ({
 
                                             onChange={(e) => handleDescriptionChange(socialMedia.media_id, e.target.value)}
                                             className={`w-full h-full bg-gray-100
-                                            border p-3 text-sm`}>
-                                            {socialMedia.user_description}
-                                        </textarea>
+                                            border p-3 text-sm`}
+                                            value={socialMedia.user_description}
+                                        ></textarea>
                                     </div>
                                 </div>
                             </label>

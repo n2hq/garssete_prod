@@ -2,13 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { ListingType } from '~/lib/types'
 import { getBusinessFeatures } from '~/lib/lib'
 import ComponentTitle from './ComponentTitle'
+import { facilityFeatures } from '~/lib/json/facility_features'
 
 const BusinessFeatures = ({ listing }: any) => {
     const [features, setFeatures] = useState<any>(undefined)
 
     useEffect(() => {
         getBusinessFeatures(listing.gid).then((data) => {
-            setFeatures(data)
+            const mergedFeatures = data.map((dbF: any) => {
+                const facility = facilityFeatures.find(f => f.feature_id === dbF.feature_id);
+
+                return {
+                    ...facility, // take default info (name, description, icon)
+                    user_description: dbF.user_description || null, // add user description if any
+                    business_guid: dbF.business_guid
+                }
+            });
+
+            setFeatures(mergedFeatures)
         })
 
     }, [listing.business_guid])
@@ -21,10 +32,15 @@ const BusinessFeatures = ({ listing }: any) => {
                     features?.map((feature: any, index: any) => {
                         return (
                             <div key={index} className={`flex flex-col`}>
-                                <div className={`font-bold`}>
-                                    {feature.name}
+                                <div className={`font-bold flex place-items-center gap-2 `}>
+                                    <span className={`text-lg`}>
+                                        {feature.icon}
+                                    </span>
+                                    <span className={`text-lg`}>
+                                        {feature.name}
+                                    </span>
                                 </div>
-                                <div className={` mt-[-2px] text-black tracking-normal leading-snug`}>
+                                <div className={` mt-[5px] text-black tracking-normal leading-snug`}>
                                     {feature.user_description || feature.description}
                                 </div>
                             </div>

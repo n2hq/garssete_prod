@@ -78,8 +78,8 @@ export const mobileLinks = [
 ]
 
 export const adInfo = {
-    clientId: "ca-pub-xxxxxxxxxxxxxxxx",
-    adslot: "1234567890",
+    clientId: "ca-pub-xxxxxxxxxxxxxxx1",
+    adslot: "1234567891",
     format: "auto",
     responsive: "true"
 }
@@ -100,6 +100,8 @@ export const lnks = [
     /* { title: "Shop", lnk: "/web/shop", icon: <FiShoppingCart /> },
     { title: "Buy Now", lnk: "/web/buynow", icon: <FaBuysellads /> } */
 ]
+
+
 
 export const leftNavLinks = [
     {

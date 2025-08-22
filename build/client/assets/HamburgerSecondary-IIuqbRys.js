@@ -1,0 +1,1 @@
+import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{i as t}from"./index-ponAJL-t.js";const i=({theme:n,openNav:r,navBg:s})=>e.jsx(e.Fragment,{children:e.jsx("div",{className:"flex items-center",onClick:r,children:e.jsx("button",{className:" text-[12px]  hover:border-yellow-300/20 px-1 rounded-none tracking-tigher",children:e.jsx(t,{className:"text-[30px]"})})})});export{i as H};

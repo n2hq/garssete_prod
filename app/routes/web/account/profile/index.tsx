@@ -109,7 +109,7 @@ const index = () => {
                         <div>
                             <CardHeader
                                 base_url={'/web/account/profile'}
-                                title={` ${userProfile?.first_name} ${userProfile?.lastname}`}
+                                title={` ${userProfile?.first_name || ""} ${userProfile?.lastname || ""}`}
 
                             />
 

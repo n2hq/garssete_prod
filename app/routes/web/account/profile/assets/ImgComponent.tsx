@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { BiUser } from 'react-icons/bi'
+import { BiSolidUser, BiUser, BiUserCircle, BiUserX } from 'react-icons/bi'
 import { MdEditSquare } from 'react-icons/md'
 import { useNotification } from '~/context/NotificationContext'
 import { config, headers } from '~/lib/lib'
@@ -96,7 +96,7 @@ const ImgComponent = ({ user, userProfileImageData }: any) => {
                             alt="Click to upload"
                             className=' object-cover w-full h-full z-0 absolute'
                         /> :
-                        <BiUser className={`object-cover w-[70%] h-[70%]`} />
+                        <BiSolidUser className={`object-cover w-[70%] h-[70%]`} />
                 }
 
                 <input type="file"
@@ -132,7 +132,7 @@ const ImgComponent = ({ user, userProfileImageData }: any) => {
                     disabled={working}
                 >
                     {
-                        working ? 'Uploading...' : 'Upload'
+                        working ? 'Uploading...' : 'Uploads'
                     }
                 </button>
             </div>

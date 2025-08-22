@@ -123,7 +123,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                     AND d.active_status = true
                 ORDER BY d.date_created DESC
                 LIMIT 50;
-`, [criteria, criteria, criteria, criteria, criteria, criteria])
+`, [criteria, criteria, criteria, criteria, criteria, criteria, criteria, criteria])
         }
 
         const listings = rawdata.map((listing: any) => {

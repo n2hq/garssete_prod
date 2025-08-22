@@ -84,7 +84,7 @@ const Index = () => {
         <div className=' '>
             <SrchNavbar />
 
-            <div className={`h-screen flex flex-col relative`}>
+            <div className={`h-screen flex flex-col relative bg-gray-100`}>
                 <div className={`mt-[120px] md:mt-[60px]`}>
 
                 </div>

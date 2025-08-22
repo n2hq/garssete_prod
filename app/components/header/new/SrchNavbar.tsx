@@ -137,7 +137,7 @@ export const NavLink = ({ link, index }: any) => {
 
     return <Link key={index} to={link.lnk} className={`flex items-center font-semibold text-[15px] hover:underline `}>
         {link.icon}
-        <span className={`mx-1 ${location.pathname === link.lnk && 'underline'}`}>{link.title}</span>
+        <span className={`mx-1 ${location.pathname === link.lnk && 'underline text-blue-200'}`}>{link.title}</span>
         <FaAngleDown className="text-xs" />
     </Link>
 }

@@ -13360,6 +13360,8 @@ const loader$q = async ({ request, params }) => {
                     (
                         d.title RLIKE ?
                         OR d.short_description RLIKE ?
+                        OR d.address_one RLIKE ?
+                        OR d.address_two RLIKE ?
                         OR d.category RLIKE ?
                         OR co.name RLIKE ?
                         OR st.name RLIKE ?
@@ -13642,6 +13644,8 @@ const loader$k = async ({ request, params }) => {
                     (
                         d.title RLIKE ?
                         OR d.short_description RLIKE ?
+                        OR d.address_one RLIKE ?
+                        OR d.address_two RLIKE ?
                         OR d.category RLIKE ?
                         OR co.name RLIKE ?
                         OR st.name RLIKE ?
@@ -13650,7 +13654,7 @@ const loader$k = async ({ request, params }) => {
                     AND d.owner = ?
                 ORDER BY d.date_created DESC
                 LIMIT 50;
-`, [criteria, criteria, criteria, criteria, criteria, criteria, owner]);
+`, [criteria, criteria, criteria, criteria, criteria, criteria, criteria, criteria, owner]);
     }
     const listings = rawdata.map((listing) => {
       delete listing.date_created;

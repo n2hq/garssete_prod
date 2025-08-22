@@ -37,20 +37,29 @@ const BusinessProfileSchema = z.object({
         ),
     long_description: z
         .string()
+        .nullish() // ✅ allows both undefined and null
         .refine(
             (val) => {
-                const words = val.trim().split(/\s+/).filter(Boolean)
-                return words.length <= 500
+                if (!val || val.trim() === "") {
+                    return true; // skip validation if empty or null
+                }
+                const words = val.trim().split(/\s+/).filter(Boolean);
+                return words.length <= 500;
             },
-            { message: 'You can only write up to 500 words.' }
+            { message: "You can only write up to 500 words." }
         ),
     address_two: z.any(),
     state_code: z.any(),
     state_text: z.any(),
     country_text: z.any(),
     city_id: z.any(),
-    established: z.string({ message: "Please enter year established" })
-        .min(4, { message: "Year must be at least 4 characters" }),
+    established: z
+        .string()
+        .optional()
+        .refine(
+            (val) => !val || (/^\d{1,4}$/.test(val)),
+            { message: "Must be only numbers and not more than 4 digits" }
+        ),
     call_code: z.any(),
     phone: z.any(),
     zipcode: z.any(),
@@ -69,12 +78,22 @@ const BusinessProfileSchema = z.object({
     xsocial: z.any(),
     fbsocial: z.any(),
     linksocial: z.any(),
-    website: z.union(
-        [
-            z.string().url().nullish(),
-            z.literal("")
-        ]
-    )
+    website: z
+        .string()
+        .nullable()
+        .optional()
+        .refine(
+            (val) => {
+                if (!val || val === "") return true; // ✅ allow empty, null, undefined
+                try {
+                    new URL(val); // will throw if invalid
+                    return true;
+                } catch {
+                    return false;
+                }
+            },
+            { message: "Please enter a valid website. Example: http://example.com" }
+        ),
 }).superRefine((data, ctx) => {
 
     if (data?.address_two?.length !== 0) {

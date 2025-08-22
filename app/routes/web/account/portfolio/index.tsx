@@ -35,10 +35,10 @@ const Index = () => {
 
     useEffect(() => {
         async function getAllData(guid: string, q: string) {
-            console.log(guid)
+            //console.log(guid)
             const userProfile: any = await getUserProfile(guid || "")
             const portfolio: any = await getPortfolio(guid || "", q || "")
-            console.log(portfolio)
+            //console.log(portfolio)
             setUserProfile(userProfile)
             setPortfolio(portfolio)
         }

@@ -5,7 +5,7 @@ type RatingBoxProps = {
 }
 
 export default function RatingBoxSquare({ rating }: RatingBoxProps) {
-    console.log(rating)
+    //console.log(rating)
     return (
         <div className="flex gap-x-[3px]">
             {Array.from({ length: 5 }).map((_, i) => {

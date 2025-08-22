@@ -107,8 +107,17 @@ const CreatePageSchema = z.object({
 
     address_two: z.any(),
 
-    established: z.string({ message: "Please enter year established" })
-        .min(4, { message: "Year must be at least 4 characters" })
+    /* established: z.string({ message: "Please enter year established" })
+        .min(4, { message: "Year must be at least 4 characters" }) */
+
+    established: z
+        .string()
+        .optional()
+        .refine(
+            (val) => !val || (/^\d{1,4}$/.test(val)),
+            { message: "Must be only numbers and not more than 4 digits" }
+        ),
+
 
 }).superRefine((data, ctx) => {
 
@@ -122,6 +131,9 @@ const CreatePageSchema = z.object({
             });
         }
     }
+
+
+
 
 })
 

@@ -7,7 +7,7 @@ import Input from '~/components/content/input/Input'
 import Select from '~/components/content/select/Select'
 import Button from '~/components/content/button/Button'
 import Textarea from '~/components/content/textarea/Textarea'
-import { formWrapperClass } from '~/lib/css.js'
+import { controlInformationClass, formWrapperClass } from '~/lib/css.js'
 import TextareaWithWordLimit from '~/components/content/textarea/TextareaWithWordLimit.js'
 import CreatePageSchema from './CreatePageSchema.js'
 import { useNotification } from '~/context/NotificationContext.js'
@@ -25,7 +25,7 @@ const CreatePageForm = ({ data, user }: any) => {
     let [cities, setCities] = useState(data.cities)
     //const categories = data.categories.data
     const categories = leftNavLinks
-    console.log(categories)
+    //console.log(categories)
 
     const [countryCode, setCountryCode] = useState('')
     const [stateCode, setStateCode] = useState('')
@@ -160,6 +160,8 @@ const CreatePageForm = ({ data, user }: any) => {
                     controlInformation={`Email address is compulsory.`}
                 />
 
+
+
                 <Select
                     controlTitle={"Business Category"}
                     controlName={"category"}
@@ -172,14 +174,38 @@ const CreatePageForm = ({ data, user }: any) => {
                 />
 
                 <Input
-                    controlTitle={"Year established"}
-                    controlPlaceholder={"Enter year established"}
-                    controlName={"established"}
+                    controlTitle={"Address 1"}
+                    controlPlaceholder={"Enter address"}
+                    controlName={"address_one"}
                     register={register}
                     changeHandler={changeHandler}
-                    error={errors.established}
-                    controlInformation={`Year registered is compulsory.`}
+                    error={errors.address_one}
+                    width={100}
+                    controlInformation={`Address of Business. E.g. 28 New York Street `}
                 />
+
+                <Input
+                    controlTitle={"Address 2"}
+                    controlPlaceholder={"Enter address"}
+                    controlName={"address_two"}
+                    register={register}
+                    changeHandler={changeHandler}
+                    error={errors.address_two}
+                    width={100}
+                    controlInformation={`Continuation of address. E.g. Crown Tower, Off Belleveu Avenue or Valu Complex, Kingston Donnel Boulevard. `}
+                />
+
+                <Input
+                    controlTitle={"Zipcode"}
+                    controlPlaceholder={"Enter zipcode"}
+                    controlName={"zipcode"}
+                    register={register}
+                    changeHandler={changeHandler}
+                    error={errors.zipcode}
+                    controlInformation={`Zipcode of location of business. Eg. 92829 or 239484 `}
+                />
+
+
 
                 <Select
                     controlTitle={"Country"}
@@ -190,6 +216,7 @@ const CreatePageForm = ({ data, user }: any) => {
                     changeHandler={changeHandler}
                     error={errors.country_code}
                     setCode={resetStates}
+                    controlInformation={`Country the business was registered or active. `}
                 />
 
                 <Select
@@ -201,6 +228,7 @@ const CreatePageForm = ({ data, user }: any) => {
                     changeHandler={changeHandler}
                     error={errors.state_code}
                     setCode={resetCities}
+                    controlInformation={`State the business is registered or active. `}
                 />
 
                 <Select
@@ -211,37 +239,11 @@ const CreatePageForm = ({ data, user }: any) => {
                     register={register}
                     changeHandler={changeHandler}
                     error={errors.city_id}
+                    controlInformation={`City the business is registered or active. `}
 
                 />
 
-                <Input
-                    controlTitle={"Address 1"}
-                    controlPlaceholder={"Enter address"}
-                    controlName={"address_one"}
-                    register={register}
-                    changeHandler={changeHandler}
-                    error={errors.address_one}
-                    width={100}
-                />
 
-                <Input
-                    controlTitle={"Address 2"}
-                    controlPlaceholder={"Enter address"}
-                    controlName={"address_two"}
-                    register={register}
-                    changeHandler={changeHandler}
-                    error={errors.address_two}
-                    width={100}
-                />
-
-                <Input
-                    controlTitle={"Zipcode"}
-                    controlPlaceholder={"Enter zipcode"}
-                    controlName={"zipcode"}
-                    register={register}
-                    changeHandler={changeHandler}
-                    error={errors.zipcode}
-                />
 
                 <Input
                     controlTitle={"Phone number"}
@@ -250,6 +252,17 @@ const CreatePageForm = ({ data, user }: any) => {
                     register={register}
                     changeHandler={changeHandler}
                     error={errors.phone}
+                    controlInformation={`Phone OR Mobile number. `}
+                />
+
+                <Input
+                    controlTitle={"Year established - Optional"}
+                    controlPlaceholder={"Enter year established"}
+                    controlName={"established"}
+                    register={register}
+                    changeHandler={changeHandler}
+                    error={errors.established}
+                    controlInformation={`Year registered is compulsory.`}
                 />
 
                 <TextareaWithWordLimit
@@ -262,6 +275,8 @@ const CreatePageForm = ({ data, user }: any) => {
                     setValue={setValue}
                     getValues={getValues}
                     watch={watch}
+                    controlInformationClass={controlInformationClass}
+                    controlInformation={`Enter a short description of this business. It should be a maximum of 50 words. `}
                 />
 
                 <Button working={working} />

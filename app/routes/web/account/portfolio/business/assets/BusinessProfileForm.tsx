@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import BusinessProfileSchema from './BusinessProfileSchema'
 import ImgComponent from './image/ImgComponent'
-import { formWrapperClass, inputHeadingClass, inputWrapperClass } from '~/lib/css'
+import { controlInformationClass, formWrapperClass, inputHeadingClass, inputWrapperClass } from '~/lib/css'
 import Input from '~/components/content/input/Input'
 import TextareaWithWordLimit from '~/components/content/textarea/TextareaWithWordLimit'
 import Select from '~/components/content/select/Select'
@@ -193,41 +193,6 @@ const BusinessProfileForm = ({ data }: any) => {
 
                         />
 
-                        <Select
-                            controlTitle={"Country"}
-                            controlName={"country_code"}
-                            controlPlaceholder={"Select country"}
-                            selectJson={countries}
-                            register={register}
-                            changeHandler={changeHandler}
-                            error={errors.country_code}
-                            setCode={resetStates}
-                            controlInformation={`This is the country the business was registered. `}
-
-                        />
-
-                        <Select
-                            controlTitle={"State"}
-                            controlName={"state_code"}
-                            controlPlaceholder={"Select state"}
-                            selectJson={states}
-                            register={register}
-                            changeHandler={changeHandler}
-                            error={errors.state_code}
-                            setCode={resetCities}
-                            controlInformation={`This is the state the business was registered. `}
-                        />
-
-                        <Select
-                            controlTitle={"City"}
-                            controlName={"city_id"}
-                            controlPlaceholder={"Select city"}
-                            selectJson={cities}
-                            register={register}
-                            changeHandler={changeHandler}
-                            error={errors.city_id}
-                            controlInformation={`This is the city the business was registered. `}
-                        />
 
                         <Input
                             controlTitle={"Address 1"}
@@ -251,6 +216,44 @@ const BusinessProfileForm = ({ data }: any) => {
                             controlInformation={`E.g. Off North Central Boulevard or North Central Road. `}
                         />
 
+                        <Select
+                            controlTitle={"Country"}
+                            controlName={"country_code"}
+                            controlPlaceholder={"Select country"}
+                            selectJson={countries}
+                            register={register}
+                            changeHandler={changeHandler}
+                            error={errors.country_code}
+                            setCode={resetStates}
+                            controlInformation={`Country the business was registered. `}
+
+                        />
+
+                        <Select
+                            controlTitle={"State"}
+                            controlName={"state_code"}
+                            controlPlaceholder={"Select state"}
+                            selectJson={states}
+                            register={register}
+                            changeHandler={changeHandler}
+                            error={errors.state_code}
+                            setCode={resetCities}
+                            controlInformation={`State the business was registered. `}
+                        />
+
+                        <Select
+                            controlTitle={"City"}
+                            controlName={"city_id"}
+                            controlPlaceholder={"Select city"}
+                            selectJson={cities}
+                            register={register}
+                            changeHandler={changeHandler}
+                            error={errors.city_id}
+                            controlInformation={`City the business was registered. `}
+                        />
+
+
+
                         <Input
                             controlTitle={"Zipcode"}
                             controlPlaceholder={"Enter zipcode"}
@@ -258,7 +261,7 @@ const BusinessProfileForm = ({ data }: any) => {
                             register={register}
                             changeHandler={changeHandler}
                             error={errors.zipcode}
-                            controlInformation={`Enter the zipcode. `}
+                            controlInformation={`Enter the zipcode. E.g.: 51234 or 845219 `}
                         />
 
                         <Input
@@ -268,7 +271,7 @@ const BusinessProfileForm = ({ data }: any) => {
                             register={register}
                             changeHandler={changeHandler}
                             error={errors.phone}
-                            controlInformation={`Mobile number or phoone number. `}
+                            controlInformation={`Mobile number or phone number. `}
                         />
 
 
@@ -281,6 +284,7 @@ const BusinessProfileForm = ({ data }: any) => {
                             register={register}
                             changeHandler={changeHandler}
                             error={errors.category}
+                            controlInformation={`Select business category.`}
                         />
 
                         <Input
@@ -290,24 +294,27 @@ const BusinessProfileForm = ({ data }: any) => {
                             register={register}
                             changeHandler={changeHandler}
                             error={errors.business_phrases}
+                            controlInformation={`Enter business phrases like: Solicitor, Advocate, Plumber, Business Analyst, Mechanical Engineers.`}
                         />
 
                         <Input
                             controlTitle={"Products"}
-                            controlPlaceholder={"Enter products"}
+                            controlPlaceholder={"E.g.: Publications, Accessories, Shoes, Subscriptions, Magazines, Cars"}
                             controlName={"products"}
                             register={register}
                             changeHandler={changeHandler}
                             error={errors.products}
+                            controlInformation={`Enter your products name like: Magazines, Generators, Accessories, Perfumes, Publications etc.`}
                         />
 
                         <Input
                             controlTitle={"Services"}
-                            controlPlaceholder={"Enter services"}
+                            controlPlaceholder={"E.g.: Consulting Services, Project Management, Outsourcing or BPO, Training and Development. etc."}
                             controlName={"services"}
                             register={register}
                             changeHandler={changeHandler}
                             error={errors.services}
+                            controlInformation={`Enter your services E.g.: Consulting Services, Project Management, Outsourcing or BPO, Training and Development. etc.`}
                         />
 
                         <TextareaWithWordLimit
@@ -320,6 +327,8 @@ const BusinessProfileForm = ({ data }: any) => {
                             setValue={setValue}
                             getValues={getValues}
                             watch={watch}
+                            controlInformationClass={controlInformationClass}
+                            controlInformation={`Enter your services E.g.: Consulting Services, Project Management, Outsourcing or BPO, Training and Development. etc.`}
                         />
 
                         <TextareaWithWordLimit
@@ -368,6 +377,7 @@ const BusinessProfileForm = ({ data }: any) => {
                             register={register}
                             changeHandler={changeHandler}
                             error={errors.website}
+                            controlInformation={`Your website should look like this: http://example.com `}
                         />
 
                         <Button working={working} />

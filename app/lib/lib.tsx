@@ -158,7 +158,7 @@ export const getListingByCategory = async (category: string, limit: number) => {
     const endpoint = `/api/listing/listing_by_category/${category}/${limit}`
     const url = config.BASE_URL + endpoint
 
-    console.log(url)
+    //console.log(url)
 
     try {
         const response = await fetch(url, {

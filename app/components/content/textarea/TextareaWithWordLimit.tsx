@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { MdError } from 'react-icons/md'
-import { inputControlWrapper, textAreaClass } from '~/lib/css';
+import { inputControlWrapper, inputHeadingClass, inputHeadingClassForTextarea, textAreaClass } from '~/lib/css';
 
 const TextareaWithWordLimit = ({
     controlName,
@@ -8,6 +8,8 @@ const TextareaWithWordLimit = ({
     controlTitle,
     register,
     changeHandler,
+    controlInformationClass,
+    controlInformation,
     error,
     setValue,
     getValues,
@@ -62,12 +64,18 @@ const TextareaWithWordLimit = ({
     return (
         <>
             <div className={inputControlWrapper}>
-                <div className='flex place-content-between'>
-                    <label className="block mb-1 text-md font-semibold">{controlTitle}</label>
+                <div className='flex place-content-between place-items-baseline top-1'>
+                    <label className={inputHeadingClassForTextarea}>{controlTitle}</label>
+
                     <label className=" text-gray-600 text-sm">
                         Word Count: <strong>{countWords(text)}</strong>
                     </label>
                 </div>
+                {
+                    controlInformation?.length > 1 && <div className={`${controlInformationClass} ml-1.5 mb-2`}>
+                        {controlInformation}
+                    </div>
+                }
                 <div>
                     <textarea
                         {...register(controlName, {

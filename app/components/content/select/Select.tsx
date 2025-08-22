@@ -29,7 +29,7 @@ const Select = ({
         <>
             <div className={inputControlWrapper}>
                 <div className={inputHeadingClass}>
-                    <div className={`mb-0`}>
+                    <div className={`mb-0 text-xl`}>
                         {controlTitle}
                     </div>
                     {

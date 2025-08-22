@@ -123,7 +123,7 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
 
     let localTimeText = getDateInTimeZoneX(localTimeZone)
 
-    console.log(localTimeObject)
+    //console.log(localTimeObject)
 
     //const localTimex = new Date(localTimeFormat.)
 

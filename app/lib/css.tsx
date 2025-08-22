@@ -1,9 +1,11 @@
 export const inputControlWrapper = `mb-8 w-[100%]`
 
-export const inputHeadingClass = `text-black ml-1.5 mb-2 font-semibold`
+export const inputHeadingClass = `text-black text-xl ml-1.5 mb-2 font-semibold`
+
+export const inputHeadingClassForTextarea = `text-black text-xl ml-1.5 font-semibold`
 
 export const controlInformationClass = `w-full text-gray-400 
-mt-[-2px] text-[12px] font-normal leading-[1.2em]`
+mt-[1px] text-[12px] font-normal leading-[1.2em]`
 
 export const inputClass = `border-[1px] border-gray-500/20 w-full px-3 py-2 rounded 
  bg-gray-100 text-[12.5px]`

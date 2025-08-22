@@ -15,6 +15,7 @@ import FeaturesSection from './landing/assets/FeaturesSection'
 import DiscoverSection from './landing/assets/DiscoverSection'
 import CallToActionSection from '../components/content/CallToActionSection'
 import FooterSection from './landing/assets/FooterSection'
+import SrchNavbar from '~/components/header/new/SrchNavbar'
 
 export const meta: MetaFunction = () => {
   return [
@@ -26,7 +27,7 @@ export const meta: MetaFunction = () => {
 const _index = () => {
   return (
     <Layout>
-      <Navbar />
+
       <HeroSection />
       <FeaturesSection />
       <DiscoverSection />

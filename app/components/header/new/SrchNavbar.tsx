@@ -27,7 +27,7 @@ const SrchNavbar = () => {
 
     return (
         <div>
-            <div className={` bg-[#001e5a] text-white  fixed top-0 left-0 w-full z-[1000] shadow-sm`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
+            <div className={` bg-blue-800 text-white  fixed top-0 left-0 w-full z-[1000] shadow-sm`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
 
                 <MobileNav
                     showNav={showNav}
@@ -37,13 +37,15 @@ const SrchNavbar = () => {
 
                     {/* Left - Logo and Menu Button */}
                     <div className="flex items-center gap-2 lg:border-r border-blue-700 pr-4">
-                        <img
-                            src={`/images/logo.svg`}
-                            alt="Garssete"
-                            width={30}
-                            height={30}
-                            className={`w-[25px] h-[25px]`}
-                        />
+                        <div className={`relative w-[25px] h-[25px] overflow-hidden `}>
+                            <img
+                                src={`/images/logo.svg`}
+                                alt="Garssete"
+                                width={30}
+                                height={30}
+                                className={` object-cover w-full h-full`}
+                            />
+                        </div>
                         <Link to="/" className="text-xl font-extrabold tracking-tight">
                             GARSSETE
                         </Link>

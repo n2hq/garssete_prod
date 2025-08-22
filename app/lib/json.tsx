@@ -78,8 +78,8 @@ export const mobileLinks = [
 ]
 
 export const adInfo = {
-    clientId: "ca-pub-xxxxxxxxxxxxxxx1",
-    adslot: "1234567891",
+    clientId: "ca-pub-xxxxxxxxxxxxxxxx",
+    adslot: "1234567890",
     format: "auto",
     responsive: "true"
 }

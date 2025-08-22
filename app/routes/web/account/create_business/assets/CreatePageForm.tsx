@@ -195,18 +195,6 @@ const CreatePageForm = ({ data, user }: any) => {
                     controlInformation={`Continuation of address. E.g. Crown Tower, Off Belleveu Avenue or Valu Complex, Kingston Donnel Boulevard. `}
                 />
 
-                <Input
-                    controlTitle={"Zipcode"}
-                    controlPlaceholder={"Enter zipcode"}
-                    controlName={"zipcode"}
-                    register={register}
-                    changeHandler={changeHandler}
-                    error={errors.zipcode}
-                    controlInformation={`Zipcode of location of business. Eg. 92829 or 239484 `}
-                />
-
-
-
                 <Select
                     controlTitle={"Country"}
                     controlName={"country_code"}
@@ -242,6 +230,18 @@ const CreatePageForm = ({ data, user }: any) => {
                     controlInformation={`City the business is registered or active. `}
 
                 />
+
+
+                <Input
+                    controlTitle={"Zipcode"}
+                    controlPlaceholder={"Enter zipcode"}
+                    controlName={"zipcode"}
+                    register={register}
+                    changeHandler={changeHandler}
+                    error={errors.zipcode}
+                    controlInformation={`Zipcode of location of business. Eg. 92829 or 239484 `}
+                />
+
 
 
 

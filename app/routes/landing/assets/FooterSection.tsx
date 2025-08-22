@@ -15,27 +15,27 @@ import { FaBagShopping } from 'react-icons/fa6'
 const socials = [
     {
         title: "Facebook",
-        url: "#",
+        url: "http://facebook.com/garssete",
         icon: faFacebookSquare
     },
     {
         title: "Instagram",
-        url: "#",
+        url: "http://instagram.com/garssete",
         icon: faInstagram
     },
     {
         title: "Twitter",
-        url: "#",
+        url: "http://x.com/garssete",
         icon: faTwitterSquare
     },
     {
         title: "Linkedin",
-        url: "#",
+        url: "https://www.linkedin.com/company/garssete",
         icon: faLinkedin
     },
     {
         title: "Youtube",
-        url: "#",
+        url: "https://www.youtube.com/@Garssete",
         icon: faYoutubeSquare
     }
 ]
@@ -104,7 +104,7 @@ const FooterSection = () => {
                     <div className={`flex space-x-4 mb-8`}>
                         {
                             socials.map((media: any, index: any) => {
-                                return <a key={index} href="#"
+                                return <a key={index} href={media?.url}
                                     aria-label={media.title}
                                     className='hover:text-primary-600'
                                 >

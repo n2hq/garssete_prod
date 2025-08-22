@@ -21,7 +21,7 @@ const CallToActionSection = () => {
                     items-center text-center md:gap-20`}>
                         <div className={`mb-6 md:mb-0 md:mr-10 `}>
                             <h2 className={`text-2xl font-bold text-white`}>
-                                Sign up and showcase your business for free.
+                                Sign up. Get access to global and local businesses.
                             </h2>
                         </div>
                         <div>
@@ -33,9 +33,9 @@ const CallToActionSection = () => {
 
                                     className={`inline-block text-primary-700 bg-white rounded-lg 
                                     px-6 py-3 font-semibold hover:bg-primary-500 hover:text-primary-50`}
-                                    to="/web/search"
+                                    to="/web/browse"
                                 >
-                                    Search
+                                    Browse
                                 </Link>
                                 <Link
                                     to="/web/signup"

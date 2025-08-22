@@ -37,15 +37,15 @@ const getFeatures = () => {
             imageSrc: `/images/landing-search${2}.png`,
             title: "Connect with Partners",
             description: "Our global directory connects you with international clients, investors, and collaborators who are actively searching for businesses like yours.",
-            linkText: "Search",
-            linkHref: "/web/search"
+            linkText: "Sign up",
+            linkHref: "/web/signup"
         },
         {
             imageSrc: `/images/landing-search${1}.png`,
             title: "Grow Beyond Borders",
             description: "Gain visibility in new markets and watch your business thrive. With more eyes on your listing, the potential for growth is limitless.",
             linkText: "Discover",
-            linkHref: "/web/search"
+            linkHref: "/web/browse"
         }
     ]
 }

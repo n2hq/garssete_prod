@@ -7,7 +7,7 @@ import { config } from '~/lib/lib'
 
 const ResultItem = ({ listing, index }: any) => {
     const [placeholder, setPlaceholder] = useState('/images/placeholder-icon.webp')
-    const [imgsrc, setImgsrc] = useState(null)
+    const [imgsrc, setImgsrc] = useState('')
     function isOdd(num: number): boolean {
         return num % 2 !== 0;
     }
@@ -18,6 +18,8 @@ const ResultItem = ({ listing, index }: any) => {
         if (listing && listing?.image_url !== null) {
             let imgsrc = config.IMG_BASE_URL + listing?.image_url
             setImgsrc(imgsrc)
+        } else {
+            setImgsrc(placeholder)
         }
     }, [listing])
 

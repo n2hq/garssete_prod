@@ -27,7 +27,7 @@ const BusinessFeatures = ({ listing }: any) => {
         <div className=' mt-12'>
             <ComponentTitle title='Facility Features' />
 
-            <div className={`grid grid-cols-2 gap-4 mt-3`}>
+            <div className={`grid grid-cols-2 gap-x-4 gap-y-8 mt-3`}>
                 {
                     features?.map((feature: any, index: any) => {
                         return (

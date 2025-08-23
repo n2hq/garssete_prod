@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { BiListOl, BiListPlus } from 'react-icons/bi'
+import { BsBag, BsBagCheckFill, BsListCheck, BsListStars } from 'react-icons/bs'
+import { IoListCircleOutline } from 'react-icons/io5'
+import { MdNotListedLocation } from 'react-icons/md'
 
 const StringToListMaker = ({ phrasesString, useGrid }: any) => {
     const [phrasesList, setPhrasesList] = useState<any[]>([])
@@ -22,7 +26,7 @@ const StringToListMaker = ({ phrasesString, useGrid }: any) => {
                                 return (
                                     <div className={`flex place-items-center gap-2`}>
                                         <span>
-                                            {index + 1}.
+                                            <BsBagCheckFill />
                                         </span>
                                         <span>
                                             {phrase}

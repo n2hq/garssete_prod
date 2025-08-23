@@ -20,7 +20,7 @@ const StringToListMaker = ({ phrasesString, useGrid }: any) => {
         <>
             {
                 useGrid === true ?
-                    <div className={`grid grid-cols-2 gap-2 w-full`}>
+                    <div className={`grid grid-cols-2 gap-y-5 w-full`}>
                         {
                             phrasesList?.map((phrase: any, index: number) => {
                                 return (

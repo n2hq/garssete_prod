@@ -24,7 +24,7 @@ const StringToListMaker = ({ phrasesString, useGrid }: any) => {
                         {
                             phrasesList?.map((phrase: any, index: number) => {
                                 return (
-                                    <div className={`flex place-items-center gap-2`}>
+                                    <div className={`flex place-items-center gap-3`}>
                                         <span>
                                             <BsBagCheckFill />
                                         </span>

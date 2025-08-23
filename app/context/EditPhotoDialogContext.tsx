@@ -200,7 +200,7 @@ export function EditPhotoDialogProvider({ children }: any) {
                                         id='image_title'
                                         value={imageTitle}
                                         placeholder={`Enter picture description.`}
-                                        className={`w-full bg-gray-100 px-3  h-[100px] py-3`}
+                                        className={`w-full bg-gray-100 px-3  h-[60px] py-3`}
                                     ></textarea>
 
                                     <div className={`flex place-content-end px-3 gap-2`}>

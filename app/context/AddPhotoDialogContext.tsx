@@ -118,7 +118,7 @@ export function AddPhotoDialogProvider({ children }: any) {
                             <textarea
                                 id='image_title'
                                 placeholder={`Enter picture description.`}
-                                className={`w-full bg-gray-100 px-3  h-[100px] py-3`}
+                                className={`w-full bg-gray-100 px-3  h-[60px] py-3`}
                             ></textarea>
                         </div>
 

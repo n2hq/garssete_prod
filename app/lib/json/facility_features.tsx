@@ -1,6 +1,9 @@
 import { BiLibrary, BiWine } from "react-icons/bi";
-import { GrCafeteria, GrLounge } from "react-icons/gr";
-import { MdBusinessCenter } from "react-icons/md";
+import { BsPersonWheelchair } from "react-icons/bs";
+import { FaWheelchair } from "react-icons/fa";
+import { FaWheelchairMove } from "react-icons/fa6";
+import { GrCafeteria, GrLounge, GrWheelchairActive } from "react-icons/gr";
+import { MdBusinessCenter, MdOutlineWheelchairPickup } from "react-icons/md";
 import { RiMusic2Line, RiTrademarkLine } from "react-icons/ri";
 
 export const facilityFeatures = [
@@ -45,5 +48,29 @@ export const facilityFeatures = [
         feature_id: "business_center",
         description: "Work, meeting, printing and typesetting",
         icon: <MdBusinessCenter />
-    }
+    },
+    {
+        name: "Wheelchair Accessible",
+        feature_id: "wheelchair_accessible",
+        description: "Helps customers for easy navigation",
+        icon: <FaWheelchair />
+    },
+    {
+        name: "Wheelchair Accessible Entrance",
+        feature_id: "wheelchair_accessible_entrance",
+        description: "Helps customers for easy navigation",
+        icon: <GrWheelchairActive />
+    },
+    {
+        name: "Wheelchair Accessible Seating",
+        feature_id: "wheelchair_accessible_seating",
+        description: "Specialised dining experience",
+        icon: <MdOutlineWheelchairPickup />
+    },
+    {
+        name: "Wheelchair Accessible Toilet",
+        feature_id: "wheelchair_accessible_toilet",
+        description: "Specialised convenience for wheelchair uses",
+        icon: <BsPersonWheelchair />
+    },
 ]

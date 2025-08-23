@@ -3,7 +3,7 @@ import { BsPersonWheelchair } from "react-icons/bs";
 import { FaWheelchair } from "react-icons/fa";
 import { FaToilet, FaWheelchairMove } from "react-icons/fa6";
 import { GrCafeteria, GrLounge, GrWheelchairActive } from "react-icons/gr";
-import { MdBusinessCenter, MdOutlineWheelchairPickup } from "react-icons/md";
+import { MdBusinessCenter, MdOutlineWheelchairPickup, MdWheelchairPickup } from "react-icons/md";
 import { RiMusic2Line, RiTrademarkLine } from "react-icons/ri";
 
 export const facilityFeatures = [
@@ -72,6 +72,12 @@ export const facilityFeatures = [
         feature_id: "wheelchair_accessible_toilet",
         description: "Specialised convenience for wheelchair uses",
         icon: <BsPersonWheelchair />
+    },
+    {
+        name: "Wheelchair Accessible Car Park",
+        feature_id: "wheelchair_accessible_car_park",
+        description: "Specialised access for wheelchair uses",
+        icon: <MdWheelchairPickup />
     },
     {
         name: "Rest room",

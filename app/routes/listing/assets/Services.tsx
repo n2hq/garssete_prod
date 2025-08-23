@@ -26,7 +26,7 @@ const Services = ({ listing }: any) => {
             <div className={`flex gap-3 flex-wrap`}>
                 {
                     listing?.services &&
-                    <StringToListMaker phrasesString={listing?.services} />
+                    <StringToListMaker useGrid phrasesString={listing?.services} />
                 }
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const StringToListMaker = ({ phrasesString }: any) => {
+const StringToListMaker = ({ phrasesString, useGrid }: any) => {
     const [phrasesList, setPhrasesList] = useState<any[]>([])
 
     useEffect(() => {
@@ -13,18 +13,40 @@ const StringToListMaker = ({ phrasesString }: any) => {
         }
     }, [phrasesString])
     return (
-        <div className={`flex gap-3 flex-wrap`}>
+        <>
             {
-                phrasesList?.map((phrase: any, index: number) => {
-                    return (
-                        <span key={index} className={`bg-blue-50 px-2 border py-1 border-gray-300 hover:shadow-lg cursor-move
+                useGrid === true ?
+                    <div className={`grid grid-cols-2 gap-2 w-full`}>
+                        {
+                            phrasesList?.map((phrase: any, index: number) => {
+                                return (
+                                    <div className={`flex place-items-center gap-2`}>
+                                        <span>
+                                            {index + 1}.
+                                        </span>
+                                        <span>
+                                            {phrase}
+                                        </span>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div> :
+                    <div className={`flex gap-3 flex-wrap`}>
+                        {
+                            phrasesList?.map((phrase: any, index: number) => {
+                                return (
+                                    <span key={index} className={`bg-blue-50 px-2 border py-1 border-gray-300 hover:shadow-lg cursor-move
                         rounded-md shadow-none shadow-gray-500`}>
-                            {phrase}
-                        </span>
-                    )
-                })
+                                        {phrase}
+                                    </span>
+                                )
+                            })
+                        }
+                    </div>
+
             }
-        </div>
+        </>
     )
 }
 

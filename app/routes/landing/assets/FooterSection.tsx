@@ -104,7 +104,7 @@ const FooterSection = () => {
                     <div className={`flex space-x-4 mb-8`}>
                         {
                             socials.map((media: any, index: any) => {
-                                return <a key={index} href={media?.url}
+                                return <a key={index} href={media?.url} target='_blank'
                                     aria-label={media.title}
                                     className='hover:text-primary-600'
                                 >

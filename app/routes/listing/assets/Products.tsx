@@ -14,7 +14,9 @@ const Products = ({ listing }: any) => {
 
             {
                 listing?.products &&
-                <StringToListMaker phrasesString={listing?.products} />
+                <StringToListMaker
+                    useGrid={true}
+                    phrasesString={listing?.products} />
             }
         </div>
     )

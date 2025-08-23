@@ -77,14 +77,24 @@ const Activate = ({
     return (
         <div>
 
-            <div className={`p-6  rounded  max-w-lg
+            <div className={`p-6  rounded  max-w-2xl
         mx-auto mt-12`}>
-                <h2 className="text-lg mb-4 font-semibold">
+                <div className={`mb-6 text-[13.5px] border-b pb-3`}>
+                    If you deactivate your data all your data will still be intact, however, it will no longer be visible across all Garssete.com platforms.
+                </div>
+                <h2 className="text-lg mb-1 font-semibold">
                     {
                         isActive ? 'Deactivate' : 'Activate'
                     }
-                    &nbsp;Business
+                    &nbsp;Business or Organization
                 </h2>
+                <div className={`mb-5`}>
+                    {
+                        isActive ?
+                            'Your data is active. It will be visible across all Garssete.com platforms.' :
+                            'Your data is deactivated, it will no longer be visible. However, all your data will still be intact.'
+                    }
+                </div>
                 <div className={`border-[3px] border-gray-100 p-5 rounded-lg shadow`}>
                     <label className={`flex items-center space-x-4 hover:cursor-pointer
                         `}>
@@ -99,7 +109,7 @@ const Activate = ({
                             <div className={`font-semibold`}>
                                 {isActive ? 'Active' : 'Inactive'}</div>
                             <div className={`font-normal text-sm`}>
-                                Click to {isActive ? 'deactivate' : 'activate'} the business profile. Once deactivated, it will no longer be visible
+                                Click to {isActive ? 'deactivate' : 'activate'} this business profile.
                             </div>
                         </div>
                     </label>

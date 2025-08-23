@@ -23,6 +23,10 @@ const settingsLinks = [
         title: "Activate",
         link: "/activate"
     },
+    {
+        title: "Delete",
+        link: "/delete"
+    },
 ]
 
 const BusinessMenu = ({ title, guid, userGuid }: any) => {

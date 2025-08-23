@@ -59,6 +59,14 @@ export type LoginType = {
     password: string
 }
 
+
+export type DeleteType = {
+    user_guid: string
+    password: string
+    confirm_delete: string
+    business_guid: string
+}
+
 export type AuthUser = {
     guid: string
     email: string

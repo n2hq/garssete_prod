@@ -84,7 +84,7 @@ const Card = ({ listing }: any) => {
                     <div className={`flex place-content-between`}>
                         {/** left */}
                         <div className={`flex place-items-center gap-2`}>
-                            <div className={`h-[40px] w-[40px] rounded bg-black bg-cover bg-center overflow-hidden`}
+                            <div className={`w-[60px] h-[60px] min-w-[60px]  rounded bg-black bg-cover bg-center overflow-hidden relative rounded-full`}
                                 style={{ backgroundImage: `url(${placeholder})` }}
                             >
                                 {

@@ -72,34 +72,34 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
 
             if (!body.title) {
-                return new Response(JSON.stringify({ error: "Missing Title" }), { status: 400 })
+                return new Response(JSON.stringify({ message: "Missing Title" }), { status: 400 })
             }
             if (!body.category) {
-                return new Response(JSON.stringify({ error: "Missing Category" }), { status: 400 })
+                return new Response(JSON.stringify({ message: "Missing Category" }), { status: 400 })
             }
             if (!body.short_description) {
-                return new Response(JSON.stringify({ error: "Missing Short Description" }), { status: 400 })
+                return new Response(JSON.stringify({ message: "Missing Short Description" }), { status: 400 })
             }
             if (!body.phone) {
-                return new Response(JSON.stringify({ error: "Missing Phone" }), { status: 400 })
+                return new Response(JSON.stringify({ message: "Missing Phone" }), { status: 400 })
             }
             if (!body.email_address) {
-                return new Response(JSON.stringify({ error: "Missing Email Address" }), { status: 400 })
+                return new Response(JSON.stringify({ message: "Missing Email Address" }), { status: 400 })
             }
             if (!body.address_one) {
-                return new Response(JSON.stringify({ error: "Missing Address" }), { status: 400 })
+                return new Response(JSON.stringify({ message: "Missing Address" }), { status: 400 })
             }
 
             if (!body.zipcode) {
-                return new Response(JSON.stringify({ error: "Missing Zipcode" }), { status: 400 })
+                return new Response(JSON.stringify({ message: "Missing Zipcode" }), { status: 400 })
             }
             if (!body.owner) {
-                return new Response(JSON.stringify({ error: "Missing Owner" }), { status: 400 })
+                return new Response(JSON.stringify({ message: "Missing Owner" }), { status: 400 })
             }
 
-            if (!body.established) {
-                return new Response(JSON.stringify({ error: "Missing Year Established" }), { status: 400 })
-            }
+            /*  if (!body.established) {
+                 return new Response(JSON.stringify({ message: "Missing Year Established" }), { status: 400 })
+             } */
 
             let branch: boolean = false
             let branch_location: string = ""

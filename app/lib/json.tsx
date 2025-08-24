@@ -206,7 +206,7 @@ export const leftNavLinks = [
     },
     {
         name: "Travel, Hospitality & Rentals",
-        id: "travel hospitality and rentals",
+        id: "travel, hospitality and rentals",
         icon: <CgAirplane size={20} />
     },
     {

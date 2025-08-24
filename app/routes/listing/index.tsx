@@ -20,20 +20,27 @@ import VerticalHeight from '../asset/VerticalHeight'
 import ResourceNotFound from './assets/ResourceNotFound'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-    const id = params.id || null
-    let listing = await getPage(id)
-
-    let profileImageData = await getBusinessProfileImageData(listing?.gid)
-    const gallery = await getBusinessGallery(listing.gid)
-    const ratingData = await getRatingsReviews(listing.gid)
 
 
-    return {
-        listing: listing,
-        gallery: gallery,
-        ratingsData: ratingData,
-        profileImageData: profileImageData
+    try {
+        const id = params.id || null
+        let listing = await getPage(id)
+
+        let profileImageData = await getBusinessProfileImageData(listing?.gid)
+        const gallery = await getBusinessGallery(listing.gid)
+        const ratingData = await getRatingsReviews(listing.gid)
+
+
+        return {
+            listing: listing,
+            gallery: gallery,
+            ratingsData: ratingData,
+            profileImageData: profileImageData
+        }
+    } catch (err) {
+        throw new Response("You are offline. Please reconnect.", { status: 503 });
     }
+
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {

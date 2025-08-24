@@ -5463,17 +5463,21 @@ const ResourceNotFound = () => {
   ] }) });
 };
 const loader$J = async ({ request, params }) => {
-  const id = params.id || null;
-  let listing = await getPage(id);
-  let profileImageData = await getBusinessProfileImageData(listing == null ? void 0 : listing.gid);
-  const gallery = await getBusinessGallery(listing.gid);
-  const ratingData = await getRatingsReviews(listing.gid);
-  return {
-    listing,
-    gallery,
-    ratingsData: ratingData,
-    profileImageData
-  };
+  try {
+    const id = params.id || null;
+    let listing = await getPage(id);
+    let profileImageData = await getBusinessProfileImageData(listing == null ? void 0 : listing.gid);
+    const gallery = await getBusinessGallery(listing.gid);
+    const ratingData = await getRatingsReviews(listing.gid);
+    return {
+      listing,
+      gallery,
+      ratingsData: ratingData,
+      profileImageData
+    };
+  } catch (err) {
+    throw new Response("You are offline. Please reconnect.", { status: 503 });
+  }
 };
 const meta$1 = ({ data }) => {
   const listing = data == null ? void 0 : data.listing;

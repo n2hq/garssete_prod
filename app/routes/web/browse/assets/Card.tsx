@@ -83,7 +83,7 @@ const Card = ({ listing }: any) => {
                 <a href={`/${userId}`}>
                     <div className={`flex place-content-between gap-2`}>
                         {/** left */}
-                        <div className={`flex place-items-center gap-2 w-full`}>
+                        <div className={`flex place-items-start gap-2 w-full`}>
                             <div className={`w-[60px] h-[60px] min-w-[60px]   bg-black bg-cover bg-center overflow-hidden relative rounded-md`}
                                 style={{ backgroundImage: `url(${placeholder})` }}
                             >

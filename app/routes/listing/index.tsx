@@ -48,11 +48,13 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     const profileImageData = data?.profileImageData
 
     let profileImageLink = ""
-    if (profileImageData === "" || profileImageData === null || profileImageData === undefined) {
-        profileImageLink = `/images/abstract_placeholder.jpg`
+
+    if (profileImageData?.image_url === "" || profileImageData?.image_url === null || profileImageData?.image_url === undefined) {
+        profileImageLink = `${config.BASE_URL}/images/abstract_placeholder.jpg`
     } else {
         profileImageLink = config.IMG_BASE_URL + profileImageData?.image_url
     }
+
 
 
     const mimetype = profileImageData?.mimetype

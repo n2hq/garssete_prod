@@ -81,10 +81,10 @@ const Card = ({ listing }: any) => {
             <div className={`bg-gray-50/30 py-3 px-4 border-b`}>
 
                 <a href={`/${userId}`}>
-                    <div className={`flex place-content-between`}>
+                    <div className={`flex place-content-between gap-2`}>
                         {/** left */}
-                        <div className={`flex place-items-center gap-2`}>
-                            <div className={`w-[60px] h-[60px] min-w-[60px]  rounded bg-black bg-cover bg-center overflow-hidden relative rounded-full`}
+                        <div className={`flex place-items-center gap-2 w-full`}>
+                            <div className={`w-[60px] h-[60px] min-w-[60px]   bg-black bg-cover bg-center overflow-hidden relative rounded-md`}
                                 style={{ backgroundImage: `url(${placeholder})` }}
                             >
                                 {
@@ -100,8 +100,8 @@ const Card = ({ listing }: any) => {
 
                             </div>
 
-                            <div className={`-space-y-1`}>
-                                <div className={`text-black text-[16px] font-semibold line-clamp-1`}>
+                            <div className={`-space-y-1 w-full`}>
+                                <div className={`text-black text-[16px] font-semibold line-clamp-1 w-full`}>
                                     {listing?.title}
 
                                 </div>
@@ -112,7 +112,7 @@ const Card = ({ listing }: any) => {
                         </div>
 
                         {/** right */}
-                        <div className={`flex place-items-center`}>
+                        <div className={`flex place-items-start`}>
                             <div className={`font-bold rounded-sm border px-3 py-[2px]`}>View</div>
                         </div>
                     </div>

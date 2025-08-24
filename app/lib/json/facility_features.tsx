@@ -1,7 +1,8 @@
 import { BiLibrary, BiWine } from "react-icons/bi";
 import { BsPersonWheelchair } from "react-icons/bs";
-import { FaWheelchair } from "react-icons/fa";
+import { FaSwimmingPool, FaWheelchair } from "react-icons/fa";
 import { FaToilet, FaWheelchairMove } from "react-icons/fa6";
+import { FcAutomotive } from "react-icons/fc";
 import { GrCafeteria, GrLounge, GrWheelchairActive } from "react-icons/gr";
 import { MdBusinessCenter, MdOutlineWheelchairPickup, MdWheelchairPickup } from "react-icons/md";
 import { RiMusic2Line, RiTrademarkLine } from "react-icons/ri";
@@ -84,5 +85,17 @@ export const facilityFeatures = [
         feature_id: "rest_room",
         description: "Convenience for customers",
         icon: <FaToilet />
+    },
+    {
+        name: "Swimming Pool",
+        feature_id: "swimming_pool",
+        description: "Swimming Pool",
+        icon: <FaSwimmingPool />
+    },
+    {
+        name: "Car Park",
+        feature_id: "car_park",
+        description: "Car Park",
+        icon: <FcAutomotive />
     },
 ]

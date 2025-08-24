@@ -126,7 +126,8 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
 
     useEffect(() => {
         let getListingAddress = async (listing: any) => {
-            let address = listing?.address_one ? listing?.address_one : ''
+            let address = listing?.title
+            address += listing?.address_one ? listing?.address_one : ''
             address += listing?.address_two ? ', ' + listing?.address_two : ''
             address += listing?.city_name ? ', ' + listing?.city_name : ''
             address += listing?.state_name ? ', ' + listing?.state_name : ''

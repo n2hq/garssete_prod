@@ -55,7 +55,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
         profileImageLink = config.IMG_BASE_URL + profileImageData?.image_url
     }
 
-
+    console.log(profileImageLink)
 
     const mimetype = profileImageData?.mimetype
     //console.log(profileImageData)

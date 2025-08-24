@@ -21,18 +21,25 @@ import CallToActionSection from '~/components/content/CallToActionSection'
 import FooterSection from '~/routes/landing/assets/FooterSection'
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-    const url = new URL(request.url);
-    const query = url.searchParams.get("q") || "";
-    let data = await getSearch(query)
+
     //console.log(data)
     //let realestate = await getListingByCategory('automotive', 4)
 
+    try {
+        const url = new URL(request.url);
+        const query = url.searchParams.get("q") || "";
+        let data = await getSearch(query)
 
-    let res = {
-        data: data,
-        query: query
+        let res = {
+            data: data,
+            query: query
+        }
+        return res;
+
+    } catch (err) {
+        throw new Response("You are offline. Please reconnect.", { status: 503 });
     }
-    return res;
+
 }
 
 

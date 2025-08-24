@@ -36,7 +36,7 @@ const BusinessFeatures = ({ listing }: any) => {
                                     <span className={`text-lg`}>
                                         {feature.icon}
                                     </span>
-                                    <span className={`text-lg`}>
+                                    <span className={`text-lg leading-[1.2em]`}>
                                         {feature.name}
                                     </span>
                                 </div>

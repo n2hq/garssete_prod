@@ -92,13 +92,19 @@ const BusinessLayout = ({
                                     </div> :
                                     <div>
                                         {
-                                            operatingHoursStatus.openStatus === "always_open" && 'Always Open'
+                                            operatingHoursStatus.openStatus === "always_open" && <div className={`bg-green-700 px-1 rounded w-fit text-white py-1`}>
+                                                Always Open
+                                            </div>
                                         }
                                         {
-                                            operatingHoursStatus.openStatus === "permanently_closed" && 'Permanently Closed'
+                                            operatingHoursStatus.openStatus === "permanently_closed" && <div className={`bg-red-700 px-1 rounded w-fit text-white py-1`}>
+                                                Permantently Closed
+                                            </div>
                                         }
                                         {
-                                            operatingHoursStatus.openStatus === "temporarily_closed" && 'Temporarily Closed'
+                                            operatingHoursStatus.openStatus === "temporarily_closed" && <div className={`bg-orange-400 px-1 rounded w-fit text-white py-1`}>
+                                                Temporarily Closed
+                                            </div>
                                         }
                                     </div>
                             }

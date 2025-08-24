@@ -42,18 +42,37 @@ const SocialMedia = ({ listing }: any) => {
         }
         return icon
     }
+
+    function isValidUrl(string: any) {
+        try {
+            new URL(string);
+            return true;
+        } catch (err) {
+            return false;
+        }
+    }
+
     useEffect(() => {
         const getSocialMedia = async (listing: any) => {
             const socials = []
 
             const socialMedia = await getSocialMediaByBusinessGuid(listing.gid)
             socialMedia.map((media: any, index: number) => {
+                const handle = media?.user_description
+                const isValidURL = isValidUrl(handle)
+                let link = ""
+
+                if (isValidURL) {
+                    link = handle
+                } else {
+                    link = `${media?.base_url}${media?.user_description}`
+                }
 
                 socials.push({
                     media: media?.name,
                     icon: getIcon(media),
                     name: media?.name,
-                    link: `${media?.base_url}${media?.user_description}`
+                    link: link
                 })
             })
 

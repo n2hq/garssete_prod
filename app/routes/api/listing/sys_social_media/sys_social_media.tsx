@@ -16,7 +16,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     try {
         const rawdata: any = await query(`SELECT * FROM tbl_sys_social_media`)
-        console.log(rawdata)
+        //console.log(rawdata)
         return DoResponse(rawdata, 200)
 
     } catch (error: any) {

@@ -101,7 +101,7 @@ const Card = ({ listing }: any) => {
                             </div>
 
                             <div className={`-space-y-1 w-full`}>
-                                <div className={`text-black text-[16px] font-semibold line-clamp-1 w-full`}>
+                                <div className={`text-black text-[16px] font-bold line-clamp-1 w-full`}>
                                     {listing?.title}
 
                                 </div>
@@ -116,7 +116,7 @@ const Card = ({ listing }: any) => {
                             <div className={`font-bold rounded-sm border px-3 py-[2px]`}>View</div>
                         </div>
                     </div>
-                    <div className={`mt-[8px] text-[14px] md:text-[13px] text-gray-500 leading-[1.3em] line-clamp-3`}>
+                    <div className={`mt-[8px] text-[14px] md:text-[13px] text-gray-800 leading-[1.3em] line-clamp-3`}>
                         {
                             listing?.short_description
                         }

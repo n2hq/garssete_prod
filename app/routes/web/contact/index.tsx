@@ -41,42 +41,38 @@ export const InfoContact = () => {
             </h2>
 
             <p data-start="272" data-end="485">
-                Welcome to <strong data-start="283" data-end="302">Garssete</strong>. We're glad to have you here! To ensure a safe and positive experience for everyone, we kindly ask that you review our terms and privacy policy.
+                <strong data-start="283" data-end="302">Garssete.com</strong> Support and Technical team are  available Monday to Sunday, 09:00 to 18:00 Central European Time.
             </p>
             <hr data-start="487" data-end="490" />
-            <h3 data-start="492" data-end="522">
-                <strong data-start="496" data-end="522">
-                    Our contact
-                </strong>
-            </h3>
-            <p data-start="739" data-end="965">
-                Please use the following links below to contact us. We will reply within 24 hours of your request. Most times we respond almost immediately.
-            </p>
-            <hr data-start="709" data-end="712" />
-            <ul>
-                <li>support@garssete.com</li>
-                <li>https://x.com/garssete</li>
-                <li>https://facebook.com/garssete</li>
-            </ul>
 
-            <hr data-start="709" data-end="712" />
-            <h3 data-start="492" data-end="522">
-                <strong data-start="496" data-end="522"
-                    className={`text-lg text-blue-500 underline`}
-                >
-                    Claim Your Business
-                </strong>
-            </h3>
-            <p data-start="272" data-end="485">
-                Please sign up and then send an email to <strong>support@garssete.com</strong> to claim your business for free!
+            <p className={`text-lg underline`}>
+                Garssete Support
             </p>
+
             <ul>
-                <li>
-                    <strong>Email:</strong>
-                    <span className={`underline`}>support@garssete.com</span>
+                <li className={`flex gap-4`}>
+                    <span className={`font-bold`}>
+                        Email:
+                    </span>
+                    <span>
+                        support@garssete.com
+                    </span>
                 </li>
 
             </ul>
+
+            <hr />
+            <h3>
+                <span
+                    className={`text-xl text-blue-500 `}
+                >
+                    Claim Your Business
+                </span>
+            </h3>
+            <p className={``}>
+                To claim your business, please sign up and then send an email to <span>support@garssete.com</span>.
+            </p>
+
 
 
 

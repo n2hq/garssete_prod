@@ -29,6 +29,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         {/** portfolio business */ }
         route("/web/account/portfolio/:business_guid/:user_guid/settings", "routes/web/account/portfolio/business/settings/index.tsx");
         route("/web/account/portfolio/:business_guid/:user_guid/gallery", "routes/web/account/portfolio/business/gallery/index.tsx");
+        route("/web/account/portfolio/:business_guid/:user_guid/videos", "routes/web/account/portfolio/business/videos/index.tsx");
         route("/web/account/portfolio/:business_guid/:user_guid/facilities", "routes/web/account/portfolio/business/facilities/index.tsx");
         route("/web/account/portfolio/:business_guid/:user_guid/activate", "routes/web/account/portfolio/business/activate/index.tsx");
         route("/web/account/portfolio/:business_guid/:user_guid/social_media", "routes/web/account/portfolio/business/social_media/index.tsx");
@@ -81,6 +82,9 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
 
         route("api/listing/activate/:user_guid/:business_guid", "routes/api/listing/activate/activate.tsx");
         route("api/listing/recents", "routes/api/listing/recents.tsx");
+        route("api/listing/save_video_link", "routes/api/listing/video_link.tsx")
+        route("api/listing/video_links/:business_guid/:user_guid", "routes/api/listing/video_links.tsx")
+        route("api/listing/video_links/:business_guid", "routes/api/listing/video_links_listing.tsx")
 
         route("api/rating", "routes/api/rating/index.tsx");
         route("api/rating/:user_guid/:business_guid", "routes/api/rating/rating.tsx");

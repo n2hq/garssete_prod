@@ -1,5 +1,5 @@
 import { FaFacebookSquare, FaLinkedinIn, FaPinterestSquare, FaVimeoSquare, FaYoutubeSquare } from "react-icons/fa"
-import { Category, City, ContactType, Country, Rating, State, UserProfile } from "./types"
+import { AddVideoType, Category, City, ContactType, Country, Rating, State, UserProfile } from "./types"
 import CryptoJS from 'crypto-js'
 import { BsInstagram, BsLinkedin, BsPinterest, BsTwitterX } from "react-icons/bs"
 import { CgFacebook } from "react-icons/cg"
@@ -1046,5 +1046,147 @@ export function strToList(str: string, separator: string) {
     return list
 }
 
+
+export const saveVideo = async (video: AddVideoType): Promise<any> => {
+
+    const endpoint = `/api/listing/save_video_link`
+
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(video)
+        })
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+
+export const getVideoGallery = async (businessGuid: string | null, userGuid: string | null): Promise<AddVideoType[] | null> => {
+
+    let endpoint: string = ""
+
+    if (businessGuid !== "" && userGuid !== "") {
+        endpoint = `/api/listing/video_links/${businessGuid}/${userGuid}`
+    } else {
+        alert('Contact admin.')
+    }
+
+
+
+
+    const url = config.BASE_URL + endpoint
+    //console.log(url)
+    //console.log("|||")
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return null
+    }
+}
+
+
+export const getYoutubeId = (videoUrl: string) => {
+    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = videoUrl?.match(regex);
+    let videoId = match ? match[1] : null;
+    return videoId
+}
+
+
+export const updateVideo = async (video: AddVideoType): Promise<any> => {
+
+    const endpoint = `/api/listing/save_video_link`
+
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "PUT",
+            headers: headers,
+            body: JSON.stringify(video)
+        })
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+
+export const getBusinessVideoGallery = async (businessGuid: string | null): Promise<AddVideoType[] | null> => {
+
+    let endpoint: string = ""
+
+    if (businessGuid !== "") {
+        endpoint = `/api/listing/video_links/${businessGuid}`
+    } else {
+
+        throw new Error(`Error: Contact Admin`);
+
+    }
+
+
+
+
+    const url = config.BASE_URL + endpoint
+
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return null
+    }
+}
 
 

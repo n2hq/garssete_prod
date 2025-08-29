@@ -4,16 +4,18 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer, useNavigate, Outlet, useNavigation, Meta, Links, ScrollRestoration, Scripts, Link, useLocation, NavLink as NavLink$2, useLoaderData, useSearchParams, useParams } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import React, { useContext, createContext, useState, useEffect, useRef } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 import NProgress from "nprogress";
-import { FaSpinner, FaVimeoSquare, FaLinkedinIn, FaSignOutAlt, FaCarSide, FaSchool, FaAngleDown, FaMobile, FaQuestion, FaBriefcase, FaWheelchair, FaSwimmingPool, FaYoutubeSquare, FaPinterestSquare, FaFacebookSquare, FaCheck } from "react-icons/fa";
+import { FaSpinner, FaVimeoSquare, FaLinkedinIn, FaSignOutAlt, FaCarSide, FaSchool, FaAngleDown, FaMobile, FaQuestion, FaBriefcase, FaWheelchair, FaSwimmingPool, FaYoutubeSquare, FaPinterestSquare, FaFacebookSquare, FaChevronLeft, FaChevronRight, FaCheck } from "react-icons/fa";
 import CryptoJS from "crypto-js";
 import { BsPinterest, BsInstagram, BsTwitterX, BsPersonFillGear, BsPersonFill, BsCircleFill, BsCircle, BsSearchHeart, BsPersonWheelchair, BsStarFill, BsStar, BsBagCheckFill, BsPhone, BsLinkedin, BsBank } from "react-icons/bs";
 import { CgFacebook, CgMoreVertical, CgChevronDown, CgChevronRight, CgShoppingCart, CgChart, CgFeed, CgPrinter, CgShoppingBag, CgAirplane, CgWebsite, CgMenu } from "react-icons/cg";
-import { GrYoutube, GrLanguage, GrRestaurant, GrCloudComputer, GrCafeteria, GrLounge, GrWheelchairActive } from "react-icons/gr";
+import { GrYoutube, GrLanguage, GrRestaurant, GrCloudComputer, GrCafeteria, GrLounge, GrWheelchairActive, GrClose } from "react-icons/gr";
 import { BiChevronLeft, BiChevronRight, BiSearch, BiBriefcase, BiUser, BiSolidRightArrow, BiSpa, BiHome, BiFoodMenu, BiCategory, BiBullseye, BiMenu, BiWine, BiLibrary, BiSolidStar, BiPhone, BiSolidUser, BiEditAlt } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
 import { MdEditSquare, MdOutlineAttachEmail, MdPassword, MdWifiPassword, MdContacts, MdMusicNote, MdRealEstateAgent, MdMeetingRoom, MdAdsClick, MdDashboard, MdCleaningServices, MdPlumbing, MdConstruction, MdElectricalServices, MdRoomService, MdLocationPin, MdPhone, MdEmail, MdBusinessCenter, MdOutlineWheelchairPickup, MdWheelchairPickup, MdError, MdOutlineCancel } from "react-icons/md";
+import { z } from "zod";
+import { FaMinimize, FaMaximize, FaBagShopping, FaToilet } from "react-icons/fa6";
 import { HiBars3BottomRight, HiMiniBriefcase, HiHome } from "react-icons/hi2";
 import { GiPadlock, GiStarGate, GiHumanTarget, GiHealthNormal } from "react-icons/gi";
 import { FcSettings, FcLandscape, FcAutomotive, FcBusiness } from "react-icons/fc";
@@ -22,10 +24,8 @@ import { TbTruckDelivery, TbWritingSign, TbPasswordUser } from "react-icons/tb";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAudible, faFacebookSquare, faInstagram, faTwitterSquare, faLinkedin, faYoutubeSquare } from "@fortawesome/free-brands-svg-icons";
-import { FaBagShopping, FaToilet } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import tzLookup from "tz-lookup";
 import { FiAlertTriangle } from "react-icons/fi";
 import mysql from "mysql2/promise";
@@ -1207,6 +1207,100 @@ function strToList(str, separator) {
   const list = str.split(separator).map((item) => item.trim()).filter((item) => item.length > 0);
   return list;
 }
+const saveVideo = async (video) => {
+  const endpoint = `/api/listing/save_video_link`;
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(video)
+    });
+    const data = await response.json();
+    return new Promise((resolve) => setTimeout(() => {
+      resolve(data);
+    }, 10));
+  } catch (error) {
+    return void 0;
+  }
+};
+const getVideoGallery = async (businessGuid, userGuid) => {
+  let endpoint = "";
+  if (businessGuid !== "" && userGuid !== "") {
+    endpoint = `/api/listing/video_links/${businessGuid}/${userGuid}`;
+  } else {
+    alert("Contact admin.");
+  }
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return new Promise((resolve) => setTimeout(() => {
+      resolve(data);
+    }, 10));
+  } catch (error) {
+    return null;
+  }
+};
+const getYoutubeId = (videoUrl) => {
+  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+  const match = videoUrl == null ? void 0 : videoUrl.match(regex);
+  let videoId = match ? match[1] : null;
+  return videoId;
+};
+const updateVideo = async (video) => {
+  const endpoint = `/api/listing/save_video_link`;
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify(video)
+    });
+    const data = await response.json();
+    return new Promise((resolve) => setTimeout(() => {
+      resolve(data);
+    }, 10));
+  } catch (error) {
+    return void 0;
+  }
+};
+const getBusinessVideoGallery = async (businessGuid) => {
+  let endpoint = "";
+  if (businessGuid !== "") {
+    endpoint = `/api/listing/video_links/${businessGuid}`;
+  } else {
+    throw new Error(`Error: Contact Admin`);
+  }
+  const url = config.BASE_URL + endpoint;
+  try {
+    const response = await fetch(
+      url,
+      {
+        method: "GET",
+        headers
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    return new Promise((resolve) => setTimeout(() => {
+      resolve(data);
+    }, 10));
+  } catch (error) {
+    return null;
+  }
+};
 const AuthContext = createContext(null);
 const SITE_BASE_URL = "https://edition.garssete.com";
 function useAuth() {
@@ -1817,6 +1911,701 @@ function EditPhotoDialogProvider({ children }) {
     children
   ] });
 }
+const AddVideoDialogContext = createContext(null);
+function useAddVideoDialogContext() {
+  const context = useContext(AddVideoDialogContext);
+  return context;
+}
+const password_regex$3 = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+z.object({
+  videolink: z.string({ message: "Please enter the video link" }),
+  url: z.string().url("Video link is not valid."),
+  videotitle: z.string({ message: "Please enter a password" }).min(8, "Password must be at least 8 characters").regex(password_regex$3, "Please enter a valid password"),
+  videodescription: z.string().trim().max(500, "Description must be less than 500 characters.").optional()
+});
+function AddVideoDialogProvider({ children }) {
+  const [working, setWorking] = useState(false);
+  const [dialog, setDialog] = useState(false);
+  const [imgSrc, setImgSrc] = useState(null);
+  const [userGuid, setUserGuid] = useState(null);
+  const [businessGuid, setBusinessGuid] = useState(null);
+  const [isImgSelected, setIsImageSelected] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const notification = useNotification();
+  const [video, setVideo] = useState(null);
+  const [videoIframe, setVideoIframe] = useState(null);
+  const [videoVerified, setVideoVerified] = useState(false);
+  const [videoUrlState, setVideoUrlState] = useState(false);
+  const [videoUrlObject, setVideoUrlObject] = useState(void 0);
+  const [videoUrlValue, setVideoUrlValue] = useState("");
+  useEffect(() => {
+    if (dialog) {
+      setVideoVerified(false);
+      setVideoUrlState(false);
+      setVideoUrlObject(void 0);
+      setVideoUrlValue("");
+    }
+  }, [dialog]);
+  useEffect(() => {
+    if (videoUrlValue && videoUrlValue.trim().length > 0) {
+      setVideoVerified(false);
+      setVideoUrlState(true);
+    } else {
+      setVideoVerified(false);
+      setVideoUrlState(false);
+    }
+  }, [videoUrlValue]);
+  const handleCloseDialog = () => {
+    setDialog(false);
+    setImgSrc(null);
+  };
+  useEffect(() => {
+    const videoUrlObject2 = document.getElementById("videolink");
+    setVideoUrlObject(videoUrlObject2);
+  }, []);
+  useEffect(() => {
+    if ((videoUrlObject == null ? void 0 : videoUrlObject.value.trim().length) > 0) {
+      setVideoUrlState(true);
+    }
+  }, [videoUrlObject]);
+  const handleVerify = () => {
+    const videoUrl = document.getElementById("videolink");
+    getVideoInfo(videoUrl.value);
+  };
+  async function checkYouTubeVideo(videoId) {
+    const url = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId}&format=json`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Video not found");
+      const data = await res.json();
+      return true;
+    } catch (err) {
+      console.error("❌ Invalid or unavailable video");
+      return false;
+    }
+  }
+  const getVideoInfo = async (videoUrl) => {
+    notification.notify();
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = videoUrl.match(regex);
+    let videoId = match ? match[1] : null;
+    let thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`;
+    let videoObject = {
+      videoId,
+      videoUrl,
+      videoThumbnail: thumbnail
+    };
+    const isLoaded = await checkYouTubeVideo(videoId);
+    if (isLoaded) {
+      try {
+        setVideo(videoObject);
+        setVideoVerified(true);
+        {
+        }
+        const ytvideoIframe = document.getElementById("yt-iframe");
+        ytvideoIframe.src = `https://www.youtube.com/embed/${videoObject == null ? void 0 : videoObject.videoId}`;
+      } finally {
+        notification.cancel();
+      }
+    } else {
+      notification.alertCancel("Video error!", "Video could not be loaded!");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    setVideo(videoObject);
+  };
+  useEffect(() => {
+    const iframe = document.getElementById("yt-iframe");
+    if (iframe == null ? void 0 : iframe.onload) {
+      console.log("✅ Iframe page loaded");
+    }
+    setVideoIframe(iframe);
+  }, []);
+  const handleVideoUrlKeyUp = (urlString) => {
+    setVideoUrlValue(urlString);
+  };
+  const handleUpload = async () => {
+    setWorking(true);
+    notification.notify("Submitting...");
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    let videoLinkState = document.getElementById("videolink");
+    let videoTitleState = document.getElementById("videotitle");
+    let videoDescriptionState = document.getElementById("videodescr");
+    let videoLink = videoLinkState.value;
+    let videoTitle = videoTitleState.value;
+    let videoDescription = videoDescriptionState.value;
+    if (videoLink.trim().length <= 0) {
+      notification.alertCancel("Submission error!", "Enter a Video link!");
+      setWorking(false);
+      return false;
+    }
+    if (videoTitle.trim().length <= 0) {
+      notification.alertCancel("Submission error!", "Video title should not be empty!");
+      setWorking(false);
+      return false;
+    }
+    if (videoDescription.trim().length > 500) {
+      notification.alertCancel("Submission error!", "Video description should not be more than 500 characters!");
+      setWorking(false);
+      return false;
+    }
+    const video2 = {
+      video_url: videoLink,
+      video_title: videoTitle,
+      video_description: videoDescription,
+      user_guid: userGuid,
+      business_guid: businessGuid,
+      video_guid: ""
+    };
+    const result = await saveVideo(video2);
+    if (result == null ? void 0 : result.data.videoInsertId) {
+      notification == null ? void 0 : notification.alertReload("Completed", "Video Link Submitted Successfully.");
+    } else {
+      notification == null ? void 0 : notification.alertCancel("Submission Error", "Video Link submission failed.");
+    }
+  };
+  let vals = {
+    dialog,
+    setDialog,
+    imgSrc,
+    setImgSrc,
+    handleCloseDialog,
+    userGuid,
+    setUserGuid,
+    businessGuid,
+    setBusinessGuid,
+    isImgSelected,
+    setIsImageSelected,
+    selectedFile,
+    setSelectedFile
+  };
+  return /* @__PURE__ */ jsxs(AddVideoDialogContext.Provider, { value: vals, children: [
+    dialog && /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: `flex w-screen h-screen z-[3000] 
+                fixed top-0 left-0 right-0 bottom-0 bg-black/30 rounded-[8px]
+                place-content-center place-items-center overflow-hidden`,
+        children: /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: `relative w-[90%] h-[80%] bg-white 
+                        rounded-[8px] overflow-x-hidden overflow-y-hidden z-[3000]`,
+            onClick: (event) => {
+              event.preventDefault();
+            },
+            children: /* @__PURE__ */ jsxs("div", { className: `relative h-full overflow-y-auto`, children: [
+              /* @__PURE__ */ jsx("div", { className: `relative w-full h-[75%] max-h-[75%] bg-black`, children: /* @__PURE__ */ jsx("div", { className: ` relative w-full h-full`, children: /* @__PURE__ */ jsx(
+                "iframe",
+                {
+                  id: "yt-iframe",
+                  src: (video == null ? void 0 : video.videoId) ? `https://www.youtube.com/embed/${video == null ? void 0 : video.videoId}` : void 0,
+                  className: "absolute top-0 left-0 w-full h-full",
+                  allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                }
+              ) }) }),
+              /* @__PURE__ */ jsx("div", { className: `flex mb-1 `, children: /* @__PURE__ */ jsx(
+                "input",
+                {
+                  id: "videolink",
+                  type: "text",
+                  placeholder: "Enter Video Link",
+                  className: `w-full bg-gray-100 px-3 py-4 `,
+                  onKeyUp: (e) => {
+                    handleVideoUrlKeyUp(e.target.value);
+                  }
+                }
+              ) }),
+              /* @__PURE__ */ jsx("div", { className: `flex mb-1 `, children: /* @__PURE__ */ jsx(
+                "input",
+                {
+                  id: "videotitle",
+                  type: "text",
+                  placeholder: "Enter Video Title",
+                  className: `w-full bg-gray-100 px-3 py-4 `
+                }
+              ) }),
+              /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(
+                "textarea",
+                {
+                  id: "videodescr",
+                  placeholder: `Enter picture description.`,
+                  className: `w-full bg-gray-100 px-3  h-[60px] py-3`
+                }
+              ) }),
+              /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-3 gap-2`, children: [
+                /* @__PURE__ */ jsx(
+                  "button",
+                  {
+                    onMouseDown: () => handleCloseDialog(),
+                    className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md mb-2 mt-4`,
+                    children: "Cancel"
+                  }
+                ),
+                /* @__PURE__ */ jsx(
+                  "button",
+                  {
+                    onClick: () => handleUpload(),
+                    className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md mb-2 mt-4 ${!videoVerified ? "hidden" : "block"}`,
+                    children: "Submit"
+                  }
+                ),
+                /* @__PURE__ */ jsx(
+                  "button",
+                  {
+                    onClick: () => handleVerify(),
+                    disabled: videoUrlState ? false : true,
+                    className: `${videoUrlState ? "bg-blue-800" : "bg-blue-300"} ${videoVerified && "hidden"} text-white px-3 py-1.5 rounded-md
+                                    shadow-md mb-2 mt-4`,
+                    children: "Verify"
+                  }
+                )
+              ] })
+            ] })
+          }
+        )
+      }
+    ),
+    children
+  ] });
+}
+const VideoSliderContext = createContext(null);
+function useVideoSliderContext() {
+  const context = useContext(VideoSliderContext);
+  return context;
+}
+const VideoSliderProvider = ({ children }) => {
+  const [dialog, setDialog] = useState(false);
+  const [selectedSlide, setSelectedSlide] = useState(null);
+  const [slides, setGallery] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [listing, setListing] = useState(null);
+  useRef(0);
+  useRef(0);
+  const [maximized, setMaximized] = useState(false);
+  const handleClose = () => {
+    setDialog(false);
+  };
+  const prev = () => {
+    let currentCount = currentSlide;
+    const currentVideo = slides[currentCount];
+    const currentIframe = document.getElementById(currentVideo == null ? void 0 : currentVideo.video_guid);
+    currentIframe.src = "";
+    let prevCount = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+    const prevVideo = slides[prevCount];
+    const iframeObject = document.getElementById(prevVideo == null ? void 0 : prevVideo.video_guid);
+    const videoId = getYoutubeId(prevVideo == null ? void 0 : prevVideo.video_url);
+    iframeObject.src = `https://www.youtube.com/embed/${videoId}`;
+    setCurrentSlide((currentSlide2) => {
+      return currentSlide2 === 0 ? slides.length - 1 : currentSlide2 - 1;
+    });
+  };
+  const next = () => {
+    let currentCount = currentSlide;
+    const currentVideo = slides[currentCount];
+    const currentIframe = document.getElementById(currentVideo == null ? void 0 : currentVideo.video_guid);
+    currentIframe.src = "";
+    let nextCount = currentSlide === slides.length - 1 ? 0 : currentSlide + 1;
+    const nextVideo = slides[nextCount];
+    const iframeObject = document.getElementById(nextVideo == null ? void 0 : nextVideo.video_guid);
+    const videoId = getYoutubeId(nextVideo == null ? void 0 : nextVideo.video_url);
+    iframeObject.src = `https://www.youtube.com/embed/${videoId}`;
+    setCurrentSlide((currentSlide2) => {
+      return currentSlide2 === slides.length - 1 ? 0 : currentSlide2 + 1;
+    });
+  };
+  useEffect(() => {
+    if (selectedSlide !== null) {
+      setCurrentSlide(selectedSlide - 1);
+    }
+  }, [selectedSlide]);
+  let vals = {
+    dialog,
+    setDialog,
+    selectedSlide,
+    setSelectedSlide,
+    slides,
+    setGallery,
+    setListing
+  };
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        handleClose();
+      }
+    };
+    if (dialog) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [dialog]);
+  return /* @__PURE__ */ jsxs(VideoSliderContext.Provider, { value: vals, children: [
+    dialog && /* @__PURE__ */ jsx("div", { className: `flex w-screen h-screen bg-white z-[20001] 
+                fixed top-0 left-0 right-0 bottom-0 `, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-0 w-full`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `${maximized ? "col-span-12" : "col-span-12 md:col-span-9"}  w-full h-full relative bg-black flex`, children: [
+        /* @__PURE__ */ jsx("div", { className: ` w-full h-screen flex overflow-hidden`, children: slides && selectedSlide && slides.map((slide, index2) => {
+          console.log(slide == null ? void 0 : slide.video_url);
+          const videoId = getYoutubeId(slide == null ? void 0 : slide.video_url);
+          const videoSrc = `https://www.youtube.com/embed/${videoId}`;
+          Date.now().toString() + videoId;
+          return /* @__PURE__ */ jsx(
+            "div",
+            {
+              style: { transform: `translateX(-${currentSlide * 100}%)` },
+              className: "object-scale-down w-full h-full \n                   block flex-shrink-0 flex-grow-0 transition-transform \n                   ease-in-out duration-1000 relative",
+              children: /* @__PURE__ */ jsx(
+                "iframe",
+                {
+                  id: slide == null ? void 0 : slide.video_guid,
+                  src: videoSrc,
+                  className: "absolute top-0 left-0 w-full h-full",
+                  allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                }
+              )
+            },
+            index2
+          );
+        }) }),
+        /* @__PURE__ */ jsx("button", { onMouseDown: () => {
+          prev();
+        }, className: `block absolute top-0 bottom-0 
+                                                p-[1rem] cursor-pointer left-0 group h-full 
+                                                transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
+                                                        transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronLeft, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
+        /* @__PURE__ */ jsx("button", { onMouseDown: next, className: `block absolute top-0 bottom-0 
+                                                    p-[1rem] cursor-pointer ${maximized ? "right-5" : "right-5 md:right-0"}  group 
+                                                     transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
+                                                        transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronRight, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            onMouseDown: () => handleClose(),
+            className: `w-[50px] h-[50px] z-[300] bg-white
+                                                    flex place-content-center place-items-center
+                                                    rounded-full absolute left-2 top-2 cursor-pointer
+                                                    hover:bg-white/40 transition duration-1000 ease-in-out`,
+            children: /* @__PURE__ */ jsx(IoClose, { className: `text-[30px]` })
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            onClick: () => {
+              setMaximized(!maximized);
+            },
+            className: `w-[50px] h-[50px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute ${maximized ? "right-10" : "right-10 md:right-5"} top-20 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`,
+            children: maximized ? /* @__PURE__ */ jsx(FaMinimize, { className: `text-[30px]` }) : /* @__PURE__ */ jsx(FaMaximize, { className: `text-[30px]` })
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: `${maximized ? "hidden" : "hidden md:block md:col-span-3"}   px-5 overflow-x-hidden overflow-y-auto h-full bg-blue-200`, children: [
+        /* @__PURE__ */ jsxs("h1", { className: " text-[22px] my-4 font-sans font-extrabold tracking-tight leading-[24px]", children: [
+          "Videos for ",
+          listing && listing.title
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: " my-4 ", children: [
+          currentSlide + 1,
+          " / ",
+          slides.length
+        ] }),
+        /* @__PURE__ */ jsx("hr", {}),
+        /* @__PURE__ */ jsx("div", { className: `my-4 whitespace-pre-line border-b pb-2`, children: slides[currentSlide].video_title }),
+        slides[currentSlide].video_description && /* @__PURE__ */ jsxs("div", { className: `my-4 whitespace-pre-line  pt-0 pb-8 `, children: [
+          /* @__PURE__ */ jsx("div", { className: `font-bold text-lg mb-3`, children: "Description" }),
+          /* @__PURE__ */ jsx("div", { children: slides[currentSlide].video_description })
+        ] })
+      ] })
+    ] }) }),
+    children
+  ] });
+};
+const EditVideoDialogContext = createContext(null);
+function useEditVideoDialogContext() {
+  const context = useContext(EditVideoDialogContext);
+  if (!context) {
+    throw new Error("Wrap the app with an EditVideoDialogProvider!");
+  }
+  return context;
+}
+function EditVideoDialogProvider({ children }) {
+  const [working, setWorking] = useState(false);
+  const [dialog, setDialog] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(null);
+  const [userGuid, setUserGuid] = useState(null);
+  const [businessGuid, setBusinessGuid] = useState(null);
+  const [isImgSelected, setIsImageSelected] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [videoTitle, setVideoTitle] = useState(null);
+  const [videoDescription, setVideoDescription] = useState(null);
+  const [videoGuid, setVideoGuid] = useState(null);
+  const [formData, setFormdata] = useState(null);
+  const [video, setVideo] = useState(null);
+  const [videoIframe, setVideoIframe] = useState(null);
+  const [videoVerified, setVideoVerified] = useState(false);
+  const [videoUrlState, setVideoUrlState] = useState(true);
+  const [videoUrlObject, setVideoUrlObject] = useState(void 0);
+  const [videoUrlValue, setVideoUrlValue] = useState("");
+  const [videoId, setVideoId] = useState(null);
+  useRef(null);
+  const notification = useNotification();
+  useEffect(() => {
+    if (videoUrlValue.trim().length > 0) {
+      setVideoVerified(false);
+      setVideoUrlState(true);
+    }
+  }, [videoUrlValue]);
+  useEffect(() => {
+    if (videoSrc) {
+      const videoId2 = getYoutubeId(videoSrc);
+      setVideoId(videoId2);
+    }
+  }, [videoSrc]);
+  const handleCloseDialog = () => {
+    setDialog(false);
+    setVideoSrc(null);
+    setWorking(false);
+  };
+  const handleSubmit = async () => {
+    setWorking(true);
+    notification.notify("Submitting...");
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    let videoLinkState = document.getElementById("videolink");
+    let videoTitleState = document.getElementById("videotitle");
+    let videoDescriptionState = document.getElementById("videodescr");
+    let videoLink = videoLinkState.value;
+    let videoTitle2 = videoTitleState.value;
+    let videoDescription2 = videoDescriptionState.value;
+    if (videoLink.trim().length <= 0) {
+      notification.alertCancel("Submission error!", "Enter a Video link!");
+      setWorking(false);
+      return false;
+    }
+    if (videoTitle2.trim().length <= 0) {
+      notification.alertCancel("Submission error!", "Video title should not be empty!");
+      setWorking(false);
+      return false;
+    }
+    if (videoDescription2.trim().length > 500) {
+      notification.alertCancel("Submission error!", "Video description should not be more than 500 characters!");
+      setWorking(false);
+      return false;
+    }
+    const video2 = {
+      video_url: videoLink,
+      video_title: videoTitle2,
+      video_description: videoDescription2,
+      user_guid: userGuid,
+      business_guid: businessGuid,
+      video_guid: videoGuid
+    };
+    const result = await updateVideo(video2);
+    if ((result == null ? void 0 : result.data.success) === true) {
+      notification == null ? void 0 : notification.alertReload("Successful", "Video link updated successfully.");
+    } else {
+      notification == null ? void 0 : notification.alertCancel("Submission Error", "Video link update failed.");
+    }
+  };
+  const deleteVideo = async (userGuid2, businessGuid2, videoGuid2) => {
+    const endpoint = `/api/listing/save_video_link`;
+    const url = config.BASE_URL + endpoint;
+    const data = {
+      user_guid: userGuid2,
+      business_guid: businessGuid2,
+      video_guid: videoGuid2,
+      video_url: "",
+      video_description: "",
+      video_title: ""
+    };
+    setWorking(true);
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers,
+        body: JSON.stringify(data)
+      });
+      if (!response.ok) {
+        let error = response.json().then((data2) => {
+          notification.alert(data2.message);
+        });
+      } else {
+        notification.alertReload("Deleted", "Video deleted successfully!");
+      }
+    } catch (error) {
+      return alert(error.message);
+    } finally {
+      setWorking(false);
+    }
+  };
+  const handleVideoUrlKeyUp = (urlString) => {
+    setVideoUrlValue(urlString);
+  };
+  async function checkYouTubeVideo(videoId2) {
+    const url = `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${videoId2}&format=json`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Video not found");
+      const data = await res.json();
+      return true;
+    } catch (err) {
+      console.error("❌ Invalid or unavailable video");
+      return false;
+    }
+  }
+  const getVideoInfo = async (videoUrl) => {
+    notification.notify();
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = videoUrl.match(regex);
+    let videoId2 = match ? match[1] : null;
+    let thumbnail = `https://img.youtube.com/vi/${videoId2}/0.jpg`;
+    let videoObject = {
+      videoId: videoId2,
+      videoUrl,
+      videoThumbnail: thumbnail
+    };
+    const isLoaded = await checkYouTubeVideo(videoId2);
+    if (isLoaded) {
+      try {
+        setVideo(videoObject);
+        setVideoVerified(true);
+        {
+        }
+        const ytvideoIframe = document.getElementById("yt-iframe");
+        ytvideoIframe.src = `https://www.youtube.com/embed/${videoObject == null ? void 0 : videoObject.videoId}`;
+      } finally {
+        notification.cancel();
+      }
+    } else {
+      notification.alertCancel("Video error!", "Video could not be loaded!");
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    setVideo(videoObject);
+  };
+  const handleVerify = () => {
+    const videoUrl = document.getElementById("videolink");
+    getVideoInfo(videoUrl.value);
+  };
+  let vals = {
+    dialog,
+    setDialog,
+    handleCloseDialog,
+    videoSrc,
+    setVideoSrc,
+    userGuid,
+    setUserGuid,
+    businessGuid,
+    setBusinessGuid,
+    isImgSelected,
+    setIsImageSelected,
+    selectedFile,
+    setSelectedFile,
+    videoTitle,
+    setVideoTitle,
+    videoGuid,
+    setVideoGuid,
+    setVideoDescription,
+    deleteVideo
+  };
+  return /* @__PURE__ */ jsxs(EditVideoDialogContext.Provider, { value: vals, children: [
+    dialog && /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: `flex w-screen h-screen z-[3000] 
+                fixed top-0 left-0 right-0 bottom-0 bg-black/30 rounded-[8px]
+                place-content-center place-items-center overflow-hidden`,
+        children: /* @__PURE__ */ jsx(
+          "div",
+          {
+            className: `relative w-[90%] h-[80%] bg-white 
+                        rounded-[8px] overflow-x-hidden overflow-y-hidden z-[3000]`,
+            onClick: (event) => {
+              event.preventDefault();
+            },
+            children: /* @__PURE__ */ jsxs("div", { className: `relative h-full overflow-y-auto`, children: [
+              /* @__PURE__ */ jsx("div", { className: `relative w-full h-[75%] max-h-[75%] bg-black`, children: /* @__PURE__ */ jsx("div", { className: ` relative w-full h-full`, children: /* @__PURE__ */ jsx(
+                "iframe",
+                {
+                  id: "yt-iframe",
+                  src: videoSrc ? `https://www.youtube.com/embed/${videoId}` : void 0,
+                  className: "absolute top-0 left-0 w-full h-full",
+                  allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                }
+              ) }) }),
+              /* @__PURE__ */ jsx("div", { className: `flex mb-1 `, children: /* @__PURE__ */ jsx(
+                "input",
+                {
+                  id: "videolink",
+                  type: "text",
+                  defaultValue: videoSrc,
+                  placeholder: "Enter Video Link",
+                  className: `w-full bg-gray-100 px-3 py-4 `,
+                  onKeyUp: (e) => {
+                    handleVideoUrlKeyUp(e.target.value);
+                  }
+                }
+              ) }),
+              /* @__PURE__ */ jsx("div", { className: `flex mb-1 `, children: /* @__PURE__ */ jsx(
+                "input",
+                {
+                  id: "videotitle",
+                  defaultValue: videoTitle,
+                  type: "text",
+                  placeholder: "Enter Video Title",
+                  className: `w-full bg-gray-100 px-3 py-4 `
+                }
+              ) }),
+              /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(
+                "textarea",
+                {
+                  id: "videodescr",
+                  defaultValue: videoDescription,
+                  placeholder: `Enter video description.`,
+                  className: `w-full bg-gray-100 px-3  h-[60px] py-3`
+                }
+              ) }),
+              /* @__PURE__ */ jsxs("div", { className: `flex place-content-end px-3 gap-2`, children: [
+                /* @__PURE__ */ jsx(
+                  "button",
+                  {
+                    onMouseDown: () => handleCloseDialog(),
+                    className: `bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md mb-2 mt-4`,
+                    children: "Cancel"
+                  }
+                ),
+                /* @__PURE__ */ jsx(
+                  "button",
+                  {
+                    onClick: () => handleSubmit(),
+                    className: `bg-blue-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md mb-2 mt-4 ${!videoVerified ? "hidden" : "block"}`,
+                    children: "Submit"
+                  }
+                ),
+                /* @__PURE__ */ jsx(
+                  "button",
+                  {
+                    onClick: () => handleVerify(),
+                    disabled: videoUrlState ? false : true,
+                    className: `${videoUrlState ? "bg-blue-800" : "bg-blue-300"} ${videoVerified && "hidden"} text-white px-3 py-1.5 rounded-md
+                                    shadow-md mb-2 mt-4`,
+                    children: "Verify"
+                  }
+                )
+              ] })
+            ] })
+          }
+        )
+      }
+    ),
+    children
+  ] });
+}
 const links = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -1856,7 +2645,7 @@ function Layout$2({ children }) {
       /* @__PURE__ */ jsx(Links, {})
     ] }),
     /* @__PURE__ */ jsxs("body", { children: [
-      /* @__PURE__ */ jsx(NotificationProvider, { children: /* @__PURE__ */ jsx(SliderProvider, { children: /* @__PURE__ */ jsx(EditPhotoDialogProvider, { children: /* @__PURE__ */ jsx(AddPhotoDialogProvider, { children: /* @__PURE__ */ jsx(AuthProvider, { children }) }) }) }) }),
+      /* @__PURE__ */ jsx(NotificationProvider, { children: /* @__PURE__ */ jsx(VideoSliderProvider, { children: /* @__PURE__ */ jsx(SliderProvider, { children: /* @__PURE__ */ jsx(EditVideoDialogProvider, { children: /* @__PURE__ */ jsx(EditPhotoDialogProvider, { children: /* @__PURE__ */ jsx(AddPhotoDialogProvider, { children: /* @__PURE__ */ jsx(AddVideoDialogProvider, { children: /* @__PURE__ */ jsx(AuthProvider, { children }) }) }) }) }) }) }) }),
       /* @__PURE__ */ jsx(ScrollRestoration, {}),
       /* @__PURE__ */ jsx(Scripts, {})
     ] })
@@ -3760,7 +4549,7 @@ const FooterSection = () => {
     /* @__PURE__ */ jsx("div", { className: `mt-8 text-center text-sm text-gray-500 flex md:justify-center space-x-4 flex-col md:flex-row`, children: /* @__PURE__ */ jsx("span", { children: "@Garssete. All rights reserved." }) })
   ] }) });
 };
-const index$p = () => {
+const index$q = () => {
   return /* @__PURE__ */ jsxs(Layout$1, { children: [
     /* @__PURE__ */ jsx(Navbar, {}),
     /* @__PURE__ */ jsx(HeroSection, {}),
@@ -3772,7 +4561,7 @@ const index$p = () => {
 };
 const route9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$p
+  default: index$q
 }, Symbol.toStringTag, { value: "Module" }));
 const GalleryContext = createContext(null);
 function useGallery() {
@@ -4751,7 +5540,7 @@ const StringToListMaker = ({ phrasesString, useGrid }) => {
     return /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-3`, children: [
       /* @__PURE__ */ jsx("span", { children: /* @__PURE__ */ jsx(BsBagCheckFill, {}) }),
       /* @__PURE__ */ jsx("span", { children: phrase })
-    ] });
+    ] }, index2);
   }) }) : /* @__PURE__ */ jsx("div", { className: `flex gap-3 flex-wrap`, children: phrasesList == null ? void 0 : phrasesList.map((phrase, index2) => {
     return /* @__PURE__ */ jsx("span", { className: `bg-blue-50 px-2 border py-1 border-gray-300 hover:shadow-lg cursor-move
                         rounded-md shadow-none shadow-gray-500`, children: phrase }, index2);
@@ -5267,10 +6056,308 @@ function RatingBoxSquare({ rating }) {
     );
   }) });
 }
+const videos = [
+  {
+    url: "https://youtu.be/fxbCHn6gE3U?si=GneGFZachbQdDEIO",
+    title: "The surprising habits of original thinkers"
+  },
+  {
+    url: "https://youtu.be/eHJnEHyyN1Y?si=aHRmeH67S227uGtr",
+    title: "6 Tips on Being a Successful Entrepreneur"
+  },
+  {
+    url: "https://youtu.be/1tRTWwZ5DIc?si=j6fNumMdLx5M16_H",
+    title: "The INSANE Rise of NVIDIA: From Bankruptcy to $4 Trillion?"
+  },
+  {
+    url: "https://www.youtube.com/watch?v=P6FORpg0KVo",
+    title: "How to Make Learning as Addictive as Social Media"
+  },
+  {
+    url: "https://www.youtube.com/watch?v=JpYA7WXkHyI",
+    title: "How to be a creative thinker"
+  },
+  {
+    url: "https://www.youtube.com/watch?v=JpYA7WXkHyI",
+    title: "How to be a creative thinker"
+  },
+  {
+    url: "https://www.youtube.com/watch?v=JpYA7WXkHyI",
+    title: "How to be a creative thinker"
+  },
+  {
+    url: "https://www.youtube.com/watch?v=JpYA7WXkHyI",
+    title: "How to be a creative thinker"
+  }
+];
+const Videos = ({ videoGallery, listing }) => {
+  const [outVideo, setOutVideo] = useState(null);
+  const [rawVideos, setRawVideos] = useState(videos);
+  const [open, setOpen] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState(null);
+  const slider = useVideoSliderContext();
+  useEffect(() => {
+    const remapVideos = async (videoGallery2) => {
+      let remappedVideo = [];
+      videoGallery2 == null ? void 0 : videoGallery2.map((video, index2) => {
+        const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+        const match = video.video_url.match(regex);
+        let videoId = match ? match[1] : null;
+        let thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`;
+        let videoObject = {
+          videoId,
+          videoUrl: video.video_url,
+          videoTitle: video.video_title,
+          videoThumbnail: thumbnail
+        };
+        remappedVideo.push(videoObject);
+      });
+      setOutVideo(remappedVideo);
+    };
+    remapVideos(videoGallery);
+  }, [videoGallery]);
+  const handleOpen = (video) => {
+    setCurrentVideo(video);
+    setOpen(true);
+  };
+  const showCarousel = (index2) => {
+    slider.setDialog(true);
+    slider.setSelectedSlide(index2 + 1);
+    slider.setGallery(videoGallery);
+    slider.setListing(listing);
+  };
+  return /* @__PURE__ */ jsxs(
+    "div",
+    {
+      className: ` `,
+      id: "video",
+      children: [
+        /* @__PURE__ */ jsx(
+          ShowVideo,
+          {
+            setOpen,
+            open,
+            currentVideo
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          VideoScrollerAlt,
+          {
+            outVideo,
+            handleOpen,
+            showCarousel,
+            listing
+          }
+        )
+      ]
+    }
+  );
+};
+const ShowVideo = ({ currentVideo, setOpen, open }) => {
+  const handleClose = () => {
+    const iframe = document.getElementById("yt-iframe");
+    iframe.src = iframe.src;
+    setOpen(false);
+  };
+  return /* @__PURE__ */ jsxs("div", { className: ` ${open ? "fixed" : "hidden"} z-[20010] top-[0px] left-[0px] w-full h-full bg-black/90`, children: [
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: `absolute bg-black w-[40px] h-[40px] z-20 rounded-full text-white flex place-items-center place-content-center mt-20 ml-5 hover:cursor-pointer`,
+        onClick: () => {
+          handleClose();
+        },
+        children: /* @__PURE__ */ jsx(GrClose, {})
+      }
+    ),
+    /* @__PURE__ */ jsx("div", { className: ` relative w-full h-full`, children: /* @__PURE__ */ jsx(
+      "iframe",
+      {
+        id: "yt-iframe",
+        src: `${open ? `https://www.youtube.com/embed/${currentVideo == null ? void 0 : currentVideo.videoId}` : ""}`,
+        className: "absolute top-0 left-0 w-full h-full",
+        allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      }
+    ) })
+  ] });
+};
+const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }) => {
+  const [openGallery, setOpenGallery] = useState(false);
+  const [slideWidth, setSlideWidth] = useState(150);
+  const scrollRef = useRef(null);
+  const [videoBar, setVideoBar] = useState(null);
+  useVideoSliderContext();
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+  return /* @__PURE__ */ jsxs("div", { className: `relative`, children: [
+    /* @__PURE__ */ jsx(
+      VideoGallery,
+      {
+        outVideo,
+        openGallery,
+        setOpenGallery,
+        handleOpen,
+        showCarousel,
+        listing
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        ref: scrollRef,
+        className: `w-full bg-black px-3 py-4 mt-3 relative flex flex-1 overflow-x-auto bottom-scrollbar-hidden`,
+        children: /* @__PURE__ */ jsxs("div", { className: `flex gap-6`, id: "videobar", children: [
+          outVideo == null ? void 0 : outVideo.map((video, index2) => {
+            return /* @__PURE__ */ jsxs(
+              "div",
+              {
+                className: `w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-md overflow-hidden hover:bg-white/50`,
+                onClick: () => showCarousel(index2),
+                children: [
+                  /* @__PURE__ */ jsxs(
+                    "div",
+                    {
+                      className: `w-full h-[120px]   z-[20]`,
+                      children: [
+                        /* @__PURE__ */ jsx("img", { src: video == null ? void 0 : video.videoThumbnail, alt: video == null ? void 0 : video.videoTitle, className: `object-cover w-full h-full` }),
+                        /* @__PURE__ */ jsx("div", { className: ` block w-full absolute z-[30] text-white bottom-0 px-2 py-[5px] bg-black/50 `, children: /* @__PURE__ */ jsx("div", { className: `w-full text-white bottom-0  `, children: /* @__PURE__ */ jsx("div", { className: ` text-[12px] leading-[1.2em] line-clamp-2`, children: video == null ? void 0 : video.videoTitle }) }) })
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ jsx("div", { className: `absolute top-0 left-0 w-full h-full hover:bg-white/50 z-40` })
+                ]
+              },
+              index2
+            );
+          }),
+          /* @__PURE__ */ jsx(
+            "div",
+            {
+              className: `w-[${slideWidth}px] h-[120px] border border-gray-500 rounded flex place-items-center place-content-center hover:cursor-pointer hover:bg-white/50`,
+              onClick: () => {
+                setOpenGallery(true);
+              },
+              children: /* @__PURE__ */ jsx("div", { className: `text-white w-1/2 text-center rounded`, children: "Video Gallery" })
+            }
+          )
+        ] })
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: `absolute text-white top-1/2 -translate-y-1/2 left-5 w-[40px] min-w-[40px] h-[40px] bg-black/50 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded z-[50]`,
+        onClick: () => {
+          scrollLeft();
+        },
+        children: /* @__PURE__ */ jsx(FaChevronLeft, {})
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        className: `absolute text-white top-1/2 -translate-y-1/2 right-5 w-[40px] min-w-[40px] h-[40px] bg-black/50 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded z-[50]`,
+        onClick: () => {
+          scrollRight();
+        },
+        children: /* @__PURE__ */ jsx(FaChevronRight, {})
+      }
+    )
+  ] });
+};
+const VideoGallery = ({
+  outVideo,
+  openGallery,
+  setOpenGallery,
+  handleOpen,
+  showCarousel,
+  listing
+}) => {
+  return /* @__PURE__ */ jsx(Fragment, { children: openGallery && /* @__PURE__ */ jsxs(
+    "div",
+    {
+      onMouseDown: (e) => setOpenGallery(false),
+      className: `flex w-screen h-screen bg-black/40 
+                        z-[20000] fixed top-0 left-0 right-0 bottom-0
+                        place-items-center place-content-center px-[15px]`,
+      children: [
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            onMouseDown: (e) => e.stopPropagation(),
+            className: `min-w-[95%] w-[95%] sm:w-[95%] md:w-[80%] h-[80%] max-h-[80%] 
+                            mx-auto bg-white rounded-lg shadow-lg shadow-black/50 
+                            space-y-6 z-[3100] overflow-hidden`,
+            children: /* @__PURE__ */ jsxs("div", { className: `w-full h-full`, children: [
+              /* @__PURE__ */ jsx("div", { className: `border-b py-3 px-3`, children: /* @__PURE__ */ jsxs("div", { className: `font-bold text-gray-700
+                                    text-xl w-[80%]  truncate`, children: [
+                "Gallery for ",
+                listing == null ? void 0 : listing.title
+              ] }) }),
+              /* @__PURE__ */ jsx("div", { className: ` 
+                                h-full overflow-y-auto pt-2 px-2 pb-2
+                                bg-white `, children: /* @__PURE__ */ jsx("div", { className: `grid grid-cols-4 md:grid-cols-6 gap-2`, children: outVideo && (outVideo == null ? void 0 : outVideo.map((video, index2) => {
+                return /* @__PURE__ */ jsxs(
+                  "div",
+                  {
+                    className: `mb-2`,
+                    onClick: () => {
+                      showCarousel(index2);
+                    },
+                    children: [
+                      /* @__PURE__ */ jsx(
+                        "div",
+                        {
+                          className: `relative hover:cursor-pointer
+                                                  h-[80px] md:h-[100px] lg:h-[120px] rounded-md bg-black
+                                                 overflow-hidden border-[5px] border-gray-200`,
+                          children: /* @__PURE__ */ jsx(
+                            "img",
+                            {
+                              className: `object-cover w-full h-full`,
+                              src: video == null ? void 0 : video.videoThumbnail,
+                              alt: ""
+                            }
+                          )
+                        }
+                      ),
+                      /* @__PURE__ */ jsx("div", { className: `mx-[2px] text-[13px] leading-[1.2em] line-clamp-2 mt-[3px]`, children: video == null ? void 0 : video.videoTitle })
+                    ]
+                  },
+                  index2
+                );
+              })) }) })
+            ] })
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            onMouseDown: () => setOpenGallery(false),
+            className: `w-[50px] h-[50px] z-[300] bg-white
+                                flex place-content-center place-items-center
+                                rounded-full absolute left-2 top-2 cursor-pointer
+                                hover:bg-white/40 transition duration-1000 ease-in-out`,
+            children: /* @__PURE__ */ jsx(IoClose, { className: `text-[30px]` })
+          }
+        )
+      ]
+    }
+  ) });
+};
 const BusinessLayout = ({
   listing,
   images,
-  ratingsData
+  ratingsData,
+  videoGallery
 }) => {
   const [ratingDisplayData, setRatingDisplayData] = useState();
   const [operatingHoursStatus, setOperatingHoursStatus] = useState(void 0);
@@ -5318,6 +6405,13 @@ const BusinessLayout = ({
       ] }),
       /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] w-full mx-auto mt-1.5`, children: operatingHoursStatus == null ? void 0 : operatingHoursStatus.localTimeText })
     ] }),
+    videoGallery.length > 0 && /* @__PURE__ */ jsx(
+      Videos,
+      {
+        videoGallery,
+        listing
+      }
+    ),
     (images == null ? void 0 : images.length) > 0 && listing && /* @__PURE__ */ jsx("div", { className: `bg-black h-fit md:hidden
                 mt-4`, children: /* @__PURE__ */ jsx(
       ListingCarousel,
@@ -5463,18 +6557,20 @@ const ResourceNotFound = () => {
     ] })
   ] }) });
 };
-const loader$J = async ({ request, params }) => {
+const loader$M = async ({ request, params }) => {
   try {
     const id = params.id || null;
     let listing = await getPage(id);
-    let profileImageData = await getBusinessProfileImageData(listing == null ? void 0 : listing.gid);
+    const profileImageData = await getBusinessProfileImageData(listing == null ? void 0 : listing.gid);
     const gallery = await getBusinessGallery(listing.gid);
     const ratingData = await getRatingsReviews(listing.gid);
+    const videoGallery = await getBusinessVideoGallery(listing == null ? void 0 : listing.gid);
     return {
       listing,
       gallery,
       ratingsData: ratingData,
-      profileImageData
+      profileImageData,
+      videoGallery
     };
   } catch (err) {
     throw new Response("You are offline. Please reconnect.", { status: 503 });
@@ -5519,11 +6615,12 @@ const meta$1 = ({ data }) => {
     { name: "twitter:description", content: listing == null ? void 0 : listing.short_description }
   ];
 };
-const index$o = () => {
+const index$p = () => {
   const data = useLoaderData();
   const listing = data.listing;
   const gallery = data.gallery;
   const ratingsData = data.ratingsData;
+  const videoGallery = data.videoGallery;
   useEffect(() => {
   }, [listing]);
   return /* @__PURE__ */ jsx(RatingProvider, { children: /* @__PURE__ */ jsx(GalleryProvider, { children: /* @__PURE__ */ jsxs(SearchLayout, { children: [
@@ -5533,7 +6630,8 @@ const index$o = () => {
       {
         listing,
         images: gallery,
-        ratingsData
+        ratingsData,
+        videoGallery
       }
     ),
     (listing == null ? void 0 : listing.category) !== void 0 ? /* @__PURE__ */ jsx(
@@ -5552,8 +6650,8 @@ const index$o = () => {
 };
 const route8 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$o,
-  loader: loader$J,
+  default: index$p,
+  loader: loader$M,
   meta: meta$1
 }, Symbol.toStringTag, { value: "Module" }));
 const meta = () => {
@@ -5658,7 +6756,7 @@ const SearchNavbar = () => {
     }
   );
 };
-function loader$I() {
+function loader$L() {
   return null;
 }
 function NotFound() {
@@ -5690,14 +6788,14 @@ function NotFound() {
 const route6 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: NotFound,
-  loader: loader$I
+  loader: loader$L
 }, Symbol.toStringTag, { value: "Module" }));
-const index$n = () => {
+const index$o = () => {
   return /* @__PURE__ */ jsx("div", {});
 };
 const route7 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$n
+  default: index$o
 }, Symbol.toStringTag, { value: "Module" }));
 const Feature$1 = ({ feature }) => {
   return /* @__PURE__ */ jsxs("div", { id: feature.gid, className: `pb-4 pt-3`, children: [
@@ -6074,7 +7172,7 @@ const LatestBusinesses = ({
     })) })
   ] });
 };
-const loader$H = async ({ request, params }) => {
+const loader$K = async ({ request, params }) => {
   try {
     const url = new URL(request.url);
     const query2 = url.searchParams.get("q") || "";
@@ -6088,7 +7186,7 @@ const loader$H = async ({ request, params }) => {
     throw new Response("You are offline. Please reconnect.", { status: 503 });
   }
 };
-const index$m = () => {
+const index$n = () => {
   var _a;
   const res = useLoaderData();
   const [searchParams] = useSearchParams();
@@ -6176,8 +7274,8 @@ const index$m = () => {
 };
 const route10 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$m,
-  loader: loader$H
+  default: index$n,
+  loader: loader$K
 }, Symbol.toStringTag, { value: "Module" }));
 const LeftNavForBrowse = () => {
   var _a;
@@ -6467,7 +7565,7 @@ const Featured = () => {
     }) : /* @__PURE__ */ jsx("div", { className: `text-[15px] mt-4`, children: "Loading..." }) })
   ] });
 };
-const loader$G = async ({ request, params }) => {
+const loader$J = async ({ request, params }) => {
   const url = new URL(request.url);
   const query2 = (url == null ? void 0 : url.searchParams.get("q")) || "";
   let data = await getSearch(query2);
@@ -6519,7 +7617,7 @@ const Index$2 = () => {
 const route11 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index$2,
-  loader: loader$G
+  loader: loader$J
 }, Symbol.toStringTag, { value: "Module" }));
 const Browse = () => {
   return /* @__PURE__ */ jsxs("div", { children: [
@@ -6685,12 +7783,12 @@ const SigninBody = () => {
         md:bg-[url('/images/oiltanker.jpg')]
         bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(SigninForm, {}) });
 };
-const index$l = () => {
+const index$m = () => {
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(SigninBody, {}) });
 };
 const route13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$l
+  default: index$m
 }, Symbol.toStringTag, { value: "Module" }));
 const password_regex$1 = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 const SignupSchema = z.object({
@@ -6912,12 +8010,12 @@ const SignupBody = () => {
         md:bg-[url('/images/mobiletab.jpg')]
         bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(SignupForm, {}) });
 };
-const index$k = () => {
+const index$l = () => {
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(SignupBody, {}) });
 };
 const route14 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$k
+  default: index$l
 }, Symbol.toStringTag, { value: "Module" }));
 const ResetPwSchema = z.object({
   username: z.string({ message: "Please enter an email" }).min(7, { message: "Email must be greater than 7 characters" }).email({ message: "Please enter a valid email" })
@@ -7066,12 +8164,12 @@ const ResetPasswordBody$2 = () => {
         md:bg-[url('/images/drone.jpg')]
         bg-cover bg-center min-h-screen flex place-content-center `, children: /* @__PURE__ */ jsx(ResetPasswordForm$3, {}) });
 };
-const index$j = () => {
+const index$k = () => {
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(ResetPasswordBody$2, {}) });
 };
 const route15 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$j
+  default: index$k
 }, Symbol.toStringTag, { value: "Module" }));
 const AccountLayout = ({ children }) => {
   const [show, setShow] = useState(true);
@@ -7185,12 +8283,12 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title })
                 rounded-lg shadow-md pb-8 `, children })
   ] });
 };
-const index$i = () => {
+const index$j = () => {
   return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsx(ContentLayout, { title: "Account Profile", children: "Account Profile" }) });
 };
 const route16 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$i
+  default: index$j
 }, Symbol.toStringTag, { value: "Module" }));
 const Button = ({
   working,
@@ -7665,7 +8763,7 @@ const CardHeader = ({ base_url, title }) => {
     }
   ) }) }) });
 };
-const index$h = () => {
+const index$i = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -7750,7 +8848,7 @@ const index$h = () => {
 };
 const route17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$h
+  default: index$i
 }, Symbol.toStringTag, { value: "Module" }));
 const EmailSchema = z.object({
   email: z.string({ message: "Please enter an email." }).min(1, { message: "Email must not be empty" }).email({ message: "Please enter a valid email" })
@@ -7847,7 +8945,7 @@ const EmailForm = ({ loaderData, user }) => {
     /* @__PURE__ */ jsx(Button, { working })
   ] }) }) });
 };
-const index$g = () => {
+const index$h = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -7901,7 +8999,7 @@ const index$g = () => {
 };
 const route18 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$g
+  default: index$h
 }, Symbol.toStringTag, { value: "Module" }));
 const passwordValidation$2 = new RegExp(
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!()£@$%^&*-]).{8,}$/
@@ -8036,7 +9134,7 @@ const ChangePasswordForm = ({ loaderData, user }) => {
     /* @__PURE__ */ jsx(Button, { working })
   ] }) }) });
 };
-const index$f = () => {
+const index$g = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -8089,7 +9187,7 @@ const index$f = () => {
 };
 const route19 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$f
+  default: index$g
 }, Symbol.toStringTag, { value: "Module" }));
 const ResetPasswordSchema$2 = z.object({
   email: z.string({ message: "Please enter an email." }).min(1, { message: "Email must not be empty" }).email({ message: "Please enter a valid email" })
@@ -8168,7 +9266,7 @@ const ResetPasswordForm$2 = ({ loaderData, user }) => {
     /* @__PURE__ */ jsx(Button, { working, value: "Send Reset Email" })
   ] }) }) });
 };
-const index$e = () => {
+const index$f = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -8221,7 +9319,7 @@ const index$e = () => {
 };
 const route20 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$e
+  default: index$f
 }, Symbol.toStringTag, { value: "Module" }));
 const DeactivateProfilechema = z.object({
   email: z.string({ message: "Please enter an email." }).min(1, { message: "Email must not be empty" }).email({ message: "Please enter a valid email" })
@@ -8311,7 +9409,7 @@ const DeactivateProfileForm = ({ loaderData, user }) => {
     /* @__PURE__ */ jsx(Button, { working, value: `${((_c = loaderData.userProfile) == null ? void 0 : _c.active) ? "Deactivate" : "Activate"} Profile` })
   ] }) }) });
 };
-const index$d = () => {
+const index$e = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -8364,7 +9462,7 @@ const index$d = () => {
 };
 const route21 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$d
+  default: index$e
 }, Symbol.toStringTag, { value: "Module" }));
 const acctLnks = [
   { title: "Account", lnk: "/web/account/profile", icon: /* @__PURE__ */ jsx(TbPasswordUser, {}) }
@@ -8459,7 +9557,7 @@ const Layout = ({ children }) => {
     /* @__PURE__ */ jsx("main", { className: `h-full flex w-full flex-col mt-[${appConfig.NAVBAR_HEIGHT}px]`, children })
   ] });
 };
-const index$c = () => {
+const index$d = () => {
   return /* @__PURE__ */ jsxs(Layout, { children: [
     /* @__PURE__ */ jsx("div", { className: `max-w-[1000px] mx-auto w-full mt-[30px]`, children: /* @__PURE__ */ jsxs("div", { className: `grid md:grid-cols-12 gap-4 `, children: [
       /* @__PURE__ */ jsx("div", { className: ` md:col-span-7  px-[15px]`, children: /* @__PURE__ */ jsx(InfoTerms, {}) }),
@@ -8548,9 +9646,9 @@ const InfoTerms = () => {
 const route22 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   InfoTerms,
-  default: index$c
+  default: index$d
 }, Symbol.toStringTag, { value: "Module" }));
-const index$b = () => {
+const index$c = () => {
   return /* @__PURE__ */ jsxs(Layout, { children: [
     /* @__PURE__ */ jsx("div", { className: `max-w-[1000px] mx-auto w-full mt-[30px]`, children: /* @__PURE__ */ jsxs("div", { className: `grid md:grid-cols-12 gap-4 `, children: [
       /* @__PURE__ */ jsx("div", { className: ` md:col-span-7  px-[15px]`, children: /* @__PURE__ */ jsx(InfoPrivacy, {}) }),
@@ -8689,9 +9787,9 @@ const InfoPrivacy = () => {
 const route23 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   InfoPrivacy,
-  default: index$b
+  default: index$c
 }, Symbol.toStringTag, { value: "Module" }));
-const index$a = () => {
+const index$b = () => {
   return /* @__PURE__ */ jsxs(Layout, { children: [
     /* @__PURE__ */ jsx("div", { className: `max-w-[1000px] mx-auto w-full mt-[30px]`, children: /* @__PURE__ */ jsxs("div", { className: `grid md:grid-cols-12 gap-4 `, children: [
       /* @__PURE__ */ jsx("div", { className: ` md:col-span-7  px-[15px]`, children: /* @__PURE__ */ jsx(InfoContact, {}) }),
@@ -8751,7 +9849,7 @@ const InfoContact = () => {
 const route24 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   InfoContact,
-  default: index$a
+  default: index$b
 }, Symbol.toStringTag, { value: "Module" }));
 const ResultItem = ({ listing, index: index2 }) => {
   const [placeholder, setPlaceholder] = useState("/images/placeholder-icon.webp");
@@ -9599,6 +10697,10 @@ const settingsLinks = [
     link: "/gallery"
   },
   {
+    title: "Videos",
+    link: "/videos"
+  },
+  {
     title: "Facilities",
     link: "/facilities"
   },
@@ -9686,14 +10788,14 @@ const BusinessHeader = ({ businessGuid, data, businessProfile }) => {
     ] })
   ] }) });
 };
-const loader$F = async ({ request, params }) => {
+const loader$I = async ({ request, params }) => {
   const business_guid = params.business_guid;
   const data = {
     business_guid
   };
   return data;
 };
-const index$9 = () => {
+const index$a = () => {
   var _a;
   useEffect(() => {
     IsAuthenticated(localStorage);
@@ -9802,8 +10904,8 @@ const index$9 = () => {
 };
 const route26 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$9,
-  loader: loader$F
+  default: index$a,
+  loader: loader$I
 }, Symbol.toStringTag, { value: "Module" }));
 const CreatePageSchema = z.object({
   title: z.string().min(1, { message: "Enter a business name" }).min(3, { message: "Busines Name must not be less than 3 characters" }).max(100, { message: "Business name must not be more than 100 characters." }),
@@ -10102,7 +11204,7 @@ const CreatePageForm = ({ data, user }) => {
     /* @__PURE__ */ jsx(Button, { working })
   ] }) });
 };
-const index$8 = () => {
+const index$9 = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -10165,7 +11267,7 @@ const index$8 = () => {
 };
 const route27 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$8
+  default: index$9
 }, Symbol.toStringTag, { value: "Module" }));
 const urlvalidator = /^(?!https?)(?!www\.?).*\..+$/g;
 const SettingsSchema = z.object({
@@ -10395,7 +11497,7 @@ const BusinessWorkingHours = ({
     ) })
   ] }) }) });
 };
-const index$7 = () => {
+const index$8 = () => {
   useEffect(() => {
     IsAuthenticated(localStorage);
   }, []);
@@ -10485,7 +11587,7 @@ const index$7 = () => {
 };
 const route28 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  default: index$7
+  default: index$8
 }, Symbol.toStringTag, { value: "Module" }));
 const AddPhoto = ({ userGuid, businessGuid }) => {
   const fileInputRef = useRef(null);
@@ -10543,7 +11645,7 @@ const AddPhoto = ({ userGuid, businessGuid }) => {
     )
   ] });
 };
-const GalleryItemMenu = ({
+const GalleryItemMenu$1 = ({
   item,
   menu,
   userGuid,
@@ -10593,7 +11695,7 @@ const GalleryItemMenu = ({
     )
   ] }) }) }) });
 };
-const GalleryItem = ({
+const GalleryItem$1 = ({
   showCarousel,
   item,
   itemIndex,
@@ -10653,6 +11755,343 @@ const GalleryItem = ({
           }
         ),
         item.image_title.length > 0 && /* @__PURE__ */ jsx("div", { className: `text-[13px] mt-2 mb-1.5 leading-[1.2em] mx-[2px] line-clamp-2`, children: item.image_title }),
+        /* @__PURE__ */ jsx(
+          GalleryItemMenu$1,
+          {
+            item,
+            menu,
+            userGuid,
+            businessGuid
+          }
+        )
+      ]
+    }
+  ) });
+};
+const Slider$1 = ({ slides, selectedSlide, handleClose }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  useRef(0);
+  useRef(0);
+  const prev = () => {
+    setCurrentSlide((currentSlide2) => {
+      return currentSlide2 === 0 ? slides.length - 1 : currentSlide2 - 1;
+    });
+  };
+  const next = () => {
+    setCurrentSlide((currentSlide2) => {
+      return currentSlide2 === slides.length - 1 ? 0 : currentSlide2 + 1;
+    });
+  };
+  useEffect(() => {
+    if (selectedSlide !== null) {
+      setCurrentSlide(selectedSlide - 1);
+    }
+  }, [selectedSlide]);
+  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-0 `, children: [
+    /* @__PURE__ */ jsxs("div", { className: `col-span-12 md:col-span-9 w-full h-full relative bg-black flex`, children: [
+      /* @__PURE__ */ jsx("div", { className: ` w-auto h-screen flex overflow-hidden`, children: slides.map((slide, index2) => {
+        return /* @__PURE__ */ jsx(
+          "img",
+          {
+            src: slide.image_url,
+            alt: "",
+            style: { transform: `translateX(-${currentSlide * 100}%)` },
+            className: `object-scale-down w-full h-full 
+                                            block flex-shrink-0 flex-grow-0 transition-transform
+                                            ease-in-out duration-1000`
+          },
+          index2
+        );
+      }) }),
+      /* @__PURE__ */ jsx("button", { onMouseDown: prev, className: `block absolute top-0 bottom-0 
+                p-[1rem] cursor-pointer left-0 group h-full 
+                transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full place-content-center place-items-center group-hover:bg-white/30
+                        transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronLeft, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
+      /* @__PURE__ */ jsx("button", { onMouseDown: next, className: `block absolute top-0 bottom-0 
+                    p-[1rem] cursor-pointer right-0 group 
+                     transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
+                        transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronRight, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
+      /* @__PURE__ */ jsx(
+        "div",
+        {
+          onMouseDown: () => handleClose(),
+          className: `w-[50px] h-[50px] z-[300] bg-white
+                    flex place-content-center place-items-center
+                    rounded-full absolute left-2 top-2 cursor-pointer
+                    hover:bg-white/40 transition duration-1000 ease-in-out`,
+          children: /* @__PURE__ */ jsx(IoClose, { className: `text-[30px]` })
+        }
+      )
+    ] }),
+    /* @__PURE__ */ jsxs("div", { className: `hidden md:block md:col-span-3 px-5`, children: [
+      /* @__PURE__ */ jsx("h1", { className: " text-[22px] my-4 font-sans font-extrabold tracking-tight leading-[24px]", children: "Photos for Jason Won, DPT - Flex With Doctor Jay" }),
+      /* @__PURE__ */ jsxs("div", { className: " my-4 ", children: [
+        currentSlide + 1,
+        " / ",
+        slides.length
+      ] }),
+      /* @__PURE__ */ jsx("hr", {}),
+      /* @__PURE__ */ jsx("div", { className: " my-4", children: slides[currentSlide].image_title })
+    ] })
+  ] }) });
+};
+const Carousel$1 = ({
+  overlay,
+  setOverlay,
+  selectedSlide,
+  handleClose,
+  gallery
+}) => {
+  return /* @__PURE__ */ jsx("div", { children: overlay && /* @__PURE__ */ jsx(
+    "div",
+    {
+      className: `flex w-screen h-screen bg-white z-[1000] 
+                fixed top-0 left-0 right-0 bottom-0 `,
+      children: gallery && selectedSlide && /* @__PURE__ */ jsx(
+        Slider$1,
+        {
+          slides: gallery,
+          selectedSlide,
+          handleClose
+        }
+      )
+    }
+  ) });
+};
+const Gallery$1 = ({ gallery, userGuid, businessGuid, listing }) => {
+  const [overlay, setOverlay] = useState(false);
+  const [selectedSlide, setSelectedSlide] = useState(0);
+  const slider = useSliderContext();
+  const handleClose = () => {
+    setOverlay(false);
+  };
+  const showCarousel = (index2) => {
+    slider.setDialog(true);
+    slider.setSelectedSlide(index2 + 1);
+    slider.setGallery(gallery);
+    slider.setListing(listing);
+  };
+  return /* @__PURE__ */ jsxs("div", { className: ``, children: [
+    /* @__PURE__ */ jsx("div", { className: ` border-[1px] p-3 rounded-[5px] 
+                grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4
+                lg:grid-cols-4 xl:grid-cols-5 gap-2 z-0`, children: gallery.map((item, index2) => {
+      return /* @__PURE__ */ jsx("div", { className: "z-0", children: /* @__PURE__ */ jsx(
+        GalleryItem$1,
+        {
+          showCarousel,
+          item,
+          itemIndex: index2,
+          userGuid,
+          businessGuid
+        }
+      ) }, index2);
+    }) }),
+    /* @__PURE__ */ jsx(
+      Carousel$1,
+      {
+        overlay,
+        setOverlay,
+        selectedSlide: selectedSlide + 1,
+        handleClose,
+        gallery
+      }
+    )
+  ] });
+};
+const index$7 = () => {
+  useEffect(() => {
+    IsAuthenticated(localStorage);
+  }, []);
+  const [businessGuid, setBusinessGuid] = useState("");
+  const [userGuid, setUserGuid] = useState("");
+  const [gallery, setGallery] = useState(null);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { business_guid, user_guid } = useParams();
+  const [businessProfile, setBusinessProfile] = useState(null);
+  const auth = useAuth();
+  if (!auth) {
+    return null;
+  }
+  useEffect(() => {
+    const getAllData = async (businessGuid2, userGuid2) => {
+      setBusinessGuid(businessGuid2);
+      setUserGuid(userGuid2);
+      const gallery2 = await getGallery(businessGuid2, userGuid2);
+      setGallery(gallery2);
+      const businessProfile2 = await getBusinessProfile(businessGuid2 || "");
+      setBusinessProfile(businessProfile2);
+    };
+    if (business_guid && user_guid) {
+      getAllData(business_guid, user_guid);
+    }
+  }, [business_guid, user_guid]);
+  useEffect(() => {
+    if (businessGuid && userGuid && gallery && businessProfile) {
+      const data2 = {
+        businessGuid,
+        userGuid,
+        gallery,
+        businessProfile
+      };
+      setData(data2);
+      setLoading(false);
+    }
+  }, [businessGuid, userGuid, gallery, businessProfile]);
+  if (loading) {
+    return /* @__PURE__ */ jsx("div", { className: "flex justify-center items-center h-screen", children: /* @__PURE__ */ jsx("div", { className: "text-lg", children: "Loading..." }) });
+  }
+  return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsxs(
+    ContentLayout,
+    {
+      title: "Gallery Settings",
+      businessGuid,
+      data,
+      businessProfile,
+      children: [
+        /* @__PURE__ */ jsx(
+          BusinessHeader,
+          {
+            businessGuid,
+            data,
+            businessProfile
+          }
+        ),
+        businessGuid && userGuid && /* @__PURE__ */ jsx(BusinessMenu, { guid: businessGuid, userGuid }),
+        businessGuid && userGuid && /* @__PURE__ */ jsx(AddPhoto, { userGuid, businessGuid }),
+        gallery.length > 0 ? /* @__PURE__ */ jsx("div", { className: "z-0", children: /* @__PURE__ */ jsx(
+          Gallery$1,
+          {
+            gallery,
+            userGuid,
+            businessGuid,
+            listing: businessProfile
+          }
+        ) }) : /* @__PURE__ */ jsx("div", { className: " mt-2 border-[1px] rounded-lg p-3 mb-6", children: "Gallery is empty" })
+      ]
+    }
+  ) });
+};
+const route29 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: index$7
+}, Symbol.toStringTag, { value: "Module" }));
+const GalleryItemMenu = ({
+  item,
+  menu,
+  userGuid,
+  businessGuid
+}) => {
+  const [dialog, setDialog] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(null);
+  const editVideo = useEditVideoDialogContext();
+  const notification = useNotification();
+  const handleOpenDialog = () => {
+    editVideo.setDialog(true);
+    editVideo.setVideoSrc(item.video_url);
+    editVideo.setVideoTitle(item.video_title);
+    editVideo.setUserGuid(userGuid);
+    editVideo.setBusinessGuid(businessGuid);
+    editVideo.setVideoGuid(item.video_guid);
+    editVideo.setVideoDescription(item.video_description);
+  };
+  const handleDelete = async () => {
+    notification.notify();
+    await new Promise((resolve) => setTimeout(resolve, 1e3));
+    editVideo.deleteVideo(userGuid, businessGuid, item.video_guid);
+  };
+  return /* @__PURE__ */ jsx("div", { className: "", children: menu && /* @__PURE__ */ jsx("div", { className: ` absolute top-2 right-2 w-[80%] bg-white
+                rounded-[12px] overflow-hidden border-[1px] border-white
+                shadow-md`, children: /* @__PURE__ */ jsx("div", { className: `mt-3`, children: /* @__PURE__ */ jsxs("div", { className: ` divide-y-[1px]`, children: [
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        onMouseDown: handleOpenDialog,
+        className: `py-1 hover:bg-gray-300 w-full
+                                flex flex-col
+                                px-2 transition duration-1000 ease-in-out`,
+        children: "Edit"
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      "div",
+      {
+        onMouseDown: handleDelete,
+        className: `py-1 hover:bg-gray-300 w-full
+                                flex flex-col
+                                px-2 transition duration-1000 ease-in-out`,
+        children: "Delete"
+      }
+    )
+  ] }) }) }) });
+};
+const GalleryItem = ({
+  showCarousel,
+  item,
+  itemIndex,
+  userGuid,
+  businessGuid
+}) => {
+  const [menu, setMenu] = useState(false);
+  const [videoId, setVideoId] = useState(null);
+  const IMG_BASE_URL2 = "https://pics.gasimg.com";
+  let imgconst = "";
+  if (item.video_url) {
+    imgconst = IMG_BASE_URL2 + item.video_url;
+  } else {
+    imgconst = "https://trendyblinds.ca/wp-content/uploads/2023/09/3.-3D-WALLPAPER-SKU0015.jpg";
+  }
+  const [imgSrc, setImgSrc] = useState(imgconst);
+  const showMenu = () => {
+    setMenu(true);
+  };
+  const hideMenu = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    setMenu(false);
+  };
+  useEffect(() => {
+    if (item) {
+      const videoId2 = getYoutubeId(item == null ? void 0 : item.video_url);
+      setVideoId(videoId2);
+    }
+  }, [item]);
+  return /* @__PURE__ */ jsx("div", { className: "z-0", children: /* @__PURE__ */ jsxs(
+    "div",
+    {
+      className: `border-[1px] h-fit p-1 rounded-md shadow-md
+                    hover:cursor-pointer relative z-0`,
+      children: [
+        /* @__PURE__ */ jsx(
+          "button",
+          {
+            onMouseDown: showMenu,
+            onBlur: hideMenu,
+            className: `w-[30px] h-[30px] z-50 bg-white 
+                flex place-content-center place-items-center 
+                rounded-full absolute right-2 top-2 cursor-pointer
+                hover:bg-gray-500 hover:text-white/80 transition duration-1000 ease-in-out`,
+            children: /* @__PURE__ */ jsx(BiEditAlt, { className: `text-[20px]` })
+          }
+        ),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            onMouseDown: (e) => showCarousel(itemIndex),
+            className: `relative h-[100px] md:h-[170px] xl:h-[160px]
+                         rounded-md overflow-hidden -z-10
+                    `,
+            children: /* @__PURE__ */ jsx(
+              "img",
+              {
+                src: `https://img.youtube.com/vi/${videoId}/0.jpg`,
+                alt: "",
+                className: `object-cover w-full h-full -z-40
+                        `
+              }
+            )
+          }
+        ),
+        item.video_title.length > 0 && /* @__PURE__ */ jsx("div", { className: `text-[13px] mt-2 mb-1.5 leading-[1.2em] mx-[2px] line-clamp-2`, children: item.video_title }),
         /* @__PURE__ */ jsx(
           GalleryItemMenu,
           {
@@ -10756,23 +12195,23 @@ const Carousel = ({
     }
   ) });
 };
-const Gallery = ({ gallery, userGuid, businessGuid, listing }) => {
+const Gallery = ({ videoGallery, userGuid, businessGuid, listing }) => {
   const [overlay, setOverlay] = useState(false);
   const [selectedSlide, setSelectedSlide] = useState(0);
-  const slider = useSliderContext();
+  const slider = useVideoSliderContext();
   const handleClose = () => {
     setOverlay(false);
   };
   const showCarousel = (index2) => {
     slider.setDialog(true);
     slider.setSelectedSlide(index2 + 1);
-    slider.setGallery(gallery);
+    slider.setGallery(videoGallery);
     slider.setListing(listing);
   };
   return /* @__PURE__ */ jsxs("div", { className: ``, children: [
     /* @__PURE__ */ jsx("div", { className: ` border-[1px] p-3 rounded-[5px] 
                 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4
-                lg:grid-cols-4 xl:grid-cols-5 gap-2 z-0`, children: gallery.map((item, index2) => {
+                lg:grid-cols-4 xl:grid-cols-5 gap-2 z-0`, children: videoGallery == null ? void 0 : videoGallery.map((item, index2) => {
       return /* @__PURE__ */ jsx("div", { className: "z-0", children: /* @__PURE__ */ jsx(
         GalleryItem,
         {
@@ -10791,7 +12230,64 @@ const Gallery = ({ gallery, userGuid, businessGuid, listing }) => {
         setOverlay,
         selectedSlide: selectedSlide + 1,
         handleClose,
-        gallery
+        gallery: videoGallery
+      }
+    )
+  ] });
+};
+const AddVideo = ({ userGuid, businessGuid }) => {
+  const fileInputRef = useRef(null);
+  const [imgSrc, setImgSrc] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [isImgSelected, setIsImageSelected] = useState(false);
+  const [overlay, setOverlay] = useState(false);
+  const [dialog, setDialog] = useState(false);
+  const addVideo = useAddVideoDialogContext();
+  const handleOpenDialog = () => {
+    addVideo.setDialog(true);
+    addVideo.setUserGuid(userGuid);
+    addVideo.setBusinessGuid(businessGuid);
+  };
+  const handleFileChange = (event) => {
+    var _a;
+    try {
+      const file = (_a = event.target.files) == null ? void 0 : _a[0];
+      if (file) {
+        const imageUrl = URL.createObjectURL(file);
+        setImgSrc(imageUrl);
+        setSelectedFile(file);
+        setIsImageSelected(true);
+        addVideo.setDialog(true);
+        addVideo.setImgSrc(imageUrl);
+        addVideo.setSelectedFile(file);
+        addVideo.setIsImageSelected(true);
+        addVideo.setUserGuid(userGuid);
+        addVideo.setBusinessGuid(businessGuid);
+      }
+    } finally {
+      event.target.value = "";
+    }
+  };
+  return /* @__PURE__ */ jsxs("div", { className: `mb-2`, children: [
+    /* @__PURE__ */ jsx(
+      "button",
+      {
+        onMouseDown: handleOpenDialog,
+        className: ` bg-blue-800 rounded-md px-3 py-1
+                text-white hover:bg-blue-700 transition
+                duration-500 ease-in-out hover:shadow-md
+                 shadow-gray-900 hover:shadow-black/50`,
+        children: "Add Video"
+      }
+    ),
+    /* @__PURE__ */ jsx(
+      "input",
+      {
+        type: "file",
+        accept: "image/*",
+        ref: fileInputRef,
+        className: " hidden",
+        onChange: handleFileChange
       }
     )
   ] });
@@ -10802,7 +12298,7 @@ const index$6 = () => {
   }, []);
   const [businessGuid, setBusinessGuid] = useState("");
   const [userGuid, setUserGuid] = useState("");
-  const [gallery, setGallery] = useState(null);
+  const [videoGallery, setVideoGallery] = useState(null);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const { business_guid, user_guid } = useParams();
@@ -10815,8 +12311,8 @@ const index$6 = () => {
     const getAllData = async (businessGuid2, userGuid2) => {
       setBusinessGuid(businessGuid2);
       setUserGuid(userGuid2);
-      const gallery2 = await getGallery(businessGuid2, userGuid2);
-      setGallery(gallery2);
+      const videoGallery2 = await getVideoGallery(businessGuid2, userGuid2);
+      setVideoGallery(videoGallery2);
       const businessProfile2 = await getBusinessProfile(businessGuid2 || "");
       setBusinessProfile(businessProfile2);
     };
@@ -10825,24 +12321,24 @@ const index$6 = () => {
     }
   }, [business_guid, user_guid]);
   useEffect(() => {
-    if (businessGuid && userGuid && gallery && businessProfile) {
+    if (businessGuid && userGuid && videoGallery && businessProfile) {
       const data2 = {
         businessGuid,
         userGuid,
-        gallery,
+        videoGallery,
         businessProfile
       };
       setData(data2);
       setLoading(false);
     }
-  }, [businessGuid, userGuid, gallery, businessProfile]);
+  }, [businessGuid, userGuid, videoGallery, businessProfile]);
   if (loading) {
     return /* @__PURE__ */ jsx("div", { className: "flex justify-center items-center h-screen", children: /* @__PURE__ */ jsx("div", { className: "text-lg", children: "Loading..." }) });
   }
   return /* @__PURE__ */ jsx(AccountLayout, { children: /* @__PURE__ */ jsxs(
     ContentLayout,
     {
-      title: "Gallery Settings",
+      title: "Videos Settings",
       businessGuid,
       data,
       businessProfile,
@@ -10856,21 +12352,21 @@ const index$6 = () => {
           }
         ),
         businessGuid && userGuid && /* @__PURE__ */ jsx(BusinessMenu, { guid: businessGuid, userGuid }),
-        businessGuid && userGuid && /* @__PURE__ */ jsx(AddPhoto, { userGuid, businessGuid }),
-        gallery.length > 0 ? /* @__PURE__ */ jsx("div", { className: "z-0", children: /* @__PURE__ */ jsx(
+        businessGuid && userGuid && /* @__PURE__ */ jsx(AddVideo, { userGuid, businessGuid }),
+        videoGallery !== null && (videoGallery == null ? void 0 : videoGallery.length) > 0 ? /* @__PURE__ */ jsx("div", { className: "z-0", children: /* @__PURE__ */ jsx(
           Gallery,
           {
-            gallery,
+            videoGallery,
             userGuid,
             businessGuid,
             listing: businessProfile
           }
-        ) }) : /* @__PURE__ */ jsx("div", { className: " mt-2 border-[1px] rounded-lg p-3 mb-6", children: "Gallery is empty" })
+        ) }) : /* @__PURE__ */ jsx("div", { className: " mt-2 border-[1px] rounded-lg p-3 mb-6", children: "Video Gallery is empty." })
       ]
     }
   ) });
 };
-const route29 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route30 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$6
 }, Symbol.toStringTag, { value: "Module" }));
@@ -11098,7 +12594,7 @@ const index$5 = () => {
     }
   ) });
 };
-const route30 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route31 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$5
 }, Symbol.toStringTag, { value: "Module" }));
@@ -11247,7 +12743,7 @@ const index$4 = () => {
     }
   ) });
 };
-const route31 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route32 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$4
 }, Symbol.toStringTag, { value: "Module" }));
@@ -11468,7 +12964,7 @@ const index$3 = () => {
     }
   ) });
 };
-const route32 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route33 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$3
 }, Symbol.toStringTag, { value: "Module" }));
@@ -11658,7 +13154,7 @@ const Index = () => {
     }
   ) });
 };
-const route33 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route34 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: Index
 }, Symbol.toStringTag, { value: "Module" }));
@@ -11739,7 +13235,7 @@ const ChangeEmailBody = ({ userGuid, email, response }) => {
     }
   ) });
 };
-const loader$E = async ({ request, params }) => {
+const loader$H = async ({ request, params }) => {
   const url = new URL(request.url);
   let userGuid = url.searchParams.get("guid");
   let email = url.searchParams.get("email");
@@ -11772,10 +13268,10 @@ const index$2 = () => {
     }
   ) }) });
 };
-const route34 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route35 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$2,
-  loader: loader$E
+  loader: loader$H
 }, Symbol.toStringTag, { value: "Module" }));
 const passwordValidation$1 = new RegExp(
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!()£@$%^&*-]).{8,}$/
@@ -11968,7 +13464,7 @@ const ResetPasswordBody$1 = ({ userGuid }) => {
         md:bg-[url('https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=1200')]
         bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(ResetPasswordForm$1, { guid: userGuid }) });
 };
-const loader$D = async ({ request, params }) => {
+const loader$G = async ({ request, params }) => {
   new URL(request.url);
   let userGuid = params.guid;
   const data = {
@@ -11981,10 +13477,10 @@ const index$1 = () => {
   const userGuid = loaderData.guid;
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(ResetPasswordBody$1, { userGuid }) });
 };
-const route35 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route36 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index$1,
-  loader: loader$D
+  loader: loader$G
 }, Symbol.toStringTag, { value: "Module" }));
 const passwordValidation = new RegExp(
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!()£@$%^&*-]).{8,}$/
@@ -12144,7 +13640,7 @@ const ResetPasswordBody = ({ userGuid }) => {
         md:bg-[url('https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=1200')]
         bg-cover bg-center min-h-screen flex place-content-center`, children: /* @__PURE__ */ jsx(ResetPasswordForm, { guid: userGuid }) });
 };
-const loader$C = async ({ request, params }) => {
+const loader$F = async ({ request, params }) => {
   new URL(request.url);
   let userGuid = params.guid;
   const data = {
@@ -12157,10 +13653,10 @@ const index = () => {
   const userGuid = loaderData.guid;
   return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(ResetPasswordBody, { userGuid }) });
 };
-const route36 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route37 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: index,
-  loader: loader$C
+  loader: loader$F
 }, Symbol.toStringTag, { value: "Module" }));
 let cachedPool = global.mysqlPool || null;
 const DATABASE_HOST = "localhost";
@@ -12277,7 +13773,7 @@ const getResetPasswordEmailCompleted = (first_name) => {
 
         ${formattedSitename} Support`;
 };
-async function loader$B() {
+async function loader$E() {
   let users = null;
   try {
     users = await query(`SELECT * FROM tbl_user ORDER BY date_created DESC`);
@@ -12290,7 +13786,7 @@ async function loader$B() {
     headers: { "Content-Type": "application/json" }
   });
 }
-async function action$j({ request }) {
+async function action$l({ request }) {
   if (request.method === "POST") {
     try {
       const contentType = request.headers.get("Content-Type");
@@ -12354,10 +13850,10 @@ async function action$j({ request }) {
   }
   return DoResponse({ message: "method not allowed" }, 200);
 }
-const route37 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route38 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$j,
-  loader: loader$B
+  action: action$l,
+  loader: loader$E
 }, Symbol.toStringTag, { value: "Module" }));
 const VerifiedStatus = {
   OK: true,
@@ -12373,13 +13869,13 @@ const RequestStatus = {
   CLOSED: "closed"
 };
 const JWT_SECRET$1 = "2454522643636363463643565346346";
-const loader$A = async ({ request, params }) => {
+const loader$D = async ({ request, params }) => {
   return DoResponse({
     success: false,
     message: "method not allowed"
   }, 405);
 };
-const action$i = async ({ request }) => {
+const action$k = async ({ request }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 405);
@@ -12445,13 +13941,13 @@ const action$i = async ({ request }) => {
     return DoResponse({ message: error.message }, 500);
   }
 };
-const route38 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route39 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$i,
-  loader: loader$A
+  action: action$k,
+  loader: loader$D
 }, Symbol.toStringTag, { value: "Module" }));
 const JWT_SECRET = "2454522643636363463643565346346";
-async function action$h({ request, params }) {
+async function action$j({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 405);
@@ -12468,11 +13964,11 @@ async function action$h({ request, params }) {
   }
   return DoResponse({ success: false, message: "method not allowed" }, 405);
 }
-const route39 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route40 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$h
+  action: action$j
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$z = async ({ request, params }) => {
+const loader$C = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -12499,7 +13995,7 @@ const loader$z = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const action$g = async ({ request, params }) => {
+const action$i = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -12598,12 +14094,12 @@ const action$g = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const route40 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route41 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$g,
-  loader: loader$z
+  action: action$i,
+  loader: loader$C
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$y = async ({ request, params }) => {
+const loader$B = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -12611,7 +14107,7 @@ const loader$y = async ({ request, params }) => {
     );
   }
 };
-async function action$f({ request, params }) {
+async function action$h({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -12668,12 +14164,12 @@ async function action$f({ request, params }) {
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route41 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route42 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$f,
-  loader: loader$y
+  action: action$h,
+  loader: loader$B
 }, Symbol.toStringTag, { value: "Module" }));
-async function action$e({ request }) {
+async function action$g({ request }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -12776,11 +14272,11 @@ async function action$e({ request }) {
   }
   return DoResponse({ message: "method not allowed" }, 200);
 }
-const route42 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route43 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$e
+  action: action$g
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$x = async ({ request, params }) => {
+const loader$A = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -12788,7 +14284,7 @@ const loader$x = async ({ request, params }) => {
     );
   }
 };
-async function action$d({ request, params }) {
+async function action$f({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -12881,12 +14377,12 @@ async function action$d({ request, params }) {
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route43 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route44 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$d,
-  loader: loader$x
+  action: action$f,
+  loader: loader$A
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$w = async ({ request, params }) => {
+const loader$z = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -12898,7 +14394,7 @@ const loader$w = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const action$c = async ({ request, params }) => {
+const action$e = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -12973,12 +14469,12 @@ const action$c = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const route44 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$c,
-  loader: loader$w
+  action: action$e,
+  loader: loader$z
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$v = async ({ request, params }) => {
+const loader$y = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -12994,11 +14490,11 @@ const loader$v = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const route45 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route46 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$v
+  loader: loader$y
 }, Symbol.toStringTag, { value: "Module" }));
-async function action$b({ request }) {
+async function action$d({ request }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -13087,11 +14583,11 @@ async function action$b({ request }) {
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route46 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route47 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$b
+  action: action$d
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$u = async ({ request, params }) => {
+const loader$x = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -13099,7 +14595,7 @@ const loader$u = async ({ request, params }) => {
     );
   }
 };
-async function action$a({ request, params }) {
+async function action$c({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -13176,12 +14672,12 @@ async function action$a({ request, params }) {
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route47 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route48 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$a,
-  loader: loader$u
+  action: action$c,
+  loader: loader$x
 }, Symbol.toStringTag, { value: "Module" }));
-async function action$9({ request, params }) {
+async function action$b({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 500);
@@ -13244,11 +14740,11 @@ async function action$9({ request, params }) {
   }
   return DoResponse({ message: "method not allowed" }, 500);
 }
-const route48 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route49 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$9
+  action: action$b
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$t = async ({ request, params }) => {
+const loader$w = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return new Response(JSON.stringify({ error: "Invalid content type. Expected JSON." }));
@@ -13265,7 +14761,7 @@ const loader$t = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-async function action$8({ request, params }) {
+async function action$a({ request, params }) {
   if (request.method === "POST") {
     try {
       const contentType = request.headers.get("Content-Type");
@@ -13385,12 +14881,12 @@ async function action$8({ request, params }) {
     }
   }
 }
-const route49 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route50 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$8,
-  loader: loader$t
+  action: action$a,
+  loader: loader$w
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$s = async ({ request, params }) => {
+const loader$v = async ({ request, params }) => {
   try {
     const id = params.guid_or_username;
     const rows = await query(`SELECT 
@@ -13417,7 +14913,7 @@ const loader$s = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const action$7 = async ({ request, params }) => {
+const action$9 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -13631,12 +15127,12 @@ const action$7 = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const route50 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route51 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$7,
-  loader: loader$s
+  action: action$9,
+  loader: loader$v
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$r = async ({ request, params }) => {
+const loader$u = async ({ request, params }) => {
   try {
     const url = new URL(request.url);
     let criteria = url.searchParams.get("q");
@@ -13756,11 +15252,11 @@ const loader$r = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route51 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route52 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$r
+  loader: loader$u
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$q = async ({ request, params }) => {
+const loader$t = async ({ request, params }) => {
   try {
     const id = params.guid_or_username;
     const isFeatured = true;
@@ -13818,11 +15314,11 @@ const loader$q = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route52 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route53 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$q
+  loader: loader$t
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$p = async ({ request, params }) => {
+const loader$s = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const businessGuid = params.business_guid;
   const selectedFeatureQuery = `SELECT
@@ -13844,11 +15340,11 @@ const loader$p = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route53 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route54 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$p
+  loader: loader$s
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$o = async ({ params }) => {
+const loader$r = async ({ params }) => {
   try {
     const category = params.category;
     const limitRaw = params.limit;
@@ -13878,11 +15374,11 @@ const loader$o = async ({ params }) => {
     return DoResponse({ error: error.message }, 500);
   }
 };
-const route54 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route55 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$o
+  loader: loader$r
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$n = async ({ request, params }) => {
+const loader$q = async ({ request, params }) => {
   const businessGuid = params.business_guid;
   try {
     const rawdata = await query(`SELECT * FROM tbl_business_gallery_image 
@@ -13894,11 +15390,11 @@ const loader$n = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route55 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route56 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$n
+  loader: loader$q
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$m = async ({ request, params }) => {
+const loader$p = async ({ request, params }) => {
   if (request.method === "GET") {
     const guid = params.guid;
     const rows = await query(
@@ -13913,11 +15409,11 @@ const loader$m = async ({ request, params }) => {
     return DoResponse(rows[0], 200);
   }
 };
-const route56 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route57 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$m
+  loader: loader$p
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$l = async ({ request, params }) => {
+const loader$o = async ({ request, params }) => {
   try {
     const url = new URL(request.url);
     let criteria = url.searchParams.get("q");
@@ -14040,17 +15536,17 @@ const loader$l = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route57 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route58 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$l
+  loader: loader$o
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$k = async ({ request, params }) => {
+const loader$n = async ({ request, params }) => {
   return DoResponse({
     success: false,
     message: "method not allowed"
   }, 405);
 };
-const action$6 = async ({ request, params }) => {
+const action$8 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse({ error: "Invalid content type. Expected JSON." }, 405);
@@ -14093,12 +15589,12 @@ const action$6 = async ({ request, params }) => {
     }
   }
 };
-const route58 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route59 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$6,
-  loader: loader$k
+  action: action$8,
+  loader: loader$n
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$j = async ({ request, params }) => {
+const loader$m = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return new Response(JSON.stringify({ error: "Invalid content type. Expected JSON." }));
@@ -14133,7 +15629,7 @@ const loader$j = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const action$5 = async ({ request, params }) => {
+const action$7 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -14279,12 +15775,12 @@ const action$5 = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const route59 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route60 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$5,
-  loader: loader$j
+  action: action$7,
+  loader: loader$m
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$i = async ({ request, params }) => {
+const loader$l = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const buid = params.business_guid;
   const user_guid = params.user_guid;
@@ -14302,11 +15798,11 @@ const loader$i = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route60 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route61 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$i
+  loader: loader$l
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$h = async ({ request, params }) => {
+const loader$k = async ({ request, params }) => {
   request.headers.get("Content-Type");
   params.buid;
   params.user_guid;
@@ -14318,11 +15814,11 @@ const loader$h = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route61 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route62 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$h
+  loader: loader$k
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$g = async ({ request, params }) => {
+const loader$j = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const businessGuid = params.business_guid;
   const userGuid = params.user_guid;
@@ -14343,11 +15839,11 @@ const loader$g = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route62 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route63 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$g
+  loader: loader$j
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$f = async ({ request, params }) => {
+const loader$i = async ({ request, params }) => {
   request.headers.get("Content-Type");
   params.buid;
   params.user_guid;
@@ -14358,7 +15854,7 @@ const loader$f = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-async function action$4({ request, params }) {
+async function action$6({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return new Response(JSON.stringify({ error: "Invalid content type. Expected JSON." }));
@@ -14404,12 +15900,12 @@ async function action$4({ request, params }) {
     }
   }
 }
-const route63 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route64 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$4,
-  loader: loader$f
+  action: action$6,
+  loader: loader$i
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$e = async ({ request, params }) => {
+const loader$h = async ({ request, params }) => {
   request.headers.get("Content-Type");
   params.buid;
   params.user_guid;
@@ -14421,11 +15917,11 @@ const loader$e = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route64 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route65 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$e
+  loader: loader$h
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$d = async ({ request, params }) => {
+const loader$g = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const businessGuid = params.business_guid;
   const userGuid = params.user_guid;
@@ -14446,11 +15942,11 @@ const loader$d = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route65 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route66 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$d
+  loader: loader$g
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$c = async ({ request, params }) => {
+const loader$f = async ({ request, params }) => {
   request.headers.get("Content-Type");
   params.buid;
   params.user_guid;
@@ -14461,7 +15957,7 @@ const loader$c = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-async function action$3({ request, params }) {
+async function action$5({ request, params }) {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return new Response(JSON.stringify({ error: "Invalid content type. Expected JSON." }));
@@ -14507,12 +16003,12 @@ async function action$3({ request, params }) {
     }
   }
 }
-const route66 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route67 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$3,
-  loader: loader$c
+  action: action$5,
+  loader: loader$f
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$b = async ({ request, params }) => {
+const loader$e = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const businessGuid = params.business_guid;
   try {
@@ -14534,11 +16030,11 @@ const loader$b = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route67 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route68 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  loader: loader$b
+  loader: loader$e
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$a = async ({ request, params }) => {
+const loader$d = async ({ request, params }) => {
   request.headers.get("Content-Type");
   const businessGuid = params.business_guid;
   const userGuid = params.user_guid;
@@ -14554,7 +16050,7 @@ const loader$a = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const action$2 = async ({ request, params }) => {
+const action$4 = async ({ request, params }) => {
   const contentType = request.headers.get("Content-Type");
   if (contentType !== "application/json") {
     return DoResponse(
@@ -14609,12 +16105,12 @@ const action$2 = async ({ request, params }) => {
     message: "method not allowed"
   }, 405);
 };
-const route68 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route69 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  action: action$2,
-  loader: loader$a
+  action: action$4,
+  loader: loader$d
 }, Symbol.toStringTag, { value: "Module" }));
-const loader$9 = async ({ request, params }) => {
+const loader$c = async ({ request, params }) => {
   try {
     const rows = await query(`SELECT 
             d.*, 
@@ -14643,15 +16139,269 @@ const loader$9 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const action$1 = async ({ request, params }) => {
+const action$3 = async ({ request, params }) => {
   return DoResponse({
     success: false,
     message: "method not allowed"
   }, 405);
 };
-const route69 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route70 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$3,
+  loader: loader$c
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$b = async ({ request, params }) => {
+  const businessGuid = params.business_guid;
+  const userGuid = params.user_guid;
+  try {
+    const rawdata = await query(`SELECT * FROM tbl_business_gallery_video 
+            WHERE 
+            business_guid = ? 
+            AND 
+            user_guid = ?
+            ORDER BY date_created DESC`, [businessGuid, userGuid]);
+    if (rawdata.length <= 0) {
+      return DoResponse({}, 200);
+    }
+    return DoResponse(rawdata, 200);
+  } catch (error) {
+    console.log(error.message);
+    return DoResponse({ "error": error.message }, 500);
+  }
+};
+async function action$2({ request }) {
+  if (request.method === "POST") {
+    try {
+      const body = await request.json();
+      if (!body.video_url || !body.video_title) {
+        return DoResponse({ error: "Please enter video link and video title" }, 400);
+      }
+      if (!body.business_guid) {
+        return DoResponse({ error: "Business Id is missing. Contact Admin" }, 400);
+      }
+      if (!body.user_guid) {
+        return DoResponse({ error: "User Id is missing. Contact Admin" }, 400);
+      }
+      const videoGuid = crypto.randomUUID();
+      const videoLink = body.video_url;
+      const videoTitle = body.video_title;
+      const videoDescription = body.video_description;
+      const userGuid = body.user_guid;
+      const businessGuid = body.business_guid;
+      {
+      }
+      const insert = await query(
+        `INSERT INTO tbl_business_gallery_video
+      (video_title, video_url, video_description, video_guid, user_guid, business_guid)
+      VALUES (?, ?, ?, ?, ?, ?)`,
+        [videoTitle, videoLink, videoDescription, videoGuid, userGuid, businessGuid]
+      );
+      const data = {
+        success: true,
+        message: "Video added successfully",
+        videoInsertId: insert.insertId,
+        user_guid: userGuid,
+        business_guid: businessGuid,
+        videoLink,
+        videoTitle,
+        videoDescription
+      };
+      return DoResponse({ data }, 200);
+    } catch (error) {
+      return DoResponse({ message: error.message }, 500);
+    }
+  }
+  if (request.method === "PUT") {
+    try {
+      const body = await request.json();
+      if (!body.video_url || !body.video_title) {
+        return DoResponse({ error: "Please enter video link and video title" }, 400);
+      }
+      if (!body.business_guid) {
+        return DoResponse({ error: "Business Id is missing. Contact Admin" }, 400);
+      }
+      if (!body.user_guid) {
+        return DoResponse({ error: "User Id is missing. Contact Admin" }, 400);
+      }
+      if (!body.video_guid) {
+        return DoResponse({ error: "Video guid is missing. Contact Admin" }, 400);
+      }
+      const videoGuid = body.video_guid;
+      const videoLink = body.video_url;
+      const videoTitle = body.video_title;
+      const videoDescription = body.video_description;
+      const userGuid = body.user_guid;
+      const businessGuid = body.business_guid;
+      {
+      }
+      const update = await query(
+        `UPDATE tbl_business_gallery_video
+                SET 
+                video_url = ?,
+                video_title = ?, 
+                video_description = ? 
+                WHERE
+                video_guid = ?
+                AND
+                business_guid = ?
+                AND
+                user_guid = ?`,
+        [
+          videoLink,
+          videoTitle,
+          videoDescription,
+          videoGuid,
+          businessGuid,
+          userGuid
+        ]
+      );
+      const data = {
+        success: true,
+        message: "Video updated successfully",
+        user_guid: userGuid,
+        business_guid: businessGuid,
+        videoLink,
+        videoTitle,
+        videoDescription
+      };
+      return DoResponse({ data }, 200);
+    } catch (error) {
+      return DoResponse({ message: error.message }, 500);
+    }
+  }
+  if (request.method === "DELETE") {
+    try {
+      const contentType = request.headers.get("Content-Type");
+      if (!(contentType == null ? void 0 : contentType.includes("application/json"))) {
+        return DoResponse({ error: "Invalid content type. Expected JSON." }, 415);
+      }
+      const body = await request.json();
+      const { user_guid, business_guid, video_guid } = body;
+      if (!user_guid || !business_guid || !video_guid) {
+        return DoResponse({ error: "Missing required fields. Contact Admin" }, 400);
+      }
+      const [existingImageRecord] = await query(
+        `SELECT * FROM tbl_business_gallery_video
+                WHERE user_guid = ?
+                AND business_guid = ?
+                AND video_guid = ?`,
+        [user_guid, business_guid, video_guid]
+      );
+      const video = existingImageRecord;
+      if (video.length <= 0) {
+        return DoResponse({ message: "Video does not exist" }, 200);
+      }
+      await query(
+        `DELETE FROM tbl_business_gallery_video
+                WHERE user_guid = ? AND
+                business_guid = ? AND
+                video_guid = ?`,
+        [user_guid, business_guid, video_guid]
+      );
+      return DoResponse(
+        {
+          message: "File deleted successfully"
+        },
+        200
+      );
+    } catch (error) {
+      console.error("Deletion error:", error);
+      return DoResponse({ error: error.message || "Deletion failed" }, 500);
+    }
+  }
+  return DoResponse({ message: "method not allowed" }, 200);
+}
+const route71 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  action: action$2,
+  loader: loader$b
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$a = async ({ request, params }) => {
+  const businessGuid = params.business_guid;
+  const userGuid = params.user_guid;
+  try {
+    const rawdata = await query(`SELECT * FROM tbl_business_gallery_video 
+            WHERE 
+            business_guid = ? 
+            AND 
+            user_guid = ?
+            ORDER BY date_created DESC`, [businessGuid, userGuid]);
+    if (rawdata.length <= 0) {
+      return DoResponse({}, 200);
+    }
+    return DoResponse(rawdata, 200);
+  } catch (error) {
+    console.log(error.message);
+    return DoResponse({ "error": error.message }, 500);
+  }
+};
+async function action$1({ request }) {
+  if (request.method === "POST") {
+    try {
+      const body = await request.json();
+      if (!body.video_url || !body.video_title) {
+        return DoResponse({ error: "Please enter video link and video title" }, 400);
+      }
+      if (!body.business_guid) {
+        return DoResponse({ error: "Business Id is missing. Contact Admin" }, 400);
+      }
+      if (!body.user_guid) {
+        return DoResponse({ error: "User Id is missing. Contact Admin" }, 400);
+      }
+      const videoGuid = crypto.randomUUID();
+      const videoLink = body.video_url;
+      const videoTitle = body.video_title;
+      const videoDescription = body.video_description;
+      const userGuid = body.user_guid;
+      const businessGuid = body.business_guid;
+      {
+      }
+      const insert = await query(
+        `INSERT INTO tbl_business_gallery_video
+      (video_title, video_url, video_description, video_guid, user_guid, business_guid)
+      VALUES (?, ?, ?, ?, ?, ?)`,
+        [videoTitle, videoLink, videoDescription, videoGuid, userGuid, businessGuid]
+      );
+      const data = {
+        success: true,
+        message: "Video added successfully",
+        videoInsertId: insert.insertId,
+        user_guid: userGuid,
+        business_guid: businessGuid,
+        videoLink,
+        videoTitle,
+        videoDescription
+      };
+      return DoResponse({ data }, 200);
+    } catch (error) {
+      return DoResponse({ message: error.message }, 500);
+    }
+  }
+  return DoResponse({ message: "method not allowed" }, 200);
+}
+const route72 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   action: action$1,
+  loader: loader$a
+}, Symbol.toStringTag, { value: "Module" }));
+const loader$9 = async ({ request, params }) => {
+  const businessGuid = params.business_guid;
+  try {
+    const rawdata = await query(`SELECT * FROM tbl_business_gallery_video 
+            WHERE 
+            business_guid = ? 
+            ORDER BY date_created DESC`, [businessGuid]);
+    if (rawdata.length <= 0) {
+      return DoResponse({}, 200);
+    }
+    return DoResponse(rawdata, 200);
+  } catch (error) {
+    console.log(error.message);
+    return DoResponse({ "error": error.message }, 500);
+  }
+};
+const route73 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
   loader: loader$9
 }, Symbol.toStringTag, { value: "Module" }));
 const loader$8 = async ({ request, params }) => {
@@ -14764,7 +16514,7 @@ async function action({ request }) {
   }
   return DoResponse({ error: "method not allowed" }, 200);
 }
-const route70 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route74 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   action,
   loader: loader$8
@@ -14791,7 +16541,7 @@ const loader$7 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route71 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route75 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$7
 }, Symbol.toStringTag, { value: "Module" }));
@@ -14827,7 +16577,7 @@ const loader$6 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route72 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route76 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$6
 }, Symbol.toStringTag, { value: "Module" }));
@@ -14850,7 +16600,7 @@ const loader$5 = async ({ request, params }) => {
     return DoResponse({ "error": error.message }, 500);
   }
 };
-const route73 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route77 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$5
 }, Symbol.toStringTag, { value: "Module" }));
@@ -14879,7 +16629,7 @@ const loader$4 = async ({ request, params }) => {
     return DoResponse(states, 200);
   }
 };
-const route74 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route78 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$4
 }, Symbol.toStringTag, { value: "Module" }));
@@ -14898,7 +16648,7 @@ const loader$3 = async ({ request, params }) => {
     return DoResponse(countries, 200);
   }
 };
-const route75 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route79 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$3
 }, Symbol.toStringTag, { value: "Module" }));
@@ -14933,7 +16683,7 @@ const loader$2 = async ({ request, params }) => {
     return DoResponse(countries, 200);
   }
 };
-const route76 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route80 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$2
 }, Symbol.toStringTag, { value: "Module" }));
@@ -14971,7 +16721,7 @@ const loader$1 = async ({ request, params }) => {
     return DoResponse(cities, 200);
   }
 };
-const route77 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route81 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader: loader$1
 }, Symbol.toStringTag, { value: "Module" }));
@@ -14990,11 +16740,11 @@ const loader = async ({ request, params }) => {
     return GetResponse(rows, true, 200);
   }
 };
-const route78 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const route82 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   loader
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-_aLB_YWL.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-DEW6DJiW.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/SliderContext-BDr2aQk1.js", "/assets/EditPhotoDialogContext-DSEC5bSQ.js", "/assets/lib-DdbhYNUc.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js"], "css": ["/assets/root-Bl1Xobn_.css"] }, "routes/_index_second_backup": { "id": "routes/_index_second_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_second_backup-CWWCT86h.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/HomeNav-CkaWgw87.js", "/assets/components-CooaLra5.js", "/assets/lib-DdbhYNUc.js", "/assets/Hamburger-_nks-8mh.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/Footer-3Sy7ZqJa.js", "/assets/index-C5cRznDX.js", "/assets/index-CCABdVaD.js", "/assets/TopAd-C5zsfElp.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/LatestStarRating-mWtvQAlk.js", "/assets/json-D2Oq_qRn.js"], "css": [] }, "routes/_index_backup": { "id": "routes/_index_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_backup-DElSvjLt.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/Footer-3Sy7ZqJa.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/lib-DdbhYNUc.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/components-CooaLra5.js", "/assets/index-CCABdVaD.js", "/assets/Hamburger-_nks-8mh.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/LatestStarRating-mWtvQAlk.js", "/assets/AuthContext-B4mBwRUt.js"], "css": [] }, "routes/landing": { "id": "routes/landing", "parentId": "root", "path": "landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-hB-nYWf7.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/lib-DdbhYNUc.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/Hamburger-_nks-8mh.js", "/assets/DiscoverSection-Ll5xe8C9.js", "/assets/FooterSection-BDVCE04V.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/index-CWk5XziR.js"], "css": [] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CxMYltoV.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/index-CffT3Qu-.js", "/assets/SliderContext-BDr2aQk1.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/index-CK3s5Z0L.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/lib-DdbhYNUc.js", "/assets/index-C5cRznDX.js", "/assets/facility_features-DpeZIcZy.js", "/assets/TopAd-C5zsfElp.js", "/assets/SearchLayout-O-1qifBr.js", "/assets/FooterSection-BDVCE04V.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/index-CWk5XziR.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/index-CCABdVaD.js", "/assets/json-D2Oq_qRn.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/HamburgerSecondary-CbrA4FE_.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-BLfBG40g.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/DiscoverSection-Ll5xe8C9.js", "/assets/FooterSection-BDVCE04V.js", "/assets/components-CooaLra5.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/index-CffT3Qu-.js", "/assets/lib-DdbhYNUc.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-C5cRznDX.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/index-CWk5XziR.js"], "css": [] }, "routes/_404": { "id": "routes/_404", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_404-ClNnXknK.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/index-CffT3Qu-.js", "/assets/lib-DdbhYNUc.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/Hamburger-_nks-8mh.js", "/assets/index-C5cRznDX.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js"], "css": [] }, "routes/web": { "id": "routes/web", "parentId": "root", "path": "web", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BspaleB3.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CxMYltoV.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/index-CffT3Qu-.js", "/assets/SliderContext-BDr2aQk1.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/index-CK3s5Z0L.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/lib-DdbhYNUc.js", "/assets/index-C5cRznDX.js", "/assets/facility_features-DpeZIcZy.js", "/assets/TopAd-C5zsfElp.js", "/assets/SearchLayout-O-1qifBr.js", "/assets/FooterSection-BDVCE04V.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/index-CWk5XziR.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/index-CCABdVaD.js", "/assets/json-D2Oq_qRn.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/HamburgerSecondary-CbrA4FE_.js"], "css": [] }, "routes/landing/index": { "id": "routes/landing/index", "parentId": "root", "path": "/landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-hB-nYWf7.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/lib-DdbhYNUc.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/Hamburger-_nks-8mh.js", "/assets/DiscoverSection-Ll5xe8C9.js", "/assets/FooterSection-BDVCE04V.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/index-CWk5XziR.js"], "css": [] }, "routes/web/search/index": { "id": "routes/web/search/index", "parentId": "root", "path": "/web/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-UYgxzFni.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/lib-DdbhYNUc.js", "/assets/index-CCABdVaD.js", "/assets/index-CffT3Qu-.js", "/assets/LatestStarRating-mWtvQAlk.js", "/assets/json-D2Oq_qRn.js", "/assets/TopAd-C5zsfElp.js", "/assets/SearchLayout-O-1qifBr.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-BDVCE04V.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-C5cRznDX.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/index-CWk5XziR.js"], "css": [] }, "routes/web/browse/index": { "id": "routes/web/browse/index", "parentId": "root", "path": "/web/browse", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DQOHjqjg.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/json-D2Oq_qRn.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/index-CffT3Qu-.js", "/assets/lib-DdbhYNUc.js", "/assets/index-C5cRznDX.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js"], "css": [] }, "routes/web/browse/browse": { "id": "routes/web/browse/browse", "parentId": "root", "path": "/web/browser", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/browse-BRrSszlA.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/components-CooaLra5.js", "/assets/index-CffT3Qu-.js", "/assets/lib-DdbhYNUc.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-C5cRznDX.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js"], "css": [] }, "routes/web/signin/index": { "id": "routes/web/signin/index", "parentId": "root", "path": "/web/signin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-huxMHNC1.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/index-CK3s5Z0L.js", "/assets/components-CooaLra5.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/lib-DdbhYNUc.js"], "css": [] }, "routes/web/signup/index": { "id": "routes/web/signup/index", "parentId": "root", "path": "/web/signup", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C1rWy1ky.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/index-CK3s5Z0L.js", "/assets/components-CooaLra5.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/lib-DdbhYNUc.js"], "css": [] }, "routes/web/reset_password/index": { "id": "routes/web/reset_password/index", "parentId": "root", "path": "/web/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index--cFoq8Gg.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/index-CK3s5Z0L.js", "/assets/components-CooaLra5.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/lib-DdbhYNUc.js"], "css": [] }, "routes/web/account/index": { "id": "routes/web/account/index", "parentId": "root", "path": "/web/account", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CzMgw3IR.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/components-CooaLra5.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/lib-DdbhYNUc.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js"], "css": [] }, "routes/web/account/profile/index": { "id": "routes/web/account/profile/index", "parentId": "root", "path": "/web/account/profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B2T5os8D.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/index-CK3s5Z0L.js", "/assets/Input-CtFaxrSO.js", "/assets/Select-DLw8VHCj.js", "/assets/lib-DdbhYNUc.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/email_address/index": { "id": "routes/web/account/email_address/index", "parentId": "root", "path": "/web/account/email_address", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BLZCf_Xb.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/lib-DdbhYNUc.js", "/assets/index-CK3s5Z0L.js", "/assets/Input-CtFaxrSO.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/change_password/index": { "id": "routes/web/account/change_password/index", "parentId": "root", "path": "/web/account/change_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-4DiLqEH0.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/lib-DdbhYNUc.js", "/assets/index-CK3s5Z0L.js", "/assets/Input-CtFaxrSO.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/reset_password/index": { "id": "routes/web/account/reset_password/index", "parentId": "root", "path": "/web/account/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DDXcN51u.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/lib-DdbhYNUc.js", "/assets/index-CK3s5Z0L.js", "/assets/Input-CtFaxrSO.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/deactivate_profile/index": { "id": "routes/web/account/deactivate_profile/index", "parentId": "root", "path": "/web/account/deactivate_profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-9I9eiC3W.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/lib-DdbhYNUc.js", "/assets/index-CK3s5Z0L.js", "/assets/Input-CtFaxrSO.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/terms/index": { "id": "routes/web/terms/index", "parentId": "root", "path": "/web/terms", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BJZLdCZE.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/NormalLayout-DnJv7opZ.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-BDVCE04V.js", "/assets/components-CooaLra5.js", "/assets/index-CffT3Qu-.js", "/assets/lib-DdbhYNUc.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-C5cRznDX.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/index-CWk5XziR.js"], "css": [] }, "routes/web/privacy/index": { "id": "routes/web/privacy/index", "parentId": "root", "path": "/web/privacy", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Dgd7Beqq.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/NormalLayout-DnJv7opZ.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-BDVCE04V.js", "/assets/components-CooaLra5.js", "/assets/index-CffT3Qu-.js", "/assets/lib-DdbhYNUc.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-C5cRznDX.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/index-CWk5XziR.js"], "css": [] }, "routes/web/contact/index": { "id": "routes/web/contact/index", "parentId": "root", "path": "/web/contact", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CUdrC8Iu.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/NormalLayout-DnJv7opZ.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-BDVCE04V.js", "/assets/components-CooaLra5.js", "/assets/index-CffT3Qu-.js", "/assets/lib-DdbhYNUc.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-C5cRznDX.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/index-CWk5XziR.js"], "css": [] }, "routes/web/account/portfolio/index": { "id": "routes/web/account/portfolio/index", "parentId": "root", "path": "/web/account/portfolio", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B-FEwo-j.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/lib-DdbhYNUc.js", "/assets/CardTitle-0ozTtK0F.js", "/assets/index-CffT3Qu-.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-C5cRznDX.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js"], "css": [] }, "routes/web/account/portfolio/business/index": { "id": "routes/web/account/portfolio/business/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BY_HW41C.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/lib-DdbhYNUc.js", "/assets/index-CK3s5Z0L.js", "/assets/index-C5cRznDX.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/Input-CtFaxrSO.js", "/assets/TextareaWithWordLimit-RjwjEoSj.js", "/assets/Select-DLw8VHCj.js", "/assets/json-D2Oq_qRn.js", "/assets/BusinessHeader-BPFQEs-d.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/index-CCABdVaD.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/create_business/index": { "id": "routes/web/account/create_business/index", "parentId": "root", "path": "/web/account/create_business", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DtHJXBvQ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/index-CK3s5Z0L.js", "/assets/lib-DdbhYNUc.js", "/assets/Input-CtFaxrSO.js", "/assets/Select-DLw8VHCj.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/TextareaWithWordLimit-RjwjEoSj.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/json-D2Oq_qRn.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/index-CCABdVaD.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/portfolio/business/settings/index": { "id": "routes/web/account/portfolio/business/settings/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/settings", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-2vz_hH7h.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/index-CK3s5Z0L.js", "/assets/components-CooaLra5.js", "/assets/lib-DdbhYNUc.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/BusinessHeader-BPFQEs-d.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/portfolio/business/gallery/index": { "id": "routes/web/account/portfolio/business/gallery/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/gallery", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BDo4L5wY.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/lib-DdbhYNUc.js", "/assets/BusinessHeader-BPFQEs-d.js", "/assets/EditPhotoDialogContext-DSEC5bSQ.js", "/assets/index-CffT3Qu-.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/SliderContext-BDr2aQk1.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-C5cRznDX.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/portfolio/business/facilities/index": { "id": "routes/web/account/portfolio/business/facilities/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/facilities", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-hf36Botd.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/lib-DdbhYNUc.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/BusinessHeader-BPFQEs-d.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/facility_features-DpeZIcZy.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js", "/assets/index-CWk5XziR.js"], "css": [] }, "routes/web/account/portfolio/business/activate/index": { "id": "routes/web/account/portfolio/business/activate/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/activate", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BaBRElgO.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/lib-DdbhYNUc.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/BusinessHeader-BPFQEs-d.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/portfolio/business/social_media/index": { "id": "routes/web/account/portfolio/business/social_media/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CJhny8ED.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/lib-DdbhYNUc.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/BusinessHeader-BPFQEs-d.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/portfolio/business/delete/index": { "id": "routes/web/account/portfolio/business/delete/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/delete", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DBTy0PD_.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/lib-DdbhYNUc.js", "/assets/ContentLayout-Cg2cdvId.js", "/assets/BusinessHeader-BPFQEs-d.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/index-CK3s5Z0L.js", "/assets/Input-CtFaxrSO.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/UserMenu-Bw5ql17d.js", "/assets/index-CffT3Qu-.js", "/assets/index-C5cRznDX.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/HomeNav-CkaWgw87.js", "/assets/SrchNavbar-BLk362xv.js", "/assets/json-D2Oq_qRn.js", "/assets/index-CCABdVaD.js", "/assets/HamburgerSecondary-CbrA4FE_.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/landing/change_email/index": { "id": "routes/web/landing/change_email/index", "parentId": "root", "path": "/web/landing/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-9eatkvTk.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/index-C5cRznDX.js", "/assets/lib-DdbhYNUc.js"], "css": [] }, "routes/web/landing/reset_password/index": { "id": "routes/web/landing/reset_password/index", "parentId": "root", "path": "/web/landing/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-TNxMBGDG.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/index-CK3s5Z0L.js", "/assets/components-CooaLra5.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/lib-DdbhYNUc.js"], "css": [] }, "routes/web/landing/complete_signup/index": { "id": "routes/web/landing/complete_signup/index", "parentId": "root", "path": "/web/landing/complete_signup/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-VOUcVO5q.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/index-CK3s5Z0L.js", "/assets/components-CooaLra5.js", "/assets/WhiteLogo-CxnHxBCo.js", "/assets/AuthContext-B4mBwRUt.js", "/assets/NotificationContext-DC0B6ih2.js", "/assets/lib-DdbhYNUc.js"], "css": [] }, "routes/api/user/index": { "id": "routes/api/user/index", "parentId": "root", "path": "api/user", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/signin": { "id": "routes/api/user/signin", "parentId": "root", "path": "api/user/signin", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/signin-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verifytoken": { "id": "routes/api/user/verifytoken", "parentId": "root", "path": "api/user/verifytoken", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verifytoken-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user": { "id": "routes/api/user/user", "parentId": "root", "path": "api/user/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_password": { "id": "routes/api/user/change_password", "parentId": "root", "path": "api/user/change_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password_request": { "id": "routes/api/user/reset_password_request", "parentId": "root", "path": "api/user/reset_password_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password": { "id": "routes/api/user/reset_password", "parentId": "root", "path": "api/user/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/activate_deactivate": { "id": "routes/api/user/activate_deactivate", "parentId": "root", "path": "api/user/activate_deactivate/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate_deactivate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user_profile_image": { "id": "routes/api/user/user_profile_image", "parentId": "root", "path": "api/user/user_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email_request": { "id": "routes/api/user/change_email_request", "parentId": "root", "path": "api/user/change_email_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email": { "id": "routes/api/user/change_email", "parentId": "root", "path": "api/user/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verify_signup": { "id": "routes/api/user/verify_signup", "parentId": "root", "path": "api/user/verify_signup/:user_hash", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verify_signup-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/index": { "id": "routes/api/listing/index", "parentId": "root", "path": "api/listing", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DP2rzg_V.js", "imports": [], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/owner/index": { "id": "routes/api/listing/owner/index", "parentId": "root", "path": "api/listing/owner", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-K6Dvbx-E.js", "imports": [], "css": [] }, "routes/api/listing/delete_business": { "id": "routes/api/listing/delete_business", "parentId": "root", "path": "api/listing/delete_business/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/operating_hours": { "id": "routes/api/listing/operating_hours", "parentId": "root", "path": "api/listing/operating_hours", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/operating_hours-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/gallery": { "id": "routes/api/listing/gallery", "parentId": "root", "path": "api/listing/gallery/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/sys_facility_features/index": { "id": "routes/api/listing/sys_facility_features/index", "parentId": "root", "path": "api/listing/sys_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C6Kfwj0f.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/selected_facility_features": { "id": "routes/api/listing/selected_facility_features/selected_facility_features", "parentId": "root", "path": "api/listing/selected_facility_features/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/index": { "id": "routes/api/listing/selected_facility_features/index", "parentId": "root", "path": "api/listing/selected_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-RnTpOC5-.js", "imports": [], "css": [] }, "routes/api/listing/sys_social_media/index": { "id": "routes/api/listing/sys_social_media/index", "parentId": "root", "path": "api/listing/sys_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DVN7Oi2P.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/selected_social_media": { "id": "routes/api/listing/selected_social_media/selected_social_media", "parentId": "root", "path": "api/listing/selected_social_media/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/index": { "id": "routes/api/listing/selected_social_media/index", "parentId": "root", "path": "api/listing/selected_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DdXTRxfG.js", "imports": [], "css": [] }, "routes/api/listing/business_social_media": { "id": "routes/api/listing/business_social_media", "parentId": "root", "path": "api/listing/business_social_media/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/activate/activate": { "id": "routes/api/listing/activate/activate", "parentId": "root", "path": "api/listing/activate/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/recents": { "id": "routes/api/listing/recents", "parentId": "root", "path": "api/listing/recents", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/recents-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/index": { "id": "routes/api/rating/index", "parentId": "root", "path": "api/rating", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BIjMHF-b.js", "imports": [], "css": [] }, "routes/api/rating/rating": { "id": "routes/api/rating/rating", "parentId": "root", "path": "api/rating/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/rating-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/state": { "id": "routes/api/util/state", "parentId": "root", "path": "api/util/state", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/state-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country": { "id": "routes/api/util/country", "parentId": "root", "path": "api/util/country", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country_locale": { "id": "routes/api/util/country_locale", "parentId": "root", "path": "api/util/country_locale", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country_locale-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/city": { "id": "routes/api/util/city", "parentId": "root", "path": "api/util/city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/city-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/category": { "id": "routes/api/util/category", "parentId": "root", "path": "api/util/category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-067123bd.js", "version": "067123bd" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-_aLB_YWL.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-JiqFn2cU.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/SliderContext-BwGpNbrd.js", "/assets/EditPhotoDialogContext-5HzaFpUR.js", "/assets/EditVideoDialogContext-D-ALO94I.js", "/assets/VideoSliderContext-C-vluay3.js", "/assets/lib-BAntKQIv.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/index-C4bLmoCR.js", "/assets/index-D612TEPc.js"], "css": ["/assets/root-8gEvcmHh.css"] }, "routes/_index_second_backup": { "id": "routes/_index_second_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_second_backup-D6SQU6Go.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/components-CooaLra5.js", "/assets/lib-BAntKQIv.js", "/assets/Hamburger-BEno9KNT.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/Footer-veC7nAsn.js", "/assets/index-BbNtmRh-.js", "/assets/index-6Bge8BTM.js", "/assets/TopAd-gsM7DeJS.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/LatestStarRating-NwGnPPCL.js", "/assets/json-iWum99gU.js"], "css": [] }, "routes/_index_backup": { "id": "routes/_index_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_backup-B8BdsksU.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/Footer-veC7nAsn.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/lib-BAntKQIv.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/components-CooaLra5.js", "/assets/index-6Bge8BTM.js", "/assets/Hamburger-BEno9KNT.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/LatestStarRating-NwGnPPCL.js", "/assets/AuthContext-CBoD9vfH.js"], "css": [] }, "routes/landing": { "id": "routes/landing", "parentId": "root", "path": "landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DEpTLhdD.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/lib-BAntKQIv.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/Hamburger-BEno9KNT.js", "/assets/DiscoverSection-DvcTJWN8.js", "/assets/FooterSection-DcrAbOP4.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/index-D612TEPc.js"], "css": [] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CvrFsNnl.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/index-Bkgnt-Ax.js", "/assets/SliderContext-BwGpNbrd.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/zod-CNQGm8c5.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/lib-BAntKQIv.js", "/assets/index-BbNtmRh-.js", "/assets/facility_features-F5EnnpBT.js", "/assets/VideoSliderContext-C-vluay3.js", "/assets/TopAd-gsM7DeJS.js", "/assets/SearchLayout-BeeBOV-y.js", "/assets/FooterSection-DcrAbOP4.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/index-D612TEPc.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/index-6Bge8BTM.js", "/assets/json-iWum99gU.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/HamburgerSecondary-BIm_Q9D9.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-Cd9vDb6y.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/DiscoverSection-DvcTJWN8.js", "/assets/FooterSection-DcrAbOP4.js", "/assets/components-CooaLra5.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/index-Bkgnt-Ax.js", "/assets/lib-BAntKQIv.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-BbNtmRh-.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/index-D612TEPc.js"], "css": [] }, "routes/_404": { "id": "routes/_404", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_404-DSaFrS8u.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/index-Bkgnt-Ax.js", "/assets/lib-BAntKQIv.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/Hamburger-BEno9KNT.js", "/assets/index-BbNtmRh-.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js"], "css": [] }, "routes/web": { "id": "routes/web", "parentId": "root", "path": "web", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BspaleB3.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CvrFsNnl.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/index-Bkgnt-Ax.js", "/assets/SliderContext-BwGpNbrd.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/zod-CNQGm8c5.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/lib-BAntKQIv.js", "/assets/index-BbNtmRh-.js", "/assets/facility_features-F5EnnpBT.js", "/assets/VideoSliderContext-C-vluay3.js", "/assets/TopAd-gsM7DeJS.js", "/assets/SearchLayout-BeeBOV-y.js", "/assets/FooterSection-DcrAbOP4.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/index-D612TEPc.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/index-6Bge8BTM.js", "/assets/json-iWum99gU.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/HamburgerSecondary-BIm_Q9D9.js"], "css": [] }, "routes/landing/index": { "id": "routes/landing/index", "parentId": "root", "path": "/landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DEpTLhdD.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/lib-BAntKQIv.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/Hamburger-BEno9KNT.js", "/assets/DiscoverSection-DvcTJWN8.js", "/assets/FooterSection-DcrAbOP4.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/index-D612TEPc.js"], "css": [] }, "routes/web/search/index": { "id": "routes/web/search/index", "parentId": "root", "path": "/web/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-wey32Rm1.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/lib-BAntKQIv.js", "/assets/index-6Bge8BTM.js", "/assets/index-Bkgnt-Ax.js", "/assets/LatestStarRating-NwGnPPCL.js", "/assets/json-iWum99gU.js", "/assets/TopAd-gsM7DeJS.js", "/assets/SearchLayout-BeeBOV-y.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-DcrAbOP4.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-BbNtmRh-.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/index-D612TEPc.js"], "css": [] }, "routes/web/browse/index": { "id": "routes/web/browse/index", "parentId": "root", "path": "/web/browse", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DKqbUGpW.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/json-iWum99gU.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/index-Bkgnt-Ax.js", "/assets/lib-BAntKQIv.js", "/assets/index-BbNtmRh-.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js"], "css": [] }, "routes/web/browse/browse": { "id": "routes/web/browse/browse", "parentId": "root", "path": "/web/browser", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/browse-BRcAmatg.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/components-CooaLra5.js", "/assets/index-Bkgnt-Ax.js", "/assets/lib-BAntKQIv.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-BbNtmRh-.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js"], "css": [] }, "routes/web/signin/index": { "id": "routes/web/signin/index", "parentId": "root", "path": "/web/signin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-jbCIfRHB.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-CNQGm8c5.js", "/assets/components-CooaLra5.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/lib-BAntKQIv.js"], "css": [] }, "routes/web/signup/index": { "id": "routes/web/signup/index", "parentId": "root", "path": "/web/signup", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-cxeLcbvX.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-CNQGm8c5.js", "/assets/components-CooaLra5.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/lib-BAntKQIv.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/reset_password/index": { "id": "routes/web/reset_password/index", "parentId": "root", "path": "/web/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BKjr3oZR.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-CNQGm8c5.js", "/assets/components-CooaLra5.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/lib-BAntKQIv.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/account/index": { "id": "routes/web/account/index", "parentId": "root", "path": "/web/account", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-HnWjTpHj.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/components-CooaLra5.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/lib-BAntKQIv.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js"], "css": [] }, "routes/web/account/profile/index": { "id": "routes/web/account/profile/index", "parentId": "root", "path": "/web/account/profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DqPUSGW-.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/zod-CNQGm8c5.js", "/assets/Input-D7Usdb_B.js", "/assets/Select-CcjRqcCs.js", "/assets/index-C4bLmoCR.js", "/assets/lib-BAntKQIv.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/email_address/index": { "id": "routes/web/account/email_address/index", "parentId": "root", "path": "/web/account/email_address", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D3i-NO5I.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/lib-BAntKQIv.js", "/assets/zod-CNQGm8c5.js", "/assets/Input-D7Usdb_B.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/change_password/index": { "id": "routes/web/account/change_password/index", "parentId": "root", "path": "/web/account/change_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CDCPdGPF.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/lib-BAntKQIv.js", "/assets/zod-CNQGm8c5.js", "/assets/Input-D7Usdb_B.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/reset_password/index": { "id": "routes/web/account/reset_password/index", "parentId": "root", "path": "/web/account/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BnKzAUiM.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/lib-BAntKQIv.js", "/assets/zod-CNQGm8c5.js", "/assets/Input-D7Usdb_B.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/deactivate_profile/index": { "id": "routes/web/account/deactivate_profile/index", "parentId": "root", "path": "/web/account/deactivate_profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B3fY66zM.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/lib-BAntKQIv.js", "/assets/zod-CNQGm8c5.js", "/assets/Input-D7Usdb_B.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/terms/index": { "id": "routes/web/terms/index", "parentId": "root", "path": "/web/terms", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-OVBYUrpH.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/NormalLayout-Bst1Lu7P.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-DcrAbOP4.js", "/assets/components-CooaLra5.js", "/assets/index-Bkgnt-Ax.js", "/assets/lib-BAntKQIv.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-BbNtmRh-.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/index-D612TEPc.js"], "css": [] }, "routes/web/privacy/index": { "id": "routes/web/privacy/index", "parentId": "root", "path": "/web/privacy", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B9UUMz77.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/NormalLayout-Bst1Lu7P.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-DcrAbOP4.js", "/assets/components-CooaLra5.js", "/assets/index-Bkgnt-Ax.js", "/assets/lib-BAntKQIv.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-BbNtmRh-.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/index-D612TEPc.js"], "css": [] }, "routes/web/contact/index": { "id": "routes/web/contact/index", "parentId": "root", "path": "/web/contact", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BKg6kB8_.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/NormalLayout-Bst1Lu7P.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-DcrAbOP4.js", "/assets/components-CooaLra5.js", "/assets/index-Bkgnt-Ax.js", "/assets/lib-BAntKQIv.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-BbNtmRh-.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/index-D612TEPc.js"], "css": [] }, "routes/web/account/portfolio/index": { "id": "routes/web/account/portfolio/index", "parentId": "root", "path": "/web/account/portfolio", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-go_p6BU_.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/lib-BAntKQIv.js", "/assets/CardTitle-0ozTtK0F.js", "/assets/index-Bkgnt-Ax.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-BbNtmRh-.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js"], "css": [] }, "routes/web/account/portfolio/business/index": { "id": "routes/web/account/portfolio/business/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-HL1aunEw.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/lib-BAntKQIv.js", "/assets/zod-CNQGm8c5.js", "/assets/index-C4bLmoCR.js", "/assets/index-BbNtmRh-.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/Input-D7Usdb_B.js", "/assets/TextareaWithWordLimit-kn4J2C2R.js", "/assets/Select-CcjRqcCs.js", "/assets/json-iWum99gU.js", "/assets/BusinessHeader-h1vqQZGX.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/index-6Bge8BTM.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/create_business/index": { "id": "routes/web/account/create_business/index", "parentId": "root", "path": "/web/account/create_business", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-J7v2coDS.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/zod-CNQGm8c5.js", "/assets/lib-BAntKQIv.js", "/assets/Input-D7Usdb_B.js", "/assets/Select-CcjRqcCs.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/TextareaWithWordLimit-kn4J2C2R.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/json-iWum99gU.js", "/assets/CardHeader-i8vu4Aui.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/index-6Bge8BTM.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/portfolio/business/settings/index": { "id": "routes/web/account/portfolio/business/settings/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/settings", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-ViiyUs3f.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-CNQGm8c5.js", "/assets/components-CooaLra5.js", "/assets/lib-BAntKQIv.js", "/assets/index-C4bLmoCR.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/BusinessHeader-h1vqQZGX.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/portfolio/business/gallery/index": { "id": "routes/web/account/portfolio/business/gallery/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/gallery", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CHBYB3CW.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/lib-BAntKQIv.js", "/assets/BusinessHeader-h1vqQZGX.js", "/assets/EditPhotoDialogContext-5HzaFpUR.js", "/assets/index-Bkgnt-Ax.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/SliderContext-BwGpNbrd.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-BbNtmRh-.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/portfolio/business/videos/index": { "id": "routes/web/account/portfolio/business/videos/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/videos", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DaEA6jIr.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/lib-BAntKQIv.js", "/assets/BusinessHeader-h1vqQZGX.js", "/assets/index-Bkgnt-Ax.js", "/assets/EditVideoDialogContext-D-ALO94I.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/VideoSliderContext-C-vluay3.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-BbNtmRh-.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js", "/assets/index-C4bLmoCR.js", "/assets/index-D612TEPc.js"], "css": [] }, "routes/web/account/portfolio/business/facilities/index": { "id": "routes/web/account/portfolio/business/facilities/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/facilities", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CQh0JRxj.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/lib-BAntKQIv.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/BusinessHeader-h1vqQZGX.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/facility_features-F5EnnpBT.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js", "/assets/index-D612TEPc.js"], "css": [] }, "routes/web/account/portfolio/business/activate/index": { "id": "routes/web/account/portfolio/business/activate/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/activate", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CgfvnqYP.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/lib-BAntKQIv.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/BusinessHeader-h1vqQZGX.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/portfolio/business/social_media/index": { "id": "routes/web/account/portfolio/business/social_media/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DDqE1nqP.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/lib-BAntKQIv.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/BusinessHeader-h1vqQZGX.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/account/portfolio/business/delete/index": { "id": "routes/web/account/portfolio/business/delete/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/delete", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D66-zbJP.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/lib-BAntKQIv.js", "/assets/ContentLayout-B8Y-KhDE.js", "/assets/BusinessHeader-h1vqQZGX.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/zod-CNQGm8c5.js", "/assets/Input-D7Usdb_B.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/index-C4bLmoCR.js", "/assets/UserMenu-DgwxDkNg.js", "/assets/index-Bkgnt-Ax.js", "/assets/index-BbNtmRh-.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/HomeNav-DcH8O4YV.js", "/assets/SrchNavbar-DS55LR9T.js", "/assets/json-iWum99gU.js", "/assets/index-6Bge8BTM.js", "/assets/HamburgerSecondary-BIm_Q9D9.js", "/assets/CardTitle-0ozTtK0F.js"], "css": [] }, "routes/web/landing/change_email/index": { "id": "routes/web/landing/change_email/index", "parentId": "root", "path": "/web/landing/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C0d4YVJL.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-CooaLra5.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/index-BbNtmRh-.js", "/assets/lib-BAntKQIv.js"], "css": [] }, "routes/web/landing/reset_password/index": { "id": "routes/web/landing/reset_password/index", "parentId": "root", "path": "/web/landing/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BIV7T7Wj.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-CNQGm8c5.js", "/assets/components-CooaLra5.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/lib-BAntKQIv.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/landing/complete_signup/index": { "id": "routes/web/landing/complete_signup/index", "parentId": "root", "path": "/web/landing/complete_signup/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-mEqEcY1r.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-CNQGm8c5.js", "/assets/components-CooaLra5.js", "/assets/WhiteLogo-Ds6DDdeZ.js", "/assets/AuthContext-CBoD9vfH.js", "/assets/NotificationContext-D4IAOL8V.js", "/assets/lib-BAntKQIv.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/api/user/index": { "id": "routes/api/user/index", "parentId": "root", "path": "api/user", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/signin": { "id": "routes/api/user/signin", "parentId": "root", "path": "api/user/signin", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/signin-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verifytoken": { "id": "routes/api/user/verifytoken", "parentId": "root", "path": "api/user/verifytoken", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verifytoken-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user": { "id": "routes/api/user/user", "parentId": "root", "path": "api/user/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_password": { "id": "routes/api/user/change_password", "parentId": "root", "path": "api/user/change_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password_request": { "id": "routes/api/user/reset_password_request", "parentId": "root", "path": "api/user/reset_password_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password": { "id": "routes/api/user/reset_password", "parentId": "root", "path": "api/user/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/activate_deactivate": { "id": "routes/api/user/activate_deactivate", "parentId": "root", "path": "api/user/activate_deactivate/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate_deactivate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user_profile_image": { "id": "routes/api/user/user_profile_image", "parentId": "root", "path": "api/user/user_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email_request": { "id": "routes/api/user/change_email_request", "parentId": "root", "path": "api/user/change_email_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email": { "id": "routes/api/user/change_email", "parentId": "root", "path": "api/user/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verify_signup": { "id": "routes/api/user/verify_signup", "parentId": "root", "path": "api/user/verify_signup/:user_hash", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verify_signup-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/index": { "id": "routes/api/listing/index", "parentId": "root", "path": "api/listing", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DP2rzg_V.js", "imports": [], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/owner/index": { "id": "routes/api/listing/owner/index", "parentId": "root", "path": "api/listing/owner", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-K6Dvbx-E.js", "imports": [], "css": [] }, "routes/api/listing/delete_business": { "id": "routes/api/listing/delete_business", "parentId": "root", "path": "api/listing/delete_business/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/operating_hours": { "id": "routes/api/listing/operating_hours", "parentId": "root", "path": "api/listing/operating_hours", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/operating_hours-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/gallery": { "id": "routes/api/listing/gallery", "parentId": "root", "path": "api/listing/gallery/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/sys_facility_features/index": { "id": "routes/api/listing/sys_facility_features/index", "parentId": "root", "path": "api/listing/sys_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C6Kfwj0f.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/selected_facility_features": { "id": "routes/api/listing/selected_facility_features/selected_facility_features", "parentId": "root", "path": "api/listing/selected_facility_features/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/index": { "id": "routes/api/listing/selected_facility_features/index", "parentId": "root", "path": "api/listing/selected_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-RnTpOC5-.js", "imports": [], "css": [] }, "routes/api/listing/sys_social_media/index": { "id": "routes/api/listing/sys_social_media/index", "parentId": "root", "path": "api/listing/sys_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DVN7Oi2P.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/selected_social_media": { "id": "routes/api/listing/selected_social_media/selected_social_media", "parentId": "root", "path": "api/listing/selected_social_media/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/index": { "id": "routes/api/listing/selected_social_media/index", "parentId": "root", "path": "api/listing/selected_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DdXTRxfG.js", "imports": [], "css": [] }, "routes/api/listing/business_social_media": { "id": "routes/api/listing/business_social_media", "parentId": "root", "path": "api/listing/business_social_media/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/activate/activate": { "id": "routes/api/listing/activate/activate", "parentId": "root", "path": "api/listing/activate/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/recents": { "id": "routes/api/listing/recents", "parentId": "root", "path": "api/listing/recents", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/recents-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_link": { "id": "routes/api/listing/video_link", "parentId": "root", "path": "api/listing/save_video_link", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_link-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_links": { "id": "routes/api/listing/video_links", "parentId": "root", "path": "api/listing/video_links/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_links-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_links_listing": { "id": "routes/api/listing/video_links_listing", "parentId": "root", "path": "api/listing/video_links/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_links_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/index": { "id": "routes/api/rating/index", "parentId": "root", "path": "api/rating", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BIjMHF-b.js", "imports": [], "css": [] }, "routes/api/rating/rating": { "id": "routes/api/rating/rating", "parentId": "root", "path": "api/rating/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/rating-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/state": { "id": "routes/api/util/state", "parentId": "root", "path": "api/util/state", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/state-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country": { "id": "routes/api/util/country", "parentId": "root", "path": "api/util/country", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country_locale": { "id": "routes/api/util/country_locale", "parentId": "root", "path": "api/util/country_locale", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country_locale-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/city": { "id": "routes/api/util/city", "parentId": "root", "path": "api/util/city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/city-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/category": { "id": "routes/api/util/category", "parentId": "root", "path": "api/util/category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-a82c3dbb.js", "version": "a82c3dbb" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";
@@ -15243,13 +16993,21 @@ const routes = {
     caseSensitive: void 0,
     module: route29
   },
+  "routes/web/account/portfolio/business/videos/index": {
+    id: "routes/web/account/portfolio/business/videos/index",
+    parentId: "root",
+    path: "/web/account/portfolio/:business_guid/:user_guid/videos",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route30
+  },
   "routes/web/account/portfolio/business/facilities/index": {
     id: "routes/web/account/portfolio/business/facilities/index",
     parentId: "root",
     path: "/web/account/portfolio/:business_guid/:user_guid/facilities",
     index: void 0,
     caseSensitive: void 0,
-    module: route30
+    module: route31
   },
   "routes/web/account/portfolio/business/activate/index": {
     id: "routes/web/account/portfolio/business/activate/index",
@@ -15257,7 +17015,7 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/activate",
     index: void 0,
     caseSensitive: void 0,
-    module: route31
+    module: route32
   },
   "routes/web/account/portfolio/business/social_media/index": {
     id: "routes/web/account/portfolio/business/social_media/index",
@@ -15265,7 +17023,7 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/social_media",
     index: void 0,
     caseSensitive: void 0,
-    module: route32
+    module: route33
   },
   "routes/web/account/portfolio/business/delete/index": {
     id: "routes/web/account/portfolio/business/delete/index",
@@ -15273,7 +17031,7 @@ const routes = {
     path: "/web/account/portfolio/:business_guid/:user_guid/delete",
     index: void 0,
     caseSensitive: void 0,
-    module: route33
+    module: route34
   },
   "routes/web/landing/change_email/index": {
     id: "routes/web/landing/change_email/index",
@@ -15281,7 +17039,7 @@ const routes = {
     path: "/web/landing/change_email",
     index: void 0,
     caseSensitive: void 0,
-    module: route34
+    module: route35
   },
   "routes/web/landing/reset_password/index": {
     id: "routes/web/landing/reset_password/index",
@@ -15289,7 +17047,7 @@ const routes = {
     path: "/web/landing/reset_password/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route35
+    module: route36
   },
   "routes/web/landing/complete_signup/index": {
     id: "routes/web/landing/complete_signup/index",
@@ -15297,7 +17055,7 @@ const routes = {
     path: "/web/landing/complete_signup/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route36
+    module: route37
   },
   "routes/api/user/index": {
     id: "routes/api/user/index",
@@ -15305,7 +17063,7 @@ const routes = {
     path: "api/user",
     index: void 0,
     caseSensitive: void 0,
-    module: route37
+    module: route38
   },
   "routes/api/user/signin": {
     id: "routes/api/user/signin",
@@ -15313,7 +17071,7 @@ const routes = {
     path: "api/user/signin",
     index: void 0,
     caseSensitive: void 0,
-    module: route38
+    module: route39
   },
   "routes/api/user/verifytoken": {
     id: "routes/api/user/verifytoken",
@@ -15321,7 +17079,7 @@ const routes = {
     path: "api/user/verifytoken",
     index: void 0,
     caseSensitive: void 0,
-    module: route39
+    module: route40
   },
   "routes/api/user/user": {
     id: "routes/api/user/user",
@@ -15329,7 +17087,7 @@ const routes = {
     path: "api/user/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route40
+    module: route41
   },
   "routes/api/user/change_password": {
     id: "routes/api/user/change_password",
@@ -15337,7 +17095,7 @@ const routes = {
     path: "api/user/change_password/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route41
+    module: route42
   },
   "routes/api/user/reset_password_request": {
     id: "routes/api/user/reset_password_request",
@@ -15345,7 +17103,7 @@ const routes = {
     path: "api/user/reset_password_request",
     index: void 0,
     caseSensitive: void 0,
-    module: route42
+    module: route43
   },
   "routes/api/user/reset_password": {
     id: "routes/api/user/reset_password",
@@ -15353,7 +17111,7 @@ const routes = {
     path: "api/user/reset_password/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route43
+    module: route44
   },
   "routes/api/user/activate_deactivate": {
     id: "routes/api/user/activate_deactivate",
@@ -15361,7 +17119,7 @@ const routes = {
     path: "api/user/activate_deactivate/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route44
+    module: route45
   },
   "routes/api/user/user_profile_image": {
     id: "routes/api/user/user_profile_image",
@@ -15369,7 +17127,7 @@ const routes = {
     path: "api/user/user_profile_image/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route45
+    module: route46
   },
   "routes/api/user/change_email_request": {
     id: "routes/api/user/change_email_request",
@@ -15377,7 +17135,7 @@ const routes = {
     path: "api/user/change_email_request",
     index: void 0,
     caseSensitive: void 0,
-    module: route46
+    module: route47
   },
   "routes/api/user/change_email": {
     id: "routes/api/user/change_email",
@@ -15385,7 +17143,7 @@ const routes = {
     path: "api/user/change_email",
     index: void 0,
     caseSensitive: void 0,
-    module: route47
+    module: route48
   },
   "routes/api/user/verify_signup": {
     id: "routes/api/user/verify_signup",
@@ -15393,7 +17151,7 @@ const routes = {
     path: "api/user/verify_signup/:user_hash",
     index: void 0,
     caseSensitive: void 0,
-    module: route48
+    module: route49
   },
   "routes/api/listing/index": {
     id: "routes/api/listing/index",
@@ -15401,7 +17159,7 @@ const routes = {
     path: "api/listing",
     index: void 0,
     caseSensitive: void 0,
-    module: route49
+    module: route50
   },
   "routes/api/listing/listing": {
     id: "routes/api/listing/listing",
@@ -15409,7 +17167,7 @@ const routes = {
     path: "api/listing/:guid_or_username",
     index: void 0,
     caseSensitive: void 0,
-    module: route50
+    module: route51
   },
   "routes/api/listing/search": {
     id: "routes/api/listing/search",
@@ -15417,7 +17175,7 @@ const routes = {
     path: "api/listing/search",
     index: void 0,
     caseSensitive: void 0,
-    module: route51
+    module: route52
   },
   "routes/api/listing/featured_listing": {
     id: "routes/api/listing/featured_listing",
@@ -15425,7 +17183,7 @@ const routes = {
     path: "api/listing/featured_listing",
     index: void 0,
     caseSensitive: void 0,
-    module: route52
+    module: route53
   },
   "routes/api/listing/business_facility_features": {
     id: "routes/api/listing/business_facility_features",
@@ -15433,7 +17191,7 @@ const routes = {
     path: "api/listing/business_facility_features/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route53
+    module: route54
   },
   "routes/api/listing/listing_by_category": {
     id: "routes/api/listing/listing_by_category",
@@ -15441,7 +17199,7 @@ const routes = {
     path: "api/listing/listing_by_category/:category/:limit",
     index: void 0,
     caseSensitive: void 0,
-    module: route54
+    module: route55
   },
   "routes/api/listing/business_gallery": {
     id: "routes/api/listing/business_gallery",
@@ -15449,7 +17207,7 @@ const routes = {
     path: "api/listing/business_gallery/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route55
+    module: route56
   },
   "routes/api/listing/business_profile_image": {
     id: "routes/api/listing/business_profile_image",
@@ -15457,7 +17215,7 @@ const routes = {
     path: "api/listing/business_profile_image/:guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route56
+    module: route57
   },
   "routes/api/listing/owner/index": {
     id: "routes/api/listing/owner/index",
@@ -15465,7 +17223,7 @@ const routes = {
     path: "api/listing/owner",
     index: void 0,
     caseSensitive: void 0,
-    module: route57
+    module: route58
   },
   "routes/api/listing/delete_business": {
     id: "routes/api/listing/delete_business",
@@ -15473,7 +17231,7 @@ const routes = {
     path: "api/listing/delete_business/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route58
+    module: route59
   },
   "routes/api/listing/operating_hours": {
     id: "routes/api/listing/operating_hours",
@@ -15481,7 +17239,7 @@ const routes = {
     path: "api/listing/operating_hours",
     index: void 0,
     caseSensitive: void 0,
-    module: route59
+    module: route60
   },
   "routes/api/listing/gallery": {
     id: "routes/api/listing/gallery",
@@ -15489,7 +17247,7 @@ const routes = {
     path: "api/listing/gallery/:business_guid/:user_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route60
+    module: route61
   },
   "routes/api/listing/sys_facility_features/index": {
     id: "routes/api/listing/sys_facility_features/index",
@@ -15497,7 +17255,7 @@ const routes = {
     path: "api/listing/sys_facility_features",
     index: void 0,
     caseSensitive: void 0,
-    module: route61
+    module: route62
   },
   "routes/api/listing/selected_facility_features/selected_facility_features": {
     id: "routes/api/listing/selected_facility_features/selected_facility_features",
@@ -15505,7 +17263,7 @@ const routes = {
     path: "api/listing/selected_facility_features/:user_guid/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route62
+    module: route63
   },
   "routes/api/listing/selected_facility_features/index": {
     id: "routes/api/listing/selected_facility_features/index",
@@ -15513,7 +17271,7 @@ const routes = {
     path: "api/listing/selected_facility_features",
     index: void 0,
     caseSensitive: void 0,
-    module: route63
+    module: route64
   },
   "routes/api/listing/sys_social_media/index": {
     id: "routes/api/listing/sys_social_media/index",
@@ -15521,7 +17279,7 @@ const routes = {
     path: "api/listing/sys_social_media",
     index: void 0,
     caseSensitive: void 0,
-    module: route64
+    module: route65
   },
   "routes/api/listing/selected_social_media/selected_social_media": {
     id: "routes/api/listing/selected_social_media/selected_social_media",
@@ -15529,7 +17287,7 @@ const routes = {
     path: "api/listing/selected_social_media/:user_guid/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route65
+    module: route66
   },
   "routes/api/listing/selected_social_media/index": {
     id: "routes/api/listing/selected_social_media/index",
@@ -15537,7 +17295,7 @@ const routes = {
     path: "api/listing/selected_social_media",
     index: void 0,
     caseSensitive: void 0,
-    module: route66
+    module: route67
   },
   "routes/api/listing/business_social_media": {
     id: "routes/api/listing/business_social_media",
@@ -15545,7 +17303,7 @@ const routes = {
     path: "api/listing/business_social_media/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route67
+    module: route68
   },
   "routes/api/listing/activate/activate": {
     id: "routes/api/listing/activate/activate",
@@ -15553,7 +17311,7 @@ const routes = {
     path: "api/listing/activate/:user_guid/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route68
+    module: route69
   },
   "routes/api/listing/recents": {
     id: "routes/api/listing/recents",
@@ -15561,7 +17319,31 @@ const routes = {
     path: "api/listing/recents",
     index: void 0,
     caseSensitive: void 0,
-    module: route69
+    module: route70
+  },
+  "routes/api/listing/video_link": {
+    id: "routes/api/listing/video_link",
+    parentId: "root",
+    path: "api/listing/save_video_link",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route71
+  },
+  "routes/api/listing/video_links": {
+    id: "routes/api/listing/video_links",
+    parentId: "root",
+    path: "api/listing/video_links/:business_guid/:user_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route72
+  },
+  "routes/api/listing/video_links_listing": {
+    id: "routes/api/listing/video_links_listing",
+    parentId: "root",
+    path: "api/listing/video_links/:business_guid",
+    index: void 0,
+    caseSensitive: void 0,
+    module: route73
   },
   "routes/api/rating/index": {
     id: "routes/api/rating/index",
@@ -15569,7 +17351,7 @@ const routes = {
     path: "api/rating",
     index: void 0,
     caseSensitive: void 0,
-    module: route70
+    module: route74
   },
   "routes/api/rating/rating": {
     id: "routes/api/rating/rating",
@@ -15577,7 +17359,7 @@ const routes = {
     path: "api/rating/:user_guid/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route71
+    module: route75
   },
   "routes/api/rating/business_ratings": {
     id: "routes/api/rating/business_ratings",
@@ -15585,7 +17367,7 @@ const routes = {
     path: "api/rating/business_ratings/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route72
+    module: route76
   },
   "routes/api/rating/ratings_reviews": {
     id: "routes/api/rating/ratings_reviews",
@@ -15593,7 +17375,7 @@ const routes = {
     path: "api/rating/ratings_reviews/:business_guid",
     index: void 0,
     caseSensitive: void 0,
-    module: route73
+    module: route77
   },
   "routes/api/util/state": {
     id: "routes/api/util/state",
@@ -15601,7 +17383,7 @@ const routes = {
     path: "api/util/state",
     index: void 0,
     caseSensitive: void 0,
-    module: route74
+    module: route78
   },
   "routes/api/util/country": {
     id: "routes/api/util/country",
@@ -15609,7 +17391,7 @@ const routes = {
     path: "api/util/country",
     index: void 0,
     caseSensitive: void 0,
-    module: route75
+    module: route79
   },
   "routes/api/util/country_locale": {
     id: "routes/api/util/country_locale",
@@ -15617,7 +17399,7 @@ const routes = {
     path: "api/util/country_locale",
     index: void 0,
     caseSensitive: void 0,
-    module: route76
+    module: route80
   },
   "routes/api/util/city": {
     id: "routes/api/util/city",
@@ -15625,7 +17407,7 @@ const routes = {
     path: "api/util/city",
     index: void 0,
     caseSensitive: void 0,
-    module: route77
+    module: route81
   },
   "routes/api/util/category": {
     id: "routes/api/util/category",
@@ -15633,7 +17415,7 @@ const routes = {
     path: "api/util/category",
     index: void 0,
     caseSensitive: void 0,
-    module: route78
+    module: route82
   }
 };
 export {

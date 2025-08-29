@@ -17,6 +17,10 @@ import { AuthProvider } from "./context/AuthContext";
 import { SliderProvider } from "./context/SliderContext";
 import { AddPhotoDialogProvider } from "./context/AddPhotoDialogContext";
 import { EditPhotoDialogProvider } from "./context/EditPhotoDialogContext";
+import { AddVideoDialogProvider } from "./context/AddVideoDialogContext";
+import { VideoSliderProvider } from "./context/VideoSliderContext";
+import EditVideoDialog from "./routes/web/account/portfolio/business/videos/videos/EditVideoDialog";
+import { EditVideoDialogProvider } from "./context/EditVideoDialogContext";
 
 
 export const links: LinksFunction = () => [
@@ -72,15 +76,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <NotificationProvider>
-          <SliderProvider>
-            <EditPhotoDialogProvider>
-              <AddPhotoDialogProvider>
-                <AuthProvider>
-                  {children}
-                </AuthProvider>
-              </AddPhotoDialogProvider>
-            </EditPhotoDialogProvider>
-          </SliderProvider>
+          <VideoSliderProvider>
+            <SliderProvider>
+              <EditVideoDialogProvider>
+                <EditPhotoDialogProvider>
+                  <AddPhotoDialogProvider>
+                    <AddVideoDialogProvider>
+                      <AuthProvider>
+                        {children}
+                      </AuthProvider>
+                    </AddVideoDialogProvider>
+                  </AddPhotoDialogProvider>
+                </EditPhotoDialogProvider>
+              </EditVideoDialogProvider>
+            </SliderProvider>
+          </VideoSliderProvider>
         </NotificationProvider>
         <ScrollRestoration />
         <Scripts />

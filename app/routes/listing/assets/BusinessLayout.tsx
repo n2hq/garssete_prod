@@ -27,13 +27,15 @@ import ClaimBusiness from './ClaimBusiness';
 import LocationWithHours from './LocationWithHours';
 import { ReportTime } from '~/lib/ReportTime';
 import RatingBoxSquare from './RatingBoxSquare';
+import Videos from './Videos';
 
 
 
 const BusinessLayout = ({
     listing,
     images,
-    ratingsData
+    ratingsData,
+    videoGallery
 }: any) => {
 
     const [ratingDisplayData, setRatingDisplayData] = useState<RatingDisplayType>()
@@ -119,6 +121,14 @@ const BusinessLayout = ({
             </div>
 
             {
+                videoGallery.length > 0 &&
+                <Videos
+                    videoGallery={videoGallery}
+                    listing={listing}
+                />
+            }
+
+            {
                 images?.length > 0 && listing &&
                 <div className={`bg-black h-fit md:hidden
                 mt-4`}>
@@ -175,6 +185,8 @@ const BusinessLayout = ({
                                     {
                                         listing && operatingHoursStatus && <LocationWithHours listing={listing} operatingHoursStatus={operatingHoursStatus} />
                                     }
+
+
 
                                     <Description listing={listing} />
 

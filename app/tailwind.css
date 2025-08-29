@@ -151,3 +151,18 @@ body {
   background-color: rgba(0, 0, 0, 0.3);
   border-radius: 4px;
 }
+
+
+
+.bottom-scrollbar-hidden {
+  overflow-y: auto;
+  /* or overflow-x if horizontal */
+  scrollbar-width: none;
+  /* Firefox: hide scrollbar */
+}
+
+.bottom-scrollbar-hidden::-webkit-scrollbar {
+  width: 0px;
+  /* Chrome/Safari: hide scrollbar */
+  height: 0px;
+}

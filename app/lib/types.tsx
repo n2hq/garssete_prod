@@ -292,3 +292,39 @@ export interface SectionProp {
     title: string,
     subtitle: string
 }
+
+export type AddVideoType = {
+    video_url: string
+    video_title: string
+    video_description: string
+    business_guid: string
+    user_guid: string
+    video_guid: string
+}
+
+export interface AddVideoProp {
+    video: AddVideoType
+}
+
+export interface VideoGalleryProps {
+    videoGallery?: AddVideoType[],
+    userGuid?: string,
+    businessGuid?: string,
+    listing?: ListingType
+}
+
+export interface GalleryItemProps {
+    showCarousel(index: number): any,
+    item: AddVideoType,
+    itemIndex: number,
+    userGuid?: string,
+    businessGuid?: string
+}
+
+
+export interface GalleryItemMenuProps {
+    item: AddVideoType,
+    menu: boolean,
+    userGuid?: string,
+    businessGuid?: string
+}

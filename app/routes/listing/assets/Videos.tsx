@@ -159,9 +159,14 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
     const scrollRef = useRef<HTMLDivElement>(null);
     const [videoBar, setVideoBar] = useState<any | null>(null)
     const slider = useVideoSliderContext()
+    const [video20, setVideo20] = useState<AddVideoType[]>([])
 
-
-
+    useEffect(() => {
+        if (outVideo) {
+            const video20 = outVideo.length > 20 ? outVideo.slice(0, 20) : outVideo
+            setVideo20(video20)
+        }
+    }, [outVideo])
 
 
     const scrollLeft = () => {
@@ -192,7 +197,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                 {/** videos */}
                 <div className={`flex gap-6`} id='videobar'>
                     {
-                        outVideo?.map((video: any, index: number) => {
+                        video20?.map((video: any, index: number) => {
                             return (
                                 <div key={index} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-md overflow-hidden hover:bg-white/50`}
                                     /*  onClick={() => { handleOpen(video) }} */

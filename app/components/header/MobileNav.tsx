@@ -26,8 +26,8 @@ const cnLinks = [
         icon: <HiHome />
     },
     {
-        title: "Search",
-        link: "/web/search",
+        title: "Browse",
+        link: "/web/browse",
         icon: <BiSearch />
     },
     {

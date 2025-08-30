@@ -56,7 +56,7 @@ export const VideoSliderProvider = ({ children }: any) => {
         const currentVideo = slides[currentCount]
         const currentIframe: any = document.getElementById(currentVideo?.video_guid)
 
-        if (currentSlide !== 0) {
+        if (currentSlide !== 1) {
             currentIframe.src = ""
         }
 

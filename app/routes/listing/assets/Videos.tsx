@@ -5,7 +5,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { GrClose } from 'react-icons/gr'
 import { IoClose } from 'react-icons/io5'
 import { useVideoSliderContext } from '~/context/VideoSliderContext'
-import { AddVideoType, VideoGalleryProps } from '~/lib/types'
+import { AddVideoType, OutVideoType, VideoGalleryProps } from '~/lib/types'
 
 const videos = [
     {
@@ -60,11 +60,12 @@ const Videos = ({ videoGallery, listing }: VideoGalleryProps) => {
                 const match = video.video_url.match(regex);
                 let videoId = match ? match[1] : null;
                 let thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`
-                let videoObject = {
+                let videoObject: OutVideoType = {
                     videoId: videoId,
                     videoUrl: video.video_url,
                     videoTitle: video.video_title,
-                    videoThumbnail: thumbnail
+                    videoThumbnail: thumbnail,
+                    videoGuid: video.video_guid
                 }
                 remappedVideo.push(videoObject)
             })
@@ -159,10 +160,11 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
     const scrollRef = useRef<HTMLDivElement>(null);
     const [videoBar, setVideoBar] = useState<any | null>(null)
     const slider = useVideoSliderContext()
-    const [video20, setVideo20] = useState<AddVideoType[]>([])
+    const [video20, setVideo20] = useState<OutVideoType[]>([])
 
     useEffect(() => {
         if (outVideo) {
+            console.log(outVideo)
             const video20 = outVideo.length > 20 ? outVideo.slice(0, 20) : outVideo
             setVideo20(video20)
         }
@@ -196,10 +198,18 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                 className={`w-full bg-black px-3 py-4 mt-3 relative flex flex-1 overflow-x-auto bottom-scrollbar-hidden`}>
                 {/** videos */}
                 <div className={`flex gap-6`} id='videobar'>
+                    {/** last slide that opens gallery */}
+                    <div className={`w-[${slideWidth}px] h-[120px] border border-gray-500 rounded flex place-items-center place-content-center hover:cursor-pointer hover:bg-white/50`}
+                        onClick={() => {
+                            setOpenGallery(true)
+                        }}
+                    >
+                        <div className={`text-white w-1/2 text-center rounded`}>All Videos</div>
+                    </div>
                     {
-                        video20?.map((video: any, index: number) => {
+                        video20?.map((video: OutVideoType, index: number) => {
                             return (
-                                <div key={index} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-md overflow-hidden hover:bg-white/50`}
+                                <div key={video.videoGuid} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-md overflow-hidden hover:bg-white/50`}
                                     /*  onClick={() => { handleOpen(video) }} */
                                     onClick={() => showCarousel(index)}
                                 >
@@ -231,14 +241,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                         })
                     }
 
-                    {/** last slide that opens gallery */}
-                    <div className={`w-[${slideWidth}px] h-[120px] border border-gray-500 rounded flex place-items-center place-content-center hover:cursor-pointer hover:bg-white/50`}
-                        onClick={() => {
-                            setOpenGallery(true)
-                        }}
-                    >
-                        <div className={`text-white w-1/2 text-center rounded`}>Video Gallery</div>
-                    </div>
+
 
                 </div>
 
@@ -264,70 +267,6 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
     )
 }
 
-export const VideoScroller = ({ outVideo, handleOpen }: any) => {
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const [openGallery, setOpenGallery] = useState(false)
-
-    const scroll = (direction: "left" | "right") => {
-        if (scrollRef.current) {
-            const { scrollLeft, clientWidth } = scrollRef.current;
-            const scrollAmount = clientWidth * 0.8; // scroll by 80% of visible width
-            scrollRef.current.scrollTo({
-                left: direction === "left" ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
-                behavior: "smooth",
-            });
-        }
-    };
-
-    return (
-        <div className={`bg-black px-[15px] py-3`}>
-            <VideoGallery
-                outVideo={outVideo}
-                openGallery={openGallery}
-                setOpenGallery={setOpenGallery}
-                handleOpen={handleOpen}
-            />
-            <div>
-                <div className={`w-full h-full flex flex-1 max-w-[1100px] mx-auto overflow-y-auto scrollbar-hidden`}>
-                    <div className={`flex gap-x-6 w-full`}>
-                        {
-                            outVideo?.map((video: any, index: number) => {
-                                return (
-                                    <div key={index} id={`${video?.videoId}`} className={`relative`}>
-                                        <a href={`#${video?.videoId}`} onClick={() => { handleOpen(video) }}>
-                                            <div className={`border border-gray-500 w-[150px] h-[120px] rounded-md overflow-hidden text-white relative`}>
-                                                <div className={`absolute bottom-0 leading-[1.3em] px-[3px] bg-black/50 line-clamp-2 py-[3px]`}>
-                                                    {video?.videoTitle}
-                                                </div>
-                                                <img src={video?.videoThumbnail} alt={video?.videoTitle} className={`object-cover w-full h-full`} />
-                                            </div>
-                                            <div className={`bg-white/5 hover:bg-white/50 absolute left-0 top-0 w-full h-full`}></div>
-                                        </a>
-
-
-
-                                    </div>
-                                )
-                            })
-                        }
-
-                        <div
-                            onClick={() => { setOpenGallery(true) }}
-                            className={`border border-gray-500 min-w-[150px] w-[150px] h-[120px] rounded-md overflow-hidden text-white relative flex place-items-center place-content-center hover:cursor-pointer bg-white/5 hover:bg-white/50`}>
-                            <div className={`flex flex-col w-[60%] text-center font-bold -space-y-1`}>
-                                <span>Video</span>
-                                <div className={`flex place-items-center place-content-center`}>
-                                    <span className={`text-[19px]`}>+</span>
-                                    <span>Gallery</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div >
-            </div>
-        </div >
-    );
-}
 
 
 export const VideoGallery = ({ outVideo, openGallery,

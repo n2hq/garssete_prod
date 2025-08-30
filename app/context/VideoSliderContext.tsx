@@ -55,6 +55,11 @@ export const VideoSliderProvider = ({ children }: any) => {
         let currentCount = currentSlide
         const currentVideo = slides[currentCount]
         const currentIframe: any = document.getElementById(currentVideo?.video_guid)
+
+        if (currentSlide !== 0) {
+            currentIframe.src = ""
+        }
+
         currentIframe.src = ""
 
         let prevCount = (currentSlide === 0) ? slides.length - 1 : currentSlide - 1
@@ -76,7 +81,11 @@ export const VideoSliderProvider = ({ children }: any) => {
         let currentCount = currentSlide
         const currentVideo = slides[currentCount]
         const currentIframe: any = document.getElementById(currentVideo?.video_guid)
-        currentIframe.src = ""
+
+
+        if (currentSlide !== slides.length - 1) {
+            currentIframe.src = ""
+        }
 
         {/** next count */ }
 

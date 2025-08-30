@@ -328,3 +328,12 @@ export interface GalleryItemMenuProps {
     userGuid?: string,
     businessGuid?: string
 }
+
+
+export type OutVideoType = {
+    videoId: string | null,
+    videoUrl: string,
+    videoTitle: string,
+    videoThumbnail: string,
+    videoGuid: string
+}

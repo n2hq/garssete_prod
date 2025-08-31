@@ -70,32 +70,36 @@ const Address = ({ businessProfile }: any) => {
                         </div>
 
                         {/** phone */}
-                        <div className={`flex w-full gap-3 py-2.5 px-3`}>
-                            <div className={`bg-blue-200/80 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
-                                <MdPhone className={`text-[20px] h-fit`} />
-                            </div>
-                            <div className={` text-[15px] md:text-[13px] leading-[1.3em]
+                        {
+                            businessProfile?.phone && <div className={`flex w-full gap-3 py-2.5 px-3`}>
+                                <div className={`bg-blue-200/80 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
+                                    <MdPhone className={`text-[20px] h-fit`} />
+                                </div>
+                                <div className={` text-[15px] md:text-[13px] leading-[1.3em]
                                 flex place-items-center font-semibold`}>
-                                {businessProfile?.phone}
-                            </div>
+                                    {businessProfile?.phone}
+                                </div>
 
-                        </div>
+                            </div>
+                        }
 
                         {/** website */}
-                        <div className={`flex w-full gap-3 py-2.5 px-3`}>
-                            <div className={`bg-blue-200/80 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
-                                <CgWebsite className={`text-[20px] h-fit`} />
-                            </div>
-                            <div className={` text-[15px] md:text-[13px] leading-[1.3em]
+                        {
+                            businessProfile?.website && <div className={`flex w-full gap-3 py-2.5 px-3`}>
+                                <div className={`bg-blue-200/80 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`}>
+                                    <CgWebsite className={`text-[20px] h-fit`} />
+                                </div>
+                                <div className={` text-[15px] md:text-[13px] leading-[1.3em]
                                 flex place-items-center font-semibold
                                 line-clamp-1`}>
 
-                                <a href={businessProfile?.website}>
-                                    {businessProfile?.website || 'No website'}
-                                </a>
-                            </div>
+                                    <a href={businessProfile?.website}>
+                                        {businessProfile?.website || 'No website'}
+                                    </a>
+                                </div>
 
-                        </div>
+                            </div>
+                        }
 
                         {/** email */}
                         <div className={`flex w-full gap-3 py-2.5 px-3`}>

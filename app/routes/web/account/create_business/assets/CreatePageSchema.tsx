@@ -98,10 +98,15 @@ const CreatePageSchema = z.object({
         .min(1, { message: "Email must not be empty" })
         .email({ message: "Please enter a valid email" }),
 
-    phone: z.string()
-        .min(1, { message: "Phone must not be empty" })
-        .max(30, { message: "PHone must not be more than 30 characters" }),
-
+    phone: z
+        .string()
+        .max(30, { message: "Phone must not be more than 30 characters" })
+        .optional()
+        .nullable()
+        .refine(
+            (val) => !val || val.trim().length > 0,
+            { message: "Phone must not be empty" }
+        ),
     address_one: z.string({ message: "Please enter an address" })
         .min(3, { message: "Address must not be less than 3 characters" })
         .max(100, { message: "Address must not be more than 100 characters" }),

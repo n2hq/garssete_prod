@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { config, getBusinessProfileImageData } from '~/lib/lib'
+import { config, getBusinessProfileImageData, searchCategories } from '~/lib/lib'
 import ComponentTitle from './ComponentTitle'
 
 const Description = ({ listing }: any) => {
@@ -7,6 +7,7 @@ const Description = ({ listing }: any) => {
 
     useEffect(() => {
         if (listing.gid) {
+            //console.log(listing)
             let imgdata = getBusinessProfileImageData(listing.gid)
             imgdata.then((data) => {
 
@@ -30,7 +31,7 @@ const Description = ({ listing }: any) => {
                         {listing.title}
                     </div>
                     <div className={`text-[12px] capitalize`}>
-                        {listing.category}
+                        {searchCategories(listing.category)?.name}
                     </div>
                 </div>
             </div>

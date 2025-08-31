@@ -4,6 +4,7 @@ import CryptoJS from 'crypto-js'
 import { BsInstagram, BsLinkedin, BsPinterest, BsTwitterX } from "react-icons/bs"
 import { CgFacebook } from "react-icons/cg"
 import { GrYoutube } from "react-icons/gr"
+import { categories } from "./json/categories"
 
 export const config = {
     BASE_URL: import.meta.env.VITE_SITE_BASE_URL,
@@ -1190,3 +1191,9 @@ export const getBusinessVideoGallery = async (businessGuid: string | null): Prom
 }
 
 
+export const searchCategories = (searchTerm: string) => {
+    const foundCategory = categories.find(
+        (cat: Category) => cat.id.toLowerCase() === searchTerm.toLowerCase()
+    );
+    return foundCategory
+}

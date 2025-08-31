@@ -164,7 +164,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
 
     useEffect(() => {
         if (outVideo) {
-            console.log(outVideo)
+            //console.log(outVideo)
             const video20 = outVideo.length > 20 ? outVideo.slice(0, 20) : outVideo
             setVideo20(video20)
         }

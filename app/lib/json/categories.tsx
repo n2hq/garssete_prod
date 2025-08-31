@@ -40,7 +40,7 @@ export const categories = [
         icon: <GiHumanTarget size={20} />
     },
     {
-        name: "Printing and Publishing",
+        name: "Printing & Publishing",
         id: "printing publishing",
         icon: <CgPrinter size={20} />
     },

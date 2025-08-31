@@ -11,6 +11,7 @@ import Select from '~/components/content/select/Select'
 import Button from '~/components/content/button/Button'
 import { useNotification } from '~/context/NotificationContext'
 import { leftNavLinks } from '~/lib/json'
+import { categories as category } from '~/lib/json/categories'
 
 const BusinessProfileForm = ({ data }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
@@ -22,7 +23,7 @@ const BusinessProfileForm = ({ data }: any) => {
     let [states, setStates] = useState(data.states)
     let [cities, setCities] = useState(data.cities)
     //const categories = data.categories.data
-    const categories = leftNavLinks?.sort((a, b) =>
+    const categories = category?.sort((a, b) =>
         a.name.localeCompare(b.name)
     )
 

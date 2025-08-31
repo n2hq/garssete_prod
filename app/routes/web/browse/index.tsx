@@ -1,12 +1,12 @@
 import { LoaderFunction } from '@remix-run/node';
 import { useLoaderData, useSearchParams } from '@remix-run/react';
 import React, { useEffect, useState } from 'react'
-import { getSearch } from '~/lib/lib';
+import { getCountries, getSearch } from '~/lib/lib';
 import SearchLayout from '~/routes/asset/SearchLayout copy';
 import Item from './assets/Item';
 import BrowseLayout from '~/routes/asset/BrowseLayout';
 import Card from './assets/Card';
-import LeftNavForBrowse from './assets/LeftNavForBrowse';
+import LeftNavForBrowse from './assets/Categories';
 import SrchNavbar from '~/components/header/new/SrchNavbar';
 
 import VerticalHeight from '~/routes/asset/VerticalHeight';
@@ -15,51 +15,21 @@ import FooterSection from '~/routes/landing/assets/FooterSection';
 import FooterCard from './assets/FooterCard';
 import SearchPagination from './assets/SearchPagination';
 import Featured from './assets/Featured';
+import Countries from './assets/Countries';
+import Categories from './assets/Categories';
 
-const dataCompanies = [
-    {
-        title: "Diageo Inc.",
-        category: "Entertainment"
-    },
-    {
-        title: "Swift Consortium",
-        category: "Services"
-    },
-    {
-        title: "Real One Business",
-        category: "Legal"
-    },
-    {
-        title: "Bronse Agnostics",
-        category: "Accounting"
-    },
-    {
-        title: "Microsoft Delaware",
-        category: "Technology"
-    },
-    {
-        title: "Apple Inc.",
-        category: "Medical"
-    },
-    {
-        title: "Somina Inc.",
-        category: "Trucking"
-    },
-    {
-        title: "Disbributed Computing",
-        category: "Banking"
-    },
-]
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
     const query = url?.searchParams.get("q") || "";
     let data = await getSearch(query)
+    let countries = await getCountries()
 
 
     let res = {
         data: data,
-        query: query
+        query: query,
+        countries: countries
     }
     return res;
 }
@@ -71,6 +41,7 @@ const Index = () => {
 
     const data = res.data
     const query = res.query
+    const countries = res.countries
     const [queryParam, setQueryParam] = useState<string | null>(null)
 
     useEffect(() => {
@@ -96,7 +67,20 @@ const Index = () => {
                             <div className={`mt-3 text-[17px] mb-4 font-bold ml-6`}>
                                 Categories
                             </div>
-                            <LeftNavForBrowse />
+                            <Categories />
+                        </div>
+
+                        <div className={`mt-5`}>
+                            <div className={`mt-3 text-[17px] mb-4 font-bold ml-6`}>
+                                Countries
+                            </div>
+                            {
+                                countries &&
+                                <Countries countries={countries} />
+                            }
+                        </div>
+                        <div className={` py-4 px-4 border-t`}>
+                            Garssete - Business Directory Listing
                         </div>
                     </aside>
 

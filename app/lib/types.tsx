@@ -176,6 +176,10 @@ export type Country = {
     id: string
 }
 
+export interface CountryProp {
+    countries: Country[]
+}
+
 export type CountryReformatted = {
     name: string
     iso2: string

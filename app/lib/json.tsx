@@ -135,7 +135,7 @@ export const leftNavLinks = [
         icon: <GiHumanTarget size={20} />
     },
     {
-        name: "Printing & Publishing",
+        name: "Printing and Publishing",
         id: "printing publishing",
         icon: <CgPrinter size={20} />
     },

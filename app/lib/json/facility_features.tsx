@@ -1,7 +1,7 @@
 import { BiLibrary, BiSpa, BiWine } from "react-icons/bi";
 import { BsPersonWheelchair } from "react-icons/bs";
 import { CgGym } from "react-icons/cg";
-import { FaSwimmingPool, FaWheelchair } from "react-icons/fa";
+import { FaParking, FaSwimmingPool, FaWheelchair } from "react-icons/fa";
 import { FaToilet, FaWheelchairMove } from "react-icons/fa6";
 import { FcAutomotive, FcWiFiLogo } from "react-icons/fc";
 import { GrCafeteria, GrLounge, GrWheelchairActive } from "react-icons/gr";
@@ -96,9 +96,9 @@ export const facilityFeatures = [
         icon: <FaSwimmingPool />
     },
     {
-        name: "Car Park",
-        feature_id: "car_park",
-        description: "Car Park",
+        name: "Paid Car Park",
+        feature_id: "paid_car_park",
+        description: "Paid Car Park",
         icon: <FcAutomotive />
     },
     {
@@ -111,7 +111,7 @@ export const facilityFeatures = [
         name: "Free Parking",
         feature_id: "free_parking",
         description: "Free Parking",
-        icon: <TiWiFi />
+        icon: <FaParking />
     },
     {
         name: "Air Conditioned",

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AccountLayout from '../assets/AccountLayout'
 import ContentLayout from '../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
-import { getPortfolio, getUserProfile, IsAuthenticated } from '~/lib/lib'
+import { formatNumber, getPortfolio, getUserProfile, IsAuthenticated } from '~/lib/lib'
 import Portfolio from './assets/Portfolio'
 import CardTitle from '../assets/CardTitle'
 import BusinessHeader from './business/assets/BusinessHeader'
@@ -88,7 +88,7 @@ const Index = () => {
 
                 <CardHeaderWithSearch
                     base_url={'/web/account/portfolio'}
-                    title={'Portfolio'}
+                    title={`${formatNumber(data.portfolio.length)} Business Pages`}
                     q={q}
 
                 />

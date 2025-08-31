@@ -1,11 +1,14 @@
-import { BiLibrary, BiWine } from "react-icons/bi";
+import { BiLibrary, BiSpa, BiWine } from "react-icons/bi";
 import { BsPersonWheelchair } from "react-icons/bs";
+import { CgGym } from "react-icons/cg";
 import { FaSwimmingPool, FaWheelchair } from "react-icons/fa";
 import { FaToilet, FaWheelchairMove } from "react-icons/fa6";
-import { FcAutomotive } from "react-icons/fc";
+import { FcAutomotive, FcWiFiLogo } from "react-icons/fc";
 import { GrCafeteria, GrLounge, GrWheelchairActive } from "react-icons/gr";
-import { MdBusinessCenter, MdOutlineWheelchairPickup, MdWheelchairPickup } from "react-icons/md";
+import { MdAirportShuttle, MdBusinessCenter, MdLocalLaundryService, MdOutlineWheelchairPickup, MdWheelchairPickup } from "react-icons/md";
 import { RiMusic2Line, RiTrademarkLine } from "react-icons/ri";
+import { TbAirConditioning } from "react-icons/tb";
+import { TiWiFi } from "react-icons/ti";
 
 export const facilityFeatures = [
     {
@@ -97,5 +100,47 @@ export const facilityFeatures = [
         feature_id: "car_park",
         description: "Car Park",
         icon: <FcAutomotive />
+    },
+    {
+        name: "Free Wifi",
+        feature_id: "free_wifi",
+        description: "Free Wifi",
+        icon: <TiWiFi />
+    },
+    {
+        name: "Free Parking",
+        feature_id: "free_parking",
+        description: "Free Parking",
+        icon: <TiWiFi />
+    },
+    {
+        name: "Air Conditioned",
+        feature_id: "air_conditioned",
+        description: "Air Conditioned",
+        icon: <TbAirConditioning />
+    },
+    {
+        name: "Laundry Service",
+        feature_id: "laundry_service",
+        description: "Laundry Service",
+        icon: <MdLocalLaundryService />
+    },
+    {
+        name: "Airport Shuttle",
+        feature_id: "airport_shuttle",
+        description: "Airport Shuttle",
+        icon: <MdAirportShuttle />
+    },
+    {
+        name: "Spa",
+        feature_id: "spa",
+        description: "Spa",
+        icon: <BiSpa />
+    },
+    {
+        name: "Gym & Fitness Center",
+        feature_id: "gym",
+        description: "Gym and Fitness Center",
+        icon: <CgGym />
     },
 ]

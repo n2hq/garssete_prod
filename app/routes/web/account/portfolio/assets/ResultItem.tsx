@@ -44,7 +44,7 @@ const ResultItem = ({ listing, index }: any) => {
                         <img
                             src={imgsrc}
                             alt={listing.title}
-                            className={`object-cover w-full h-full text-sm
+                            className={`object-cover w-full h-full text-sm bg-white
                              `}
                         />
                     }

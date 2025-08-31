@@ -35,7 +35,7 @@ const ResultItem = ({ listing, index }: any) => {
              ${isOdd(index) ? '' : ''}
                 `}>
                 {/** left */}
-                <div className={`relative min-w-[50px] w-[50px] h-[45px]
+                <div className={`relative min-w-[48px] w-[48px] h-[45px]
                     rounded-md overflow-hidden border bg-transparent bg-cover bg-center`}
                     style={{ backgroundImage: `url(${placeholder})` }}
                 >

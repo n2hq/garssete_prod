@@ -93,7 +93,7 @@ const Card = ({ listing }: any) => {
                                         src={imgscr}
                                         alt={""}
                                         className={`object-cover w-full h-full text-sm
-                            rounded z-0`}
+                            rounded z-0 bg-white`}
                                     />
 
                                 }

@@ -62,7 +62,7 @@ const PortfolioPagination = <T,>({
 
             {/* Pagination controls */}
             {totalPages > 1 && (
-                <div className="flex justify-end gap-[5px] mt-[20px] text-[13px] border-t pt-6">
+                <div className="flex justify-center gap-[5px] mt-[20px] text-[13px] border-t pt-6">
                     <button
                         onClick={goToPrevious}
                         disabled={currentPage === 1}

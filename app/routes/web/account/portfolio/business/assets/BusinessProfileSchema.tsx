@@ -83,7 +83,9 @@ const BusinessProfileSchema = z.object({
         ),
 
     call_code: z.any(),
-    phone: z.any(),
+    phone: z.string()
+        .min(1, { message: "Phone must not be empty" })
+        .max(30, { message: "PHone must not be more than 30 characters" }),
 
     intro: z.any(),
     category: z.string()

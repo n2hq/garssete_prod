@@ -31,9 +31,9 @@ const BusinessProfileSchema = z.object({
         .refine(
             (val) => {
                 const words = val.trim().split(/\s+/).filter(Boolean)
-                return words.length <= 50
+                return words.length <= 60
             },
-            { message: 'You can only write up to 50 words.' }
+            { message: 'You can only write up to 60 words.' }
         ),
     long_description: z
         .string()
@@ -53,16 +53,38 @@ const BusinessProfileSchema = z.object({
     state_text: z.any(),
     country_text: z.any(),
     city_id: z.any(),
+
     established: z
         .string()
         .optional()
+        .nullable()
+        .transform((val) => val ?? "") // turn null into ""
         .refine(
-            (val) => !val || (/^\d{1,4}$/.test(val)),
-            { message: "Must be only numbers and not more than 4 digits" }
+            (val) => val === "" || /^[0-9]+$/.test(val),
+            { message: "Year established must contain only numbers" }
+        )
+        .refine(
+            (val) => val === "" || val.length <= 4,
+            { message: "Year established must not be more than 4 digits" }
         ),
+
+    zipcode: z
+        .string()
+        .optional()
+        .nullable()
+        .transform((val) => val ?? "") // turn null into ""
+        .refine(
+            (val) => val === "" || /^[0-9]+$/.test(val),
+            { message: "Zipcode must contain only numbers" }
+        )
+        .refine(
+            (val) => val === "" || val.length <= 7,
+            { message: "Zipcode must not be more than 7 digits" }
+        ),
+
     call_code: z.any(),
     phone: z.any(),
-    zipcode: z.any(),
+
     intro: z.any(),
     category: z.string()
         .min(2, { message: "Please select a business category" }),

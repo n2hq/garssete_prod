@@ -73,8 +73,9 @@ const CreatePageSchema = z.object({
     city_id: z.any(),
 
     zipcode: z.string()
-        .min(1, { message: "Zipcode must not be empty" })
-        .max(7, { message: "Zipcode must not be more than 7 characters" }),
+        .max(7, { message: "Zipcode must not be more than 7 characters" })
+        .optional()
+        .or(z.literal("")), // allow empty string
 
     short_description: z
         .string()
@@ -88,9 +89,9 @@ const CreatePageSchema = z.object({
         .refine(
             (val) => {
                 const words = val.trim().split(/\s+/).filter(Boolean)
-                return words.length <= 50
+                return words.length <= 60
             },
-            { message: 'You can only write up to 50 words.' }
+            { message: 'You can only write up to 60 words.' }
         ),
 
     email_address: z.string({ message: "Please enter an email." })

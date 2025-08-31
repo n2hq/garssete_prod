@@ -7,7 +7,7 @@ import { GrYoutube } from 'react-icons/gr'
 import RatingBox from './RatingBox'
 import RatingText from './RatingText'
 import Address from './Address'
-import { config, getCardIcon, strToList } from '~/lib/lib'
+import { config, getCardIcon, searchCategories, strToList } from '~/lib/lib'
 import { MdEmail } from 'react-icons/md'
 
 
@@ -106,7 +106,7 @@ const Card = ({ listing }: any) => {
 
                                 </div>
                                 <div className={`text-[12px] text-gray-500  capitalize`}>
-                                    {listing?.category}
+                                    {searchCategories(listing?.category)?.name}
                                 </div>
                             </div>
                         </div>

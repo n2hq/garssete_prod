@@ -4,7 +4,7 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer, useNavigate, Outlet, useNavigation, Meta, Links, ScrollRestoration, Scripts, Link, useLocation, NavLink as NavLink$2, useLoaderData, useSearchParams, useParams } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import React, { createContext, useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, createContext, useState, useEffect, useRef } from "react";
 import NProgress from "nprogress";
 import { FaSpinner, FaSchool, FaVimeoSquare, FaLinkedinIn, FaSignOutAlt, FaCarSide, FaAngleDown, FaMobile, FaQuestion, FaBriefcase, FaWheelchair, FaSwimmingPool, FaParking, FaYoutubeSquare, FaPinterestSquare, FaFacebookSquare, FaChevronLeft, FaChevronRight, FaCheck } from "react-icons/fa";
 import CryptoJS from "crypto-js";
@@ -13802,10 +13802,7 @@ if (!cachedPool) {
   });
 }
 async function getConnection() {
-  console.log(DATABASE_HOST);
-  console.log(DATABASE_USER);
-  console.log(DATABASE_PASS);
-  console.log("hello");
+  console.log(`${DATABASE_USER}: got connection`);
   return cachedPool.getConnection();
 }
 async function query(sql, values = []) {
@@ -14945,7 +14942,6 @@ async function action$a({ request, params }) {
       }
       const gid = crypto.randomUUID();
       const listingHash = GenerateRandomHash();
-      console.log(body);
       const result = await query(
         `INSERT INTO tbl_dir SET 
                 title = ?, 

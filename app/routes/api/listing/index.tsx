@@ -115,7 +115,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
             const listingHash = GenerateRandomHash()
 
-            console.log(body)
+            //console.log(body)
 
             const result = await query(`INSERT INTO tbl_dir SET 
                 title = ?, 

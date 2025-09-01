@@ -24,7 +24,7 @@ const HeroSection = () => {
         >
           <div className={`max-w-5xl mx-auto px-[20px] sm:px-12`}>
             <h1 className={`text-4xl md:text-[35px] font-bold text-white mb-6 leading-[1.2em]`}>
-              Start Your Global Journey. Connect Your Business to the World
+              Garssete Business Directory. Connect Your Business to the World
             </h1>
             <p className={`font-sans text-lg text-white mb-8 font-normal leading-[1.2em] px-[20px]`}>
               Get Discovered Worldwide. List Your Business for Free and Reach Global Partners Instantly!

@@ -28,7 +28,7 @@ export default defineConfig({
     host: true, // allow external access
     allowedHosts: ["garssete.gasimg.com", "edition.garssete.com"], // <-- your domain here
     hmr: {
-      port: 4001, // or any other available port
+      port: Number(process.env.VITE_HMR_PORT), // or any other available port
     },
   },
 });

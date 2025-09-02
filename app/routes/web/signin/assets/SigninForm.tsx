@@ -12,10 +12,12 @@ import { whiteLogoColor } from '~/lib/css'
 import { config } from '~/lib/lib'
 
 const SigninForm = () => {
-    const [formdata, setFormdata] = useState<any | null>(null)
+
     const auth = useAuth()
     if (!auth) { return null }
     const { signin } = auth
+
+    const [formdata, setFormdata] = useState<any>({})
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
     const navigator = useNavigate()

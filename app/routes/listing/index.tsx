@@ -5,7 +5,7 @@ import SearchHead from '~/components/content/SearchHead'
 import ResponsiveNav from '~/components/header/lite/ResponsiveNav'
 import { GalleryProvider } from '~/context/GalleryContext'
 import RatingProvider from '~/context/RatingContext'
-import { config, getBusinessGallery, getBusinessProfileImageData, getBusinessVideoGallery, getOperatingHours, getPage, getRatingsReviews, getSearch, getVideoGallery } from '~/lib/lib'
+import { config, getBusinessGallery, getBusinessProfileImageData, getBusinessVideoGallery, getOperatingHours, getPage, getProductGallery, getRatingsReviews, getSearch, getVideoGallery } from '~/lib/lib'
 import BusinessLayout from './assets/BusinessLayout'
 import Footer from '~/components/footer/Footer'
 import Related from './assets/Related'
@@ -18,7 +18,7 @@ import CallToActionSection from '../../components/content/CallToActionSection'
 import FooterSection from '../landing/assets/FooterSection'
 import VerticalHeight from '../asset/VerticalHeight'
 import ResourceNotFound from './assets/ResourceNotFound'
-import { AddVideoType } from '~/lib/types'
+import { AddVideoType, ProductType } from '~/lib/types'
 
 
 
@@ -33,6 +33,9 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         const gallery = await getBusinessGallery(listing.gid)
         const ratingData = await getRatingsReviews(listing.gid)
         const videoGallery: AddVideoType[] | null = await getBusinessVideoGallery(listing?.gid)
+        const products: ProductType[] | null = await getProductGallery(listing?.gid, listing?.owner)
+
+
 
 
         return {
@@ -40,7 +43,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             gallery: gallery,
             ratingsData: ratingData,
             profileImageData: profileImageData,
-            videoGallery: videoGallery
+            videoGallery: videoGallery,
+            products: products
         }
     } catch (err) {
         throw new Response("You are offline. Please reconnect.", { status: 503 });
@@ -107,6 +111,7 @@ const index = () => {
     const gallery: any = data.gallery
     const ratingsData: any = data.ratingsData
     const videoGallery: AddVideoType[] = data.videoGallery
+    const products: ProductType[] = data.products
 
     useEffect(() => {
         if (listing) {
@@ -129,6 +134,7 @@ const index = () => {
                             images={gallery}
                             ratingsData={ratingsData}
                             videoGallery={videoGallery}
+                            products={products}
                         />
                     }
 

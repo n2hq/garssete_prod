@@ -326,6 +326,7 @@ export interface GalleryItemProps {
 }
 
 
+
 export interface GalleryItemMenuProps {
     item: AddVideoType,
     menu: boolean,
@@ -340,4 +341,49 @@ export type OutVideoType = {
     videoTitle: string,
     videoThumbnail: string,
     videoGuid: string
+}
+
+export type ProductType = {
+    product_image_filename: string,
+    user_guid: string,
+    business_guid: string,
+    product_guid: string,
+    product_image_url: string,
+    mimetype: string,
+    product_title: string,
+    product_description: string,
+    product_link: string
+}
+
+export interface ProductGalleryProps {
+    productGallery: ProductType[]
+    listing: ListingType[]
+    userGuid: string
+    businessGuid: string
+}
+
+export interface ProductItemProps {
+    showCarousel(index: number): any,
+    product: ProductType,
+    itemIndex: number,
+    userGuid?: string,
+    businessGuid?: string
+}
+
+export interface ProductItemMenuProps {
+    product: ProductType
+    menu: boolean
+    userGuid?: string
+    businessGuid?: string
+}
+
+export interface ProductDisplayProps {
+    products: ProductType[]
+    listing: ListingType
+}
+
+export interface ProductDisplayGalleryProps {
+    products: ProductType[]
+    setGalleryDialog: any
+    listing: ListingType
 }

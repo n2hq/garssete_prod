@@ -1,5 +1,5 @@
 import { FaFacebookSquare, FaLinkedinIn, FaPinterestSquare, FaVimeoSquare, FaYoutubeSquare } from "react-icons/fa"
-import { AddVideoType, Category, City, ContactType, Country, Rating, State, UserProfile } from "./types"
+import { AddVideoType, Category, City, ContactType, Country, ProductType, Rating, State, UserProfile } from "./types"
 import CryptoJS from 'crypto-js'
 import { BsInstagram, BsLinkedin, BsPinterest, BsTwitterX } from "react-icons/bs"
 import { CgFacebook } from "react-icons/cg"
@@ -1196,4 +1196,45 @@ export const searchCategories = (searchTerm: string) => {
         (cat: Category) => cat.id.toLowerCase() === searchTerm.toLowerCase()
     );
     return foundCategory
+}
+
+
+export const getProductGallery = async (businessGuid: string | null, userGuid: string | null): Promise<ProductType[] | null> => {
+
+    let endpoint: string = ""
+
+    if (businessGuid !== "" && userGuid !== "") {
+        endpoint = `/api/listing/products/${businessGuid}/${userGuid}`
+    } else {
+        alert('Contact admin.')
+    }
+
+
+
+
+    const url = config.BASE_URL + endpoint
+    //console.log(url)
+    //console.log("|||")
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+
+        return new Promise((resolve) => setTimeout(() => {
+
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return null
+    }
 }

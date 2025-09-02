@@ -16,6 +16,10 @@ const settingsLinks = [
         link: "/videos"
     },
     {
+        title: "Products",
+        link: "/products"
+    },
+    {
         title: "Facilities",
         link: "/facilities"
     },

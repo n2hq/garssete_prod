@@ -15,7 +15,7 @@ import ImageBlock from './ImageBlock';
 import { list } from 'postcss';
 import { ListingCarousel } from './ListingCarousel';
 import BusinessPhrases from './BusinessPhrases';
-import Products from './Products';
+
 import Services from './Services';
 import SocialMedia from './SocialMedia';
 import RatingDisplay from './RatingDisplay';
@@ -28,6 +28,7 @@ import LocationWithHours from './LocationWithHours';
 import { ReportTime } from '~/lib/ReportTime';
 import RatingBoxSquare from './RatingBoxSquare';
 import Videos from './Videos';
+import Products from './products/Products';
 
 
 
@@ -35,7 +36,8 @@ const BusinessLayout = ({
     listing,
     images,
     ratingsData,
-    videoGallery
+    videoGallery,
+    products
 }: any) => {
 
     const [ratingDisplayData, setRatingDisplayData] = useState<RatingDisplayType>()
@@ -197,7 +199,9 @@ const BusinessLayout = ({
 
                                     {listing && <BusinessPhrases listing={listing} />}
 
-                                    {listing && <Products listing={listing} />}
+                                    {listing && <Products products={products}
+                                        listing={listing}
+                                    />}
 
                                     {listing && <Services listing={listing} />}
 

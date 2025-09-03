@@ -58,7 +58,7 @@ const ProductGallery = (productGallery: ProductDisplayGalleryProps) => {
                                                     <img
                                                         src={config.IMG_BASE_URL + product.product_image_url}
                                                         alt=""
-                                                        className={` object-scale-down w-full h-full`}
+                                                        className={` object-cover w-full h-full`}
                                                     />
                                                 </div>
                                                 <div className={`mt-3 text-center line-clamp-2 border-t pt-2 h-[50px] leading-[1.4em]`}>

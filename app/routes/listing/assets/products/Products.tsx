@@ -35,7 +35,7 @@ const Products = (products: ProductDisplayProps) => {
                             return (
                                 <div key={index}>
                                     <a href={product?.product_link} target='product'>
-                                        <div className={`border rounded-md p-3 block hover:shadow-md`}>
+                                        <div className={`border rounded-md p-3 h-auto block hover:shadow-md`}>
                                             <div className={` w-full h-[150px] relative `}>
                                                 <img
                                                     src={config.IMG_BASE_URL + product.product_image_url}
@@ -43,7 +43,7 @@ const Products = (products: ProductDisplayProps) => {
                                                     className={` object-scale-down w-full h-full`}
                                                 />
                                             </div>
-                                            <div className={`mt-3 text-center line-clamp-2 border-t pt-2 h-[50px] leading-[1.4em]`}>
+                                            <div className={`mt-3 text-center line-clamp-2 border-t pt-2 leading-[1.4em]`}>
                                                 {
                                                     product?.product_title
                                                 }

@@ -162,11 +162,11 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
     const [videoBar, setVideoBar] = useState<any | null>(null)
     const slider = useVideoSliderContext()
     const [video20, setVideo20] = useState<OutVideoType[]>([])
-
+    const maxSlides = 6
     useEffect(() => {
         if (outVideo) {
             //console.log(outVideo)
-            const video20 = outVideo.length > 20 ? outVideo.slice(0, 20) : outVideo
+            const video20 = outVideo.length > maxSlides ? outVideo.slice(0, maxSlides) : outVideo
             setVideo20(video20)
         }
     }, [outVideo])
@@ -185,7 +185,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
     };
 
     return (
-        <div className={`px-[5px]`}>
+        <div className={`px-[5px] mt-6 mb-5`}>
             <div className={`relative w-full max-w-[1100px] mx-auto`}>
                 <VideoGallery
                     outVideo={outVideo}
@@ -197,55 +197,61 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                 />
                 <div
                     ref={scrollRef}
-                    className={`w-full px-0 py-4 mt-3 relative flex flex-1 overflow-x-auto bottom-scrollbar-hidden`}>
+                    className={`w-full px-0 py-0 mt-3 relative flex flex-1 overflow-x-auto bottom-scrollbar-hidden`}>
                     {/** videos */}
-                    <div className={`flex gap-3`} id='videobar'>
+                    <div className={`flex gap-x-3`} id='videobar'>
 
-                        {
-                            video20?.map((video: OutVideoType, index: number) => {
-                                return (
-                                    <div key={video.videoGuid} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-md overflow-hidden hover:bg-white/50`}
-                                        /*  onClick={() => { handleOpen(video) }} */
-                                        onClick={() => showCarousel(index)}
-                                    >
 
-                                        {/** video thumbnail */}
-                                        <div className={`relative w-full h-[120px]   z-[20]`}
-                                        >
-                                            {/** youtube logo */}
-                                            <div className={`absolute top-0 left-0 w-full h-full bg-black/20 flex place-content-center place-items-center z-[300000]`}>
-                                                <RiYoutubeFill size={30} className={`text-red-500 bg-white`} />
-                                            </div>
 
-                                            <img src={video?.videoThumbnail} alt={video?.videoTitle} className={`object-cover w-full h-full`} />
+                        {Array.from({ length: maxSlides }, (_, i) => {
+                            return (
+                                <div key={i}>
+                                    {
+                                        i < maxSlides ?
+                                            <div key={video20[i]?.videoGuid} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-md overflow-hidden hover:bg-white/50`}
+                                                /*  onClick={() => { handleOpen(video) }} */
+                                                onClick={() => showCarousel(i)}
+                                            >
 
-                                            {/** bottom title */}
-                                            <div className={` block w-full absolute z-[30] text-white bottom-0 px-2 py-[5px] bg-black/50 `}>
-
-                                                <div className={`w-full text-white bottom-0  `}>
-
-                                                    <div className={` text-[12px] leading-[1.2em] line-clamp-2`}>
-                                                        {video?.videoTitle}
+                                                {/** video thumbnail */}
+                                                <div className={`relative w-full h-[120px]   z-[20]`}
+                                                >
+                                                    {/** youtube logo */}
+                                                    <div className={`absolute top-0 left-0 w-full h-full bg-black/20 flex place-content-center place-items-center z-[300000]`}>
+                                                        <RiYoutubeFill size={30} className={`text-red-500 bg-white`} />
                                                     </div>
 
+                                                    <img src={video20[i]?.videoThumbnail} alt={video20[i]?.videoTitle} className={`object-cover w-full h-full`} />
+
+                                                    {/** bottom title */}
+                                                    <div className={` block w-full absolute z-[30] text-white bottom-0 px-2 py-[5px] bg-black/50 `}>
+
+                                                        <div className={`w-full text-white bottom-0  `}>
+
+                                                            <div className={` text-[12px] leading-[1.2em] line-clamp-2`}>
+                                                                {video20[i]?.videoTitle}
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+
                                                 </div>
+                                            </div> :
+                                            <div className={`w-[${slideWidth}px] h-full border border-gray-500 rounded-md flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-black`}
+                                                onClick={() => {
+                                                    setOpenGallery(true)
+                                                }}
+                                            >
+                                                <div className={`text-white w-1/2 text-center rounded`}></div>
                                             </div>
-
-
-                                        </div>
-
-                                        {/** video title */}
-
-                                        <div className={`absolute top-0 left-0 w-full h-full hover:bg-white/50 z-40`}>
-
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
+                                    }
+                                </div>
+                            )
+                        })}
 
                         {/** last slide that opens gallery */}
-                        <div className={`w-[${slideWidth}px] h-full border border-gray-500 rounded flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-black`}
+                        <div className={`w-[${slideWidth}px] h-full border border-gray-500 rounded-md flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-black`}
                             onClick={() => {
                                 setOpenGallery(true)
                             }}

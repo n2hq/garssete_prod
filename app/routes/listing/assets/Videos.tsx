@@ -207,7 +207,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                             return (
                                 <div key={i}>
                                     {
-                                        i < maxSlides ?
+                                        i < maxSlides && i < video20?.length ?
                                             <div key={video20[i]?.videoGuid} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-md overflow-hidden hover:bg-white/50`}
                                                 /*  onClick={() => { handleOpen(video) }} */
                                                 onClick={() => showCarousel(i)}

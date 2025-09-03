@@ -35,7 +35,7 @@ const Products = (products: ProductDisplayProps) => {
                             return (
                                 <div key={index}>
                                     <a href={product?.product_link} target='product'>
-                                        <div className={`border rounded-md p-3 h-auto block hover:shadow-md`}>
+                                        <div className={`border rounded-md p-3 h-[230px] block hover:shadow-md`}>
                                             <div className={` w-full h-[150px] relative `}>
                                                 <img
                                                     src={config.IMG_BASE_URL + product.product_image_url}
@@ -47,6 +47,8 @@ const Products = (products: ProductDisplayProps) => {
                                                 {
                                                     product?.product_title
                                                 }
+
+
                                             </div>
                                         </div>
                                     </a>
@@ -62,7 +64,7 @@ const Products = (products: ProductDisplayProps) => {
                         key={products.products.length + 1}
                         onClick={() => showGallery()}
                     >
-                        <div className={`border rounded-md p-3 hover:bg-gray-50 h-full flex place-items-center place-content-center flex-col bg-gray-200 cursor-pointer min-w-full`}>
+                        <div className={`border rounded-md p-3 hover:bg-gray-50 h-[230px] flex place-items-center place-content-center flex-col bg-gray-200 cursor-pointer min-w-full`}>
 
                             <MdBrowseGallery size={22} />
                             <div>Product Gallery</div>

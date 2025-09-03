@@ -6,12 +6,28 @@ import { RatingDisplayProp, RatingDisplayType } from '~/lib/types'
 
 const RatingDisplay = ({ data }: RatingDisplayProp) => {
     const [ratingText, setRatingText] = useState('')
+    const [hasDecimalNumber, setHasDecimalNumber] = useState(false)
+
+
+    const hasDecimal = (value: number) => {
+        const strValue = value.toFixed(1).replace(/\.0$/, ""); // show "4" instead of "4.0"
+        const hasDecimal = strValue.includes(".");
+        return hasDecimal
+    }
+
+    useEffect(() => {
+        if (data) {
+            const hasDec = hasDecimal(Number(data?.rating))
+            setHasDecimalNumber(hasDec)
+        }
+    }, [data])
+
+
     useEffect(() => {
         const getRatingVal = (ratingVal: number) => {
             if (ratingVal > 4.5) {
                 setRatingText('Excellent')
-            }
-            if (ratingVal >= 4 && ratingVal < 4.5) {
+            } else if (ratingVal >= 4 && ratingVal < 4.5) {
                 setRatingText('Superb')
             } else if (ratingVal > 3.5 && ratingVal < 4) {
                 setRatingText('Very Good')
@@ -59,39 +75,14 @@ const RatingDisplay = ({ data }: RatingDisplayProp) => {
 
                     {/** right */}
                     <div className={``}>
-                        <div className={`bg-blue-950 h-full w-[40px] rounded-md text-white flex place-items-center place-content-center text-[26px]`}>
-                            {Number(data?.rating).toPrecision(2)}
+                        <div className={`bg-blue-950 h-[40px] w-[40px] rounded-md text-white flex place-items-center place-content-center ${hasDecimalNumber ? 'text-[26px]' : 'text-[36px]'}`}>
+                            {formatNumber(Number(data?.rating))}
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* <div className={`md:border-t md:border-l md:border-r py-[12px] px-[12px] md:mb-0 rounded-t border-b-[1px] bg-blue-50 rounded-b-none`}>
-                <div className={`flex place-content-between gap-1
-                `}>
-                    <div className={`flex flex-col place-items-center -space-y-1.5
-                    place-content-start w-full `}>
-                        <div className={`font-sans text-[13px] font-semibold text-blue-900 flex place-items-start  w-full -ml-[1.5px]`}>Category</div>
-                        <div className={` font-normal text-black capitalize text-[11px] tracking-normal  w-full`}>
-                            {data?.category}
-                        </div>
-                    </div>
-                    <div className={`w-full flex flex-col place-items-end place-content-center -space-y-1.5 `}>
-                        <div className={`font-bold tracking-tighter text-[12px] font-sans text-black `}>
-                            {data?.ratingCount === 0 ? 'No reviews yet' : ratingText}
-                        </div>
-                        <div className={`text-[11px] `}>
-                            {formatNumber(Number(data?.ratingCount))} review
-                            {Number(data?.ratingCount) > 1 ? 's' : ''}
-                        </div>
-                    </div>
-                    <div className={`flex place-items-center px-[3px]`}>
-                        <div className={`min-w-10 w-10 h-10 mt-[-1px] bg-blue-800 flex place-content-center text-white place-items-center rounded text-[15px]`}>
-                            {formatNumber(Number(data?.rating))}
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+
         </div>
     )
 }

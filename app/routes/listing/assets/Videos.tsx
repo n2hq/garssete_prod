@@ -1,9 +1,10 @@
 import { list } from 'postcss'
 import React, { useEffect, useRef, useState } from 'react'
 import { CgCloseR } from 'react-icons/cg'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight, FaYoutube } from 'react-icons/fa'
 import { GrClose } from 'react-icons/gr'
 import { IoClose } from 'react-icons/io5'
+import { RiYoutubeFill } from 'react-icons/ri'
 import { useVideoSliderContext } from '~/context/VideoSliderContext'
 import { AddVideoType, OutVideoType, VideoGalleryProps } from '~/lib/types'
 
@@ -184,84 +185,94 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
     };
 
     return (
-        <div className={`relative`}>
-            <VideoGallery
-                outVideo={outVideo}
-                openGallery={openGallery}
-                setOpenGallery={setOpenGallery}
-                handleOpen={handleOpen}
-                showCarousel={showCarousel}
-                listing={listing}
-            />
-            <div
-                ref={scrollRef}
-                className={`w-full bg-black px-3 py-4 mt-3 relative flex flex-1 overflow-x-auto bottom-scrollbar-hidden`}>
-                {/** videos */}
-                <div className={`flex gap-6`} id='videobar'>
-                    {/** last slide that opens gallery */}
-                    <div className={`w-[${slideWidth}px] h-[120px] border border-gray-500 rounded flex place-items-center place-content-center hover:cursor-pointer hover:bg-white/50`}
-                        onClick={() => {
-                            setOpenGallery(true)
-                        }}
-                    >
-                        <div className={`text-white w-1/2 text-center rounded`}>All Videos</div>
-                    </div>
-                    {
-                        video20?.map((video: OutVideoType, index: number) => {
-                            return (
-                                <div key={video.videoGuid} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-md overflow-hidden hover:bg-white/50`}
-                                    /*  onClick={() => { handleOpen(video) }} */
-                                    onClick={() => showCarousel(index)}
-                                >
+        <div className={`px-[5px]`}>
+            <div className={`relative w-full max-w-[1100px] mx-auto`}>
+                <VideoGallery
+                    outVideo={outVideo}
+                    openGallery={openGallery}
+                    setOpenGallery={setOpenGallery}
+                    handleOpen={handleOpen}
+                    showCarousel={showCarousel}
+                    listing={listing}
+                />
+                <div
+                    ref={scrollRef}
+                    className={`w-full px-0 py-4 mt-3 relative flex flex-1 overflow-x-auto bottom-scrollbar-hidden`}>
+                    {/** videos */}
+                    <div className={`flex gap-3`} id='videobar'>
 
-                                    {/** video thumbnail */}
-                                    <div className={`w-full h-[120px]   z-[20]`}
+                        {
+                            video20?.map((video: OutVideoType, index: number) => {
+                                return (
+                                    <div key={video.videoGuid} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-md overflow-hidden hover:bg-white/50`}
+                                        /*  onClick={() => { handleOpen(video) }} */
+                                        onClick={() => showCarousel(index)}
                                     >
-                                        <img src={video?.videoThumbnail} alt={video?.videoTitle} className={`object-cover w-full h-full`} />
 
-                                        <div className={` block w-full absolute z-[30] text-white bottom-0 px-2 py-[5px] bg-black/50 `}>
-
-                                            <div className={`w-full text-white bottom-0  `}>
-
-                                                <div className={` text-[12px] leading-[1.2em] line-clamp-2`}>
-                                                    {video?.videoTitle}
-                                                </div>
-
+                                        {/** video thumbnail */}
+                                        <div className={`relative w-full h-[120px]   z-[20]`}
+                                        >
+                                            {/** youtube logo */}
+                                            <div className={`absolute top-0 left-0 w-full h-full bg-black/20 flex place-content-center place-items-center z-[300000]`}>
+                                                <RiYoutubeFill size={30} className={`text-red-500 bg-white`} />
                                             </div>
+
+                                            <img src={video?.videoThumbnail} alt={video?.videoTitle} className={`object-cover w-full h-full`} />
+
+                                            {/** bottom title */}
+                                            <div className={` block w-full absolute z-[30] text-white bottom-0 px-2 py-[5px] bg-black/50 `}>
+
+                                                <div className={`w-full text-white bottom-0  `}>
+
+                                                    <div className={` text-[12px] leading-[1.2em] line-clamp-2`}>
+                                                        {video?.videoTitle}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        {/** video title */}
+
+                                        <div className={`absolute top-0 left-0 w-full h-full hover:bg-white/50 z-40`}>
+
                                         </div>
                                     </div>
+                                )
+                            })
+                        }
 
-                                    {/** video title */}
+                        {/** last slide that opens gallery */}
+                        <div className={`w-[${slideWidth}px] h-full border border-gray-500 rounded flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-black`}
+                            onClick={() => {
+                                setOpenGallery(true)
+                            }}
+                        >
+                            <div className={`text-white w-1/2 text-center rounded`}>All Videos</div>
+                        </div>
 
-                                    <div className={`absolute top-0 left-0 w-full h-full hover:bg-white/50 z-40`}>
-
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
-
+                    </div>
 
 
                 </div>
 
-
-            </div>
-
-            {/** navlinks */}
-            {/** left arrow */}
-            <div className={`absolute text-white top-1/2 -translate-y-1/2 left-5 w-[40px] min-w-[40px] h-[40px] bg-black/50 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded z-[50]`}
-                onClick={() => { scrollLeft() }}
-            >
-                <FaChevronLeft />
-            </div>
+                {/** navlinks */}
+                {/** left arrow */}
+                <div className={`absolute text-white top-1/2 -translate-y-1/2 left-2 w-[40px] min-w-[40px] h-[40px] bg-black/50 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded z-[50]`}
+                    onClick={() => { scrollLeft() }}
+                >
+                    <FaChevronLeft />
+                </div>
 
 
-            {/** right arrow */}
-            <div className={`absolute text-white top-1/2 -translate-y-1/2 right-5 w-[40px] min-w-[40px] h-[40px] bg-black/50 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded z-[50]`}
-                onClick={() => { scrollRight() }}
-            >
-                <FaChevronRight />
+                {/** right arrow */}
+                <div className={`absolute text-white top-1/2 -translate-y-1/2 right-2 w-[40px] min-w-[40px] h-[40px] bg-black/50 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded z-[50]`}
+                    onClick={() => { scrollRight() }}
+                >
+                    <FaChevronRight />
+                </div>
             </div>
         </div>
     )

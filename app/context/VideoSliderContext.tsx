@@ -208,7 +208,7 @@ export const VideoSliderProvider = ({ children }: any) => {
                                 }
                             </div>
                         </div>
-                        <div className={`${maximized ? 'hidden' : 'hidden md:block md:col-span-3'}   px-5 overflow-x-hidden overflow-y-auto h-full bg-blue-200`}>
+                        <div className={`${maximized ? 'hidden' : 'hidden md:block md:col-span-3'}   px-5 overflow-x-hidden overflow-y-auto h-full bg-white`}>
                             <h1 className=' text-[22px] my-4 font-sans font-extrabold tracking-tight leading-[24px]'>Videos for {listing && listing.title}</h1>
                             <div className=' my-4 '>{currentSlide + 1} / {slides.length}</div>
                             <hr />

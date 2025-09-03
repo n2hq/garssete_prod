@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { CgCloseR } from 'react-icons/cg'
 import { FaChevronLeft, FaChevronRight, FaYoutube } from 'react-icons/fa'
 import { GrClose } from 'react-icons/gr'
-import { IoClose } from 'react-icons/io5'
+import { IoClose, IoImage, IoImagesOutline } from 'react-icons/io5'
+import { MdOutlineImage } from 'react-icons/md'
 import { RiYoutubeFill } from 'react-icons/ri'
 import { useVideoSliderContext } from '~/context/VideoSliderContext'
 import { AddVideoType, OutVideoType, VideoGalleryProps } from '~/lib/types'
@@ -208,7 +209,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                                 <div key={i}>
                                     {
                                         i < maxSlides && i < video20?.length ?
-                                            <div key={video20[i]?.videoGuid} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-md overflow-hidden hover:bg-white/50`}
+                                            <div key={video20[i]?.videoGuid} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-none overflow-hidden hover:bg-white/50`}
                                                 /*  onClick={() => { handleOpen(video) }} */
                                                 onClick={() => showCarousel(i)}
                                             >
@@ -217,7 +218,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                                                 <div className={`relative w-full h-[120px]   z-[20]`}
                                                 >
                                                     {/** youtube logo */}
-                                                    <div className={`absolute top-0 left-0 w-full h-full bg-black/20 flex place-content-center place-items-center z-[300000]`}>
+                                                    <div className={`absolute top-0 left-0 w-full h-full bg-black/20 flex place-content-center place-items-center z-[300000] hover:bg-white/40`}>
                                                         <RiYoutubeFill size={30} className={`text-red-500 bg-white`} />
                                                     </div>
 
@@ -238,12 +239,14 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
 
                                                 </div>
                                             </div> :
-                                            <div className={`w-[${slideWidth}px] h-full border border-gray-500 rounded-md flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-black`}
+                                            <div className={`w-[${slideWidth}px] h-full border rounded-none flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-gray-900 `}
                                                 onClick={() => {
                                                     setOpenGallery(true)
                                                 }}
                                             >
-                                                <div className={`text-white w-1/2 text-center rounded`}></div>
+                                                <div className={`text-white/60 w-[85%] text-center rounded-md h-[85%] border border-dashed border-gray-200 flex place-items-center place-content-center text-[23px]`}>
+                                                    <MdOutlineImage />
+                                                </div>
                                             </div>
                                     }
                                 </div>
@@ -251,7 +254,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                         })}
 
                         {/** last slide that opens gallery */}
-                        <div className={`w-[${slideWidth}px] h-full border border-gray-500 rounded-md flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-black`}
+                        <div className={`w-[${slideWidth}px] h-full border border-gray-500 rounded-none flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-black`}
                             onClick={() => {
                                 setOpenGallery(true)
                             }}

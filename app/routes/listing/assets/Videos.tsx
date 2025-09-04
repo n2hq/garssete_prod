@@ -221,8 +221,8 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                                                 <div className={`relative w-full h-[${slideHeight}px]   z-[20]`}
                                                 >
                                                     {/** youtube logo */}
-                                                    <div className={`absolute top-0 left-0 w-full h-full bg-black/20 flex place-content-end place-items-start z-[300000] hover:bg-white/40`}>
-                                                        <RiYoutubeFill size={20} className={`text-white  `} />
+                                                    <div className={`absolute top-0 left-0 w-full h-full bg-black/20  z-[300000] hover:bg-white/40`}>
+                                                        <RiYoutubeFill size={20} className={`text-white absolute top-0.5 right-1 `} />
                                                     </div>
 
                                                     <img src={video20[i]?.videoThumbnail} alt={video20[i]?.videoTitle} className={`object-cover w-full h-full`} />
@@ -247,7 +247,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                                                     setOpenGallery(true)
                                                 }}
                                             >
-                                                <div className={`text-white/60 w-[85%] text-center rounded-md h-[85%] border border-dashed border-gray-200/80 flex place-items-center place-content-center text-[23px]`}>
+                                                <div className={`text-white/60 w-[85%] text-center rounded-md h-[75%] border border-dashed border-gray-200/50 flex place-items-center place-content-center text-[23px]`}>
                                                     <MdOutlineImage />
                                                 </div>
                                             </div>

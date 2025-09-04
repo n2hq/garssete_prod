@@ -112,6 +112,7 @@ const index = () => {
     const ratingsData: any = data.ratingsData
     const videoGallery: AddVideoType[] = data.videoGallery
     const products: ProductType[] = data.products
+    const profileImageData = data.profileImageData
 
     useEffect(() => {
         if (listing) {
@@ -135,6 +136,7 @@ const index = () => {
                             ratingsData={ratingsData}
                             videoGallery={videoGallery}
                             products={products}
+                            profileImageData={profileImageData}
                         />
                     }
 

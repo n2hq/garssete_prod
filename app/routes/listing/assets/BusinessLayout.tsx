@@ -37,7 +37,8 @@ const BusinessLayout = ({
     images,
     ratingsData,
     videoGallery,
-    products
+    products,
+    profileImageData
 }: any) => {
 
     const [ratingDisplayData, setRatingDisplayData] = useState<RatingDisplayType>()
@@ -83,12 +84,17 @@ const BusinessLayout = ({
                     }
 
                     {
-                        listing && <Header listing={listing} />
+                        listing && profileImageData && <Header
+                            listing={listing}
+                            profileImageData={profileImageData}
+                            operatingHoursStatus={operatingHoursStatus}
+                            ratingsData={ratingsData}
+                        />
                     }
 
                     {
                         operatingHoursStatus !== undefined &&
-                        <div className={`mt-[6px] leading-[1.2em]`}>
+                        <div className={`mt-[6px] leading-[1.2em] border-t pt-[8px]`}>
                             {
                                 operatingHoursStatus.openStatus === "selected_hours" ?
                                     <div>

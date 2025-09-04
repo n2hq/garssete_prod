@@ -41,7 +41,7 @@ const BusinessRatings = ({ listing }: any) => {
             <ComponentTitle title='Reviews' />
 
             <div className={`-mt-1 text-[14px] flex flex-col -gap-y-1 font-light`}>
-                <div className={`font-bold`}>Overall Rating:</div>
+                <div className={`font-bold text-lg`}>Overall Rating:</div>
                 {
                     ratingsRevews &&
                     <SingleStarRating rating={ratingsRevews?.rating_average} />
@@ -86,11 +86,11 @@ const BusinessRatings = ({ listing }: any) => {
                                     <div>
                                         <SingleStarRating rating={review.rating} />
                                     </div>
-                                    <div className={`text-[12px] flex gap-1 place-items-center`}>
+                                    <div className={`text-[12px] mt-1`}>
                                         <b>Created at:</b>
                                         <span className={`text-[12px]`}>{getLocalDate(review.created_at)}</span>
                                     </div>
-                                    <div className={`text-[12px] flex gap-1 place-items-center`}>
+                                    <div className={`text-[12px]`}>
                                         <b>Last Edited:</b>
                                         <span className={`text-[12px]`}>{getLocalDate(review.updated_at)}</span>
                                     </div>

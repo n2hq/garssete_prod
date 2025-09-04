@@ -327,9 +327,9 @@ export const getBusinessRatings = async (businessGuid: string | null): Promise<a
 export const getLocalDate = (date: string) => {
     const localDate = new Date(date)
     const formatted = localDate.toLocaleString('en-US', {
-        weekday: 'long',
+        weekday: 'short',
         year: 'numeric',
-        month: 'long',
+        month: 'short',
         day: 'numeric',
         hour: '2-digit',
         minute: '2-digit',

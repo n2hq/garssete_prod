@@ -13,13 +13,13 @@ const SingleStarRating = ({ rating = 3.5, maxStars = 5 }: StarRatingProps) => {
     for (let i = 1; i <= maxStars; i++) {
         if (i <= rating) {
             stars.push(
-                <span key={i} className="text-yellow-500 text-lg">
+                <span key={i} className="text-yellow-500 text-xl">
                     <BsStarFill />
                 </span>
             );
         } else {
             stars.push(
-                <span key={i} className="text-yellow-500 text-lg">
+                <span key={i} className="text-yellow-500 text-xl">
                     <BsStar />
                 </span>
             );
@@ -34,8 +34,8 @@ const SingleStarRating = ({ rating = 3.5, maxStars = 5 }: StarRatingProps) => {
             <div className={`text-gray-400`}>
                 <BiSolidRightArrow className={`text-[15px] text-yellow-400`} />
             </div>
-            <div className={` text-sm`}>
-                Rating: {Number(rating).toFixed(0)}
+            <div className={` text-xl`}>
+                Rating: {Number(rating)}
             </div>
 
         </div>

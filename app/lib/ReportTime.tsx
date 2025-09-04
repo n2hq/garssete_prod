@@ -174,8 +174,8 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
 
 
     if (todayHoursEntry && todayHoursEntry.hours.includes('Not Set')) {
-        todayHoursFormatted = <div>
-            <span>Operating Hours: </span>
+        todayHoursFormatted = <div className={`text-sm`}>
+            <span>OPERATING HOURS: </span>
             <span className={` rounded text-black px-1 py-[2px] uppercase text-sm font-semibold`}>
                 open ended
             </span>

@@ -28,14 +28,39 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                 </div>
 
                 <div className={` leading-[1.3em] space-x-1`}>
-                    <span className={`underline font-bold`}>Address:</span>
-                    <span className={``}>
-                        {listing?.address_one ? `${listing?.address_one}, ` : ''}
-                        {listing?.address_two ? `${listing?.address_two}, ` : ''}
-                        {listing?.city_name ? `${listing?.city_name}, ` : ''}
-                        {listing?.state_name ? `${listing?.state_name}, ` : ''}
-                        {listing?.country_name}
-                    </span>
+                    {
+                        operatingHoursStatus !== undefined &&
+                        <div className={`mt-[3px] leading-[1.2em]`}>
+                            {
+                                operatingHoursStatus.openStatus === "selected_hours" ?
+                                    <div>
+                                        {operatingHoursStatus.todayHoursFormatted}
+                                    </div> :
+                                    <div>
+                                        {
+                                            operatingHoursStatus.openStatus === "always_open" && <div className={`bg-green-700 px-1 rounded w-fit text-white py-1`}>
+                                                Always Open
+                                            </div>
+                                        }
+                                        {
+                                            operatingHoursStatus.openStatus === "permanently_closed" && <div className={`bg-red-700 px-1 rounded w-fit text-white py-1`}>
+                                                Permantently Closed
+                                            </div>
+                                        }
+                                        {
+                                            operatingHoursStatus.openStatus === "temporarily_closed" && <div className={`bg-orange-400 px-1 rounded w-fit text-white py-1`}>
+                                                Temporarily Closed
+                                            </div>
+                                        }
+                                    </div>
+                            }
+
+                            <div className={`max-w-[1100px] w-full mx-auto mt-1.5`}>
+                                {operatingHoursStatus?.localTimeText}
+                            </div>
+                        </div>
+
+                    }
 
 
                 </div>

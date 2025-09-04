@@ -159,6 +159,8 @@ export const ShowVideo = ({ currentVideo, setOpen, open }: any) => {
 export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }: any) => {
     const [openGallery, setOpenGallery] = useState(false)
     const [slideWidth, setSlideWidth] = useState(150)
+    const [slideHeight, setSlideHeight] = useState(90)
+
     const scrollRef = useRef<HTMLDivElement>(null);
     const [videoBar, setVideoBar] = useState<any | null>(null)
     const slider = useVideoSliderContext()
@@ -209,13 +211,13 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                                 <div key={i}>
                                     {
                                         i < maxSlides && i < video20?.length ?
-                                            <div key={video20[i]?.videoGuid} className={`w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-none overflow-hidden hover:bg-white/50`}
+                                            <div key={video20[i]?.videoGuid} className={` w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-none overflow-hidden hover:bg-white/50`}
                                                 /*  onClick={() => { handleOpen(video) }} */
                                                 onClick={() => showCarousel(i)}
                                             >
 
                                                 {/** video thumbnail */}
-                                                <div className={`relative w-full h-[120px]   z-[20]`}
+                                                <div className={`relative w-full h-[${slideHeight}px]   z-[20]`}
                                                 >
                                                     {/** youtube logo */}
                                                     <div className={`absolute top-0 left-0 w-full h-full bg-black/20 flex place-content-center place-items-center z-[300000] hover:bg-white/40`}>

@@ -66,7 +66,7 @@ const BusinessLayout = ({
         }
     }, [listing])
     return (
-        <div className={``}>
+        <div className={`mt-5`}>
             <div className={`px-[15px] w-full`}>
                 <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
 

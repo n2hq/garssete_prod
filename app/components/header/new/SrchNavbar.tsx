@@ -27,7 +27,7 @@ const SrchNavbar = () => {
 
     return (
         <div>
-            <div className={` bg-blue-900 text-white  fixed top-0 left-0 w-full z-[1000] shadow-sm`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
+            <div className={` bg-black text-white  fixed top-0 left-0 w-full z-[1000] shadow-sm`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
 
                 <MobileNav
                     showNav={showNav}
@@ -46,8 +46,8 @@ const SrchNavbar = () => {
                                 className={` object-cover w-full h-full`}
                             />
                         </div>
-                        <Link to="/" className="text-xl font-extrabold tracking-tight">
-                            GARSSETE
+                        <Link to="/" className="text-3xl font-extrabold tracking-tight">
+                            Garssete
                         </Link>
                     </div>
 
@@ -138,9 +138,9 @@ export const NavLink = ({ link, index }: any) => {
     const location = useLocation();
 
 
-    return <Link key={index} to={link.lnk} className={`flex items-center font-semibold text-[15px] hover:underline `}>
+    return <Link key={index} to={link.lnk} className={`flex items-center font-light text-[15px] hover:underline `}>
         {link.icon}
-        <span className={`mx-1 ${location.pathname === link.lnk && 'underline text-blue-200'}`}>{link.title}</span>
+        <span className={`mx-1 ${location.pathname === link.lnk && 'underline text-white'}`}>{link.title}</span>
         <FaAngleDown className="text-xs" />
     </Link>
 }

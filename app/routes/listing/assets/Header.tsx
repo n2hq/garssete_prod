@@ -13,11 +13,11 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
 
     return (
         <div className={`flex gap-2 mt-2`}>
-            <div className={`bg-white w-[90px] min-w-[90px] h-[90px] rounded-none relative overflow-hidden hidden md:block`}>
+            <div className={`bg-white w-[90px] min-w-[90px] h-[90px] rounded-none relative overflow-hidden hidden md:block border border-gray-300 p-1`}>
                 <img
                     src={profileImg}
                     alt=""
-                    className={` object-cover w-full h-full border border-gray-500 p-1`}
+                    className={` object-cover w-full h-full border-[1px]  border-gray-300`}
                 />
             </div>
             <div className={`w-full`}>

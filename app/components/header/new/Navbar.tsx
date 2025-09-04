@@ -49,9 +49,9 @@ const Navbar = () => {
                     </Link>
                 </div>
 
-                <div className={`text-gray-200 hidden text-[12px] lg:flex md:gap-3`}>
+                <div className={`text-black hidden text-[12px] lg:flex md:gap-3`}>
                     <div className='hover:underline'>
-                        <a href="/web/search">Search</a>
+                        <a href="/web/browse">Search</a>
                     </div>
                     <div className='hover:underline'>
                         <a href="/web/terms">Terms</a>

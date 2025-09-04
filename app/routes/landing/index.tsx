@@ -11,14 +11,16 @@ import FooterSection from './assets/FooterSection'
 
 const index = () => {
   return (
-    <Layout>
-      <Navbar />
-      <HeroSection />
-      <FeaturesSection />
-      <DiscoverSection />
-      <CallToActionSection />
-      <FooterSection />
-    </Layout>
+    <div>
+      {/* <Layout>
+        <Navbar />
+        <HeroSection />
+        <FeaturesSection />
+        <DiscoverSection />
+        <CallToActionSection />
+        <FooterSection />
+      </Layout> */}
+    </div>
   )
 }
 

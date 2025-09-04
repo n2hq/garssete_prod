@@ -189,7 +189,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
     };
 
     return (
-        <div className={`px-[15px] mt-6 mb-5`}>
+        <div className={`px-[10px] mt-6 mb-5`}>
             <div className={`relative w-full max-w-[1100px] mx-auto`}>
                 <VideoGallery
                     outVideo={outVideo}
@@ -212,7 +212,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                                 <div key={i}>
                                     {
                                         i < maxSlides && i < video20?.length ?
-                                            <div key={video20[i]?.videoGuid} className={` w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border border-gray-500 rounded-none overflow-hidden hover:bg-white/50`}
+                                            <div key={video20[i]?.videoGuid} className={` w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border  rounded-none overflow-hidden hover:bg-white/50`}
                                                 /*  onClick={() => { handleOpen(video) }} */
                                                 onClick={() => showCarousel(i)}
                                             >
@@ -221,14 +221,14 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                                                 <div className={`relative w-full h-[${slideHeight}px]   z-[20]`}
                                                 >
                                                     {/** youtube logo */}
-                                                    <div className={`absolute top-0 left-0 w-full h-full bg-black/20  z-[300000] hover:bg-white/40`}>
+                                                    <div className={`absolute top-0 left-0 w-full h-full bg-transparent  z-[300000] hover:bg-white/40`}>
                                                         <RiYoutubeFill size={20} className={`text-white absolute top-0.5 right-1 `} />
                                                     </div>
 
                                                     <img src={video20[i]?.videoThumbnail} alt={video20[i]?.videoTitle} className={`object-cover w-full h-full`} />
 
                                                     {/** bottom title */}
-                                                    <div className={` block w-full absolute z-[30] text-white bottom-0 px-2 py-[5px] bg-black/50 `}>
+                                                    <div className={` block w-full absolute z-[30] text-white bottom-0 px-2 py-[5px] bg-black/80 `}>
 
                                                         <div className={`w-full text-white bottom-0  `}>
 

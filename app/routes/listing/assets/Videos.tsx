@@ -188,7 +188,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
     };
 
     return (
-        <div className={`px-[5px] mt-6 mb-5`}>
+        <div className={`px-[15px] mt-6 mb-5`}>
             <div className={`relative w-full max-w-[1100px] mx-auto`}>
                 <VideoGallery
                     outVideo={outVideo}

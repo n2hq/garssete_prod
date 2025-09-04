@@ -24,12 +24,21 @@ const ClaimBusiness = ({ listing }: any) => {
             {
                 ownerRole === "admin" &&
                 <div className={` md:mt-0 `}>
-                    <Link to={`/web/contact`}>
-                        <div className={`px-3 text-[15px] text-center border border-t-0 py-[15px] rounded rounded-t-none underline underline-offset-2  bg-blue-100 mx-[0px] md:mx-[0px]
-                            mb-[40px] md:mb-[40px]`}>
-                            Is this your business? Claim it for free!
-                        </div>
-                    </Link>
+                    <div className={`px-3  border border-t-0  rounded rounded-t-none  underline-offset-2  bg-blue-100 mx-[0px] md:mx-[0px] mb-[40px] md:mb-[40px] divide-y-1 divide-gray-600`}>
+                        <a href="/web/contact">
+                            <div className={`text-[15px] text-center  py-[10px] `}>
+                                Is this your business? Claim it for free!
+                            </div>
+                        </a>
+
+                        <div className={`border-b-[1px] border-gray-50/20`} />
+
+                        <a href="/web/contact">
+                            <div className={`text-[12px] text-center underline py-[10px]`}>
+                                Request removal.
+                            </div>
+                        </a>
+                    </div>
                 </div>
             }
         </>

@@ -2,7 +2,7 @@ import { LoaderFunction } from '@remix-run/node';
 import { useLoaderData, useSearchParams } from '@remix-run/react';
 import React, { useEffect, useState } from 'react'
 import { getCountries, getSearch } from '~/lib/lib';
-import SearchLayout from '~/routes/asset/SearchLayout copy';
+import SearchLayout from '~/routes/asset/SearchLayoutMain';
 import Item from './assets/Item';
 import BrowseLayout from '~/routes/asset/BrowseLayout';
 import Card from './assets/Card';

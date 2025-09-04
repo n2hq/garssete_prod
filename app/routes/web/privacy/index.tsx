@@ -1,14 +1,15 @@
 import React from 'react'
 import { appConfig } from '~/lib/lib'
-import Layout from '~/routes/asset/NormalLayout'
+
 import VerticalHeight from '~/routes/asset/VerticalHeight'
 import CallToActionSection from '~/components/content/CallToActionSection'
 import FooterSection from '~/routes/landing/assets/FooterSection'
+import SearchLayoutMain from '~/routes/asset/SearchLayoutMain'
 
 const index = () => {
     return (
-        <Layout>
-            <div className={`max-w-[1000px] mx-auto w-full mt-[30px]`}>
+        <SearchLayoutMain>
+            <div className={`max-w-[1100px] mx-auto w-full mt-[30px]`}>
                 <div className={`grid md:grid-cols-12 gap-4 `}>
                     <div className={` md:col-span-7  px-[15px]`}>
                         <InfoPrivacy />
@@ -22,7 +23,7 @@ const index = () => {
             <VerticalHeight />
             <CallToActionSection />
             <FooterSection />
-        </Layout>
+        </SearchLayoutMain>
     )
 }
 
@@ -198,7 +199,7 @@ export const InfoPrivacy = () => {
                     <p data-start="2281" data-end="2326">Contact us with any privacy-related questions</p>
                 </li>
             </ul>
-            <p data-start="2328" data-end="2401">To make a request, please reach out to us at <strong data-start="2373" data-end="2400">privacy@garssete.com</strong>.</p>
+            <p data-start="2328" data-end="2401">To make a request, please reach out to us at <strong data-start="2373" data-end="2400">support@garssete.com</strong>.</p>
             <hr data-start="2403" data-end="2406" />
             <h3 data-start="2408" data-end="2427">
                 <strong data-start="2412" data-end="2427">7. Security</strong>
@@ -232,7 +233,7 @@ export const InfoPrivacy = () => {
                 If you have any questions or concerns about this Privacy Policy, feel free to contact us:
             </p>
             <p data-start="3296" data-end="3371">
-                <strong data-start="3299" data-end="3309">Email:</strong> <a href="mailto:privacy@garssete.com">privacy@garssete.com</a><br data-start="3331" data-end="3334" />
+                <strong data-start="3299" data-end="3309">Email:</strong> <a href="mailto:support@garssete.com">support@garssete.com</a><br data-start="3331" data-end="3334" />
                 🌐 <strong data-start="3337" data-end="3349">Website:</strong> <a href="garssete.com/contact">garssete.com/contact</a>
             </p>
             <hr data-start="3373" data-end="3376" />

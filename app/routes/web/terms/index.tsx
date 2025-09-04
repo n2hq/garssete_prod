@@ -1,14 +1,14 @@
 import React from 'react'
 import { appConfig } from '~/lib/lib'
-import Layout from '~/routes/asset/NormalLayout'
 import VerticalHeight from '~/routes/asset/VerticalHeight'
 import CallToActionSection from '~/components/content/CallToActionSection'
 import FooterSection from '~/routes/landing/assets/FooterSection'
+import SearchLayoutMain from '~/routes/asset/SearchLayoutMain'
 
 const index = () => {
     return (
-        <Layout>
-            <div className={`max-w-[1000px] mx-auto w-full mt-[30px]`}>
+        <SearchLayoutMain>
+            <div className={`max-w-[1100px] mx-auto w-full mt-[30px]`}>
                 <div className={`grid md:grid-cols-12 gap-4 `}>
                     <div className={` md:col-span-7  px-[15px]`}>
                         <InfoTerms />
@@ -22,7 +22,7 @@ const index = () => {
             <VerticalHeight />
             <CallToActionSection />
             <FooterSection />
-        </Layout>
+        </SearchLayoutMain>
     )
 }
 
@@ -183,7 +183,7 @@ export const InfoTerms = () => {
             </p>
             <hr data-start="3183" data-end="3186" />
             <p data-start="3188" data-end="3318">
-                If you have any questions or suggestions about these Terms, we’d love to hear from you at <a href="mailto:info@garssete.com" className='text-blue-600'>info@garssete.com</a>. Thank you for being part of our community!
+                If you have any questions or suggestions about these Terms, we’d love to hear from you at <a href="mailto:support@garssete.com" className='text-blue-600'>support@garssete.com</a>. Thank you for being part of our community!
             </p>
             <hr data-start="3320" data-end="3323" />
 

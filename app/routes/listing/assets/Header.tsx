@@ -13,7 +13,7 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
 
     return (
         <div className={`flex gap-2 mt-2`}>
-            <div className={`bg-white w-[90px] min-w-[90px] h-[90px] rounded-none relative overflow-hidden`}>
+            <div className={`bg-white w-[90px] min-w-[90px] h-[90px] rounded-none relative overflow-hidden hidden md:block`}>
                 <img
                     src={profileImg}
                     alt=""
@@ -22,15 +22,15 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
             </div>
             <div className={`w-full`}>
                 <div className={`text-[19px] md:text-[24px]
-                font-bold mt-[5px] leading-[1.2em]`}>
+                font-bold  leading-[1.2em] tracking-tight font-poppins`}>
                     {listing?.title}
 
                 </div>
 
-                <div className={` leading-[1.3em] space-x-1`}>
+                <div className={` leading-[1.3em] space-x-1 mt-1`}>
                     {
                         operatingHoursStatus !== undefined &&
-                        <div className={`mt-[3px] leading-[1.2em]`}>
+                        <div className={` leading-[1.2em]`}>
                             {
                                 operatingHoursStatus.openStatus === "selected_hours" ?
                                     <div>
@@ -38,24 +38,24 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                                     </div> :
                                     <div>
                                         {
-                                            operatingHoursStatus.openStatus === "always_open" && <div className={`bg-green-700 px-1 rounded w-fit text-white py-1`}>
+                                            operatingHoursStatus.openStatus === "always_open" && <div className={`bg-green-700 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
                                                 Always Open
                                             </div>
                                         }
                                         {
-                                            operatingHoursStatus.openStatus === "permanently_closed" && <div className={`bg-red-700 px-1 rounded w-fit text-white py-1`}>
+                                            operatingHoursStatus.openStatus === "permanently_closed" && <div className={`bg-red-700 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
                                                 Permantently Closed
                                             </div>
                                         }
                                         {
-                                            operatingHoursStatus.openStatus === "temporarily_closed" && <div className={`bg-orange-400 px-1 rounded w-fit text-white py-1`}>
+                                            operatingHoursStatus.openStatus === "temporarily_closed" && <div className={`bg-orange-400 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
                                                 Temporarily Closed
                                             </div>
                                         }
                                     </div>
                             }
 
-                            <div className={`max-w-[1100px] w-full mx-auto mt-1.5`}>
+                            <div className={` w-full mx-auto mt-1.5`}>
                                 {operatingHoursStatus?.localTimeText}
                             </div>
                         </div>

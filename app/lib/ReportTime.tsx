@@ -158,13 +158,13 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
         isOpen = localTimeObject >= openTime && localTimeObject <= closeTime;
 
         const formattedLabel = (isOpen: boolean) => {
-            return `${isOpen ? 'Open Now' : 'Closed Now'}:`
+            return `${isOpen ? 'Open Now' : 'Closed Now'}`
         }
 
         //todayHoursFormatted = formattedLabel(isOpen) + ` ${today}, ${formatTime(openStr)} - ${formatTime(closeStr)}`;
 
         todayHoursFormatted = <div className={`w-full flex gap-1.5 place-items-center flex-wrap`}>
-            <span className={`${isOpen ? 'bg-blue-700' : 'bg-red-500'} text-white px-1 py-[2px] rounded-md`}>{formattedLabel(isOpen)}</span>
+            <span className={`${isOpen ? 'bg-blue-700' : 'bg-red-500'} text-white px-1 py-[2px] rounded-sm text-[13px]`}>{formattedLabel(isOpen)}</span>
             <span>{today}, </span>
             <span>{formatTime(openStr)}</span>
             <span> {"-"} </span>
@@ -174,7 +174,7 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
 
 
     if (todayHoursEntry && todayHoursEntry.hours.includes('Not Set')) {
-        todayHoursFormatted = <div className={`text-sm`}>
+        todayHoursFormatted = <div className={`text-[12px]`}>
             <span>OPERATING HOURS: </span>
             <span className={` rounded text-black px-1 py-[2px] uppercase text-sm font-semibold`}>
                 open ended

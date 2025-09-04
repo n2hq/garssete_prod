@@ -1,5 +1,6 @@
 import { list } from 'postcss'
 import React, { useEffect, useRef, useState } from 'react'
+import { BsYoutube } from 'react-icons/bs'
 import { CgCloseR } from 'react-icons/cg'
 import { FaChevronLeft, FaChevronRight, FaYoutube } from 'react-icons/fa'
 import { GrClose } from 'react-icons/gr'
@@ -220,8 +221,8 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                                                 <div className={`relative w-full h-[${slideHeight}px]   z-[20]`}
                                                 >
                                                     {/** youtube logo */}
-                                                    <div className={`absolute top-0 left-0 w-full h-full bg-black/20 flex place-content-center place-items-center z-[300000] hover:bg-white/40`}>
-                                                        <RiYoutubeFill size={30} className={`text-red-500 bg-white`} />
+                                                    <div className={`absolute top-0 left-0 w-full h-full bg-black/20 flex place-content-end place-items-start z-[300000] hover:bg-white/40`}>
+                                                        <RiYoutubeFill size={20} className={`text-white  `} />
                                                     </div>
 
                                                     <img src={video20[i]?.videoThumbnail} alt={video20[i]?.videoTitle} className={`object-cover w-full h-full`} />
@@ -246,7 +247,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                                                     setOpenGallery(true)
                                                 }}
                                             >
-                                                <div className={`text-white/60 w-[85%] text-center rounded-md h-[85%] border border-dashed border-gray-200 flex place-items-center place-content-center text-[23px]`}>
+                                                <div className={`text-white/60 w-[85%] text-center rounded-md h-[85%] border border-dashed border-gray-200/80 flex place-items-center place-content-center text-[23px]`}>
                                                     <MdOutlineImage />
                                                 </div>
                                             </div>

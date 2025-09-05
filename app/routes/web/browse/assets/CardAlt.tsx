@@ -1,17 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { BiPhone } from 'react-icons/bi'
-import { BsGeo, BsHeart, BsHeartFill, BsStarFill } from 'react-icons/bs'
+import { BiPhone, BiPhoneCall, BiSolidPhone } from 'react-icons/bi'
+import { BsFillPhoneFill, BsGeo, BsHeart, BsHeartFill, BsStarFill } from 'react-icons/bs'
 import { FaMapLocation } from 'react-icons/fa6'
 import { GrMapLocation } from 'react-icons/gr'
 import { MdEmail, MdLocationPin } from 'react-icons/md'
-import { config, formatNumber, getCardIcon, searchCategories, strToList } from '~/lib/lib'
+import { config, formatNumber, getCardIcon, getRandomImage, searchCategories, strToList } from '~/lib/lib'
 import { ListingType } from '~/lib/types'
 import RatingBoxAlt from './RatingBoxAlt'
+import { list } from 'postcss'
 
 interface CardProp {
     listing: ListingType
     index: number
 }
+
+const defaultBGImages = [
+    {
+        image: '/images/lcape.jpg'
+    },
+    {
+        image: '/images/dohamarina.webp'
+    },
+    {
+        image: '/images/landscapex.jpeg'
+    },
+    {
+        image: '/images/sideviewcar.jpg'
+    }
+]
 
 const CardAlt = ({ listing, index }: any) => {
     const [listingData, setListingData] = useState<ListingType | null>(null)
@@ -25,12 +41,15 @@ const CardAlt = ({ listing, index }: any) => {
         if (listing) {
             if (listing?.image_url !== "" && listing?.image_url !== null && listing?.image_url !== undefined) {
                 //console.log(config.IMG_BASE_URL)
-                setImgsrc(config.IMG_BASE_URL + listing?.image_url)
+                //setImgsrc(config.IMG_BASE_URL + listing?.image_url)
             }
 
             if (listing?.bg_image_url !== "" && listing?.bg_image_url !== null && listing?.bg_image_url !== undefined) {
 
                 setBgimgsrc(config.IMG_BASE_URL + listing?.bg_image_url)
+            } else {
+                const img = getRandomImage(defaultBGImages)
+                //setBgimgsrc('https://i.pinimg.com/736x/80/8a/31/808a318aad215c39b4855619b0e87f10.jpg')
             }
 
             if (listing?.username !== "" && listing?.username !== null && listing?.username !== undefined) {
@@ -76,14 +95,15 @@ const CardAlt = ({ listing, index }: any) => {
 
     return (
         <div className={`px-[15px] md:px-0 bg-white`}>
-            <a href={`/${userId}`}>
-                <div className={` w-full rounded-xl overflow-hidden shadow-lg`}>
 
-                    {/** header */}
-                    <div className={`w-full h-[150px] bg-black bg-no-repeat bg-cover relative bg-center`}
+            <div className={` w-full rounded-xl overflow-hidden shadow-lg`}>
+
+                {/** header */}
+                <a href={`/${userId}`}>
+                    <div className={`w-full h-[150px] bg-gray-500 bg-no-repeat bg-cover relative bg-center`}
                         style={{ backgroundImage: `url('${bgimgsrc}')` }}
                     >
-                        <div className={`w-full h-full top-0 left-0 bg-black/30 absolute`}></div>
+                        <div className={`w-full h-full top-0 left-0 bg-black/0 absolute`}></div>
                         <div className={` flex absolute mt-[30px] ml-[20px] gap-2`}>
 
                             <RatingStarCenter averageRating={listing?.average_rating} />
@@ -91,9 +111,12 @@ const CardAlt = ({ listing, index }: any) => {
                             <ShowEmail />
                         </div>
                     </div>
+                </a>
 
 
-                    {/** body */}
+
+                {/** body */}
+                <a href={`/${userId}`}>
                     <div className={`relative h-[140px]`}>
                         {/** logo image */}
                         <div className={`w-[70px] h-[70px] bg-black rounded-full absolute -top-[20px] left-[15px] overflow-hidden`}>
@@ -137,35 +160,46 @@ const CardAlt = ({ listing, index }: any) => {
 
 
                     </div>
+                </a>
 
-                    {/** footer */}
-                    <div className={`border-t pt-2 pb-2 mt-5 `}>
-                        <div className={`flex place-content-between mx-[20px] place-items-center mt-[4px] mb-[5px]`}>
-                            <div className={` flex place-items-center gap-3 text-[13px] mt-[2px]`}>
-                                <a href={`mailto:${listing?.email_address}`} key={34}>
-                                    <MdEmail size={20} />
-                                </a>
-                                <a href={`tel:${listing?.phone}`} key={30}>
-                                    <BiPhone size={20} />
-                                </a>
+                {/** footer */}
+                <div className={`border-t pt-2 pb-2 mt-5 `}>
+                    <div className={`flex place-content-between mx-[20px] place-items-center mt-[4px] mb-[5px]`}>
+                        <div className={` flex place-items-center gap-3 text-[13px] mt-[2px]`}>
+                            <a href={`mailto:${listing?.email_address}`} key={34}>
+                                <MdEmail size={20} />
+                            </a>
+                            <a href={`${listing?.phone ? `tel:${listing?.phone}` : `#${index}`}`} key={30}>
                                 {
-                                    socialMedia !== null &&
-                                    socialMedia?.map((media: any, index: number) => {
-                                        return (
-                                            <a href={`${media?.baseUrl}${media?.mediaHandle}`} key={index}>
-                                                {getCardIcon(media?.mediaName)}
-                                            </a>)
-                                    })}
-                            </div>
-                            <div>
-                                Website
-                            </div>
-                        </div>
+                                    !listing?.phone ?
+                                        <BiPhone size={18} className={`text-gray-400`} /> :
+                                        <BiPhoneCall size={18} />
+                                }
 
+
+                            </a>
+                            {
+                                socialMedia !== null &&
+                                socialMedia?.map((media: any, index: number) => {
+                                    return (
+                                        <a href={`${media?.baseUrl}${media?.mediaHandle}`} key={index}>
+                                            {getCardIcon(media?.mediaName)}
+                                        </a>)
+                                })}
+                        </div>
+                        <div>
+                            <a
+                                className={`font-normal bg-blue-600 text-white py-[3px] px-[5px] rounded-md hover:shadow-md hover:shadow-gray-400`}
+                                href={`${listing?.website ? listing?.website : `#${index}`}`}>
+                                Website
+                            </a>
+                        </div>
                     </div>
+
                 </div>
-            </a>
-        </div >
+            </div>
+
+        </div>
     )
 }
 
@@ -189,7 +223,7 @@ const RatingStarCenter = ({ averageRating }: any) => {
     }, [averageRating])
 
     return (
-        <div className={`border border-white/50 flex place-items-center place-content-center rounded-lg px-2 gap-1 bg-black/50 h-[42px]`}>
+        <div className={`border border-white/50 flex place-items-center place-content-center rounded-lg px-2 gap-1 bg-black/50 h-[40px]`}>
 
             <RatingBoxAlt rating={avgRating} />
         </div>

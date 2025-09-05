@@ -1263,3 +1263,10 @@ export const getProductGallery = async (businessGuid: string | null, userGuid: s
         return null
     }
 }
+
+
+export function getRandomImage(images: { image: string }[]): string {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    const i = randomIndex === 0 ? 1 : randomIndex
+    return images[i].image;
+}

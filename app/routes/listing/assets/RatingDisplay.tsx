@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { formatNumber } from '~/lib/lib'
+import { formatNumber, searchCategories } from '~/lib/lib'
 import { RatingDisplayProp, RatingDisplayType } from '~/lib/types'
 
 
 
 const RatingDisplay = ({ data }: RatingDisplayProp) => {
+
     const [ratingText, setRatingText] = useState('')
     const [hasDecimalNumber, setHasDecimalNumber] = useState(false)
 
@@ -55,7 +56,7 @@ const RatingDisplay = ({ data }: RatingDisplayProp) => {
                         Category
                     </div>
                     <div className={`text-sm capitalize line-clamp-1`}>
-                        {data?.category} {data?.category}
+                        {searchCategories(data?.category || "")?.name}
                     </div>
                 </div>
 

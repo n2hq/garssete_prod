@@ -4,7 +4,7 @@ import { BsGeo, BsHeart, BsHeartFill, BsStarFill } from 'react-icons/bs'
 import { FaMapLocation } from 'react-icons/fa6'
 import { GrMapLocation } from 'react-icons/gr'
 import { MdEmail, MdLocationPin } from 'react-icons/md'
-import { config, formatNumber, getCardIcon, strToList } from '~/lib/lib'
+import { config, formatNumber, getCardIcon, searchCategories, strToList } from '~/lib/lib'
 import { ListingType } from '~/lib/types'
 import RatingBoxAlt from './RatingBoxAlt'
 
@@ -112,7 +112,8 @@ const CardAlt = ({ listing, index }: any) => {
                                 {listing?.title}
                             </div>
                             <div className={`text-sm capitalize`}>
-                                {listing?.category}
+
+                                {searchCategories(listing?.category || "")?.name}
                             </div>
                         </div>
 

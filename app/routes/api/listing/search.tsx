@@ -43,18 +43,22 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                 d.website,
                 d.date_created,
                 (SELECT name FROM tbl_country co WHERE co.iso2 = d.country_code LIMIT 1) AS country_name,
+                (SELECT co.iso2 FROM tbl_country co WHERE co.iso2 = d.country_code LIMIT 1) AS country_code,
                 (SELECT name FROM tbl_state st WHERE st.iso2 = d.state_code AND st.country_code = d.country_code LIMIT 1) AS state_name,
+                (SELECT st.iso2 FROM tbl_state st WHERE st.iso2 = d.state_code AND st.country_code = d.country_code LIMIT 1) AS state_code,
                 (SELECT name FROM tbl_city ci WHERE ci.id = d.city_id LIMIT 1) AS city_name,
                  (SELECT GROUP_CONCAT(CONCAT(sm.media_id, '$', sm.user_description, '$', sysm.base_url) SEPARATOR ', ')
  FROM tbl_selected_social_media sm, tbl_sys_social_media sysm 
  WHERE d.gid = sm.business_guid AND sm.media_id = sysm.media_id) AS social_media,
                 b.image_url,
+                bg.image_url AS bg_image_url,
                 r.average_rating,
                 r.total_reviews
 
                 FROM tbl_dir d
 
                 LEFT JOIN tbl_business_profile_image b ON d.gid = b.business_guid
+                LEFT JOIN tbl_business_profile_bg bg ON d.gid = bg.business_guid
 
                 LEFT JOIN (
                     SELECT 
@@ -83,13 +87,16 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                     d.website,
                     d.date_created,
                     co.name AS country_name,
+                    co.iso2 AS country_code,
                     st.name AS state_name,
+                    st.iso2 AS state_code,
                     ci.name AS city_name,
                     (SELECT GROUP_CONCAT(CONCAT(sm.media_id, '$', sm.user_description, '$', sysm.base_url) SEPARATOR ', ')
                     FROM tbl_selected_social_media sm
                     JOIN tbl_sys_social_media sysm ON sm.media_id = sysm.media_id
                     WHERE d.gid = sm.business_guid) AS social_media,
                     b.image_url,
+                    bg.image_url AS bg_image_url,
                     r.average_rating,
                     r.total_reviews
                 FROM tbl_dir d
@@ -101,6 +108,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                     ON ci.id = d.city_id
                 LEFT JOIN tbl_business_profile_image b 
                     ON d.gid = b.business_guid
+                LEFT JOIN tbl_business_profile_bg bg
+                    ON d.gid = bg.business_guid
                 LEFT JOIN (
                     SELECT 
                         business_guid,

@@ -4,7 +4,7 @@ import ContentLayout from '../../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
 import { LoaderFunction } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import { getBusinessProfile, getBusinessProfileImageData, getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData, IsAuthenticated } from '~/lib/lib'
+import { getBusinessProfile, getBusinessProfileBgData, getBusinessProfileImageData, getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData, IsAuthenticated } from '~/lib/lib'
 import BusinessProfileForm from './assets/BusinessProfileForm'
 import BusinessMenu from './assets/BusinessMenu'
 import CardTitle from '../../assets/CardTitle'
@@ -40,6 +40,7 @@ const index = () => {
     const [cities, setCities] = useState<any | null>(null)
     const [userProfileImageData, setUserProfileImageData] = useState<any | null>(null)
     const [businessProfileImageData, setBusinessProfileImageData] = useState<any | null>(null)
+    const [businessProfileBgData, setBusinessProfileBgData] = useState<any | null>(null)
     const [categories, setCategories] = useState<any | null>(null)
     const [data, setData] = useState<any | null>(null)
 
@@ -55,6 +56,7 @@ const index = () => {
             const categories = await getCategories()
             const userProfileImageData = await getUserProfileImageData(userGuid || "")
             const businessProfileImageData = await getBusinessProfileImageData(businessGuid || "")
+            const businessProfileBgData = await getBusinessProfileBgData(businessGuid || "")
 
             setUserProfile(userProfile)
             setBusinessProfile(businessProfile)
@@ -64,6 +66,9 @@ const index = () => {
             setUserProfileImageData(userProfileImageData)
             setBusinessProfileImageData(businessProfileImageData)
             setCategories(categories)
+            setBusinessProfileBgData(businessProfileBgData)
+
+            console.log(businessProfileBgData)
         }
 
         if (userGuid && businessGuid) {
@@ -75,7 +80,7 @@ const index = () => {
         if (userProfile && businessProfile &&
             countries && states && cities &&
             userProfileImageData && categories &&
-            businessProfileImageData) {
+            businessProfileImageData && businessProfileBgData) {
 
             const data = {
 
@@ -86,6 +91,7 @@ const index = () => {
                 cities,
                 userProfileImageData,
                 businessProfileImageData,
+                businessProfileBgData,
                 categories
             }
 
@@ -99,7 +105,8 @@ const index = () => {
         userProfileImageData,
         businessProfileImageData,
         userProfile,
-        businessProfile
+        businessProfile,
+        businessProfileBgData
     ])
 
     useEffect(() => {

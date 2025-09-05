@@ -227,6 +227,31 @@ export const getBusinessProfileImageData = async (guid: string | null): Promise<
     }
 }
 
+export const getBusinessProfileBgData = async (guid: string | null): Promise<any | undefined> => {
+
+    const endpoint = "/api/listing/business_profile_bg/" + guid
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
 export const getBusinessGallery = async (businessGuid: string | null) => {
     const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
     const endpoint = `/api/listing/business_gallery/${businessGuid}`

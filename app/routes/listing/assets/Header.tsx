@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import StarRatingAlt from './StarRatingAlt'
 import { config } from '~/lib/lib'
+import FormattedAddress from './FormattedAddress'
 
 const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }: any) => {
     const [profileImg, setProfileImg] = useState('')
@@ -25,6 +26,11 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                 font-bold  leading-[1.2em] tracking-tight font-poppins`}>
                     {listing?.title}
 
+                </div>
+
+                <div>
+
+                    <FormattedAddress listing={listing} />
                 </div>
 
                 <div className={` leading-[1.3em] space-x-1 mt-1`}>

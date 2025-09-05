@@ -3,13 +3,13 @@ import { MdEditSquare } from 'react-icons/md'
 import { useNotification } from '~/context/NotificationContext'
 import { config, headers } from '~/lib/lib'
 
-const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
+const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
 
 
     let imgconst = ""
 
-    if (businessProfileImageData.image_url) {
-        imgconst = config.IMG_BASE_URL + businessProfileImageData.image_url
+    if (businessProfileBgData.image_url) {
+        imgconst = config.IMG_BASE_URL + businessProfileBgData.image_url
     } else {
         imgconst = '/images/placeholder-icon.webp'
     }
@@ -51,7 +51,7 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
             formData.append('bid', listing.gid)
 
 
-            const endpoint = "/business_profile_pic_upload"
+            const endpoint = "/business_profile_bg_upload"
             const url = config.IMG_BASE_URL + endpoint
 
             try {
@@ -86,12 +86,12 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
 
 
     return (
-        <div>
-            <div className='relative bg-blue-100 w-[150px] h-[150px] z-40 rounded-full overflow-hidden border-[2px] border-gray-200'>
+        <div className={`relative`}>
+            <div className='relative bg-blue-100 w-full h-[150px] z-[40]  overflow-hidden'>
                 <img
                     src={imgSrc}
                     alt="Click to upload"
-                    className=' object-cover w-full h-full z-0 absolute'
+                    className=' object-cover w-full h-full  absolute z-[40]'
                 />
                 <input type="file"
                     accept='image/*'
@@ -101,11 +101,11 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
                 />
                 <div
                     className={`flex place-content-center place-items-center
-                                 bg-black/10 w-full h-full absolute z-0 top-0 object-cover
+                                 bg-black/10 w-full h-full absolute z-[60] top-0 object-cover
                                  text-white/80 `}
                     onMouseDown={handleImageClick}
                 >
-                    <div className={`w-[50%] h-[50%] flex flex-col
+                    <div className={`w-[70px] h-[70px] flex flex-col
                                     place-content-center place-items-center
                                     hover:cursor-pointer hover:bg-white/50
                                     bg-blue-300/50
@@ -115,7 +115,7 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
                 </div>
             </div>
             <div className={` flex flex-col place-items-center 
-                place-content-center mt-2 `}>
+                place-content-center bottom-[5px] right-[5px] w-[100px] z-[120] absolute`}>
                 <button
                     className={`${working ? 'bg-gray-200 cursor-default' : 'bg-blue-100'}  w-full py-[6px] rounded-[8px] border-[1px] border-gray-200
                         shadow-sm hover:shadow-lg transition duration-500 ease-in-out`}
@@ -131,4 +131,4 @@ const ImgComponent = ({ listing, user, businessProfileImageData }: any) => {
     )
 }
 
-export default ImgComponent
+export default BgComponent

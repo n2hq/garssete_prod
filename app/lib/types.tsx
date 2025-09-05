@@ -128,7 +128,9 @@ export type ListingType = {
     linksocial: string
     fbsocial: string
     country_code: string
+    country_name: string
     state_code: string
+    state_name: string
     city_id: string
     website: string
 }

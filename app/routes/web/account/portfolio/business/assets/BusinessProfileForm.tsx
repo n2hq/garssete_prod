@@ -12,6 +12,7 @@ import Button from '~/components/content/button/Button'
 import { useNotification } from '~/context/NotificationContext'
 import { leftNavLinks } from '~/lib/json'
 import { categories as category } from '~/lib/json/categories'
+import BgComponent from './image/BgComponent'
 
 const BusinessProfileForm = ({ data }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
@@ -132,10 +133,15 @@ const BusinessProfileForm = ({ data }: any) => {
         <div>
             <div className={formWrapperClass}>
                 <div className={`${inputWrapperClass} flex flex-col place-items-center`}>
-                    <div className={inputHeadingClass}>
-                        Add/Change Photo
+
+                    <div className={`z-[50] w-full bg-black h-[150px]`}>
+                        <BgComponent
+                            listing={data.businessProfile}
+                            user={data.userProfile}
+                            businessProfileBgData={data.businessProfileBgData}
+                        />
                     </div>
-                    <div className='mt-4'>
+                    <div className={`-mt-10 z-[100]`}>
 
                         <ImgComponent
                             listing={data.businessProfile}

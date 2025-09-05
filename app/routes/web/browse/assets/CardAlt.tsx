@@ -95,9 +95,9 @@ const CardAlt = ({ listing, index }: any) => {
 
 
     return (
-        <div className={`px-[15px] md:px-0 bg-white`}>
+        <div className={` px-[0px] md:px-0 bg-white`}>
 
-            <div className={` w-full rounded-xl overflow-hidden shadow-lg`}>
+            <div className={` w-full md:rounded-xl overflow-hidden shadow-lg`}>
 
                 {/** header */}
                 <a href={`/${userId}`}>
@@ -138,8 +138,8 @@ const CardAlt = ({ listing, index }: any) => {
 
                         {/** business name and category */}
 
-                        <div className={` absolute left-[100px] top-[6px] -space-y-1`}>
-                            <div className={`font-semibold text-xl font-poppins `}>
+                        <div className={` absolute left-[100px] top-[6px] -space-y-1 block`}>
+                            <div className={`font-semibold text-xl font-poppins line-clamp-1 `}>
                                 {listing?.title}
                             </div>
                             <div className={`text-sm capitalize`}>

@@ -101,7 +101,7 @@ const CardAlt = ({ listing, index }: any) => {
 
                 {/** header */}
                 <a href={`/${userId}`}>
-                    <div className={`w-full h-[150px] bg-gray-800 bg-no-repeat bg-cover relative bg-center`}
+                    <div className={`w-full h-[150px] bg-black bg-no-repeat bg-cover relative bg-center`}
                         style={{ backgroundImage: `url('${bgimgsrc}')` }}
                     >
                         <div className={`w-full h-full top-0 left-0 bg-black/0 absolute flex place-items-center place-content-center  `}>

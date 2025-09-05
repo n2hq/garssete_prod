@@ -107,7 +107,7 @@ const CardAlt = ({ listing, index }: any) => {
                         <div className={`w-full h-full top-0 left-0 bg-black/0 absolute flex place-items-center place-content-center  `}>
                             {
                                 !bgimgsrc &&
-                                <div className={`relative top-5 font-poppins font-black text-white/50 text-[17px]`}>
+                                <div className={`flex place-items-end mr-2 mb-4 place-content-end w-full h-full font-light text-white/50 text-[17px]`}>
                                     {listing?.title}.
                                 </div>
                             }

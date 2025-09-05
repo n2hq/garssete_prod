@@ -100,10 +100,17 @@ const CardAlt = ({ listing, index }: any) => {
 
                 {/** header */}
                 <a href={`/${userId}`}>
-                    <div className={`w-full h-[150px] bg-gray-500 bg-no-repeat bg-cover relative bg-center`}
+                    <div className={`w-full h-[150px] bg-gray-800 bg-no-repeat bg-cover relative bg-center`}
                         style={{ backgroundImage: `url('${bgimgsrc}')` }}
                     >
-                        <div className={`w-full h-full top-0 left-0 bg-black/0 absolute`}></div>
+                        <div className={`w-full h-full top-0 left-0 bg-black/0 absolute flex place-items-center place-content-center  `}>
+                            {
+                                !bgimgsrc &&
+                                <div className={`relative top-5 font-poppins font-black text-white/50 text-[17px]`}>
+                                    {listing?.title}.
+                                </div>
+                            }
+                        </div>
                         <div className={` flex absolute mt-[30px] ml-[20px] gap-2`}>
 
                             <RatingStarCenter averageRating={listing?.average_rating} />

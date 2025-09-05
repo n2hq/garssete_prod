@@ -49,6 +49,7 @@ const CardAlt = ({ listing, index }: any) => {
                 setBgimgsrc(config.IMG_BASE_URL + listing?.bg_image_url)
             } else {
                 const img = getRandomImage(defaultBGImages)
+                setBgimgsrc('')
                 //setBgimgsrc('https://i.pinimg.com/736x/80/8a/31/808a318aad215c39b4855619b0e87f10.jpg')
             }
 

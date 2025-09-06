@@ -153,11 +153,11 @@ const Cardex = <T,>({ listing, index }: CardexProp<T>) => {
                 </div>
             </div>
 
-            <div className={`md:hidden mt-6`}>
+            <div className={` mt-6`}>
                 {
                     baseListing?.short_description &&
                     <div className={`line-clamp-2 mt-2 text-[13px]`}>
-                        a{baseListing?.short_description}
+                        {baseListing?.short_description}
                     </div>
                 }
             </div>

@@ -120,11 +120,15 @@ const Cardex = <T,>({ listing, index }: CardexProp<T>) => {
                             </div>
                         }
                         {
-                            baseListing?.average_rating !== null && baseListing?.average_rating !== "" &&
-                            <div className={`mt-2 flex gap-2 place-items-center`}>
-                                <RatingBoxRounded rating={Number(baseListing?.average_rating)} />
-                                <RatingCount averageRating={baseListing?.average_rating} />
-                            </div>
+                            baseListing?.average_rating !== null && baseListing?.average_rating !== "" ?
+                                <div className={`mt-2 flex gap-2 place-items-center`}>
+                                    <RatingBoxRounded rating={Number(baseListing?.average_rating)} />
+                                    <RatingCount averageRating={baseListing?.average_rating} />
+                                </div> :
+                                <div className={`mt-2 flex gap-2 place-items-center`}>
+                                    <RatingBoxRounded rating={Number(3)} />
+                                    <RatingCount averageRating={3} />
+                                </div>
                         }
 
                         {

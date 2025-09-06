@@ -114,7 +114,7 @@ const Cardex = <T,>({ listing, index }: CardexProp<T>) => {
 
                         {
                             baseListing?.category !== null && baseListing?.category !== "" &&
-                            <div className={`text-[14px] mt-2`}>
+                            <div className={`text-[14px] mt-1`}>
                                 {searchCategories(baseListing?.category || "")?.name}
 
                             </div>

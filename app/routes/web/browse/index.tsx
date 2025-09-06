@@ -55,7 +55,7 @@ const Index = () => {
         <div className=' '>
             <SrchNavbar />
 
-            <div className={`h-screen flex flex-col relative bg-gray-100`}>
+            <div className={`h-screen flex flex-col relative `}>
                 <div className={`mt-[120px] md:mt-[60px]`}>
 
                 </div>
@@ -88,7 +88,7 @@ const Index = () => {
                     <div className={`col-span-12 lg:col-span-9  overflow-y-auto w-full md:px-[15px]`}>
 
                         {/** grid */}
-                        <div className={`grid grid-cols-12 gap-8`}>
+                        <div className={`grid grid-cols-12 gap-5`}>
 
                             {/** left */}
                             <div className={`col-span-12 md:col-span-7  pt-3`}>

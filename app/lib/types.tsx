@@ -133,6 +133,10 @@ export type ListingType = {
     state_name: string
     city_id: string
     website: string
+    image_url: string
+    bg_image_url: string
+    social_media: string
+    average_rating: string
 }
 
 export type ContactType = {

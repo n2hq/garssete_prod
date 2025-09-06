@@ -5,6 +5,7 @@ import { BsInstagram, BsLinkedin, BsPinterest, BsTwitterX } from "react-icons/bs
 import { CgFacebook } from "react-icons/cg"
 import { GrYoutube } from "react-icons/gr"
 import { categories } from "./json/categories"
+import { facilityFeatures } from "./json/facility_features"
 
 export const config = {
     BASE_URL: import.meta.env.VITE_SITE_BASE_URL,
@@ -1269,4 +1270,12 @@ export function getRandomImage(images: { image: string }[]): string {
     const randomIndex = Math.floor(Math.random() * images.length);
     const i = randomIndex === 0 ? 1 : randomIndex
     return images[i].image;
+}
+
+
+export const searchFacilities = (selectedFacilities: any) => {
+    const mappedFacilities = selectedFacilities
+        .map((sel: any) => facilityFeatures.find(fac => fac.feature_id === sel.feature_id))
+        .filter(Boolean);
+    return mappedFacilities
 }

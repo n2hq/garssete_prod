@@ -91,13 +91,17 @@ const CardAlt = ({ listing, index }: any) => {
             setSocialMedia(socialMedia)
 
         }
+
+
     }, [listing])
+
+
 
 
     return (
         <div className={` px-[0px] md:px-0 bg-white`}>
 
-            <div className={` w-full md:rounded-xl overflow-hidden shadow-lg`}>
+            <div className={` w-full md:rounded-xl overflow-hidden `}>
 
                 {/** header */}
                 <a href={`/${userId}`}>

@@ -3,6 +3,8 @@ import { useSearchParams } from "@remix-run/react";
 import Card from "./Card";
 import SearchAd from "~/components/content/ads/SearchAd";
 import CardAlt from "./CardAlt";
+import Cardex from "./Cardex";
+import { ListingType } from "~/lib/types";
 
 interface PaginationProps<T> {
     data: T[];
@@ -55,16 +57,16 @@ const SearchPagination = <T,>({
     return (
         <div>
             <div className="space-y-6">
-                {currentItems?.map((item, index) => (
+                {currentItems?.map((item: T, index) => (
                     <div key={index}>
 
                         {
                             (index + 1) % 2 ?
                                 <div>
-                                    <CardAlt listing={item} index={index} />
+                                    <Cardex listing={item} index={index} />
                                 </div> :
                                 <>
-                                    <CardAlt listing={item} index={index} />
+                                    <Cardex listing={item} index={index} />
                                     <SearchAd />
 
                                 </>

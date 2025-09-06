@@ -162,7 +162,7 @@ const Cardex = <T,>({ listing, index }: CardexProp<T>) => {
                 }
             </div>
 
-            <div className={`mt-8 max-w-[50%] md:max-w-[50%] w-full`}>
+            <div className={`mt-8 max-w-[70%] md:max-w-[50%] w-full`}>
 
                 <div className={` grid grid-cols-2 gap-2 w-full`}>
                     <div className={`w-full`}>

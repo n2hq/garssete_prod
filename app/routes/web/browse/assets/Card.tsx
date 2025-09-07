@@ -123,7 +123,7 @@ const Card = ({ listing }: any) => {
 
     useEffect(() => {
         let getListingAddress = async (listing: any) => {
-            let address = listing?.title
+            let address = "listing?.title"
             address += listing?.address_one ? ', ' + listing?.address_one : ''
             address += listing?.address_two ? ', ' + listing?.address_two : ''
             address += listing?.city_name ? ', ' + listing?.city_name : ''
@@ -135,6 +135,7 @@ const Card = ({ listing }: any) => {
             let addLink = `https://www.google.com/maps/search/?api=1&query=${address}`
             let addressLink = `https://www.google.com/maps?q=${(address)}&t=&z=15&ie=UTF8&iwloc=B&output=`
             //setAddress(address)
+            console.log(addLink)
             setAddressLink(addLink)
         }
 

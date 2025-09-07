@@ -395,3 +395,17 @@ export interface ProductDisplayGalleryProps {
     setGalleryDialog: any
     listing: ListingType
 }
+
+export interface PaginationData {
+    currentPage: number;
+    totalPages: number;
+    totalItems: number;
+    itemsPerPage: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+}
+
+export interface PaginatedResponse<T> {
+    items: T[];
+    pagination: PaginationData;
+}

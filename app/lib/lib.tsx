@@ -104,9 +104,9 @@ export const getBusinessProfile = async (criteria: string | null): Promise<Conta
     }
 }
 
-export const getSearch: any = async (criteria: string) => {
+export const getSearch: any = async (criteria: string, page: string) => {
 
-    const endpoint = "/api/listing/search?q=" + criteria
+    const endpoint = "/api/listing/searchlisting?q=" + criteria + '&page=' + page
 
     console.log(criteria)
     const url = config.BASE_URL + endpoint

@@ -17,12 +17,16 @@ import SearchPagination from './assets/SearchPagination';
 import Featured from './assets/Featured';
 import Countries from './assets/Countries';
 import Categories from './assets/Categories';
+import { ListingType } from '~/lib/types';
+import Pagination from './assets/Pagination';
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
     const query = url?.searchParams.get("q") || "";
-    let data = await getSearch(query)
+    const page = parseInt(url?.searchParams.get("page") || "1")
+    let data = await getSearch(query, page)
+
     let countries = await getCountries()
 
 
@@ -39,10 +43,13 @@ const Index = () => {
     const res: any = useLoaderData()
     const [searchParams] = useSearchParams();
 
-    const data = res.data
+    const data = res.data.items
+    const pagination = res.data.pagination
     const query = res.query
     const countries = res.countries
     const [queryParam, setQueryParam] = useState<string | null>(null)
+
+    const currentPage = parseInt(searchParams.get('page') || '1');
 
     useEffect(() => {
         if (query) {
@@ -95,6 +102,20 @@ const Index = () => {
                                 <div className={`space-y-8`}>
 
                                     {
+                                        data.map((data: ListingType, index: number) => {
+                                            return (
+                                                <Card
+                                                    listing={data}
+                                                />
+                                            )
+                                        })
+                                    }
+
+                                    <Pagination
+                                        pagination={pagination}
+                                    />
+
+                                    {/* {
                                         data?.length > 0 ?
                                             <SearchPagination
                                                 data={data}
@@ -105,7 +126,7 @@ const Index = () => {
                             place-content-center p-5 border capitalize`}>
                                                 <span>no record</span>
                                             </div>
-                                    }
+                                    } */}
 
 
                                     <FooterCard />

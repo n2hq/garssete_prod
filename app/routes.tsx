@@ -61,6 +61,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/listing", "routes/api/listing/index.tsx");
         route("api/listing/:guid_or_username", "routes/api/listing/listing.tsx");
         route("api/listing/search", "routes/api/listing/search.tsx");
+        route("api/listing/searchlisting", "routes/api/listing/searchlisting.tsx");
         route("api/listing/featured_listing", "routes/api/listing/featured_listing.tsx");
         route("api/listing/business_facility_features/:business_guid", "routes/api/listing/business_facility_features.tsx");
         route("api/listing/listing_by_category/:category/:limit", "routes/api/listing/listing_by_category.tsx");

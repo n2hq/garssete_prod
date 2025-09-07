@@ -130,8 +130,8 @@ const Card = ({ listing }: any) => {
             address += listing?.state_name ? ', ' + listing?.state_name : ''
             address += listing?.zipcode ? ', ' + listing?.zipcode : ''
             address += listing?.country_code ? ', ' + listing?.country_code : ''
-            //console.log(address)
-            let addressLink = `https://www.google.com/maps?q=${encodeURI(address)}&t=&z=15&ie=UTF8&iwloc=B&output=`
+            console.log(address)
+            let addressLink = `https://www.google.com/maps?q=${(address)}&t=&z=15&ie=UTF8&iwloc=B&output=`
             //setAddress(address)
             setAddressLink(addressLink)
         }

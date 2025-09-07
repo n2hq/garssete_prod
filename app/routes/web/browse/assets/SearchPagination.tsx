@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams, Link } from "@remix-run/react";
+import { useSearchParams } from "@remix-run/react";
 import Card from "./Card";
 import SearchAd from "~/components/content/ads/SearchAd";
-import { ListingType } from "~/lib/types";
 
 interface PaginationProps<T> {
     data: T[];
@@ -17,8 +16,13 @@ const SearchPagination = <T,>({
 }: PaginationProps<T>) => {
     const [searchParams] = useSearchParams();
 
-    const initialPage = Number(searchParams.get("page")) || 1;
-    const [currentPage, setCurrentPage] = useState(initialPage);
+    // ✅ always compute page from URL param
+    const pageFromUrl = Number(searchParams.get("page")) || 1;
+    const [currentPage, setCurrentPage] = useState(pageFromUrl);
+
+    useEffect(() => {
+        setCurrentPage(pageFromUrl);
+    }, [pageFromUrl]);
 
     const totalPages = Math.ceil(data.length / itemsPerPage);
 
@@ -26,7 +30,7 @@ const SearchPagination = <T,>({
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
-    // keep page reset behavior if needed
+    // ✅ reset page when key changes (like new search)
     useEffect(() => {
         if (resetPageKey !== undefined) {
             setCurrentPage(1);
@@ -53,7 +57,7 @@ const SearchPagination = <T,>({
             {/* Pagination controls */}
             {totalPages > 1 && (
                 <div className="flex justify-center gap-[5px] mt-[60px]">
-                    {/* Previous link */}
+                    {/* Previous */}
                     {currentPage > 1 ? (
                         <a
                             href={
@@ -75,9 +79,7 @@ const SearchPagination = <T,>({
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
                         <a
                             key={number}
-                            href={
-                                number === 1 ? `/web/browse` : `/web/browse?page=${number}`
-                            }
+                            href={number === 1 ? `/web/browse` : `/web/browse?page=${number}`}
                             className={`px-[12px] py-[8px] border rounded-[4px] ${currentPage === number
                                 ? "bg-blue-500 text-white border-blue-500"
                                 : "bg-white"
@@ -87,7 +89,7 @@ const SearchPagination = <T,>({
                         </a>
                     ))}
 
-                    {/* Next link */}
+                    {/* Next */}
                     {currentPage < totalPages ? (
                         <a
                             href={`/web/browse?page=${currentPage + 1}`}

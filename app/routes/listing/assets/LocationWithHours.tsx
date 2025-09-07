@@ -134,7 +134,7 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
             address += listing?.zipcode ? ', ' + listing?.zipcode : ''
             address += listing?.country_code ? ', ' + listing?.country_code : ''
 
-            let addressLink = `https://www.google.com/maps?q=${encodeURI(address)}&t=&z=15&ie=UTF8&iwloc=B&output=`
+            let addressLink = `https://www.google.com/maps?q=${(address)}&t=&z=15&ie=UTF8&iwloc=B&output=`
             setAddress(address)
             setAddressLink(addressLink)
         }

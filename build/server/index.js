@@ -17038,7 +17038,7 @@ const route54 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   loader: loader$x
 }, Symbol.toStringTag, { value: "Module" }));
 const loader$w = async ({ request, params }) => {
-  const ITEMS_PER_PAGE = 3;
+  const ITEMS_PER_PAGE = 20;
   try {
     const url = new URL(request.url);
     let criteria = url.searchParams.get("q");

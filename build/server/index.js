@@ -17065,6 +17065,22 @@ const loader$w = async ({ request, params }) => {
                     d.address_two,
                     d.website,
                     d.date_created,
+                    (SELECT
+                        co.latitude
+                    FROM
+                    tbl_country co
+                    WHERE
+                    co.iso2 = d.country_code
+                    LIMIT 1
+                    ) AS latitude,
+                    (SELECT
+                        co.longitude
+                    FROM
+                    tbl_country co
+                    WHERE
+                    co.iso2 = d.country_code
+                    LIMIT 1
+                    ) AS longitude,
                     (
                     SELECT NAME
                 FROM

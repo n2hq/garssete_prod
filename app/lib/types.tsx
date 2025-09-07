@@ -139,6 +139,8 @@ export type ListingType = {
     average_rating: string
     facility_features: string
     total_reviews: string
+    latitude: string
+    longitude: string
 }
 
 export type ContactType = {

@@ -129,7 +129,7 @@ const Card = ({ listing }: any) => {
             address += listing?.city_name ? ', ' + listing?.city_name : ''
             address += listing?.state_name ? ', ' + listing?.state_name : ''
             address += listing?.zipcode ? ', ' + listing?.zipcode : ''
-            address += listing?.country_code ? ', ' + listing?.country_code : ''
+            address += listing?.country_name ? ', ' + listing?.country_name : ''
             console.log(address)
             let addressLink = `https://www.google.com/maps?q=${(address)}&t=&z=15&ie=UTF8&iwloc=B&output=`
             //setAddress(address)

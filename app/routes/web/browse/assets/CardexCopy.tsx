@@ -16,7 +16,7 @@ interface CardexProp<T> {
     index?: number;
 }
 
-const Cardex = <T,>({ listing, index }: CardexProp<T>) => {
+const CardexCopy = <T,>({ listing, index }: CardexProp<T>) => {
     const [baseListing, setBaseListing] = useState<ListingType | null>(null)
     const [imgsrc, setImgsrc] = useState('')
     const [bgimgsrc, setBgimgsrc] = useState('')
@@ -126,7 +126,7 @@ const Cardex = <T,>({ listing, index }: CardexProp<T>) => {
                 <div className={`flex place-content-between w-full`}>
 
                     {/** left */}
-                    <div className={`w-full  grow block`}>
+                    <div className={`w-full  block`}>
                         <div className={`text-xl font-normal text-blue-700`}>
                             <a href={`/${userId}`}>
                                 {baseListing?.title}
@@ -208,7 +208,7 @@ const Cardex = <T,>({ listing, index }: CardexProp<T>) => {
                 facilityFeatures !== null &&
                 <div className={`mt-6 flex place-items-center gap-8 w-full relative`}>
                     <span className={`text-[15px]`}>Facilities: </span>
-                    <div className={`flex place-items-center gap-3`}>
+                    <div className={`flex place-items-center gap-3 flex-wrap `}>
                         {
                             facilityFeatures?.map((feature: any, index: number) => {
 
@@ -263,7 +263,7 @@ const Cardex = <T,>({ listing, index }: CardexProp<T>) => {
     )
 }
 
-export default Cardex
+export default CardexCopy
 
 
 export const RatingCount = ({ averageRating }: any) => {
@@ -274,7 +274,7 @@ export const RatingCount = ({ averageRating }: any) => {
         }
     }, [averageRating])
     return (
-        <div className={`text-blue-700`}>
+        <div className={`text-blue-700 mt-[3px]`}>
             ({formatNumber(Number(avgRating))})
         </div>
     )

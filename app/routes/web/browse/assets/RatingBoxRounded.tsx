@@ -6,7 +6,7 @@ type RatingBoxProps = {
 
 export default function RatingBoxRounded({ rating }: RatingBoxProps) {
     return (
-        <div className="flex gap-[2px]">
+        <div className="flex gap-x-[2px]">
             {Array.from({ length: 5 }).map((_, i) => {
                 const fillPercent = Math.max(0, Math.min(1, rating - i)) * 100
 

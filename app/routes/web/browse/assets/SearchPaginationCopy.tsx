@@ -5,6 +5,7 @@ import SearchAd from "~/components/content/ads/SearchAd";
 import CardAlt from "./CardAlt";
 import Cardex from "./Cardex";
 import { ListingType } from "~/lib/types";
+import CardexCopy from "./CardexCopy";
 
 interface PaginationProps<T> {
     data: T[];
@@ -12,7 +13,7 @@ interface PaginationProps<T> {
     resetPageKey?: string; // 👈 new prop for controlling reset (e.g. search query)
 }
 
-const SearchPagination = <T,>({
+const SearchPaginationCopy = <T,>({
     data,
     itemsPerPage = 10,
     resetPageKey
@@ -63,10 +64,10 @@ const SearchPagination = <T,>({
                         {
                             (index + 1) % 2 ?
                                 <div>
-                                    <Card listing={item} index={index} />
+                                    <CardexCopy listing={item} index={index} />
                                 </div> :
                                 <>
-                                    <Card listing={item} index={index} />
+                                    <CardexCopy listing={item} index={index} />
                                     <SearchAd />
 
                                 </>
@@ -112,4 +113,4 @@ const SearchPagination = <T,>({
     );
 };
 
-export default SearchPagination;
+export default SearchPaginationCopy;

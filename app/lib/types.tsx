@@ -137,6 +137,8 @@ export type ListingType = {
     bg_image_url: string
     social_media: string
     average_rating: string
+    facility_features: string
+    total_reviews: string
 }
 
 export type ContactType = {

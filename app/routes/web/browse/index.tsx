@@ -62,7 +62,7 @@ const Index = () => {
                 {/** layout */}
                 <div className={`grid grid-cols-12 h-full overflow-hidden  gap-5 `}>
                     {/** left */}
-                    <aside className={`col-span-3 h-full overflow-y-auto scrollbar-hidden pt-2 hidden lg:block`}>
+                    <aside className={`col-span-3 h-full overflow-y-auto scrollbar-hidden pt-2 hidden xl:block`}>
                         <div className={``}>
                             <div className={`mt-3 text-[17px] mb-4 font-bold ml-6`}>
                                 Categories
@@ -85,13 +85,13 @@ const Index = () => {
                     </aside>
 
                     {/** right */}
-                    <div className={`col-span-12 lg:col-span-9  overflow-y-auto w-full md:px-[15px]`}>
+                    <div className={`col-span-12 xl:col-span-9  overflow-y-auto w-full md:px-[15px]`}>
 
                         {/** grid */}
                         <div className={`grid grid-cols-12 gap-5`}>
 
                             {/** left */}
-                            <div className={`col-span-12 md:col-span-7  pt-3`}>
+                            <div className={`col-span-12 md:col-span-8  pt-3`}>
                                 <div className={`space-y-8`}>
 
                                     {
@@ -115,9 +115,9 @@ const Index = () => {
                             </div>
 
                             {/** right */}
-                            <div className={`hidden md:block md:col-span-5 pt-3   `}>
+                            <div className={`hidden md:block md:col-span-4 pt-3    `}>
 
-                                <div className={`w-full lg:w-[90%] sticky top-3 ml-auto`}>
+                                <div className={`w-full xl:w-[90%] sticky top-3 ml-auto`}>
                                     <Featured />
                                 </div>
                             </div>

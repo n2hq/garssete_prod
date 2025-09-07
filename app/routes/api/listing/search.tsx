@@ -103,15 +103,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                                 sf.feature_id,
                                 '$',
                                 sf.user_description,
-                                '$',
-                                sysf.name
-                            ) SEPARATOR ', '
+                                '$'
+                            ) SEPARATOR '& '
                         )
                     FROM
-                        tbl_selected_facility_features sf,
-                        tbl_sys_facility_features sysf
+                        tbl_selected_facility_features sf
                     WHERE
-                        d.gid = sf.business_guid AND sf.feature_id = sysf.feature_id
+                        d.gid = sf.business_guid
                 ) AS facility_features,
                 b.image_url,
                 bg.image_url AS bg_image_url,

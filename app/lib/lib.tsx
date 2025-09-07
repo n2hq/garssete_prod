@@ -1039,22 +1039,22 @@ export function getCardIcon(media: any) {
 
     switch (media) {
         case "facebook":
-            icon = <CgFacebook size={20} />
+            icon = <CgFacebook className={`text-blue-700`} size={20} />
             break;
         case "twitterx":
-            icon = <BsTwitterX size={14} />
+            icon = <BsTwitterX className={`text-blue-600`} size={16} />
             break;
         case "linkedin":
-            icon = <FaLinkedinIn size={15} />
+            icon = <FaLinkedinIn className={`text-blue-500`} size={17} />
             break;
         case "instagram":
-            icon = <BsInstagram size={15} />
+            icon = <BsInstagram className={`text-red-800`} size={15} />
             break;
         case "pinterest":
-            icon = <BsPinterest size={18} />
+            icon = <BsPinterest className={`text-red-500`} size={17} />
             break;
         case "youtube":
-            icon = <GrYoutube size={20} />
+            icon = <GrYoutube className={`text-red-500`} size={20} />
             break;
         case "vimeo":
             icon = <FaVimeoSquare size={18} />
@@ -1275,7 +1275,17 @@ export function getRandomImage(images: { image: string }[]): string {
 
 export const searchFacilities = (selectedFacilities: any) => {
     const mappedFacilities = selectedFacilities
-        .map((sel: any) => facilityFeatures.find(fac => fac.feature_id === sel.feature_id))
+        .map((sel: any) => {
+            const fac = facilityFeatures.find(fac => fac.feature_id === sel.featureId)
+            if (!fac) return null;
+
+            return {
+                ...sel,
+                name: fac.name,
+                description: fac.description,
+                icon: fac.icon
+            }
+        })
         .filter(Boolean);
     return mappedFacilities
 }

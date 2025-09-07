@@ -20,6 +20,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/terms", "routes/web/terms/index.tsx");
         route("/web/privacy", "routes/web/privacy/index.tsx");
         route("/web/contact", "routes/web/contact/index.tsx");
+        route("/web/db", "routes/web/browse/db.tsx")
 
         {/** account portfolio */ }
         route("/web/account/portfolio", "routes/web/account/portfolio/index.tsx");

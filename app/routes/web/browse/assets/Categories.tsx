@@ -25,7 +25,7 @@ const Categories = () => {
             </div>
 
             {/* Scrollable List */}
-            <div className="h-[300px] overflow-y-auto scrollbar-hidden">
+            <div className="h-[250px] overflow-y-auto scrollbar-hidden">
                 {filteredCategories?.map((nav: any, index: number) => (
                     <div key={index}>
                         <a href={`/web/browse?q=${nav?.id}`}>

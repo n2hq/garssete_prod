@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "@remix-run/react";
+import { useSearchParams, useNavigate } from "@remix-run/react";
 import Card from "./Card";
 import SearchAd from "~/components/content/ads/SearchAd";
-import CardAlt from "./CardAlt";
-import Cardex from "./Cardex";
 import { ListingType } from "~/lib/types";
 
 interface PaginationProps<T> {
     data: T[];
     itemsPerPage?: number;
-    resetPageKey?: string; // 👈 new prop for controlling reset (e.g. search query)
+    resetPageKey?: string; // 👈 control reset (e.g. search query)
 }
 
 const SearchPagination = <T,>({
@@ -17,7 +15,8 @@ const SearchPagination = <T,>({
     itemsPerPage = 10,
     resetPageKey
 }: PaginationProps<T>) => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
 
     // Get initial page from URL, default to 1
     const initialPage = Number(searchParams.get("page")) || 1;
@@ -32,10 +31,15 @@ const SearchPagination = <T,>({
     const updatePage = (page: number) => {
         setCurrentPage(page);
 
-        // ✅ Update URL with both existing query + new page
-        const newParams = new URLSearchParams(searchParams);
-        newParams.set("page", String(page));
-        setSearchParams(newParams);
+        // ✅ For page 1 → no query param
+        if (page === 1) {
+            navigate(`/web/browse`, { replace: false });
+        } else {
+            navigate(`/web/browse?page=${page}`, { replace: false });
+        }
+
+        // ✅ Scroll to top after navigating
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const goToPrevious = () => {
@@ -46,7 +50,7 @@ const SearchPagination = <T,>({
         if (currentPage < totalPages) updatePage(currentPage + 1);
     };
 
-    // ✅ Reset page to 1 only when resetPageKey changes (e.g. query)
+    // ✅ Reset page when resetPageKey changes
     useEffect(() => {
         if (resetPageKey !== undefined) {
             updatePage(1);
@@ -59,18 +63,14 @@ const SearchPagination = <T,>({
             <div className="space-y-6">
                 {currentItems?.map((item: T, index) => (
                     <div key={index}>
-
-                        {
-                            (index + 1) % 2 ?
-                                <div>
-                                    <Card listing={item} index={index} />
-                                </div> :
-                                <>
-                                    <Card listing={item} index={index} />
-                                    <SearchAd />
-
-                                </>
-                        }
+                        {(index + 1) % 2 ? (
+                            <Card listing={item} index={index} />
+                        ) : (
+                            <>
+                                <Card listing={item} index={index} />
+                                <SearchAd />
+                            </>
+                        )}
                     </div>
                 ))}
             </div>

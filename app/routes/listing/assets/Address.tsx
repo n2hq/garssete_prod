@@ -1,5 +1,5 @@
 import { Link } from '@remix-run/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BiLocationPlus } from 'react-icons/bi'
 import { CgWebsite } from 'react-icons/cg'
 import { FaInternetExplorer } from 'react-icons/fa'
@@ -9,8 +9,29 @@ import { IoMdGlobe } from 'react-icons/io'
 import { MdEmail, MdLocationPin, MdOutline3gMobiledata, MdPhone, MdWeb } from 'react-icons/md'
 import Review from './Review'
 import ClaimBusiness from './ClaimBusiness'
+import { ListingType } from '~/lib/types'
 
 const Address = ({ businessProfile }: any) => {
+    const [listing, setListing] = useState<ListingType | null>(null)
+    const [address, setAddress] = useState('')
+
+    useEffect(() => {
+        if (businessProfile) {
+            setListing(businessProfile)
+        }
+    }, [businessProfile])
+
+    useEffect(() => {
+        if (listing) {
+            let address = listing?.address_one ? listing?.address_one : ''
+            address += listing?.address_two ? ', ' + listing?.address_two : ''
+            address += listing?.city_name ? ', ' + listing?.city_name : ''
+            address += listing?.state_name ? ', ' + listing?.state_name : ''
+            address += listing?.zipcode ? ', ' + listing?.zipcode : ''
+            address += listing?.country_name ? ', ' + listing?.country_name : ''
+            setAddress(address)
+        }
+    }, [listing])
     return (
         <div className={`w-full`}>
 
@@ -38,34 +59,12 @@ const Address = ({ businessProfile }: any) => {
                             <div className={`bg-blue-200/80 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md border-[1px]`}>
                                 <MdLocationPin className={`text-[20px]`} />
                             </div>
-                            <div className={`text-[15px] md:text-[13px] leading-[1.3em]`}>
-                                {
-                                    businessProfile?.address_one + ", "
-                                }
-                                {
-                                    businessProfile?.address_two !== null ?
-                                        businessProfile?.address_two + ", " :
-                                        ""
-                                }
-                                {
-                                    businessProfile?.city_name !== null ?
-                                        businessProfile?.city_name + ", " :
-                                        ""
-                                }
-                                {
-                                    businessProfile?.state_name !== null ?
-                                        businessProfile?.state_name + ", " :
-                                        ""
-                                }
-                                {
-                                    businessProfile?.zipcode !== null ?
-                                        businessProfile?.zipcode + ", " :
-                                        ""
-                                }
-                                {
-                                    businessProfile?.country_name
-                                }
-                            </div>
+                            {
+                                address &&
+                                <div className={`text-[15px] md:text-[13px] leading-[1.3em]`}>
+                                    {address}
+                                </div>
+                            }
 
                         </div>
 

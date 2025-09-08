@@ -141,6 +141,7 @@ export type ListingType = {
     total_reviews: string
     latitude: string
     longitude: string
+    city_name: string
 }
 
 export type ContactType = {

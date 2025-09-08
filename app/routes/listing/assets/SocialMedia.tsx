@@ -3,7 +3,7 @@ import { list } from 'postcss'
 import React, { useEffect, useState } from 'react'
 import { BsFacebook, BsInstagram, BsLinkedin, BsPhone, BsPinterest, BsTwitterX } from 'react-icons/bs'
 import { CgWebsite } from 'react-icons/cg'
-import { FaFacebook, FaFacebookSquare, FaPinterestSquare, FaVimeoSquare, FaYoutubeSquare } from 'react-icons/fa'
+import { FaFacebook, FaFacebookSquare, FaPinterestSquare, FaTiktok, FaVimeoSquare, FaYoutubeSquare } from 'react-icons/fa'
 import { MdEmail, MdFacebook } from 'react-icons/md'
 import { config, getBusinessProfileImageData, getSocialMediaByBusinessGuid } from '~/lib/lib'
 import ComponentTitle from './ComponentTitle'
@@ -36,6 +36,9 @@ const SocialMedia = ({ listing }: any) => {
                 break;
             case "vimeo":
                 icon = <FaVimeoSquare />
+                break;
+            case "tiktok":
+                icon = <FaTiktok />
                 break;
 
 

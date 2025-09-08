@@ -1,0 +1,2 @@
+import{j as s}from"./jsx-runtime-0DLF9kdB.js";import{S as l}from"./SrchNavbar-_CsHUzSt.js";import{h as m}from"./lib-BhGWTxvs.js";import{H as r}from"./HomeNav-BzkUje5a.js";const f=({children:a})=>s.jsxs("div",{className:"h-full w-full",children:[s.jsx(l,{}),s.jsx("div",{className:`md:hidden mt-[${m.NAVBAR_HEIGHT}px] fixed w-full
+            bg-white z-[3000]`,children:s.jsx(r,{})}),s.jsx("div",{className:"h-[120px] md:h-[60px]"}),s.jsx("main",{className:"h-full flex w-full flex-col ",children:a})]});export{f as S};

@@ -1060,7 +1060,7 @@ export function getCardIcon(media: any) {
             icon = <FaVimeoSquare size={18} />
             break;
         case "tiktok":
-            icon = <FaTiktok size={18} />
+            icon = <FaTiktok size={17} />
             break;
 
 

@@ -10,8 +10,6 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
 
     if (businessProfileBgData.image_url) {
         imgconst = config.IMG_BASE_URL + businessProfileBgData.image_url
-    } else {
-        imgconst = '/images/placeholder-icon.webp'
     }
 
 
@@ -87,12 +85,15 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
 
     return (
         <div className={`relative`}>
-            <div className='relative bg-blue-100 w-full h-[150px] z-[40]  overflow-hidden'>
-                <img
-                    src={imgSrc}
-                    alt="Click to upload"
-                    className=' object-cover w-full h-full  absolute z-[40]'
-                />
+            <div className='relative bg-gray-800 w-full h-[150px] z-[40]  overflow-hidden'>
+                {
+                    imgSrc &&
+                    <img
+                        src={imgSrc}
+                        alt="Click to upload"
+                        className=' object-cover w-full h-full  absolute z-[40]'
+                    />
+                }
                 <input type="file"
                     accept='image/*'
                     ref={fileInputRef}

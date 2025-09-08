@@ -1,4 +1,4 @@
-import { FaFacebookSquare, FaLinkedinIn, FaPinterestSquare, FaVimeoSquare, FaYoutubeSquare } from "react-icons/fa"
+import { FaFacebookSquare, FaLinkedinIn, FaPinterestSquare, FaTiktok, FaVimeoSquare, FaYoutubeSquare } from "react-icons/fa"
 import { AddVideoType, Category, City, ContactType, Country, ProductType, Rating, State, UserProfile } from "./types"
 import CryptoJS from 'crypto-js'
 import { BsInstagram, BsLinkedin, BsPinterest, BsTwitterX } from "react-icons/bs"
@@ -108,9 +108,9 @@ export const getSearch: any = async (criteria: string, page: string) => {
 
     const endpoint = "/api/listing/searchlisting?q=" + criteria + '&page=' + page
 
-    console.log(criteria)
+    //console.log(criteria)
     const url = config.BASE_URL + endpoint
-    console.log(url)
+    //console.log(url)
 
 
     try {
@@ -1058,6 +1058,9 @@ export function getCardIcon(media: any) {
             break;
         case "vimeo":
             icon = <FaVimeoSquare size={18} />
+            break;
+        case "tiktok":
+            icon = <FaTiktok size={18} />
             break;
 
 

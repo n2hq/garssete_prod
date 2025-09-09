@@ -130,6 +130,30 @@ const index = () => {
     const products: ProductType[] = data.products
     const profileImageData = data.profileImageData
 
+
+    const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+    useEffect(() => {
+        const goOnline = () => setIsOnline(true);
+        const goOffline = () => setIsOnline(false);
+
+        window.addEventListener("online", goOnline);
+        window.addEventListener("offline", goOffline);
+
+        return () => {
+            window.removeEventListener("online", goOnline);
+            window.removeEventListener("offline", goOffline);
+        };
+    }, []);
+
+    if (!isOnline) {
+        return <div>No internet connection. Please reconnect.</div>;
+    }
+
+
+
+
+
     useEffect(() => {
         if (listing) {
             //console.log(listing)

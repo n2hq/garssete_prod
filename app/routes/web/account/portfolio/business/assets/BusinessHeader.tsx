@@ -9,7 +9,7 @@ const BusinessHeader = ({ businessGuid, data, businessProfile }: any) => {
                             flex place-content-between rounded-lg
                             place-items-center h-auto py-2 gap-[5px]
                             leading-[1.5em]`}>
-                <div className={`h-full block`}>
+                <div className={`h-full block `}>
                     <div className={`line-clamp-1 `}>
                         <CardTitle
                             baseUrl='/web/account/portfolio/'

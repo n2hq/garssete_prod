@@ -132,16 +132,6 @@ const index = () => {
     const profileImageData = data.profileImageData
 
 
-    const online = useOnlineStatus();
-
-    if (!online) {
-        return <div>No internet connection. Please reconnect.</div>;
-    }
-
-
-
-
-
     useEffect(() => {
         if (listing) {
             //console.log(listing)

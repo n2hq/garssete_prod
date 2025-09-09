@@ -9,7 +9,7 @@ const StringToListMaker = ({ phrasesString, useGrid }: any) => {
 
     useEffect(() => {
         const convertToList = (phrasesString: string) => {
-            const phraseList = phrasesString.split(",").map(item => item.trim());
+            const phraseList = phrasesString?.split(",").map(item => item.trim());
             setPhrasesList(phraseList)
         }
         if (phrasesString !== null && phrasesString !== "") {

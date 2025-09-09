@@ -80,7 +80,7 @@ export const ListingCarousel = ({ images, listing }: any) => {
         //alert(images.length)
         //slider.setSelectedSlide(1)
         //setOverlay(true)
-        if (index < images.length) {
+        if (index < images?.length) {
             slider.setDialog(true)
             slider.setSelectedSlide(index + 1)
             slider.setGallery(images)
@@ -178,7 +178,7 @@ export const ListingCarousel = ({ images, listing }: any) => {
                                     onTouchEnd={handleTouchEnd}
                                     onMouseDown={(e) => showCarousel(index)}
                                     key={index}
-                                    src={config.IMG_BASE_URL + slide.image_url}
+                                    src={config?.IMG_BASE_URL + slide?.image_url}
 
                                     alt=""
                                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}

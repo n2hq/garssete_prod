@@ -8,8 +8,8 @@ const BusinessFeatures = ({ listing }: any) => {
     const [features, setFeatures] = useState<any>(undefined)
 
     useEffect(() => {
-        getBusinessFeatures(listing.gid).then((data) => {
-            const mergedFeatures = data.map((dbF: any) => {
+        getBusinessFeatures(listing?.gid).then((data) => {
+            const mergedFeatures = data?.map((dbF: any) => {
                 const facility = facilityFeatures.find(f => f.feature_id === dbF.feature_id);
 
                 return {

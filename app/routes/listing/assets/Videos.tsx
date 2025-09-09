@@ -207,54 +207,56 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
 
 
 
-                        {Array.from({ length: maxSlides }, (_, i) => {
-                            return (
-                                <div key={i}>
-                                    {
-                                        i < maxSlides && i < video20?.length ?
-                                            <div key={video20[i]?.videoGuid} className={` w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border  rounded-none overflow-hidden hover:bg-white/50`}
-                                                /*  onClick={() => { handleOpen(video) }} */
-                                                onClick={() => showCarousel(i)}
-                                            >
-
-                                                {/** video thumbnail */}
-                                                <div className={`relative w-full h-[${slideHeight}px]   z-[20]`}
+                        {
+                            Array.isArray(video20) &&
+                            Array.from({ length: maxSlides }, (_, i) => {
+                                return (
+                                    <div key={i}>
+                                        {
+                                            i < maxSlides && i < video20?.length ?
+                                                <div key={video20[i]?.videoGuid} className={` w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border  rounded-none overflow-hidden hover:bg-white/50`}
+                                                    /*  onClick={() => { handleOpen(video) }} */
+                                                    onClick={() => showCarousel(i)}
                                                 >
-                                                    {/** youtube logo */}
-                                                    <div className={`absolute top-0 left-0 w-full h-full bg-transparent  z-[300000] hover:bg-white/40`}>
-                                                        <RiYoutubeFill size={20} className={`text-white absolute top-0.5 right-1 `} />
-                                                    </div>
 
-                                                    <img src={video20[i]?.videoThumbnail} alt={video20[i]?.videoTitle} className={`object-cover w-full h-full`} />
-
-                                                    {/** bottom title */}
-                                                    <div className={` block w-full absolute z-[30] text-white bottom-0 px-2 py-[5px] bg-black/80 `}>
-
-                                                        <div className={`w-full text-white bottom-0  `}>
-
-                                                            <div className={` text-[12px] leading-[1.2em] line-clamp-2`}>
-                                                                {video20[i]?.videoTitle}
-                                                            </div>
-
+                                                    {/** video thumbnail */}
+                                                    <div className={`relative w-full h-[${slideHeight}px]   z-[20]`}
+                                                    >
+                                                        {/** youtube logo */}
+                                                        <div className={`absolute top-0 left-0 w-full h-full bg-transparent  z-[300000] hover:bg-white/40`}>
+                                                            <RiYoutubeFill size={20} className={`text-white absolute top-0.5 right-1 `} />
                                                         </div>
+
+                                                        <img src={video20[i]?.videoThumbnail} alt={video20[i]?.videoTitle} className={`object-cover w-full h-full`} />
+
+                                                        {/** bottom title */}
+                                                        <div className={` block w-full absolute z-[30] text-white bottom-0 px-2 py-[5px] bg-black/80 `}>
+
+                                                            <div className={`w-full text-white bottom-0  `}>
+
+                                                                <div className={` text-[12px] leading-[1.2em] line-clamp-2`}>
+                                                                    {video20[i]?.videoTitle}
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
                                                     </div>
-
-
+                                                </div> :
+                                                <div className={`w-[${slideWidth}px] h-full border rounded-none flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-gray-900 `}
+                                                    onClick={() => {
+                                                        setOpenGallery(true)
+                                                    }}
+                                                >
+                                                    <div className={`text-white/60 w-[85%] text-center rounded-md h-[75%] border border-dashed border-gray-200/50 flex place-items-center place-content-center text-[23px]`}>
+                                                        <MdOutlineImage />
+                                                    </div>
                                                 </div>
-                                            </div> :
-                                            <div className={`w-[${slideWidth}px] h-full border rounded-none flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-gray-900 `}
-                                                onClick={() => {
-                                                    setOpenGallery(true)
-                                                }}
-                                            >
-                                                <div className={`text-white/60 w-[85%] text-center rounded-md h-[75%] border border-dashed border-gray-200/50 flex place-items-center place-content-center text-[23px]`}>
-                                                    <MdOutlineImage />
-                                                </div>
-                                            </div>
-                                    }
-                                </div>
-                            )
-                        })}
+                                        }
+                                    </div>
+                                )
+                            })}
 
                         {/** last slide that opens gallery */}
                         <div className={`w-[${slideWidth}px] h-full border border-gray-500 rounded-none flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-black`}
@@ -325,7 +327,8 @@ export const VideoGallery = ({ outVideo, openGallery,
                                 h-full overflow-y-auto pt-2 px-2 pb-2
                                 bg-white `}>
                                 <div className={`grid grid-cols-4 md:grid-cols-6 gap-2`}>
-                                    {outVideo &&
+                                    {
+                                        Array.isArray(outVideo) &&
                                         outVideo?.map((video: any, index: number) => {
                                             return (
                                                 <div key={index} className={`mb-2`}

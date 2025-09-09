@@ -59,8 +59,8 @@ const SocialMedia = ({ listing }: any) => {
         const getSocialMedia = async (listing: any) => {
             const socials = []
 
-            const socialMedia = await getSocialMediaByBusinessGuid(listing.gid)
-            socialMedia.map((media: any, index: number) => {
+            const socialMedia = await getSocialMediaByBusinessGuid(listing?.gid)
+            socialMedia?.map((media: any, index: number) => {
                 const handle = media?.user_description
                 const isValidURL = isValidUrl(handle)
                 let link = ""

@@ -10,7 +10,7 @@ const Services = ({ listing }: any) => {
         const convertToList = (phrases: string) => {
 
             if (phrases !== null && phrases !== "") {
-                const serviceList = phrases.split(",").map(item => item.trim());
+                const serviceList = phrases?.split(",").map(item => item.trim());
                 setServiceList(serviceList)
             }
         }

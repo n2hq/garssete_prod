@@ -26,7 +26,7 @@ const ImageBlock = ({ images, listing }: any) => {
         let shortGallery = [...items]
 
         if (images) {
-            images.map((image: any, index: number) => {
+            images?.map((image: any, index: number) => {
                 if (index + 1 < 12) {
                     shortGallery.push(image)
                 }

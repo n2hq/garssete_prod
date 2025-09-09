@@ -38,19 +38,23 @@ const index = () => {
 
     useEffect(() => {
         async function getAllData(guid: string) {
-            const userProfileData = await getUserProfile(guid || "")
-            const countries = await getCountries()
-            const userObject: any = userProfileData
-            const states = await getStates(userObject.country_code || "")
-            const cities = await getCities(userObject.country_code || "", userObject.state_code || "")
-            const categories = await getCategories()
-            const userProfileImageData = await getUserProfileImageData(guid || "")
-            setUserProfile(userProfileData)
-            setCountries(countries)
-            setStates(states)
-            setCities(cities)
-            setUserProfileImageData(userProfileImageData)
-            setCategories(categories)
+            try {
+                const userProfileData = await getUserProfile(guid || "")
+                const countries = await getCountries()
+                const userObject: any = userProfileData
+                const states = await getStates(userObject.country_code || "")
+                const cities = await getCities(userObject.country_code || "", userObject.state_code || "")
+                const categories = await getCategories()
+                const userProfileImageData = await getUserProfileImageData(guid || "")
+                setUserProfile(userProfileData)
+                setCountries(countries)
+                setStates(states)
+                setCities(cities)
+                setUserProfileImageData(userProfileImageData)
+                setCategories(categories)
+            } catch (e: any) {
+                console.log(e.message)
+            }
         }
 
         if (user?.guid) {

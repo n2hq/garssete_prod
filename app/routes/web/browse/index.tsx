@@ -24,11 +24,17 @@ import Pagination from './assets/Pagination';
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
     const query = url?.searchParams.get("q") || "";
-    const page = parseInt(url?.searchParams.get("page") || "1")
-    let data = await getSearch(query, page)
+    let page: number = 1
+    let data: any = ""
+    let countries = null
 
-    let countries = await getCountries()
-
+    try {
+        page = parseInt(url?.searchParams.get("page") || "1")
+        data = await getSearch(query, page)
+        countries = await getCountries()
+    } catch (error: any) {
+        console.log(error.message)
+    }
 
     let res = {
         data: data,

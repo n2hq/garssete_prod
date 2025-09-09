@@ -8103,9 +8103,16 @@ function Pagination({ pagination }) {
 const loader$N = async ({ request, params }) => {
   const url = new URL(request.url);
   const query2 = (url == null ? void 0 : url.searchParams.get("q")) || "";
-  const page = parseInt((url == null ? void 0 : url.searchParams.get("page")) || "1");
-  let data = await getSearch(query2, page);
-  let countries = await getCountries();
+  let page = 1;
+  let data = "";
+  let countries = null;
+  try {
+    page = parseInt((url == null ? void 0 : url.searchParams.get("page")) || "1");
+    data = await getSearch(query2, page);
+    countries = await getCountries();
+  } catch (error) {
+    console.log(error.message);
+  }
   let res = {
     data,
     query: query2,

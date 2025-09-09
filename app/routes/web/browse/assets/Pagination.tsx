@@ -74,7 +74,7 @@ export default function Pagination({ pagination }: PaginationProps) {
                 </a>
 
                 {/* Page Numbers */}
-                {getPageNumbers().map((page, index) =>
+                {getPageNumbers()?.map((page, index) =>
                     typeof page === 'number' ? (
                         <a
                             key={page}

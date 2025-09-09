@@ -1,7 +1,7 @@
 import { LoaderFunction } from '@remix-run/node';
 import { useLoaderData, useSearchParams } from '@remix-run/react';
 import React, { useEffect, useState } from 'react'
-import { getCountries, getSearch } from '~/lib/lib';
+import { getCountries, getSearch, logError } from '~/lib/lib';
 import SearchLayout from '~/routes/asset/SearchLayoutMain';
 import Item from './assets/Item';
 import BrowseLayout from '~/routes/asset/BrowseLayout';
@@ -33,7 +33,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         data = await getSearch(query, page)
         countries = await getCountries()
     } catch (error: any) {
-        console.log(error.message)
+        logError(error)
     }
 
     let res = {
@@ -108,7 +108,7 @@ const Index = () => {
                                 <div className={`space-y-8`}>
 
                                     {
-                                        data.map((data: ListingType, index: number) => {
+                                        data?.map((data: ListingType, index: number) => {
                                             return (
                                                 <Card
                                                     key={index}

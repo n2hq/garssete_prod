@@ -335,7 +335,7 @@ const BusinessProfileForm = ({ data }: any) => {
                             getValues={getValues}
                             watch={watch}
                             controlInformationClass={controlInformationClass}
-                            controlInformation={`Enter your services E.g.: Consulting Services, Project Management, Outsourcing or BPO, Training and Development. etc.`}
+                            controlInformation={`Short description of business activities`}
                         />
 
                         <TextareaWithWordLimit
@@ -348,6 +348,8 @@ const BusinessProfileForm = ({ data }: any) => {
                             setValue={setValue}
                             getValues={getValues}
                             watch={watch}
+                            controlInformationClass={controlInformationClass}
+                            controlInformation={`More description about the business.`}
                         />
 
                         {/* <Input

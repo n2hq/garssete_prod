@@ -15,7 +15,7 @@ const Button = ({
 
                         className={`border-[1px] border-none bg-blue-900 
                             w-full  text-xl
-                            py-2.5 rounded text-white mt-1 shadow-lg shadow-blue-400
+                            py-2.5 rounded-full text-white mt-1 shadow-lg shadow-blue-400
                             cursor-pointer ${working && 'bg-blue-500 cursor-default'}`}
                         disabled={working}
                     >

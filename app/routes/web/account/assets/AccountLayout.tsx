@@ -140,7 +140,7 @@ const AccountLayout = ({ children }: any) => {
                 ${show ? 'left-[295px]' : 'left-[15px]'}
                 focus:outline-none fixed z-50 top-[60px] 
                 transition-all duration-1000 ease-in-out
-                hidden md:block`}
+                hidden lg:block`}
             >
                 <CgMenu className={`${show ? 'rotate-0 transition-all duration-1000 ease-in-out' : 'rotate-90 transition-all duration-1000 ease-in-out'}`} />
             </button>
@@ -153,7 +153,7 @@ const AccountLayout = ({ children }: any) => {
                     className={`bg-gray-50 text-gray-900 
                         h-full overflow-y-auto transition-all z-30
                         duration-1000 ease-in-out border-r shadow-md
-                        hidden md:block
+                        hidden lg:block 
                         ${show ? 'w-[350px] min-w-[350px]' : 'w-0 min-w-0 overflow-hidden'}`}
                 >
                     <div className={`mt-[20px]`}></div>

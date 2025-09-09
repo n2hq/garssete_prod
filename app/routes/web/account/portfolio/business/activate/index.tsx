@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import Activate from './Activate'
 import { useParams } from '@remix-run/react'
-import { getBusinessProfile, IsAuthenticated } from '~/lib/lib'
+import { getBusinessProfile, IsAuthenticated, logError } from '~/lib/lib'
 import AccountLayout from '../../../assets/AccountLayout'
 import ContentLayout from '../../../assets/ContentLayout'
 import BusinessMenu from '../assets/BusinessMenu'
@@ -33,9 +33,13 @@ const index = () => {
             const businessProfile = await getBusinessProfile(businessGuid || "")
             setBusinessProfile(businessProfile)
         }
-        if (business_guid && user_guid) {
+        try {
+            if (business_guid && user_guid) {
 
-            getAllData(business_guid, user_guid)
+                getAllData(business_guid, user_guid)
+            }
+        } catch (e: any) {
+            logError(e)
         }
     }, [business_guid, user_guid])
 

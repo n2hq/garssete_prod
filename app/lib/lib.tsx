@@ -13,7 +13,8 @@ export const config = {
     MAIL_SERVICE: import.meta.env.VITE_MAIL_SERVICE,
     SITENAME: import.meta.env.VITE_SITENAME,
     FORMATTED_SITENAME: import.meta.env.VITE_SITENAME,
-    SESSION_SECRET: import.meta.env.VITE_SESSION_SECRET
+    SESSION_SECRET: import.meta.env.VITE_SESSION_SECRET,
+    ENV: import.meta.env.VITE_ENV
 }
 
 export const appConfig = {
@@ -1291,4 +1292,12 @@ export const searchFacilities = (selectedFacilities: any) => {
         })
         .filter(Boolean);
     return mappedFacilities
+}
+
+export const logError = (e: any) => {
+    const environments = ['dev']
+
+    if (environments.includes(config.ENV)) {
+        console.log(e.message)
+    }
 }

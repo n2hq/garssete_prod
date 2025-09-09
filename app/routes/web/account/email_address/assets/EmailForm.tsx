@@ -96,7 +96,7 @@ const EmailForm = ({ loaderData, user }: any) => {
                     <div className=' pt-3 pb-4 text-[13px] leading-5'>
                         <span className=' font-semibold'>[{loaderData.userProfile?.email}]</span> will be used for account-related notifications and can be used for password resets.
                     </div>
-                    <div className='border-[1px] rounded-[8px] px-3 py-3 bg-gray-100'>
+                    <div className='border-[1px] rounded-full px-3 py-3 bg-gray-50'>
                         {loaderData.userProfile?.email} &nbsp;
                     </div>
 

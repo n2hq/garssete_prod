@@ -30,13 +30,20 @@ const index = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+
         async function getAllData(guid: string) {
             const userProfileData = await getUserProfile(guid || "")
             setUserProfile(userProfileData)
         }
 
-        if (user?.guid) {
-            getAllData(user?.guid)
+        try {
+
+
+            if (user?.guid) {
+                getAllData(user?.guid)
+            }
+        } catch (e: any) {
+            console.log(e.message)
         }
     }, [user?.guid])
 

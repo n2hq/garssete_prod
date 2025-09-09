@@ -111,6 +111,7 @@ const Index = () => {
                                         data.map((data: ListingType, index: number) => {
                                             return (
                                                 <Card
+                                                    key={index}
                                                     listing={data}
                                                 />
                                             )

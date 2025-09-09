@@ -91,7 +91,7 @@ const Index = () => {
 
                 <CardHeaderWithSearch
                     base_url={'/web/account/portfolio'}
-                    title={`${formatNumber(data.portfolio.length)} Business Pages`}
+                    title={`${formatNumber(data.portfolio.length)} Pages`}
                     q={q}
 
                 />

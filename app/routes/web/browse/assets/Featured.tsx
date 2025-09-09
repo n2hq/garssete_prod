@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 
 import { get } from 'http'
-import { getFeaturedListing } from '~/lib/lib'
+import { getFeaturedListing, logError } from '~/lib/lib'
 import Feature from './Feature'
 
 const featuredData = [
@@ -55,7 +55,11 @@ const Featured = () => {
             setFeatured(data)
         }
 
-        getFeatured()
+        try {
+            getFeatured()
+        } catch (e: any) {
+            logError(e.message)
+        }
     }, [])
 
     return (

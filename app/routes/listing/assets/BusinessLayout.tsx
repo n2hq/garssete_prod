@@ -21,7 +21,7 @@ import SocialMedia from './SocialMedia';
 import RatingDisplay from './RatingDisplay';
 import { RatingDisplayType } from '~/lib/types';
 import RatingBox from '~/routes/web/search/assets/RatingBox';
-import { formatNumber } from '~/lib/lib';
+import { formatNumber, logError } from '~/lib/lib';
 import RatingBoxRounded from './RatingBoxRounded';
 import ClaimBusiness from './ClaimBusiness';
 import LocationWithHours from './LocationWithHours';
@@ -58,10 +58,14 @@ const BusinessLayout = ({
 
     useEffect(() => {
         if (listing) {
-            ReportTime(listing).then((data) => {
-                //console.log(data)
-                setOperatingHoursStatus(data);
-            })
+            try {
+                ReportTime(listing).then((data) => {
+
+                    setOperatingHoursStatus(data);
+                })
+            } catch (e: any) {
+                logError(e)
+            }
 
         }
     }, [listing])
@@ -118,97 +122,7 @@ const BusinessLayout = ({
             }
 
 
-            <div className={` md:pt-4 md:px-[12px]`}>
-                <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
 
-                    <div className={`grid grid-cols-12 gap-0 md:gap-4 relative
-                    `}>
-                        <div className={` col-span-12 lg:col-span-8`}>
-
-
-
-                            <div className={`hidden md:block mt-0`}>
-                                {
-                                    images?.length > 0 && listing &&
-                                    <ImageBlock
-                                        images={images}
-                                        listing={listing}
-                                    />
-                                }
-                            </div>
-
-                            {/*  {
-                            images && listing &&
-                            <Masonry
-                                images={images}
-                                listing={listing}
-                            />
-                        } */}
-
-                            <div className={``}>
-                                <div className={`lg:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
-                                    {ratingDisplayData && <RatingDisplay data={ratingDisplayData} />}
-                                    {listing && <Address businessProfile={listing} />}
-                                    {listing && <ClaimBusiness listing={listing} />}
-                                    {/* {
-                                        listing && <Review listing={listing} />
-                                    } */}
-
-                                </div>
-
-                                <div className={`px-[15px] md:px-[0px]`}>
-                                    <ShortDescription listing={listing} />
-
-                                    {
-                                        listing && operatingHoursStatus && <LocationWithHours listing={listing} operatingHoursStatus={operatingHoursStatus} />
-                                    }
-
-
-
-                                    <Description listing={listing} />
-
-                                    {listing && <SocialMedia listing={listing} />}
-
-                                    {listing && <BusinessFeatures listing={listing} />}
-
-
-                                    {listing && <BusinessPhrases listing={listing} />}
-
-                                    {listing && <Products products={products}
-                                        listing={listing}
-                                    />}
-
-                                    {listing && <Services listing={listing} />}
-
-
-
-
-
-                                    {listing && <BusinessRatings listing={listing} />}
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div className={`col-span-12 lg:col-span-4 hidden lg:block`}>
-
-
-                            <div className={` sticky top-[100px]`}>
-
-                                {ratingDisplayData &&
-                                    <RatingDisplay data={ratingDisplayData} />
-                                }
-                                {listing &&
-                                    <Address businessProfile={listing} />
-                                }
-                                {listing && <ClaimBusiness listing={listing} />}
-                                {/* <Review /> */}
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
     )
 }

@@ -43,9 +43,12 @@ const Index = () => {
             setPortfolio(portfolio)
         }
 
-        if (user?.guid) {
-
-            getAllData(user?.guid, q)
+        try {
+            if (user?.guid) {
+                getAllData(user?.guid, q)
+            }
+        } catch (e: any) {
+            console.log(e.message)
         }
     }, [user?.guid, q])
 

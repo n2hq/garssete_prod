@@ -160,7 +160,7 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                 <div className={`grid grid-cols-1 md:grid-cols-12 gap-5
                     `}>
                     <div className='col-span-6'>
-                        <div className=' relative w-full h-[150px] border-[1px] border-gray-300'>
+                        <div className=' relative w-full h-[150px] overflow-hidden rounded-lg'>
                             <img
                                 className=' object-cover w-full h-full'
                                 src="/images/mapicon.jpeg" alt=""
@@ -172,8 +172,8 @@ const LocationWithHours = ({ listing, operatingHoursStatus }: any) => {
                             </div>
                             <div>
                                 <a href={`${addressLink}`} target="_blank">
-                                    <button className='w-[100%] bg-gray-100 border-[1px] border-gray-300'>
-                                        <div className='text-[14px]  font-sans font-bold text-black  py-1 '>
+                                    <button className='w-[100%] border-[1px] border-blue-300 rounded-md'>
+                                        <div className='text-[14px]  font-sans font-bold text-bold  py-2 tracking-tight '>
                                             View in Map
                                         </div>
                                     </button>

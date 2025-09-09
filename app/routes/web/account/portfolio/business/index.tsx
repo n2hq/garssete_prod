@@ -68,11 +68,15 @@ const index = () => {
             setCategories(categories)
             setBusinessProfileBgData(businessProfileBgData)
 
-            console.log(businessProfileBgData)
+            //console.log(businessProfileBgData)
         }
 
-        if (userGuid && businessGuid) {
-            getAllData(userGuid, businessGuid)
+        try {
+            if (userGuid && businessGuid) {
+                getAllData(userGuid, businessGuid)
+            }
+        } catch (e: any) {
+            console.log(e.message)
         }
     }, [userGuid, businessGuid])
 

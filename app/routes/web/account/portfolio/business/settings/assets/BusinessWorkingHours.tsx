@@ -202,7 +202,8 @@ const BusinessWorkingHours = ({
                             <div key={day} className="flex items-center gap-4">
                                 <span className="w-24 font-semibold">{day}</span>
                                 <select
-                                    value={workingHours[day as Day].start}
+
+                                    value={workingHours[day as Day]?.start || ''}
                                     onChange={(e) => handleTimeChangeStart(day as Day, "start", e.target.value)}
                                     className="border p-2 rounded"
                                 >
@@ -215,7 +216,7 @@ const BusinessWorkingHours = ({
                                 </select>
                                 <span>to</span>
                                 <select
-                                    value={workingHours[day as Day].end}
+                                    value={workingHours[day as Day].end || ''}
                                     onChange={(e) => handleTimeChangeEnd(day as Day, "end", e.target.value)}
                                     className="border p-2 rounded"
                                 >

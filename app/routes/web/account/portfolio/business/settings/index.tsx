@@ -47,8 +47,12 @@ const index = () => {
             setBusinessProfile(businessProfile)
         }
 
-        if (business_guid && user_guid) {
-            getAllData(business_guid, user_guid)
+        try {
+            if (business_guid && user_guid) {
+                getAllData(business_guid, user_guid)
+            }
+        } catch (e: any) {
+            console.log(e.message)
         }
 
 

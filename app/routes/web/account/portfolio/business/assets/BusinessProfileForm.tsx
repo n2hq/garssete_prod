@@ -131,10 +131,10 @@ const BusinessProfileForm = ({ data }: any) => {
 
     return (
         <div>
-            <div className={formWrapperClass}>
+            <div className={`formWrapperClass mt-[15px]`}>
                 <div className={`${inputWrapperClass} flex flex-col place-items-center`}>
 
-                    <div className={`z-[50] w-full bg-black h-[150px]`}>
+                    <div className={`z-[50] w-full  h-[150px]`}>
                         <BgComponent
                             listing={data.businessProfile}
                             user={data.userProfile}

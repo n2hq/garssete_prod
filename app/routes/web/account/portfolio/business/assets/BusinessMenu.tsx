@@ -48,7 +48,7 @@ const BusinessMenu = ({ title, guid, userGuid }: any) => {
         setShowSettings(false)
     }
     return (
-        <div className=' flex place-content-between w-full  px-4 py-3 mt-1 z-[1000]'>
+        <div className=' flex place-content-between w-full  px-4 pt-3 mt-1 z-[1000]'>
             <div className='  rounded-lg text-xl text-black font-normal'>
                 {title}
             </div>

@@ -25,8 +25,12 @@ const index = () => {
             setUserProfile(userProfileData)
         }
 
-        if (user?.guid) {
-            getAllData(user?.guid)
+        try {
+            if (user?.guid) {
+                getAllData(user?.guid)
+            }
+        } catch (e: any) {
+            console.log(e.message)
         }
     }, [user?.guid])
 

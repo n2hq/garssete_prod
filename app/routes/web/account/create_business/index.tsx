@@ -40,8 +40,12 @@ const index = () => {
             setUser(user)
         }
 
-        if (auth?.user) {
-            getAllData(auth?.user)
+        try {
+            if (auth?.user) {
+                getAllData(auth?.user)
+            }
+        } catch (e: any) {
+            console.log(e.message)
         }
     }, [auth])
 

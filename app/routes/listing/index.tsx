@@ -160,7 +160,7 @@ const index = () => {
 
 
 
-                    {
+                    {/* {
                         listing?.category !== undefined ?
                             <Related
                                 category={listing?.category}
@@ -169,7 +169,7 @@ const index = () => {
                                 subtitle={"Related based on the same category."}
                             /> :
                             <ResourceNotFound />
-                    }
+                    } */}
                     <VerticalHeight />
                     <CallToActionSection />
                     <FooterSection />

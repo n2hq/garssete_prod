@@ -1,21 +1,21 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PassThrough } from "node:stream";
 import { createReadableStreamFromReadable } from "@remix-run/node";
-import { RemixServer, useNavigate, Outlet, useNavigation, Meta, Links, ScrollRestoration, Scripts, Link, useLocation, NavLink as NavLink$1, useLoaderData, useSearchParams, useParams } from "@remix-run/react";
+import { RemixServer, useNavigate, Outlet, useNavigation, Meta, Links, ScrollRestoration, Scripts, Link, useLocation, useLoaderData, useSearchParams, NavLink as NavLink$1, useParams } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import React, { useContext, createContext, useState, useEffect, useRef } from "react";
+import { useContext, createContext, useState, useEffect, useRef } from "react";
 import NProgress from "nprogress";
-import { FaSpinner, FaSchool, FaWheelchair, FaSwimmingPool, FaParking, FaTiktok, FaVimeoSquare, FaLinkedinIn, FaSignOutAlt, FaCarSide, FaYoutubeSquare, FaPinterestSquare, FaFacebookSquare, FaChevronLeft, FaChevronRight, FaAngleDown, FaMobile, FaQuestion, FaBriefcase, FaCheck } from "react-icons/fa";
+import { FaSpinner, FaSchool, FaWheelchair, FaSwimmingPool, FaParking, FaTiktok, FaVimeoSquare, FaLinkedinIn, FaSignOutAlt, FaCarSide, FaAngleDown, FaMobile, FaQuestion, FaBriefcase, FaCheck } from "react-icons/fa";
 import CryptoJS from "crypto-js";
-import { BsPersonWheelchair, BsPinterest, BsInstagram, BsTwitterX, BsPersonFillGear, BsPersonFill, BsCircleFill, BsCircle, BsSearchHeart, BsStarFill, BsStar, BsBagCheckFill, BsPhone, BsLinkedin, BsBank } from "react-icons/bs";
-import { CgChart, CgFeed, CgPrinter, CgShoppingCart, CgShoppingBag, CgAirplane, CgGym, CgFacebook, CgMoreVertical, CgChevronDown, CgChevronRight, CgWebsite, CgMenu, CgChevronDoubleRight } from "react-icons/cg";
-import { GrLanguage, GrRestaurant, GrCloudComputer, GrCafeteria, GrLounge, GrWheelchairActive, GrYoutube, GrClose, GrLaunch } from "react-icons/gr";
-import { BiFoodMenu, BiWine, BiLibrary, BiSpa, BiChevronLeft, BiChevronRight, BiSearch, BiBriefcase, BiUser, BiSolidRightArrow, BiHome, BiCategory, BiBullseye, BiSolidStar, BiMenu, BiPhone, BiSolidUser, BiEditAlt } from "react-icons/bi";
+import { BsPersonWheelchair, BsPinterest, BsInstagram, BsTwitterX, BsPersonFillGear, BsPersonFill, BsCircleFill, BsCircle, BsSearchHeart, BsBank } from "react-icons/bs";
+import { CgChart, CgFeed, CgPrinter, CgShoppingCart, CgShoppingBag, CgAirplane, CgGym, CgFacebook, CgMoreVertical, CgChevronDown, CgChevronRight, CgMenu, CgChevronDoubleRight } from "react-icons/cg";
+import { GrLanguage, GrRestaurant, GrCloudComputer, GrCafeteria, GrLounge, GrWheelchairActive, GrYoutube, GrLaunch } from "react-icons/gr";
+import { BiFoodMenu, BiWine, BiLibrary, BiSpa, BiChevronLeft, BiChevronRight, BiSearch, BiBriefcase, BiUser, BiSolidRightArrow, BiHome, BiCategory, BiBullseye, BiMenu, BiSolidStar, BiPhone, BiSolidUser, BiEditAlt } from "react-icons/bi";
 import { FcLandscape, FcAutomotive, FcBusiness, FcSettings } from "react-icons/fc";
 import { GiHumanTarget, GiHealthNormal, GiPadlock, GiStarGate } from "react-icons/gi";
-import { MdMeetingRoom, MdAdsClick, MdDashboard, MdCleaningServices, MdPlumbing, MdConstruction, MdElectricalServices, MdRoomService, MdRealEstateAgent, MdBusinessCenter, MdOutlineWheelchairPickup, MdWheelchairPickup, MdLocalLaundryService, MdAirportShuttle, MdEditSquare, MdOutlineAttachEmail, MdPassword, MdWifiPassword, MdContacts, MdMusicNote, MdLocationPin, MdPhone, MdEmail, MdOutlineImage, MdBrowseGallery, MdError, MdOutlineCancel } from "react-icons/md";
-import { RiGovernmentFill, RiMusic2Line, RiTrademarkLine, RiRestaurantFill, RiYoutubeFill, RiDoubleQuotesL } from "react-icons/ri";
+import { MdMeetingRoom, MdAdsClick, MdDashboard, MdCleaningServices, MdPlumbing, MdConstruction, MdElectricalServices, MdRoomService, MdRealEstateAgent, MdBusinessCenter, MdOutlineWheelchairPickup, MdWheelchairPickup, MdLocalLaundryService, MdAirportShuttle, MdEditSquare, MdOutlineAttachEmail, MdPassword, MdWifiPassword, MdContacts, MdMusicNote, MdEmail, MdError, MdOutlineCancel } from "react-icons/md";
+import { RiGovernmentFill, RiMusic2Line, RiTrademarkLine, RiRestaurantFill, RiDoubleQuotesL } from "react-icons/ri";
 import { TbTruckDelivery, TbAirConditioning, TbWritingSign, TbPasswordUser } from "react-icons/tb";
 import { FaToilet, FaMinimize, FaMaximize, FaBagShopping } from "react-icons/fa6";
 import { TiWiFi } from "react-icons/ti";
@@ -786,26 +786,6 @@ const getListingByCategory = async (category, limit) => {
     return { "message": error.message };
   }
 };
-const getRating = async (userGuid, businessGuid) => {
-  const endpoint = `/api/rating/${userGuid}/${businessGuid}`;
-  const url = config.BASE_URL + endpoint;
-  try {
-    const response = await fetch(
-      url,
-      {
-        method: "GET",
-        headers
-      }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return { "message": error.message };
-  }
-};
 const getBusinessProfileImageData = async (guid) => {
   const endpoint = "/api/listing/business_profile_image/" + guid;
   const url = config.BASE_URL + endpoint;
@@ -906,88 +886,6 @@ const getPage = async (criteria) => {
     return data;
   } catch (error) {
     return { "message": error.message };
-  }
-};
-const getBusinessRatings = async (businessGuid) => {
-  const BASE_URL = "https://edition.garssete.com";
-  const endpoint = `/api/rating/business_ratings/${businessGuid}`;
-  const url = BASE_URL + endpoint;
-  try {
-    const response = await fetch(
-      url,
-      {
-        method: "GET",
-        headers
-      }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return new Promise((resolve) => setTimeout(() => {
-      resolve(data);
-    }, 10));
-  } catch (error) {
-    return void 0;
-  }
-};
-const getLocalDate = (date) => {
-  const localDate = new Date(date);
-  const formatted = localDate.toLocaleString("en-US", {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true
-  });
-  return formatted;
-};
-const getBusinessFeatures = async (businessGuid) => {
-  const BASE_URL = "https://edition.garssete.com";
-  const endpoint = `/api/listing/business_facility_features/${businessGuid}`;
-  const url = BASE_URL + endpoint;
-  try {
-    const response = await fetch(
-      url,
-      {
-        method: "GET",
-        headers
-      }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return new Promise((resolve) => setTimeout(() => {
-      resolve(data);
-    }, 10));
-  } catch (error) {
-    return void 0;
-  }
-};
-const getSocialMediaByBusinessGuid = async (businessGuid) => {
-  const endpoint = `/api/listing/business_social_media/${businessGuid}`;
-  const url = config.BASE_URL + endpoint;
-  try {
-    const response = await fetch(
-      url,
-      {
-        method: "GET",
-        headers
-      }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return new Promise((resolve) => setTimeout(() => {
-      resolve(data);
-    }, 10));
-  } catch (error) {
-    return void 0;
   }
 };
 const generate7DigitNumber = () => {
@@ -4157,10 +4055,6 @@ const route9 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   default: index$r
 }, Symbol.toStringTag, { value: "Module" }));
 const GalleryContext = createContext(null);
-function useGallery() {
-  const context = useContext(GalleryContext);
-  return context;
-}
 const GalleryProvider = ({ children }) => {
   const [show, setShow] = useState(false);
   const [gallery, setGallery] = useState(null);
@@ -4256,10 +4150,6 @@ const GalleryProvider = ({ children }) => {
 };
 const maximumWords = 100;
 const RatingContext = createContext(null);
-function useRating() {
-  const context = useContext(RatingContext);
-  return context;
-}
 const RatingSchema = z.object({
   fullname: z.any(),
   rating: z.any(),
@@ -4487,952 +4377,6 @@ function RatingProvider({ children }) {
     children
   ] });
 }
-const FormattedAddress$1 = ({ listing }) => {
-  return /* @__PURE__ */ jsxs("div", { children: [
-    (listing == null ? void 0 : listing.address_one) ? (listing == null ? void 0 : listing.address_one) + ", " : "",
-    (listing == null ? void 0 : listing.state_code) ? (listing == null ? void 0 : listing.state_name) + ", " : "",
-    (listing == null ? void 0 : listing.country_code) ? listing == null ? void 0 : listing.country_code : ""
-  ] });
-};
-const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }) => {
-  const [profileImg, setProfileImg] = useState("");
-  useEffect(() => {
-    if (profileImageData) {
-      setProfileImg(config.IMG_BASE_URL + (profileImageData == null ? void 0 : profileImageData.image_url));
-    }
-  }, [profileImageData]);
-  return /* @__PURE__ */ jsxs("div", { className: `flex gap-2 mt-2 w-full`, children: [
-    /* @__PURE__ */ jsx("div", { className: `bg-white w-[95px] min-w-[95px] h-[95px] rounded-none relative overflow-hidden hidden md:block border border-gray-200  shadow-sm`, children: /* @__PURE__ */ jsx(
-      "img",
-      {
-        src: profileImg,
-        alt: "",
-        className: ` object-cover w-full h-full border-[1px]  border-gray-200`
-      }
-    ) }),
-    /* @__PURE__ */ jsxs("div", { className: `w-full`, children: [
-      /* @__PURE__ */ jsx("div", { className: `text-[19px] md:text-[24px]
-                font-bold  leading-[1.2em] tracking-tight font-poppins`, children: listing == null ? void 0 : listing.title }),
-      /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(FormattedAddress$1, { listing }) }),
-      /* @__PURE__ */ jsx("div", { className: ` leading-[1.3em] space-x-1 mt-1`, children: operatingHoursStatus !== void 0 && /* @__PURE__ */ jsxs("div", { className: ` leading-[1.2em]`, children: [
-        operatingHoursStatus.openStatus === "selected_hours" ? /* @__PURE__ */ jsx("div", { children: operatingHoursStatus.todayHoursFormatted }) : /* @__PURE__ */ jsxs("div", { children: [
-          operatingHoursStatus.openStatus === "always_open" && /* @__PURE__ */ jsx("div", { className: `bg-green-700 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`, children: "Always Open" }),
-          operatingHoursStatus.openStatus === "permanently_closed" && /* @__PURE__ */ jsx("div", { className: `bg-red-700 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`, children: "Permantently Closed" }),
-          operatingHoursStatus.openStatus === "temporarily_closed" && /* @__PURE__ */ jsx("div", { className: `bg-orange-400 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`, children: "Temporarily Closed" })
-        ] }),
-        /* @__PURE__ */ jsx("div", { className: ` w-full mx-auto mt-1.5`, children: operatingHoursStatus == null ? void 0 : operatingHoursStatus.localTimeText })
-      ] }) })
-    ] })
-  ] });
-};
-const ComponentTitle = ({ title }) => {
-  return /* @__PURE__ */ jsx("div", { className: `text-[19px] font-bold
-                border-b mb-6`, children: title });
-};
-const Description = ({ listing }) => {
-  var _a;
-  const [img, setImg] = useState("");
-  useEffect(() => {
-    if (listing.gid) {
-      let imgdata = getBusinessProfileImageData(listing.gid);
-      imgdata.then((data) => {
-        setImg(config.IMG_BASE_URL + data.image_url);
-      });
-    }
-  }, [listing]);
-  return /* @__PURE__ */ jsxs("div", { className: "mt-12", children: [
-    /* @__PURE__ */ jsx(ComponentTitle, { title: "About this business" }),
-    /* @__PURE__ */ jsxs("div", { className: `flex place-items-start place-content-start
-                gap-2 mt-4 mb-3`, children: [
-      /* @__PURE__ */ jsx("div", { className: `rounded-full bg-black w-[30px] h-[30px]
-                    overflow-hidden relative`, children: /* @__PURE__ */ jsx(
-        "img",
-        {
-          className: `object-cover w-full h-full`,
-          src: img,
-          alt: ""
-        }
-      ) }),
-      /* @__PURE__ */ jsxs("div", { className: `flex flex-col`, children: [
-        /* @__PURE__ */ jsx("div", { className: `text-md font-bold tracking-tight leading-[1.2em]`, children: listing.title }),
-        /* @__PURE__ */ jsx("div", { className: `text-[12px] capitalize`, children: (_a = searchCategories(listing.category)) == null ? void 0 : _a.name })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsx("div", { className: `flex flex-col gap-y-5 text-[14px] mt-4 whitespace-pre-wrap`, children: listing == null ? void 0 : listing.long_description })
-  ] });
-};
-const Review = ({ listing }) => {
-  const rating = useRating();
-  const { user } = useAuth();
-  const notification = useNotification();
-  useEffect(() => {
-    if ((listing == null ? void 0 : listing.gid) && (user == null ? void 0 : user.guid)) {
-      rating.setListing(listing);
-      getRating(user.guid, listing.gid).then((data) => {
-        if ((data == null ? void 0 : data.length) !== 0) {
-          rating.reset(data);
-          rating.setRatingData(data);
-        } else {
-          rating.validateData(data, user);
-        }
-      });
-    }
-  }, [listing, user]);
-  const handleResult = (confirmed) => {
-    if (confirmed) {
-      notification.cancel();
-      window.location.href = "/signin";
-    } else {
-      notification.cancel();
-    }
-  };
-  const handleShow = () => {
-    if ((user == null ? void 0 : user.guid) === null || (user == null ? void 0 : user.guid) === void 0) {
-      notification.confirm("Login to continue", handleResult);
-    } else {
-      rating.setShow(true);
-    }
-  };
-  return /* @__PURE__ */ jsx("div", { className: `w-full mt-0 `, children: /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsx(
-    "button",
-    {
-      onClick: () => handleShow(),
-      className: `bg-blue-500 text-white flex flex-col
-                items-center pt-[2px] pb-[3px] w-full `,
-      children: "Write Review"
-    }
-  ) }) });
-};
-const Address$1 = ({ businessProfile }) => {
-  const [listing, setListing] = useState(null);
-  const [address, setAddress] = useState("");
-  useEffect(() => {
-    if (businessProfile) {
-      setListing(businessProfile);
-    }
-  }, [businessProfile]);
-  useEffect(() => {
-    if (listing) {
-      let address2 = (listing == null ? void 0 : listing.address_one) ? listing == null ? void 0 : listing.address_one : "";
-      address2 += (listing == null ? void 0 : listing.address_two) ? ", " + (listing == null ? void 0 : listing.address_two) : "";
-      address2 += (listing == null ? void 0 : listing.city_name) ? ", " + (listing == null ? void 0 : listing.city_name) : "";
-      address2 += (listing == null ? void 0 : listing.state_name) ? ", " + (listing == null ? void 0 : listing.state_name) : "";
-      address2 += (listing == null ? void 0 : listing.zipcode) ? ", " + (listing == null ? void 0 : listing.zipcode) : "";
-      address2 += (listing == null ? void 0 : listing.country_name) ? ", " + (listing == null ? void 0 : listing.country_name) : "";
-      setAddress(address2);
-    }
-  }, [listing]);
-  return /* @__PURE__ */ jsx("div", { className: `w-full`, children: /* @__PURE__ */ jsxs("div", { className: `md:bg-white
-            rounded-none overflow-hidden pt-[0px]
-            pb-[15px] bg-[blue]/0 text-black md:black
-            md:text-black  border-[1px] border-gray-300/70 border-t-0 border-b-0`, children: [
-    /* @__PURE__ */ jsx("div", { className: `font-normal text-[19px] 
-                   px-[10px] tracking-tight w-fit rounded-md
-                   ml-[20px] mt-[25px] bg-blue-900 text-white
-                   shadow-md shadow-gray-100`, children: "Business Contact" }),
-    /* @__PURE__ */ jsx("div", { className: "mt-[20px]" }),
-    /* @__PURE__ */ jsxs(
-      "div",
-      {
-        className: `grid grid-cols-1 md:grid-cols-3 lg:grid-cols-1 
-                text-[14px]  tracking-tight md:space-x-4 lg:space-x-0 md:text-black/80 font-sans`,
-        children: [
-          /* @__PURE__ */ jsxs("div", { className: `mx-[0px] divide-y-[1px] `, children: [
-            /* @__PURE__ */ jsxs("div", { className: `flex w-full gap-3 py-3 px-3`, children: [
-              /* @__PURE__ */ jsx("div", { className: `bg-blue-200/80 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md border-[1px]`, children: /* @__PURE__ */ jsx(MdLocationPin, { className: `text-[20px]` }) }),
-              address && /* @__PURE__ */ jsx("div", { className: `text-[15px] md:text-[13px] leading-[1.3em]`, children: address })
-            ] }),
-            (businessProfile == null ? void 0 : businessProfile.phone) && /* @__PURE__ */ jsxs("div", { className: `flex w-full gap-3 py-2.5 px-3`, children: [
-              /* @__PURE__ */ jsx("div", { className: `bg-blue-200/80 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`, children: /* @__PURE__ */ jsx(MdPhone, { className: `text-[20px] h-fit` }) }),
-              /* @__PURE__ */ jsx("div", { className: ` text-[15px] md:text-[13px] leading-[1.3em]
-                                flex place-items-center font-semibold`, children: businessProfile == null ? void 0 : businessProfile.phone })
-            ] }),
-            (businessProfile == null ? void 0 : businessProfile.website) && /* @__PURE__ */ jsxs("div", { className: `flex w-full gap-3 py-2.5 px-3`, children: [
-              /* @__PURE__ */ jsx("div", { className: `bg-blue-200/80 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`, children: /* @__PURE__ */ jsx(CgWebsite, { className: `text-[20px] h-fit` }) }),
-              /* @__PURE__ */ jsx("div", { className: ` text-[15px] md:text-[13px] leading-[1.3em]
-                                flex place-items-center font-semibold
-                                line-clamp-1`, children: /* @__PURE__ */ jsx("a", { href: businessProfile == null ? void 0 : businessProfile.website, children: (businessProfile == null ? void 0 : businessProfile.website) || "No website" }) })
-            ] }),
-            /* @__PURE__ */ jsxs("div", { className: `flex w-full gap-3 py-2.5 px-3`, children: [
-              /* @__PURE__ */ jsx("div", { className: `bg-blue-200/80 h-[30px] min-w-[30px] w-[30px] flex place-content-center place-items-center rounded-md`, children: /* @__PURE__ */ jsx(MdEmail, { className: `text-[20px]` }) }),
-              /* @__PURE__ */ jsx("div", { className: ` text-[15px] md:text-[13px] leading-[1.3em]
-                                flex place-items-center font-semibold
-                                line-clamp-1`, children: /* @__PURE__ */ jsx("a", { href: `mailto:${businessProfile.email_address}`, children: businessProfile.email_address }) })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { className: `bg-blue-500 mt-[30px] mx-[15px]
-                        text-white text-center py-2 rounded`, children: businessProfile && /* @__PURE__ */ jsx(Review, { listing: businessProfile }) }) })
-        ]
-      }
-    )
-  ] }) });
-};
-const BusinessFeatures = ({ listing }) => {
-  const [features, setFeatures] = useState(void 0);
-  useEffect(() => {
-    getBusinessFeatures(listing == null ? void 0 : listing.gid).then((data) => {
-      const mergedFeatures = data == null ? void 0 : data.map((dbF) => {
-        const facility = facilityFeatures.find((f) => f.feature_id === dbF.feature_id);
-        return {
-          ...facility,
-          // take default info (name, description, icon)
-          user_description: dbF.user_description || null,
-          // add user description if any
-          business_guid: dbF.business_guid
-        };
-      });
-      setFeatures(mergedFeatures);
-    });
-  }, [listing.business_guid]);
-  return /* @__PURE__ */ jsxs("div", { className: " mt-12", children: [
-    /* @__PURE__ */ jsx(ComponentTitle, { title: "Facility Features" }),
-    /* @__PURE__ */ jsx("div", { className: `grid grid-cols-2 gap-x-4 gap-y-8 mt-3`, children: features == null ? void 0 : features.map((feature, index2) => {
-      return /* @__PURE__ */ jsxs("div", { className: `flex flex-col`, children: [
-        /* @__PURE__ */ jsxs("div", { className: `font-bold flex place-items-center gap-2 `, children: [
-          /* @__PURE__ */ jsx("span", { className: `text-lg`, children: feature.icon }),
-          /* @__PURE__ */ jsx("span", { className: `text-lg leading-[1.2em]`, children: feature.name })
-        ] }),
-        /* @__PURE__ */ jsx("div", { className: ` mt-[5px] text-black tracking-normal leading-snug`, children: feature.user_description || feature.description })
-      ] }, index2);
-    }) })
-  ] });
-};
-const ShortDescription = ({ listing }) => {
-  return /* @__PURE__ */ jsxs("div", { className: `mt-4`, children: [
-    /* @__PURE__ */ jsx(ComponentTitle, { title: "Intro" }),
-    /* @__PURE__ */ jsx("div", { className: ` text-[14px] flex flex-col gap-y-4 whitespace-pre-wrap `, children: listing.short_description })
-  ] });
-};
-const SingleStarRating = ({ rating = 3.5, maxStars = 5 }) => {
-  const stars = [];
-  for (let i = 1; i <= maxStars; i++) {
-    if (i <= rating) {
-      stars.push(
-        /* @__PURE__ */ jsx("span", { className: "text-yellow-500 text-xl", children: /* @__PURE__ */ jsx(BsStarFill, {}) }, i)
-      );
-    } else {
-      stars.push(
-        /* @__PURE__ */ jsx("span", { className: "text-yellow-500 text-xl", children: /* @__PURE__ */ jsx(BsStar, {}) }, i)
-      );
-    }
-  }
-  return /* @__PURE__ */ jsxs("div", { className: " flex w-full place-items-center gap-2 mt-0", children: [
-    /* @__PURE__ */ jsx("div", { className: `flex  gap-x-[3px] -mt-[2px]`, children: stars }),
-    /* @__PURE__ */ jsx("div", { className: `text-gray-400`, children: /* @__PURE__ */ jsx(BiSolidRightArrow, { className: `text-[15px] text-yellow-400` }) }),
-    /* @__PURE__ */ jsxs("div", { className: ` text-xl`, children: [
-      "Rating: ",
-      Number(rating)
-    ] })
-  ] });
-};
-const BusinessRatings = ({ listing }) => {
-  const [reviews, setReviews] = useState([]);
-  const [ratingsRevews, setRatingsReviews] = useState({});
-  useEffect(() => {
-    const getReviews = async (guid) => {
-      if (guid) {
-        await getBusinessRatings(guid).then((data) => {
-          setReviews(data);
-        });
-      }
-    };
-    const getRatingsReviewsData = async (guid) => {
-      if (guid) {
-        await getRatingsReviews(guid).then((data) => {
-          setRatingsReviews(data);
-        });
-      }
-    };
-    if (listing.gid) {
-      getReviews(listing.gid);
-      getRatingsReviewsData(listing.gid);
-    }
-  }, [listing]);
-  return /* @__PURE__ */ jsxs("div", { className: `mt-12`, children: [
-    /* @__PURE__ */ jsx(ComponentTitle, { title: "Reviews" }),
-    /* @__PURE__ */ jsxs("div", { className: `-mt-1 text-[14px] flex flex-col -gap-y-1 font-light`, children: [
-      /* @__PURE__ */ jsx("div", { className: `font-bold text-lg`, children: "Overall Rating:" }),
-      ratingsRevews && /* @__PURE__ */ jsx(SingleStarRating, { rating: ratingsRevews == null ? void 0 : ratingsRevews.rating_average })
-    ] }),
-    /* @__PURE__ */ jsx("hr", { className: `mt-3` }),
-    /* @__PURE__ */ jsx("div", { className: `flex flex-col gap-y-4 divide-y-[1px]`, children: reviews !== null && (reviews == null ? void 0 : reviews.map((review, index2) => {
-      return /* @__PURE__ */ jsxs("div", { className: `pt-7 pb-4`, children: [
-        /* @__PURE__ */ jsxs("div", { className: `flex place-items-start gap-2`, children: [
-          /* @__PURE__ */ jsx("div", { className: `w-[30px] h-[30px] rounded-full
-                                        bg-black overflow-hidden`, children: /* @__PURE__ */ jsx("img", { src: config.IMG_BASE_URL + (review == null ? void 0 : review.image_url), alt: "" }) }),
-          /* @__PURE__ */ jsxs("div", { className: `flex flex-col -space-y-1.5`, children: [
-            /* @__PURE__ */ jsx("div", { className: `text-lg font-bold`, children: review.fullname }),
-            (review == null ? void 0 : review.city_name) !== null && (review == null ? void 0 : review.state_name) && /* @__PURE__ */ jsx("div", { className: `text-[11px]`, children: `${review == null ? void 0 : review.city_name}, ${review == null ? void 0 : review.state_name}` }),
-            (review == null ? void 0 : review.country_name) !== null && /* @__PURE__ */ jsx("div", { className: `text-[11px]`, children: `${review == null ? void 0 : review.country_name}` })
-          ] })
-        ] }),
-        /* @__PURE__ */ jsxs("div", { className: `mt-2`, children: [
-          /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(SingleStarRating, { rating: review.rating }) }),
-          /* @__PURE__ */ jsxs("div", { className: `text-[12px] mt-1`, children: [
-            /* @__PURE__ */ jsx("b", { children: "Created at:" }),
-            /* @__PURE__ */ jsx("span", { className: `text-[12px]`, children: getLocalDate(review.created_at) })
-          ] }),
-          /* @__PURE__ */ jsxs("div", { className: `text-[12px]`, children: [
-            /* @__PURE__ */ jsx("b", { children: "Last Edited:" }),
-            /* @__PURE__ */ jsx("span", { className: `text-[12px]`, children: getLocalDate(review.updated_at) })
-          ] }),
-          /* @__PURE__ */ jsx("div", { className: `text-[14px] mt-2`, children: review.comment })
-        ] })
-      ] }, index2);
-    })) })
-  ] });
-};
-const ImageBlock = ({ images, listing }) => {
-  var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u;
-  const [items, setItems] = useState([]);
-  const slider = useSliderContext();
-  const gallery = useGallery();
-  const [placeholder, setPlaceholder] = useState("images/abstract_placeholder.jpg");
-  const [shortGallery, setShortGallery] = useState([]);
-  useEffect(() => {
-    let shortGallery2 = [...items];
-    if (images) {
-      images == null ? void 0 : images.map((image, index2) => {
-        if (index2 + 1 < 12) {
-          shortGallery2.push(image);
-        }
-      });
-      setShortGallery(shortGallery2);
-    }
-  }, [images]);
-  const showCarousel = (index2) => {
-    if (index2 < images.length) {
-      slider.setDialog(true);
-      slider.setSelectedSlide(index2 + 1);
-      slider.setGallery(images);
-      slider.setListing(listing);
-    }
-  };
-  const showGallery = (index2) => {
-    gallery.setShow(true);
-    gallery.setGallery(images);
-    gallery.setListing(listing);
-  };
-  return /* @__PURE__ */ jsxs("div", { className: "w-full h-auto mb-[32px] flex flex-col gap-2", children: [
-    /* @__PURE__ */ jsxs("div", { className: `h-[350px]
-                grid grid-cols-12 gap-[7px]`, children: [
-      /* @__PURE__ */ jsx(
-        "div",
-        {
-          className: `col-span-7 bg-black
-                    row-span-2 rounded-xl overflow-hidden
-                    relative cursor-pointer`,
-          onMouseDown: (e) => showCarousel(0),
-          children: /* @__PURE__ */ jsx(
-            "img",
-            {
-              src: ((_a = images[0]) == null ? void 0 : _a.image_url) !== void 0 && ((_b = images[0]) == null ? void 0 : _b.image_url) !== null ? config.IMG_BASE_URL + ((_c = images[0]) == null ? void 0 : _c.image_url) : placeholder,
-              alt: "",
-              className: `object-cover h-full w-full`
-            }
-          )
-        }
-      ),
-      /* @__PURE__ */ jsx(
-        "div",
-        {
-          className: `col-span-5 bg-black
-                    rounded-xl overflow-hidden h-full
-                    relative cursor-pointer`,
-          onMouseDown: (e) => showCarousel(1),
-          children: /* @__PURE__ */ jsx(
-            "img",
-            {
-              src: ((_d = images[1]) == null ? void 0 : _d.image_url) !== void 0 && ((_e = images[1]) == null ? void 0 : _e.image_url) !== null ? config.IMG_BASE_URL + ((_f = images[1]) == null ? void 0 : _f.image_url) : placeholder,
-              alt: "",
-              className: `object-cover h-full w-full`
-            }
-          )
-        }
-      ),
-      /* @__PURE__ */ jsx(
-        "div",
-        {
-          className: `col-span-5 bg-black
-                    rounded-xl overflow-hidden h-full
-                    relative cursor-pointer`,
-          onMouseDown: (e) => showCarousel(2),
-          children: /* @__PURE__ */ jsx(
-            "img",
-            {
-              src: ((_g = images[2]) == null ? void 0 : _g.image_url) !== void 0 && ((_h = images[2]) == null ? void 0 : _h.image_url) !== null ? config.IMG_BASE_URL + ((_i = images[2]) == null ? void 0 : _i.image_url) : placeholder,
-              alt: "",
-              className: `object-cover h-full w-full`
-            }
-          )
-        }
-      )
-    ] }),
-    /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-5 gap-[7px] mt-[2px]`, children: [
-      /* @__PURE__ */ jsx(
-        "div",
-        {
-          className: `rounded-xl overflow-hidden
-                    relative cursor-pointer h-[100px] bg-black`,
-          onMouseDown: (e) => showCarousel(3),
-          children: /* @__PURE__ */ jsx(
-            "img",
-            {
-              src: ((_j = images[3]) == null ? void 0 : _j.image_url) !== void 0 && ((_k = images[3]) == null ? void 0 : _k.image_url) !== null ? config.IMG_BASE_URL + ((_l = images[3]) == null ? void 0 : _l.image_url) : placeholder,
-              alt: "",
-              className: `object-cover h-full w-full`
-            }
-          )
-        }
-      ),
-      /* @__PURE__ */ jsx(
-        "div",
-        {
-          className: `rounded-xl overflow-hidden
-                    relative cursor-pointer h-[100px] bg-black`,
-          onMouseDown: (e) => showCarousel(4),
-          children: /* @__PURE__ */ jsx(
-            "img",
-            {
-              src: ((_m = images[4]) == null ? void 0 : _m.image_url) !== void 0 && ((_n = images[4]) == null ? void 0 : _n.image_url) !== null ? config.IMG_BASE_URL + ((_o = images[4]) == null ? void 0 : _o.image_url) : placeholder,
-              alt: "",
-              className: `object-cover h-full w-full`
-            }
-          )
-        }
-      ),
-      /* @__PURE__ */ jsx(
-        "div",
-        {
-          className: `rounded-xl overflow-hidden
-                    relative bg-black cursor-pointer h-[100px]`,
-          onMouseDown: (e) => showCarousel(5),
-          children: /* @__PURE__ */ jsx(
-            "img",
-            {
-              src: ((_p = images[5]) == null ? void 0 : _p.image_url) !== void 0 && ((_q = images[5]) == null ? void 0 : _q.image_url) !== null ? config.IMG_BASE_URL + ((_r = images[5]) == null ? void 0 : _r.image_url) : placeholder,
-              alt: "",
-              className: `object-cover h-full w-full`
-            }
-          )
-        }
-      ),
-      /* @__PURE__ */ jsx(
-        "div",
-        {
-          className: `rounded-xl overflow-hidden
-                    relative bg-black cursor-pointer h-[100px]`,
-          onMouseDown: (e) => showCarousel(6),
-          children: /* @__PURE__ */ jsx(
-            "img",
-            {
-              src: ((_s = images[6]) == null ? void 0 : _s.image_url) !== void 0 && ((_t = images[6]) == null ? void 0 : _t.image_url) !== null ? config.IMG_BASE_URL + ((_u = images[6]) == null ? void 0 : _u.image_url) : placeholder,
-              alt: "",
-              className: `object-cover h-full w-full`
-            }
-          )
-        }
-      ),
-      /* @__PURE__ */ jsxs(
-        "div",
-        {
-          className: `rounded-xl overflow-hidden
-                    relative bg-black text-white cursor-pointer
-                    flex place-content-center place-items-center h-[100px]
-                    bg-cover`,
-          onMouseDown: (e) => showGallery(),
-          style: { backgroundImage: `url("/images/abstract_placeholder.jpg")` },
-          children: [
-            /* @__PURE__ */ jsx("div", { className: ` absolute top-0 left-0 right-0 bottom-0 bg-black/20` }),
-            (images == null ? void 0 : images.length) > 7 ? `+${images.length - 7}` : "View all"
-          ]
-        }
-      )
-    ] })
-  ] });
-};
-const ListingCarousel = ({ images, listing }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const slideStep = useRef(0);
-  useRef(0);
-  const handleTouchStart = (e) => {
-    slideStep.current = e.touches[0].clientX;
-  };
-  const handleTouchEnd = (e) => {
-    const endX = e.changedTouches[0].clientX;
-    const deltaX = slideStep.current - endX;
-    if (deltaX > 50) {
-      setCurrentSlide((i) => (i + 1) % images.length);
-    } else if (deltaX < -50) {
-      setCurrentSlide((i) => (i - 1 + images.length) % images.length);
-    }
-  };
-  const [slides, setSlides] = useState(null);
-  let timeoutId = useRef(null);
-  const [items, setItems] = useState([]);
-  const slider = useSliderContext();
-  useGallery();
-  const [shortGallery, setShortGallery] = useState([]);
-  useEffect(() => {
-    let shortGallery2 = [...items];
-    if (images) {
-      images.map((image, index2) => {
-        if (index2 + 1 < 12) {
-          shortGallery2.push(image);
-        }
-      });
-      setShortGallery(shortGallery2);
-    }
-  }, [images]);
-  const showCarousel = (index2) => {
-    if (index2 < (images == null ? void 0 : images.length)) {
-      slider.setDialog(true);
-      slider.setSelectedSlide(index2 + 1);
-      slider.setGallery(images);
-      slider.setListing(listing);
-    }
-  };
-  useEffect(() => {
-    if (images) {
-      setSlides(images);
-    }
-  }, [images]);
-  const prev = () => {
-    setCurrentSlide((currentSlide2) => {
-      return currentSlide2 === 0 ? slides.length - 1 : currentSlide2 - 1;
-    });
-  };
-  const next = () => {
-    setCurrentSlide((currentSlide2) => {
-      return currentSlide2 === slides.length - 1 ? 0 : currentSlide2 + 1;
-    });
-  };
-  const handleNext = async () => {
-    if (timeoutId.current) {
-      clearTimeout(timeoutId.current);
-    }
-    next();
-    timeoutId.current = setTimeout(() => {
-    }, 15e3);
-  };
-  const handlePrev = async () => {
-    if (timeoutId.current) {
-      clearTimeout(timeoutId.current);
-    }
-    prev();
-    timeoutId.current = setTimeout(() => {
-    }, 15e3);
-  };
-  useEffect(() => {
-  }, [slides]);
-  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs("div", { className: `relative`, children: [
-    /* @__PURE__ */ jsx("div", { className: ` w-full h-[300px] md:h-[500px] flex 
-          overflow-hidden z-0
-          `, children: slides == null ? void 0 : slides.map((slide, index2) => {
-      return /* @__PURE__ */ jsx(
-        "img",
-        {
-          onTouchStart: handleTouchStart,
-          onTouchEnd: handleTouchEnd,
-          onMouseDown: (e) => showCarousel(index2),
-          src: (config == null ? void 0 : config.IMG_BASE_URL) + (slide == null ? void 0 : slide.image_url),
-          alt: "",
-          style: { transform: `translateX(-${currentSlide * 100}%)` },
-          className: `object-cover w-full h-full 
-                      block flex-shrink-0 flex-grow-0 transition-transform
-                      ease-in-out duration-1000 cursor-pointer`
-        },
-        index2
-      );
-    }) }),
-    /* @__PURE__ */ jsxs("div", { className: `z-[300]`, children: [
-      /* @__PURE__ */ jsx("button", { onMouseDown: handlePrev, className: `block absolute top-0 bottom-0 
-                                                  z-[300] p-[1rem] cursor-pointer left-0 group h-full 
-                                                        transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full 
-            place-content-center place-items-center group-hover:bg-white/30
-            z-[300] transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronLeft, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
-      /* @__PURE__ */ jsx("button", { onMouseDown: handleNext, className: `block absolute top-0 bottom-0 
-                                                        z-[300]    p-[1rem] cursor-pointer right-0 group 
-                                                             transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full 
-            flex place-content-center place-items-center group-hover:bg-white/30
-            z-[300]   transition duration-500 ease-in-out
-            `, children: /* @__PURE__ */ jsx(BiChevronRight, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) })
-    ] })
-  ] }) });
-};
-const StringToListMaker = ({ phrasesString, useGrid }) => {
-  const [phrasesList, setPhrasesList] = useState([]);
-  useEffect(() => {
-    const convertToList = (phrasesString2) => {
-      const phraseList = phrasesString2 == null ? void 0 : phrasesString2.split(",").map((item) => item.trim());
-      setPhrasesList(phraseList);
-    };
-    if (phrasesString !== null && phrasesString !== "") {
-      convertToList(phrasesString);
-    }
-  }, [phrasesString]);
-  return /* @__PURE__ */ jsx(Fragment, { children: useGrid === true ? /* @__PURE__ */ jsx("div", { className: `grid grid-cols-2 gap-y-5 w-full`, children: phrasesList == null ? void 0 : phrasesList.map((phrase, index2) => {
-    return /* @__PURE__ */ jsxs("div", { className: `flex place-items-center gap-3`, children: [
-      /* @__PURE__ */ jsx("span", { children: /* @__PURE__ */ jsx(BsBagCheckFill, {}) }),
-      /* @__PURE__ */ jsx("span", { children: phrase })
-    ] }, index2);
-  }) }) : /* @__PURE__ */ jsx("div", { className: `flex gap-3 flex-wrap`, children: phrasesList == null ? void 0 : phrasesList.map((phrase, index2) => {
-    return /* @__PURE__ */ jsx("span", { className: `bg-blue-50 px-2 border py-1 border-gray-300 hover:shadow-lg cursor-move
-                        rounded-md shadow-none shadow-gray-500`, children: phrase }, index2);
-  }) }) });
-};
-const BusinessPhrases = ({ listing }) => {
-  return /* @__PURE__ */ jsxs("div", { className: "mt-12", children: [
-    /* @__PURE__ */ jsx(ComponentTitle, { title: "Business Phrases" }),
-    /* @__PURE__ */ jsx("div", { className: `flex gap-3 flex-wrap`, children: (listing == null ? void 0 : listing.business_phrases) && /* @__PURE__ */ jsx(StringToListMaker, { phrasesString: listing == null ? void 0 : listing.business_phrases }) })
-  ] });
-};
-const Services = ({ listing }) => {
-  const [serviceList, setServiceList] = useState([]);
-  useEffect(() => {
-    const convertToList = (phrases) => {
-      if (phrases !== null && phrases !== "") {
-        const serviceList2 = phrases == null ? void 0 : phrases.split(",").map((item) => item.trim());
-        setServiceList(serviceList2);
-      }
-    };
-    if (listing !== null) {
-      convertToList(listing == null ? void 0 : listing.services);
-    }
-  }, [listing]);
-  return /* @__PURE__ */ jsxs("div", { className: "mt-12", children: [
-    /* @__PURE__ */ jsx(ComponentTitle, { title: "Services" }),
-    /* @__PURE__ */ jsx("div", { className: `flex gap-3 flex-wrap`, children: (listing == null ? void 0 : listing.services) && /* @__PURE__ */ jsx(StringToListMaker, { useGrid: true, phrasesString: listing == null ? void 0 : listing.services }) })
-  ] });
-};
-const SocialMedia$1 = ({ listing }) => {
-  const [img, setImg] = useState("");
-  const [social, setSocial] = useState(null);
-  function getIcon(media) {
-    let icon = null;
-    switch (media == null ? void 0 : media.media_id) {
-      case "facebook":
-        icon = /* @__PURE__ */ jsx(FaFacebookSquare, {});
-        break;
-      case "twitterx":
-        icon = /* @__PURE__ */ jsx(BsTwitterX, {});
-        break;
-      case "linkedin":
-        icon = /* @__PURE__ */ jsx(BsLinkedin, {});
-        break;
-      case "instagram":
-        icon = /* @__PURE__ */ jsx(BsInstagram, {});
-        break;
-      case "pinterest":
-        icon = /* @__PURE__ */ jsx(FaPinterestSquare, {});
-        break;
-      case "youtube":
-        icon = /* @__PURE__ */ jsx(FaYoutubeSquare, {});
-        break;
-      case "vimeo":
-        icon = /* @__PURE__ */ jsx(FaVimeoSquare, {});
-        break;
-      case "tiktok":
-        icon = /* @__PURE__ */ jsx(FaTiktok, {});
-        break;
-    }
-    return icon;
-  }
-  function isValidUrl(string) {
-    try {
-      new URL(string);
-      return true;
-    } catch (err) {
-      return false;
-    }
-  }
-  useEffect(() => {
-    const getSocialMedia = async (listing2) => {
-      const socials2 = [];
-      const socialMedia = await getSocialMediaByBusinessGuid(listing2 == null ? void 0 : listing2.gid);
-      socialMedia == null ? void 0 : socialMedia.map((media, index2) => {
-        const handle = media == null ? void 0 : media.user_description;
-        const isValidURL = isValidUrl(handle);
-        let link = "";
-        if (isValidURL) {
-          link = handle;
-        } else {
-          link = `${media == null ? void 0 : media.base_url}${media == null ? void 0 : media.user_description}`;
-        }
-        socials2.push({
-          media: media == null ? void 0 : media.name,
-          icon: getIcon(media),
-          name: media == null ? void 0 : media.name,
-          link
-        });
-      });
-      if (listing2 == null ? void 0 : listing2.website) {
-        socials2.push({
-          media: listing2 == null ? void 0 : listing2.website,
-          icon: /* @__PURE__ */ jsx(CgWebsite, {}),
-          name: "Website",
-          link: `${listing2 == null ? void 0 : listing2.website}`
-        });
-      }
-      if (listing2 == null ? void 0 : listing2.email_address) {
-        socials2.push({
-          media: listing2 == null ? void 0 : listing2.email_address,
-          icon: /* @__PURE__ */ jsx(MdEmail, {}),
-          name: "Email Address",
-          link: `mailto:${listing2 == null ? void 0 : listing2.email_address}`
-        });
-      }
-      if (listing2 == null ? void 0 : listing2.phone) {
-        socials2.push({
-          media: listing2 == null ? void 0 : listing2.phone,
-          icon: /* @__PURE__ */ jsx(BsPhone, {}),
-          name: "Phone",
-          link: `tel:${listing2 == null ? void 0 : listing2.phone}`
-        });
-      }
-      setSocial(socials2);
-    };
-    if (listing !== null) {
-      getSocialMedia(listing);
-    }
-  }, [listing]);
-  return /* @__PURE__ */ jsxs("div", { className: "mt-12", children: [
-    /* @__PURE__ */ jsx(ComponentTitle, { title: "Social Media" }),
-    /* @__PURE__ */ jsx("div", { className: `flex flex-col gap-y-5 text-[14px] mt-4 whitespace-pre-wrap`, children: /* @__PURE__ */ jsx("div", { className: `flex gap-3 flex-wrap`, children: social !== null && (social == null ? void 0 : social.map((socialMedia, index2) => {
-      return /* @__PURE__ */ jsx(Link, { to: socialMedia == null ? void 0 : socialMedia.link, children: /* @__PURE__ */ jsxs(
-        "div",
-        {
-          className: `border px-[8px] py-[2px] 
-                                    cursor-pointer flex place-items-center rounded-md
-                                    gap-1 border-gray-400 bg-blue-50 hover:bg-blue-50
-                                    text-black hover:text-black
-                                    hover:shadow-md`,
-          children: [
-            /* @__PURE__ */ jsx("span", { className: `text-[12px]`, children: socialMedia == null ? void 0 : socialMedia.icon }),
-            socialMedia == null ? void 0 : socialMedia.name
-          ]
-        },
-        index2
-      ) }, index2);
-    })) }) })
-  ] });
-};
-const RatingDisplay = ({ data }) => {
-  var _a;
-  const [ratingText, setRatingText] = useState("");
-  const [hasDecimalNumber, setHasDecimalNumber] = useState(false);
-  const hasDecimal = (value) => {
-    const strValue = value.toFixed(1).replace(/\.0$/, "");
-    const hasDecimal2 = strValue.includes(".");
-    return hasDecimal2;
-  };
-  useEffect(() => {
-    if (data) {
-      const hasDec = hasDecimal(Number(data == null ? void 0 : data.rating));
-      setHasDecimalNumber(hasDec);
-    }
-  }, [data]);
-  useEffect(() => {
-    const getRatingVal = (ratingVal) => {
-      if (ratingVal > 4.5) {
-        setRatingText("Excellent");
-      } else if (ratingVal >= 4 && ratingVal < 4.5) {
-        setRatingText("Superb");
-      } else if (ratingVal > 3.5 && ratingVal < 4) {
-        setRatingText("Very Good");
-      } else if (ratingVal > 2 && ratingVal <= 3.5) {
-        setRatingText("Good");
-      } else if (ratingVal > 1 && ratingVal < 2) {
-        setRatingText("Poor");
-      } else {
-        setRatingText("Bad");
-      }
-    };
-    if ((data == null ? void 0 : data.rating) !== null) {
-      getRatingVal(Number(data == null ? void 0 : data.rating));
-    } else {
-      getRatingVal(0);
-    }
-  }, [data]);
-  return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsxs("div", { className: `bg-blue-100 w-full px-3 py-3 border border-b-0 rounded-t-md grid grid-cols-2`, children: [
-    /* @__PURE__ */ jsxs("div", { className: `block`, children: [
-      /* @__PURE__ */ jsx("div", { className: `text-[16px] font-semibold`, children: "Category" }),
-      /* @__PURE__ */ jsx("div", { className: `text-sm capitalize line-clamp-1`, children: (_a = searchCategories((data == null ? void 0 : data.category) || "")) == null ? void 0 : _a.name })
-    ] }),
-    /* @__PURE__ */ jsxs("div", { className: `flex place-content-between gap-x-1.5`, children: [
-      /* @__PURE__ */ jsxs("div", { className: `text-right w-full flex flex-col place-content-center`, children: [
-        /* @__PURE__ */ jsx("div", { className: `text-base font-semibold`, children: (data == null ? void 0 : data.ratingCount) === 0 ? "No reviews yet" : ratingText }),
-        /* @__PURE__ */ jsxs("div", { className: `text-sm`, children: [
-          formatNumber(Number(data == null ? void 0 : data.ratingCount)),
-          " review",
-          Number(data == null ? void 0 : data.ratingCount) > 1 ? "s" : ""
-        ] })
-      ] }),
-      /* @__PURE__ */ jsx("div", { className: ``, children: /* @__PURE__ */ jsx("div", { className: `bg-blue-950 h-[40px] w-[40px] rounded-md text-white flex place-items-center place-content-center ${hasDecimalNumber ? "text-[26px]" : "text-[36px]"}`, children: formatNumber(Number(data == null ? void 0 : data.rating)) }) })
-    ] })
-  ] }) });
-};
-const ClaimBusiness = ({ listing }) => {
-  const [ownerRole, setOwnerRole] = useState("user");
-  useEffect(() => {
-    const getOwnerRole = async (owner) => {
-      await getUserProfile(owner).then((data) => {
-        let user = data;
-        setOwnerRole(user.role);
-      });
-    };
-    if (listing == null ? void 0 : listing.owner) {
-      getOwnerRole(listing == null ? void 0 : listing.owner);
-    }
-  }, [listing]);
-  return /* @__PURE__ */ jsx(Fragment, { children: ownerRole === "admin" && /* @__PURE__ */ jsx("div", { className: ` md:mt-0 `, children: /* @__PURE__ */ jsxs("div", { className: `px-3  border border-t-0  rounded-b-xl shadow-lg rounded-t-none  underline-offset-2  bg-blue-100 mx-[0px] md:mx-[0px] mb-[40px] md:mb-[40px] divide-y-1 divide-gray-600`, children: [
-    /* @__PURE__ */ jsx("a", { href: "/web/contact", children: /* @__PURE__ */ jsx("div", { className: `text-[15px] text-center  py-[10px] `, children: "Is this your business? Claim it for free!" }) }),
-    /* @__PURE__ */ jsx("div", { className: `border-b-[1px] border-gray-50/20` }),
-    /* @__PURE__ */ jsx("a", { href: "/web/contact", children: /* @__PURE__ */ jsx("div", { className: `text-[12px] text-center underline py-[10px]`, children: "Request removal." }) })
-  ] }) }) });
-};
-const LocationWithHours = ({ listing, operatingHoursStatus }) => {
-  const [dense, setDense] = React.useState(true);
-  const [secondary, setSecondary] = React.useState(false);
-  const [businessGuid, setBusinessGuid] = useState("");
-  const [userGuid, setUserGuid] = useState("");
-  const [operatingHours, setOperatingHours] = useState(void 0);
-  const [opHours, setOpHours] = useState(null);
-  const [openStatus, setopenStatus] = useState("");
-  const [address, setAddress] = useState("");
-  const [addressLink, setAddressLink] = useState("");
-  const [opHoursStatus, setOpHoursStatus] = useState(void 0);
-  useEffect(() => {
-    if (listing) {
-      setBusinessGuid(listing == null ? void 0 : listing.gid);
-      setUserGuid(listing == null ? void 0 : listing.owner);
-    }
-  }, [listing]);
-  const constructDailyHour2 = (start, end) => {
-    if (start === "Closed" || end == "Closed") {
-      return "Closed";
-    } else {
-      return `${start} - ${end}`;
-    }
-  };
-  const constructHours = (operatingHours2) => {
-    const opHours2 = [];
-    setopenStatus(operatingHours2 == null ? void 0 : operatingHours2.open_status);
-    opHours2.push({
-      day: "Mon",
-      hours: constructDailyHour2(operatingHours2.monday_from, operatingHours2.monday_to)
-    });
-    opHours2.push({
-      day: "Tue",
-      hours: constructDailyHour2(operatingHours2.tuesday_from, operatingHours2.tuesday_to)
-    });
-    opHours2.push({
-      day: "Wed",
-      hours: constructDailyHour2(operatingHours2.wednesday_from, operatingHours2.wednesday_to)
-    });
-    opHours2.push({
-      day: "Thu",
-      hours: constructDailyHour2(operatingHours2.thursday_from, operatingHours2.thursday_to)
-    });
-    opHours2.push({
-      day: "Fri",
-      hours: constructDailyHour2(operatingHours2.friday_from, operatingHours2.friday_to)
-    });
-    opHours2.push({
-      day: "Sat",
-      hours: constructDailyHour2(operatingHours2.saturday_from, operatingHours2.saturday_to)
-    });
-    opHours2.push({
-      day: "Sun",
-      hours: constructDailyHour2(operatingHours2.sunday_from, operatingHours2.sunday_to)
-    });
-    setOpHours(opHours2);
-  };
-  useEffect(() => {
-    const getOpHours = async (businessGuid2, userGuid2) => {
-      const operatingHours2 = await getOperatingHours(businessGuid2, userGuid2);
-      return operatingHours2;
-    };
-    if (businessGuid && userGuid) {
-      getOpHours(businessGuid, userGuid).then((data) => {
-        constructHours(data);
-      });
-    }
-  }, [businessGuid, userGuid]);
-  useEffect(() => {
-    let getListingAddress = async (listing2) => {
-      let address2 = listing2 == null ? void 0 : listing2.title;
-      address2 += (listing2 == null ? void 0 : listing2.address_one) ? ", " + (listing2 == null ? void 0 : listing2.address_one) : "";
-      address2 += (listing2 == null ? void 0 : listing2.address_two) ? ", " + (listing2 == null ? void 0 : listing2.address_two) : "";
-      address2 += (listing2 == null ? void 0 : listing2.city_name) ? ", " + (listing2 == null ? void 0 : listing2.city_name) : "";
-      address2 += (listing2 == null ? void 0 : listing2.state_name) ? ", " + (listing2 == null ? void 0 : listing2.state_name) : "";
-      address2 += (listing2 == null ? void 0 : listing2.zipcode) ? ", " + (listing2 == null ? void 0 : listing2.zipcode) : "";
-      address2 += (listing2 == null ? void 0 : listing2.country_code) ? ", " + (listing2 == null ? void 0 : listing2.country_code) : "";
-      let addressLink2 = `https://www.google.com/maps?q=${address2}&t=&z=15&ie=UTF8&iwloc=B&output=`;
-      setAddress(address2);
-      setAddressLink(addressLink2);
-    };
-    if (listing !== null) {
-      getListingAddress(listing);
-    }
-  }, [listing]);
-  useEffect(() => {
-    if (operatingHoursStatus !== void 0) {
-      setOpHoursStatus(operatingHoursStatus);
-    }
-  }, [operatingHoursStatus]);
-  return /* @__PURE__ */ jsxs("div", { className: "mt-12", children: [
-    /* @__PURE__ */ jsx(ComponentTitle, { title: "Location and Hours" }),
-    /* @__PURE__ */ jsx("div", { className: " ", children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-1 md:grid-cols-12 gap-5
-                    `, children: [
-      /* @__PURE__ */ jsxs("div", { className: "col-span-6", children: [
-        /* @__PURE__ */ jsx("div", { className: " relative w-full h-[150px] overflow-hidden rounded-lg", children: /* @__PURE__ */ jsx(
-          "img",
-          {
-            className: " object-cover w-full h-full",
-            src: "/images/mapicon.jpeg",
-            alt: ""
-          }
-        ) }),
-        /* @__PURE__ */ jsxs("div", { className: " grid grid-cols-2 gap-6 mt-3", children: [
-          /* @__PURE__ */ jsx("div", { children: address }),
-          /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("a", { href: `${addressLink}`, target: "_blank", children: /* @__PURE__ */ jsx("button", { className: "w-[100%] border-[1px] border-blue-300 rounded-md", children: /* @__PURE__ */ jsx("div", { className: "text-[14px]  font-sans font-bold text-bold  py-2 tracking-tight ", children: "View in Map" }) }) }) })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsx("div", { className: `col-span-6`, children: /* @__PURE__ */ jsxs("div", { className: ``, children: [
-        openStatus === "no_hours" || openStatus === null && /* @__PURE__ */ jsx("div", { children: "No hours selected." }),
-        openStatus === "always_open" && /* @__PURE__ */ jsx("div", { children: "Business is always open" }),
-        openStatus === "permanently_closed" && /* @__PURE__ */ jsx("div", { children: "Permanently Closed" }),
-        openStatus === "temporarily_closed" && /* @__PURE__ */ jsx("div", { children: "Temporarily Closed" }),
-        opHours !== null && openStatus === "selected_hours" && /* @__PURE__ */ jsx("ul", { className: `w-full divide-y-[1px] md:divide-none`, children: opHours == null ? void 0 : opHours.map((item, index2) => {
-          return /* @__PURE__ */ jsx(
-            "li",
-            {
-              className: `w-full ${(item == null ? void 0 : item.hours.includes(null)) && "hidden"} `,
-              children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 py-1.5 
-                                                        `, children: [
-                /* @__PURE__ */ jsx("div", { className: ` col-span-2 flex flex-col
-                                                        place-items-start`, children: item == null ? void 0 : item.day }),
-                /* @__PURE__ */ jsxs(
-                  "div",
-                  {
-                    className: `flex flex-row col-span-10
-                                                    place-items-end place-content-end md:place-content-start gap-3 `,
-                    children: [
-                      /* @__PURE__ */ jsx("span", { className: `${(item == null ? void 0 : item.hours.includes("Closed")) && "hidden"}`, children: item == null ? void 0 : item.hours }),
-                      /* @__PURE__ */ jsx("span", { className: `${opHoursStatus.today === (item == null ? void 0 : item.day) ? "mr-[10px]" : ""}`, children: (item == null ? void 0 : item.hours.includes("Closed")) ? "Closed" : opHoursStatus.today === (item == null ? void 0 : item.day) && (opHoursStatus.isOpen ? "Open Now" : "Closed Now") })
-                    ]
-                  }
-                )
-              ] })
-            },
-            index2
-          );
-        }) })
-      ] }) })
-    ] }) })
-  ] });
-};
 const getCountriesWithTimezone = async (countryCode) => {
   const endpoint = config.BASE_URL + "/api/util/country_locale";
   try {
@@ -5575,586 +4519,6 @@ const ReportTime = async (listing) => {
   const locationDetails = getLocationAndBusinessStatus(listing);
   return locationDetails;
 };
-function RatingBoxSquare({ rating }) {
-  return /* @__PURE__ */ jsx("div", { className: "flex gap-x-[3px]", children: Array.from({ length: 5 }).map((_, i) => {
-    const fillPercent = Math.max(0, Math.min(1, rating - i)) * 100;
-    return /* @__PURE__ */ jsxs(
-      "div",
-      {
-        className: `relative w-[20px] h-[20px] ${rating > 0 ? "bg-blue-500" : "bg-gray-200"} rounded 
-                            overflow-hidden flex place-items-center
-                            place-content-center`,
-        children: [
-          /* @__PURE__ */ jsx(
-            "div",
-            {
-              className: `absolute inset-0 bg-green-400  z-[0]`,
-              style: { width: `${fillPercent}%` }
-            }
-          ),
-          /* @__PURE__ */ jsx(BiSolidStar, { className: `relative z-[0] w-[14px] h-[14px] ${rating > 0 ? "text-black" : "text-red-500"}`, fill: "currentColor" })
-        ]
-      },
-      i
-    );
-  }) });
-}
-const videos = [
-  {
-    url: "https://youtu.be/fxbCHn6gE3U?si=GneGFZachbQdDEIO",
-    title: "The surprising habits of original thinkers"
-  },
-  {
-    url: "https://youtu.be/eHJnEHyyN1Y?si=aHRmeH67S227uGtr",
-    title: "6 Tips on Being a Successful Entrepreneur"
-  },
-  {
-    url: "https://youtu.be/1tRTWwZ5DIc?si=j6fNumMdLx5M16_H",
-    title: "The INSANE Rise of NVIDIA: From Bankruptcy to $4 Trillion?"
-  },
-  {
-    url: "https://www.youtube.com/watch?v=P6FORpg0KVo",
-    title: "How to Make Learning as Addictive as Social Media"
-  },
-  {
-    url: "https://www.youtube.com/watch?v=JpYA7WXkHyI",
-    title: "How to be a creative thinker"
-  },
-  {
-    url: "https://www.youtube.com/watch?v=JpYA7WXkHyI",
-    title: "How to be a creative thinker"
-  },
-  {
-    url: "https://www.youtube.com/watch?v=JpYA7WXkHyI",
-    title: "How to be a creative thinker"
-  },
-  {
-    url: "https://www.youtube.com/watch?v=JpYA7WXkHyI",
-    title: "How to be a creative thinker"
-  }
-];
-const Videos = ({ videoGallery, listing }) => {
-  const [outVideo, setOutVideo] = useState(null);
-  const [rawVideos, setRawVideos] = useState(videos);
-  const [open, setOpen] = useState(false);
-  const [currentVideo, setCurrentVideo] = useState(null);
-  const slider = useVideoSliderContext();
-  useEffect(() => {
-    const remapVideos = async (videoGallery2) => {
-      let remappedVideo = [];
-      videoGallery2 == null ? void 0 : videoGallery2.map((video, index2) => {
-        const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-        const match = video.video_url.match(regex);
-        let videoId = match ? match[1] : null;
-        let thumbnail = `https://img.youtube.com/vi/${videoId}/0.jpg`;
-        let videoObject = {
-          videoId,
-          videoUrl: video.video_url,
-          videoTitle: video.video_title,
-          videoThumbnail: thumbnail,
-          videoGuid: video.video_guid
-        };
-        remappedVideo.push(videoObject);
-      });
-      setOutVideo(remappedVideo);
-    };
-    remapVideos(videoGallery);
-  }, [videoGallery]);
-  const handleOpen = (video) => {
-    setCurrentVideo(video);
-    setOpen(true);
-  };
-  const showCarousel = (index2) => {
-    slider.setDialog(true);
-    slider.setSelectedSlide(index2 + 1);
-    slider.setGallery(videoGallery);
-    slider.setListing(listing);
-  };
-  return /* @__PURE__ */ jsxs(
-    "div",
-    {
-      className: ` `,
-      id: "video",
-      children: [
-        /* @__PURE__ */ jsx(
-          ShowVideo,
-          {
-            setOpen,
-            open,
-            currentVideo
-          }
-        ),
-        /* @__PURE__ */ jsx(
-          VideoScrollerAlt,
-          {
-            outVideo,
-            handleOpen,
-            showCarousel,
-            listing
-          }
-        )
-      ]
-    }
-  );
-};
-const ShowVideo = ({ currentVideo, setOpen, open }) => {
-  const handleClose = () => {
-    const iframe = document.getElementById("yt-iframe");
-    iframe.src = iframe.src;
-    setOpen(false);
-  };
-  return /* @__PURE__ */ jsxs("div", { className: ` ${open ? "fixed" : "hidden"} z-[20010] top-[0px] left-[0px] w-full h-full bg-black/90`, children: [
-    /* @__PURE__ */ jsx(
-      "div",
-      {
-        className: `absolute bg-black w-[40px] h-[40px] z-20 rounded-full text-white flex place-items-center place-content-center mt-20 ml-5 hover:cursor-pointer`,
-        onClick: () => {
-          handleClose();
-        },
-        children: /* @__PURE__ */ jsx(GrClose, {})
-      }
-    ),
-    /* @__PURE__ */ jsx("div", { className: ` relative w-full h-full`, children: /* @__PURE__ */ jsx(
-      "iframe",
-      {
-        id: "yt-iframe",
-        src: `${open ? `https://www.youtube.com/embed/${currentVideo == null ? void 0 : currentVideo.videoId}` : ""}`,
-        className: "absolute top-0 left-0 w-full h-full",
-        allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      }
-    ) })
-  ] });
-};
-const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }) => {
-  const [openGallery, setOpenGallery] = useState(false);
-  const [slideWidth, setSlideWidth] = useState(150);
-  const [slideHeight, setSlideHeight] = useState(90);
-  const scrollRef = useRef(null);
-  const [videoBar, setVideoBar] = useState(null);
-  useVideoSliderContext();
-  const [video20, setVideo20] = useState([]);
-  const maxSlides = 6;
-  useEffect(() => {
-    if (outVideo) {
-      const video202 = outVideo.length > maxSlides ? outVideo.slice(0, maxSlides) : outVideo;
-      setVideo20(video202);
-    }
-  }, [outVideo]);
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
-    }
-  };
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
-    }
-  };
-  return /* @__PURE__ */ jsx("div", { className: `px-[10px] mt-6 mb-5`, children: /* @__PURE__ */ jsxs("div", { className: `relative w-full max-w-[1100px] mx-auto`, children: [
-    /* @__PURE__ */ jsx(
-      VideoGallery,
-      {
-        outVideo,
-        openGallery,
-        setOpenGallery,
-        handleOpen,
-        showCarousel,
-        listing
-      }
-    ),
-    /* @__PURE__ */ jsx(
-      "div",
-      {
-        ref: scrollRef,
-        className: `w-full px-0 py-0 mt-3 relative flex flex-1 overflow-x-auto bottom-scrollbar-hidden`,
-        children: /* @__PURE__ */ jsxs("div", { className: `flex gap-x-3`, id: "videobar", children: [
-          Array.isArray(video20) && Array.from({ length: maxSlides }, (_, i) => {
-            var _a, _b, _c, _d;
-            return /* @__PURE__ */ jsx("div", { children: i < maxSlides && i < (video20 == null ? void 0 : video20.length) ? /* @__PURE__ */ jsx(
-              "div",
-              {
-                className: ` w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border  rounded-none overflow-hidden hover:bg-white/50`,
-                onClick: () => showCarousel(i),
-                children: /* @__PURE__ */ jsxs(
-                  "div",
-                  {
-                    className: `relative w-full h-[${slideHeight}px]   z-[20]`,
-                    children: [
-                      /* @__PURE__ */ jsx("div", { className: `absolute top-0 left-0 w-full h-full bg-transparent  z-[300000] hover:bg-white/40`, children: /* @__PURE__ */ jsx(RiYoutubeFill, { size: 20, className: `text-white absolute top-0.5 right-1 ` }) }),
-                      /* @__PURE__ */ jsx("img", { src: (_a = video20[i]) == null ? void 0 : _a.videoThumbnail, alt: (_b = video20[i]) == null ? void 0 : _b.videoTitle, className: `object-cover w-full h-full` }),
-                      /* @__PURE__ */ jsx("div", { className: ` block w-full absolute z-[30] text-white bottom-0 px-2 py-[5px] bg-black/80 `, children: /* @__PURE__ */ jsx("div", { className: `w-full text-white bottom-0  `, children: /* @__PURE__ */ jsx("div", { className: ` text-[12px] leading-[1.2em] line-clamp-2`, children: (_c = video20[i]) == null ? void 0 : _c.videoTitle }) }) })
-                    ]
-                  }
-                )
-              },
-              (_d = video20[i]) == null ? void 0 : _d.videoGuid
-            ) : /* @__PURE__ */ jsx(
-              "div",
-              {
-                className: `w-[${slideWidth}px] h-full border rounded-none flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-gray-900 `,
-                onClick: () => {
-                  setOpenGallery(true);
-                },
-                children: /* @__PURE__ */ jsx("div", { className: `text-white/60 w-[85%] text-center rounded-md h-[75%] border border-dashed border-gray-200/50 flex place-items-center place-content-center text-[23px]`, children: /* @__PURE__ */ jsx(MdOutlineImage, {}) })
-              }
-            ) }, i);
-          }),
-          /* @__PURE__ */ jsx(
-            "div",
-            {
-              className: `w-[${slideWidth}px] h-full border border-gray-500 rounded-none flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-black`,
-              onClick: () => {
-                setOpenGallery(true);
-              },
-              children: /* @__PURE__ */ jsx("div", { className: `text-white w-1/2 text-center rounded`, children: "All Videos" })
-            }
-          )
-        ] })
-      }
-    ),
-    /* @__PURE__ */ jsx(
-      "div",
-      {
-        className: `absolute text-white top-1/2 -translate-y-1/2 left-2 w-[40px] min-w-[40px] h-[40px] bg-black/50 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded z-[50]`,
-        onClick: () => {
-          scrollLeft();
-        },
-        children: /* @__PURE__ */ jsx(FaChevronLeft, {})
-      }
-    ),
-    /* @__PURE__ */ jsx(
-      "div",
-      {
-        className: `absolute text-white top-1/2 -translate-y-1/2 right-2 w-[40px] min-w-[40px] h-[40px] bg-black/50 hover:bg-white/70 hover:text-black flex place-content-center place-items-center hover:cursor-pointer border-[1px] border-gray-400 rounded z-[50]`,
-        onClick: () => {
-          scrollRight();
-        },
-        children: /* @__PURE__ */ jsx(FaChevronRight, {})
-      }
-    )
-  ] }) });
-};
-const VideoGallery = ({
-  outVideo,
-  openGallery,
-  setOpenGallery,
-  handleOpen,
-  showCarousel,
-  listing
-}) => {
-  return /* @__PURE__ */ jsx(Fragment, { children: openGallery && /* @__PURE__ */ jsxs(
-    "div",
-    {
-      onMouseDown: (e) => setOpenGallery(false),
-      className: `flex w-screen h-screen bg-black/40 
-                        z-[20000] fixed top-0 left-0 right-0 bottom-0
-                        place-items-center place-content-center px-[15px]`,
-      children: [
-        /* @__PURE__ */ jsx(
-          "div",
-          {
-            onMouseDown: (e) => e.stopPropagation(),
-            className: `min-w-[95%] w-[95%] sm:w-[95%] md:w-[80%] h-[80%] max-h-[80%] 
-                            mx-auto bg-white rounded-lg shadow-lg shadow-black/50 
-                            space-y-6 z-[3100] overflow-hidden`,
-            children: /* @__PURE__ */ jsxs("div", { className: `w-full h-full`, children: [
-              /* @__PURE__ */ jsx("div", { className: `border-b py-3 px-3`, children: /* @__PURE__ */ jsxs("div", { className: `font-bold text-gray-700
-                                    text-xl w-[80%]  truncate`, children: [
-                "Gallery for ",
-                listing == null ? void 0 : listing.title
-              ] }) }),
-              /* @__PURE__ */ jsx("div", { className: ` 
-                                h-full overflow-y-auto pt-2 px-2 pb-2
-                                bg-white `, children: /* @__PURE__ */ jsx("div", { className: `grid grid-cols-4 md:grid-cols-6 gap-2`, children: Array.isArray(outVideo) && (outVideo == null ? void 0 : outVideo.map((video, index2) => {
-                return /* @__PURE__ */ jsxs(
-                  "div",
-                  {
-                    className: `mb-2`,
-                    onClick: () => {
-                      showCarousel(index2);
-                    },
-                    children: [
-                      /* @__PURE__ */ jsx(
-                        "div",
-                        {
-                          className: `relative hover:cursor-pointer
-                                                  h-[80px] md:h-[100px] lg:h-[120px] rounded-md bg-black
-                                                 overflow-hidden border-[5px] border-gray-200`,
-                          children: /* @__PURE__ */ jsx(
-                            "img",
-                            {
-                              className: `object-cover w-full h-full`,
-                              src: video == null ? void 0 : video.videoThumbnail,
-                              alt: ""
-                            }
-                          )
-                        }
-                      ),
-                      /* @__PURE__ */ jsx("div", { className: `mx-[2px] text-[13px] leading-[1.2em] line-clamp-2 mt-[3px]`, children: video == null ? void 0 : video.videoTitle })
-                    ]
-                  },
-                  index2
-                );
-              })) }) })
-            ] })
-          }
-        ),
-        /* @__PURE__ */ jsx(
-          "div",
-          {
-            onMouseDown: () => setOpenGallery(false),
-            className: `w-[50px] h-[50px] z-[300] bg-white
-                                flex place-content-center place-items-center
-                                rounded-full absolute left-2 top-2 cursor-pointer
-                                hover:bg-white/40 transition duration-1000 ease-in-out`,
-            children: /* @__PURE__ */ jsx(IoClose, { className: `text-[30px]` })
-          }
-        )
-      ]
-    }
-  ) });
-};
-const ProductSliderContext = createContext(null);
-function useProductSliderContext() {
-  const context = useContext(ProductSliderContext);
-  return context;
-}
-const IMG_BASE_URL = "https://pics.gasimg.com";
-const ProductSliderProvider = ({ children }) => {
-  const [dialog, setDialog] = useState(false);
-  const [selectedSlide, setSelectedSlide] = useState(null);
-  const [slides, setGallery] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [listing, setListing] = useState(null);
-  const slideStep = useRef(0);
-  useRef(0);
-  const handleTouchStart = (e) => {
-    slideStep.current = e.touches[0].clientX;
-  };
-  const handleTouchEnd = (e) => {
-    const endX = e.changedTouches[0].clientX;
-    const deltaX = slideStep.current - endX;
-    if (deltaX > 50) {
-      setCurrentSlide((i) => (i + 1) % slides.length);
-    } else if (deltaX < -50) {
-      setCurrentSlide((i) => (i - 1 + slides.length) % slides.length);
-    }
-  };
-  const handleClose = () => {
-    setDialog(false);
-  };
-  const prev = () => {
-    setCurrentSlide((currentSlide2) => {
-      return currentSlide2 === 0 ? slides.length - 1 : currentSlide2 - 1;
-    });
-  };
-  const next = () => {
-    setCurrentSlide((currentSlide2) => {
-      return currentSlide2 === slides.length - 1 ? 0 : currentSlide2 + 1;
-    });
-  };
-  useEffect(() => {
-    if (selectedSlide !== null) {
-      setCurrentSlide(selectedSlide - 1);
-    }
-  }, [selectedSlide]);
-  let vals = {
-    dialog,
-    setDialog,
-    selectedSlide,
-    setSelectedSlide,
-    slides,
-    setGallery,
-    setListing
-  };
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        handleClose();
-      }
-    };
-    if (dialog) {
-      document.addEventListener("keydown", handleKeyDown);
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [dialog]);
-  return /* @__PURE__ */ jsxs(ProductSliderContext.Provider, { value: vals, children: [
-    dialog && /* @__PURE__ */ jsx("div", { className: `flex w-screen h-screen bg-white z-[20001] 
-                fixed top-0 left-0 right-0 bottom-0 `, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-0 w-full`, children: [
-      /* @__PURE__ */ jsxs("div", { className: `col-span-12 md:col-span-9 w-full h-full relative bg-black flex`, children: [
-        /* @__PURE__ */ jsx("div", { className: ` w-full h-screen flex overflow-hidden`, children: slides && selectedSlide && slides.map((slide, index2) => {
-          return /* @__PURE__ */ jsx(
-            "img",
-            {
-              onTouchStart: handleTouchStart,
-              onTouchEnd: handleTouchEnd,
-              src: IMG_BASE_URL + slide.product_image_url,
-              alt: "",
-              style: { transform: `translateX(-${currentSlide * 100}%)` },
-              className: `object-scale-down w-full h-full 
-                                            block flex-shrink-0 flex-grow-0 transition-transform
-                                            ease-in-out duration-1000`
-            },
-            index2
-          );
-        }) }),
-        /* @__PURE__ */ jsx("button", { onMouseDown: prev, className: `block absolute top-0 bottom-0 
-                                                p-[1rem] cursor-pointer left-0 group h-full 
-                                                transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
-                                                        transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronLeft, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
-        /* @__PURE__ */ jsx("button", { onMouseDown: next, className: `block absolute top-0 bottom-0 
-                                                    p-[1rem] cursor-pointer right-0 group 
-                                                     transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
-                                                        transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronRight, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
-        /* @__PURE__ */ jsx(
-          "div",
-          {
-            onMouseDown: () => handleClose(),
-            className: `w-[50px] h-[50px] z-[300] bg-white
-                                                    flex place-content-center place-items-center
-                                                    rounded-full absolute left-2 top-2 cursor-pointer
-                                                    hover:bg-white/40 transition duration-1000 ease-in-out`,
-            children: /* @__PURE__ */ jsx(IoClose, { className: `text-[30px]` })
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxs("div", { className: `hidden md:block md:col-span-3 px-5`, children: [
-        /* @__PURE__ */ jsxs("h1", { className: " text-[22px] my-4 font-sans font-extrabold tracking-tight leading-[24px]", children: [
-          "Products for ",
-          listing && listing.title
-        ] }),
-        /* @__PURE__ */ jsxs("div", { className: " my-4 ", children: [
-          currentSlide + 1,
-          " / ",
-          slides.length
-        ] }),
-        /* @__PURE__ */ jsx("hr", {}),
-        /* @__PURE__ */ jsx("div", { className: " my-4 whitespace-pre-line", children: slides[currentSlide].product_title }),
-        slides[currentSlide].product_description && /* @__PURE__ */ jsx("div", { className: " my-4 whitespace-pre-line", children: slides[currentSlide].product_description }),
-        /* @__PURE__ */ jsx("div", { className: " mt-8 whitespace-pre-line", children: /* @__PURE__ */ jsx(
-          "a",
-          {
-            target: "_product",
-            href: slides[currentSlide].product_link,
-            className: `bg-blue-600 text-white px-12 py-4 text-center rounded-md cursor-pointer hover:shadow-lg hover:shadow-gray-300`,
-            children: "Go"
-          }
-        ) })
-      ] })
-    ] }) }),
-    children
-  ] });
-};
-const ProductGallery$1 = (productGallery) => {
-  const [showProductGallerySlider, setShowProductGallerySlider] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const productSlider = useProductSliderContext();
-  const showProductSlider = (currentSlide2) => {
-    productSlider.setDialog(true);
-    productSlider.setSelectedSlide(currentSlide2 + 1);
-    productSlider.setGallery(productGallery.products);
-    productSlider.setListing(productGallery.listing);
-  };
-  return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("div", { className: `fixed bg-black/20 w-screen h-screen top-0 left-0 z-[3000]`, children: /* @__PURE__ */ jsx(
-    "div",
-    {
-      className: ` w-full h-full flex place-content-center place-items-center`,
-      onMouseDown: (e) => productGallery.setGalleryDialog(false),
-      children: /* @__PURE__ */ jsxs(
-        "div",
-        {
-          className: `max-w-[90%] w-full mx-auto bg-white h-[80%] rounded-lg`,
-          onMouseDown: (e) => e.stopPropagation(),
-          children: [
-            /* @__PURE__ */ jsx("div", { className: ` border-b px-5 py-2`, children: /* @__PURE__ */ jsxs("div", { className: `flex place-content-between place-items-center`, children: [
-              /* @__PURE__ */ jsxs("div", { className: `text-[17px] font-semibold`, children: [
-                "Products for ",
-                productGallery.listing.title
-              ] }),
-              /* @__PURE__ */ jsx(
-                "div",
-                {
-                  className: `text-[25px] rounded-full border flex place-content-center place-items-center w-[35px] h-[35px] hover:bg-gray-100 hover:cursor-pointer`,
-                  onMouseDown: () => productGallery.setGalleryDialog(false),
-                  children: /* @__PURE__ */ jsx(IoClose, {})
-                }
-              )
-            ] }) }),
-            /* @__PURE__ */ jsx("div", { className: ` w-full h-[85%] overflow-auto`, children: /* @__PURE__ */ jsx("div", { className: `w-full h-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-5 px-5 py-5`, children: productGallery.products.map((product, index2) => {
-              return /* @__PURE__ */ jsxs(
-                "div",
-                {
-                  className: `border rounded-md p-3 block hover:shadow-md hover:cursor-pointer`,
-                  onClick: () => {
-                    showProductSlider(index2);
-                  },
-                  children: [
-                    /* @__PURE__ */ jsx("div", { className: ` w-full h-[150px] relative `, children: /* @__PURE__ */ jsx(
-                      "img",
-                      {
-                        src: config.IMG_BASE_URL + product.product_image_url,
-                        alt: "",
-                        className: ` object-cover w-full h-full`
-                      }
-                    ) }),
-                    /* @__PURE__ */ jsx("div", { className: `mt-3 text-center line-clamp-2 border-t pt-2 h-[50px] leading-[1.4em]`, children: product == null ? void 0 : product.product_title })
-                  ]
-                },
-                index2
-              );
-            }) }) })
-          ]
-        }
-      )
-    }
-  ) }) });
-};
-const Products = (products) => {
-  var _a;
-  const [galleryDaialog, setGalleryDialog] = useState(false);
-  const showGallery = () => {
-    setGalleryDialog(true);
-  };
-  return /* @__PURE__ */ jsx(ProductSliderProvider, { children: /* @__PURE__ */ jsxs("div", { className: "mt-12", children: [
-    /* @__PURE__ */ jsx(ComponentTitle, { title: "Products" }),
-    galleryDaialog && /* @__PURE__ */ jsx(
-      ProductGallery$1,
-      {
-        products: products.products,
-        setGalleryDialog,
-        listing: products.listing
-      }
-    ),
-    /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5`, children: [
-      (_a = products.products) == null ? void 0 : _a.map((product, index2) => {
-        return /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx("a", { href: product == null ? void 0 : product.product_link, target: "product", children: /* @__PURE__ */ jsxs("div", { className: `border rounded-md p-3 h-[230px] block hover:shadow-md`, children: [
-          /* @__PURE__ */ jsx("div", { className: ` w-full h-[150px] relative `, children: /* @__PURE__ */ jsx(
-            "img",
-            {
-              src: config.IMG_BASE_URL + product.product_image_url,
-              alt: "",
-              className: ` object-cover w-full h-full`
-            }
-          ) }),
-          /* @__PURE__ */ jsx("div", { className: `mt-3 text-center line-clamp-2 border-t pt-2 leading-[1.4em]`, children: product == null ? void 0 : product.product_title })
-        ] }) }) }, index2);
-      }),
-      /* @__PURE__ */ jsx(
-        "div",
-        {
-          onClick: () => showGallery(),
-          children: /* @__PURE__ */ jsxs("div", { className: `border rounded-md p-3 hover:bg-gray-50 h-[230px] flex place-items-center place-content-center flex-col bg-gray-200 cursor-pointer min-w-full`, children: [
-            /* @__PURE__ */ jsx(MdBrowseGallery, { size: 22 }),
-            /* @__PURE__ */ jsx("div", { children: "Product Gallery" })
-          ] })
-        },
-        products.products.length + 1
-      )
-    ] })
-  ] }) });
-};
 const BusinessLayout = ({
   listing,
   images,
@@ -6186,159 +4550,7 @@ const BusinessLayout = ({
       }
     }
   }, [listing]);
-  return /* @__PURE__ */ jsxs("div", { className: `mt-5`, children: [
-    /* @__PURE__ */ jsx("div", { className: `px-[15px] w-full`, children: /* @__PURE__ */ jsxs("div", { className: `max-w-[1100px] w-full mx-auto bg-white`, children: [
-      ratingsData && /* @__PURE__ */ jsxs("div", { className: `mt-4 flex gap-2 place-items-center`, children: [
-        /* @__PURE__ */ jsx(RatingBoxSquare, { rating: Number(ratingsData == null ? void 0 : ratingsData.rating_average) }),
-        /* @__PURE__ */ jsxs("div", { className: `flex place-items-center place-content-center
-                                    gap-1 text-black/60 text-[14px]`, children: [
-          /* @__PURE__ */ jsx("div", { children: formatNumber(Number(ratingsData == null ? void 0 : ratingsData.rating_average)) }),
-          /* @__PURE__ */ jsxs("div", { children: [
-            "(",
-            /* @__PURE__ */ jsxs("span", { className: "underline", children: [
-              formatNumber(ratingsData == null ? void 0 : ratingsData.rating_count),
-              " reviews"
-            ] }),
-            ")"
-          ] })
-        ] })
-      ] }),
-      listing && profileImageData && /* @__PURE__ */ jsx(
-        Header,
-        {
-          listing,
-          profileImageData,
-          operatingHoursStatus,
-          ratingsData
-        }
-      )
-    ] }) }),
-    videoGallery.length > 0 && /* @__PURE__ */ jsx(
-      Videos,
-      {
-        videoGallery,
-        listing
-      }
-    ),
-    (images == null ? void 0 : images.length) > 0 && listing && /* @__PURE__ */ jsx("div", { className: `bg-black h-fit md:hidden
-                mt-4`, children: /* @__PURE__ */ jsx(
-      ListingCarousel,
-      {
-        images,
-        listing
-      }
-    ) }),
-    /* @__PURE__ */ jsx("div", { className: ` md:pt-4 md:px-[12px]`, children: /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] w-full mx-auto bg-white`, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-0 md:gap-4 relative
-                    `, children: [
-      /* @__PURE__ */ jsxs("div", { className: ` col-span-12 lg:col-span-8`, children: [
-        /* @__PURE__ */ jsx("div", { className: `hidden md:block mt-0`, children: (images == null ? void 0 : images.length) > 0 && listing && /* @__PURE__ */ jsx(
-          ImageBlock,
-          {
-            images,
-            listing
-          }
-        ) }),
-        /* @__PURE__ */ jsxs("div", { className: ``, children: [
-          /* @__PURE__ */ jsxs("div", { className: `lg:hidden ${(images == null ? void 0 : images.length) <= 0 && "mt-5"}  md:mt-0 mb-5`, children: [
-            ratingDisplayData && /* @__PURE__ */ jsx(RatingDisplay, { data: ratingDisplayData }),
-            listing && /* @__PURE__ */ jsx(Address$1, { businessProfile: listing }),
-            listing && /* @__PURE__ */ jsx(ClaimBusiness, { listing })
-          ] }),
-          /* @__PURE__ */ jsxs("div", { className: `px-[15px] md:px-[0px]`, children: [
-            /* @__PURE__ */ jsx(ShortDescription, { listing }),
-            listing && operatingHoursStatus && /* @__PURE__ */ jsx(LocationWithHours, { listing, operatingHoursStatus }),
-            /* @__PURE__ */ jsx(Description, { listing }),
-            listing && /* @__PURE__ */ jsx(SocialMedia$1, { listing }),
-            listing && /* @__PURE__ */ jsx(BusinessFeatures, { listing }),
-            listing && /* @__PURE__ */ jsx(BusinessPhrases, { listing }),
-            listing && /* @__PURE__ */ jsx(
-              Products,
-              {
-                products,
-                listing
-              }
-            ),
-            listing && /* @__PURE__ */ jsx(Services, { listing }),
-            listing && /* @__PURE__ */ jsx(BusinessRatings, { listing })
-          ] })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsx("div", { className: `col-span-12 lg:col-span-4 hidden lg:block`, children: /* @__PURE__ */ jsxs("div", { className: ` sticky top-[100px]`, children: [
-        ratingDisplayData && /* @__PURE__ */ jsx(RatingDisplay, { data: ratingDisplayData }),
-        listing && /* @__PURE__ */ jsx(Address$1, { businessProfile: listing }),
-        listing && /* @__PURE__ */ jsx(ClaimBusiness, { listing })
-      ] }) })
-    ] }) }) })
-  ] });
-};
-const SectionTitle = ({ title, subtitle }) => {
-  return /* @__PURE__ */ jsxs("div", { className: `mb-6 border-b pb-4 -space-y-1`, children: [
-    /* @__PURE__ */ jsx("div", { className: `text-[19px] font-bold
-                `, children: title }),
-    /* @__PURE__ */ jsx("div", { className: "text-sm ", children: subtitle })
-  ] });
-};
-const Related = ({
-  title,
-  subtitle,
-  category,
-  limit
-}) => {
-  const [ti, setTi] = useState("");
-  const [st, setSt] = useState("");
-  const [listings, setListings] = useState([]);
-  const [userId, setUserId] = useState("");
-  const IMG_BASE_URL2 = "https://pics.gasimg.com";
-  useEffect(() => {
-    if (title && subtitle) {
-      setTi(title);
-      setSt(subtitle);
-    }
-  }, [title, subtitle]);
-  let getListings = async (category2, limit2) => {
-    if (limit2 && category2) {
-      let cat = await getListingByCategory(category2, limit2);
-      setListings(cat);
-    }
-  };
-  useEffect(() => {
-    if (limit && category) {
-      getListings(category, limit);
-    }
-  }, [limit, category]);
-  return /* @__PURE__ */ jsx("div", { className: `px-[15px]`, children: /* @__PURE__ */ jsx("div", { className: `max-w-[1100px] mx-auto w-full`, children: /* @__PURE__ */ jsxs("div", { className: `mt-10 border-t pt-5`, children: [
-    /* @__PURE__ */ jsx("div", { className: ` mb-[20px] `, children: /* @__PURE__ */ jsx(
-      SectionTitle,
-      {
-        title: ti,
-        subtitle: st
-      }
-    ) }),
-    /* @__PURE__ */ jsx("div", { className: `grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-4`, children: listings == null ? void 0 : listings.map((data, index2) => {
-      let userId2 = "";
-      if (data == null ? void 0 : data.username) {
-        userId2 = data == null ? void 0 : data.username;
-      } else {
-        userId2 = data == null ? void 0 : data.gid;
-      }
-      return /* @__PURE__ */ jsxs("div", { children: [
-        /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(NavLink$1, { to: `/${userId2}`, children: /* @__PURE__ */ jsx("div", { className: `relative h-[120px] rounded-lg md:h-[180px] overflow-hidden`, children: /* @__PURE__ */ jsx(
-          "img",
-          {
-            className: `object-cover w-full h-full
-                                                    text-sm`,
-            src: (data == null ? void 0 : data.image_url) ? IMG_BASE_URL2 + (data == null ? void 0 : data.image_url) : "images/placeholder.gif",
-            alt: data.title
-          }
-        ) }) }) }),
-        /* @__PURE__ */ jsx("div", { className: `mt-1 text-[15px] tracking-tight 
-                                     truncate`, children: data.title }),
-        /* @__PURE__ */ jsx("div", { className: `mt-1`, children: /* @__PURE__ */ jsx(RatingBoxSquare, { rating: data.avg_rating }) }),
-        /* @__PURE__ */ jsx("div", { className: `text-[11px] mt-[5px] tracking-tight line-clamp-3
-                                    leading-[1.2em]`, children: data.short_description })
-      ] }, index2);
-    }) })
-  ] }) }) });
+  return /* @__PURE__ */ jsx("div", {});
 };
 const HamburgerSecondary = ({ theme, openNav, navBg }) => {
   return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(
@@ -6598,28 +4810,6 @@ const FooterSection = () => {
 const VerticalHeight = () => {
   return /* @__PURE__ */ jsx("div", { className: `h-20` });
 };
-const ResourceNotFound = () => {
-  return /* @__PURE__ */ jsx("div", { className: `flex place-content-center place-items-center w-full min-h-[700px] text-[13px] flex-col space-y-4`, children: /* @__PURE__ */ jsxs("div", { className: `flex place-content-center place-items-center gap-3
-                h-[40px]`, children: [
-    /* @__PURE__ */ jsx("div", { className: `text-2xl font-bold text-red-600 h-full
-                    flex place-items-center`, children: "404" }),
-    /* @__PURE__ */ jsx("div", { className: `h-full w-[2px] border-r` }),
-    /* @__PURE__ */ jsxs("div", { className: `text-black text-[14px]
-                    h-full flex place-items-center space-x-2`, children: [
-      /* @__PURE__ */ jsx("span", { children: "Resource not found." }),
-      /* @__PURE__ */ jsx(
-        "button",
-        {
-          onClick: () => {
-            window.history.back();
-          },
-          className: `underline`,
-          children: "Go back"
-        }
-      )
-    ] })
-  ] }) });
-};
 const loader$Q = async ({ request, params }) => {
   try {
     const id = params.id || null;
@@ -6719,15 +4909,6 @@ const index$q = () => {
         profileImageData
       }
     ),
-    (listing == null ? void 0 : listing.category) !== void 0 ? /* @__PURE__ */ jsx(
-      Related,
-      {
-        category: listing == null ? void 0 : listing.category,
-        limit: 6,
-        title: `Related: ${listing == null ? void 0 : listing.category}`,
-        subtitle: "Related based on the same category."
-      }
-    ) : /* @__PURE__ */ jsx(ResourceNotFound, {}),
     /* @__PURE__ */ jsx(VerticalHeight, {}),
     /* @__PURE__ */ jsx(CallToActionSection, {}),
     /* @__PURE__ */ jsx(FooterSection, {})
@@ -13664,6 +11845,139 @@ const Carousel$1 = ({
     }
   ) });
 };
+const ProductSliderContext = createContext(null);
+function useProductSliderContext() {
+  const context = useContext(ProductSliderContext);
+  return context;
+}
+const IMG_BASE_URL = "https://pics.gasimg.com";
+const ProductSliderProvider = ({ children }) => {
+  const [dialog, setDialog] = useState(false);
+  const [selectedSlide, setSelectedSlide] = useState(null);
+  const [slides, setGallery] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [listing, setListing] = useState(null);
+  const slideStep = useRef(0);
+  useRef(0);
+  const handleTouchStart = (e) => {
+    slideStep.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const deltaX = slideStep.current - endX;
+    if (deltaX > 50) {
+      setCurrentSlide((i) => (i + 1) % slides.length);
+    } else if (deltaX < -50) {
+      setCurrentSlide((i) => (i - 1 + slides.length) % slides.length);
+    }
+  };
+  const handleClose = () => {
+    setDialog(false);
+  };
+  const prev = () => {
+    setCurrentSlide((currentSlide2) => {
+      return currentSlide2 === 0 ? slides.length - 1 : currentSlide2 - 1;
+    });
+  };
+  const next = () => {
+    setCurrentSlide((currentSlide2) => {
+      return currentSlide2 === slides.length - 1 ? 0 : currentSlide2 + 1;
+    });
+  };
+  useEffect(() => {
+    if (selectedSlide !== null) {
+      setCurrentSlide(selectedSlide - 1);
+    }
+  }, [selectedSlide]);
+  let vals = {
+    dialog,
+    setDialog,
+    selectedSlide,
+    setSelectedSlide,
+    slides,
+    setGallery,
+    setListing
+  };
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        handleClose();
+      }
+    };
+    if (dialog) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [dialog]);
+  return /* @__PURE__ */ jsxs(ProductSliderContext.Provider, { value: vals, children: [
+    dialog && /* @__PURE__ */ jsx("div", { className: `flex w-screen h-screen bg-white z-[20001] 
+                fixed top-0 left-0 right-0 bottom-0 `, children: /* @__PURE__ */ jsxs("div", { className: `grid grid-cols-12 gap-0 w-full`, children: [
+      /* @__PURE__ */ jsxs("div", { className: `col-span-12 md:col-span-9 w-full h-full relative bg-black flex`, children: [
+        /* @__PURE__ */ jsx("div", { className: ` w-full h-screen flex overflow-hidden`, children: slides && selectedSlide && slides.map((slide, index2) => {
+          return /* @__PURE__ */ jsx(
+            "img",
+            {
+              onTouchStart: handleTouchStart,
+              onTouchEnd: handleTouchEnd,
+              src: IMG_BASE_URL + slide.product_image_url,
+              alt: "",
+              style: { transform: `translateX(-${currentSlide * 100}%)` },
+              className: `object-scale-down w-full h-full 
+                                            block flex-shrink-0 flex-grow-0 transition-transform
+                                            ease-in-out duration-1000`
+            },
+            index2
+          );
+        }) }),
+        /* @__PURE__ */ jsx("button", { onMouseDown: prev, className: `block absolute top-0 bottom-0 
+                                                p-[1rem] cursor-pointer left-0 group h-full 
+                                                transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
+                                                        transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronLeft, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
+        /* @__PURE__ */ jsx("button", { onMouseDown: next, className: `block absolute top-0 bottom-0 
+                                                    p-[1rem] cursor-pointer right-0 group 
+                                                     transition duration-1000 ease-in-out`, children: /* @__PURE__ */ jsx("div", { className: `w-[50px] h-[50px] bg-white/60 rounded-full flex place-content-center place-items-center group-hover:bg-white/30
+                                                        transition duration-500 ease-in-out`, children: /* @__PURE__ */ jsx(BiChevronRight, { className: " stroke-white fill-black w-[2rem] h-[2rem]" }) }) }),
+        /* @__PURE__ */ jsx(
+          "div",
+          {
+            onMouseDown: () => handleClose(),
+            className: `w-[50px] h-[50px] z-[300] bg-white
+                                                    flex place-content-center place-items-center
+                                                    rounded-full absolute left-2 top-2 cursor-pointer
+                                                    hover:bg-white/40 transition duration-1000 ease-in-out`,
+            children: /* @__PURE__ */ jsx(IoClose, { className: `text-[30px]` })
+          }
+        )
+      ] }),
+      /* @__PURE__ */ jsxs("div", { className: `hidden md:block md:col-span-3 px-5`, children: [
+        /* @__PURE__ */ jsxs("h1", { className: " text-[22px] my-4 font-sans font-extrabold tracking-tight leading-[24px]", children: [
+          "Products for ",
+          listing && listing.title
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: " my-4 ", children: [
+          currentSlide + 1,
+          " / ",
+          slides.length
+        ] }),
+        /* @__PURE__ */ jsx("hr", {}),
+        /* @__PURE__ */ jsx("div", { className: " my-4 whitespace-pre-line", children: slides[currentSlide].product_title }),
+        slides[currentSlide].product_description && /* @__PURE__ */ jsx("div", { className: " my-4 whitespace-pre-line", children: slides[currentSlide].product_description }),
+        /* @__PURE__ */ jsx("div", { className: " mt-8 whitespace-pre-line", children: /* @__PURE__ */ jsx(
+          "a",
+          {
+            target: "_product",
+            href: slides[currentSlide].product_link,
+            className: `bg-blue-600 text-white px-12 py-4 text-center rounded-md cursor-pointer hover:shadow-lg hover:shadow-gray-300`,
+            children: "Go"
+          }
+        ) })
+      ] })
+    ] }) }),
+    children
+  ] });
+};
 const ProductGallery = ({ productGallery, userGuid, businessGuid, listing }) => {
   const [overlay, setOverlay] = useState(false);
   const [selectedSlide, setSelectedSlide] = useState(0);
@@ -18925,7 +17239,7 @@ const route87 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   __proto__: null,
   loader
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-r6iFe7bS.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-3jay1Ay4.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/AuthContext-BeibwHU0.js", "/assets/SliderContext-BibNJ2B-.js", "/assets/EditPhotoDialogContext-CQzs78mY.js", "/assets/EditVideoDialogContext-CU9poiqh.js", "/assets/VideoSliderContext-DzT7HXBz.js", "/assets/lib-CmGctQ2Y.js", "/assets/index-Q1NsX5qb.js", "/assets/index-C4bLmoCR.js"], "css": ["/assets/root-DZ_-v6Rz.css"] }, "routes/_index_second_backup": { "id": "routes/_index_second_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_second_backup-DVKz3CB-.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/Hamburger-BEAMULtu.js", "/assets/UserMenu-C2sgJDas.js", "/assets/Footer-BMo4TwD_.js", "/assets/TopAd-Q5b8NvXB.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/LatestStarRating-CopYQx_y.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/_index_backup": { "id": "routes/_index_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_backup-CT-xNO0Z.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/Footer-BMo4TwD_.js", "/assets/lib-CmGctQ2Y.js", "/assets/components-qdL6XBti.js", "/assets/UserMenu-C2sgJDas.js", "/assets/Hamburger-BEAMULtu.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/LatestStarRating-CopYQx_y.js", "/assets/AuthContext-BeibwHU0.js", "/assets/index-Q1NsX5qb.js"], "css": [] }, "routes/landing": { "id": "routes/landing", "parentId": "root", "path": "landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BspaleB3.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BC6CctWH.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/index-Q1NsX5qb.js", "/assets/SliderContext-BibNJ2B-.js", "/assets/AuthContext-BeibwHU0.js", "/assets/zod-g2XesUsp.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/lib-CmGctQ2Y.js", "/assets/VideoSliderContext-DzT7HXBz.js", "/assets/ProductSliderContext-CBbV11ad.js", "/assets/TopAd-Q5b8NvXB.js", "/assets/SearchLayout-BgLBnv65.js", "/assets/FooterSection-qWj2L4hw.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/json-aIH7KC0V.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/UserMenu-C2sgJDas.js", "/assets/WhiteLogo-j22IVSIa.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-BYrfDR9S.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/lib-CmGctQ2Y.js", "/assets/components-qdL6XBti.js", "/assets/FooterSection-qWj2L4hw.js", "/assets/UserMenu-C2sgJDas.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/_404": { "id": "routes/_404", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_404-CoZWGRzE.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/UserMenu-C2sgJDas.js", "/assets/Hamburger-BEAMULtu.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js"], "css": [] }, "routes/web": { "id": "routes/web", "parentId": "root", "path": "web", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Cmlstfnz.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BC6CctWH.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/index-Q1NsX5qb.js", "/assets/SliderContext-BibNJ2B-.js", "/assets/AuthContext-BeibwHU0.js", "/assets/zod-g2XesUsp.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/lib-CmGctQ2Y.js", "/assets/VideoSliderContext-DzT7HXBz.js", "/assets/ProductSliderContext-CBbV11ad.js", "/assets/TopAd-Q5b8NvXB.js", "/assets/SearchLayout-BgLBnv65.js", "/assets/FooterSection-qWj2L4hw.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/json-aIH7KC0V.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/UserMenu-C2sgJDas.js", "/assets/WhiteLogo-j22IVSIa.js"], "css": [] }, "routes/landing/index": { "id": "routes/landing/index", "parentId": "root", "path": "/landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BspaleB3.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/web/search/index": { "id": "routes/web/search/index", "parentId": "root", "path": "/web/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BOLnsOOO.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/LatestStarRating-CopYQx_y.js", "/assets/json-aIH7KC0V.js", "/assets/TopAd-Q5b8NvXB.js", "/assets/SearchLayout-BgLBnv65.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-qWj2L4hw.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/UserMenu-C2sgJDas.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js"], "css": [] }, "routes/web/browse/index": { "id": "routes/web/browse/index", "parentId": "root", "path": "/web/browse", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DCLi0DGB.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/Categories-D9-ctvKj.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/UserMenu-C2sgJDas.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/browse/browse": { "id": "routes/web/browse/browse", "parentId": "root", "path": "/web/browser", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/browse-BT7opDDR.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/UserMenu-C2sgJDas.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/signin/index": { "id": "routes/web/signin/index", "parentId": "root", "path": "/web/signin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BIIZwkdq.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/AuthContext-BeibwHU0.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/lib-CmGctQ2Y.js"], "css": [] }, "routes/web/signup/index": { "id": "routes/web/signup/index", "parentId": "root", "path": "/web/signup", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BT1fKyI6.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/lib-CmGctQ2Y.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/reset_password/index": { "id": "routes/web/reset_password/index", "parentId": "root", "path": "/web/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B77gY9iu.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/AuthContext-BeibwHU0.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/lib-CmGctQ2Y.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/account/index": { "id": "routes/web/account/index", "parentId": "root", "path": "/web/account", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-FKq1WAz5.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/components-qdL6XBti.js", "/assets/UserMenu-C2sgJDas.js", "/assets/lib-CmGctQ2Y.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/profile/index": { "id": "routes/web/account/profile/index", "parentId": "root", "path": "/web/account/profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-JipxstvL.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/zod-g2XesUsp.js", "/assets/Input-Cjyi9cvk.js", "/assets/Select-B7EJ80_a.js", "/assets/index-C4bLmoCR.js", "/assets/lib-CmGctQ2Y.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/AuthContext-BeibwHU0.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-C2sgJDas.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/email_address/index": { "id": "routes/web/account/email_address/index", "parentId": "root", "path": "/web/account/email_address", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C0DVbrnd.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/AuthContext-BeibwHU0.js", "/assets/lib-CmGctQ2Y.js", "/assets/zod-g2XesUsp.js", "/assets/Input-Cjyi9cvk.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-C2sgJDas.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/change_password/index": { "id": "routes/web/account/change_password/index", "parentId": "root", "path": "/web/account/change_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-y2j8jrlR.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/AuthContext-BeibwHU0.js", "/assets/lib-CmGctQ2Y.js", "/assets/zod-g2XesUsp.js", "/assets/Input-Cjyi9cvk.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-C2sgJDas.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/reset_password/index": { "id": "routes/web/account/reset_password/index", "parentId": "root", "path": "/web/account/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D_8JQm-6.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/AuthContext-BeibwHU0.js", "/assets/lib-CmGctQ2Y.js", "/assets/zod-g2XesUsp.js", "/assets/Input-Cjyi9cvk.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-C2sgJDas.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/deactivate_profile/index": { "id": "routes/web/account/deactivate_profile/index", "parentId": "root", "path": "/web/account/deactivate_profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BEjcS6Hc.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/AuthContext-BeibwHU0.js", "/assets/lib-CmGctQ2Y.js", "/assets/zod-g2XesUsp.js", "/assets/Input-Cjyi9cvk.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-C2sgJDas.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/terms/index": { "id": "routes/web/terms/index", "parentId": "root", "path": "/web/terms", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-PnS35y0u.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-qWj2L4hw.js", "/assets/SearchLayoutMain-BmCsoydC.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/UserMenu-C2sgJDas.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/json-aIH7KC0V.js", "/assets/HomeNav-CTrJ-ziL.js"], "css": [] }, "routes/web/privacy/index": { "id": "routes/web/privacy/index", "parentId": "root", "path": "/web/privacy", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-B6DCOxL0.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-qWj2L4hw.js", "/assets/SearchLayoutMain-BmCsoydC.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/UserMenu-C2sgJDas.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/json-aIH7KC0V.js", "/assets/HomeNav-CTrJ-ziL.js"], "css": [] }, "routes/web/contact/index": { "id": "routes/web/contact/index", "parentId": "root", "path": "/web/contact", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-RSI1Amco.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SearchLayoutMain-BmCsoydC.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-qWj2L4hw.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/UserMenu-C2sgJDas.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/json-aIH7KC0V.js", "/assets/HomeNav-CTrJ-ziL.js"], "css": [] }, "routes/web/browse/db": { "id": "routes/web/browse/db", "parentId": "root", "path": "/web/db", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/db-CF5BBiOI.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/Categories-D9-ctvKj.js", "/assets/FooterSection-qWj2L4hw.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/lib-CmGctQ2Y.js", "/assets/UserMenu-C2sgJDas.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/portfolio/index": { "id": "routes/web/account/portfolio/index", "parentId": "root", "path": "/web/account/portfolio", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DES9MXzR.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/AuthContext-BeibwHU0.js", "/assets/lib-CmGctQ2Y.js", "/assets/UserMenu-C2sgJDas.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/portfolio/business/index": { "id": "routes/web/account/portfolio/business/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BypFauXb.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/AuthContext-BeibwHU0.js", "/assets/lib-CmGctQ2Y.js", "/assets/zod-g2XesUsp.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/Input-Cjyi9cvk.js", "/assets/TextareaWithWordLimit-CbWPlahh.js", "/assets/Select-B7EJ80_a.js", "/assets/BusinessHeader-D4gQ81dg.js", "/assets/UserMenu-C2sgJDas.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/create_business/index": { "id": "routes/web/account/create_business/index", "parentId": "root", "path": "/web/account/create_business", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BlGR7kkE.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/AuthContext-BeibwHU0.js", "/assets/zod-g2XesUsp.js", "/assets/lib-CmGctQ2Y.js", "/assets/Input-Cjyi9cvk.js", "/assets/Select-B7EJ80_a.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/TextareaWithWordLimit-CbWPlahh.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-C2sgJDas.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/portfolio/business/settings/index": { "id": "routes/web/account/portfolio/business/settings/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/settings", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CmI_oYvx.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/index-C4bLmoCR.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/BusinessHeader-D4gQ81dg.js", "/assets/AuthContext-BeibwHU0.js", "/assets/UserMenu-C2sgJDas.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/portfolio/business/gallery/index": { "id": "routes/web/account/portfolio/business/gallery/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/gallery", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-ByyDmWvJ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/lib-CmGctQ2Y.js", "/assets/BusinessHeader-D4gQ81dg.js", "/assets/EditPhotoDialogContext-CQzs78mY.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/index-Q1NsX5qb.js", "/assets/SliderContext-BibNJ2B-.js", "/assets/AuthContext-BeibwHU0.js", "/assets/UserMenu-C2sgJDas.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/portfolio/business/products/index": { "id": "routes/web/account/portfolio/business/products/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/products", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BTRrUT5-.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/lib-CmGctQ2Y.js", "/assets/BusinessHeader-D4gQ81dg.js", "/assets/AuthContext-BeibwHU0.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/index-Q1NsX5qb.js", "/assets/ProductSliderContext-CBbV11ad.js", "/assets/UserMenu-C2sgJDas.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/portfolio/business/videos/index": { "id": "routes/web/account/portfolio/business/videos/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/videos", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-O4CQCWaG.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/lib-CmGctQ2Y.js", "/assets/BusinessHeader-D4gQ81dg.js", "/assets/EditVideoDialogContext-CU9poiqh.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/index-Q1NsX5qb.js", "/assets/VideoSliderContext-DzT7HXBz.js", "/assets/AuthContext-BeibwHU0.js", "/assets/UserMenu-C2sgJDas.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/account/portfolio/business/facilities/index": { "id": "routes/web/account/portfolio/business/facilities/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/facilities", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BxeeYOGj.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/BusinessHeader-D4gQ81dg.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/AuthContext-BeibwHU0.js", "/assets/UserMenu-C2sgJDas.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/portfolio/business/activate/index": { "id": "routes/web/account/portfolio/business/activate/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/activate", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CtAzKutH.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/lib-CmGctQ2Y.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/BusinessHeader-D4gQ81dg.js", "/assets/AuthContext-BeibwHU0.js", "/assets/UserMenu-C2sgJDas.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/portfolio/business/social_media/index": { "id": "routes/web/account/portfolio/business/social_media/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Brx4jgLm.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/BusinessHeader-D4gQ81dg.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/UserMenu-C2sgJDas.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/account/portfolio/business/delete/index": { "id": "routes/web/account/portfolio/business/delete/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/delete", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CxF8551D.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CmGctQ2Y.js", "/assets/ContentLayout-Co8wfYGC.js", "/assets/BusinessHeader-D4gQ81dg.js", "/assets/AuthContext-BeibwHU0.js", "/assets/zod-g2XesUsp.js", "/assets/Input-Cjyi9cvk.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/index-C4bLmoCR.js", "/assets/UserMenu-C2sgJDas.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/index-Q1NsX5qb.js", "/assets/HomeNav-CTrJ-ziL.js", "/assets/SrchNavbar-DW0vQmFq.js", "/assets/json-aIH7KC0V.js"], "css": [] }, "routes/web/landing/change_email/index": { "id": "routes/web/landing/change_email/index", "parentId": "root", "path": "/web/landing/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CIYrsT9N.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/AuthContext-BeibwHU0.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/lib-CmGctQ2Y.js"], "css": [] }, "routes/web/landing/reset_password/index": { "id": "routes/web/landing/reset_password/index", "parentId": "root", "path": "/web/landing/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CqCZWiy9.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/AuthContext-BeibwHU0.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/lib-CmGctQ2Y.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/landing/complete_signup/index": { "id": "routes/web/landing/complete_signup/index", "parentId": "root", "path": "/web/landing/complete_signup/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-rZuxK3Cg.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/WhiteLogo-j22IVSIa.js", "/assets/AuthContext-BeibwHU0.js", "/assets/NotificationContext-DIPcm5A-.js", "/assets/lib-CmGctQ2Y.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/api/user/index": { "id": "routes/api/user/index", "parentId": "root", "path": "api/user", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/signin": { "id": "routes/api/user/signin", "parentId": "root", "path": "api/user/signin", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/signin-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verifytoken": { "id": "routes/api/user/verifytoken", "parentId": "root", "path": "api/user/verifytoken", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verifytoken-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user": { "id": "routes/api/user/user", "parentId": "root", "path": "api/user/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_password": { "id": "routes/api/user/change_password", "parentId": "root", "path": "api/user/change_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password_request": { "id": "routes/api/user/reset_password_request", "parentId": "root", "path": "api/user/reset_password_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password": { "id": "routes/api/user/reset_password", "parentId": "root", "path": "api/user/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/activate_deactivate": { "id": "routes/api/user/activate_deactivate", "parentId": "root", "path": "api/user/activate_deactivate/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate_deactivate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user_profile_image": { "id": "routes/api/user/user_profile_image", "parentId": "root", "path": "api/user/user_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email_request": { "id": "routes/api/user/change_email_request", "parentId": "root", "path": "api/user/change_email_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email": { "id": "routes/api/user/change_email", "parentId": "root", "path": "api/user/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verify_signup": { "id": "routes/api/user/verify_signup", "parentId": "root", "path": "api/user/verify_signup/:user_hash", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verify_signup-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/index": { "id": "routes/api/listing/index", "parentId": "root", "path": "api/listing", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DP2rzg_V.js", "imports": [], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/searchlisting": { "id": "routes/api/listing/searchlisting", "parentId": "root", "path": "api/listing/searchlisting", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/searchlisting-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_bg": { "id": "routes/api/listing/business_profile_bg", "parentId": "root", "path": "api/listing/business_profile_bg/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_bg-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/owner/index": { "id": "routes/api/listing/owner/index", "parentId": "root", "path": "api/listing/owner", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-K6Dvbx-E.js", "imports": [], "css": [] }, "routes/api/listing/delete_business": { "id": "routes/api/listing/delete_business", "parentId": "root", "path": "api/listing/delete_business/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/operating_hours": { "id": "routes/api/listing/operating_hours", "parentId": "root", "path": "api/listing/operating_hours", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/operating_hours-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/gallery": { "id": "routes/api/listing/gallery", "parentId": "root", "path": "api/listing/gallery/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/sys_facility_features/index": { "id": "routes/api/listing/sys_facility_features/index", "parentId": "root", "path": "api/listing/sys_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C6Kfwj0f.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/selected_facility_features": { "id": "routes/api/listing/selected_facility_features/selected_facility_features", "parentId": "root", "path": "api/listing/selected_facility_features/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/index": { "id": "routes/api/listing/selected_facility_features/index", "parentId": "root", "path": "api/listing/selected_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-RnTpOC5-.js", "imports": [], "css": [] }, "routes/api/listing/sys_social_media/index": { "id": "routes/api/listing/sys_social_media/index", "parentId": "root", "path": "api/listing/sys_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DVN7Oi2P.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/selected_social_media": { "id": "routes/api/listing/selected_social_media/selected_social_media", "parentId": "root", "path": "api/listing/selected_social_media/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/index": { "id": "routes/api/listing/selected_social_media/index", "parentId": "root", "path": "api/listing/selected_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DdXTRxfG.js", "imports": [], "css": [] }, "routes/api/listing/business_social_media": { "id": "routes/api/listing/business_social_media", "parentId": "root", "path": "api/listing/business_social_media/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/activate/activate": { "id": "routes/api/listing/activate/activate", "parentId": "root", "path": "api/listing/activate/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/recents": { "id": "routes/api/listing/recents", "parentId": "root", "path": "api/listing/recents", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/recents-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_link": { "id": "routes/api/listing/video_link", "parentId": "root", "path": "api/listing/save_video_link", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_link-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_links": { "id": "routes/api/listing/video_links", "parentId": "root", "path": "api/listing/video_links/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_links-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_links_listing": { "id": "routes/api/listing/video_links_listing", "parentId": "root", "path": "api/listing/video_links/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_links_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/products/index": { "id": "routes/api/listing/products/index", "parentId": "root", "path": "api/listing/products/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BIjMHF-b.js", "imports": [], "css": [] }, "routes/api/rating/index": { "id": "routes/api/rating/index", "parentId": "root", "path": "api/rating", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BQEWTaK-.js", "imports": [], "css": [] }, "routes/api/rating/rating": { "id": "routes/api/rating/rating", "parentId": "root", "path": "api/rating/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/rating-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/state": { "id": "routes/api/util/state", "parentId": "root", "path": "api/util/state", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/state-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country": { "id": "routes/api/util/country", "parentId": "root", "path": "api/util/country", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country_locale": { "id": "routes/api/util/country_locale", "parentId": "root", "path": "api/util/country_locale", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country_locale-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/city": { "id": "routes/api/util/city", "parentId": "root", "path": "api/util/city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/city-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/category": { "id": "routes/api/util/category", "parentId": "root", "path": "api/util/category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-38a76ac6.js", "version": "38a76ac6" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-r6iFe7bS.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-DMgHgO6-.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/SliderContext-DwYrx2Ws.js", "/assets/EditPhotoDialogContext-BfyIOoo9.js", "/assets/EditVideoDialogContext-CTyBM7Nn.js", "/assets/lib-CswUZYoq.js", "/assets/index-Dz1RsV8-.js", "/assets/index-C4bLmoCR.js"], "css": ["/assets/root-DZ_-v6Rz.css"] }, "routes/_index_second_backup": { "id": "routes/_index_second_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_second_backup-BsBTvwyN.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/Hamburger-B0b9aU9m.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/Footer-Dii31uUY.js", "/assets/TopAd-Bzu_Q0Ek.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/LatestStarRating-epirdmlx.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/_index_backup": { "id": "routes/_index_backup", "parentId": "root", "path": void 0, "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index_backup-ge35Pxru.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/Footer-Dii31uUY.js", "/assets/lib-CswUZYoq.js", "/assets/components-qdL6XBti.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/Hamburger-B0b9aU9m.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/LatestStarRating-epirdmlx.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/index-Dz1RsV8-.js"], "css": [] }, "routes/landing": { "id": "routes/landing", "parentId": "root", "path": "landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BspaleB3.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/listing": { "id": "routes/listing", "parentId": "root", "path": "listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DR9rvq6l.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/index-Dz1RsV8-.js", "/assets/SliderContext-DwYrx2Ws.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/zod-g2XesUsp.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/lib-CswUZYoq.js", "/assets/TopAd-Bzu_Q0Ek.js", "/assets/SearchLayout-M5M4fiId.js", "/assets/FooterSection-3hpDOb-k.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/json-BrY44Fjs.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/WhiteLogo-Il9AjoLy.js"], "css": [] }, "routes/_index": { "id": "routes/_index", "parentId": "root", "path": "/", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_index-ZAcLXXly.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/lib-CswUZYoq.js", "/assets/components-qdL6XBti.js", "/assets/FooterSection-3hpDOb-k.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/_404": { "id": "routes/_404", "parentId": "root", "path": "*", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/_404-CfDxZkPY.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/Hamburger-B0b9aU9m.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js"], "css": [] }, "routes/web": { "id": "routes/web", "parentId": "root", "path": "web", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Cmlstfnz.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/listing/index": { "id": "routes/listing/index", "parentId": "root", "path": "/:id", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DR9rvq6l.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/index-Dz1RsV8-.js", "/assets/SliderContext-DwYrx2Ws.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/zod-g2XesUsp.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/lib-CswUZYoq.js", "/assets/TopAd-Bzu_Q0Ek.js", "/assets/SearchLayout-M5M4fiId.js", "/assets/FooterSection-3hpDOb-k.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/json-BrY44Fjs.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/WhiteLogo-Il9AjoLy.js"], "css": [] }, "routes/landing/index": { "id": "routes/landing/index", "parentId": "root", "path": "/landing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BspaleB3.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js"], "css": [] }, "routes/web/search/index": { "id": "routes/web/search/index", "parentId": "root", "path": "/web/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BWyHPP6J.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/LatestStarRating-epirdmlx.js", "/assets/json-BrY44Fjs.js", "/assets/TopAd-Bzu_Q0Ek.js", "/assets/SearchLayout-M5M4fiId.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-3hpDOb-k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js"], "css": [] }, "routes/web/browse/index": { "id": "routes/web/browse/index", "parentId": "root", "path": "/web/browse", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BdZ-_qoy.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/Categories-F209-gH1.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/browse/browse": { "id": "routes/web/browse/browse", "parentId": "root", "path": "/web/browser", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/browse-Evwz3fNw.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/signin/index": { "id": "routes/web/signin/index", "parentId": "root", "path": "/web/signin", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BTGnzu5A.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/lib-CswUZYoq.js"], "css": [] }, "routes/web/signup/index": { "id": "routes/web/signup/index", "parentId": "root", "path": "/web/signup", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-yMVUVeAc.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/lib-CswUZYoq.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/reset_password/index": { "id": "routes/web/reset_password/index", "parentId": "root", "path": "/web/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BBL2DjFQ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/lib-CswUZYoq.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/account/index": { "id": "routes/web/account/index", "parentId": "root", "path": "/web/account", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DlKR43lT.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/ContentLayout-IVhImePf.js", "/assets/components-qdL6XBti.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/lib-CswUZYoq.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/profile/index": { "id": "routes/web/account/profile/index", "parentId": "root", "path": "/web/account/profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DQLQyXKs.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/zod-g2XesUsp.js", "/assets/Input-bIdjgbry.js", "/assets/Select-BgX1lGs9.js", "/assets/index-C4bLmoCR.js", "/assets/lib-CswUZYoq.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/email_address/index": { "id": "routes/web/account/email_address/index", "parentId": "root", "path": "/web/account/email_address", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D0xv6Ar0.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/lib-CswUZYoq.js", "/assets/zod-g2XesUsp.js", "/assets/Input-bIdjgbry.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/change_password/index": { "id": "routes/web/account/change_password/index", "parentId": "root", "path": "/web/account/change_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-NW8sO2VS.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/lib-CswUZYoq.js", "/assets/zod-g2XesUsp.js", "/assets/Input-bIdjgbry.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/reset_password/index": { "id": "routes/web/account/reset_password/index", "parentId": "root", "path": "/web/account/reset_password", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-7XSIca9O.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/lib-CswUZYoq.js", "/assets/zod-g2XesUsp.js", "/assets/Input-bIdjgbry.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/deactivate_profile/index": { "id": "routes/web/account/deactivate_profile/index", "parentId": "root", "path": "/web/account/deactivate_profile", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D07JGf4-.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/lib-CswUZYoq.js", "/assets/zod-g2XesUsp.js", "/assets/Input-bIdjgbry.js", "/assets/index-C4bLmoCR.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/terms/index": { "id": "routes/web/terms/index", "parentId": "root", "path": "/web/terms", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-ol1kGXqU.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-3hpDOb-k.js", "/assets/SearchLayoutMain-BpRBM2PQ.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/json-BrY44Fjs.js", "/assets/HomeNav-DcrJ3R4k.js"], "css": [] }, "routes/web/privacy/index": { "id": "routes/web/privacy/index", "parentId": "root", "path": "/web/privacy", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D3duGuev.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-3hpDOb-k.js", "/assets/SearchLayoutMain-BpRBM2PQ.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/json-BrY44Fjs.js", "/assets/HomeNav-DcrJ3R4k.js"], "css": [] }, "routes/web/contact/index": { "id": "routes/web/contact/index", "parentId": "root", "path": "/web/contact", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BZs6muLl.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/SearchLayoutMain-BpRBM2PQ.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/FooterSection-3hpDOb-k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/json-BrY44Fjs.js", "/assets/HomeNav-DcrJ3R4k.js"], "css": [] }, "routes/web/browse/db": { "id": "routes/web/browse/db", "parentId": "root", "path": "/web/db", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/db-Dy4dTE5P.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/Categories-F209-gH1.js", "/assets/FooterSection-3hpDOb-k.js", "/assets/VerticalHeight-CjKseacd.js", "/assets/lib-CswUZYoq.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/portfolio/index": { "id": "routes/web/account/portfolio/index", "parentId": "root", "path": "/web/account/portfolio", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CgaFFs1_.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/lib-CswUZYoq.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/portfolio/business/index": { "id": "routes/web/account/portfolio/business/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-j15uMC8j.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/lib-CswUZYoq.js", "/assets/zod-g2XesUsp.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/Input-bIdjgbry.js", "/assets/TextareaWithWordLimit-DbB6hYCP.js", "/assets/Select-BgX1lGs9.js", "/assets/BusinessHeader-DZ7R-Rjs.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/create_business/index": { "id": "routes/web/account/create_business/index", "parentId": "root", "path": "/web/account/create_business", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CFl1suL7.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/zod-g2XesUsp.js", "/assets/lib-CswUZYoq.js", "/assets/Input-bIdjgbry.js", "/assets/Select-BgX1lGs9.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/TextareaWithWordLimit-DbB6hYCP.js", "/assets/index-C4bLmoCR.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/CardHeader-Sn9e5sVD.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/portfolio/business/settings/index": { "id": "routes/web/account/portfolio/business/settings/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/settings", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CNBmM6hW.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/index-C4bLmoCR.js", "/assets/ContentLayout-IVhImePf.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/BusinessHeader-DZ7R-Rjs.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/portfolio/business/gallery/index": { "id": "routes/web/account/portfolio/business/gallery/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/gallery", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DJqWYmh-.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/lib-CswUZYoq.js", "/assets/BusinessHeader-DZ7R-Rjs.js", "/assets/EditPhotoDialogContext-BfyIOoo9.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/index-Dz1RsV8-.js", "/assets/SliderContext-DwYrx2Ws.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/portfolio/business/products/index": { "id": "routes/web/account/portfolio/business/products/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/products", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-jg6iHYrl.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/lib-CswUZYoq.js", "/assets/BusinessHeader-DZ7R-Rjs.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/index-Dz1RsV8-.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/portfolio/business/videos/index": { "id": "routes/web/account/portfolio/business/videos/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/videos", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BytFw-0I.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/ContentLayout-IVhImePf.js", "/assets/lib-CswUZYoq.js", "/assets/BusinessHeader-DZ7R-Rjs.js", "/assets/EditVideoDialogContext-CTyBM7Nn.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/index-Dz1RsV8-.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/account/portfolio/business/facilities/index": { "id": "routes/web/account/portfolio/business/facilities/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/facilities", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Dvbz-PgY.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/ContentLayout-IVhImePf.js", "/assets/BusinessHeader-DZ7R-Rjs.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/portfolio/business/activate/index": { "id": "routes/web/account/portfolio/business/activate/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/activate", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-Bvr_BVi0.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/lib-CswUZYoq.js", "/assets/ContentLayout-IVhImePf.js", "/assets/BusinessHeader-DZ7R-Rjs.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/portfolio/business/social_media/index": { "id": "routes/web/account/portfolio/business/social_media/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CVGDb63n.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/ContentLayout-IVhImePf.js", "/assets/BusinessHeader-DZ7R-Rjs.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/account/portfolio/business/delete/index": { "id": "routes/web/account/portfolio/business/delete/index", "parentId": "root", "path": "/web/account/portfolio/:business_guid/:user_guid/delete", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-9il9ETw6.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/lib-CswUZYoq.js", "/assets/ContentLayout-IVhImePf.js", "/assets/BusinessHeader-DZ7R-Rjs.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/zod-g2XesUsp.js", "/assets/Input-bIdjgbry.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/index-C4bLmoCR.js", "/assets/UserMenu-LiQR5g1A.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/index-Dz1RsV8-.js", "/assets/HomeNav-DcrJ3R4k.js", "/assets/SrchNavbar-DyHOxup7.js", "/assets/json-BrY44Fjs.js"], "css": [] }, "routes/web/landing/change_email/index": { "id": "routes/web/landing/change_email/index", "parentId": "root", "path": "/web/landing/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DESCHdNd.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/components-qdL6XBti.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/lib-CswUZYoq.js"], "css": [] }, "routes/web/landing/reset_password/index": { "id": "routes/web/landing/reset_password/index", "parentId": "root", "path": "/web/landing/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-D2otqFP1.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/lib-CswUZYoq.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/web/landing/complete_signup/index": { "id": "routes/web/landing/complete_signup/index", "parentId": "root", "path": "/web/landing/complete_signup/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-CXCfjjcZ.js", "imports": ["/assets/jsx-runtime-0DLF9kdB.js", "/assets/zod-g2XesUsp.js", "/assets/components-qdL6XBti.js", "/assets/WhiteLogo-Il9AjoLy.js", "/assets/AuthContext-BaQ1mGz6.js", "/assets/NotificationContext-IgbMj6VA.js", "/assets/lib-CswUZYoq.js", "/assets/index-C4bLmoCR.js"], "css": [] }, "routes/api/user/index": { "id": "routes/api/user/index", "parentId": "root", "path": "api/user", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/signin": { "id": "routes/api/user/signin", "parentId": "root", "path": "api/user/signin", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/signin-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verifytoken": { "id": "routes/api/user/verifytoken", "parentId": "root", "path": "api/user/verifytoken", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verifytoken-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user": { "id": "routes/api/user/user", "parentId": "root", "path": "api/user/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_password": { "id": "routes/api/user/change_password", "parentId": "root", "path": "api/user/change_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password_request": { "id": "routes/api/user/reset_password_request", "parentId": "root", "path": "api/user/reset_password_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/reset_password": { "id": "routes/api/user/reset_password", "parentId": "root", "path": "api/user/reset_password/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/reset_password-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/activate_deactivate": { "id": "routes/api/user/activate_deactivate", "parentId": "root", "path": "api/user/activate_deactivate/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate_deactivate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/user_profile_image": { "id": "routes/api/user/user_profile_image", "parentId": "root", "path": "api/user/user_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/user_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email_request": { "id": "routes/api/user/change_email_request", "parentId": "root", "path": "api/user/change_email_request", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email_request-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/change_email": { "id": "routes/api/user/change_email", "parentId": "root", "path": "api/user/change_email", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/change_email-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/user/verify_signup": { "id": "routes/api/user/verify_signup", "parentId": "root", "path": "api/user/verify_signup/:user_hash", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/verify_signup-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/index": { "id": "routes/api/listing/index", "parentId": "root", "path": "api/listing", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DP2rzg_V.js", "imports": [], "css": [] }, "routes/api/listing/listing": { "id": "routes/api/listing/listing", "parentId": "root", "path": "api/listing/:guid_or_username", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/search": { "id": "routes/api/listing/search", "parentId": "root", "path": "api/listing/search", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/search-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/searchlisting": { "id": "routes/api/listing/searchlisting", "parentId": "root", "path": "api/listing/searchlisting", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/searchlisting-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/featured_listing": { "id": "routes/api/listing/featured_listing", "parentId": "root", "path": "api/listing/featured_listing", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/featured_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_facility_features": { "id": "routes/api/listing/business_facility_features", "parentId": "root", "path": "api/listing/business_facility_features/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/listing_by_category": { "id": "routes/api/listing/listing_by_category", "parentId": "root", "path": "api/listing/listing_by_category/:category/:limit", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/listing_by_category-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_gallery": { "id": "routes/api/listing/business_gallery", "parentId": "root", "path": "api/listing/business_gallery/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_image": { "id": "routes/api/listing/business_profile_image", "parentId": "root", "path": "api/listing/business_profile_image/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_image-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/business_profile_bg": { "id": "routes/api/listing/business_profile_bg", "parentId": "root", "path": "api/listing/business_profile_bg/:guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_profile_bg-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/owner/index": { "id": "routes/api/listing/owner/index", "parentId": "root", "path": "api/listing/owner", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-K6Dvbx-E.js", "imports": [], "css": [] }, "routes/api/listing/delete_business": { "id": "routes/api/listing/delete_business", "parentId": "root", "path": "api/listing/delete_business/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/delete_business-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/operating_hours": { "id": "routes/api/listing/operating_hours", "parentId": "root", "path": "api/listing/operating_hours", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/operating_hours-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/gallery": { "id": "routes/api/listing/gallery", "parentId": "root", "path": "api/listing/gallery/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/gallery-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/sys_facility_features/index": { "id": "routes/api/listing/sys_facility_features/index", "parentId": "root", "path": "api/listing/sys_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-C6Kfwj0f.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/selected_facility_features": { "id": "routes/api/listing/selected_facility_features/selected_facility_features", "parentId": "root", "path": "api/listing/selected_facility_features/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_facility_features-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_facility_features/index": { "id": "routes/api/listing/selected_facility_features/index", "parentId": "root", "path": "api/listing/selected_facility_features", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-RnTpOC5-.js", "imports": [], "css": [] }, "routes/api/listing/sys_social_media/index": { "id": "routes/api/listing/sys_social_media/index", "parentId": "root", "path": "api/listing/sys_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DVN7Oi2P.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/selected_social_media": { "id": "routes/api/listing/selected_social_media/selected_social_media", "parentId": "root", "path": "api/listing/selected_social_media/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/selected_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/selected_social_media/index": { "id": "routes/api/listing/selected_social_media/index", "parentId": "root", "path": "api/listing/selected_social_media", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-DdXTRxfG.js", "imports": [], "css": [] }, "routes/api/listing/business_social_media": { "id": "routes/api/listing/business_social_media", "parentId": "root", "path": "api/listing/business_social_media/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_social_media-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/activate/activate": { "id": "routes/api/listing/activate/activate", "parentId": "root", "path": "api/listing/activate/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/activate-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/recents": { "id": "routes/api/listing/recents", "parentId": "root", "path": "api/listing/recents", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/recents-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_link": { "id": "routes/api/listing/video_link", "parentId": "root", "path": "api/listing/save_video_link", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_link-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_links": { "id": "routes/api/listing/video_links", "parentId": "root", "path": "api/listing/video_links/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_links-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/video_links_listing": { "id": "routes/api/listing/video_links_listing", "parentId": "root", "path": "api/listing/video_links/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/video_links_listing-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/listing/products/index": { "id": "routes/api/listing/products/index", "parentId": "root", "path": "api/listing/products/:business_guid/:user_guid", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BIjMHF-b.js", "imports": [], "css": [] }, "routes/api/rating/index": { "id": "routes/api/rating/index", "parentId": "root", "path": "api/rating", "index": void 0, "caseSensitive": void 0, "hasAction": true, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/index-BQEWTaK-.js", "imports": [], "css": [] }, "routes/api/rating/rating": { "id": "routes/api/rating/rating", "parentId": "root", "path": "api/rating/:user_guid/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/rating-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/business_ratings": { "id": "routes/api/rating/business_ratings", "parentId": "root", "path": "api/rating/business_ratings/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/business_ratings-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/rating/ratings_reviews": { "id": "routes/api/rating/ratings_reviews", "parentId": "root", "path": "api/rating/ratings_reviews/:business_guid", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/ratings_reviews-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/state": { "id": "routes/api/util/state", "parentId": "root", "path": "api/util/state", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/state-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country": { "id": "routes/api/util/country", "parentId": "root", "path": "api/util/country", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/country_locale": { "id": "routes/api/util/country_locale", "parentId": "root", "path": "api/util/country_locale", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/country_locale-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/city": { "id": "routes/api/util/city", "parentId": "root", "path": "api/util/city", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/city-l0sNRNKZ.js", "imports": [], "css": [] }, "routes/api/util/category": { "id": "routes/api/util/category", "parentId": "root", "path": "api/util/category", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": true, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/category-l0sNRNKZ.js", "imports": [], "css": [] } }, "url": "/assets/manifest-d7e1dfe9.js", "version": "d7e1dfe9" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";

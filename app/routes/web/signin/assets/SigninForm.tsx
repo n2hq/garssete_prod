@@ -35,27 +35,31 @@ const SigninForm = () => {
     }
 
     const handleSigninForm = async (data: LoginData) => {
-        setWorking(true)
-        notification.notify()
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        try {
+            setWorking(true)
+            notification.notify()
+            await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        const email = data.username
-        const password = data.password
+            const email = data.username
+            const password = data.password
 
-        const datr = {
-            email: email,
-            password: password
+            const datr = {
+                email: email,
+                password: password
+            }
+            const res = await signin(datr)
+            if (res === true) {
+                notification.cancel()
+                navigator("/")
+            } else {
+                //alert(res.message))
+                notification.alertCancel("Complete Your Signup", res.message)
+            }
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            setWorking(false)
+        } catch (error: any) {
+            console.log(error)
         }
-        const res = await signin(datr)
-        if (res === true) {
-            notification.cancel()
-            navigator("/")
-        } else {
-            //alert(res.message))
-            notification.alertCancel("Complete Your Signup", res.message)
-        }
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        setWorking(false)
     }
 
     const {

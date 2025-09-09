@@ -153,7 +153,7 @@ export const NotificationProvider = ({ children }: any) => {
 export const Confirm = ({ handleClose, working, message, handleConfirmCancel, setConfirmOk, onClose }: any) => {
     return (
         <div className={`z-[4000] fixed left-0 top-0 right-0 bottom-0
-                bg-black/10 flex flex-col place-content-center place-items-center
+                bg-black/30 flex flex-col place-content-center place-items-center
                 `}>
             <div className={`w-[90%] sm:w-[500px] h-auto bg-white 
                         overflow-hidden rounded-md relative shadow-2xl shadow-black/50`}>
@@ -190,7 +190,7 @@ export const Confirm = ({ handleClose, working, message, handleConfirmCancel, se
 export const Notify = ({ working, notifyMessage }: any) => {
     return (
         <div className={`z-[4000] fixed left-0 top-0 right-0 bottom-0
-                bg-black/10 flex flex-col place-content-center place-items-center
+                bg-black/30 flex flex-col place-content-center place-items-center
                 `}>
             <div className={`w-[90%] sm:w-[500px] h-auto bg-white 
                         overflow-hidden rounded-md relative shadow-2xl shadow-black/50`}>
@@ -219,7 +219,7 @@ export const Notify = ({ working, notifyMessage }: any) => {
 export const Alert = ({ handleClose, working, message, title }: any) => {
     return (
         <div className={`z-[4000] fixed left-0 top-0 right-0 bottom-0
-                bg-black/10 flex flex-col place-content-center place-items-center
+                bg-black/30 flex flex-col place-content-center place-items-center
                 `}>
             <div className={`w-[90%] sm:w-[500px] h-auto bg-white 
                         overflow-hidden rounded-md relative shadow-2xl shadow-black/50`}>
@@ -259,7 +259,7 @@ export const Alert = ({ handleClose, working, message, title }: any) => {
 export const AlertReload = ({ handleClose, working, message, title }: any) => {
     return (
         <div className={`z-[4000] fixed left-0 top-0 right-0 bottom-0
-                bg-black/10 flex flex-col place-content-center place-items-center
+                bg-black/30 flex flex-col place-content-center place-items-center
                 `}>
             <div className={`w-[90%] sm:w-[500px] h-auto bg-white 
                         overflow-hidden rounded-md relative shadow-2xl shadow-black/50`}>
@@ -294,7 +294,7 @@ export const AlertReload = ({ handleClose, working, message, title }: any) => {
 export const AlertCancel = ({ handleClose, working, message, title }: any) => {
     return (
         <div className={`z-[4000] fixed left-0 top-0 right-0 bottom-0
-                bg-black/10 flex flex-col place-content-center place-items-center
+                bg-black/30 flex flex-col place-content-center place-items-center
                 `}>
             <div className={`w-[90%] sm:w-[500px] h-auto bg-white 
                         overflow-hidden rounded-md relative shadow-2xl shadow-black/50`}>

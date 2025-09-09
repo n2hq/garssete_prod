@@ -27,14 +27,24 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     try {
         const id = params.id || null
-        let listing = await getPage(id)
+        let listing
 
-        const profileImageData = await getBusinessProfileImageData(listing?.gid)
-        const gallery = await getBusinessGallery(listing.gid)
-        const ratingData = await getRatingsReviews(listing.gid)
-        const videoGallery: AddVideoType[] | null = await getBusinessVideoGallery(listing?.gid)
-        const products: ProductType[] | null = await getProductGallery(listing?.gid, listing?.owner)
+        let profileImageData
+        let gallery
+        let ratingData
+        let videoGallery: AddVideoType[] | null = null
+        let products: ProductType[] | null = null
 
+        try {
+            listing = await getPage(id)
+            profileImageData = await getBusinessProfileImageData(listing?.gid)
+            gallery = await getBusinessGallery(listing.gid)
+            ratingData = await getRatingsReviews(listing.gid)
+            videoGallery = await getBusinessVideoGallery(listing?.gid)
+            products = await getProductGallery(listing?.gid, listing?.owner)
+        } catch (error: any) {
+            console.log(error.message)
+        }
 
 
 

@@ -6612,12 +6612,22 @@ const ResourceNotFound = () => {
 const loader$Q = async ({ request, params }) => {
   try {
     const id = params.id || null;
-    let listing = await getPage(id);
-    const profileImageData = await getBusinessProfileImageData(listing == null ? void 0 : listing.gid);
-    const gallery = await getBusinessGallery(listing.gid);
-    const ratingData = await getRatingsReviews(listing.gid);
-    const videoGallery = await getBusinessVideoGallery(listing == null ? void 0 : listing.gid);
-    const products = await getProductGallery(listing == null ? void 0 : listing.gid, listing == null ? void 0 : listing.owner);
+    let listing;
+    let profileImageData;
+    let gallery;
+    let ratingData;
+    let videoGallery = null;
+    let products = null;
+    try {
+      listing = await getPage(id);
+      profileImageData = await getBusinessProfileImageData(listing == null ? void 0 : listing.gid);
+      gallery = await getBusinessGallery(listing.gid);
+      ratingData = await getRatingsReviews(listing.gid);
+      videoGallery = await getBusinessVideoGallery(listing == null ? void 0 : listing.gid);
+      products = await getProductGallery(listing == null ? void 0 : listing.gid, listing == null ? void 0 : listing.owner);
+    } catch (error) {
+      console.log(error.message);
+    }
     return {
       listing,
       gallery,

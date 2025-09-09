@@ -19,6 +19,7 @@ import FooterSection from '../landing/assets/FooterSection'
 import VerticalHeight from '../asset/VerticalHeight'
 import ResourceNotFound from './assets/ResourceNotFound'
 import { AddVideoType, ProductType } from '~/lib/types'
+import { useOnlineStatus } from '~/context/useOnlineStatus'
 
 
 
@@ -131,22 +132,9 @@ const index = () => {
     const profileImageData = data.profileImageData
 
 
-    const [isOnline, setIsOnline] = useState(navigator.onLine);
+    const online = useOnlineStatus();
 
-    useEffect(() => {
-        const goOnline = () => setIsOnline(true);
-        const goOffline = () => setIsOnline(false);
-
-        window.addEventListener("online", goOnline);
-        window.addEventListener("offline", goOffline);
-
-        return () => {
-            window.removeEventListener("online", goOnline);
-            window.removeEventListener("offline", goOffline);
-        };
-    }, []);
-
-    if (!isOnline) {
+    if (!online) {
         return <div>No internet connection. Please reconnect.</div>;
     }
 

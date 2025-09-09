@@ -1,2 +1,0 @@
-import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{t as s}from"./lib-BigDE8VY.js";import{L as r}from"./components-qdL6XBti.js";const l=t=>e.jsx("div",{className:` text-[15px] md:text-[19px]
-        font-sans tracking-tight font-bold text-blue-900 hover:underline`,children:e.jsx(r,{to:`${t.baseUrl}${t.guid}`,children:e.jsxs("div",{className:"flex place-items-center",children:[e.jsx(s,{className:"font-bold",size:25}),t.children]})})});export{l as C};

@@ -1,6 +1,7 @@
 import React from 'react'
 import CardTitle from '../../../assets/CardTitle'
 import { Link, NavLink } from '@remix-run/react'
+import { CgChevronDoubleRight } from 'react-icons/cg'
 
 const BusinessHeader = ({ businessGuid, data, businessProfile }: any) => {
     return (
@@ -9,14 +10,11 @@ const BusinessHeader = ({ businessGuid, data, businessProfile }: any) => {
                             flex place-content-between rounded-lg
                             place-items-center h-auto py-2 gap-[5px]
                             leading-[1.5em]`}>
-                <div className={`h-full block `}>
-                    <div className={`line-clamp-1 `}>
-                        <CardTitle
-                            baseUrl='/web/account/portfolio/'
-                            guid={businessGuid}>
-                            {data?.businessProfile?.title}
-                        </CardTitle>
-                    </div>
+                <div className="flex items-center text-blue-800 text-[17px] font-sans tracking-tight font-bold hover:underline">
+                    <CgChevronDoubleRight className="mr-1 flex-shrink-0" size={25} />
+                    <span className="line-clamp-1 overflow-hidden">
+                        {data?.businessProfile?.title}
+                    </span>
                 </div>
 
                 <div className={`space-x-2   flex place-content-end`}>

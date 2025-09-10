@@ -42,8 +42,15 @@ const BusinessLayout = ({
     reportTime
 }: any) => {
     //console.log(profileImageData)
-    const [ratingDisplayData, setRatingDisplayData] = useState<RatingDisplayType>()
+    const [ratingDisplayData, setRatingDisplayData] = useState<RatingDisplayType | null>(null)
     const [operatingHoursStatus, setOperatingHoursStatus] = useState<any | undefined>(undefined)
+    const [bListing, setbListing] = useState<any | null>(null)
+
+    useEffect(() => {
+        if (listing) {
+            setbListing(listing)
+        }
+    }, [listing])
 
     useEffect(() => {
         if (listing && ratingsData) {
@@ -122,6 +129,8 @@ const BusinessLayout = ({
                     <div className={`grid grid-cols-12 gap-0 md:gap-4 relative
                     `}>
                         <div className={` col-span-12 lg:col-span-8`}>
+
+                            {/** image block */}
                             <div className={`hidden md:block mt-0`}>
                                 {
                                     Array.isArray(images) && images?.length > 0 && listing &&
@@ -131,6 +140,20 @@ const BusinessLayout = ({
                                     />
                                 }
                             </div>
+
+                            {/**  */}
+                            <div className={``}>
+                                <div className={`lg:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
+                                    {ratingDisplayData !== null && <RatingDisplay data={ratingDisplayData} />}
+                                    {bListing !== null && <Address businessProfile={bListing} />}
+                                    {bListing !== null && <ClaimBusiness listing={bListing} />}
+                                    {/* {
+                                        listing && <Review listing={listing} />
+                                    } */}
+
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -38,7 +38,8 @@ const BusinessLayout = ({
     ratingsData,
     videoGallery,
     products,
-    profileImageData
+    profileImageData,
+    reportTime
 }: any) => {
 
     const [ratingDisplayData, setRatingDisplayData] = useState<RatingDisplayType>()
@@ -57,20 +58,43 @@ const BusinessLayout = ({
     }, [listing, ratingsData])
 
     useEffect(() => {
-        if (listing) {
-            try {
-                ReportTime(listing).then((data) => {
-
-                    setOperatingHoursStatus(data);
-                })
-            } catch (e: any) {
-                logError(e)
-            }
+        if (listing && reportTime) {
+            setOperatingHoursStatus(reportTime);
 
         }
-    }, [listing])
+    }, [listing, reportTime])
     return (
-        <div>
+        <div className={`mt-5`}>
+            <div className={`px-[15px] w-full`}>
+                <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
+
+
+                    {
+                        ratingsData &&
+                        <div className={`mt-4 flex gap-2 place-items-center`}>
+                            <RatingBoxSquare rating={Number(ratingsData?.rating_average)} />
+                            <div className={`flex place-items-center place-content-center
+                                    gap-1 text-black/60 text-[14px]`}>
+                                <div>{formatNumber(Number(ratingsData?.rating_average))}</div>
+                                <div>(<span className='underline'>{formatNumber(ratingsData?.rating_count)} reviews</span>)</div>
+                            </div>
+                        </div>
+                    }
+
+                    {
+                        listing && profileImageData && <Header
+                            listing={listing}
+                            profileImageData={profileImageData}
+                            operatingHoursStatus={operatingHoursStatus}
+                            ratingsData={ratingsData}
+                        />
+                    }
+
+
+                </div>
+
+            </div>
+
 
         </div>
     )

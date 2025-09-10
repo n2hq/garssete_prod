@@ -6,6 +6,7 @@ import { CgFacebook } from "react-icons/cg"
 import { GrYoutube } from "react-icons/gr"
 import { categories } from "./json/categories"
 import { facilityFeatures } from "./json/facility_features"
+import { json } from "@remix-run/react"
 
 export const config = {
     BASE_URL: import.meta.env.VITE_SITE_BASE_URL,
@@ -320,7 +321,7 @@ export const getPage: any = async (criteria: string) => {
 
         return data
     } catch (error: any) {
-        return ({ "message": error.message })
+        return Response.json({ error: true, data: [] }, { status: 200 });
     }
 }
 

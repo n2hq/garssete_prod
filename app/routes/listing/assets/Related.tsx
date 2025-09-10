@@ -105,6 +105,7 @@ const Related = ({
 
                     <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-4`}>
                         {
+                            Array.isArray(listings) &&
                             listings?.map((data: any, index: number) => {
                                 let userId = ''
                                 if (data?.username) {

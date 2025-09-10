@@ -20,6 +20,7 @@ import VerticalHeight from '../asset/VerticalHeight'
 import ResourceNotFound from './assets/ResourceNotFound'
 import { AddVideoType, ProductType } from '~/lib/types'
 import { useOnlineStatus } from '~/context/useOnlineStatus'
+import { ReportTime } from '~/lib/ReportTime'
 
 
 
@@ -35,14 +36,16 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         let ratingData
         let videoGallery: AddVideoType[] | null = null
         let products: ProductType[] | null = null
+        let reportTime
 
         try {
             listing = await getPage(id)
-            //profileImageData = await getBusinessProfileImageData(listing?.gid)
-            //gallery = await getBusinessGallery(listing.gid)
-            //ratingData = await getRatingsReviews(listing.gid)
-            //videoGallery = await getBusinessVideoGallery(listing?.gid)
-            //products = await getProductGallery(listing?.gid, listing?.owner)
+            profileImageData = await getBusinessProfileImageData(listing?.gid)
+            gallery = await getBusinessGallery(listing.gid)
+            ratingData = await getRatingsReviews(listing.gid)
+            videoGallery = await getBusinessVideoGallery(listing?.gid)
+            products = await getProductGallery(listing?.gid, listing?.owner)
+            reportTime = await ReportTime(listing)
         } catch (error: any) {
             console.log(error.message)
         }
@@ -55,7 +58,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             ratingsData: ratingData,
             profileImageData: profileImageData,
             videoGallery: videoGallery,
-            products: products
+            products: products,
+            reportTime: reportTime
         }
     } catch (err: any) {
         logError(err)
@@ -125,12 +129,12 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 const index = () => {
     const data: any = useLoaderData()
     const listing: any = data.listing
-    const gallery: any = data.gallery
+    const gallery: any[] = data.gallery
     const ratingsData: any = data.ratingsData
     const videoGallery: AddVideoType[] = data.videoGallery
     const products: ProductType[] = data.products
     const profileImageData = data.profileImageData
-
+    const reportTime = data.reportTime
 
     useEffect(() => {
         if (listing) {
@@ -147,7 +151,7 @@ const index = () => {
                     <TopAd />
 
                     {
-                        listing.gid !== null && listing.gid !== undefined &&
+                        listing.gid !== null && listing.gid !== undefined && gallery && ratingsData && videoGallery && products && profileImageData && reportTime &&
                         < BusinessLayout
                             listing={listing}
                             images={gallery}
@@ -155,12 +159,13 @@ const index = () => {
                             videoGallery={videoGallery}
                             products={products}
                             profileImageData={profileImageData}
+                            reportTime={reportTime}
                         />
                     }
 
 
 
-                    {/* {
+                    {
                         listing?.category !== undefined ?
                             <Related
                                 category={listing?.category}
@@ -169,7 +174,7 @@ const index = () => {
                                 subtitle={"Related based on the same category."}
                             /> :
                             <ResourceNotFound />
-                    } */}
+                    }
                     <VerticalHeight />
                     <CallToActionSection />
                     <FooterSection />

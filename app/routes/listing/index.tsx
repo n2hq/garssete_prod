@@ -128,20 +128,47 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 
 const index = () => {
-    const data: any = useLoaderData()
-    const listing: any = data.listing
-    const gallery: any[] = data.gallery
-    const ratingsData: any = data.ratingsData
-    const videoGallery: AddVideoType[] = data.videoGallery
-    const products: ProductType[] = data.products
-    const profileImageData = data.profileImageData
-    const reportTime = data.reportTime
+
+    const [online, setOnline] = useState(true)
+    const isOnline = useOnlineStatus()
 
     useEffect(() => {
-        if (listing) {
-            //console.log(listing)
-        }
-    }, [listing])
+
+        setOnline(isOnline)
+
+    }, [isOnline])
+
+
+
+
+
+    const data: any = useLoaderData()
+
+
+    let listing
+    let gallery: any[] | null = null
+    let ratingsData: any
+    let videoGallery: AddVideoType[] | null = null
+    let products: ProductType[] | null = null
+    let profileImageData
+    let reportTime
+
+    listing = data.listing
+    gallery = data.gallery
+    ratingsData = data.ratingsData
+    videoGallery = data.videoGallery
+    products = data.products
+    profileImageData = data.profileImageData
+    reportTime = data.reportTime
+
+
+
+
+    /*  if (!online) {
+         return (
+             <div>Possible no internet connection. Check to reconnect.</div>
+         )
+     } */
 
     return (
         <RatingProvider>
@@ -152,7 +179,16 @@ const index = () => {
                     <TopAd />
 
                     {
-                        listing.gid !== null && listing.gid !== undefined && gallery && ratingsData && videoGallery && products && profileImageData && reportTime &&
+                        !online &&
+                        <div className={`bg-pink-100 w-full text-center py-2`}>
+                            Possible no internet connection. Check to reconnect.
+                        </div>
+                    }
+
+
+
+                    {
+                        listing?.gid !== null && listing?.gid !== undefined && gallery && ratingsData && videoGallery && products && profileImageData && reportTime &&
                         <BusinessLayout
                             listing={listing}
                             images={gallery}

@@ -105,7 +105,7 @@ const BusinessLayout = ({
             </div>
 
             {
-                videoGallery.length > 0 &&
+                videoGallery?.length > 0 &&
                 <Videos
                     videoGallery={videoGallery}
                     listing={listing}

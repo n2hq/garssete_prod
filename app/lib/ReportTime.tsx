@@ -37,37 +37,48 @@ const constructDailyHour = (start: string, end: string) => {
     }
 }
 
+const randomKey = (start: number, keyLength: number) =>
+    (Math.random().toString(36).substring(2, 8) + Date.now().toString(36)).substring(0, 10);
+
+
 const reConstructHours = (operatingHours: any) => {
 
     const opHours = []
     const openStatus = (operatingHours?.open_status)
-
+    Math.random()
     opHours.push({
+        key: randomKey(2, 12),
         day: "Mon",
         hours: constructDailyHour(operatingHours.monday_from, operatingHours.monday_to)
     })
     opHours.push({
+        key: randomKey(2, 12),
         day: "Tue",
         hours: constructDailyHour(operatingHours.tuesday_from, operatingHours.tuesday_to)
     })
     opHours.push({
+        key: randomKey(2, 12),
         day: "Wed",
         hours: constructDailyHour(operatingHours.wednesday_from, operatingHours.wednesday_to)
     })
     opHours.push({
+        key: randomKey(2, 12),
         day: "Thu",
         hours: constructDailyHour(operatingHours.thursday_from, operatingHours.thursday_to)
     })
     opHours.push({
+        key: randomKey(2, 12),
         day: "Fri",
         hours: constructDailyHour(operatingHours.friday_from, operatingHours.friday_to)
     })
     opHours.push({
+        key: randomKey(2, 12),
         day: "Sat",
         hours: constructDailyHour(operatingHours.saturday_from, operatingHours.saturday_to)
     })
 
     opHours.push({
+        key: randomKey(2, 12),
         day: "Sun",
         hours: constructDailyHour(operatingHours.sunday_from, operatingHours.sunday_to)
     })
@@ -93,12 +104,6 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
 
     const data = await getCountriesWithTimezone(countryCode)
     const country = getCountryTimezoneData(countryCode, data)
-
-
-
-
-
-
 
     const operatingHours: any = await getOperatingHours(listing?.gid, listing?.owner)
     //console.log(operatingHours)
@@ -135,11 +140,11 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
     const todayHoursEntry = country.hours.find((entry: any) => entry.day === today);
 
     let isOpen = false;
-    let todayHoursFormatted: any = <span className={` space-x-2`}>
-        <span className={`underline font-bold`}>
+    let todayHoursFormatted: any = <span key={'m1'} className={` space-x-2`}>
+        <span key={'n1'} className={`underline font-bold`}>
             Status:
         </span>
-        <span>
+        <span key={'n2'}>
             Closed Today
         </span>
     </span>;
@@ -163,21 +168,25 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
 
         //todayHoursFormatted = formattedLabel(isOpen) + ` ${today}, ${formatTime(openStr)} - ${formatTime(closeStr)}`;
 
-        todayHoursFormatted = <div className={`w-full flex gap-1.5 place-items-center flex-wrap`}>
-            <span className={`${isOpen ? 'bg-blue-700' : 'bg-red-500'} text-white px-1 py-[2px] rounded-sm text-[13px]`}>{formattedLabel(isOpen)}</span>
-            <span>{today}, </span>
-            <span>{formatTime(openStr)}</span>
-            <span> {"-"} </span>
-            <span>{formatTime(closeStr)}</span>
-        </div>
+        todayHoursFormatted = (
+            <div className="w-full flex gap-1.5 place-items-center flex-wrap">
+                <span key={'o1'} className={`${isOpen ? 'bg-blue-700' : 'bg-red-500'} text-white px-1 py-[2px] rounded-sm text-[13px]`}>
+                    {formattedLabel(isOpen)}
+                </span>
+                <span key={'o2'}>{today}, </span>
+                <span key={'o3'}>{formatTime(openStr)}</span>
+                <span key={'o4'}>-</span>
+                <span key={'o5'}>{formatTime(closeStr)}</span>
+            </div>
+        );
     }
 
 
     if (todayHoursEntry && todayHoursEntry.hours.includes('Not Set')) {
         todayHoursFormatted = <div className={`text-[12px]`}>
-            <span>OPERATING HOURS: </span>
-            <span className={` rounded text-black px-1 py-[2px] uppercase text-sm font-semibold`}>
-                open ended
+            <span key={'p1'}>OPERATING HOURS: </span>
+            <span key={'p2'} className={` rounded text-black px-1 py-[2px] uppercase text-sm font-semibold`}>
+                Hours not set.
             </span>
         </div>
     }

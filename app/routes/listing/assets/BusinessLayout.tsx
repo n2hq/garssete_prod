@@ -41,7 +41,7 @@ const BusinessLayout = ({
     profileImageData,
     reportTime
 }: any) => {
-
+    //console.log(profileImageData)
     const [ratingDisplayData, setRatingDisplayData] = useState<RatingDisplayType>()
     const [operatingHoursStatus, setOperatingHoursStatus] = useState<any | undefined>(undefined)
 
@@ -59,6 +59,7 @@ const BusinessLayout = ({
 
     useEffect(() => {
         if (listing && reportTime) {
+
             setOperatingHoursStatus(reportTime);
 
         }
@@ -82,7 +83,8 @@ const BusinessLayout = ({
                     }
 
                     {
-                        listing && profileImageData && <Header
+                        listing && (profileImageData) &&
+                        <Header
                             listing={listing}
                             profileImageData={profileImageData}
                             operatingHoursStatus={operatingHoursStatus}
@@ -94,6 +96,14 @@ const BusinessLayout = ({
                 </div>
 
             </div>
+
+            {
+                videoGallery.length > 0 &&
+                <Videos
+                    videoGallery={videoGallery}
+                    listing={listing}
+                />
+            }
 
 
         </div>

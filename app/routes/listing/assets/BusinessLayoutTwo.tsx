@@ -32,7 +32,7 @@ import Products from './products/Products';
 
 
 
-const BusinessLayout = ({
+const BusinessLayoutTwo = ({
     listing,
     images,
     ratingsData,
@@ -218,4 +218,4 @@ const BusinessLayout = ({
 }
 
 
-export default BusinessLayout
+export default BusinessLayoutTwo

@@ -44,17 +44,20 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                                     </div> :
                                     <div>
                                         {
-                                            operatingHoursStatus.openStatus === "always_open" && <div className={`bg-green-700 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
+                                            operatingHoursStatus.openStatus === "always_open" &&
+                                            <div key={'1'} className={`bg-green-700 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
                                                 Always Open
                                             </div>
                                         }
                                         {
-                                            operatingHoursStatus.openStatus === "permanently_closed" && <div className={`bg-red-700 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
+                                            operatingHoursStatus.openStatus === "permanently_closed" &&
+                                            <div key={'2'} className={`bg-red-700 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
                                                 Permantently Closed
                                             </div>
                                         }
                                         {
-                                            operatingHoursStatus.openStatus === "temporarily_closed" && <div className={`bg-orange-400 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
+                                            operatingHoursStatus.openStatus === "temporarily_closed" &&
+                                            <div key={'3'} className={`bg-orange-400 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
                                                 Temporarily Closed
                                             </div>
                                         }

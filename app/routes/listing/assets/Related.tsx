@@ -114,7 +114,7 @@ const Related = ({
                                     userId = data?.gid
                                 }
                                 return (
-                                    <div key={index}>
+                                    <div key={userId}>
                                         <div>
                                             <NavLink to={`/${userId}`}>
                                                 <div className={`relative h-[120px] rounded-lg md:h-[180px] overflow-hidden`}>

@@ -46,6 +46,7 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             videoGallery = await getBusinessVideoGallery(listing?.gid)
             products = await getProductGallery(listing?.gid, listing?.owner)
             reportTime = await ReportTime(listing)
+            console.log(profileImageData)
         } catch (error: any) {
             console.log(error.message)
         }
@@ -152,7 +153,7 @@ const index = () => {
 
                     {
                         listing.gid !== null && listing.gid !== undefined && gallery && ratingsData && videoGallery && products && profileImageData && reportTime &&
-                        < BusinessLayout
+                        <BusinessLayout
                             listing={listing}
                             images={gallery}
                             ratingsData={ratingsData}

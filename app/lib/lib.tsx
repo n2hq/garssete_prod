@@ -1027,8 +1027,8 @@ export function getDateInTimeZoneX(timeZone: any) {
     }).format(timeObject);
 
     const displayFormattedTime = <span className={`space-x-1 tracking-tight`}>
-        <span className={`font-bold underline uppercase`}>Local Time:</span>
-        <span>{formattedTime}</span>
+        <span key={'a1'} className={`font-bold underline uppercase`}>Local Time:</span>
+        <span key={'a2'}>{formattedTime}</span>
     </span>
 
     // Construct a Date from the parts (in local machine time)

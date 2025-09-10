@@ -38,11 +38,11 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
         try {
             listing = await getPage(id)
-            profileImageData = await getBusinessProfileImageData(listing?.gid)
-            gallery = await getBusinessGallery(listing.gid)
-            ratingData = await getRatingsReviews(listing.gid)
-            videoGallery = await getBusinessVideoGallery(listing?.gid)
-            products = await getProductGallery(listing?.gid, listing?.owner)
+            //profileImageData = await getBusinessProfileImageData(listing?.gid)
+            //gallery = await getBusinessGallery(listing.gid)
+            //ratingData = await getRatingsReviews(listing.gid)
+            //videoGallery = await getBusinessVideoGallery(listing?.gid)
+            //products = await getProductGallery(listing?.gid, listing?.owner)
         } catch (error: any) {
             console.log(error.message)
         }
@@ -57,8 +57,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             videoGallery: videoGallery,
             products: products
         }
-    } catch (err) {
-        throw new Response("You are offline. Please reconnect.", { status: 503 });
+    } catch (err: any) {
+        logError(err)
     }
 
 }

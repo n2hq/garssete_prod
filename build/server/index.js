@@ -830,47 +830,6 @@ const getBusinessProfileBgData = async (guid) => {
     return void 0;
   }
 };
-const getBusinessGallery = async (businessGuid) => {
-  const BASE_URL = "https://edition.garssete.com";
-  const endpoint = `/api/listing/business_gallery/${businessGuid}`;
-  const url = BASE_URL + endpoint;
-  try {
-    const response = await fetch(
-      url,
-      {
-        method: "GET",
-        headers
-      }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return { "message": error.message };
-  }
-};
-const getRatingsReviews = async (businessGuid) => {
-  const endpoint = `/api/rating/ratings_reviews/${businessGuid}`;
-  const url = config.BASE_URL + endpoint;
-  try {
-    const response = await fetch(
-      url,
-      {
-        method: "GET",
-        headers
-      }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return { "message": error.message };
-  }
-};
 const getPage = async (criteria) => {
   const endpoint = "/api/listing/" + criteria;
   const url = config.BASE_URL + endpoint;
@@ -1466,33 +1425,6 @@ const updateVideo = async (video) => {
     }, 10));
   } catch (error) {
     return void 0;
-  }
-};
-const getBusinessVideoGallery = async (businessGuid) => {
-  let endpoint = "";
-  if (businessGuid !== "") {
-    endpoint = `/api/listing/video_links/${businessGuid}`;
-  } else {
-    throw new Error(`Error: Contact Admin`);
-  }
-  const url = config.BASE_URL + endpoint;
-  try {
-    const response = await fetch(
-      url,
-      {
-        method: "GET",
-        headers
-      }
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    return new Promise((resolve) => setTimeout(() => {
-      resolve(data);
-    }, 10));
-  } catch (error) {
-    return null;
   }
 };
 const searchCategories = (searchTerm) => {
@@ -4821,11 +4753,6 @@ const loader$Q = async ({ request, params }) => {
     let products = null;
     try {
       listing = await getPage(id);
-      profileImageData = await getBusinessProfileImageData(listing == null ? void 0 : listing.gid);
-      gallery = await getBusinessGallery(listing.gid);
-      ratingData = await getRatingsReviews(listing.gid);
-      videoGallery = await getBusinessVideoGallery(listing == null ? void 0 : listing.gid);
-      products = await getProductGallery(listing == null ? void 0 : listing.gid, listing == null ? void 0 : listing.owner);
     } catch (error) {
       console.log(error.message);
     }
@@ -4838,7 +4765,7 @@ const loader$Q = async ({ request, params }) => {
       products
     };
   } catch (err) {
-    throw new Response("You are offline. Please reconnect.", { status: 503 });
+    logError(err);
   }
 };
 const meta$1 = ({ data }) => {

@@ -105,6 +105,36 @@ const BusinessLayout = ({
                 />
             }
 
+            {
+                images?.length > 0 && listing &&
+                <div className={`bg-black h-fit md:hidden
+                            mt-4`}>
+                    <ListingCarousel
+                        images={images}
+                        listing={listing}
+                    />
+
+                </div>
+            }
+
+            <div className={` md:pt-4 md:px-[12px]`}>
+                <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
+                    <div className={`grid grid-cols-12 gap-0 md:gap-4 relative
+                    `}>
+                        <div className={` col-span-12 lg:col-span-8`}>
+                            <div className={`hidden md:block mt-0`}>
+                                {
+                                    images?.length > 0 && listing &&
+                                    <ImageBlock
+                                        images={images}
+                                        listing={listing}
+                                    />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     )

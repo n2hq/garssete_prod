@@ -661,7 +661,7 @@ const getSiteLogo = () => {
   return /* @__PURE__ */ jsx("span", { className: ` 
          `, children: "Garssete" });
 };
-const headers = {
+const headers$1 = {
   "Access-Control-Allow-Origin": "*",
   // Allow all origins
   "Access-Control-Allow-Methods": "*",
@@ -679,7 +679,7 @@ function DoResponse(json2, code = 500) {
     JSON.stringify(json2),
     {
       status: code,
-      headers
+      headers: headers$1
     }
   );
 }
@@ -693,7 +693,7 @@ function GetResponse(data, success = false, code = 200) {
     JSON.stringify(response),
     {
       status: code,
-      headers
+      headers: headers$1
     }
   );
 }
@@ -737,7 +737,7 @@ const getSearch = async (criteria, page) => {
   try {
     const response = await fetch(url, {
       method: "GET",
-      headers
+      headers: headers$1
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -755,7 +755,7 @@ const getFeaturedListing = async () => {
   try {
     const response = await fetch(url, {
       method: "GET",
-      headers
+      headers: headers$1
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -774,7 +774,7 @@ const getListingByCategory = async (category, limit) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -794,7 +794,7 @@ const getRating = async (userGuid, businessGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -814,7 +814,7 @@ const getBusinessProfileImageData = async (guid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -836,7 +836,7 @@ const getBusinessProfileBgData = async (guid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -859,7 +859,7 @@ const getBusinessGallery = async (businessGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -879,7 +879,7 @@ const getRatingsReviews = async (businessGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -897,7 +897,7 @@ const getPage = async (criteria) => {
   try {
     const response = await fetch(url, {
       method: "GET",
-      headers
+      headers: headers$1
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -919,7 +919,7 @@ const getCountries = async () => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -945,7 +945,7 @@ const getStates = async (countryCode) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -967,7 +967,7 @@ const getCities = async (countryCode, stateCode) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -989,7 +989,7 @@ const getCategories = async () => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1012,7 +1012,7 @@ const getUserProfile = async (guid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1034,7 +1034,7 @@ const getUserProfileImageData = async (guid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1057,7 +1057,7 @@ const getPortfolio = async (guid, q) => {
   try {
     const response = await fetch(url, {
       method: "GET",
-      headers
+      headers: headers$1
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -1079,7 +1079,7 @@ const getOperatingHours = async (businessGuid, userGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1101,7 +1101,7 @@ const saveOperatingHours = async (openStatus, workingHours, businessGuid, userGu
   try {
     const response = await fetch(url, {
       method: "PUT",
-      headers,
+      headers: headers$1,
       body: JSON.stringify({ openStatus, workingHours })
     });
     if (!response.ok) {
@@ -1129,7 +1129,7 @@ const getGallery = async (businessGuid, userGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1151,7 +1151,7 @@ const getSysFacilityFeatures = async () => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1174,7 +1174,7 @@ const getSelectedFacilityFeatures = async (userGuid, businessGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1196,7 +1196,7 @@ const getSysSocialMedia = async () => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1218,7 +1218,7 @@ const getSelectedSocialMedia = async (userGuid, businessGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1240,7 +1240,7 @@ const getBusiness = async (userGuid, businessGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1262,7 +1262,7 @@ const getRecents = async () => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1306,7 +1306,7 @@ const changeEmail = async (guid, email) => {
       url,
       {
         method: "PUT",
-        headers
+        headers: headers$1
       }
     );
     const data = await response.json();
@@ -1324,7 +1324,7 @@ const sendEmail = async (data) => {
   try {
     const response = await fetch(url, {
       method: "GET",
-      headers
+      headers: headers$1
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -1427,7 +1427,7 @@ const saveVideo = async (video) => {
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers,
+      headers: headers$1,
       body: JSON.stringify(video)
     });
     const data = await response.json();
@@ -1451,7 +1451,7 @@ const getVideoGallery = async (businessGuid, userGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1477,7 +1477,7 @@ const updateVideo = async (video) => {
   try {
     const response = await fetch(url, {
       method: "PUT",
-      headers,
+      headers: headers$1,
       body: JSON.stringify(video)
     });
     const data = await response.json();
@@ -1501,7 +1501,7 @@ const getBusinessVideoGallery = async (businessGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1534,7 +1534,7 @@ const getProductGallery = async (businessGuid, userGuid) => {
       url,
       {
         method: "GET",
-        headers
+        headers: headers$1
       }
     );
     if (!response.ok) {
@@ -1581,7 +1581,7 @@ function AuthProvider({ children }) {
       let vep = SITE_BASE_URL + verifyep;
       const response = await fetch(vep, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify({ "token": accessToken })
       });
       if (response.status !== 200) {
@@ -1635,7 +1635,7 @@ function AuthProvider({ children }) {
     try {
       const response = await fetch(requesturl, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       let tokens = await response.json();
@@ -1685,7 +1685,7 @@ function AuthProvider({ children }) {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       var respObj = await response.json();
@@ -2061,7 +2061,7 @@ function EditPhotoDialogProvider({ children }) {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -2695,7 +2695,7 @@ function EditVideoDialogProvider({ children }) {
     try {
       const response = await fetch(url, {
         method: "DELETE",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -2888,6 +2888,14 @@ const links = () => [
     href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
   }
 ];
+const headers = () => {
+  return {
+    "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+    "Pragma": "no-cache",
+    "Expires": "0",
+    "Surrogate-Control": "no-store"
+  };
+};
 function Layout$1({ children }) {
   const navigation = useNavigation();
   useEffect(() => {
@@ -2928,6 +2936,7 @@ const route0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   __proto__: null,
   Layout: Layout$1,
   default: App,
+  headers,
   links
 }, Symbol.toStringTag, { value: "Module" }));
 const HomeNav = () => {
@@ -5698,7 +5707,7 @@ const getCountriesWithTimezone = async (countryCode) => {
   try {
     const response = await fetch(endpoint, {
       method: "GET",
-      headers
+      headers: headers$1
     });
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -5861,6 +5870,7 @@ const loader$Q = async ({ request, params }) => {
     } catch (error) {
       console.log(error.message);
     }
+    /* @__PURE__ */ jsx(RatingProvider, { children: /* @__PURE__ */ jsx(GalleryProvider, { children: "a" }) });
     return {
       listing,
       gallery,
@@ -7658,7 +7668,7 @@ const SignupForm = () => {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -8415,7 +8425,7 @@ const ProfileForm = ({ loaderData, user, userProfileData }) => {
     try {
       const response = await fetch(url, {
         method: "PUT",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -8721,7 +8731,7 @@ const EmailForm = ({ loaderData, user }) => {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -8899,7 +8909,7 @@ const ChangePasswordForm = ({ loaderData, user }) => {
     try {
       const response = await fetch(url, {
         method: "PUT",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -9205,7 +9215,7 @@ const DeactivateProfileForm = ({ loaderData, user }) => {
     try {
       const response = await fetch(url, {
         method: "PUT",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -10567,7 +10577,7 @@ const BusinessProfileForm = ({ data }) => {
     try {
       const response = await fetch(url, {
         method: "PUT",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(datar)
       });
       if (!response.ok) {
@@ -11190,7 +11200,7 @@ const CreatePageForm = ({ data, user }) => {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(datar)
       });
       if (!response.ok) {
@@ -12278,7 +12288,7 @@ function AddProductDialogProvider({ children }) {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -12540,7 +12550,7 @@ function EditProductDialogProvider({ children }) {
     try {
       const response = await fetch(url, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -13624,7 +13634,7 @@ const FacilityFeatures = ({
       };
       const response = await fetch(url, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (response.ok) {
@@ -13818,7 +13828,7 @@ const Activate = ({
       };
       const res = await fetch(url, {
         method: "PUT",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       notification.alertReload("Success", "Completed!");
@@ -14009,7 +14019,7 @@ const SocialMedia = ({
       };
       const response = await fetch(url, {
         method: "POST",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (response.ok) {
@@ -14200,7 +14210,7 @@ const DeleteForm = ({
     try {
       const response = await fetch(url, {
         method: "PUT",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -14524,7 +14534,7 @@ const ResetPasswordForm$1 = ({ guid }) => {
     try {
       const response = await fetch(url, {
         method: "PUT",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -14723,7 +14733,7 @@ const ResetPasswordForm = ({ guid }) => {
     try {
       const response = await fetch(url, {
         method: "PUT",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       if (!response.ok) {
@@ -14748,7 +14758,7 @@ const ResetPasswordForm = ({ guid }) => {
     try {
       const response = await fetch(url, {
         method: "PUT",
-        headers,
+        headers: headers$1,
         body: JSON.stringify(data)
       });
       const respObj = await response.json();

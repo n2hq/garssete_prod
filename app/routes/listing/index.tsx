@@ -51,6 +51,11 @@ export const loader: LoaderFunction = async ({ request, params }) => {
             console.log(error.message)
         }
 
+        <RatingProvider>
+            <GalleryProvider>
+                a
+            </GalleryProvider>
+        </RatingProvider>
 
 
         return {

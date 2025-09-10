@@ -124,7 +124,7 @@ const BusinessLayout = ({
                         <div className={` col-span-12 lg:col-span-8`}>
                             <div className={`hidden md:block mt-0`}>
                                 {
-                                    Array.isArray(images) && listing &&
+                                    Array.isArray(images) && images?.length > 0 && listing &&
                                     <ImageBlock
                                         images={images}
                                         listing={listing}

@@ -141,19 +141,82 @@ const BusinessLayout = ({
                                 }
                             </div>
 
-                            {/**  */}
+                            {/** right sticky */}
                             <div className={``}>
                                 <div className={`lg:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
+
                                     {ratingDisplayData !== null && <RatingDisplay data={ratingDisplayData} />}
-                                    {bListing !== null && <Address businessProfile={bListing} />}
-                                    {bListing !== null && <ClaimBusiness listing={bListing} />}
+
+                                    {
+                                        bListing !== null && <Address businessProfile={bListing} />
+                                    }
+
+                                    {bListing !== null && <ClaimBusiness listing={bListing} />
+                                    }
                                     {/* {
                                         listing && <Review listing={listing} />
                                     } */}
 
                                 </div>
-                            </div>
 
+                                <div className={`px-[15px] md:px-[0px]`}>
+                                    {/** short description */}
+                                    <ShortDescription listing={listing} />
+
+
+                                    {/** location with hours */}
+                                    {
+                                        listing && operatingHoursStatus && <LocationWithHours listing={listing} operatingHoursStatus={operatingHoursStatus} />
+                                    }
+
+
+                                    {/** long description */}
+                                    <Description listing={listing} />
+
+
+                                    [{/** social media */}
+                                    {listing && <SocialMedia listing={listing} />}
+
+
+                                    {/** facility features */}
+                                    {listing && <BusinessFeatures listing={listing} />}
+
+
+                                    {/** business phrases */}
+                                    {listing && <BusinessPhrases listing={listing} />}
+
+
+                                    {/** products */}
+                                    {listing && <Products products={products}
+                                        listing={listing}
+                                    />}
+
+
+                                    {/** services */}
+                                    {listing && <Services listing={listing} />}
+
+
+
+                                    {/** business ratings */}
+                                    {listing && <BusinessRatings listing={listing} />}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className={`col-span-12 lg:col-span-4 hidden lg:block`}>
+                            {/** sticky sidebar */}
+                            <div className={` sticky top-[100px]`}>
+
+                                {ratingDisplayData &&
+                                    <RatingDisplay data={ratingDisplayData} />
+                                }
+                                {listing &&
+                                    <Address businessProfile={listing} />
+                                }
+                                {listing && <ClaimBusiness listing={listing} />}
+                                {/* <Review /> */}
+                            </div>
                         </div>
                     </div>
                 </div>

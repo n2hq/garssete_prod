@@ -141,7 +141,7 @@ const BusinessLayout = ({
                                 }
                             </div>
 
-                            {/** right sticky */}
+                            {/**  */}
                             <div className={``}>
                                 <div className={`lg:hidden ${images?.length <= 0 && 'mt-5'}  md:mt-0 mb-5`}>
 
@@ -174,7 +174,7 @@ const BusinessLayout = ({
                                     <Description listing={listing} />
 
 
-                                    [{/** social media */}
+                                    {/** social media */}
                                     {listing && <SocialMedia listing={listing} />}
 
 

@@ -20,8 +20,8 @@ const Description = ({ listing }: any) => {
             <ComponentTitle title='About this business' />
             <div className={`flex place-items-start place-content-start
                 gap-2 mt-4 mb-3`}>
-                <div className={`rounded-full bg-black w-[30px] h-[30px]
-                    overflow-hidden relative`}>
+                <div className={`rounded-full bg-white w-[30px] h-[30px]
+                    overflow-hidden relative border`}>
                     <img
                         className={`object-cover w-full h-full`}
                         src={img} alt="" />

@@ -5,9 +5,9 @@ const OnlineStatusContext = createContext<boolean | null>(null);
 
 export function useOnlineStatusContext() {
     const context = useContext(OnlineStatusContext);
-    if (context === null) {
+    /* if (context === null) {
         throw new Error("useOnlineStatusContext must be used within an OnlineStatusProvider");
-    }
+    } */
     return context;
 }
 
@@ -35,7 +35,7 @@ export const OnlineStatusProvider = ({ children }: { children: React.ReactNode }
                 <div
                     style={{
                         position: "fixed",
-                        top: "60px",
+                        bottom: 0,
                         left: 0,
                         right: 0,
                         background: "blue",
@@ -44,6 +44,8 @@ export const OnlineStatusProvider = ({ children }: { children: React.ReactNode }
                         textAlign: "center",
                         fontWeight: "bold",
                         zIndex: 1000,
+
+
                     }}
                 >
                     ⚠️ You are offline. Please check your internet connection.

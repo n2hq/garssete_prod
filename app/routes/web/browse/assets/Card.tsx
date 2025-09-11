@@ -287,9 +287,12 @@ const Card = ({ listing }: any) => {
                         <a href={`mailto:${listing?.email_address}`} key={34}>
                             <MdEmail size={20} />
                         </a>
-                        <a href={`tel:${listing?.phone}`} key={30}>
-                            <BiPhone size={20} />
-                        </a>
+                        {
+                            listing?.phone &&
+                            <a href={`tel:${listing?.phone}`} key={30}>
+                                <BiPhone size={20} />
+                            </a>
+                        }
                         {
                             socialMedia !== null &&
                             socialMedia?.map((media: any, index: number) => {

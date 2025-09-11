@@ -7,7 +7,7 @@ import { LoaderFunction } from '@remix-run/node'
 import { useAuth } from '~/context/AuthContext'
 import { getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData, IsAuthenticated } from '~/lib/lib'
 import CardTitle from '../assets/CardTitle'
-import CardHeader from '../portfolio/business/assets/CardHeader'
+import CardHeader from '../assets/CardHeader'
 
 
 

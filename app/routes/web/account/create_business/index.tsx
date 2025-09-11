@@ -5,7 +5,7 @@ import { useAuth } from '~/context/AuthContext'
 import CreatePageForm from './assets/CreatePageForm'
 import { getCategories, getCities, getCountries, getStates, getUserProfile, IsAuthenticated } from '~/lib/lib'
 import CardTitle from '../assets/CardTitle'
-import CardHeader from '../portfolio/business/assets/CardHeader'
+import CardHeader from '../assets/CardHeader'
 
 const index = () => {
     useEffect(() => {

@@ -5,7 +5,7 @@ import { useAuth } from '~/context/AuthContext'
 import { getUserProfile, IsAuthenticated } from '~/lib/lib'
 import ChangePasswordForm from './assets/ChangePasswordForm'
 import CardTitle from '../assets/CardTitle'
-import CardHeader from '../portfolio/business/assets/CardHeader'
+import CardHeader from '../assets/CardHeader'
 
 const index = () => {
     useEffect(() => {

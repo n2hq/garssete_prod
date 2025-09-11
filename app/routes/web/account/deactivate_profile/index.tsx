@@ -7,7 +7,7 @@ import ChangePasswordForm from '../change_password/assets/ChangePasswordForm'
 import DeactivateUserForm from './assets/DeactivateProfileForm'
 import DeactivateProfileForm from './assets/DeactivateProfileForm'
 import CardTitle from '../assets/CardTitle'
-import CardHeader from '../portfolio/business/assets/CardHeader'
+import CardHeader from '../assets/CardHeader'
 
 const index = () => {
     useEffect(() => {

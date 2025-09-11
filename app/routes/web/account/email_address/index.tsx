@@ -6,7 +6,7 @@ import { getUserProfile, IsAuthenticated } from '~/lib/lib'
 import EmailForm from './assets/EmailForm'
 import CardTitle from '../assets/CardTitle'
 import { redirect } from '@remix-run/react'
-import CardHeader from '../portfolio/business/assets/CardHeader'
+import CardHeader from '../assets/CardHeader'
 
 const index = () => {
     useEffect(() => {

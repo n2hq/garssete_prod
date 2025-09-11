@@ -6,7 +6,7 @@ import { formatNumber, getPortfolio, getUserProfile, IsAuthenticated } from '~/l
 import Portfolio from './assets/Portfolio'
 import CardTitle from '../assets/CardTitle'
 import BusinessHeader from './business/assets/BusinessHeader'
-import CardHeader from './business/assets/CardHeader'
+import CardHeader from '../assets/CardHeader'
 import { useLocation } from '@remix-run/react'
 import { PortfolioSearchBox } from './business/assets/PortfolioSearchBox'
 import CardHeaderWithSearch from './business/assets/CardHeaderWithSearch'

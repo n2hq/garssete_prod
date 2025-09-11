@@ -31,6 +31,8 @@ export const getSiteLogo = () => {
     )
 }
 
+
+
 export const headers = {
     "Access-Control-Allow-Origin": "*",  // Allow all origins
     "Access-Control-Allow-Methods": "*",  // Allow specific methods

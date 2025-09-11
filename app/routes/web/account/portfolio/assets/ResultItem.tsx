@@ -61,8 +61,8 @@ const ResultItem = ({ listing, index }: any) => {
                         <div className={`md:flex md:place-content-between 
                 w-full md:gap-x-[4px]`}>
                             {/** left */}
-                            <div className={`w-full md:w-[60%] -space-y-1`}>
-                                <div className={`font-bold text-[14px] text-brown-800 `}>
+                            <div className={`w-full md:w-[60%] -space-y-1 block`}>
+                                <div className={`font-bold text-[14px] text-brown-800 line-clamp-1`}>
                                     {listing.title}
                                 </div>
 

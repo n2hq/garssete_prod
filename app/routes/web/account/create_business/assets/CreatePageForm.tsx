@@ -97,7 +97,7 @@ const CreatePageForm = ({ data, user }: any) => {
                     }
                 }
 
-                if (notification.confirm('Page Created. Do you wish to create another page?', handleOption)) {
+                if (notification.confirm('Page created. Do you wish to create another page?', handleOption)) {
 
                 }
 
@@ -134,6 +134,9 @@ const CreatePageForm = ({ data, user }: any) => {
             setValue("city_id", "")
         }
     }, [newStateCode])
+
+
+
 
 
     return (

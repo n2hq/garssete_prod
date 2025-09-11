@@ -50,7 +50,7 @@ export const NotificationProvider = ({ children }: any) => {
     const alert = async (title: string, message: string) => {
         {/** reset show and type */ }
         cancel()
-        setMessage(message || 'Completed!')
+        setMessage(message || 'Process Completed!')
         setTitle(title || 'Alert')
         await new Promise((resolve) => setTimeout(resolve, 100));
         setShow(true)
@@ -70,7 +70,7 @@ export const NotificationProvider = ({ children }: any) => {
     const alertReload = async (title: string, message: string) => {
         {/** reset show and type */ }
         cancel()
-        setMessage(message || 'Completed!')
+        setMessage(message || 'Process Completed!')
         setTitle(title || 'Alert')
         await new Promise((resolve) => setTimeout(resolve, 100));
         setShow(true)
@@ -173,13 +173,13 @@ export const Confirm = ({ handleClose, working, message, handleConfirmCancel, se
                         onClick={() => onClose(false)}
                         className={`px-3 bg-red-500 text-white rounded-[5px]
                                 text-[14px] py-1 hover:bg-red-800`}>
-                        Cancel
+                        No
                     </button>
                     <button
                         onClick={() => onClose(true)}
                         className={`px-3 bg-gray-100 py-1 border-[1px] rounded-[5px]
                                 text-[14px] hover:bg-gray-200`}>
-                        Continue
+                        Yes
                     </button>
                 </div>
             </div>

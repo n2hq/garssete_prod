@@ -21,6 +21,7 @@ import ResourceNotFound from './assets/ResourceNotFound'
 import { AddVideoType, ProductType } from '~/lib/types'
 import { useOnlineStatus } from '~/context/useOnlineStatus'
 import { ReportTime } from '~/lib/ReportTime'
+import { OnlineStatusProvider } from '~/context/OnlineStatusContext'
 
 
 
@@ -134,19 +135,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 const index = () => {
 
-    const [online, setOnline] = useState(true)
-    const isOnline = useOnlineStatus()
-
-    useEffect(() => {
-
-        setOnline(isOnline)
-
-    }, [isOnline])
-
-
-
-
-
     const data: any = useLoaderData()
 
 
@@ -176,20 +164,13 @@ const index = () => {
      } */
 
     return (
+
         <RatingProvider>
             <GalleryProvider>
                 <Layout>
 
 
                     <TopAd />
-
-                    {
-                        !online &&
-                        <div className={`bg-pink-100 w-full text-center py-2`}>
-                            Possible no internet connection. Check to reconnect.
-                        </div>
-                    }
-
 
 
                     {
@@ -224,6 +205,7 @@ const index = () => {
             </GalleryProvider>
 
         </RatingProvider>
+
     )
 }
 

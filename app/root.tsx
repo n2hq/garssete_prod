@@ -21,6 +21,7 @@ import { AddVideoDialogProvider } from "./context/AddVideoDialogContext";
 import { VideoSliderProvider } from "./context/VideoSliderContext";
 import EditVideoDialog from "./routes/web/account/portfolio/business/videos/videos/EditVideoDialog";
 import { EditVideoDialogProvider } from "./context/EditVideoDialogContext";
+import { OnlineStatusProvider } from "./context/OnlineStatusContext";
 
 
 export const links: LinksFunction = () => [
@@ -93,7 +94,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   <AddPhotoDialogProvider>
                     <AddVideoDialogProvider>
                       <AuthProvider>
-                        {children}
+                        <OnlineStatusProvider>
+                          {children}
+                        </OnlineStatusProvider>
                       </AuthProvider>
                     </AddVideoDialogProvider>
                   </AddPhotoDialogProvider>

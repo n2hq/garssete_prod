@@ -8,15 +8,12 @@ import { useAuth } from '~/context/AuthContext'
 import { getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData, IsAuthenticated } from '~/lib/lib'
 import CardTitle from '../assets/CardTitle'
 import CardHeader from '../assets/CardHeader'
-import Profile from './assets/Profile'
-import ProfileLayout from '../assets/ProfileLayout'
-import { useLoaderData } from '@remix-run/react'
 
 
 
 
 
-const index = () => {
+const indexbackup = () => {
 
     useEffect(() => {
         IsAuthenticated(localStorage)
@@ -109,17 +106,32 @@ const index = () => {
 
 
     return (
-        <ProfileLayout>
-            {
-                userProfile && data && !loading && user &&
-                <Profile
-                    loaderData={data}
-                    user={user}
-                    userProfileData={data.userProfile}
-                />
-            }
-        </ProfileLayout>
+        <AccountLayout>
+            <ContentLayout title={'Account Profile'}>
+                {
+                    userProfile && data && user && !loading ?
+                        <div>
+                            <CardHeader
+                                base_url={'/web/account/profile'}
+                                title={` ${userProfile?.first_name || ""} ${userProfile?.lastname || ""}`}
+
+                            />
+
+
+
+                            <ProfileForm
+                                loaderData={data}
+                                user={user}
+                                userProfileData={data.userProfile}
+                            />
+                        </div> :
+                        <div>
+                            Loading...
+                        </div>
+                }
+            </ContentLayout>
+        </AccountLayout>
     )
 }
 
-export default index
+export default indexbackup

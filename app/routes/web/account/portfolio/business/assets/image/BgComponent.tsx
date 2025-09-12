@@ -85,7 +85,7 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
 
     return (
         <div className={`relative`}>
-            <div className='relative bg-gray-600 w-full h-[200px] z-[40]  overflow-hidden'>
+            <div className='relative bg-gray-600 w-full h-[200px] z-[40] shadow-lg'>
                 {
                     imgSrc &&
                     <img

@@ -48,35 +48,29 @@ const BusinessMenu = ({ title, guid, userGuid }: any) => {
         setShowSettings(false)
     }
     return (
-        <div className=' flex place-content-between w-full  px-4 pt-3 mt-1 z-[1000]'>
-            <div className='  rounded-lg text-xl text-black font-normal'>
-                {title}
-            </div>
+        <div className=' w-fit   z-[1000] '>
 
-            <div className={`relative flex flex-col place-items-center place-content-end 
-                 w-[180px]  gap-3  text-gray-500 font-light font-sans
-                
-                
-                `}>
+
+            <div className={`relative`}>
                 <button
-                    className={`rounded-full cursor-pointer w-full bg-blue-900
-                         text-white shadow-md shadow-blue-400 py-1 flex place-items-center`}
+                    className={`rounded-full cursor-pointer bg-blue-900 w-[50px] h-[50px]
+                         text-white shadow-md shadow-blue-400 py-1 flex place-items-center place-content-center`}
                     onMouseDown={() => displaySettings()}
                     onBlur={() => hideSettings()}
                 >
-                    <MdMenu size={30} />
-                    <div className={`text-[17px]`}>Settings</div>
+                    <MdMenu size={30} className={`${showSettings ? 'rotate-90 transition-all duration-1000 ease-in-out' : 'rotate-0 transition-all duration-1000 ease-in-out'}`} />
+
                 </button>
 
-                <div className={`${showSettings ? 'block' : 'hidden'} absolute w-full top-8 rounded-lg z-[10000]
-                border-[1px] border-gray-100 bg-white shadow-lg  `}>
+                <div className={`${showSettings ? 'block' : 'hidden'} absolute w-[180px] top-[50px] rounded-lg z-[10000] text-black
+                border-[1px] border-gray-100 bg-white shadow-lg right-[20px] `}>
                     <div className='divide-y-[1px] divide-gray-500/20 '>
                         {
                             settingsLinks.map((item, index) => {
                                 const url = pathname + item.link
                                 return (
                                     <div key={index} className={`py-2.5 px-3 text-[14px]
-                                     text-black font-sans font-semibold
+                                     text-black font-sans font-semibold hover:bg-blue-200
                                      ${location.pathname === url && 'bg-gray-300/30'}
                                      `}>
                                         <Link to={`${url}`}>

@@ -2,7 +2,7 @@ import React from 'react'
 import BusinessHeader from '../portfolio/business/assets/BusinessHeader'
 import BusinessMenu from '../portfolio/business/assets/BusinessMenu'
 
-const ContentLayout = ({ children, businessGuid, data, businessProfile, title }: any) => {
+const PortfolioLayout = ({ children, businessGuid, data, businessProfile, title }: any) => {
     return (
         <div>
 
@@ -14,25 +14,14 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title }:
                         {title}
                     </div>
                     <div className={`text-[13px] flex place-items-center gap-2`}>
-                        {
-                            businessProfile?.gid !== undefined && businessProfile?.gid !== "" && businessProfile?.gid !== "" &&
-                            <a href={`/web/account/portfolio/${businessGuid}`}
-                                className={`border py-[5px] px-[10px] rounded-full bg-blue-50`}
-                            >
-                                Back
-                            </a>
-                        }
+
 
                         <a href={`/web/account/portfolio`}
                             className={`border py-[5px] px-[10px] rounded-full bg-blue-50`}
                         >
-                            Portfolio
+                            Portfolio Home
                         </a>
-                        <a href={`/${businessGuid}`}
-                            className={`border py-[5px] px-[10px] rounded-full bg-blue-50`}
-                        >
-                            Preview
-                        </a>
+
                     </div>
                 </div>
                 <div className={`px-[15px]  pt-4 `}>
@@ -50,4 +39,4 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title }:
     )
 }
 
-export default ContentLayout
+export default PortfolioLayout

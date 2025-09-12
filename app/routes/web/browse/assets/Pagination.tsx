@@ -1,10 +1,11 @@
 import { Link, useSearchParams } from '@remix-run/react';
 import { PaginationData } from '~/lib/types';
 
-
 interface PaginationProps {
     pagination: PaginationData;
 }
+
+const maxVisiblePages = 3; // 👈 moved outside so it's a single constant
 
 export default function Pagination({ pagination }: PaginationProps) {
     const [searchParams] = useSearchParams();
@@ -13,7 +14,6 @@ export default function Pagination({ pagination }: PaginationProps) {
 
     const getPageNumbers = () => {
         const pages = [];
-        const maxVisiblePages = 5;
 
         let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
         let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);

@@ -10,6 +10,7 @@ import CardHeader from '../assets/CardHeader'
 import { useLocation } from '@remix-run/react'
 import { PortfolioSearchBox } from './business/assets/PortfolioSearchBox'
 import CardHeaderWithSearch from './business/assets/CardHeaderWithSearch'
+import PortfolioLayout from '../assets/PortfolioLayout'
 
 
 
@@ -85,7 +86,7 @@ const Index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={'My Portfolio'}>
+            <PortfolioLayout title={'My Portfolio'}>
 
                 {userProfile === null ? 'Loading...' : ''}
 
@@ -109,7 +110,7 @@ const Index = () => {
                 {/*  {
                     data && <EmailForm loaderData={data} user={user} />
                 } */}
-            </ContentLayout>
+            </PortfolioLayout>
         </AccountLayout>
     )
 }

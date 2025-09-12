@@ -152,15 +152,15 @@ const BusinessProfile = ({ data }: any) => {
             <div>
                 <hr />
 
-                <div className={`relative`}>
+                <div className={`relative w-full flex place-items-center gap-1 place-content-end px-[10px]`}>
                     <a href={`/web/account/portfolio`}
-                        className={` py-[9px] px-[20px] rounded-full absolute right-[300px] top-[9px] bg-blue-900 shadow-lg shadow-blue-400 text-white`}
+                        className={` py-[9px] px-[20px] rounded-full bg-blue-900 shadow-lg shadow-blue-400 text-white`}
                     >
                         Portfolio
                     </a>
 
                     <a href={`/${data.businessProfile.gid}`}
-                        className={` py-[9px] px-[20px] rounded-full absolute right-[200px] top-[9px] bg-blue-900 shadow-lg shadow-blue-400 text-white`}
+                        className={` py-[9px] px-[20px] rounded-full bg-blue-900 shadow-lg shadow-blue-400 text-white`}
                     >
                         Preview
                     </a>
@@ -174,11 +174,11 @@ const BusinessProfile = ({ data }: any) => {
 
 
                 </div>
-                <form className=' w-full' onSubmit={handleSubmit(handleAddBusiness)}>
+                <form className={`w-full px-[10px]`} onSubmit={handleSubmit(handleAddBusiness)}>
 
 
-                    <div className={`${formWrapperClass} mt-0  rounded-lg pt-4
-                                lg:max-w-[500px] w-full mx-auto `}>
+                    <div className={`${formWrapperClass} mt-0  rounded-lg pt-4 md:max-w-[80%]
+                                lg:max-w-[60%] w-full mx-auto `}>
 
                         <Input
                             controlTitle={"Username"}

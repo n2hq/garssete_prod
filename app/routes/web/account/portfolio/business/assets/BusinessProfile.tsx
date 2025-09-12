@@ -153,6 +153,12 @@ const BusinessProfile = ({ data }: any) => {
                 <hr />
 
                 <div className={`relative`}>
+                    <a href={`/web/account/portfolio`}
+                        className={` py-[9px] px-[20px] rounded-full absolute right-[300px] top-[9px] bg-blue-900 shadow-lg shadow-blue-400 text-white`}
+                    >
+                        Portfolio
+                    </a>
+
                     <a href={`/${data.businessProfile.gid}`}
                         className={` py-[9px] px-[20px] rounded-full absolute right-[200px] top-[9px] bg-blue-900 shadow-lg shadow-blue-400 text-white`}
                     >

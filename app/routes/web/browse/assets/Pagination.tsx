@@ -5,7 +5,7 @@ interface PaginationProps {
     pagination: PaginationData;
 }
 
-const maxVisiblePages = 3; // 👈 moved outside so it's a single constant
+const maxVisiblePages = 5; // 👈 moved outside so it's a single constant
 
 export default function Pagination({ pagination }: PaginationProps) {
     const [searchParams] = useSearchParams();

@@ -50,6 +50,94 @@ const PortfolioPagination = <T,>({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [resetPageKey]);
 
+    // ✅ Function to render limited pagination buttons
+    const renderPageNumbers = () => {
+        if (totalPages <= 3) {
+            // If few pages, just render all
+            return Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+                <button
+                    key={number}
+                    onClick={() => updatePage(number)}
+                    className={`px-[12px] py-[6px] cursor-pointer border rounded-[4px] ${currentPage === number
+                        ? "bg-blue-500 text-white border-blue-500"
+                        : "bg-white"
+                        }`}
+                >
+                    {number}
+                </button>
+            ));
+        }
+
+        const buttons: React.ReactNode[] = [];
+
+        // Always show page 1
+        if (currentPage > 2) {
+            buttons.push(
+                <button
+                    key={1}
+                    onClick={() => updatePage(1)}
+                    className={`px-[12px] py-[6px] cursor-pointer border rounded-[4px] ${currentPage === 1
+                        ? "bg-blue-500 text-white border-blue-500"
+                        : "bg-white"
+                        }`}
+                >
+                    1
+                </button>
+            );
+            if (currentPage > 3) {
+                buttons.push(
+                    <span key="start-ellipsis" className="px-2">
+                        …
+                    </span>
+                );
+            }
+        }
+
+        // Current page and its neighbors
+        const start = Math.max(1, currentPage - 1);
+        const end = Math.min(totalPages, currentPage + 1);
+
+        for (let number = start; number <= end; number++) {
+            buttons.push(
+                <button
+                    key={number}
+                    onClick={() => updatePage(number)}
+                    className={`px-[12px] py-[6px] cursor-pointer border rounded-[4px] ${currentPage === number
+                        ? "bg-blue-500 text-white border-blue-500"
+                        : "bg-white"
+                        }`}
+                >
+                    {number}
+                </button>
+            );
+        }
+
+        // Always show last page
+        if (currentPage < totalPages - 1) {
+            if (currentPage < totalPages - 2) {
+                buttons.push(
+                    <span key="end-ellipsis" className="px-2">
+                        …
+                    </span>
+                );
+            }
+            buttons.push(
+                <button
+                    key={totalPages}
+                    onClick={() => updatePage(totalPages)}
+                    className={`px-[12px] py-[6px] cursor-pointer border rounded-[4px] ${currentPage === totalPages
+                        ? "bg-blue-500 text-white border-blue-500"
+                        : "bg-white"
+                        }`}
+                >
+                    {totalPages}
+                </button>
+            );
+        }
+
+        return buttons;
+    };
+
     return (
         <div>
             <div className="divide-gray-500/20 divide-y-[1px]">
@@ -71,18 +159,7 @@ const PortfolioPagination = <T,>({
                         Previous
                     </button>
 
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-                        <button
-                            key={number}
-                            onClick={() => updatePage(number)}
-                            className={`px-[12px] py-[6px] cursor-pointer border rounded-[4px] ${currentPage === number
-                                ? "bg-blue-500 text-white border-blue-500"
-                                : "bg-white"
-                                }`}
-                        >
-                            {number}
-                        </button>
-                    ))}
+                    {renderPageNumbers()}
 
                     <button
                         onClick={goToNext}

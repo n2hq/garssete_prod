@@ -1,11 +1,9 @@
-import { Link, useSearchParams } from '@remix-run/react';
+import { useSearchParams } from '@remix-run/react';
 import { PaginationData } from '~/lib/types';
 
 interface PaginationProps {
     pagination: PaginationData;
 }
-
-const maxVisiblePages = 5; // 👈 moved outside so it's a single constant
 
 export default function Pagination({ pagination }: PaginationProps) {
     const [searchParams] = useSearchParams();
@@ -13,34 +11,45 @@ export default function Pagination({ pagination }: PaginationProps) {
     const totalPages = pagination.totalPages;
 
     const getPageNumbers = () => {
-        const pages = [];
-
-        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-
-        if (endPage - startPage + 1 < maxVisiblePages) {
-            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        if (totalPages <= 7) {
+            // If total pages is 7 or less, show all pages
+            return Array.from({ length: totalPages }, (_, i) => i + 1);
         }
 
-        // Add first page and ellipsis if needed
-        if (startPage > 1) {
-            pages.push(1);
-            if (startPage > 2) {
-                pages.push('...');
-            }
-        }
+        const pages: (number | string)[] = [];
 
-        // Add page numbers
-        for (let i = startPage; i <= endPage; i++) {
-            pages.push(i);
-        }
+        // Always include first page
+        pages.push(1);
 
-        // Add last page and ellipsis if needed
-        if (endPage < totalPages) {
-            if (endPage < totalPages - 1) {
-                pages.push('...');
-            }
-            pages.push(totalPages);
+        switch (currentPage) {
+            case 1:
+                // Page 1 → 1 2 3 ... Last
+                pages.push(2, 3, '...', totalPages);
+                break;
+            case 2:
+                // Page 2 → 1 2 3 4 ... Last
+                pages.push(2, 3, 4, '...', totalPages);
+                break;
+            case 3:
+                // Page 3 → 1 2 3 4 5 ... Last
+                pages.push(2, 3, 4, 5, '...', totalPages);
+                break;
+            case totalPages - 2:
+                // Page n-2 → 1 ... n-3 n-2 n-1 n
+                pages.push('...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+                break;
+            case totalPages - 1:
+                // Page n-1 → 1 ... n-3 n-2 n-1 n
+                pages.push('...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+                break;
+            case totalPages:
+                // Page n → 1 ... n-2 n-1 n
+                pages.push('...', totalPages - 2, totalPages - 1, totalPages);
+                break;
+            default:
+                // Middle pages → 1 ... current-1 current current+1 ... Last
+                pages.push('...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages);
+                break;
         }
 
         return pages;
@@ -63,14 +72,15 @@ export default function Pagination({ pagination }: PaginationProps) {
             <nav className="flex items-center space-x-1">
                 {/* Previous Button */}
                 <a
-                    href={createPageUrl(currentPage - 1)}
+                    href={pagination.hasPrev ? createPageUrl(currentPage - 1) : '#'}
                     className={`px-3 py-2 border rounded-md text-sm font-medium ${!pagination.hasPrev
                         ? 'opacity-50 cursor-not-allowed text-gray-400'
                         : 'text-gray-700 hover:bg-gray-100'
                         }`}
                     aria-disabled={!pagination.hasPrev}
+                    onClick={(e) => !pagination.hasPrev && e.preventDefault()}
                 >
-                    Previous
+                    Prev
                 </a>
 
                 {/* Page Numbers */}
@@ -98,12 +108,13 @@ export default function Pagination({ pagination }: PaginationProps) {
 
                 {/* Next Button */}
                 <a
-                    href={createPageUrl(currentPage + 1)}
+                    href={pagination.hasNext ? createPageUrl(currentPage + 1) : '#'}
                     className={`px-3 py-2 border rounded-md text-sm font-medium ${!pagination.hasNext
                         ? 'opacity-50 cursor-not-allowed text-gray-400'
                         : 'text-gray-700 hover:bg-gray-100'
                         }`}
                     aria-disabled={!pagination.hasNext}
+                    onClick={(e) => !pagination.hasNext && e.preventDefault()}
                 >
                     Next
                 </a>

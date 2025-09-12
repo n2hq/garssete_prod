@@ -6,7 +6,7 @@ import { query } from "../DB"
 
 export const loader: LoaderFunction = async ({ request, params }) => {
 
-    const ITEMS_PER_PAGE = 7;
+    const ITEMS_PER_PAGE = 1;
 
 
 

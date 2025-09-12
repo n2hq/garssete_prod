@@ -85,7 +85,7 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
 
     return (
         <div className={`relative`}>
-            <div className='relative rounded-xl bg-gray-600 w-full h-[150px] z-[40]  overflow-hidden'>
+            <div className='relative bg-gray-600 w-full h-[200px] z-[40]  overflow-hidden'>
                 {
                     imgSrc &&
                     <img
@@ -100,25 +100,23 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
                     className=' hidden'
                     onChange={handleFileChange}
                 />
-                <div
-                    className={`flex place-content-center place-items-center
-                                 bg-black/10 w-full h-full absolute z-[60] top-0 object-cover
-                                 text-white/80 `}
+
+            </div>
+            <div className={` flex place-items-center gap-3
+                place-content-center bottom-[5px] right-[5px] w-fit z-[120] absolute`}>
+
+                <button
+                    className={`bg-white  w-full py-[4px] rounded-[8px] border-[1px] border-gray-200
+                        shadow-sm hover:shadow-lg transition duration-500 ease-in-out px-[8px] `}
+                    disabled={working}
                     onMouseDown={handleImageClick}
                 >
-                    <div className={`w-[70px] h-[70px] flex flex-col
-                                    place-content-center place-items-center
-                                    hover:cursor-pointer hover:bg-white/50
-                                    bg-blue-300/50
-                                    rounded-full transition duration-300 ease-in-out`}>
-                        <MdEditSquare className=' text-[30px]' />
-                    </div>
-                </div>
-            </div>
-            <div className={` flex flex-col place-items-center 
-                place-content-center bottom-[5px] right-[5px] w-[100px] z-[120] absolute`}>
+                    Browse
+                </button>
+
+
                 <button
-                    className={`${working ? 'bg-gray-200 cursor-default' : 'bg-blue-100'}  w-full py-[6px] rounded-[8px] border-[1px] border-gray-200
+                    className={` bg-white  w-full py-[3px] rounded-[8px] border-[1px] border-gray-200 px-[8px]
                         shadow-sm hover:shadow-lg transition duration-500 ease-in-out`}
                     onMouseDown={handleUpload}
                     disabled={working}

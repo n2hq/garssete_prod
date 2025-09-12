@@ -88,16 +88,7 @@ const index = () => {
                 businessProfile={businessProfile}
                 title={'Facility Features'}>
 
-                <BusinessHeader
-                    businessGuid={businessGuid}
-                    data={data}
-                    businessProfile={businessProfile}
-                />
 
-                {
-                    businessGuid && userGuid &&
-                    <BusinessMenu guid={businessGuid} userGuid={userGuid} />
-                }
 
                 {
                     data && <FacilityFeatures

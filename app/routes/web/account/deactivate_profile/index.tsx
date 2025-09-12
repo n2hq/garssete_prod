@@ -8,6 +8,7 @@ import DeactivateUserForm from './assets/DeactivateProfileForm'
 import DeactivateProfileForm from './assets/DeactivateProfileForm'
 import CardTitle from '../assets/CardTitle'
 import CardHeader from '../assets/CardHeader'
+import ProfileContentLayout from '../assets/ProfileContentLayout'
 
 const index = () => {
     useEffect(() => {
@@ -64,19 +65,15 @@ const index = () => {
     }
     return (
         <AccountLayout>
-            <ContentLayout title={userProfile.active ? 'Deactivate Profile' : 'Activate Profile'}>
+            <ProfileContentLayout title={userProfile.active ? 'Deactivate Profile' : 'Activate Profile'}>
                 {userProfile === null ? 'Loading...' : ''}
 
-                <CardHeader
-                    base_url={'/web/account/profile'}
-                    title={userProfile?.email}
 
-                />
 
                 {
                     data && <DeactivateProfileForm loaderData={data} user={user} />
                 }
-            </ContentLayout>
+            </ProfileContentLayout>
         </AccountLayout>
     )
 }

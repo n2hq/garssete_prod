@@ -7,6 +7,7 @@ import EmailForm from './assets/EmailForm'
 import CardTitle from '../assets/CardTitle'
 import { redirect } from '@remix-run/react'
 import CardHeader from '../assets/CardHeader'
+import ProfileContentLayout from '../assets/ProfileContentLayout'
 
 const index = () => {
     useEffect(() => {
@@ -77,17 +78,9 @@ const index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={'Email Address'}>
+            <ProfileContentLayout title={'Email Address'}>
 
                 {userProfile === null ? 'Loading...' : ''}
-
-                <CardHeader
-                    base_url={'/web/account/profile'}
-                    title={userProfile?.email}
-
-                />
-
-
 
                 <div className={`font-semibold mb-2 text-md`}>
 
@@ -96,7 +89,7 @@ const index = () => {
                 {
                     data && <EmailForm loaderData={data} user={user} />
                 }
-            </ContentLayout>
+            </ProfileContentLayout>
         </AccountLayout>
     )
 }

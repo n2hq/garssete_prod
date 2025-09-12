@@ -89,13 +89,7 @@ const AccountLayout = ({ children }: any) => {
 
     useEffect(() => {
         if (userActive === false) {
-            const info = <div className={`mb-4 flex place-items-center gap-2 text-red-600
-                            w-full border pb-2 leading-[1.2em] rounded p-2 bg-white `}>
-                <FiAlertTriangle className={`min-h-[32px] min-w-[32px]`} />
-                <div>
-                    You are currently deactivated. Some operations like creating new business cannot be performed. Activate your profile to continue.
-                </div>
-            </div>
+            const info = `You are currently deactivated. Some operations like creating new business cannot be performed. Activate your profile to continue.`
             setInactiveMessage(info)
         }
     }, [userActive])
@@ -163,13 +157,22 @@ const AccountLayout = ({ children }: any) => {
 
 
                 {/* Main Content */}
-                <div className={`flex-1 overflow-y-auto bg-gray-100 py-6 px-[15px]`}>
-                    <div className={`max-w-[100%] md:max-w-[80%] mx-auto w-full  
-                        `}>
-                        {
-                            inactiveMessage
-                        }
-                        {children}
+                <div className={`flex-1 overflow-y-auto bg-gray-100 `}>
+
+                    {
+                        inactiveMessage &&
+                        <div className={`max-w-[100%] mx-auto w-full bg-blue-500 pt-[10px] pb-[15px] text-white text-center`}>
+                            {
+                                inactiveMessage
+                            }
+
+                        </div>
+                    }
+                    <div className={`mx-[15px]`}>
+                        <div className={`max-w-[100%] mx-auto w-full  `}>
+
+                            {children}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -581,6 +581,31 @@ export const getUserProfileImageData = async (guid: string | null): Promise<User
     }
 }
 
+export const getUserProfileBgData = async (guid: string | null): Promise<any | undefined> => {
+
+    const endpoint = "/api/user/user_profile_bg/" + guid
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
 export const getPortfolio = async (guid: string, q?: string): Promise<any | null> => {
     let businessesEndpoint = `/api/listing/owner?guid=${guid}&q=${q}`
 

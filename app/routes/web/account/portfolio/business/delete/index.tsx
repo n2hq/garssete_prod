@@ -80,15 +80,7 @@ const Index = () => {
                 data={data}
                 businessProfile={businessProfile}
             >
-                <BusinessHeader
-                    businessGuid={businessGuid}
-                    data={data}
-                    businessProfile={businessProfile}
-                />
-                {
-                    businessGuid && userGuid &&
-                    <BusinessMenu guid={businessGuid} userGuid={userGuid} />
-                }
+
                 {
                     data && <DeleteForm
                         userGuid={userGuid}

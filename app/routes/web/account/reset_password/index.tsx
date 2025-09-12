@@ -6,6 +6,7 @@ import { getUserProfile, IsAuthenticated } from '~/lib/lib'
 import ResetPasswordForm from './assets/ResetPasswordForm'
 import CardTitle from '../assets/CardTitle'
 import CardHeader from '../assets/CardHeader'
+import ProfileContentLayout from '../assets/ProfileContentLayout'
 
 const index = () => {
     useEffect(() => {
@@ -64,21 +65,17 @@ const index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={'Reset Password'}>
+            <ProfileContentLayout title={'Reset Password'}>
                 {userProfile === null ? 'Loading...' : ''}
 
-                <CardHeader
-                    base_url={'/web/account/profile'}
-                    title={userProfile?.email}
 
-                />
 
 
 
                 {
                     data && <ResetPasswordForm loaderData={data} user={user} />
                 }
-            </ContentLayout>
+            </ProfileContentLayout>
         </AccountLayout>
     )
 }

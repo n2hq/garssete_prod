@@ -1,6 +1,6 @@
 import { Link, useLocation } from '@remix-run/react'
 import React, { useState } from 'react'
-import { MdArrowBack, MdArrowForward, MdOutlineSafetyDivider, MdSafetyDivider } from 'react-icons/md'
+import { MdArrowBack, MdArrowForward, MdMenu, MdOutlineSafetyDivider, MdSafetyDivider } from 'react-icons/md'
 
 const settingsLinks = [
     {
@@ -54,17 +54,18 @@ const BusinessMenu = ({ title, guid, userGuid }: any) => {
             </div>
 
             <div className={`relative flex flex-col place-items-center place-content-end 
-                bg-blue-200 w-[180px]  gap-3  text-gray-500 font-light font-sans
+                 w-[180px]  gap-3  text-gray-500 font-light font-sans
                 
                 
                 `}>
                 <button
-                    className={`rounded-md cursor-pointer w-full bg-blue-900
-                         text-white shadow-md shadow-blue-400 py-1 `}
+                    className={`rounded-full cursor-pointer w-full bg-blue-900
+                         text-white shadow-md shadow-blue-400 py-1 flex place-items-center`}
                     onMouseDown={() => displaySettings()}
                     onBlur={() => hideSettings()}
                 >
-                    Settings
+                    <MdMenu size={30} />
+                    <div className={`text-[17px]`}>Settings</div>
                 </button>
 
                 <div className={`${showSettings ? 'block' : 'hidden'} absolute w-full top-8 rounded-lg z-[10000]

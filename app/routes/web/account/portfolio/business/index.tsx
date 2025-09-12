@@ -9,6 +9,8 @@ import BusinessProfileForm from './assets/BusinessProfileForm'
 import BusinessMenu from './assets/BusinessMenu'
 import CardTitle from '../../assets/CardTitle'
 import BusinessHeader from './assets/BusinessHeader'
+import ProfileLayout from '../../assets/ProfileLayout'
+import BusinessProfile from './assets/BusinessProfile'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -130,35 +132,14 @@ const index = () => {
     }
 
     return (
-        <AccountLayout>
-            <ContentLayout
-                title={'Update Business'}
-                businessGuid={businessGuid}
-                data={data}
-                businessProfile={businessProfile}
-            >
-
-                <BusinessHeader
-                    businessGuid={businessGuid}
+        <ProfileLayout>
+            {
+                data !== null &&
+                <BusinessProfile
                     data={data}
-                    businessProfile={businessProfile}
                 />
-
-                {
-                    data && <div>
-
-                        {
-                            businessGuid && userGuid &&
-                            <BusinessMenu guid={businessGuid} userGuid={userGuid} />
-                        }
-
-                        <BusinessProfileForm
-                            data={data}
-                        />
-                    </div>
-                }
-            </ContentLayout>
-        </AccountLayout>
+            }
+        </ProfileLayout>
     )
 }
 

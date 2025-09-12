@@ -53,6 +53,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/user/reset_password/:guid", "routes/api/user/reset_password.tsx");
         route("api/user/activate_deactivate/:guid", "routes/api/user/activate_deactivate.tsx");
         route("api/user/user_profile_image/:guid", "routes/api/user/user_profile_image.tsx");
+        route("api/user/user_profile_bg/:guid", "routes/api/user/user_profile_bg.tsx");
         route("api/user/change_email_request", "routes/api/user/change_email_request.tsx");
         route("api/user/change_email", "routes/api/user/change_email.tsx");
         route("api/user/verify_signup/:user_hash", "routes/api/user/verify_signup.tsx");

@@ -160,7 +160,7 @@ const ProfileLayout = ({ children }: any) => {
                 <div className={`flex-1 overflow-y-auto bg-gray-50 pb-6 px-[0px] relative`}>
                     {
                         inactiveMessage &&
-                        <div className={`max-w-[100%] mx-auto w-full bg-blue-500 p-3 text-white text-center`}>
+                        <div className={`max-w-[100%] mx-auto w-full bg-blue-500 px-3 pt-[10px] pb-[15px] text-white text-center`}>
                             {
                                 inactiveMessage
                             }

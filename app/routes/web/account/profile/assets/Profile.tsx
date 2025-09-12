@@ -11,8 +11,9 @@ import Button from '~/components/content/button/Button'
 import Input from '~/components/content/input/Input'
 import Select from '~/components/content/select/Select'
 import { formWrapperClass } from '~/lib/css'
+import ProfileBg from './ProfileBg'
 
-const Profile = ({ loaderData, user, userProfileData }: any) => {
+const Profile = ({ loaderData, user, userProfileData, userProfileBgData }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
 
@@ -114,15 +115,16 @@ const Profile = ({ loaderData, user, userProfileData }: any) => {
         }
     }, [newStateCode])
 
+
+
+
     return (
         <div>
-            <div className={`bg-black w-full h-[200px] relative`}>
-                <img
-                    src={`https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/33/b1/a3/hotel-building-exterior.jpg?w=1200&h=-1&s=1`}
-                    alt="user"
-                    className={`object-cover w-full h-full`}
-                />
-            </div>
+            <ProfileBg
+                user={userProfileData}
+                userProfileBgData={userProfileBgData}
+            />
+
 
             <div className={`px-[15px]  relative w-full flex place-content-center h-[180px]`}>
 
@@ -137,12 +139,12 @@ const Profile = ({ loaderData, user, userProfileData }: any) => {
                 </div>
             </div>
 
-            <div>
+            <div className={`px-[15px]`}>
                 <hr />
                 <form onSubmit={handleSubmit(handleUpdateUser)}>
 
                     <div className={`${formWrapperClass} mt-0  rounded-lg pt-4
-                 max-w-[400px] w-full mx-auto `}>
+                 md:max-w-[400px] w-full mx-auto `}>
                         <Input
                             controlTitle={"First Name"}
                             controlName={"first_name"}

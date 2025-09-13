@@ -79,7 +79,7 @@ const SrchNavbar = () => {
                         <form action="/web/browse">
                             <div className={`bg-gray-100 w-full rounded-full h-[38px]
                                     flex place-items-center px-2 gap-2 border
-                                    border-gray-400/20`}>
+                                    border-gray-600`}>
                                 <BiSearch className={`h-[20px] w-[20px] text-gray-500`} />
                                 <input
                                     type="text"

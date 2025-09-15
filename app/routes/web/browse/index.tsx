@@ -1,5 +1,5 @@
 import { LoaderFunction } from '@remix-run/node';
-import { useLoaderData, useSearchParams } from '@remix-run/react';
+import { useLoaderData, useNavigation, useSearchParams } from '@remix-run/react';
 import React, { useEffect, useState } from 'react'
 import { getCountries, getSearch, logError } from '~/lib/lib';
 import SearchLayout from '~/routes/asset/SearchLayoutMain';
@@ -20,18 +20,24 @@ import Categories from './assets/Categories';
 import { ListingType } from '~/lib/types';
 import Pagination from './assets/Pagination';
 import { OnlineStatusProvider } from '~/context/OnlineStatusContext';
+import QueryBuilder from './assets/QueryBuilder';
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
     const url = new URL(request.url);
     const query = url?.searchParams.get("q") || "";
+    const state = url?.searchParams.get("state") || "";
+    const city = url?.searchParams.get("city") || "";
+    const country = url?.searchParams.get("country") || "";
+    const category = url?.searchParams.get("category") || "";
+
     let page: number = 1
     let data: any = ""
     let countries = null
 
     try {
         page = parseInt(url?.searchParams.get("page") || "1")
-        data = await getSearch(query, page)
+        data = await getSearch(query, city, state, country, category, page)
         countries = await getCountries()
     } catch (error: any) {
         logError(error)
@@ -48,9 +54,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 const Index = () => {
 
     const res: any = useLoaderData()
-    const [searchParams] = useSearchParams();
 
-    const data = res.data.items
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const navigation = useNavigation()
+
+
+    const data = res.data.items || []
     const pagination = res.data.pagination
     const query = res.query
     const countries = res.countries
@@ -58,12 +68,24 @@ const Index = () => {
 
     const currentPage = parseInt(searchParams.get('page') || '1');
 
+    const isLoading = navigation.state === 'loading'
+
     useEffect(() => {
         if (query) {
             //alert(query)
             setQueryParam(query)
         }
     }, [query])
+
+
+    // Extract initial filters from URL
+    const initialFilters = {
+        q: searchParams.get('q') || '',
+        category: searchParams.get('category') || '',
+        country: searchParams.get('country') || '',
+        state: searchParams.get('state') || '',
+        city: searchParams.get('city') || ''
+    }
 
     return (
         <div className=' '>
@@ -77,6 +99,9 @@ const Index = () => {
                 <div className={`grid grid-cols-12 h-full overflow-hidden  gap-5 `}>
                     {/** left */}
                     <aside className={`col-span-3 h-full overflow-y-auto scrollbar-hidden pt-2 hidden xl:block`}>
+
+
+
                         <div className={``}>
                             <div className={`mt-3 text-[17px] mb-4 font-bold ml-6`}>
                                 Categories
@@ -106,7 +131,16 @@ const Index = () => {
 
                             {/** left */}
                             <div className={`col-span-12 md:col-span-8  pt-3`}>
+
+
+
                                 <div className={`space-y-8`}>
+                                    <div className={``}>
+                                        <QueryBuilder
+                                            loading={isLoading}
+                                            initialFilters={initialFilters}
+                                        />
+                                    </div>
 
                                     {
                                         data?.map((data: ListingType, index: number) => {

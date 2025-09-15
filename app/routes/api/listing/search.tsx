@@ -10,6 +10,11 @@ export const loader: LoaderFunction = async ({ request, params }) => {
         const url = new URL(request.url)
         let criteria = url.searchParams.get("q") as string
 
+        let category = url.searchParams.get("category") as string
+        let city = escapeRegex(url.searchParams.get("city") as string) || ""
+        let state = escapeRegex(url.searchParams.get("state") as string) || ""
+        let country = escapeRegex(url.searchParams.get("country") as string) || ""
+
         if (criteria === "" || criteria === null || criteria === undefined) {
             criteria = ""
         } else {
@@ -197,9 +202,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
                         OR ci.name RLIKE ?
                     )
                     AND d.active_status = true
+                    AND d.category RLIKE ?
+                    AND co.name RLIKE ?
+                    AND st.name RLIKE ?
+                    AND ci.name RLIKE ?
                 ORDER BY d.date_created DESC
                 LIMIT 50;
-`, [criteria, criteria, criteria, criteria, criteria, criteria, criteria, criteria])
+`, [criteria, criteria, criteria, criteria, criteria, criteria, criteria, criteria, category, country, state, city])
         }
 
         const listings = rawdata.map((listing: any) => {

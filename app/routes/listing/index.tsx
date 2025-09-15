@@ -22,6 +22,7 @@ import { AddVideoType, ProductType } from '~/lib/types'
 import { useOnlineStatus } from '~/context/useOnlineStatus'
 import { ReportTime } from '~/lib/ReportTime'
 import { OnlineStatusProvider } from '~/context/OnlineStatusContext'
+import FooterAlt from '~/components/footer/FooterAlt'
 
 
 
@@ -200,7 +201,8 @@ const index = () => {
                     }
                     <VerticalHeight />
                     <CallToActionSection />
-                    <FooterSection />
+                    {/** footer */}
+                    <FooterAlt />
                 </Layout>
             </GalleryProvider>
 

@@ -25,7 +25,7 @@ const Countries = ({ countries }: CountryProp) => {
             </div>
 
             {/* Scrollable List */}
-            <div className="h-[250px] overflow-y-auto scrollbar-hidden">
+            <div className="h-[150px] overflow-y-auto scrollbar-hidden">
                 {filteredCountries?.map((nav: Country, index: number) => (
                     <div key={index}>
                         <a href={`/web/browse?q=${nav?.name.toLowerCase()}`}>

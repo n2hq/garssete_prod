@@ -6,11 +6,11 @@ import { State } from "~/lib/types"
 export const loader: LoaderFunction = async ({ request, params }) => {
     const contentType = request.headers.get("Content-Type")
 
-    if (contentType !== "application/json") {
+    /* if (contentType !== "application/json") {
         return DoResponse(
             { error: "Invalid content type. Expected JSON." }
         )
-    }
+    } */
 
     if (request.method === "GET") {
         const url = new URL(request.url);

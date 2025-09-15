@@ -2,8 +2,8 @@ import { DefineRoutesFunction } from '@remix-run/dev/dist/config/routes';
 
 export function setupRoutes(defineRoutes: DefineRoutesFunction) {
     return defineRoutes((route) => {
-        route("/", "routes/_index.tsx");
-        route("/homepage", "routes/homepage.tsx");
+        //route("/", "routes/_index.tsx");
+        //route("/", "routes/homepage.tsx");
         route("/:id", "routes/listing/index.tsx");
         route("/landing", "routes/landing/index.tsx");
         route("/web/search", "routes/web/search/index.tsx");
@@ -67,6 +67,8 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/listing/featured_listing", "routes/api/listing/featured_listing.tsx");
         route("api/listing/business_facility_features/:business_guid", "routes/api/listing/business_facility_features.tsx");
         route("api/listing/listing_by_category/:category/:limit", "routes/api/listing/listing_by_category.tsx");
+        route("api/listing/home_listing_by_category/:category/:limit", "routes/api/listing/home_listing_by_category.tsx")
+        route("api/listing/home_latest_businesses/:limit", "routes/api/listing/home_latest_businesses.tsx")
         route("api/listing/business_gallery/:business_guid", "routes/api/listing/business_gallery.tsx");
         route("api/listing/business_profile_image/:guid", "routes/api/listing/business_profile_image.tsx");
         route("api/listing/business_profile_bg/:guid", "routes/api/listing/business_profile_bg.tsx");

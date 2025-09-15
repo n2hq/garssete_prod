@@ -182,9 +182,16 @@ export type State = {
     iso2: string
 }
 
+export type StateAlt = {
+    name: string
+    country_code: string
+    id: string
+}
+
 export type Country = {
     name: string
     id: string
+    iso2: string
 }
 
 export interface CountryProp {

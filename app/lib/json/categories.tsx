@@ -1,17 +1,18 @@
-import { BiFoodMenu } from "react-icons/bi";
+import { BiFoodMenu, BiHotel } from "react-icons/bi";
 import { CgAirplane, CgChart, CgFeed, CgPrinter, CgShoppingBag, CgShoppingCart } from "react-icons/cg";
 import { FaSchool } from "react-icons/fa";
 import { FcAutomotive, FcBusiness, FcLandscape } from "react-icons/fc";
 import { GiHealthNormal, GiHumanTarget } from "react-icons/gi";
 import { GrCloudComputer, GrLanguage, GrRestaurant } from "react-icons/gr";
+import { IoMdMusicalNotes } from "react-icons/io";
 import { MdAdsClick, MdCleaningServices, MdConstruction, MdDashboard, MdElectricalServices, MdMeetingRoom, MdPlumbing, MdRealEstateAgent, MdRoomService } from "react-icons/md";
 import { RiGovernmentFill } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
 
 export const categories = [
     {
-        name: "Business Consulting",
-        id: "business consulting",
+        name: "Business Services",
+        id: "business services",
         icon: <MdMeetingRoom size={20} />
     },
     {
@@ -60,6 +61,11 @@ export const categories = [
         icon: <MdPlumbing size={20} />
     },
     {
+        name: "Hotels",
+        id: "hotel",
+        icon: <BiHotel size={20} />
+    },
+    {
         name: "Construction & Roofing",
         id: "construction and roofing",
         icon: <MdConstruction size={20} />
@@ -105,8 +111,8 @@ export const categories = [
         icon: <BiFoodMenu size={20} />
     },
     {
-        name: "Retail & Shopping",
-        id: "retail and shopping",
+        name: "Shopping & Retail",
+        id: "shopping and retail",
         icon: <CgShoppingBag size={20} />
     },
     {
@@ -116,8 +122,13 @@ export const categories = [
     },
     {
         name: "Automotive",
-        id: "automative",
+        id: "automotive",
         icon: <FcAutomotive size={20} />
+    },
+    {
+        name: "Entertainment",
+        id: "entertainment",
+        icon: <IoMdMusicalNotes size={20} />
     },
     {
         name: "Education",

@@ -1,5 +1,5 @@
 import { FaFacebookSquare, FaLinkedinIn, FaPinterestSquare, FaTiktok, FaVimeoSquare, FaYoutubeSquare } from "react-icons/fa"
-import { AddVideoType, Category, City, ContactType, Country, ProductType, Rating, State, UserProfile } from "./types"
+import { AddVideoType, Category, City, ContactType, Country, ProductType, Rating, State, StateAlt, UserProfile } from "./types"
 import CryptoJS from 'crypto-js'
 import { BsInstagram, BsLinkedin, BsPinterest, BsTwitterX } from "react-icons/bs"
 import { CgFacebook } from "react-icons/cg"
@@ -108,9 +108,14 @@ export const getBusinessProfile = async (criteria: string | null): Promise<Conta
     }
 }
 
-export const getSearch: any = async (criteria: string, page: string) => {
+export const getSearch: any = async (criteria: string, city: string, state: string, country: string, category: string, page: string) => {
 
-    const endpoint = "/api/listing/searchlisting?q=" + criteria + '&page=' + page
+    let endpoint = "/api/listing/searchlisting?q=" + criteria
+    endpoint += "&city=" + city
+    endpoint += "&state=" + state
+    endpoint += "&country=" + country
+    endpoint += "&category=" + category
+    endpoint += '&page=' + page
 
     //console.log(criteria)
     const url = config.BASE_URL + endpoint
@@ -162,6 +167,56 @@ export const getFeaturedListing: any = async () => {
 export const getListingByCategory = async (category: string, limit: number) => {
 
     const endpoint = `/api/listing/listing_by_category/${category}/${limit}`
+    const url = config.BASE_URL + endpoint
+
+    //console.log(url)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+
+export const getHomeListingByCategory = async (category: string, limit: number) => {
+
+    const endpoint = `/api/listing/home_listing_by_category/${category}/${limit}`
+    const url = config.BASE_URL + endpoint
+
+    //console.log(url)
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: any = await response.json();
+        return data
+    } catch (error: any) {
+        return ({ "message": error.message })
+    }
+}
+
+
+export const getLatestBusinesses = async (limit: number) => {
+
+    const endpoint = `/api/listing/home_latest_businesses/${limit}`
     const url = config.BASE_URL + endpoint
 
     //console.log(url)
@@ -473,6 +528,31 @@ export const getStates = async (countryCode: string | null): Promise<State[] | u
         }
 
         const data: State[] = await response.json();
+
+        return new Promise((resolve) => setTimeout(() => {
+            resolve(data)
+        }, 10))
+    } catch (error: any) {
+        return undefined
+    }
+}
+
+export const getStatesAlt = async (countryCode: string | null): Promise<StateAlt[] | undefined> => {
+
+    const endpoint = "/api/util/state?country_code=" + countryCode
+    const url = config.BASE_URL + endpoint
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: headers,
+        }
+        )
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: StateAlt[] = await response.json();
 
         return new Promise((resolve) => setTimeout(() => {
             resolve(data)

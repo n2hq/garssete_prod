@@ -1,39 +1,99 @@
 import React from 'react'
-import HomeNav from './assets/header/HomeNav'
-import { HeaderNav } from './assets/header/HeaderNav'
-import { HomepageHero } from './assets/header/HomepageHero'
-import Recents from './home/Recents'
-import { FrontPageCategories } from './assets/FrontPageCategories'
-import Footer from '~/components/footer/Footer'
-import { MetaFunction } from '@remix-run/react'
-import { HomepageCarousel } from './assets/HomeCarousel'
-import { TopAd } from '~/components/content/ads/TopAd'
-import Layout from './landing/assets/layout'
-import Navbar from '~/components/header/new/Navbar'
-import HeroSection from './landing/assets/HeroSection'
-import FeaturesSection from './landing/assets/FeaturesSection'
-import DiscoverSection from './landing/assets/DiscoverSection'
-import CallToActionSection from '../components/content/CallToActionSection'
-import FooterSection from './landing/assets/FooterSection'
-import SrchNavbar from '~/components/header/new/SrchNavbar'
 
-export const meta: MetaFunction = () => {
-  return [
-    { title: "Garssete | Business Directory, Travel, Real Estate, Hotels & Restaurants!" },
-    { name: "Garssete", content: "Welcome to Garssete!" },
-  ];
-};
+import WhereTo from './homepage/assets/search/SearchBusiness'
+import HomeLayout from './landing/assets/HomeLayout'
+import SearchBusiness from './homepage/assets/search/SearchBusiness'
+import TopCategories from './homepage/assets/topcategories/TopCategories'
+import LatestBusinesses from './homepage/assets/latestbusinesses/LatestBusinesses'
+import Inspire from './homepage/assets/inspire/Inspire'
+import Shopping from './homepage/assets/shopping/Shopping'
+import Hotels from './homepage/assets/hotels/Hotels'
+import YourGuide from './homepage/assets/yourguide/YourGuide'
+import FooterAlt from '~/components/footer/FooterAlt'
+import { LoaderFunction } from '@remix-run/node'
+import { getHomeListingByCategory, getLatestBusinesses, getListingByCategory, logError } from '~/lib/lib'
+import { useLoaderData } from '@remix-run/react'
+import { ListingType } from '~/lib/types'
+import { late } from 'zod'
+import TopDestinations from './homepage/assets/topdestinations/TopDestinations'
+
+
+export const loader: LoaderFunction = async ({ request, params }) => {
+
+
+  try {
+    const id = params.id || null
+    let hotels: ListingType[] | [] = []
+    let latestBusinesses: ListingType[] | [] = []
+    let gallery
+    let ratingData
+
+
+    try {
+      hotels = await getHomeListingByCategory('hotel', 6)
+      latestBusinesses = await getLatestBusinesses(10)
+
+      //console.log(latestBusinesses)
+
+    } catch (error: any) {
+      console.log(error.message)
+    }
+
+
+
+    return {
+      hotels: hotels,
+      latestBusinesses: latestBusinesses
+
+    }
+  } catch (err: any) {
+    logError(err)
+  }
+
+}
 
 const _index = () => {
-  return (
-    <Layout>
+  const loader: any = useLoaderData()
+  const hotels = loader.hotels
+  const latestBusinesses = loader.latestBusinesses
 
-      <HeroSection />
-      <FeaturesSection />
-      <DiscoverSection />
-      <CallToActionSection />
-      <FooterSection />
-    </Layout>
+  return (
+    <HomeLayout>
+      {/** background with search */}
+      <SearchBusiness />
+
+
+      {/** top categories */}
+      <TopCategories />
+
+
+      {/** top categories */}
+      <Hotels data={hotels} />
+
+
+      {/** top categories */}
+      <YourGuide />
+
+
+      {/** latest businesses */}
+      {/* <LatestBusinesses data={latestBusinesses} /> */}
+      <TopDestinations />
+
+
+      {/** inspire */}
+      <Inspire />
+
+
+      {/** shopping */}
+      <Shopping />
+
+      <div className={`h-[100px]`}>
+
+      </div>
+
+      {/** footer */}
+      <FooterAlt />
+    </HomeLayout>
   )
 }
 

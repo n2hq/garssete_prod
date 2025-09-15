@@ -12,7 +12,7 @@ const topcat = [
         title: "Costa Brava Coves Towns and Winery Private Tour",
         location: 'New York',
         link: '/web/browse?q=hotel',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/f3/b4/2e/caption.jpg?w=600&h=600&s=1`
+        bglink: `/images/hotels-img.jpg`
     },
     {
         title: "Omani Dhow Coastal and Sunset Cruise",
@@ -70,7 +70,7 @@ const Hotels = ({ data }: any) => {
                     </div>
 
                     <div className={`text-[15px] font-poppins mt-1 mb-6`}>
-                        Whatever you're looking for we've got you.
+                        Browse both affordable and luxury hotels
                     </div>
                 </div>
 
@@ -89,7 +89,7 @@ const Hotels = ({ data }: any) => {
                                             key={index}
                                         >
                                             <a href={`/${business?.username || business?.gid}`}>
-                                                <div className={`border-none rounded-xl min-w-[280px] h-[250px] overflow-hidden relative`}>
+                                                <div className={`border-none rounded-xl min-w-[220px] md:min-w-[280px] h-[250px] overflow-hidden relative`}>
                                                     <img
                                                         src={config.IMG_BASE_URL + business?.image_url}
                                                         alt=""

@@ -8,40 +8,40 @@ import { GiKnifeFork } from 'react-icons/gi'
 
 const hotels = [
     {
-        title: "Costa Brava Coves Towns and Winery Private Tour",
+        title: "Luxury shopping paradise amid dazzling modern architecture.",
         city: `dubai`,
         category: 'shopping and retail',
         link: '/web/browse?q=&category=shopping and retail&city=dubai',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/f3/b4/2e/caption.jpg?w=600&h=600&s=1`,
+        bglink: `https://www.vexcolt.com/wp-content/uploads/2018/04/ref_Mall_01.jpg`,
 
     },
     {
-        title: "Omani Dhow Coastal and Sunset Cruise",
+        title: "Historic streets brimming with iconic retail destinations.",
         city: `london`,
         category: 'shopping and retail',
         link: '/web/browse?q=hotel&city=london',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/20/db/50/caption.jpg?w=600&h=600&s=1`
+        bglink: `https://www.europetravelguide.co.uk/wp-content/uploads/2020/05/Shopping-in-London.jpg`
     },
     {
-        title: "Hike The Wonderland Mountain Abuja",
+        title: "Ultimate urban shopping experience, endless variety.",
         city: `new york city`,
         category: 'shopping and retail',
         link: '/web/browse?q=hotel&city=new york',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/00/24/f1/caption.jpg?w=600&h=600&s=1`
+        bglink: `https://thetravelexpert.ie/wp-content/uploads/2015/09/new-york-742795_1280_opt.jpg`
     },
     {
-        title: "Gurara Waterfall",
+        title: "Opulent malls meet rich traditional market culture.",
         city: `doha`,
         category: 'shopping and retail',
         link: '/web/browse?q=hotel&city=doha',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/dc/63/d0/caption.jpg?w=600&h=600&s=1`
+        bglink: `https://visitqatar.com/content/dam/visitqatar/img/things-to-do/shopping-in-qatar/shopping-malls-2.jpg/_jcr_content/renditions/medium-1280px.jpeg`
     },
     {
-        title: "Abuja Nature And Parks Tour",
+        title: "Chic fashion capital and style epicenter.",
         city: `paris`,
         category: 'shopping and retail',
         link: '/web/browse?q=hotel&city=paris',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/64/0c/18/caption.jpg?w=600&h=600&s=1`
+        bglink: `https://hips.hearstapps.com/hmg-prod/images/crowds-of-people-at-rue-montorgueil-pedestrian-royalty-free-image-1576958383.jpg`
     },
     // Added more categories to demonstrate overflow
 
@@ -99,7 +99,7 @@ const Hotel = () => {
                                             key={index}
                                         >
                                             <Link to={link}>
-                                                <div className={`border-none rounded-xl min-w-[280px] h-[290px] overflow-hidden relative`}>
+                                                <div className={`border-none rounded-xl min-w-[220px] md:min-w-[280px] h-[290px] overflow-hidden relative`}>
                                                     <img
                                                         src={business?.bglink}
                                                         alt=""
@@ -113,16 +113,14 @@ const Hotel = () => {
 
                                                 <div className={`mt-3 `}>
                                                     <div>
-                                                        <div className={`bg-gray-100 w-fit px-2 rounded`}>
+                                                        <div className={`bg-gray-100 w-fit px-2 rounded capitalize`}>
                                                             {business?.city}
                                                         </div>
                                                     </div>
                                                     <div className={`font-poppins text-xl font-[500] mt-[3px]`}>
                                                         {business?.title}
                                                     </div>
-                                                    <div className={`mt-2 font-poppins text-[13px] font-[500] text-gray-500`}>
-                                                        {business?.category}
-                                                    </div>
+
                                                 </div>
                                             </Link>
                                         </div>

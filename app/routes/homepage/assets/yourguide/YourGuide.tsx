@@ -24,9 +24,9 @@ const YourGuide = () => {
                             </div>
 
                             <div className={`text-center mt-6 flex place-content-center`}>
-                                <Link to={`/web/browse`}>
+                                <Link to={`/web/signup`}>
                                     <div className={`bg-black px-10 py-4 text-lg text-white font-poppins w-fit rounded-full`}>
-                                        Learn more
+                                        Sign up!
                                     </div>
                                 </Link>
                             </div>
@@ -35,7 +35,7 @@ const YourGuide = () => {
                     </div>
                     <div className={`relative overflow-hidden rounded-xl`}>
                         <img
-                            src={`https://www.arabianbusiness.com/wp-content/uploads/sites/3/cloud/2023/07/31/dubai-real-estate-1.jpg`}
+                            src={`/images/home/dubai-real-estate-1.jpg`}
                             alt=""
                             className={`object-cover w-full h-full`}
                         />

@@ -11,35 +11,35 @@ const topdestinations = [
         category: "hotel",
         icon: <BiHotel size={20} />,
         link: '/web/browse?q=&city=london',
-        bglink: '/images/hotels-img.jpg'
+        bglink: '/images/home/londonts.png'
     },
     {
         title: "New York",
         category: "entertainment",
         icon: <BsHouse size={17} />,
         link: '/web/browse?q=&city=new york city',
-        bglink: `/images/ent-img.webp`
+        bglink: `/images/home/newyrkst.webp`
     },
     {
         title: "Berlin",
         category: 'restaurant',
         icon: <GiKnifeFork size={17} />,
         link: '/web/browse?q=&city=berlin',
-        bglink: `/images/rest-img.webp`
+        bglink: `/images/home/berlin.jpg`
     },
     {
         title: "Dubai",
         category: "travel",
         icon: <BsAirplane size={17} />,
         link: '/web/browse?q=&city=dubai',
-        bglink: `/images/travel.jpg`
+        bglink: `/images/home/dubaij.avif`
     },
     {
         title: "Paris",
         category: "realestate",
         icon: <FcHome size={17} />,
         link: '/web/browse?q=&city=paris',
-        bglink: `/images/real-img.jpg`
+        bglink: `https://media.cntraveler.com/photos/665e30e3c623d0ae10ca3dd9/1:1/w_3215,h_3215,c_limit/pexels-magnusflechsenhaar-3361209.jpg`
     },
     // Added more categories to demonstrate overflow
 
@@ -73,11 +73,11 @@ const TopDestinations = () => {
                 {/** section title and sub title */}
                 <div>
                     <div className={`text-[19px] font-poppins font-bold`}>
-                        Find businesses in Top Destinations
+                        Find businesses in Top Cities
                     </div>
 
                     <div className={`text-[15px] font-poppins mt-1 mb-6`}>
-                        Seeking to do businesses in these locations?
+                        Seeking to do businesses in these cities?
                     </div>
                 </div>
 
@@ -97,7 +97,7 @@ const TopDestinations = () => {
                                         >
                                             <div
                                                 key={index}
-                                                className={`border-none rounded-xl min-w-[280px] h-[300px] overflow-hidden relative`}>
+                                                className={`border-none rounded-xl min-w-[220px] md:min-w-[280px] h-[300px] overflow-hidden relative`}>
                                                 <img
                                                     src={category?.bglink}
                                                     alt=""

@@ -11,37 +11,37 @@ const topcat = [
         title: "Find Real Estate Businesses",
         category: 'real estate',
         link: '/web/browse?q=real estate',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/f3/b4/2e/caption.jpg?w=600&h=600&s=1`
+        bglink: `https://www.investopedia.com/thmb/X9xQZtw5p2-AE82gGS3bugBJD3I=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/mortgage-real-estate-investing-guide-4222543-v1-b49c49405ee14779adb25d2879411414.png`
     },
     {
         title: "Discover IT and Tech Firms",
         category: 'technology and it',
         link: '/web/browse?q=technology and it',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/20/db/50/caption.jpg?w=600&h=600&s=1`
+        bglink: `https://trendsresearch.org/wp-content/uploads/2025/04/Artificial-intelligence-platforms-copy.jpg`
     },
     {
         title: "Browse Cleaning Services Companies",
         category: 'cleaning services',
         link: '/web/browse?q=&category=cleaning services',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/00/24/f1/caption.jpg?w=600&h=600&s=1`
+        bglink: `https://palmettocommercialservices.com/wp-content/uploads/2021/06/local-cleaning-business-janitorial-cart-in-lobby-1200x600-1-715x415.jpg`
     },
     {
         title: "Explore Advertising and Marketing Agencies",
         category: 'advertising & marketing',
         link: '/web/browse?q=&category=advertising marketing',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/f3/b4/2e/caption.jpg?w=600&h=600&s=1`
+        bglink: `https://www.barolin-spencer.com/wp-content/uploads/2021/02/Advertising-101-post.jpg`
     },
     {
         title: "Autmotive Manufacturing and Sales",
         category: 'automotive',
         link: '/web/browse?q=&category=automotive',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/20/db/50/caption.jpg?w=600&h=600&s=1`
+        bglink: `https://ptc-p-001.sitecorecontenthub.cloud/api/public/content/b5652be4bd904cf8a51005df000c5cd4?v=32324506`
     },
     {
         title: "Communities and Government Agencies",
         category: 'community and government',
         link: '/web/browse?q=&category=community and government',
-        bglink: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/00/24/f1/caption.jpg?w=600&h=600&s=1`
+        bglink: `https://media.istockphoto.com/id/175514706/photo/oval-conference-room-with-rows-of-seats.jpg?s=612x612&w=0&k=20&c=C1WQjl65qL7-pxRKAAcSAb6JqxI4pv60avdS1wHQM6I=`
     },
 
     // Added more categories to demonstrate overflow
@@ -100,7 +100,7 @@ const Inspire = () => {
                                             key={index}
                                         >
                                             <Link to={lnk}>
-                                                <div className={`border-none rounded-xl min-w-[280px] h-[250px] overflow-hidden relative`}>
+                                                <div className={`border-none rounded-xl min-w-[220px] md:min-w-[280px] h-[250px] overflow-hidden relative`}>
                                                     <img
                                                         src={business?.bglink}
                                                         alt=""

@@ -95,7 +95,7 @@ const LatestBusinesses = ({ data }: LatestBusinessProps) => {
                                         <div
                                             key={index}
                                         >
-                                            <div className={`border-none rounded-xl min-w-[280px] h-[250px] overflow-hidden relative`}>
+                                            <div className={`border-none rounded-xl min-w-[220px] md:min-w-[280px] h-[250px] overflow-hidden relative`}>
                                                 <img
                                                     src={business?.bglink}
                                                     alt=""

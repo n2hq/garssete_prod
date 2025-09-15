@@ -12,35 +12,35 @@ const topcat = [
         category: "hotel",
         icon: <BiHotel size={20} />,
         link: '/web/browse?q=hotel',
-        bglink: '/images/hotels-img.jpg'
+        bglink: '/images/home/hotels-img.jpg'
     },
     {
         title: "Entertainment",
         category: "entertainment",
         icon: <BsHouse size={17} />,
         link: '/web/browse?q=hotel',
-        bglink: `/images/ent-img.webp`
+        bglink: `/images/home/ent-img.webp`
     },
     {
         title: "Restaurant",
         category: 'restaurant',
         icon: <GiKnifeFork size={17} />,
         link: '/web/browse?q=hotel',
-        bglink: `/images/rest-img.webp`
+        bglink: `/images/home/rest-img.webp`
     },
     {
         title: "Travels",
         category: "travel",
         icon: <BsAirplane size={17} />,
         link: '/web/browse?q=travel',
-        bglink: `/images/travel.jpg`
+        bglink: `/images/home/travel.jpg`
     },
     {
         title: "Real Estate",
         category: "real estate",
         icon: <FcHome size={17} />,
         link: '/web/browse?q=realestate',
-        bglink: `/images/real-img.jpg`
+        bglink: `/images/home/real-img.jpg`
     },
     // Added more categories to demonstrate overflow
 
@@ -78,7 +78,7 @@ const TopCategories = () => {
                     </div>
 
                     <div className={`text-[15px] font-poppins mt-1 mb-6`}>
-                        Whatever you're into, we've got it
+                        Whatever you're into, we've got you covered.
                     </div>
                 </div>
 
@@ -99,7 +99,7 @@ const TopCategories = () => {
                                         >
                                             <div
                                                 key={index}
-                                                className={`border-none rounded-xl min-w-[280px] h-[300px] overflow-hidden relative`}>
+                                                className={`border-none rounded-xl min-w-[220px] md:min-w-[280px] h-[300px] overflow-hidden relative`}>
                                                 <img
                                                     src={category?.bglink}
                                                     alt=""

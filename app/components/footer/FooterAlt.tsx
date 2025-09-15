@@ -122,7 +122,7 @@ const FooterAlt = () => {
                 <div className={`w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-y-8 lg:gap-x-4`}>
 
                     {/** first column */}
-                    <div className={`lg:col-span-2`}>
+                    <div className={`lg:col-span-2 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>
                         <div className={`font-poppins font-[300] text-xl`}>
                             About Garssete
                         </div>
@@ -147,7 +147,7 @@ const FooterAlt = () => {
 
 
                     {/** second column */}
-                    <div className={`lg:col-span-2`}>
+                    <div className={`lg:col-span-2 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>
                         <div className={`font-poppins font-[300] text-xl`}>
                             Discover
                         </div>
@@ -172,7 +172,7 @@ const FooterAlt = () => {
 
 
                     {/** third column */}
-                    <div className={`lg:col-span-5`}>
+                    <div className={`lg:col-span-5 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>
                         <div className={`font-poppins font-[300] text-xl`}>
                             Top Categories
                         </div>
@@ -198,7 +198,7 @@ const FooterAlt = () => {
 
 
                     {/** fourth column */}
-                    <div className={`lg:col-span-3 `}>
+                    <div className={`lg:col-span-3 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>
                         <div className={`font-poppins font-[300] text-xl`}>
                             Do Business With Us
                         </div>
@@ -223,7 +223,7 @@ const FooterAlt = () => {
                     </div>
                 </div>
 
-                <div className={`mt-12`}>
+                <div className={`mt-12 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>
                     <div className={`flex place-items-center gap-1.5`}>
                         <div className={`relative w-[20px] h-[20px]`}>
                             <img
@@ -241,7 +241,7 @@ const FooterAlt = () => {
                     </div>
                 </div>
 
-                <div className={`mt-3 font-poppins font-[300] grid grid-cols-1 md:grid-cols-12`}>
+                <div className={`mt-3 font-poppins font-[300] grid grid-cols-1 md:grid-cols-12 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>
                     <div className={`md:col-span-8`}>
                         Garssete connects you to trusted local businesses. Discover services, read reviews, and support your community. Find everything from restaurants to contractors in one comprehensive directory. Your journey to better local experiences starts here.
                     </div>

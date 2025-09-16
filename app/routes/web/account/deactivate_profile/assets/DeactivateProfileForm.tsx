@@ -9,6 +9,7 @@ import ResetPasswordSchema from './DeactivateProfileSchema'
 import DeactivateUserSchema from './DeactivateProfileSchema'
 import { formWrapperClass, inputWrapperClass } from '~/lib/css'
 import { useNotification } from '~/context/NotificationContext'
+import { useOperation } from '~/context/OperationContext'
 
 
 
@@ -16,6 +17,9 @@ const DeactivateProfileForm = ({ loaderData, user }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -37,7 +41,8 @@ const DeactivateProfileForm = ({ loaderData, user }: any) => {
         } else {
             msg = 'Activating...'
         }
-        notification.notify(msg)
+        //notification.notify(msg)
+        showOperation('processing', msg)
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         let guid = loaderData.userProfile.user_guid as string
@@ -59,16 +64,28 @@ const DeactivateProfileForm = ({ loaderData, user }: any) => {
             if (!response.ok) {
                 let error = response.json().then((data) => {
 
-                    notification.alertCancel('Error!', data.message)
+                    //notification.alertCancel('Error!', data.message)
+                    showError('Error', data.message)
+                    completeOperation()
                 })
 
             } else {
-                notification.alertReload('Success!', `You are now ${data["active"] ? 'activated' : 'deactivated'}`)
+                //notification.alertReload('Success!', `You are now ${data["active"] ? 'activated' : 'deactivated'}`)
+                let message = Boolean(data["active"]) ? 'Activated.' : 'Deactivated.'
+                showSuccess('Success', message)
+
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                showOperation('processing', 'Refreshing...')
+                await new Promise((resolve) => setTimeout(resolve, 4000));
+                window.location.reload()
+                completeOperation()
 
             }
 
         } catch (error: any) {
-            notification.alertCancel('Error!', error.message)
+            //notification.alertCancel('Error!', error.message)
+            console.log(error.message)
+            showError('Error', 'Process not completed.')
         } finally {
             setWorking(false)
         }

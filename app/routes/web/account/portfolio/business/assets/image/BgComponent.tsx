@@ -88,7 +88,9 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
                 setWorking(false)
             }
         } else {
-            notification.alertCancel('', 'Please select an image to continue.')
+            //notification.alertCancel('', 'Please select an image to continue.')
+            showError('Error', 'Please select an image to continue.')
+            completeOperation()
             setWorking(false)
         }
     }

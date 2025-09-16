@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { BiSolidUser, BiUser, BiUserCircle, BiUserX } from 'react-icons/bi'
 import { MdEditSquare } from 'react-icons/md'
 import { useNotification } from '~/context/NotificationContext'
+import { useOperation } from '~/context/OperationContext'
 import { config, headers } from '~/lib/lib'
 
 const ImgComponentAlt = ({ user, userProfileImageData }: any) => {
@@ -21,6 +22,8 @@ const ImgComponentAlt = ({ user, userProfileImageData }: any) => {
     const [isImgSelected, setIsImageSelected] = useState(false)
     const [working, setWorking] = useState<boolean>(false)
 
+    const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
+
     const handleImageClick = () => {
         fileInputRef.current?.click()
     }
@@ -38,7 +41,8 @@ const ImgComponentAlt = ({ user, userProfileImageData }: any) => {
 
     const handleUpload = async () => {
         setWorking(true)
-        notification.notify('Working...')
+        ///notification.notify('Working...')
+        showOperation('processing')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         if (isImgSelected) {
@@ -62,21 +66,29 @@ const ImgComponentAlt = ({ user, userProfileImageData }: any) => {
 
                 if (!response.ok) {
                     let error = response.json().then((data) => {
-                        notification.alertCancel('', data.message)
+                        //notification.alertCancel('', data.message)
+                        showError('Error', data.message)
+                        completeOperation()
                     })
 
                 } else {
-                    notification.alertReload('', 'Image uploaded successfully!')
+                    //notification.alertReload('', 'Image uploaded successfully!')
+                    showSuccess('Success', 'Image uploaded.')
+                    completeOperation()
                 }
 
             } catch (error) {
-                return undefined
+                showError('Error', 'Image upload failed.')
+                completeOperation()
+                //return undefined
             } finally {
                 setWorking(false)
             }
         } else {
-            notification.alertCancel('', 'Please select an image to continue.')
+            //notification.alertCancel('', 'Please select an image to continue.')
             //alert('Please select an image to continue.')
+            showError('Error', 'Please select an image to continue')
+            completeOperation()
             setWorking(false)
         }
     }

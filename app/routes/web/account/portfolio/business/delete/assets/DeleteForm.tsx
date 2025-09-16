@@ -81,7 +81,7 @@ const DeleteForm = ({
 
         } catch (error: any) {
             console.log(error.message)
-            showError('Error', 'Delete failed.')
+            showError('Error', error.message || error.error || 'Delete failed.')
             completeOperation()
         }
     }

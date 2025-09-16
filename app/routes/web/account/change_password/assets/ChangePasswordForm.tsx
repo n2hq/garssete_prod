@@ -8,6 +8,7 @@ import { config, headers } from '~/lib/lib'
 import ChangePasswordSchema from './ChangePasswordSchema'
 import { formWrapperClass, inputWrapperClass } from '~/lib/css'
 import { useNotification } from '~/context/NotificationContext'
+import { useOperation } from '~/context/OperationContext'
 
 
 const ChangePasswordForm = ({ loaderData, user }: any) => {
@@ -15,6 +16,7 @@ const ChangePasswordForm = ({ loaderData, user }: any) => {
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
 
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -30,7 +32,8 @@ const ChangePasswordForm = ({ loaderData, user }: any) => {
 
     const handleEmailChangeRequest: SubmitHandler<any> = async (data: any) => {
         setWorking(true)
-        notification.notify('In progress...')
+        //notification.notify('In progress...')
+        showOperation('processing')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const endpoint = "/api/user/change_password/" + loaderData.userProfile?.user_guid
@@ -51,15 +54,22 @@ const ChangePasswordForm = ({ loaderData, user }: any) => {
             if (!response.ok) {
                 let error = response.json().then((data) => {
 
-                    notification.alertCancel('', data.message)
+                    //notification.alertCancel('', data.message)
+                    showError('Error', data.message)
+                    completeOperation()
                 })
 
             } else {
-                notification.alertReload('Success', 'Password Successfully Changed! Use new password on next login')
+                //notification.alertReload('Success', 'Password Successfully Changed! Use new password on next login')
+                showSuccess('Success', 'Password changed. Use new password on next login.')
+                completeOperation()
             }
 
         } catch (error: any) {
-            notification.alertCancel('', error.message)
+            //notification.alertCancel('', error.message)
+            console.log(error.message)
+            showError('Error', 'Password change failed.')
+            completeOperation()
         } finally {
             setWorking(false)
         }

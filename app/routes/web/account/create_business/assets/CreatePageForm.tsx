@@ -91,6 +91,10 @@ const CreatePageForm = ({ data, user }: any) => {
             } else {
 
                 showSuccess('success', 'Page created successfully.')
+
+                showOperation('processing', 'Redirecting...')
+                await new Promise((resolve) => setTimeout(resolve, 4000));
+                window.location.href = '/web/account/portfolio'
                 completeOperation()
                 //alert('Successfully added!')
                 /*  const handleOption = async (value: boolean) => {

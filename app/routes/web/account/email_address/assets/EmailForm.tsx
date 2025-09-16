@@ -8,6 +8,7 @@ import { config, headers } from '~/lib/lib'
 import EmailSchema from './EmailSchema'
 import { formWrapperClass, inputWrapperClass } from '~/lib/css'
 import { useNotification } from '~/context/NotificationContext'
+import { useOperation } from '~/context/OperationContext'
 
 const EmailForm = ({ loaderData, user }: any) => {
 
@@ -15,7 +16,7 @@ const EmailForm = ({ loaderData, user }: any) => {
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
     const [loading, setLoading] = useState(true)
-
+    const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -31,11 +32,15 @@ const EmailForm = ({ loaderData, user }: any) => {
 
     const handleEmailChangeRequest: SubmitHandler<any> = async (data: any) => {
         setWorking(true)
-        notification.notify('', 'Updating email...')
+        //notification.notify('', 'Updating email...')
+        showOperation('processing')
+
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         if (data["email"] === loaderData.userProfile?.email) {
-            notification.alertCancel('Email is the same.', 'Enter a different email to continue.')
+            //notification.alertCancel('Email is the same.', 'Enter a different email to continue.')
+            showError('Error', 'Email is in use. Enter a new email.')
+            completeOperation()
             setWorking(false)
             return false;
         }
@@ -59,10 +64,15 @@ const EmailForm = ({ loaderData, user }: any) => {
                 })
 
             } else {
-                notification.alertCancel('Email Change Request', 'Email Change Request Successfully Sent!')
+                //notification.alertCancel('Email Change Request', 'Email Change Request Successfully Sent!')
+                showSuccess('Success', 'Please check your new email to continue.')
+                completeOperation()
             }
 
-        } catch (error) {
+        } catch (error: any) {
+            console.log(error.message)
+            showError('Error', 'Email change request failed.')
+            completeOperation()
             return undefined
         } finally {
             setWorking(false)

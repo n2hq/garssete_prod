@@ -9,6 +9,7 @@ import ResetPasswordSchema from './ResetPasswordSchema'
 import { formWrapperClass, inputWrapperClass } from '~/lib/css'
 import { useNotification } from '~/context/NotificationContext'
 import { useAuth } from '~/context/AuthContext'
+import { useOperation } from '~/context/OperationContext'
 
 
 
@@ -18,6 +19,9 @@ const ResetPasswordForm = ({ loaderData, user }: any) => {
     const notification = useNotification()
     const auth = useAuth()
     if (!auth) { return null }
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -34,7 +38,8 @@ const ResetPasswordForm = ({ loaderData, user }: any) => {
     const handleSendResetEmail: SubmitHandler<any> = async (data: any) => {
 
         setWorking(true)
-        notification.notify('Sending reset password request.')
+        //notification.notify('Sending reset password request.')
+        showOperation('processing', 'Sending reset password email')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const email = auth?.user?.email.trim()
@@ -45,16 +50,25 @@ const ResetPasswordForm = ({ loaderData, user }: any) => {
         }
 
 
-        const res = await auth.resetpw(datr)
+        try {
+            const res = await auth.resetpw(datr)
 
-        if (JSON.stringify(res).includes('Error')) {
-            setWorking(false)
-            notification.alertCancel('', toSentenceCase(res))
-        } else {
-            notification.alertCancel('', toSentenceCase(res))
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            setWorking(false)
-            //setRecoverySent(true)
+            if (JSON.stringify(res).includes('Error')) {
+                setWorking(false)
+                showError('Error', toSentenceCase(res))
+                completeOperation()
+                //notification.alertCancel('', toSentenceCase(res))
+            } else {
+                //notification.alertCancel('', toSentenceCase(res))
+                showSuccess('Success', toSentenceCase(res))
+                completeOperation()
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                setWorking(false)
+                //setRecoverySent(true)
+            }
+        } catch (error: any) {
+            showError('Error', 'Password reset failed. Wait for a minute and retry.')
+            completeOperation()
         }
 
         /* const endpoint = "/api/user/reset_password_request"

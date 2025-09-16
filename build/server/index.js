@@ -4,7 +4,7 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer, useNavigate, Outlet, useNavigation, Meta, Links, ScrollRestoration, Scripts, Link, useLocation, useLoaderData, NavLink as NavLink$2, useSearchParams, useParams } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import React, { createContext, useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, createContext, useState, useEffect, useRef } from "react";
 import NProgress from "nprogress";
 import { FaSpinner, FaSchool, FaWheelchair, FaSwimmingPool, FaParking, FaTiktok, FaVimeoSquare, FaLinkedinIn, FaSignOutAlt, FaCarSide, FaAngleDown, FaMobile, FaQuestion, FaBriefcase, FaChevronLeft, FaChevronRight, FaYoutubeSquare, FaPinterestSquare, FaFacebookSquare, FaCheck } from "react-icons/fa";
 import CryptoJS from "crypto-js";
@@ -20668,10 +20668,10 @@ async function action({ request }) {
         return DoResponse({ error: "Rating empty!" }, 400);
       }
       if (!body.comment) {
-        return DoResponse({ error: "Please enter comment!" }, 400);
+        return DoResponse({ error: "Please write a comment!" }, 400);
       }
       if (!body.fullname) {
-        return DoResponse({ error: "Please enter full name!" }, 400);
+        return DoResponse({ error: "Please fill in full name!" }, 400);
       }
       const userGuid = body.user_guid;
       const businsessGuid = body.business_guid;

@@ -36,10 +36,10 @@ export async function action({ request }: ActionFunctionArgs) {
                 return DoResponse({ error: "Rating empty!" }, 400)
             }
             if (!body.comment) {
-                return DoResponse({ error: "Please enter comment!" }, 400)
+                return DoResponse({ error: "Please write a comment!" }, 400)
             }
             if (!body.fullname) {
-                return DoResponse({ error: "Please enter full name!" }, 400)
+                return DoResponse({ error: "Please fill in full name!" }, 400)
             }
 
 

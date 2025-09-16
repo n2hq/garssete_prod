@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { MdEditSquare } from 'react-icons/md'
 import { useNotification } from '~/context/NotificationContext'
+import { useOperation } from '~/context/OperationContext'
 import { config } from '~/lib/lib'
 
 const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
@@ -11,6 +12,8 @@ const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
     const [isImgSelected, setIsImageSelected] = useState(false)
     const notification = useNotification()
     const [selectedFile, setSelectedFile] = useState<any>(null)
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
 
     useEffect(() => {
         if (userProfileBgData?.image_url) {
@@ -40,7 +43,9 @@ const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
 
     const handleUpload = async () => {
         setWorking(true)
-        notification.notify('Working...')
+        //notification.notify('Working...')
+        showOperation('processing')
+
         await new Promise((resolve) => setTimeout(resolve, 1000));
         const formData = new FormData();
 
@@ -65,16 +70,25 @@ const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
 
                 if (!response.ok) {
                     let error = response.json().then((data) => {
-                        notification.alertCancel('', data.message)
+                        //notification.alertCancel('', data.message)
+                        console.log(data.message)
+                        showError('Error', data.message)
+                        completeOperation()
                     })
 
                 } else {
-                    notification.alertReload('', 'Image uploaded successfully!')
+                    //notification.alertReload('', 'Image uploaded successfully!')
+                    try {
+                        showSuccess('Success', 'Image saved.')
+                    } finally {
+                        completeOperation()
+                    }
                 }
 
             } catch (error: any) {
                 console.log(error)
-                return undefined
+                showError('Error', 'Image save failed')
+                completeOperation()
             } finally {
                 setWorking(false)
             }

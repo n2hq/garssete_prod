@@ -154,7 +154,7 @@ export default function RatingProvider({ children }: any) {
             } else {
                 console.log(datar.error)
                 //notification.alert('Error', datar.error);
-                showError('Error', 'Rating not submitted.')
+                showError('Error', datar.error)
                 completeOperation()
             }
         } catch (error: any) {

@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useRef, useState } from "react";
 import { MdEditSquare } from "react-icons/md";
 import { headers } from "~/lib/lib";
 import { useNotification } from "./NotificationContext";
+import { useOperation } from "./OperationContext";
 
 
 const EditProductDialogContext = createContext<any | null>(null)
@@ -33,6 +34,9 @@ export function EditProductDialogProvider({ children }: any) {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
     const notification = useNotification()
 
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
     const handleCloseDialog = () => {
         setDialog(false)
         setImgSrc(null)
@@ -55,7 +59,8 @@ export function EditProductDialogProvider({ children }: any) {
     }
 
     const handleUpdate = async () => {
-        notification.notify()
+        //notification.notify()
+        showOperation('processing')
         setWorking(true)
         await new Promise((resolve) => setTimeout(resolve, 1000));
         let productTitle = document.getElementById("product_title") as HTMLInputElement
@@ -94,12 +99,16 @@ export function EditProductDialogProvider({ children }: any) {
 
             if (!response.ok) {
                 let error = response.json().then((data) => {
-
-                    notification.alert('', data.message)
+                    console.log(data.message)
+                    showError('Error', 'Update failed')
+                    completeOperation()
+                    //notification.alert('', data.message)
                 })
 
             } else {
-                notification.alert('Product Update', 'Product updated successfully!')
+                //notification.alert('Product Update', 'Product updated successfully!')
+                showSuccess('Success', 'Product saved.')
+                completeOperation()
             }
 
         } catch (error) {
@@ -111,17 +120,18 @@ export function EditProductDialogProvider({ children }: any) {
 
     }
 
-    const deletePhoto = async (userGuid: string, businessGuid: string, imageGuid: string) => {
+    const deleteProduct = async (userGuid: string, businessGuid: string, productGuid: string) => {
         const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
-        const endpoint = `/delete_business_gallery_pic`
+        const endpoint = `/delete_business_product`
         const url = IMG_BASE_URL + endpoint
 
         const data = {
             guid: userGuid,
             bid: businessGuid,
-            image_guid: imageGuid
+            product_guid: productGuid
         }
 
+        showOperation('processing')
         setWorking(true)
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -134,15 +144,28 @@ export function EditProductDialogProvider({ children }: any) {
 
             if (!response.ok) {
                 let error = response.json().then((data) => {
-                    notification.alert(data.message)
+                    //notification.alert(data.message)
+                    console.log(data)
+                    showError('Error', `Delete failed.`)
+                    completeOperation()
                 })
 
             } else {
-                notification.alertReload('', 'Image deleted successfully!')
+                try {
+                    showSuccess('Success', 'Product deleted.')
+                    completeOperation()
+                    await new Promise((resolve) => setTimeout(resolve, 2000));
+                } finally {
+                    window.location.reload()
+                }
+
+                //notification.alertReload('', 'Image deleted successfully!')
             }
 
         } catch (error: any) {
-            return alert(error.message)
+            showError('Error', 'Product delete failed.')
+            console.log(error.message)
+            //return alert(error.message)
         } finally {
             setWorking(false)
 
@@ -162,7 +185,7 @@ export function EditProductDialogProvider({ children }: any) {
         productDescription, setProductDescription,
         productLink, setProductLink,
         productGuid, setProductGuid,
-        deletePhoto
+        deleteProduct
     }
 
     return (
@@ -234,11 +257,19 @@ export function EditProductDialogProvider({ children }: any) {
 
                                     <div className={`flex place-content-end px-3 gap-2`}>
                                         <button
+                                            onMouseDown={() => window.location.reload()}
+                                            className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md mb-2 mt-4`}
+                                        >
+                                            Reload
+                                        </button>
+
+                                        <button
                                             onMouseDown={() => handleCloseDialog()}
                                             className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
                                     shadow-md mb-2 mt-4`}
                                         >
-                                            Cancel
+                                            Close
                                         </button>
 
                                         <button

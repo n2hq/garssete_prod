@@ -7,6 +7,7 @@ import { useNotification } from '~/context/NotificationContext'
 import { config, getBusiness, headers } from '~/lib/lib'
 import DeleteSchema from './DeleteSchema'
 import { useNavigate } from '@remix-run/react'
+import { useOperation } from '~/context/OperationContext'
 
 const DeleteForm = ({
     userGuid,
@@ -20,6 +21,7 @@ const DeleteForm = ({
 
     const [formdata, setFormdata] = useState<any | null>(null)
 
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -35,7 +37,9 @@ const DeleteForm = ({
 
     const handleDelete = async (data: any) => {
         setWorking(true)
-        notification.notify('Deleting business...')
+        //notification.notify('Deleting business...')
+        showOperation('processing')
+
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         data["user_guid"] = userGuid
@@ -45,26 +49,40 @@ const DeleteForm = ({
         const url = config.BASE_URL + endpoint
 
         try {
+
             const response = await fetch(url, {
                 method: "PUT",
                 headers: headers,
                 body: JSON.stringify(data)
             })
 
-            if (!response.ok) {
+            if (response.status !== 200) {
                 const errorData = await response.text();
                 const errorObject = JSON.parse(errorData)
-                throw new Error(`${errorObject.error}`);
+                let msg = errorObject.message || errorObject.error
+                throw new Error(`${msg}`);
 
             } else {
-                notification.cancel()
-                navigator("/web/account/portfolio")
+                //alert(response.status)
+                //notification.cancel()
+                try {
+
+                    showSuccess('Success', 'Page Deleted.')
+                    await new Promise((resolve) => setTimeout(resolve, 3000));
+                    completeOperation()
+
+                } finally {
+                    navigator("/web/account/portfolio")
+                }
+
 
             }
 
 
         } catch (error: any) {
-
+            console.log(error.message)
+            showError('Error', 'Delete failed.')
+            completeOperation()
         }
     }
 

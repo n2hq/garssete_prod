@@ -34,10 +34,10 @@ const GalleryItemMenu = ({
     }
 
     const handleDelete = async () => {
-        notification.notify()
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        //notification.notify()
+        //await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        editProduct.deleteVideo(userGuid, businessGuid, product.product_guid)
+        editProduct.deleteProduct(userGuid, businessGuid, product.product_guid)
 
     }
 

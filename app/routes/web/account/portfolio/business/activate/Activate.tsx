@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNotification } from '~/context/NotificationContext'
+import { useOperation } from '~/context/OperationContext'
 import { config, getBusiness, headers } from '~/lib/lib'
 
 const Activate = ({
@@ -10,6 +11,7 @@ const Activate = ({
     const [loading, setLoading] = useState(true)
     const notification = useNotification()
     const [working, setWorking] = useState<boolean>(false)
+    const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
 
     useEffect(() => {
         try {
@@ -28,7 +30,9 @@ const Activate = ({
 
     const toggleBusiness = async () => {
         setWorking(true)
-        notification.notify()
+        //notification.notify()
+        showOperation('processing', '')
+
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const newStatus = !isActive
@@ -51,11 +55,13 @@ const Activate = ({
             })
 
 
-            notification.alertReload('Success', 'Completed!')
+            //notification.alertReload('Success', 'Completed!')
+            showSuccess('success', 'Operation completed successfully')
+            completeOperation()
             await new Promise((resolve) => setTimeout(resolve, 1000));
 
         } catch (error: any) {
-
+            showError('error', `Error processing: ${error.message}`)
         } finally {
 
             setIsActive(newStatus)

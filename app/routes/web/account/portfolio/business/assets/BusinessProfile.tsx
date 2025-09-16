@@ -13,6 +13,7 @@ import { controlInformationClass, formWrapperClass } from '~/lib/css'
 import TextareaWithWordLimit from '~/components/content/textarea/TextareaWithWordLimit'
 import Select from '~/components/content/select/Select'
 import BusinessMenu from './BusinessMenu'
+import { useOperation } from '~/context/OperationContext'
 
 const BusinessProfile = ({ data }: any) => {
     console.log(data.businessProfile)
@@ -20,6 +21,9 @@ const BusinessProfile = ({ data }: any) => {
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
     const [errorMsg, setErrorMsg] = useState<any>(null)
+
+
+    const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
 
     const countries = data.countries
     let [states, setStates] = useState(data.states)
@@ -61,9 +65,10 @@ const BusinessProfile = ({ data }: any) => {
         })
     }
 
-    const handleAddBusiness: SubmitHandler<any> = async (datar: any) => {
+    const handleUpdateBusiness: SubmitHandler<any> = async (datar: any) => {
         setWorking(true)
-        notification.notify('Updating business profile...')
+        //notification.notify('Updating business profile...')
+        showOperation('processing', 'Updating page profile')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const endpoint = "/api/listing/" + data.businessProfile.gid
@@ -82,11 +87,15 @@ const BusinessProfile = ({ data }: any) => {
                 throw new Error(`${errorObject.error}`);
 
             } else {
-                notification.alertReload('Success!', 'Successfully updated!')
+                //notification.alertReload('Success!', 'Successfully updated!')
+                showSuccess('Success', 'Page profile updated.')
+                completeOperation()
             }
 
         } catch (error: any) {
-            notification.alertCancel('Unsuccessful', error.message)
+            //notification.alertCancel('Unsuccessful', error.message)
+            showError('error', `${error.message}`)
+            completeOperation()
         } finally {
             setWorking(false)
         }
@@ -174,7 +183,7 @@ const BusinessProfile = ({ data }: any) => {
 
 
                 </div>
-                <form className={`w-full px-[10px]`} onSubmit={handleSubmit(handleAddBusiness)}>
+                <form className={`w-full px-[10px]`} onSubmit={handleSubmit(handleUpdateBusiness)}>
 
 
                     <div className={`${formWrapperClass} mt-0  rounded-lg pt-4 md:max-w-[80%]

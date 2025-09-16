@@ -9,6 +9,7 @@ import BusinessMenu from '../assets/BusinessMenu'
 import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
 import BusinessHeader from '../assets/BusinessHeader'
+import { OperationProvider } from '~/context/OperationContext'
 
 
 const index = () => {
@@ -80,12 +81,14 @@ const index = () => {
                 businessProfile={businessProfile}
             >
 
-                {
-                    data && <Activate
-                        userGuid={userGuid}
-                        businessGuid={businessGuid}
-                    />
-                }
+                <OperationProvider>
+                    {
+                        data && <Activate
+                            userGuid={userGuid}
+                            businessGuid={businessGuid}
+                        />
+                    }
+                </OperationProvider>
             </ContentLayout>
         </AccountLayout>
     )

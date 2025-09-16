@@ -26,8 +26,8 @@ const GalleryItemMenu = ({
     }
 
     const handleDelete = async () => {
-        notification.notify()
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        //notification.notify()
+        //await new Promise((resolve) => setTimeout(resolve, 1000));
 
         editPhoto.deletePhoto(userGuid, businessGuid, item.image_guid)
 

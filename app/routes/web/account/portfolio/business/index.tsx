@@ -11,6 +11,7 @@ import CardTitle from '../../assets/CardTitle'
 import BusinessHeader from './assets/BusinessHeader'
 import ProfileLayout from '../../assets/ProfileLayout'
 import BusinessProfile from './assets/BusinessProfile'
+import { OperationProvider } from '~/context/OperationContext'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -133,12 +134,14 @@ const index = () => {
 
     return (
         <ProfileLayout>
-            {
-                data !== null &&
-                <BusinessProfile
-                    data={data}
-                />
-            }
+            <OperationProvider>
+                {
+                    data !== null &&
+                    <BusinessProfile
+                        data={data}
+                    />
+                }
+            </OperationProvider>
         </ProfileLayout>
     )
 }

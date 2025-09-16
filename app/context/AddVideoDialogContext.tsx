@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod"
 import { saveVideo } from "~/lib/lib";
 import { AddVideoType } from "~/lib/types";
+import { useOperation } from "./OperationContext";
 
 const AddVideoDialogContext = createContext<any | null>(null)
 
@@ -55,6 +56,8 @@ export function AddVideoDialogProvider({ children }: any) {
     const [videoUrlValue, setVideoUrlValue] = useState('')
 
 
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
 
     useEffect(() => {
         if (dialog) {
@@ -94,6 +97,7 @@ export function AddVideoDialogProvider({ children }: any) {
     }, [videoUrlObject])
 
     const handleVerify = () => {
+        showOperation('processing', 'Verifying video link.')
         const videoUrl: any = document.getElementById("videolink")
 
         getVideoInfo(videoUrl.value)
@@ -115,7 +119,8 @@ export function AddVideoDialogProvider({ children }: any) {
 
     const getVideoInfo = async (videoUrl: any) => {
 
-        notification.notify()
+        //notification.notify()
+        showOperation('processing')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
@@ -140,8 +145,9 @@ export function AddVideoDialogProvider({ children }: any) {
                 ytvideoIframe.src = `https://www.youtube.com/embed/${videoObject?.videoId}`
 
             } finally {
-
-                notification.cancel()
+                completeOperation()
+                showSuccess('Verified', 'Enter the video title and optional description to continue.')
+                //notification.cancel()
             }
 
         } else {
@@ -174,8 +180,8 @@ export function AddVideoDialogProvider({ children }: any) {
     const handleUpload = async () => {
 
         setWorking(true)
-        notification.notify('Submitting...')
-
+        //notification.notify('Submitting...')
+        showOperation('processing', 'Submitting video link')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         let videoLinkState: any = document.getElementById("videolink")
@@ -190,13 +196,17 @@ export function AddVideoDialogProvider({ children }: any) {
 
 
         if (videoLink.trim().length <= 0) {
-            notification.alertCancel("Submission error!", "Enter a Video link!")
+            //notification.alertCancel("Submission error!", "Enter a Video link!")
+            showError('Error', 'Please enter a Youtube video link')
+            completeOperation()
             setWorking(false)
             return false
         }
 
         if (videoTitle.trim().length <= 0) {
-            notification.alertCancel("Submission error!", "Video title should not be empty!")
+            //notification.alertCancel("Submission error!", "Video title should not be empty!")
+            showError('Error', 'Please enter a video title')
+            completeOperation()
             setWorking(false)
             return false
         }
@@ -219,9 +229,18 @@ export function AddVideoDialogProvider({ children }: any) {
         const result = await saveVideo(video);
 
         if (result?.data.videoInsertId) {
-            notification?.alertReload("Completed", "Video Link Submitted Successfully.")
+            //notification?.alertReload("Completed", "Video Link Submitted Successfully.")
+            try {
+                showSuccess('Success', 'Video link submitted')
+                completeOperation()
+            } finally {
+                window.location.reload()
+            }
+
         } else {
             notification?.alertCancel("Submission Error", "Video Link submission failed.")
+            showError('Error', 'Submission failed.')
+            completeOperation()
         }
 
 
@@ -274,12 +293,13 @@ export function AddVideoDialogProvider({ children }: any) {
                             </div>
 
                             {/** video link */}
-                            <div className={`flex mb-1 `}>
+                            <div className={`flex mb-1 flex-col mx-3 `}>
+                                <div className={`text-[14px] font-semibold py-1`}>Paste a Youtube video link</div>
                                 <input
                                     id="videolink"
                                     type="text"
-                                    placeholder="Enter Video Link"
-                                    className={`w-full bg-gray-100 px-3 py-4 `}
+                                    placeholder="Paste a Youtube Video"
+                                    className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
                                     onKeyUp={(e: any) => {
                                         handleVideoUrlKeyUp(e.target.value);
                                     }}
@@ -290,22 +310,24 @@ export function AddVideoDialogProvider({ children }: any) {
 
                             {/** video title */}
 
-                            <div className={`flex mb-1 `}>
+                            <div className={`flex mb-1 flex-col mx-3 `}>
+                                <div className={`text-[14px] font-semibold py-1`}>Enter video title</div>
                                 <input
                                     id="videotitle"
                                     type="text"
                                     placeholder="Enter Video Title"
-                                    className={`w-full bg-gray-100 px-3 py-4 `}
+                                    className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
                                 />
 
                             </div>
 
                             { /** description */}
-                            <div>
+                            <div className={`flex mb-1 flex-col mx-3 `}>
+                                <div className={`text-[14px] font-semibold py-1`}>Enter title description</div>
                                 <textarea
                                     id='videodescr'
                                     placeholder={`Enter picture description.`}
-                                    className={`w-full bg-gray-100 px-3  h-[60px] py-3`}
+                                    className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
                                 ></textarea>
                             </div>
 

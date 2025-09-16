@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useRef, useState } from "react";
 import { MdEditSquare } from "react-icons/md";
 import { headers } from "~/lib/lib";
 import { useNotification } from "./NotificationContext";
+import { useOperation } from "./OperationContext";
 
 
 const EditPhotoDialogContext = createContext<any | null>(null)
@@ -30,6 +31,8 @@ export function EditPhotoDialogProvider({ children }: any) {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
     const notification = useNotification()
 
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
     const handleCloseDialog = () => {
         setDialog(false)
         setImgSrc(null)
@@ -52,7 +55,8 @@ export function EditPhotoDialogProvider({ children }: any) {
     }
 
     const handleUpdate = async () => {
-        notification.notify()
+        //notification.notify()
+        showOperation('processing')
         setWorking(true)
         await new Promise((resolve) => setTimeout(resolve, 1000));
         let imageTitle = document.getElementById("image_title") as HTMLInputElement
@@ -84,11 +88,19 @@ export function EditPhotoDialogProvider({ children }: any) {
 
             if (!response.ok) {
                 let error = response.json().then((data) => {
-                    notification.alert('', data.message)
+                    //notification.alert('', data.message)
+                    showError('Error', `${data.message}`)
                 })
 
             } else {
-                notification.alert('Image Update', 'Image updated successfully!')
+                //notification.alert('Image Update', 'Image updated successfully!')
+                try {
+                    showSuccess('Success', `Picture updated.`)
+                    completeOperation()
+                } finally {
+                    //window.location.reload()
+                }
+
             }
 
         } catch (error) {
@@ -112,6 +124,7 @@ export function EditPhotoDialogProvider({ children }: any) {
         }
 
         setWorking(true)
+        showOperation('processing')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         try {
@@ -123,15 +136,24 @@ export function EditPhotoDialogProvider({ children }: any) {
 
             if (!response.ok) {
                 let error = response.json().then((data) => {
-                    notification.alert(data.message)
+                    //notification.alert(data.message)
+                    showError('Error', `${data.message}`)
+                    completeOperation()
                 })
 
             } else {
-                notification.alertReload('', 'Image deleted successfully!')
+                //notification.alertReload('', 'Image deleted successfully!')
+                try {
+                    showSuccess('Success', 'Picture deleted.')
+                    completeOperation()
+                } finally {
+                    window.location.reload()
+                }
             }
 
         } catch (error: any) {
-            return alert(error.message)
+            console.log(error.message)
+            showError('Error', 'Image not deleted.')
         } finally {
             setWorking(false)
 
@@ -205,11 +227,18 @@ export function EditPhotoDialogProvider({ children }: any) {
 
                                     <div className={`flex place-content-end px-3 gap-2`}>
                                         <button
+                                            onMouseDown={() => window.location.reload()}
+                                            className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md mb-2 mt-4`}
+                                        >
+                                            Reload
+                                        </button>
+                                        <button
                                             onMouseDown={() => handleCloseDialog()}
                                             className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
                                     shadow-md mb-2 mt-4`}
                                         >
-                                            Cancel
+                                            Close
                                         </button>
 
                                         <button

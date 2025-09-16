@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import WhereTo from './homepage/assets/search/SearchBusiness'
 import HomeLayout from './landing/assets/HomeLayout'
@@ -16,6 +16,9 @@ import { useLoaderData } from '@remix-run/react'
 import { ListingType } from '~/lib/types'
 import { late } from 'zod'
 import TopDestinations from './homepage/assets/topdestinations/TopDestinations'
+import NotificationDemo, { OperationNotification } from '~/components/content/OperationNotification'
+import OperationDemo, { OperationProvider } from '~/context/OperationContext'
+
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -52,48 +55,56 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
 }
 
+type OperationType = 'login' | 'signup' | 'update' | 'processing';
+
+
 const _index = () => {
   const loader: any = useLoaderData()
   const hotels = loader.hotels
   const latestBusinesses = loader.latestBusinesses
 
+
   return (
-    <HomeLayout>
-      {/** background with search */}
-      <SearchBusiness />
+    <OperationProvider defaultDuration={4000}>
+
+      <HomeLayout>
+
+        {/** background with search */}
+        <SearchBusiness />
 
 
-      {/** top categories */}
-      <TopCategories />
+        {/** top categories */}
+        <TopCategories />
 
 
-      {/** top categories */}
-      <Hotels data={hotels} />
+        {/** top categories */}
+        <Hotels data={hotels} />
 
 
-      {/** top categories */}
-      <YourGuide />
+        {/** top categories */}
+        <YourGuide />
 
 
-      {/** latest businesses */}
-      {/* <LatestBusinesses data={latestBusinesses} /> */}
-      <TopDestinations />
+        {/** latest businesses */}
+        {/* <LatestBusinesses data={latestBusinesses} /> */}
+        <TopDestinations />
 
 
-      {/** inspire */}
-      <Inspire />
+        {/** inspire */}
+        <Inspire />
 
 
-      {/** shopping */}
-      <Shopping />
+        {/** shopping */}
+        <Shopping />
 
-      <div className={`h-[100px]`}>
+        <div className={`h-[100px]`}>
 
-      </div>
+        </div>
 
-      {/** footer */}
-      <FooterAlt />
-    </HomeLayout>
+        {/** footer */}
+        <FooterAlt />
+      </HomeLayout>
+    </OperationProvider>
   )
 }
 

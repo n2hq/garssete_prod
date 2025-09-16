@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNotification } from '~/context/NotificationContext'
+import { useOperation } from '~/context/OperationContext'
 import { headers } from '~/lib/lib'
 
 type Socials = {
@@ -30,7 +31,8 @@ const SocialMedia = ({
 
 
     const [working, setWorking] = useState<boolean>(false)
-    const notification = useNotification()
+    //const notification = useNotification()
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
 
     const [socialMedia, setSocialMedia] = useState<any | null>(null)
     const [selectedSocialMedia, setSelectedSocialMedia] = useState<any | null>(null)
@@ -76,6 +78,7 @@ const SocialMedia = ({
     }
 
     const handleDescriptionChange = (id: string, value: string) => {
+
         setMergedSocialMedia((prev: any) =>
             prev.map((media: any) =>
                 media.media_id === id ? { ...media, user_description: value } : media
@@ -89,7 +92,8 @@ const SocialMedia = ({
         const url = BASE_URL + endpoint
 
         setWorking(true)
-        notification.notify()
+        //notification.notify()
+        showOperation('processing')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         //console.log((mergedFeatures))
@@ -119,12 +123,19 @@ const SocialMedia = ({
             })
 
             if (response.ok) {
-                notification.alertReload('', 'Saved successfully!')
+                //notification.alertReload('', 'Saved successfully!')
+                showSuccess('Success', 'Social media saved.')
+                completeOperation()
             } else {
-                notification.alert('', 'Failed to save.')
+                //notification.alert('', 'Failed to save.')
+                showError('Error', 'Save failed.')
+                completeOperation()
             }
         } catch (error: any) {
-            notification.alert('', 'Something happened!')
+            //notification.alert('', 'Something happened!')
+            console.log(error.message)
+            showError('Error', 'Save failed.')
+            completeOperation()
         } finally {
             setWorking(false)
             //notification.alertReload("", "Completed successfully.")
@@ -163,11 +174,16 @@ const SocialMedia = ({
                                     {/* <p className="text-xs ">{socialMedia.description}</p> */}
                                     <div className=' w-full h-[50px] mt-1 rounded overflow-hidden'>
                                         <textarea
-
+                                            onClick={(e) => handleToggle(socialMedia.media_id)}
                                             onChange={(e) => handleDescriptionChange(socialMedia.media_id, e.target.value)}
                                             className={`w-full h-full bg-gray-100
                                             border p-3 text-sm`}
                                             value={socialMedia.user_description}
+                                            onBlur={(e) => {
+                                                if (e.currentTarget.value.length <= 0) {
+                                                    handleToggle(socialMedia.media_id)
+                                                }
+                                            }}
                                         ></textarea>
                                     </div>
                                 </div>

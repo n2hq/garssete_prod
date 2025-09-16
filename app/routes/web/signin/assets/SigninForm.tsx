@@ -10,12 +10,16 @@ import { useForm } from 'react-hook-form'
 import { WhiteLogo } from '~/components/header/WhiteLogo'
 import { whiteLogoColor } from '~/lib/css'
 import { config } from '~/lib/lib'
+import { useOperation } from '~/context/OperationContext'
 
 const SigninForm = () => {
 
     const auth = useAuth()
     if (!auth) { return null }
     const { signin } = auth
+
+
+    const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
 
     const [formdata, setFormdata] = useState<any>({})
     const [working, setWorking] = useState<boolean>(false)
@@ -37,7 +41,9 @@ const SigninForm = () => {
     const handleSigninForm = async (data: LoginData) => {
         try {
             setWorking(true)
-            notification.notify()
+            //notification.notify()
+            showOperation('processing', 'Sign in is peing processed.');
+
             await new Promise((resolve) => setTimeout(resolve, 1000));
 
             const email = data.username
@@ -49,11 +55,15 @@ const SigninForm = () => {
             }
             const res = await signin(datr)
             if (res === true) {
-                notification.cancel()
+                //notification.cancel()
+                showSuccess('login', 'Signin is successful.')
+                await new Promise((resolve) => setTimeout(resolve, 1000));
+                completeOperation()
                 navigator("/")
             } else {
                 //alert(res.message))
-                notification.alertCancel("Complete Your Signup", res.message)
+                //notification.alertCancel("Complete Your Signup", res.message)
+                showError('error', `Complete your signup: ${res.message}`)
             }
             await new Promise((resolve) => setTimeout(resolve, 1000));
             setWorking(false)

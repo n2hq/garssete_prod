@@ -22,6 +22,7 @@ import { VideoSliderProvider } from "./context/VideoSliderContext";
 import EditVideoDialog from "./routes/web/account/portfolio/business/videos/videos/EditVideoDialog";
 import { EditVideoDialogProvider } from "./context/EditVideoDialogContext";
 import { OnlineStatusProvider } from "./context/OnlineStatusContext";
+import { OperationProvider } from "./context/OperationContext";
 
 
 export const links: LinksFunction = () => [
@@ -87,23 +88,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <NotificationProvider>
-          <VideoSliderProvider>
-            <SliderProvider>
-              <EditVideoDialogProvider>
-                <EditPhotoDialogProvider>
-                  <AddPhotoDialogProvider>
-                    <AddVideoDialogProvider>
-                      <AuthProvider>
-                        <OnlineStatusProvider>
-                          {children}
-                        </OnlineStatusProvider>
-                      </AuthProvider>
-                    </AddVideoDialogProvider>
-                  </AddPhotoDialogProvider>
-                </EditPhotoDialogProvider>
-              </EditVideoDialogProvider>
-            </SliderProvider>
-          </VideoSliderProvider>
+          <OperationProvider>
+            <VideoSliderProvider>
+              <SliderProvider>
+                <EditVideoDialogProvider>
+                  <EditPhotoDialogProvider>
+                    <AddPhotoDialogProvider>
+                      <AddVideoDialogProvider>
+                        <AuthProvider>
+                          <OnlineStatusProvider>
+                            {children}
+                          </OnlineStatusProvider>
+                        </AuthProvider>
+                      </AddVideoDialogProvider>
+                    </AddPhotoDialogProvider>
+                  </EditPhotoDialogProvider>
+                </EditVideoDialogProvider>
+              </SliderProvider>
+            </VideoSliderProvider>
+          </OperationProvider>
         </NotificationProvider>
         <ScrollRestoration />
         <Scripts />

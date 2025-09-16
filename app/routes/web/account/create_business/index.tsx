@@ -7,6 +7,7 @@ import { getCategories, getCities, getCountries, getStates, getUserProfile, IsAu
 import CardTitle from '../assets/CardTitle'
 import CardHeader from '../assets/CardHeader'
 import ProfileContentLayout from '../assets/ProfileContentLayout'
+import { OperationProvider } from '~/context/OperationContext'
 
 const index = () => {
     useEffect(() => {
@@ -79,12 +80,14 @@ const index = () => {
     return (
         <AccountLayout>
             <ProfileContentLayout title={'Create Page'}>
-                {
-                    data && <div>
+                <OperationProvider>
+                    {
+                        data && <div>
 
-                        <CreatePageForm data={data} user={user} />
-                    </div>
-                }
+                            <CreatePageForm data={data} user={user} />
+                        </div>
+                    }
+                </OperationProvider>
             </ProfileContentLayout>
         </AccountLayout>
     )

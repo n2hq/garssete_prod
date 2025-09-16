@@ -61,7 +61,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
                     (user_guid, business_guid, feature_id, user_description, guid) VALUES (?, ?, ?, ?, ?)`,
                             [userGuid, businessGuid, feature.feature_id, feature.user_description, guid])
                     } catch (error: any) {
-                        console.log('>>>>>bumbum')
+                        console.log(error.message)
                         return DoResponse({ error: error.message }, 405)
                     }
                 })

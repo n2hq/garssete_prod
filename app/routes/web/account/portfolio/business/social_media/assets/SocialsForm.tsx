@@ -49,6 +49,7 @@ const FacilityFeatureForm = ({
                             </div>
 
                             <textarea
+
                                 className={`w-full outline-none 
                                     border rounded-[8px] p-3 h-[100px]`}
                             >

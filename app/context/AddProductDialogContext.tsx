@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useRef, useState } from "react";
 import { MdEditSquare } from "react-icons/md";
 import { config, headers } from "~/lib/lib";
 import { useNotification } from "./NotificationContext";
+import { useOperation } from "./OperationContext";
 
 
 const AddProductDialogContext = createContext<any | null>(null)
@@ -32,6 +33,8 @@ export function AddProductDialogProvider({ children }: any) {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
     const notification = useNotification()
 
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
     const handleCloseDialog = () => {
         setDialog(false)
         setImgSrc(null)
@@ -54,7 +57,8 @@ export function AddProductDialogProvider({ children }: any) {
     }
 
     const handleUpdate = async () => {
-        notification.notify()
+        //notification.notify()
+        showOperation('processing')
         setWorking(true)
         await new Promise((resolve) => setTimeout(resolve, 1000));
         let productTitle = document.getElementById("product_title") as HTMLInputElement
@@ -93,11 +97,20 @@ export function AddProductDialogProvider({ children }: any) {
 
             if (!response.ok) {
                 let error = response.json().then((data) => {
-                    notification.alert('', data.message)
+                    //notification.alert('', data.message)
+                    console.log(data.message)
+                    showError('Error', `Failed to add product`)
+                    completeOperation()
                 })
 
             } else {
-                notification.alert('Product Saved', 'Product saved successfully!')
+                ///notification.alert('Product Saved', 'Product saved successfully!')
+                try {
+                    showSuccess('Success', `Product saved.`)
+                    completeOperation()
+                } finally {
+                    window.location.reload()
+                }
             }
 
         } catch (error) {
@@ -109,7 +122,7 @@ export function AddProductDialogProvider({ children }: any) {
 
     }
 
-    const deletePhoto = async (userGuid: string, businessGuid: string, imageGuid: string) => {
+    const deleteProduct = async (userGuid: string, businessGuid: string, imageGuid: string) => {
         const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
         const endpoint = `/delete_business_gallery_pic`
         const url = IMG_BASE_URL + endpoint
@@ -159,7 +172,7 @@ export function AddProductDialogProvider({ children }: any) {
         productTitle, setProductTitle,
         productDescription, setProductDescription,
         productLink, setProductLink,
-        deletePhoto
+        deleteProduct
     }
 
     return (
@@ -207,30 +220,40 @@ export function AddProductDialogProvider({ children }: any) {
                             </div>
 
                             <div className={`h-[25%] space-y-1`}>
+                                <div className={`flex mb-1 flex-col mx-3 `}>
+                                    <div className={`text-[14px] font-semibold py-1`}>Enter product title</div>
+                                    <input
+                                        onChange={(e) => setProductTitle(e.target.value)}
+                                        id='product_title'
+                                        value={productTitle || ""}
+                                        placeholder={`Enter product title.`}
+                                        className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
+                                    />
+                                </div>
 
-                                <input
-                                    onChange={(e) => setProductTitle(e.target.value)}
-                                    id='product_title'
-                                    value={productTitle || ""}
-                                    placeholder={`Enter product title.`}
-                                    className={`w-full bg-gray-100 px-3 py-3`}
-                                />
+                                <div className={`flex mb-1 flex-col mx-3 `}>
+                                    <div className={`text-[14px] font-semibold py-1`}>Enter product description</div>
+                                    <textarea
+                                        onChange={(e) => setProductDescription(e.target.value)}
+                                        id='product_description'
+                                        value={productDescription || ""}
+                                        placeholder={`Enter product description.`}
+                                        className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
+                                    />
+                                </div>
 
-                                <textarea
-                                    onChange={(e) => setProductDescription(e.target.value)}
-                                    id='product_description'
-                                    value={productDescription || ""}
-                                    placeholder={`Enter product description.`}
-                                    className={`w-full bg-gray-100 px-3  h-[60px] py-3`}
-                                />
 
-                                <input
-                                    onChange={(e) => setProductLink(e.target.value)}
-                                    id='product_link'
-                                    value={productLink || ""}
-                                    placeholder={`Enter product link.`}
-                                    className={`w-full bg-gray-100 px-3   py-3`}
-                                />
+                                <div className={`flex mb-1 flex-col mx-3 `}>
+                                    <div className={`text-[14px] font-semibold py-1`}>Enter product link</div>
+                                    <input
+                                        onChange={(e) => setProductLink(e.target.value)}
+                                        id='product_link'
+                                        value={productLink || ""}
+                                        placeholder={`Enter product link.`}
+                                        className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
+                                    />
+                                </div>
+
 
 
 

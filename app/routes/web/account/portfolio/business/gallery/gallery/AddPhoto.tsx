@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import AddPhotoDialog from './AddPhotoDialog'
 import { useAddPhotoDialogContext } from '~/context/AddPhotoDialogContext'
+import { useOperation } from '~/context/OperationContext'
 
 const AddPhoto = ({ userGuid, businessGuid }: any) => {
     const fileInputRef = useRef<HTMLInputElement | null>(null)
@@ -10,6 +11,8 @@ const AddPhoto = ({ userGuid, businessGuid }: any) => {
     const [overlay, setOverlay] = useState<any>(false)
     const [dialog, setDialog] = useState<any>(false)
     const addPhoto = useAddPhotoDialogContext()
+
+
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         try {

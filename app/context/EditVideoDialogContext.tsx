@@ -3,6 +3,7 @@ import { MdEditSquare } from "react-icons/md";
 import { config, getYoutubeId, headers, saveVideo, updateVideo } from "~/lib/lib";
 import { useNotification } from "./NotificationContext";
 import { AddVideoType } from "~/lib/types";
+import { useOperation } from "./OperationContext";
 
 
 const EditVideoDialogContext = createContext<any | null>(null)
@@ -42,6 +43,9 @@ export function EditVideoDialogProvider({ children }: any) {
 
     const fileInputRef = useRef<HTMLInputElement | null>(null)
     const notification = useNotification()
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
 
     useEffect(() => {
         if (videoUrlValue.trim().length > 0) {
@@ -83,7 +87,8 @@ export function EditVideoDialogProvider({ children }: any) {
 
     const handleSubmit = async () => {
         setWorking(true)
-        notification.notify('Submitting...')
+        //notification.notify('Submitting...')
+        showOperation('processing')
 
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -96,19 +101,25 @@ export function EditVideoDialogProvider({ children }: any) {
         let videoDescription = videoDescriptionState.value;
 
         if (videoLink.trim().length <= 0) {
-            notification.alertCancel("Submission error!", "Enter a Video link!")
+            //notification.alertCancel("Submission error!", "Enter a Video link!")
+            showError('Error', 'Please enter a video link to proceed.')
+            completeOperation()
             setWorking(false)
             return false
         }
 
         if (videoTitle.trim().length <= 0) {
-            notification.alertCancel("Submission error!", "Video title should not be empty!")
+            //notification.alertCancel("Submission error!", "Video title should not be empty!")
+            showError('Error', 'Please enter a title for the video.')
+            completeOperation()
             setWorking(false)
             return false
         }
 
         if (videoDescription.trim().length > 500) {
-            notification.alertCancel("Submission error!", "Video description should not be more than 500 characters!")
+            //notification.alertCancel("Submission error!", "Video description should not be more than 500 characters!")
+            showError('Error', 'Video description should not be more than 500 characters.')
+            completeOperation()
             setWorking(false)
             return false
         }
@@ -125,9 +136,13 @@ export function EditVideoDialogProvider({ children }: any) {
         const result = await updateVideo(video);
 
         if (result?.data.success === true) {
-            notification?.alertReload("Successful", "Video link updated successfully.")
+            //notification?.alertReload("Successful", "Video link updated successfully.")
+            showSuccess('Success', 'Video link is updated.')
+            completeOperation()
         } else {
-            notification?.alertCancel("Submission Error", "Video link update failed.")
+            //notification?.alertCancel("Submission Error", "Video link update failed.")
+            showError('Error', 'Update failed')
+            completeOperation()
         }
 
 
@@ -148,6 +163,7 @@ export function EditVideoDialogProvider({ children }: any) {
         }
 
         setWorking(true)
+        showOperation('processing', 'Submitting video')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         try {
@@ -159,15 +175,20 @@ export function EditVideoDialogProvider({ children }: any) {
 
             if (!response.ok) {
                 let error = response.json().then((data) => {
-                    notification.alert(data.message)
+                    //notification.alert(data.message)
+                    showError('Error', `Failed: ${data.message}`)
+                    completeOperation()
                 })
 
             } else {
-                notification.alertReload('Deleted', 'Video deleted successfully!')
+                //notification.alertReload('Deleted', 'Video deleted successfully!')
+                showSuccess('Success', 'Video deleted.')
+                completeOperation()
             }
 
         } catch (error: any) {
-            return alert(error.message)
+            console.log(error)
+            showError('Error', 'Update failed')
         } finally {
             setWorking(false)
 
@@ -196,7 +217,8 @@ export function EditVideoDialogProvider({ children }: any) {
 
     const getVideoInfo = async (videoUrl: any) => {
 
-        notification.notify()
+        //notification.notify()
+        showOperation('processing', 'Verifying video')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
@@ -221,14 +243,16 @@ export function EditVideoDialogProvider({ children }: any) {
                 ytvideoIframe.src = `https://www.youtube.com/embed/${videoObject?.videoId}`
 
             } finally {
-
-                notification.cancel()
+                showSuccess('Success', 'Video link is verified')
+                completeOperation()
             }
 
         } else {
 
-            notification.alertCancel("Video error!", "Video could not be loaded!")
+            //notification.alertCancel("Video error!", "Video could not be loaded!")
+            showError('Error', 'Video could not be loaded!')
 
+            completeOperation()
         }
 
 
@@ -268,13 +292,17 @@ export function EditVideoDialogProvider({ children }: any) {
         }
 
         if (videoTitle.trim().length <= 0) {
-            notification.alertCancel("Submission error!", "Video title should not be empty!")
+            //notification.alertCancel("Submission error!", "Video title should not be empty!")
+            showError('Error', 'Video title should not be empty')
+            completeOperation()
             setWorking(false)
             return false
         }
 
         if (videoDescription.trim().length > 500) {
-            notification.alertCancel("Submission error!", "Video description should not be more than 500 characters!")
+            //notification.alertCancel("Submission error!", "Video description should not be more than 500 characters!")
+            showError('Error', 'Video description should not be more than 500 characters')
+            completeOperation()
             setWorking(false)
             return false
         }
@@ -291,9 +319,12 @@ export function EditVideoDialogProvider({ children }: any) {
         const result = await saveVideo(video);
 
         if (result?.data.videoInsertId) {
-            notification?.alertReload("Completed", "Video Link Submitted Successfully.")
+            //notification?.alertReload("Completed", "Video Link Submitted Successfully.")
+            showSuccess('Success', 'Video link submitted')
+            completeOperation()
         } else {
-            notification?.alertCancel("Submission Error", "Video Link submission failed.")
+            //notification?.alertCancel("Submission Error", "Video Link submission failed.")
+            showError('Error', 'Video link submission failed')
         }
 
 
@@ -348,13 +379,14 @@ export function EditVideoDialogProvider({ children }: any) {
                             </div>
 
                             {/** video link */}
-                            <div className={`flex mb-1 `}>
+                            <div className={`flex mb-1 flex-col mx-3 `}>
+                                <div className={`text-[14px] font-semibold py-1`}>Paste a Youtube video link</div>
                                 <input
                                     id="videolink"
                                     type="text"
                                     defaultValue={videoSrc}
                                     placeholder="Enter Video Link"
-                                    className={`w-full bg-gray-100 px-3 py-4 `}
+                                    className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
                                     onKeyUp={(e: any) => {
                                         handleVideoUrlKeyUp(e.target.value);
                                     }}
@@ -365,34 +397,43 @@ export function EditVideoDialogProvider({ children }: any) {
 
                             {/** video title */}
 
-                            <div className={`flex mb-1 `}>
+                            <div className={`flex mb-1 flex-col mx-3 `}>
+                                <div className={`text-[14px] font-semibold py-1`}>Enter video title</div>
                                 <input
                                     id="videotitle"
                                     defaultValue={videoTitle}
                                     type="text"
                                     placeholder="Enter Video Title"
-                                    className={`w-full bg-gray-100 px-3 py-4 `}
+                                    className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
                                 />
 
                             </div>
 
                             { /** description */}
-                            <div>
+                            <div className={`flex mb-1 flex-col mx-3 `}>
+                                <div className={`text-[14px] font-semibold py-1`}>Enter title description</div>
                                 <textarea
                                     id='videodescr'
                                     defaultValue={videoDescription}
                                     placeholder={`Enter video description.`}
-                                    className={`w-full bg-gray-100 px-3  h-[60px] py-3`}
+                                    className={`w-full border-[1px] border-gray-700 bg-gray-100 px-3 py-4 outline-none rounded-lg`}
                                 ></textarea>
                             </div>
 
                             <div className={`flex place-content-end px-3 gap-2`}>
                                 <button
+                                    onMouseDown={() => window.location.reload()}
+                                    className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
+                                    shadow-md mb-2 mt-4`}
+                                >
+                                    Reload
+                                </button>
+                                <button
                                     onMouseDown={() => handleCloseDialog()}
                                     className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
                                     shadow-md mb-2 mt-4`}
                                 >
-                                    Cancel
+                                    Close
                                 </button>
 
                                 <button

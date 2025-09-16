@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNotification } from '~/context/NotificationContext'
+import { useOperation } from '~/context/OperationContext'
 import { headers } from '~/lib/lib'
 
 type FacilityFeature = {
@@ -35,6 +36,8 @@ const FacilityFeatures = ({
     const [features, setFeatures] = useState<any | null>(null)
     const [selectedFeatures, setSelectedFeatures] = useState<any | null>(null)
     const [mergedFeatures, setMergedFeatures] = useState<any | null>(null)
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
 
     useEffect(() => {
         if (facilityFeatures && selectedFacilityFeatures) {
@@ -88,7 +91,9 @@ const FacilityFeatures = ({
         const url = BASE_URL + endpoint
 
         setWorking(true)
-        notification.notify()
+        //notification.notify()
+        showOperation('processing')
+
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         //console.log((mergedFeatures))
@@ -118,12 +123,18 @@ const FacilityFeatures = ({
             })
 
             if (response.ok) {
-                notification.alertReload('', 'Saved successfully!')
+                //notification.alertReload('', 'Saved successfully!')
+                showSuccess('Success', 'Features saved.')
+                completeOperation()
             } else {
-                notification.alert('', 'Failed to save.')
+                //notification.alert('', 'Failed to save.')
+                showError('Error', 'Save failed.')
+                completeOperation()
             }
         } catch (error: any) {
-            notification.alert('', 'Something happened!')
+            console.log(error.message)
+            showError('Error', `Save failed.`)
+            //notification.alert('', 'Something happened!')
         } finally {
             setWorking(false)
             //notification.alertReload("", "Completed successfully.")
@@ -168,9 +179,10 @@ const FacilityFeatures = ({
                                     <p className="text-xs ">{feature.description}</p>
                                     <div className=' w-full h-[100px] mt-1 rounded overflow-hidden'>
                                         <textarea
+                                            onClick={() => handleToggle(feature.feature_id)}
                                             onChange={(e) => handleDescriptionChange(feature.feature_id, e.target.value)}
                                             className={`w-full h-full bg-gray-100
-                                            border p-3 text-sm`}
+                                            border p-3 text-sm rounded-md`}
                                             value={feature.user_description}
                                         ></textarea>
                                     </div>

@@ -77,6 +77,7 @@ const index = () => {
             </div>
         )
     }
+
     return (
         <EditProductDialogProvider>
             <ProductSliderProvider>

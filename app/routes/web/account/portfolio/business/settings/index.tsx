@@ -12,6 +12,7 @@ import BusinessMenu from '../assets/BusinessMenu'
 import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
 import BusinessHeader from '../assets/BusinessHeader'
+import { OperationProvider } from '~/context/OperationContext'
 
 const index = () => {
     useEffect(() => {
@@ -105,16 +106,18 @@ const index = () => {
             >
 
 
-                {
-                    data &&
-                    <div className={`mt-6`}>
-                        <BusinessWorkingHours
-                            data={data}
-                            onChange={setWorkingHours}
-                            options={options}
-                        />
-                    </div>
-                }
+                <OperationProvider>
+                    {
+                        data &&
+                        <div className={`mt-6`}>
+                            <BusinessWorkingHours
+                                data={data}
+                                onChange={setWorkingHours}
+                                options={options}
+                            />
+                        </div>
+                    }
+                </OperationProvider>
             </ContentLayout>
 
         </AccountLayout>

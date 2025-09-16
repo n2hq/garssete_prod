@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNotification } from '~/context/NotificationContext';
+import { useOperation } from '~/context/OperationContext';
 import { formWrapperClass } from '~/lib/css';
 import { saveOperatingHours } from '~/lib/lib';
 
@@ -60,6 +61,8 @@ const BusinessWorkingHours = ({
     const [openStatus, setOpenStatus] = useState<OpenStatus>("no_hours");
     const [working, setWorking] = useState(false)
     const notification = useNotification()
+
+    const { showOperation, completeOperation, showError, showSuccess } = useOperation()
 
     const getWorkingHours = async (operatingHours: any) => {
         const hours = operatingHours
@@ -141,11 +144,13 @@ const BusinessWorkingHours = ({
 
         if (openStatus === null) {
 
-            notification.alertCancel("", "Please select working hours.")
+            //notification.alertCancel("", "Please select working hours.")
+            showError('Error', 'Please select working hours.')
             return false;
         }
         setWorking(true)
-        notification.notify()
+        //notification.notify()
+        showOperation('processing', 'Request is being processed.')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         try {
@@ -153,11 +158,14 @@ const BusinessWorkingHours = ({
 
             console.log(response)
 
-            notification.alert("", response.message)
+            //notification.alert("", response.message)
+            completeOperation()
+            showSuccess('Success', 'Working hours saved.')
             setWorking(false)
         } catch (error: any) {
-
-            notification.alert("", error.message)
+            console.log(error.message)
+            //notification.alert("", error.message)
+            showError('error', `Business working hours could not be saved.`)
         }
 
     }

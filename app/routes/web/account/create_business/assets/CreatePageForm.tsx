@@ -14,12 +14,15 @@ import { useNotification } from '~/context/NotificationContext.js'
 import { useNavigate, useNavigation } from '@remix-run/react'
 import { leftNavLinks } from '~/lib/json.js'
 import { categories as category } from '~/lib/json/categories.js'
+import { useOperation } from '~/context/OperationContext.js'
 
 const CreatePageForm = ({ data, user }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
     const navigator = useNavigate()
+
+    const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
 
     const countries = data.countries
     let [states, setStates] = useState(data.states)
@@ -63,7 +66,8 @@ const CreatePageForm = ({ data, user }: any) => {
 
     const handleAddBusiness = async (datar: any) => {
         setWorking(true)
-        notification.notify('Creating page...')
+        //notification.notify('Creating page...')
+        showOperation('processing', 'Creating a page')
         await new Promise((resolve) => setTimeout(resolve, 1000));
         datar["owner"] = user.guid
         //alert(JSON.stringify(datar))
@@ -85,21 +89,25 @@ const CreatePageForm = ({ data, user }: any) => {
                 var respObj = await response.json()
                 throw new Error(`Error Code: ${response.status} - ${respObj.message}`)
             } else {
+
+                showSuccess('success', 'Page created successfully.')
+                completeOperation()
                 //alert('Successfully added!')
-                const handleOption = async (value: boolean) => {
-                    if (value) {
-                        notification.cancel()
-                    } else {
-                        window.location.href = ("/web/account/portfolio")
-                        await new Promise((resolve) => setTimeout(resolve, 1000));
-                        notification.cancel()
-
-                    }
-                }
-
-                if (notification.confirm('Page created. Do you wish to create another page?', handleOption)) {
-
-                }
+                /*  const handleOption = async (value: boolean) => {
+                     if (value) {
+                         notification.cancel()
+ 
+                     } else {
+                         window.location.href = ("/web/account/portfolio")
+                         await new Promise((resolve) => setTimeout(resolve, 1000));
+                         notification.cancel()
+ 
+                     }
+                 }
+ 
+                 if (notification.confirm('Page created. Do you wish to create another page?', handleOption)) {
+ 
+                 } */
 
             }
         } catch (e: any) {

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { useNotification } from "./NotificationContext";
+import { useOperation } from "./OperationContext";
 
 const AddPhotoDialogContext = createContext<any | null>(null)
 
@@ -21,6 +22,7 @@ export function AddPhotoDialogProvider({ children }: any) {
     const [selectedFile, setSelectedFile] = useState<any>(null)
     const notification = useNotification()
 
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
 
     const handleCloseDialog = () => {
         setDialog(false)
@@ -40,7 +42,8 @@ export function AddPhotoDialogProvider({ children }: any) {
             formData.append('bid', businessGuid)
             formData.append('image_title', imageTitle.value)
 
-            notification.notify()
+            //notification.notify()
+            showOperation('processing', 'Saving picture')
             await new Promise((resolve) => setTimeout(resolve, 2000));
 
             const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
@@ -60,11 +63,19 @@ export function AddPhotoDialogProvider({ children }: any) {
 
                 if (!response.ok) {
                     let error = response.json().then((data) => {
-                        notification.alert('', data.message)
+                        //notification.alert('', data.message)
+                        showError('Error', `${data.message}`)
+                        completeOperation()
                     })
 
                 } else {
-                    notification.alertReload('', 'Image uploaded successfully!')
+                    //notification.alertReload('', 'Image uploaded successfully!')
+                    try {
+                        showSuccess('Success', 'Picture saved.')
+                        completeOperation()
+                    } finally {
+                        window.location.reload()
+                    }
 
                 }
 
@@ -74,7 +85,7 @@ export function AddPhotoDialogProvider({ children }: any) {
                 setWorking(false)
             }
         } else {
-            alert('Please select an image to continue.')
+            showError('Error', 'Please select an image to continue.')
             setWorking(false)
         }
     }
@@ -128,7 +139,7 @@ export function AddPhotoDialogProvider({ children }: any) {
                                 className={`bg-gray-800 text-white px-3 py-1.5 rounded-md
                                     shadow-md mb-2 mt-4`}
                             >
-                                Cancel
+                                Close
                             </button>
 
                             <button

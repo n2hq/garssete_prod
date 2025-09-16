@@ -9,6 +9,7 @@ import Gallery from './gallery/Gallery'
 import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
 import BusinessHeader from '../assets/BusinessHeader'
+import { OperationProvider } from '~/context/OperationContext'
 
 const index = () => {
     useEffect(() => {
@@ -76,32 +77,27 @@ const index = () => {
                 data={data}
                 businessProfile={businessProfile}
             >
+                <OperationProvider>
+                    {
+                        businessGuid && userGuid &&
+                        <AddPhoto userGuid={userGuid} businessGuid={businessGuid} />
+                    }
 
-
-
-
-
-                {
-                    businessGuid && userGuid &&
-                    <AddPhoto userGuid={userGuid} businessGuid={businessGuid} />
-                }
-
-                {
-                    gallery.length > 0 ?
-                        <div className='z-0'>
-                            <Gallery
-                                gallery={gallery}
-                                userGuid={userGuid}
-                                businessGuid={businessGuid}
-                                listing={businessProfile}
-                            />
-                        </div> :
-                        (<div className=' mt-2 border-[1px] rounded-lg p-3 mb-6'>
-                            Gallery is empty
-                        </div>)
-                }
-
-
+                    {
+                        gallery.length > 0 ?
+                            <div className='z-0'>
+                                <Gallery
+                                    gallery={gallery}
+                                    userGuid={userGuid}
+                                    businessGuid={businessGuid}
+                                    listing={businessProfile}
+                                />
+                            </div> :
+                            (<div className=' mt-2 border-[1px] rounded-lg p-3 mb-6'>
+                                Gallery is empty
+                            </div>)
+                    }
+                </OperationProvider>
 
             </ContentLayout>
         </AccountLayout>

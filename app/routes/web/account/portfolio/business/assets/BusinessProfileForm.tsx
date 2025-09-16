@@ -13,8 +13,12 @@ import { useNotification } from '~/context/NotificationContext'
 import { leftNavLinks } from '~/lib/json'
 import { categories as category } from '~/lib/json/categories'
 import BgComponent from './image/BgComponent'
+import { useOperation } from '~/context/OperationContext'
 
 const BusinessProfileForm = ({ data }: any) => {
+
+    const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
+
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
@@ -60,9 +64,10 @@ const BusinessProfileForm = ({ data }: any) => {
         })
     }
 
-    const handleAddBusiness: SubmitHandler<any> = async (datar: any) => {
+    const handleUpdateBusiness: SubmitHandler<any> = async (datar: any) => {
         setWorking(true)
-        notification.notify('Updating business profile...')
+        //notification.notify('Updating business profile...')
+        showOperation('processing', 'Updating business profile')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const endpoint = "/api/listing/" + data.businessProfile.gid
@@ -81,7 +86,9 @@ const BusinessProfileForm = ({ data }: any) => {
                 throw new Error(`${errorObject.error}`);
 
             } else {
-                notification.alertReload('Success!', 'Successfully updated!')
+                //notification.alertReload('Success!', 'Successfully updated!')
+                showSuccess('success', 'Profile updated.')
+                completeOperation()
             }
 
         } catch (error: any) {
@@ -152,7 +159,7 @@ const BusinessProfileForm = ({ data }: any) => {
                 </div>
 
                 <hr className={`w-full`} />
-                <form className=' w-full' onSubmit={handleSubmit(handleAddBusiness)}>
+                <form className=' w-full' onSubmit={handleSubmit(handleUpdateBusiness)}>
 
                     <div className={`${formWrapperClass} mt-0  rounded-lg pt-4
                                 lg:max-w-[500px] w-full mx-auto  `}>

@@ -52,6 +52,21 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                 }, 405)
             }
 
+
+            const businessExists: any = await query(`SELECT * FROM tbl_dir 
+            WHERE
+            gid = ?
+            AND
+            owner = ?`, [business_guid, user_guid])
+            const business = businessExists[0]
+
+            if ((businessExists as any[]).length <= 0) {
+                return DoResponse({
+                    success: false,
+                    message: "Page does not exist"
+                }, 405)
+            }
+
             const deleteBusiness = await query(`DELETE FROM tbl_dir WHERE gid = ?`, [business_guid]);
             const deleteSocialMedia = await query(`DELETE FROM tbl_selected_social_media WHERE business_guid = ?`, [business_guid]);
             const deleteFacilityFeatures = await query(`DELETE FROM tbl_selected_facility_features WHERE business_guid = ?`, [business_guid]);

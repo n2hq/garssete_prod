@@ -214,116 +214,118 @@ export default function RatingProvider({ children }: any) {
     return (
         <RatingContext.Provider value={vals}>
             {
-                show && <div className={`flex w-screen h-screen bg-black/40 z-[3000] 
+                show && <div className={`flex w-full h-full bg-black/40 z-[3000] 
                 fixed top-0 left-0 right-0 bottom-0 place-items-center place-content-center`}>
-                    <div className={`w-[450px] h-fit mx-auto p-6 bg-white rounded-xl shadow-md space-y-6`}>
-                        <h2 className="text-xl font-bold">Create/Edit Rating</h2>
-                        <form onSubmit={handleSubmit(postRating)} className="space-y-4">
-                            <div>
-                                <label className="block mb-1 text-sm font-semibold">Full Name</label>
-                                <input
-                                    {...register("fullname", {
-                                        onChange: changeHandler
-                                    })}
-                                    type="text"
-                                    className={`w-full px-3 py-2 border rounded-md
+                    <div className={`max-w-[400px] w-full h-fit mx-auto bg-white rounded-xl shadow-md `}>
+                        <div className={`space-y-6 p-6`}>
+                            <h2 className="text-xl font-bold">Create/Edit Rating</h2>
+                            <form onSubmit={handleSubmit(postRating)} className="space-y-4">
+                                <div>
+                                    <label className="block mb-1 text-sm font-semibold">Full Name</label>
+                                    <input
+                                        {...register("fullname", {
+                                            onChange: changeHandler
+                                        })}
+                                        type="text"
+                                        className={`w-full px-3 py-2 border rounded-md
                                         text-sm`}
-                                    placeholder="Enter Business GUID"
+                                        placeholder="Enter Business GUID"
 
-                                />
-                                {errors.fullname?.message && (
-                                    <div className={`text-red-500 mt-1 text-sm`}>
-                                        {errors.fullname.message.toString()}
-                                    </div>
-                                )}
-                            </div>
-
-                            <div>
-                                <label className="block mb-1 text-sm font-semibold">Stars</label>
-                                <select
-                                    {...register("rating", {
-                                        onChange: (e) => {
-                                            setStars(Number(e.target.value))
-                                            changeHandler(e)
-                                        }
-                                    })}
-                                    /* onChange={(e) => setStars(Number(e.target.value))} */
-                                    className={`w-full px-3 py-2 border rounded-md
-                                        text-sm`}
-                                >
-                                    {[5, 4, 3, 2, 1].map((s) => (
-                                        <option key={s} value={s}>
-                                            {s} Star{s > 1 ? 's' : ''}
-                                        </option>
-                                    ))}
-                                </select>
-                                {errors.rating?.message && (
-                                    <div className="text-red-500 mt-1 text-sm">
-                                        {errors.rating.message.toString()}
-                                    </div>
-                                )}
-                            </div>
-
-                            <div>
-                                <div className='flex place-content-between'>
-                                    <label className="block mb-1 text-sm font-semibold">Comment</label>
-                                    <label className=" text-gray-600 text-sm">
-                                        Word Count: <strong>{countWords(text)}</strong>
-                                    </label>
+                                    />
+                                    {errors.fullname?.message && (
+                                        <div className={`text-red-500 mt-1 text-sm`}>
+                                            {errors.fullname.message.toString()}
+                                        </div>
+                                    )}
                                 </div>
-                                <textarea
 
-                                    {...register("comment", {
-                                        onChange: (e) => {
-                                            let words = countWords(text)
-                                            if (words <= maximumWords) {
-                                                setText(e.target.value)
-                                                handleTextChange(e)
+                                <div>
+                                    <label className="block mb-1 text-sm font-semibold">Stars</label>
+                                    <select
+                                        {...register("rating", {
+                                            onChange: (e) => {
+                                                setStars(Number(e.target.value))
                                                 changeHandler(e)
-                                            } else {
-                                                e.preventDefault()
                                             }
-                                        }
-                                    })}
-                                    onKeyDown={handleKeyDown}
-                                    className={`w-full px-3 py-2 border rounded-md 
+                                        })}
+                                        /* onChange={(e) => setStars(Number(e.target.value))} */
+                                        className={`w-full px-3 py-2 border rounded-md
                                         text-sm`}
-                                    placeholder="Write your review..."
-                                    rows={4}
-                                />
-                                {wordLimitReached && (
-                                    <div className="text-red-500 mt-0 text-sm">
-                                        Maximum maximumWords words allowed.
-                                    </div>
-                                )}
-                                {errors.comment?.message && (
-                                    <div className="text-red-500 mt-0 text-sm">
-                                        {errors.comment.message.toString()}
-                                    </div>
-                                )}
-                            </div>
+                                    >
+                                        {[5, 4, 3, 2, 1].map((s) => (
+                                            <option key={s} value={s}>
+                                                {s} Star{s > 1 ? 's' : ''}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {errors.rating?.message && (
+                                        <div className="text-red-500 mt-1 text-sm">
+                                            {errors.rating.message.toString()}
+                                        </div>
+                                    )}
+                                </div>
 
-                            <div className={`w-full grid grid-cols-2 gap-2`}>
-                                <button
-                                    onClick={() => setShow(false)}
-                                    className={`w-full bg-red-200 rounded-md
+                                <div>
+                                    <div className='flex place-content-between'>
+                                        <label className="block mb-1 text-sm font-semibold">Comment</label>
+                                        <label className=" text-gray-600 text-sm">
+                                            Word Count: <strong>{countWords(text)}</strong>
+                                        </label>
+                                    </div>
+                                    <textarea
+
+                                        {...register("comment", {
+                                            onChange: (e) => {
+                                                let words = countWords(text)
+                                                if (words <= maximumWords) {
+                                                    setText(e.target.value)
+                                                    handleTextChange(e)
+                                                    changeHandler(e)
+                                                } else {
+                                                    e.preventDefault()
+                                                }
+                                            }
+                                        })}
+                                        onKeyDown={handleKeyDown}
+                                        className={`w-full px-3 py-2 border rounded-md 
+                                        text-sm`}
+                                        placeholder="Write your review..."
+                                        rows={4}
+                                    />
+                                    {wordLimitReached && (
+                                        <div className="text-red-500 mt-0 text-sm">
+                                            Maximum maximumWords words allowed.
+                                        </div>
+                                    )}
+                                    {errors.comment?.message && (
+                                        <div className="text-red-500 mt-0 text-sm">
+                                            {errors.comment.message.toString()}
+                                        </div>
+                                    )}
+                                </div>
+
+                                <div className={`w-full grid grid-cols-2 gap-2`}>
+                                    <button
+                                        onClick={() => setShow(false)}
+                                        className={`w-full bg-red-200 rounded-md
                                         hover:bg-red-100 text-sm`}
-                                >
-                                    Close
-                                </button>
-                                <button
-                                    type="submit"
-                                    disabled={working}
-                                    className={`w-full bg-blue-600 text-white py-2 
+                                    >
+                                        Close
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        disabled={working}
+                                        className={`w-full bg-blue-600 text-white py-2 
                                         rounded-md hover:bg-blue-700 text-sm`}
-                                >
-                                    {working ? 'Submitting...' : 'Submit Rating'}
-                                </button>
-                            </div>
-                        </form>
+                                    >
+                                        {working ? 'Submitting...' : 'Submit Rating'}
+                                    </button>
+                                </div>
+                            </form>
 
-                        {/* {success && <div className="text-green-600">{success}</div>}
+                            {/* {success && <div className="text-green-600">{success}</div>}
                         {error && <div className="text-red-600">{error}</div>} */}
+                        </div>
                     </div>
                 </div>
             }

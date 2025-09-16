@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod'
 import { useNotification } from './NotificationContext';
+import { useOperation } from './OperationContext';
 
 const maximumWords = 100
 
@@ -54,6 +55,8 @@ export default function RatingProvider({ children }: any) {
     const [ratingData, setRatingData] = useState<Rating[] | undefined>(undefined)
     const [text, setText] = useState('')
     const notification = useNotification()
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
 
 
     const [stars, setStars] = useState<number>(5);
@@ -117,7 +120,8 @@ export default function RatingProvider({ children }: any) {
     };
 
     const postRating = async (data: any) => {
-        notification.notify('Working...')
+        //notification.notify('Working...')
+        showOperation('processing')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const userGuid = user!.guid
@@ -144,13 +148,20 @@ export default function RatingProvider({ children }: any) {
             const datar = await res.json();
             if (res.ok) {
 
-                notification.alert('Success', 'Rating submitted successfully!');
+                //notification.alert('Success', 'Rating submitted successfully!');
+                showSuccess('Success', 'Rating submitted.')
+                completeOperation()
             } else {
-
-                notification.alert('Error', datar.error);
+                console.log(datar.error)
+                //notification.alert('Error', datar.error);
+                showError('Error', 'Rating not submitted.')
+                completeOperation()
             }
         } catch (error: any) {
-            notification.alert('', error.message);
+            //notification.alert('', error.message);
+            showError('Error', 'Rating not submitted.')
+            completeOperation()
+            console.log(error.message)
         }
     }
 

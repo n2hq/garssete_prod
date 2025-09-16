@@ -281,7 +281,8 @@ export function AddVideoDialogProvider({ children }: any) {
                     >
                         <div className={`relative h-full overflow-y-auto`}>
                             <div className={`relative w-full h-[75%] max-h-[75%] bg-black`}>
-                                <div className={` relative w-full h-full`}>
+                                <div className={` relative w-full h-full text-white flex place-items-center place-content-center flex-col`}>
+                                    {working ? 'Loading...' : 'Paste a Youtube link below!'}
                                     <iframe id="yt-iframe"
                                         src={video?.videoId ? `https://www.youtube.com/embed/${video?.videoId}` : undefined}
                                         className="absolute top-0 left-0 w-full h-full"

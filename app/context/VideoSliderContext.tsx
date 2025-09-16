@@ -151,9 +151,10 @@ export const VideoSliderProvider = ({ children }: any) => {
                                                 key={index}
                                                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
                                                 className="object-scale-down w-full h-full 
-                   block flex-shrink-0 flex-grow-0 transition-transform 
-                   ease-in-out duration-1000 relative"
+                   flex flex-shrink-0 flex-grow-0 transition-transform 
+                   ease-in-out duration-1000 relative place-items-center place-content-center bg-black text-white"
                                             >
+                                                Loading...
                                                 <iframe
                                                     id={slide?.video_guid}
                                                     src={videoSrc}

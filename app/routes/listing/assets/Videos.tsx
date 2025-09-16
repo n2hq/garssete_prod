@@ -234,7 +234,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
 
                                                             <div className={`w-full text-white bottom-0  `}>
 
-                                                                <div className={` text-[12px] leading-[1.2em] line-clamp-2`}>
+                                                                <div className={` text-[12px] leading-[1.2em] line-clamp-1`}>
                                                                     {video20[i]?.videoTitle}
                                                                 </div>
 

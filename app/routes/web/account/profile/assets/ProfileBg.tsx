@@ -119,7 +119,7 @@ const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
 
 
 
-            <div className={` flex place-items-center gap-3
+            <div className={` flex place-items-center gap-1.5
                 place-content-center top-[5px] right-[5px] w-fit z-[120] absolute`}>
 
                 <button

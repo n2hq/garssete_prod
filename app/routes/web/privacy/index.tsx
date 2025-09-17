@@ -5,6 +5,7 @@ import VerticalHeight from '~/routes/asset/VerticalHeight'
 import CallToActionSection from '~/components/content/CallToActionSection'
 import FooterSection from '~/routes/landing/assets/FooterSection'
 import SearchLayoutMain from '~/routes/asset/SearchLayoutMain'
+import FooterAlt from '~/components/footer/FooterAlt'
 
 const index = () => {
     return (
@@ -21,8 +22,7 @@ const index = () => {
 
             </div>
             <VerticalHeight />
-            <CallToActionSection />
-            <FooterSection />
+            <FooterAlt />
         </SearchLayoutMain>
     )
 }

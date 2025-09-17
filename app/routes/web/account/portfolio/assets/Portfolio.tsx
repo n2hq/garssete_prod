@@ -6,7 +6,7 @@ const Portfolio = ({ user, portfolio }: any) => {
 
 
     return (
-        <div className={` h-fit`}>
+        <div className={` h-fit pl-[5px] pr-[10px]`}>
             {
                 portfolio?.length > 0 ?
                     <PortfolioPagination

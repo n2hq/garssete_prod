@@ -13,12 +13,12 @@ const CardHeaderWithSearch = ({ base_url, title, q }: any) => {
             <div className={`bg-gray-100 w-full  
                             flex place-content-between rounded-lg
                             place-items-center h-auto py-3 gap-[5px]
-                            leading-[1.5em] px-[15px]`}>
-                <div className={`h-full`}>
+                            leading-[1.5em] px-[10px]`}>
+                <div className={`h-full min-w-[100px] w-[100px] max-w-[300px]`}>
 
-                    <div className="flex items-center text-blue-800 text-[18px] font-poppins tracking-tight font-bold  ">
-                        <GrLaunch className="mr-1 flex-shrink-0" size={25} />
-                        <span className="line-clamp-1 overflow-hidden">
+                    <div className="flex items-center   ">
+                        <GrLaunch className="mr-1 flex-shrink-0" size={20} />
+                        <span className="line-clamp-1 overflow-hidden text-blue-800 text-[16px] font-sans tracking-tight font-bold">
                             {title}
                         </span>
                     </div>

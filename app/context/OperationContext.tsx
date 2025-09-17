@@ -333,15 +333,44 @@ const AlertNotification: React.FC = () => {
 
     return (
         <div className="fixed top-4 right-4 z-[30000] max-w-sm w-full">
-            <div className={`rounded-lg p-4 shadow-lg border ${styles.bg} ${styles.border} animate-slide-in`}>
-                <div className="flex items-start">
+            <div className={`rounded-md shadow-lg border ${styles.bg} ${styles.border} animate-slide-in`}>
+                <div className={`mx-3 mt-2.5`}>
+                    <div className={`flex place-items-center place-content-between gap-2`}>
+                        <div className={`w-fit`}>
+                            {styles.icon}
+                        </div>
+                        <div className={`text-md font-bold ${styles.text} grow w-full text-start`}>
+                            {title}
+                        </div>
+                        <div className="ml-4 flex-shrink-0 flex">
+                            <button
+                                onClick={hideAlert}
+                                className={`inline-flex ${styles.bg} rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+                            >
+                                <span className="sr-only">Close</span>
+                                <svg className="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={`mx-6 mt-1 mb-5`}>
+                    <p className={`mt-1 text-sm ${styles.text}`}>
+                        {message}
+                    </p>
+                </div>
+
+                {/* <div className="flex items-start">
                     <div className="flex-shrink-0">
                         {styles.icon}
                     </div>
                     <div className="ml-3 w-0 flex-1">
-                        <h3 className={`text-sm font-medium ${styles.text}`}>
+                        <h3 className={`text-sm font-bold ${styles.text}`}>
                             {title}
                         </h3>
+
                         <p className={`mt-1 text-sm ${styles.text}`}>
                             {message}
                         </p>
@@ -357,7 +386,7 @@ const AlertNotification: React.FC = () => {
                             </svg>
                         </button>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
     );

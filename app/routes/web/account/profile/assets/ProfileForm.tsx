@@ -10,6 +10,7 @@ import { MdEditSquare } from 'react-icons/md'
 import ImgComponent from './ImgComponent'
 import { formWrapperClass, inputHeadingClass, inputWrapperClass } from '~/lib/css'
 import { useNotification } from '~/context/NotificationContext'
+import { useOperation } from '~/context/OperationContext'
 
 const categoryJson = [
     {
@@ -37,6 +38,8 @@ const ProfileForm = ({ loaderData, user, userProfileData }: any) => {
 
     const [newCountryCode, setNewCountryCode] = useState('')
     const [newStateCode, setNewStateCode] = useState('')
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
 
     const resetStates = async (countryCode: string) => {
         setCountryCode(countryCode)
@@ -67,7 +70,9 @@ const ProfileForm = ({ loaderData, user, userProfileData }: any) => {
 
     const handleUpdateUser: SubmitHandler<any> = async (data: any) => {
         setWorking(true)
-        notification.notify('Updating user profile...')
+        //notification.notify('Updating user profile...')
+        showOperation('processing')
+
         await new Promise((resolve) => setTimeout(resolve, 1000));
         const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
         const endpoint = "/api/user/" + user.guid
@@ -84,11 +89,15 @@ const ProfileForm = ({ loaderData, user, userProfileData }: any) => {
                 var respObj = await response.json()
                 throw new Error(`Error Code: ${response.status} - ${respObj.error}`)
             } else {
-                notification.alertReload('Success', 'Update is Successful!')
+                //notification.alertReload('Success', 'Update is Successful!')
+                showSuccess('Success', 'Updated.')
+                completeOperation()
             }
         }
         catch (error: any) {
-            notification.alertCancel('Error', error.message)
+            //notification.alertCancel('Error', error.message)
+            showError('Error', error?.message || error?.error || 'Update failed.')
+            completeOperation()
             return undefined
         }
         finally {

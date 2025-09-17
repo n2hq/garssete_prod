@@ -12,6 +12,7 @@ import Input from '~/components/content/input/Input'
 import Select from '~/components/content/select/Select'
 import { formWrapperClass } from '~/lib/css'
 import ProfileBg from './ProfileBg'
+import { useOperation } from '~/context/OperationContext'
 
 const Profile = ({ loaderData, user, userProfileData, userProfileBgData }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
@@ -29,6 +30,9 @@ const Profile = ({ loaderData, user, userProfileData, userProfileBgData }: any) 
 
     const [newCountryCode, setNewCountryCode] = useState('')
     const [newStateCode, setNewStateCode] = useState('')
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
 
     const resetStates = async (countryCode: string) => {
         setCountryCode(countryCode)
@@ -59,7 +63,8 @@ const Profile = ({ loaderData, user, userProfileData, userProfileBgData }: any) 
 
     const handleUpdateUser: SubmitHandler<any> = async (data: any) => {
         setWorking(true)
-        notification.notify('Updating user profile...')
+        //notification.notify('Updating user profile...')
+        showOperation('processing')
         await new Promise((resolve) => setTimeout(resolve, 1000));
         const BASE_URL = import.meta.env.VITE_SITE_BASE_URL
         const endpoint = "/api/user/" + user.guid
@@ -76,11 +81,15 @@ const Profile = ({ loaderData, user, userProfileData, userProfileBgData }: any) 
                 var respObj = await response.json()
                 throw new Error(`Error Code: ${response.status} - ${respObj.error}`)
             } else {
-                notification.alertReload('Success', 'Update is Successful!')
+                //notification.alertReload('Success', 'Update is Successful!')
+                showSuccess('Success', 'Updated.')
+                completeOperation()
             }
         }
         catch (error: any) {
-            notification.alertCancel('Error', error.message)
+            //notification.alertCancel('Error', error.message)
+            showError('Error', error?.message || error?.error || 'Update failed.')
+            completeOperation()
             return undefined
         }
         finally {

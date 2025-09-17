@@ -18,8 +18,6 @@ const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
     useEffect(() => {
         if (userProfileBgData?.image_url) {
             setImgconst(config.IMG_BASE_URL + userProfileBgData?.image_url)
-        } else {
-            setImgconst('/images/newyork.jpg')
         }
     }, [])
 
@@ -103,11 +101,12 @@ const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
 
     return (
         <div className={`relative`}>
-            <div className={`bg-black w-full h-[200px] relative shadow-lg`}>
+            <div className={`bg-black w-full h-[200px] relative shadow-lg `}>
+
                 <img
                     src={imgconst}
-                    alt="user"
-                    className={`object-cover w-full h-full`}
+                    alt="Add Photo"
+                    className={`object-cover w-full h-full flex place-content-center place-items-center text-white`}
                 />
 
                 <input type="file"

@@ -9,6 +9,7 @@ import { whiteLogoColor } from '~/lib/css'
 import { config, headers } from '~/lib/lib'
 import { IAddUser } from '~/lib/types'
 import SignupSchema from './SignupSchema'
+import { useOperation } from '~/context/OperationContext'
 
 const SignupForm = () => {
     const [formdata, setFormdata] = useState<any | null>(null)
@@ -17,6 +18,8 @@ const SignupForm = () => {
     const navigate = useNavigate()
     const [signedup, setSignedup] = useState(false)
     const successMsg = `Signup is successful! Please check email provided to complete signup.`
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -32,7 +35,8 @@ const SignupForm = () => {
 
     const handleSignup = async (data: any) => {
         setWorking(true)
-        notification.notify("", "")
+        //notification.notify("", "")
+        showOperation('processing')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
 
@@ -53,16 +57,20 @@ const SignupForm = () => {
 
             if (!response.ok) {
                 var respObj = await response.json()
-                throw new Error(`Error Code: ${response.status} - ${respObj.message || respObj.error}`)
+                throw new Error(`${respObj.message || respObj.error}`)
             } else {
                 {/** signup is successful */ }
-                notification.alertCancel('', successMsg)
+                //notification.alertCancel('', successMsg)
+                showSuccess('Success', successMsg)
+                completeOperation()
                 //navigate("/signup/code")
                 setSignedup(true)
             }
         } catch (e: any) {
 
-            notification.alertCancel('', e.message)
+            //notification.alertCancel('', e.message)
+            showError('Error', e.message)
+            completeOperation()
             return undefined
         } finally {
             setWorking(false)

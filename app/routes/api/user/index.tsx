@@ -48,7 +48,7 @@ export async function action({ request }: ActionFunctionArgs) {
                 return DoResponse(
                     {
                         exists: true,
-                        message: "Email is not available. Check your email if you tried to signed up earlier."
+                        message: "Please choose another email."
                     },
                     409
                 )

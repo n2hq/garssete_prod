@@ -103,8 +103,8 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
                     imgSrc &&
                     <img
                         src={imgSrc}
-                        alt="Click to upload"
-                        className=' object-cover w-full h-full  absolute z-[40]'
+                        alt="Add photo."
+                        className=' object-cover w-full h-full  absolute z-[40] text-white flex place-items-center place-content-center'
                     />
                 }
                 <input type="file"

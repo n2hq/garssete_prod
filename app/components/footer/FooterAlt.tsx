@@ -1,5 +1,7 @@
 import { Link } from '@remix-run/react'
 import React from 'react'
+import { FaFacebook, FaInstagram } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 
 const aboutLinks = [
     {
@@ -92,6 +94,21 @@ const doBusinessLinks = [
 
 ]
 
+const garsseteSocialLinks = [
+    {
+        icon: <FaFacebook />,
+        link: 'http://facebook.com/garssete'
+    },
+    {
+        icon: <FaXTwitter />,
+        link: 'http://x.com/garssete'
+    },
+    {
+        icon: <FaInstagram />,
+        link: 'http://instagram.com/garssete'
+    },
+]
+
 
 const garsseteSites = [
     {
@@ -107,6 +124,11 @@ const garsseteSites = [
 
 export type AboutLinksType = {
     title: string
+    link: string
+}
+
+export type FooterSocialMediaType = {
+    icon: any
     link: string
 }
 
@@ -247,6 +269,26 @@ const FooterAlt = () => {
                     </div>
                     <div className={`md:col-span-4`}>
 
+                    </div>
+                </div>
+
+                <div>
+                    <div className={`flex gap-2 place-items-center place-content-start mt-4`}>
+                        {
+                            garsseteSocialLinks.map((media: FooterSocialMediaType, index: number) => {
+                                return (
+                                    <div key={index}>
+                                        <a href={media?.link}>
+                                            <div
+                                                className={`bg-gray-200 text-black text-[15px] w-[35px] h-[35px] place-items-center place-content-center flex`}
+                                            >
+                                                {media.icon}
+                                            </div>
+                                        </a>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>

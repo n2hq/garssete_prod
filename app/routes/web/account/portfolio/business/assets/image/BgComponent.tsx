@@ -98,13 +98,14 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
 
     return (
         <div className={`relative`}>
-            <div className='relative bg-gray-600 w-full h-[200px] z-[40] shadow-lg'>
+            <div className='relative bg-gray-600 w-full h-[200px] z-[40] shadow-lg text-white flex place-items-center place-content-center flex-col'>
+                {imgSrc === "" && 'Add Photo.'}
                 {
                     imgSrc &&
                     <img
                         src={imgSrc}
                         alt="Add photo."
-                        className=' object-cover w-full h-full  absolute z-[40] text-white flex place-items-center place-content-center'
+                        className=' object-cover w-full h-full  absolute z-[40] '
                     />
                 }
                 <input type="file"

@@ -263,7 +263,7 @@ const FooterAlt = () => {
                     </div>
                 </div>
 
-                <div className={`mt-3 font-poppins font-[300] grid grid-cols-1 md:grid-cols-12 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>
+                <div className={`mt-3 font-poppins font-[300] grid-cols-1 md:grid-cols-12 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>
                     <div className={`md:col-span-8`}>
                         Garssete connects you to trusted local businesses. Discover services, read reviews, and support your community. Find everything from restaurants to contractors in one comprehensive directory. Your journey to better local experiences starts here.
                     </div>

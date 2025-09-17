@@ -59,7 +59,7 @@ const ChangeEmailForm = ({ guid, email, response }: any) => {
                             <Link className={`w-[85%]`}
                                 to={`/web/signin`}>
                                 <div
-                                    className={`border-b w-full
+                                    className={`border-b w-full text-center
                                                     px-[0px] py-1 text-[14px]
                                                     outline-none hover:underline`}
                                 >

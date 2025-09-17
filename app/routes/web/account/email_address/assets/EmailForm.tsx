@@ -60,7 +60,9 @@ const EmailForm = ({ loaderData, user }: any) => {
 
             if (!response.ok) {
                 let error = response.json().then((data) => {
-                    notification.alertCancel('Error', data.error)
+                    //throw new Error('Error', data.message)
+                    showError('Error', data.message)
+                    completeOperation()
                 })
 
             } else {
@@ -70,10 +72,11 @@ const EmailForm = ({ loaderData, user }: any) => {
             }
 
         } catch (error: any) {
-            console.log(error.message)
-            showError('Error', 'Email change request failed.')
+            //console.log(error[0].error)
+            //let msg = error?.error || 'Change request failed.'
+            showError('Error', 'Change request failed')
             completeOperation()
-            return undefined
+            //return undefined
         } finally {
             setWorking(false)
         }

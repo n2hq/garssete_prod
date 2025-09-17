@@ -3,7 +3,7 @@ import BusinessHeader from '../portfolio/business/assets/BusinessHeader'
 import BusinessMenu from '../portfolio/business/assets/BusinessMenu'
 
 const ProfileContentLayout = ({ children, businessGuid, data, businessProfile, title }: any) => {
-    console.log(data)
+    //console.log(data)
     return (
         <div>
 

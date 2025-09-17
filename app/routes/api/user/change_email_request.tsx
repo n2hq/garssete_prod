@@ -23,6 +23,18 @@ export async function action({ request }: ActionFunctionArgs) {
                 return DoResponse({ error: "User / Owner Guid is required!" }, 400)
             }
 
+            {/** check if email exists */ }
+            let emailExists: any = await query(`SELECT * FROM tbl_user WHERE email = ?`, [body.email])
+            if ((emailExists as any[]).length > 0) {
+                return DoResponse(
+                    {
+                        exists: false,
+                        message: "Email is not available. Choose another email!"
+                    },
+                    409
+                )
+            }
+
             {/** check if user's guid exists */ }
             let rows: any = await query(`SELECT * FROM tbl_user WHERE user_guid = ?`, [body.guid])
             if ((rows as any[]).length <= 0) {

@@ -11,16 +11,15 @@ const ChangeEmailFail = () => {
     return (
         <div className=' flex place-content-center place-items-center w-full'>
             <div className=' max-w-[300px]'>
-                <div className=' text-xl leading-[1.2em] text-center font-light '>
-                    Link Has Expired.
+                <div className=' text-xl leading-[1.2em] text-center font-light flex place-items-center gap-x-1 place-content-center '>
+                    <div className={`w-[30px] h-[30px] bg-gray-300 flex place-content-center 
+                    place-items-center rounded-full text-black  border-[5px]`}>
+                        <MdOutlineCancel className='text-[40px]' />
+                    </div>
+                    <span>Link Has Expired.</span>
                 </div>
 
-                <div className={`mt-4 flex place-items-center place-content-center`}>
-                    <div className={`w-[60px] h-[60px] bg-gray-300 flex place-content-center 
-                    place-items-center rounded-full text-black  border-[5px]`}>
-                        <MdOutlineCancel className='text-[50px]' />
-                    </div>
-                </div>
+
 
 
                 <div className=' mt-6 text-[15px] '>

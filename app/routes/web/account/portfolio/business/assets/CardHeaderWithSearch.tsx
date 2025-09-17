@@ -10,13 +10,13 @@ import { GrLaunch } from 'react-icons/gr'
 const CardHeaderWithSearch = ({ base_url, title, q }: any) => {
     return (
         <div>
-            <div className={`bg-blue-100 w-full px-3 
+            <div className={`bg-gray-100 w-full  
                             flex place-content-between rounded-lg
                             place-items-center h-auto py-3 gap-[5px]
-                            leading-[1.5em]`}>
+                            leading-[1.5em] px-[15px]`}>
                 <div className={`h-full`}>
 
-                    <div className="flex items-center text-blue-800 text-[18px] font-poppins tracking-tight font-bold ">
+                    <div className="flex items-center text-blue-800 text-[18px] font-poppins tracking-tight font-bold  ">
                         <GrLaunch className="mr-1 flex-shrink-0" size={25} />
                         <span className="line-clamp-1 overflow-hidden">
                             {title}

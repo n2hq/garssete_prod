@@ -24,12 +24,9 @@ const PortfolioLayout = ({ children, businessGuid, data, businessProfile, title 
 
                     </div>
                 </div>
-                <div className={`px-[15px]  pt-4 `}>
+                <div className={`  pt-0 `}>
                     <div className={`w-full flex place-content-end`}>
-                        {
-                            businessGuid && data.userGuid &&
-                            <BusinessMenu guid={businessGuid} userGuid={data.userGuid} />
-                        }
+
                     </div>
                     {children}
                     <div className={`h-[40px]`}></div>

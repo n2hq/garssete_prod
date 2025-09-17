@@ -12,11 +12,7 @@ import { getFirstChar } from '~/lib/lib'
 import { UserProfile, UserProfileProps } from '~/lib/types'
 
 const mainLink = [
-    {
-        title: "Account Profile",
-        icon: <BsPersonFillGear />,
-        link: '/web/account/profile'
-    },
+
     {
         title: "Email Address",
         icon: <MdOutlineAttachEmail />,
@@ -41,6 +37,11 @@ const mainLink = [
 ]
 
 const moreTools = [
+    {
+        title: "Account Profile",
+        icon: <BsPersonFillGear />,
+        link: '/web/account/profile'
+    },
     {
         title: "Create Business",
         icon: <BiBriefcase />,
@@ -102,36 +103,10 @@ const LeftNav = ({ userProfile }: UserProfileProps) => {
 
             </div>
 
-            {
-                mainLink.map((link, index) => {
-                    return (
-                        <div key={index} className={`mt-[0px]`}>
-                            <Link to={link.link}>
-                                <div className={` flex place-items-center gap-3
-                        hover:bg-gray-200/60 py-1 rounded
-                        ${location.pathname.startsWith(link.link) && 'bg-[#2e374a]/15'}`}>
-
-                                    <div className={`w-[40px] h-[40px] rounded-full
-                    place-content-center place-items-center border-gray-300 text-[23px]`}>
-                                        {link.icon}
-                                    </div>
-                                    <div className={`text-[13px]`}>
-                                        {link.title}
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>
-                    )
-                })
-            }
-
-
-
-
             <div className={` text-[17px] mt-[20px]
                 flex place-items-center h-[40px] place-content-between`}>
                 <div className={`font-[600]`}>
-                    More tools
+                    Business Tools
                 </div>
                 <div className={``}>
                     <CgChevronDown className={`text-[20px]`} />
@@ -173,6 +148,45 @@ const LeftNav = ({ userProfile }: UserProfileProps) => {
                     )
                 })
             }
+
+
+            <div className={` text-[17px] mt-[20px]
+                flex place-items-center h-[40px] place-content-between`}>
+                <div className={`font-[600]`}>
+                    Profile Tools
+                </div>
+                <div className={``}>
+                    <CgChevronDown className={`text-[20px]`} />
+                </div>
+            </div>
+
+            {
+                mainLink.map((link, index) => {
+                    return (
+                        <div key={index} className={`mt-[0px]`}>
+                            <Link to={link.link}>
+                                <div className={` flex place-items-center gap-3
+                        hover:bg-gray-200/60 py-1 rounded
+                        ${location.pathname.startsWith(link.link) && 'bg-[#2e374a]/15'}`}>
+
+                                    <div className={`w-[40px] h-[40px] rounded-full
+                    place-content-center place-items-center border-gray-300 text-[23px]`}>
+                                        {link.icon}
+                                    </div>
+                                    <div className={`text-[13px]`}>
+                                        {link.title}
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                    )
+                })
+            }
+
+
+
+
+
 
         </div>
     )

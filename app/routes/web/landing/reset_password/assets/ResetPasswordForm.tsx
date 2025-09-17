@@ -20,6 +20,7 @@ const ResetPasswordForm = ({ guid }: any) => {
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
     const navigator = useNavigate()
+    const [successful, setSuccessful] = useState(false)
 
     const [recoverySent, setRecoverySent] = useState(false)
     const successMsg = `Please check email provided to continue.`
@@ -73,6 +74,7 @@ const ResetPasswordForm = ({ guid }: any) => {
             } else {
                 //notification.alertCancel('Success!', 'Password Successfully Changed! Use new password on next login')
                 reset()
+                setSuccessful(true)
                 showSuccess('Success', 'Password changed.')
                 completeOperation()
             }
@@ -109,21 +111,25 @@ const ResetPasswordForm = ({ guid }: any) => {
 
             </div>
             <div className={`place-content-center flex lg:place-content-end col-span-12 md:col-span-1`}>
-                <form id='rspw' onSubmit={handleSubmit(handleResetPassword)}>
-                    <div className={`w-[350px] bg-white h-full rounded-2xl
+
+                <div className={`w-[350px] bg-white h-full rounded-2xl
                     flex flex-col place-items-center pt-[40px] pb-[40px]
                     px-[10px] `}>
-                        <div className={whiteLogoColor}>
-                            <WhiteLogo />
-                        </div>
+                    <div className={whiteLogoColor}>
+                        <WhiteLogo />
+                    </div>
 
-                        <div className={`text-[22px] text-center
+
+                    <div className={`text-[22px] text-center
                         mt-[30px] font-bold text-black`}>
-                            Reset Password
-                        </div>
+                        Reset Password
+                    </div>
 
+                    <form
+                        className={`${successful ? 'hidden' : 'block'}`}
+                        id='rspw' onSubmit={handleSubmit(handleResetPassword)}>
                         <div className={`text-[15px] text-center
-                        mt-[0px] font-light text-black`}>
+                        mt-[0px] font-light text-black min-w-[350px] w-full`}>
                             Enter new password below!
                         </div>
 
@@ -185,47 +191,55 @@ const ResetPasswordForm = ({ guid }: any) => {
                                     Reset Password
                                 </button>
                             </div>
-                        </section>
 
-                        <section
-                            className={`${recoverySent ? 'block' : 'hidden'}
+                        </section>
+                    </form>
+                    <section
+                        className={`${recoverySent ? 'block' : 'hidden'}
                             text-black. w-[90%] text-[17px] text-center
                             mt-[50px] mb-[25px] 
                             bg-yellow-50 text-yellow-900 px-1.5 py-2
                             rounded`}
-                        >
-                            {successMsg}
-                        </section>
+                    >
+                        {successMsg}
+                    </section>
 
-                        <div className={`w-full flex flex-col 
+                    {
+                        successful &&
+                        <div className={`bg-yellow-50 rounded w-fit p-4 text-center mt-[20px] mx-[40px] max-w-[350px] min-w-[350px]`}>
+                            Password reset successful!
+                        </div>
+                    }
+
+                    <div className={`w-full flex flex-col 
                                             place-items-center mt-[20px] `}>
-                            <Link className={`w-[85%]`}
-                                to={`/web/signin`}>
-                                <div
-                                    className={`border-b w-full
+                        <Link className={`w-[85%]`}
+                            to={`/web/signin`}>
+                            <div
+                                className={`border-b w-full text-center
                                                     px-[0px] py-1 text-[14px]
                                                     outline-none hover:underline`}
-                                >
-                                    Already have and account? Sign in
-                                </div>
-                            </Link>
-                        </div>
+                            >
+                                Please click here to sign in.
+                            </div>
+                        </Link>
+                    </div>
 
-                        <div className={`w-full flex flex-col 
+                    <div className={`w-full flex flex-col 
                                             place-items-center mt-[20px]`}>
-                            <Link to={`/web/signup`} className={`w-[85%]`}>
-                                <button
-                                    className={`w-full 
+                        <Link to={`/web/signup`} className={`w-[85%]`}>
+                            <button
+                                className={`w-full 
                                                 py-[2px] text-[14px] rounded-full text-center
                                                 text-blue-700 hover:bg-gray-100`}
-                                >
-                                    No account yet? <span className={`text-black`}>Create an account</span>
-                                </button>
-                            </Link>
+                            >
+                                No account yet? <span className={`text-black`}>Create an account</span>
+                            </button>
+                        </Link>
 
-                        </div>
                     </div>
-                </form>
+                </div>
+
             </div>
         </div >
     )

@@ -1,0 +1,30 @@
+import{j as e}from"./jsx-runtime-0DLF9kdB.js";import{u as C,s as O}from"./zod-PtQGc9r6.js";import{r as o,a as A,L as j,u as D}from"./components-CCwaTRgT.js";import{w as F,W as T}from"./WhiteLogo-BBidgNJe.js";import{u as V}from"./AuthContext-Crea6u0m.js";import{u as W}from"./NotificationContext-Bgz3_41l.js";import{p as z}from"./lib-B-TVjvlj.js";import{z as n}from"./index-C4bLmoCR.js";import{u as B}from"./OperationContext-CaoUEJma.js";const v=new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!()£@$%^&*-]).{8,}$/),I=n.object({password:n.string().min(1,{message:"Please enter new password."}).min(8,{message:"Password must be up to 8 characters."}).regex(v,{message:"Please enter a valid password"}),password2:n.string().min(1,{message:"Please enter new password."}).min(8,{message:"Password must be at least 8 characters."}).regex(v,{message:"Please enter a valid password"})}).superRefine((a,l)=>{a.password!==a.password2&&l.addIssue({code:n.ZodIssueCode.custom,path:["password2"],message:"Your new password don't match"})}),U=({guid:a})=>{var f,b;const[l,N]=o.useState(null);if(!V())return null;const[G,c]=o.useState(!1);W(),A();const[m,y]=o.useState(!1),[u,H]=o.useState(!1),P="Please check email provided to continue.",{showOperation:S,showError:w,completeOperation:i,showSuccess:k}=B(),h=r=>{let d=r.target.value,p=r.target.name;N(x=>({...x,[p]:d}))},R=async r=>{c(!0),S("processing"),await new Promise(t=>setTimeout(t,1e3)),r.password;const d="https://edition.garssete.com",p=`/api/user/reset_password/${a}`,x=d+p;try{const t=await fetch(x,{method:"PUT",headers:z,body:JSON.stringify(r)});if(t.ok)L(),y(!0),k("Success","Password changed."),i();else{let K=t.json().then($=>{w("Error",$.message),i()})}}catch(t){w("Error",t.message),i();return}finally{c(!1)}await new Promise(t=>setTimeout(t,1e3)),c(!1)},{register:g,handleSubmit:E,getValues:J,watch:M,setError:Y,reset:L,formState:{errors:s,isSubmitting:q}}=C({defaultValues:{},resolver:O(I)});return e.jsxs("div",{className:`w-[80%] h-fit grid grid-cols-1 lg:grid-cols-2
+        mt-[100px] mb-[20px]  `,children:[e.jsx("div",{className:"hidden lg:block "}),e.jsx("div",{className:"place-content-center flex lg:place-content-end col-span-12 md:col-span-1",children:e.jsxs("div",{className:`w-[350px] bg-white h-full rounded-2xl
+                    flex flex-col place-items-center pt-[40px] pb-[40px]
+                    px-[10px] `,children:[e.jsx("div",{className:F,children:e.jsx(T,{})}),e.jsx("div",{className:`text-[22px] text-center
+                        mt-[30px] font-bold text-black`,children:"Reset Password"}),e.jsxs("form",{className:`${m?"hidden":"block"}`,id:"rspw",onSubmit:E(R),children:[e.jsx("div",{className:`text-[15px] text-center
+                        mt-[0px] font-light text-black min-w-[350px] w-full`,children:"Enter new password below!"}),e.jsxs("section",{className:`w-full
+                            ${u&&"hidden"}`,children:[e.jsxs("div",{className:`w-full flex flex-col 
+                        place-items-center mt-[30px]`,children:[e.jsx("input",{...g("password",{onChange:h}),placeholder:"Enter new password",type:"password",className:`border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`}),(s==null?void 0:s.password)&&e.jsx("div",{className:`text-sm text-red-500 ml-[1px]
+                                leading-[1.2em] mt-1`,children:(f=s==null?void 0:s.password)==null?void 0:f.message})]}),e.jsxs("div",{className:`w-full flex flex-col 
+                        place-items-center mt-[10px]`,children:[e.jsx("input",{...g("password2",{onChange:h}),placeholder:"Retype new password",type:"password",className:`border-b w-[85%]
+                                px-[0px] py-1 text-[15px]
+                                outline-none`}),(s==null?void 0:s.password2)&&e.jsx("div",{className:`text-sm text-red-500 ml-[1px]
+                                leading-[1.2em] mt-1`,children:(b=s==null?void 0:s.password2)==null?void 0:b.message})]}),e.jsx("div",{className:`w-full flex flex-col 
+                        place-items-center mt-[25px]`,children:e.jsx("button",{type:"submit",className:`w-[85%] bg-blue-600
+                            py-[12px] text-[15px] rounded-full
+                            text-white hover:bg-blue-700`,children:"Reset Password"})})]})]}),e.jsx("section",{className:`${u?"block":"hidden"}
+                            text-black. w-[90%] text-[17px] text-center
+                            mt-[50px] mb-[25px] 
+                            bg-yellow-50 text-yellow-900 px-1.5 py-2
+                            rounded`,children:P}),m&&e.jsx("div",{className:"bg-yellow-50 rounded w-fit p-4 text-center mt-[20px] mx-[40px] max-w-[350px] min-w-[350px]",children:"Password reset successful!"}),e.jsx("div",{className:`w-full flex flex-col 
+                                            place-items-center mt-[20px] `,children:e.jsx(j,{className:"w-[85%]",to:"/web/signin",children:e.jsx("div",{className:`border-b w-full text-center
+                                                    px-[0px] py-1 text-[14px]
+                                                    outline-none hover:underline`,children:"Please click here to sign in."})})}),e.jsx("div",{className:`w-full flex flex-col 
+                                            place-items-center mt-[20px]`,children:e.jsx(j,{to:"/web/signup",className:"w-[85%]",children:e.jsxs("button",{className:`w-full 
+                                                py-[2px] text-[14px] rounded-full text-center
+                                                text-blue-700 hover:bg-gray-100`,children:["No account yet? ",e.jsx("span",{className:"text-black",children:"Create an account"})]})})})]})})]})},Z=({userGuid:a})=>e.jsx("div",{className:`bg-white w-full 
+        md:bg-[url('https://images.pexels.com/photos/290386/pexels-photo-290386.jpeg?auto=compress&cs=tinysrgb&w=1200')]
+        bg-cover bg-center min-h-screen flex place-content-center`,children:e.jsx(U,{guid:a})}),ne=()=>{const l=D().guid;return e.jsx("div",{children:e.jsx(Z,{userGuid:l})})};export{ne as default};

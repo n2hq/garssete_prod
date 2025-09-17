@@ -15,7 +15,7 @@ const ResetPasswordSchema = z.object({
             message: 'Please enter a valid password',
         }),
     password2: z.string()
-        .min(1, { message: "Please enter new password." })
+        .min(1, { message: "Please retype new password." })
         .min(8, { message: "Password must be at least 8 characters." })
         .regex(passwordValidation, {
             message: 'Please enter a valid password',

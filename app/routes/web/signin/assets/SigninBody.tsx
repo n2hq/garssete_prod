@@ -1,12 +1,14 @@
 import React from 'react'
 import SigninForm from './SigninForm'
+import SigninFormAlt from './SigninFormAlt'
 
 const SigninBody = () => {
     return (
         <div className={`bg-white w-full 
-        md:bg-[url('/images/oiltanker.jpg')]
+        bg-[url('/images/oiltanker.jpg')]
         bg-cover bg-center min-h-screen flex place-content-center`}>
-            <SigninForm />
+            {/* <SigninForm /> */}
+            <SigninFormAlt />
         </div>
     )
 }

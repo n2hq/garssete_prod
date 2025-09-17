@@ -104,7 +104,7 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
                     imgSrc &&
                     <img
                         src={imgSrc}
-                        alt="Add photo."
+                        alt=""
                         className=' object-cover w-full h-full  absolute z-[40] '
                     />
                 }

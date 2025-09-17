@@ -105,7 +105,7 @@ const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
                 {imgconst === "" && 'Add Photo.'}
                 <img
                     src={imgconst}
-                    alt="Add Photo"
+                    alt=""
                     className={`object-cover w-full h-full `}
                 />
 

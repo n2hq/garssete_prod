@@ -42,7 +42,7 @@ const SigninForm = () => {
         try {
             setWorking(true)
             //notification.notify()
-            showOperation('processing', 'Sign in is peing processed.');
+            showOperation('processing');
 
             await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -63,7 +63,8 @@ const SigninForm = () => {
             } else {
                 //alert(res.message))
                 //notification.alertCancel("Complete Your Signup", res.message)
-                showError('error', `Complete your signup: ${res.message}`)
+                showError('error', `${res.message}`)
+                completeOperation()
             }
             await new Promise((resolve) => setTimeout(resolve, 1000));
             setWorking(false)

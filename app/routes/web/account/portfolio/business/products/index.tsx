@@ -83,7 +83,7 @@ const index = () => {
             <ProductSliderProvider>
                 <AddProductDialogProvider>
                     <AccountLayout>
-                        <ContentLayout title={'Videos Settings'}
+                        <ContentLayout title={'Product Settings'}
                             businessGuid={businessGuid}
                             data={data}
                             businessProfile={businessProfile}

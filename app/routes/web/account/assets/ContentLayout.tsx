@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BusinessHeader from '../portfolio/business/assets/BusinessHeader'
 import BusinessMenu from '../portfolio/business/assets/BusinessMenu'
 
 const ContentLayout = ({ children, businessGuid, data, businessProfile, title }: any) => {
+
     return (
         <div>
 
@@ -36,12 +37,18 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title }:
                     </div>
                 </div>
                 <div className={`px-[15px]  pt-4 `}>
-                    <div className={`w-full flex place-content-end`}>
-                        {
-                            businessGuid && data.userGuid &&
-                            <BusinessMenu guid={businessGuid} userGuid={data.userGuid} />
-                        }
+                    <div className={`w-full flex place-content-between place-items-center`}>
+                        <div className={`text-lg font-[600] leading-[1.4em]`}>
+                            {businessProfile && businessProfile.title}
+                        </div>
+                        <div>
+                            {
+                                businessGuid && data.userGuid &&
+                                <BusinessMenu guid={businessGuid} userGuid={data.userGuid} />
+                            }
+                        </div>
                     </div>
+                    <div className={`h-[12px]`}></div>
                     {children}
                     <div className={`h-[40px]`}></div>
                 </div>

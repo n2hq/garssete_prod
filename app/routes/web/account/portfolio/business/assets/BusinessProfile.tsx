@@ -155,10 +155,14 @@ const BusinessProfile = ({ data }: any) => {
                             businessProfileImageData={data.businessProfileImageData}
                         />
                     </div>
+
                 </div>
+
+
             </div>
 
             <div>
+
                 <hr />
 
                 <div className={`relative w-full flex place-items-center gap-1 place-content-end px-[10px]`}>
@@ -183,11 +187,16 @@ const BusinessProfile = ({ data }: any) => {
 
 
                 </div>
+
+
                 <form className={`w-full px-[10px]`} onSubmit={handleSubmit(handleUpdateBusiness)}>
 
 
                     <div className={`${formWrapperClass} mt-0  rounded-lg pt-4 md:max-w-[80%]
                                 lg:max-w-[60%] w-full mx-auto `}>
+                        <div className={`text-xl font-[600] leading-[1.4em] px-[10px] text-black mb-[32px]`}>
+                            {data?.businessProfile.title}
+                        </div>
 
                         <Input
                             controlTitle={"Username"}

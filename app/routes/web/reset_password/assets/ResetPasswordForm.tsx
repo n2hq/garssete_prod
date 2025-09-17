@@ -9,6 +9,7 @@ import { useNotification } from '~/context/NotificationContext'
 import { whiteLogoColor } from '~/lib/css'
 import { toSentenceCase } from '~/lib/lib'
 import ResetPwSchema from './ResetPwSchema'
+import { useOperation } from '~/context/OperationContext'
 
 const ResetPasswordForm = () => {
     const [formdata, setFormdata] = useState<any | null>(null)
@@ -20,6 +21,9 @@ const ResetPasswordForm = () => {
 
     const [recoverySent, setRecoverySent] = useState(false)
     const successMsg = `Please check email provided to continue.`
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -35,7 +39,8 @@ const ResetPasswordForm = () => {
 
     const handleResetPw = async (data: any) => {
         setWorking(true)
-        notification.notify()
+        //notification.notify()
+        showOperation('processing')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const email = data.username
@@ -51,10 +56,14 @@ const ResetPasswordForm = () => {
 
         if (JSON.stringify(res).includes('Error')) {
             setWorking(false)
-            notification.alertCancel('', toSentenceCase(res))
+            //notification.alertCancel('', toSentenceCase(res))
+            showError('Error', toSentenceCase(res))
+            completeOperation()
         } else {
-            notification.alertCancel('', toSentenceCase(res))
+            //notification.alertCancel('', toSentenceCase(res))
+            showSuccess('Success', toSentenceCase(res))
             await new Promise((resolve) => setTimeout(resolve, 1000));
+            completeOperation()
             setWorking(false)
             setRecoverySent(true)
         }

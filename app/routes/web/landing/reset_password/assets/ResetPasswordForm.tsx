@@ -10,6 +10,7 @@ import { whiteLogoColor } from '~/lib/css'
 import { headers, toSentenceCase } from '~/lib/lib'
 import ResetPasswordSchema from './ResetPasswordSchema'
 import { ResetPasswordNewType, ResetPasswordType } from '~/lib/types'
+import { useOperation } from '~/context/OperationContext'
 
 
 const ResetPasswordForm = ({ guid }: any) => {
@@ -22,6 +23,9 @@ const ResetPasswordForm = ({ guid }: any) => {
 
     const [recoverySent, setRecoverySent] = useState(false)
     const successMsg = `Please check email provided to continue.`
+
+    const { showOperation, showError, completeOperation, showSuccess } = useOperation()
+
 
     const changeHandler = (e: any) => {
         let value = e.target.value
@@ -37,7 +41,8 @@ const ResetPasswordForm = ({ guid }: any) => {
 
     const handleResetPassword = async (data: any) => {
         setWorking(true)
-        notification.notify('', 'Working...')
+        //notification.notify('', 'Working...')
+        showOperation('processing')
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         const password = data.password
@@ -60,14 +65,21 @@ const ResetPasswordForm = ({ guid }: any) => {
 
             if (!response.ok) {
                 let error = response.json().then((data) => {
-                    notification.alertCancel('Error!', data.message)
+                    //notification.alertCancel('Error!', data.message)
+                    showError('Error', data.message)
+                    completeOperation()
                 })
 
             } else {
-                notification.alertCancel('Success!', 'Password Successfully Changed! Use new password on next login')
+                //notification.alertCancel('Success!', 'Password Successfully Changed! Use new password on next login')
+                reset()
+                showSuccess('Success', 'Password changed.')
+                completeOperation()
             }
 
-        } catch (error) {
+        } catch (error: any) {
+            showError('Error', error.message)
+            completeOperation()
             return undefined
         } finally {
             setWorking(false)
@@ -83,6 +95,7 @@ const ResetPasswordForm = ({ guid }: any) => {
         getValues,
         watch,
         setError,
+        reset,
         formState: { errors, isSubmitting }
     } = useForm<ResetPasswordNewType>({
         defaultValues: ({}),
@@ -96,7 +109,7 @@ const ResetPasswordForm = ({ guid }: any) => {
 
             </div>
             <div className={`place-content-center flex lg:place-content-end col-span-12 md:col-span-1`}>
-                <form onSubmit={handleSubmit(handleResetPassword)}>
+                <form id='rspw' onSubmit={handleSubmit(handleResetPassword)}>
                     <div className={`w-[350px] bg-white h-full rounded-2xl
                     flex flex-col place-items-center pt-[40px] pb-[40px]
                     px-[10px] `}>

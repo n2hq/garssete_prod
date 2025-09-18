@@ -100,7 +100,12 @@ const Index = () => {
                     {/** left */}
                     <aside className={`col-span-3 h-full overflow-y-auto scrollbar-hidden pt-2 hidden xl:block`}>
 
-
+                        <div className={``}>
+                            <QueryBuilder
+                                loading={isLoading}
+                                initialFilters={initialFilters}
+                            />
+                        </div>
 
                         <div className={``}>
                             <div className={`mt-3 text-[17px] mb-4 font-bold ml-6`}>
@@ -135,12 +140,7 @@ const Index = () => {
 
 
                                 <div className={`space-y-8`}>
-                                    <div className={``}>
-                                        <QueryBuilder
-                                            loading={isLoading}
-                                            initialFilters={initialFilters}
-                                        />
-                                    </div>
+
 
                                     {
                                         data?.map((data: ListingType, index: number) => {

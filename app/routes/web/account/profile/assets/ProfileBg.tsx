@@ -103,11 +103,14 @@ const ProfileBg = ({ listing, user, userProfileBgData }: any) => {
         <div className={`relative`}>
             <div className={`bg-gray-700 w-full h-[200px] relative shadow-lg text-white flex place-items-center place-content-center flex-col`}>
                 {imgconst === "" && 'Add Photo (1920x200)'}
-                <img
-                    src={imgconst}
-                    alt=""
-                    className={`object-cover w-full h-full absolute`}
-                />
+                {
+                    imgconst &&
+                    <img
+                        src={imgconst}
+                        alt=""
+                        className={`object-cover w-full h-full absolute`}
+                    />
+                }
 
                 <input type="file"
                     accept='image/*'

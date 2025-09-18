@@ -143,7 +143,9 @@ const Index = () => {
 
 
                                 <div className={`space-y-8`}>
-
+                                    <Pagination
+                                        pagination={pagination}
+                                    />
 
                                     {
                                         data?.map((data: ListingType, index: number) => {

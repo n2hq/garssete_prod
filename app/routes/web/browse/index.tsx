@@ -101,6 +101,9 @@ const Index = () => {
                     <aside className={`col-span-3 h-full overflow-y-auto scrollbar-hidden pt-2 hidden xl:block`}>
 
                         <div className={``}>
+                            <div className={`mt-3 text-[17px] mb-4 font-bold ml-6`}>
+                                Search Filter
+                            </div>
                             <QueryBuilder
                                 loading={isLoading}
                                 initialFilters={initialFilters}

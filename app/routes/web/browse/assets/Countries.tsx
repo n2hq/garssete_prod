@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Country, CountryProp } from '~/lib/types'
 
 const Countries = ({ countries }: CountryProp) => {
+
     const [searchTerm, setSearchTerm] = useState("")
 
     // filter countries based on search term
@@ -28,7 +29,7 @@ const Countries = ({ countries }: CountryProp) => {
             <div className="h-[150px] overflow-y-auto scrollbar-hidden">
                 {filteredCountries?.map((nav: Country, index: number) => (
                     <div key={index}>
-                        <a href={`/web/browse?q=${nav?.name.toLowerCase()}`}>
+                        <a href={`/web/browse?q=&country=${nav?.id}`}>
                             <div
                                 className="flex place-content-start place-items-center gap-2 w-full hover:bg-blue-100 pl-5 py-1.5 hover:cursor-pointer"
                             >

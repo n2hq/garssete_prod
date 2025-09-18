@@ -11,8 +11,6 @@ const ImgComponentAlt = ({ listing, user, businessProfileImageData }: any) => {
 
     if (businessProfileImageData.image_url) {
         imgconst = config.IMG_BASE_URL + businessProfileImageData.image_url
-    } else {
-        imgconst = '/images/placeholder-icon.webp'
     }
 
 
@@ -102,8 +100,8 @@ const ImgComponentAlt = ({ listing, user, businessProfileImageData }: any) => {
             <div className='relative bg-blue-100 w-[150px] h-[150px] z-40 rounded-full overflow-hidden border-[2px] border-gray-200'>
                 <img
                     src={imgSrc}
-                    alt="Click to upload"
-                    className=' object-cover w-full h-full z-0 absolute'
+                    alt=""
+                    className={`object-cover w-full h-full z-0 absolute ${imgSrc === "" ? 'bg-black' : 'bg-white'}`}
                 />
                 <input type="file"
                     accept='image/*'

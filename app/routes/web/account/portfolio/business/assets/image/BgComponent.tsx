@@ -9,7 +9,7 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
 
     let imgconst = ""
 
-    if (businessProfileBgData.image_url) {
+    if (businessProfileBgData?.image_url) {
         imgconst = config.IMG_BASE_URL + businessProfileBgData.image_url
     }
 
@@ -98,14 +98,14 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
 
     return (
         <div className={`relative`}>
-            <div className='relative bg-gray-600 w-full h-[200px] z-[40] shadow-lg text-white flex place-items-center place-content-center flex-col'>
-                {imgSrc === "" && 'Add Photo.'}
+            <div className='relative bg-gray-700 w-full h-[200px] z-[40] shadow-lg text-white flex place-items-center place-content-center flex-col'>
+                {imgSrc === "" && 'Add Photo (1920x200)'}
                 {
                     imgSrc &&
                     <img
                         src={imgSrc}
                         alt=""
-                        className=' object-cover w-full h-full  absolute z-[40] '
+                        className={`object-cover w-full h-full  absolute z-[40]`}
                     />
                 }
                 <input type="file"

@@ -97,7 +97,7 @@ const ImgComponentAlt = ({ user, userProfileImageData }: any) => {
     return (
         <div className={`w-[50%] mx-auto flex flex-col 
         place-content-center place-items-center`}>
-            <div className={`relative bg-blue-100 w-[150px] 
+            <div className={`relative bg-black w-[150px] 
                 h-[150px] z-40 rounded-full overflow-hidden
                 flex place-content-center place-items-center border-[3px] border-white`}>
 
@@ -105,8 +105,8 @@ const ImgComponentAlt = ({ user, userProfileImageData }: any) => {
                     imgSrc !== "" ?
                         <img
                             src={imgSrc}
-                            alt="Click to upload"
-                            className=' object-cover w-full h-full z-0 absolute'
+                            alt=""
+                            className={` object-cover w-full h-full z-0 absolute ${imgSrc === "" ? 'bg-transparent' : 'bg-white'}`}
                         /> :
                         <BiSolidUser className={`object-cover w-[70%] h-[70%]`} />
                 }

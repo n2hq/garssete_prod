@@ -61,14 +61,14 @@ export const meta: MetaFunction<typeof loader> = () => {
   try {
 
     return [
-      { title: "Garssete Inc." },
-      { name: "description", content: "Garssete.com is a modern online platform offering news, business listings, and digital services, connecting users with information, opportunities, and resources to grow and stay informed in today’s digital economy." },
+      { title: "Business Directory, Explore Listings Around The World | Garssete" },
+      { name: "description", content: "Discover and connect with businesses worldwide. Garssete.com helps you explore listings, find services, and grow your network across industries and countries." },
       { name: "keywords", content: "Business Directory, Location Services" },
       { property: "fb:app_id", content: "1325393508603168" },
       { property: "og:url", content: "https://garssete.com" },
       { property: "og:type", content: "website" },
-      { property: "og:title", content: "Garssete.com" },
-      { property: "og:description", content: "Garssete.com is a modern online platform offering news, business listings, and digital services, connecting users with information, opportunities, and resources to grow and stay informed in today’s digital economy." },
+      { property: "og:title", content: "Business Directory, Explore Listings Around The World | Garssete" },
+      { property: "og:description", content: "Discover and connect with businesses worldwide. Garssete.com helps you explore listings, find services, and grow your network across industries and countries." },
       { property: "og:image", content: "https://edition.garssete.com/images/garsseteo.png" },
       { property: "og:image:secure_url", content: "https://edition.garssete.com/images/garsseteo.png" },
       { property: "og:image:type", content: "image/png" },
@@ -76,8 +76,8 @@ export const meta: MetaFunction<typeof loader> = () => {
       { property: "og:image:alt", content: "Garssete" },
       { name: "twitter:creator", content: "garssete" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Garssete Business Directory" },
-      { name: "twitter:description", content: "Garssete.com is a modern online platform offering news, business listings, and digital services, connecting users with information, opportunities, and resources to grow and stay informed in today’s digital economy." },
+      { name: "twitter:title", content: "Business Directory, Explore Listings Around The World | Garssete" },
+      { name: "twitter:description", content: "Discover and connect with businesses worldwide. Garssete.com helps you explore listings, find services, and grow your network across industries and countries." },
     ];
   } catch (e: any) {
     logError(e)

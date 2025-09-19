@@ -22,7 +22,12 @@ import OperationDemo, { OperationProvider } from '~/context/OperationContext'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-
+  function generateRandom10DigitNumber() {
+    // Ensure the first digit is not 0
+    const min = 1000000000; // smallest 10-digit number
+    const max = 9999999999; // largest 10-digit number
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
   try {
     const id = params.id || null
@@ -30,12 +35,13 @@ export const loader: LoaderFunction = async ({ request, params }) => {
     let latestBusinesses: ListingType[] | [] = []
     let gallery
     let ratingData
+    let randomNumber
 
 
     try {
       hotels = await getHomeListingByCategory('hotel', 6)
       latestBusinesses = await getLatestBusinesses(10)
-
+      randomNumber = generateRandom10DigitNumber()
       //console.log(latestBusinesses)
 
     } catch (error: any) {
@@ -46,8 +52,8 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     return {
       hotels: hotels,
-      latestBusinesses: latestBusinesses
-
+      latestBusinesses: latestBusinesses,
+      randomNumber: randomNumber
     }
   } catch (err: any) {
     logError(err)
@@ -57,8 +63,12 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
 type OperationType = 'login' | 'signup' | 'update' | 'processing';
 
-export const meta: MetaFunction<typeof loader> = () => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+
+  let randomNo = data?.randomNumber
   try {
+
+
 
     return [
       { title: "Garssete | Business Directory, Explore Listings Around The World" },
@@ -69,8 +79,8 @@ export const meta: MetaFunction<typeof loader> = () => {
       { property: "og:type", content: "website" },
       { property: "og:title", content: "Garssete | Business Directory, Explore Listings Around The World" },
       { property: "og:description", content: "Discover and connect with businesses worldwide. Garssete.com helps you explore listings, find services, and grow your network across industries and countries." },
-      { property: "og:image", content: "https://edition.garssete.com/images/garssetee.png" },
-      { property: "og:image:secure_url", content: "https://edition.garssete.com/images/garssetee.png" },
+      { property: "og:image", content: `https://edition.garssete.com/images/garssetee.png?v=${randomNo}` },
+      { property: "og:image:secure_url", content: `https://edition.garssete.com/images/garssetee.png?v=${randomNo}` },
       { property: "og:image:type", content: "image/png" },
       { property: "og:image:width", content: "200" },
       { property: "og:image:alt", content: "Garssete" },

@@ -68,16 +68,16 @@ export const meta: MetaFunction<typeof loader> = () => {
       { property: "og:url", content: "https://garssete.com" },
       { property: "og:type", content: "website" },
       { property: "og:title", content: "Garssete.com" },
-      { property: "og:description", content: "Business Directory, Location Services" },
+      { property: "og:description", content: "Garssete.com is a modern online platform offering news, business listings, and digital services, connecting users with information, opportunities, and resources to grow and stay informed in today’s digital economy." },
       { property: "og:image", content: "/images/logo.svg" },
-      { property: "og:image:secure_url", content: "https://edition.garssete.com/images/logo.svg" },
-      { property: "og:image:type", content: "image/svg+xml" },
+      { property: "og:image:secure_url", content: "https://edition.garssete.com/images/favicon33.png" },
+      { property: "og:image:type", content: "image/png" },
       { property: "og:image:width", content: "200" },
       { property: "og:image:alt", content: "Garssete" },
       { name: "twitter:creator", content: "garssete" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Garssete Business Directory" },
-      { name: "twitter:description", content: "Business Directory, Location Services" },
+      { name: "twitter:description", content: "Garssete.com is a modern online platform offering news, business listings, and digital services, connecting users with information, opportunities, and resources to grow and stay informed in today’s digital economy." },
     ];
   } catch (e: any) {
     logError(e)

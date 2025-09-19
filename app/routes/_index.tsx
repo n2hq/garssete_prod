@@ -69,7 +69,7 @@ export const meta: MetaFunction<typeof loader> = () => {
       { property: "og:type", content: "website" },
       { property: "og:title", content: "Garssete.com" },
       { property: "og:description", content: "Garssete.com is a modern online platform offering news, business listings, and digital services, connecting users with information, opportunities, and resources to grow and stay informed in today’s digital economy." },
-      { property: "og:image", content: "/images/logo.svg" },
+      { property: "og:image", content: "https://edition.garssete.com/images/favicon33.png" },
       { property: "og:image:secure_url", content: "https://edition.garssete.com/images/favicon33.png" },
       { property: "og:image:type", content: "image/png" },
       { property: "og:image:width", content: "200" },

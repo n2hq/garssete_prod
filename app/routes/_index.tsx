@@ -62,7 +62,7 @@ export const meta: MetaFunction<typeof loader> = () => {
 
     return [
       { title: "Garssete Inc." },
-      { name: "description", content: "Business Directory Services" },
+      { name: "description", content: "Garssete.com is a modern online platform offering news, business listings, and digital services, connecting users with information, opportunities, and resources to grow and stay informed in today’s digital economy." },
       { name: "keywords", content: "Business Directory, Location Services" },
       { property: "fb:app_id", content: "1325393508603168" },
       { property: "og:url", content: "https://garssete.com" },
@@ -70,7 +70,7 @@ export const meta: MetaFunction<typeof loader> = () => {
       { property: "og:title", content: "Garssete.com" },
       { property: "og:description", content: "Business Directory, Location Services" },
       { property: "og:image", content: "/images/logo.svg" },
-      { property: "og:image:secure_url", content: "/images/logo.svg" },
+      { property: "og:image:secure_url", content: "https://edition.garssete.com/images/logo.svg" },
       { property: "og:image:type", content: "image/svg+xml" },
       { property: "og:image:width", content: "200" },
       { property: "og:image:alt", content: "Garssete" },

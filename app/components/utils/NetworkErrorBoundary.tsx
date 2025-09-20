@@ -56,9 +56,9 @@ export function NetworkErrorBoundary() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8 text-center">
+            <div className="max-w-[1100px] mx-auto w-full space-y-8 text-center flex place-items-center place-content-center font-poppins">
                 <div>
-                    <FaWifi size={14} />
+                    <FaWifi size={30} />
                     <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
                         {status === 408 ? 'Network Connection Lost' : 'Connection Error'}
                     </h2>

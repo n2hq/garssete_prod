@@ -39,7 +39,7 @@ const topdestinations = [
         category: "realestate",
         icon: <FcHome size={17} />,
         link: '/web/browse?q=&city=paris',
-        bglink: `https://media.cntraveler.com/photos/665e30e3c623d0ae10ca3dd9/1:1/w_3215,h_3215,c_limit/pexels-magnusflechsenhaar-3361209.jpg`
+        bglink: `/images/home/france.webp`
     },
     // Added more categories to demonstrate overflow
 
@@ -86,9 +86,9 @@ const TopDestinations = () => {
                 <div className={`relative`}>
                     <div
                         ref={scrollRef}
-                        className={`w-full overflow-hidden relative rounded-xl`}
+                        className={`w-full overflow-x-auto bottom-scrollbar-hidden relative rounded-xl`}
                     >
-                        <div className={`flex gap-6`}>
+                        <div className={`flex gap-3`}>
                             {
                                 topdestinations?.map((category: TopDestinationsType, index: number) => {
                                     return (

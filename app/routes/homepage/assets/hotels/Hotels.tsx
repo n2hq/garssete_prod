@@ -79,9 +79,9 @@ const Hotels = ({ data }: any) => {
                 <div className={`relative`}>
                     <div
                         ref={scrollRef}
-                        className={`w-full overflow-hidden relative rounded-xl`}
+                        className={`w-full overflow-x-auto bottom-scrollbar-hidden relative rounded-xl`}
                     >
-                        <div className={`flex gap-6`}>
+                        <div className={`flex gap-3`}>
                             {
                                 data?.map((business: ListingType, index: number) => {
                                     return (

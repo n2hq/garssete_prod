@@ -87,9 +87,9 @@ const TopCategories = () => {
                 <div className={`relative`}>
                     <div
                         ref={scrollRef}
-                        className={`w-full overflow-hidden relative rounded-xl`}
+                        className={`w-full overflow-x-auto bottom-scrollbar-hidden relative rounded-xl`}
                     >
-                        <div className={`flex gap-6`}>
+                        <div className={`flex gap-3`}>
                             {
                                 topcat?.map((category: TopCategoryType, index: number) => {
                                     const lnk = `/web/browse?q=&category=${category.category}`
@@ -99,7 +99,7 @@ const TopCategories = () => {
                                         >
                                             <div
                                                 key={index}
-                                                className={`border-none rounded-xl min-w-[220px] md:min-w-[280px] h-[300px] overflow-hidden relative`}>
+                                                className={`border-none rounded-xl min-w-[220px] md:min-w-[220px] h-[400px] overflow-hidden relative`}>
                                                 <img
                                                     src={category?.bglink}
                                                     alt=""

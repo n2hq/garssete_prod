@@ -1,6 +1,7 @@
 // app/components/NetworkErrorBoundary.tsx
 import { useRouteError, useNavigate } from '@remix-run/react';
 import { useEffect } from 'react';
+import { GrNetwork } from 'react-icons/gr';
 
 
 export interface NetworkError extends Error {
@@ -56,19 +57,7 @@ export function NetworkErrorBoundary() {
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8 text-center">
                 <div>
-                    <svg
-                        className="mx-auto h-3 w-3 text-red-500"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"
-                        />
-                    </svg>
+                    <GrNetwork size={14} />
                     <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
                         {status === 408 ? 'Network Connection Lost' : 'Connection Error'}
                     </h2>

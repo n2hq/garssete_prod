@@ -1,10 +1,12 @@
 import {
+  isRouteErrorResponse,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
   useNavigation,
+  useRouteError,
 } from "@remix-run/react";
 import type { HeadersFunction, LinksFunction, MetaFunction } from "@remix-run/node";
 
@@ -23,6 +25,7 @@ import EditVideoDialog from "./routes/web/account/portfolio/business/videos/vide
 import { EditVideoDialogProvider } from "./context/EditVideoDialogContext";
 import { OnlineStatusProvider } from "./context/OnlineStatusContext";
 import { OperationProvider } from "./context/OperationContext";
+import { CustomNetworkError, isNetworkError, NetworkErrorBoundary } from "./components/utils/NetworkErrorBoundary";
 
 
 export const links: LinksFunction = () => [
@@ -51,6 +54,26 @@ export const headers: HeadersFunction = () => {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigation = useNavigation()
+
+  const error = useRouteError();
+
+
+  if (isNetworkError(error) || error instanceof CustomNetworkError) {
+    return <NetworkErrorBoundary />;
+  }
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold">
+            {error.status} {error.statusText}
+          </h1>
+          <p className="mt-4 text-xl">{error.data}</p>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
 

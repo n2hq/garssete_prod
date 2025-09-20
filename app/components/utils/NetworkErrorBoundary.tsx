@@ -1,6 +1,7 @@
 // app/components/NetworkErrorBoundary.tsx
 import { useRouteError, useNavigate } from '@remix-run/react';
 import { useEffect } from 'react';
+import { FaWifi } from 'react-icons/fa';
 import { GrNetwork } from 'react-icons/gr';
 
 
@@ -57,7 +58,7 @@ export function NetworkErrorBoundary() {
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-md w-full space-y-8 text-center">
                 <div>
-                    <GrNetwork size={14} />
+                    <FaWifi size={14} />
                     <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
                         {status === 408 ? 'Network Connection Lost' : 'Connection Error'}
                     </h2>

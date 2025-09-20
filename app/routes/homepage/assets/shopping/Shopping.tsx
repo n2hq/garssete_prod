@@ -90,7 +90,7 @@ const Hotel = () => {
                         ref={scrollRef}
                         className={`w-full overflow-x-auto bottom-scrollbar-hidden relative rounded-xl`}
                     >
-                        <div className={`flex gap-6`}>
+                        <div className={`flex gap-3`}>
                             {
                                 hotels?.map((business: HotelType, index: number) => {
                                     const link = `/web/browse?q=&category=${business?.category}&city=${business?.city}`

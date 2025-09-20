@@ -57,7 +57,7 @@ export function NetworkErrorBoundary() {
             <div className="max-w-md w-full space-y-8 text-center">
                 <div>
                     <svg
-                        className="mx-auto h-16 w-16 text-red-500"
+                        className="mx-auto h-3 w-3 text-red-500"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

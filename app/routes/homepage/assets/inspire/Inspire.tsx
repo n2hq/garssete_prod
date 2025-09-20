@@ -89,9 +89,9 @@ const Inspire = () => {
                 <div className={`relative`}>
                     <div
                         ref={scrollRef}
-                        className={`w-full overflow-hidden relative rounded-xl`}
+                        className={`w-full overflow-x-auto bottom-scrollbar-hidden relative rounded-xl`}
                     >
-                        <div className={`flex gap-6 place-content-between`}>
+                        <div className={`flex gap-3 place-content-between`}>
                             {
                                 topcat?.map((business: LatestBusinessesType, index: number) => {
                                     const lnk = `/web/browse?q=&category=${business?.category}`

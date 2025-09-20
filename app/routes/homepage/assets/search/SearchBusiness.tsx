@@ -22,7 +22,7 @@ const SearchBusiness = () => {
                 <div className={`max-w-[800px] mx-auto w-full mt-10 md:mt-16`}>
                     {/* Updated container for horizontal scrolling on smaller screens */}
                     <div className="w-full overflow-x-auto scroll-container pb-0 scrollbar-hidden">
-                        <div className="min-w-max px-4">
+                        <div className="min-w-max">
                             <CategoryLinks />
                         </div>
                     </div>

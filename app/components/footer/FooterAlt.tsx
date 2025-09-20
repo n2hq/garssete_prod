@@ -273,7 +273,7 @@ const FooterAlt = () => {
                 </div>
 
                 <div>
-                    <div className={`flex gap-2 place-items-center place-content-start mt-4`}>
+                    <div className={`flex gap-2 place-items-center place-content-center md:place-content-start mt-4`}>
                         {
                             garsseteSocialLinks.map((media: FooterSocialMediaType, index: number) => {
                                 return (

@@ -37,15 +37,19 @@ const settingsLinks = [
     },
 ]
 
-const BusinessMenu = ({ title, guid, userGuid }: any) => {
+const BusinessMenu = ({ title, guid, userGuid, setIsOpen }: any) => {
     const [showSettings, setShowSettings] = useState(false)
-    const displaySettings = () => setShowSettings(true)
+    const displaySettings = (showSettings: boolean) => {
+        setShowSettings(showSettings)
+        setIsOpen(showSettings)
+    }
     const location = useLocation()
     const pathname = `/web/account/portfolio/${guid}/${userGuid}`
 
     const hideSettings = async () => {
         await new Promise((resolve) => setTimeout(resolve, 500));
         setShowSettings(false)
+        setIsOpen(false)
     }
     return (
         <div className=' w-fit   z-[1000] '>
@@ -55,14 +59,15 @@ const BusinessMenu = ({ title, guid, userGuid }: any) => {
                 <button
                     className={`rounded-full cursor-pointer bg-blue-900 w-[50px] h-[50px]
                          text-white shadow-md shadow-blue-400 py-1 flex place-items-center place-content-center`}
-                    onMouseDown={() => displaySettings()}
+                    onMouseDown={() => displaySettings(!showSettings)}
                     onBlur={() => hideSettings()}
+
                 >
                     <MdMenu size={30} className={`${showSettings ? 'rotate-90 transition-all duration-1000 ease-in-out' : 'rotate-0 transition-all duration-1000 ease-in-out'}`} />
 
                 </button>
 
-                <div className={`${showSettings ? 'block' : 'hidden'} absolute w-[180px] top-[50px] rounded-lg z-[10000] text-black
+                {/*  <div className={`${showSettings ? 'block' : 'hidden'} absolute w-[180px] top-[50px] rounded-lg z-[10000] text-black
                 border-[1px] border-gray-100 bg-white shadow-lg right-[20px] `}>
                     <div className='divide-y-[1px] divide-gray-500/20 '>
                         {
@@ -83,7 +88,7 @@ const BusinessMenu = ({ title, guid, userGuid }: any) => {
                             })
                         }
                     </div>
-                </div>
+                </div> */}
             </div>
 
         </div>

@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import BusinessHeader from '../portfolio/business/assets/BusinessHeader'
 import BusinessMenu from '../portfolio/business/assets/BusinessMenu'
+import BusinessDrawer from './BusinessDrawer'
+
 
 const ContentLayout = ({ children, businessGuid, data, businessProfile, title }: any) => {
+    const [isOpen, setIsOpen] = useState(false)
 
     return (
         <div>
 
-
+            <BusinessDrawer isOpen={isOpen} businessGuid={businessGuid} userGuid={businessProfile?.owner} />
             <div className={`mt-4 bg-white 
                 rounded-lg shadow-md pb-8 `}>
                 <div className={`font-semibold text-[17px] border-b-[1px] p-3 flex place-content-between place-items-center`}>
@@ -44,7 +47,7 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title }:
                         <div>
                             {
                                 businessGuid && data.userGuid &&
-                                <BusinessMenu guid={businessGuid} userGuid={data.userGuid} />
+                                <BusinessMenu setIsOpen={setIsOpen} guid={businessGuid} userGuid={data.userGuid} />
                             }
                         </div>
                     </div>

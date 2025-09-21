@@ -98,7 +98,7 @@ const BgComponent = ({ listing, user, businessProfileBgData }: any) => {
 
     return (
         <div className={`relative`}>
-            <div className='relative bg-gray-700 w-full h-[200px] z-[40] shadow-lg text-white flex place-items-center place-content-center flex-col'>
+            <div className='relative bg-gray-700 w-full h-[200px] z-[0] shadow-lg text-white flex place-items-center place-content-center flex-col'>
                 {imgSrc === "" && 'Add Photo (1920x200)'}
                 {
                     imgSrc &&

@@ -48,11 +48,21 @@ const BusinessDrawer = ({ isOpen, userGuid, businessGuid }: any) => {
 
     return (
         <div className={`relative`}>
-            <div className={` fixed ${navOpen}   w-[250px] h-screen bg-white shadow-lg transform transition-transform ease-in-out duration-500 `}>
+            <div className={` fixed ${navOpen}   w-[250px] h-screen bg-white shadow-lg transform transition-transform ease-in-out duration-500 z-[10] `}>
                 <div className={`p-5 border-b font-bold text-lg`}>
                     Settings
                 </div>
                 <div className={``}>
+
+                    <div className='group'>
+                        <a href={`/web/account/portfolio/${businessGuid}`}>
+                            <div className={`py-4 hover:bg-gray-100`}>
+                                <div className={`mx-5 group-hover:underline`}>
+                                    Page Home
+                                </div>
+                            </div>
+                        </a>
+                    </div>
 
                     {
                         settingsLinks?.map((setting: any, index: number) => {

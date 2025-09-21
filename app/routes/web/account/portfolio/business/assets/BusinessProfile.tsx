@@ -14,13 +14,15 @@ import TextareaWithWordLimit from '~/components/content/textarea/TextareaWithWor
 import Select from '~/components/content/select/Select'
 import BusinessMenu from './BusinessMenu'
 import { useOperation } from '~/context/OperationContext'
+import BusinessDrawer from '../../../assets/BusinessDrawer'
 
 const BusinessProfile = ({ data }: any) => {
-    console.log(data.businessProfile)
+    //console.log(data.businessProfile)
     const [formdata, setFormdata] = useState<any | null>(null)
     const [working, setWorking] = useState<boolean>(false)
     const notification = useNotification()
     const [errorMsg, setErrorMsg] = useState<any>(null)
+    const [isOpen, setIsOpen] = useState(false)
 
 
     const { showOperation, showSuccess, showError, showWarning, showInfo, completeOperation } = useOperation();
@@ -140,6 +142,8 @@ const BusinessProfile = ({ data }: any) => {
 
     return (
         <div>
+            <BusinessDrawer isOpen={isOpen} businessGuid={data.businessProfile.gid} userGuid={data.businessProfile?.owner} />
+
             <BgComponent
                 listing={data.businessProfile}
                 user={data.userProfile}
@@ -178,9 +182,12 @@ const BusinessProfile = ({ data }: any) => {
                         Preview
                     </a>
 
+
+
                     {
                         data?.businessProfile &&
                         <BusinessMenu
+                            setIsOpen={setIsOpen}
                             guid={data?.businessProfile.gid}
                             userGuid={data?.businessProfile.owner} />
                     }

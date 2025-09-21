@@ -4,6 +4,7 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
     return defineRoutes((route) => {
         //route("/", "routes/_index.tsx");
         //route("/", "routes/homepage.tsx");
+
         route("/:id", "routes/listing/index.tsx");
         route("/landing", "routes/landing/index.tsx");
         route("/web/search", "routes/web/search/index.tsx");

@@ -153,7 +153,12 @@ const Profile = ({ loaderData, user, userProfileData, userProfileBgData }: any) 
                 <form onSubmit={handleSubmit(handleUpdateUser)}>
 
                     <div className={`${formWrapperClass} mt-0  rounded-lg pt-4
-                 md:max-w-[400px] w-full mx-auto `}>
+                 md:max-w-[600px] w-full mx-auto `}>
+
+                        <div className={`text-xl font-[600] leading-[1.4em] px-[10px] text-black mb-[32px]`}>
+                            {userProfileData?.first_name} {userProfileData?.lastname}
+                        </div>
+
                         <Input
                             controlTitle={"First Name"}
                             controlName={"first_name"}

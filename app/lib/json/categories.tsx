@@ -1,19 +1,26 @@
 import { BiFoodMenu, BiHotel } from "react-icons/bi";
-import { CgAirplane, CgChart, CgFeed, CgPrinter, CgShoppingBag, CgShoppingCart } from "react-icons/cg";
-import { FaSchool } from "react-icons/fa";
+import { CgAirplane, CgChart, CgFeed, CgGenderFemale, CgPrinter, CgShoppingBag, CgShoppingCart } from "react-icons/cg";
+import { FaFemale, FaSchool } from "react-icons/fa";
 import { FcAutomotive, FcBusiness, FcLandscape } from "react-icons/fc";
-import { GiHealthNormal, GiHumanTarget } from "react-icons/gi";
+import { GiFemaleLegs, GiHealthNormal, GiHumanTarget, GiNurseFemale } from "react-icons/gi";
 import { GrCloudComputer, GrLanguage, GrRestaurant } from "react-icons/gr";
 import { IoMdMusicalNotes } from "react-icons/io";
+import { IoFemaleOutline } from "react-icons/io5";
 import { MdAdsClick, MdCleaningServices, MdConstruction, MdDashboard, MdElectricalServices, MdMeetingRoom, MdPlumbing, MdRealEstateAgent, MdRoomService } from "react-icons/md";
 import { RiGovernmentFill } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
+import FashionModel from "~/components/customicons/FashionModel";
 
 export const categories = [
     {
         name: "Business Services",
         id: "business services",
         icon: <MdMeetingRoom size={20} />
+    },
+    {
+        name: "Fashion & Accessories",
+        id: "fashion and accessories",
+        icon: <GiFemaleLegs size={20} />
     },
     {
         name: "Accounting & Bookkeeping",

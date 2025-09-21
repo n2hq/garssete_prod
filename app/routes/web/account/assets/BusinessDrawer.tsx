@@ -1,3 +1,4 @@
+import { useLocation } from '@remix-run/react'
 import React, { useEffect } from 'react'
 
 
@@ -39,6 +40,9 @@ const settingsLinks = [
 
 const BusinessDrawer = ({ isOpen, userGuid, businessGuid }: any) => {
     const navOpen = isOpen ? "translate-x-0 " : "-translate-x-[110%]"
+    const location = useLocation()
+    const pathname = `/web/account/portfolio/${businessGuid}/${userGuid}`
+    const businesspath = `/web/account/portfolio/${businessGuid}`
 
     useEffect(() => {
         if (userGuid && businessGuid) {
@@ -56,7 +60,7 @@ const BusinessDrawer = ({ isOpen, userGuid, businessGuid }: any) => {
 
                     <div className='group'>
                         <a href={`/web/account/portfolio/${businessGuid}`}>
-                            <div className={`py-4 hover:bg-gray-100`}>
+                            <div className={`py-4 hover:bg-gray-100 ${location.pathname === businesspath && 'bg-gray-300/30'}`}>
                                 <div className={`mx-5 group-hover:underline`}>
                                     Page Home
                                 </div>
@@ -66,10 +70,12 @@ const BusinessDrawer = ({ isOpen, userGuid, businessGuid }: any) => {
 
                     {
                         settingsLinks?.map((setting: any, index: number) => {
+                            const url = pathname + setting.link
+
                             return (
                                 <div className={` group  `}>
                                     <a href={`/web/account/portfolio/${businessGuid}/${userGuid}${setting?.link}`}>
-                                        <div className={`py-4 hover:bg-gray-100`}>
+                                        <div className={`py-4 hover:bg-gray-200 ${location.pathname === url && 'bg-gray-300/30'}`}>
                                             <div className={`mx-5 group-hover:underline`}>
                                                 {
                                                     setting?.title

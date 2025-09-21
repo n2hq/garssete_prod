@@ -67,7 +67,7 @@ const BusinessMenu = ({ title, guid, userGuid, setIsOpen }: any) => {
 
                 </button>
 
-                {/* <div className={`${showSettings ? 'block' : 'hidden'} absolute w-[180px] top-[50px] rounded-lg z-[10000] text-black
+                <div className={`${showSettings ? 'block' : 'hidden'} absolute w-[180px] top-[50px] rounded-lg z-[10000] text-black
                 border-[1px] border-gray-100 bg-white shadow-lg right-[20px] `}>
                     <div className='divide-y-[1px] divide-gray-500/20 '>
                         {
@@ -88,7 +88,7 @@ const BusinessMenu = ({ title, guid, userGuid, setIsOpen }: any) => {
                             })
                         }
                     </div>
-                </div> */}
+                </div>
             </div>
 
         </div>

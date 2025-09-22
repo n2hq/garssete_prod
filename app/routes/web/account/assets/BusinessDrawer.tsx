@@ -36,6 +36,10 @@ const settingsLinks = [
         title: "Delete",
         link: "/delete"
     },
+    {
+        title: "Reassign Business",
+        link: "/reassign"
+    },
 ]
 
 const BusinessDrawer = ({ isOpen, userGuid, businessGuid }: any) => {
@@ -73,7 +77,7 @@ const BusinessDrawer = ({ isOpen, userGuid, businessGuid }: any) => {
                             const url = pathname + setting.link
 
                             return (
-                                <div className={` group  `}>
+                                <div className={` group  `} key={index}>
                                     <a href={`/web/account/portfolio/${businessGuid}/${userGuid}${setting?.link}`}>
                                         <div className={`py-4 hover:bg-gray-200 ${location.pathname === url && 'bg-gray-300/30'}`}>
                                             <div className={`mx-5 group-hover:underline`}>

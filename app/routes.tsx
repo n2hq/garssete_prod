@@ -39,6 +39,8 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("/web/account/portfolio/:business_guid/:user_guid/social_media", "routes/web/account/portfolio/business/social_media/index.tsx");
         route("/web/account/portfolio/:business_guid/:user_guid/delete", "routes/web/account/portfolio/business/delete/index.tsx");
 
+        route("/web/account/portfolio/:business_guid/:user_guid/reassign", "routes/web/account/portfolio/business/reassign/index.tsx");
+
 
         {/** landing */ }
         route("/web/landing/change_email", "routes/web/landing/change_email/index.tsx")
@@ -76,6 +78,11 @@ export function setupRoutes(defineRoutes: DefineRoutesFunction) {
         route("api/listing/owner", "routes/api/listing/owner/index.tsx");
         route("api/listing/delete_business/:business_guid", "routes/api/listing/delete_business.tsx");
 
+        route("api/listing/reassign_business", "routes/api/listing/reassign_business.tsx");
+
+        route("api/listing/business_single_search", "routes/api/listing/business_single_search.tsx");
+
+        route("api/listing/user_single_search", "routes/api/listing/user_single_search.tsx");
 
         route("api/listing/operating_hours", "routes/api/listing/operating_hours.tsx");
         route("api/listing/gallery/:business_guid/:user_guid", "routes/api/listing/gallery.tsx");

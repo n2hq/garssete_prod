@@ -74,6 +74,7 @@ export type AuthUser = {
     last_name: string
     iat: string
     exp: string
+    role: string
 }
 
 export type AuthContextType = {

@@ -23,7 +23,7 @@ const Activate = ({
 
 
         } catch (error: any) {
-            alert('Could not fetch business')
+            console.log('Could not fetch business')
         }
 
     }, [])

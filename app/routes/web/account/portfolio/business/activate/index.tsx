@@ -23,8 +23,11 @@ const index = () => {
     const [userGuid, setUserGuid] = useState('')
     const { business_guid, user_guid } = useParams();
     const [businessProfile, setBusinessProfile] = useState<any | null>(null)
+
     const auth = useAuth()
     if (!auth) { return null }
+
+    const { user } = auth
 
     useEffect(() => {
         const getAllData = async (businessGuid: string, userGuid: string) => {
@@ -43,6 +46,12 @@ const index = () => {
             logError(e)
         }
     }, [business_guid, user_guid])
+
+    useEffect(() => {
+        if (user) {
+            //alert(JSON.stringify(user))
+        }
+    }, [user])
 
     useEffect(() => {
 
@@ -75,7 +84,8 @@ const index = () => {
 
     return (
         <AccountLayout>
-            <ContentLayout title={`${Boolean(businessProfile.active_status) ? 'Deactivate' : 'Activate'} Business Profile`}
+            <ContentLayout
+                title={`${Boolean(businessProfile.active_status) ? 'Deactivate' : 'Activate'} Business Profile`}
                 businessGuid={businessGuid}
                 data={data}
                 businessProfile={businessProfile}

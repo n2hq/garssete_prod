@@ -11,6 +11,7 @@ const ContentLayout = ({ children, businessGuid, data, businessProfile, title }:
         <div>
 
             <BusinessDrawer isOpen={isOpen} businessGuid={businessGuid} userGuid={businessProfile?.owner} />
+
             <div className={`mt-4 bg-white 
                 rounded-lg shadow-md pb-8 `}>
                 <div className={`font-semibold text-[17px] border-b-[1px] p-3 flex place-content-between place-items-center`}>

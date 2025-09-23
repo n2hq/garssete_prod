@@ -46,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } catch (error: any) {
             {/** return null if token could not be verified */ }
             console.log(error.message)
-            alert(error.message)
+            //alert(error.message)
             return null
         }
     }
@@ -83,6 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     setUser(null)
                     localStorage.removeItem("authTokens")
                 } else {
+                    console.log(data)
                     setUser(data)
                 }
             })

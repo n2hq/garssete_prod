@@ -57,7 +57,7 @@ const BusinessMenu = ({ title, guid, userGuid, setIsOpen }: any) => {
 
             <div className={`relative`}>
                 <button
-                    className={`rounded-full cursor-pointer bg-blue-900 w-[50px] h-[50px]
+                    className={`rounded-full cursor-pointer bg-blue-900 w-[40px] h-[40px]
                          text-white shadow-md shadow-blue-400 py-1 flex place-items-center place-content-center`}
                     onMouseDown={() => displaySettings(!showSettings)}
                     onBlur={() => hideSettings()}

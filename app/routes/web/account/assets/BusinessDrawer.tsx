@@ -1,5 +1,6 @@
 import { useLocation } from '@remix-run/react'
 import React, { useEffect } from 'react'
+import { useAuth } from '~/context/AuthContext'
 
 
 
@@ -36,17 +37,27 @@ const settingsLinks = [
         title: "Delete",
         link: "/delete"
     },
-    {
-        title: "Reassign Business",
-        link: "/reassign"
-    },
+
 ]
 
 const BusinessDrawer = ({ isOpen, userGuid, businessGuid }: any) => {
+
+    const auth = useAuth()
+    if (!auth) { return null }
+
+    const { user } = auth
+
+    useEffect(() => {
+        if (user) {
+            console.log(user.role)
+        }
+    }, [user])
+
     const navOpen = isOpen ? "translate-x-0 " : "-translate-x-[110%]"
     const location = useLocation()
     const pathname = `/web/account/portfolio/${businessGuid}/${userGuid}`
     const businesspath = `/web/account/portfolio/${businessGuid}`
+    const reassignpath = `/web/account/portfolio/${businessGuid}/${userGuid}/reassign`
 
     useEffect(() => {
         if (userGuid && businessGuid) {
@@ -90,6 +101,19 @@ const BusinessDrawer = ({ isOpen, userGuid, businessGuid }: any) => {
                                 </div>
                             )
                         })
+                    }
+
+                    {
+                        user?.role === 'admin' &&
+                        <div className='group'>
+                            <a href={`/web/account/portfolio/${businessGuid}/${userGuid}/reassign`}>
+                                <div className={`py-4 hover:bg-gray-100 ${location.pathname === reassignpath && 'bg-gray-300/30'}`}>
+                                    <div className={`mx-5 group-hover:underline`}>
+                                        Reassign Business
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     }
                 </div>
             </div>

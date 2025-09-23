@@ -83,7 +83,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
             guid: user.user_guid,
             email: user.email,
             first_name: user.first_name,
-            last_name: user.lastname
+            last_name: user.lastname,
+            role: user.role
         }
 
         const accessToken = jwt.sign(JWT_INFO, JWT_SECRET, { expiresIn: "7d" })

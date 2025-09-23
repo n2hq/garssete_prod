@@ -18,7 +18,7 @@ import { NavLink } from '@remix-run/react'
 
 const Card = ({ listing }: any) => {
 
-    const [placeholder, setPlaceholder] = useState('/images/placeholder-icon.webp')
+    const [placeholder, setPlaceholder] = useState('/images/placeholder22.png')
     const [imgscr, setImgsrc] = useState('')
     const [userId, setUserId] = useState('')
     const [socialMedia, setSocialMedia] = useState<any | null>(null)
@@ -35,6 +35,8 @@ const Card = ({ listing }: any) => {
             //console.log(baseListing)
 
             setImgsrc(config.IMG_BASE_URL + baseListing?.image_url)
+        } else {
+            setImgsrc(placeholder)
         }
     }, [listing])
 
@@ -56,6 +58,8 @@ const Card = ({ listing }: any) => {
             if (listing?.image_url !== "" && listing?.image_url !== null && listing?.image_url !== undefined) {
                 //console.log(config.IMG_BASE_URL)
                 setImgsrc(config.IMG_BASE_URL + listing?.image_url)
+            } else {
+                setImgsrc(placeholder)
             }
 
             if (listing?.username !== "" && listing?.username !== null && listing?.username !== undefined) {
@@ -155,18 +159,14 @@ const Card = ({ listing }: any) => {
                         {/** left */}
                         <div className={`flex place-items-start gap-2 w-full`}>
                             <div className={`w-[90px] h-[90px] min-w-[90px]   bg-black bg-cover bg-center overflow-hidden relative border`}
-                                style={{ backgroundImage: `url(${placeholder})` }}
-                            >
-                                {
-                                    imgscr !== '' &&
-                                    <img
-                                        src={imgscr}
-                                        alt={""}
-                                        className={`object-cover w-full h-full text-sm
-                             z-0 bg-white`}
-                                    />
 
-                                }
+                            >
+                                <img
+                                    src={imgscr}
+                                    alt={""}
+                                    className={`object-cover w-full h-full text-sm
+                             z-0 bg-white`}
+                                />
 
                             </div>
 

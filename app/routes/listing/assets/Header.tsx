@@ -5,10 +5,13 @@ import FormattedAddress from './FormattedAddress'
 
 const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }: any) => {
     const [profileImg, setProfileImg] = useState('')
+    const [placeholder, setPlaceholder] = useState('/images/placeholder22.png')
     useEffect(() => {
-        if (profileImageData) {
+        if (profileImageData?.image_url) {
 
             setProfileImg(config.IMG_BASE_URL + profileImageData?.image_url)
+        } else {
+            setProfileImg(placeholder)
         }
     }, [profileImageData])
 
@@ -19,7 +22,7 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
             </div>
             <div className={`flex gap-2 mt-2 w-full `}>
 
-                <div className={`bg-white w-[95px] min-w-[95px] h-[95px] rounded-none relative overflow-hidden hidden md:hidden border border-gray-200  shadow-sm`}>
+                <div className={`bg-white w-[95px] min-w-[95px] h-[95px] rounded-none relative overflow-hidden hidden md:block  `}>
                     <img
                         src={profileImg}
                         alt=""

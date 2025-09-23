@@ -66,6 +66,7 @@ const Related = ({
     const [listings, setListings] = useState<any[]>([])
     const [userId, setUserId] = useState('')
     const IMG_BASE_URL = import.meta.env.VITE_IMG_BASE_URL
+    const [placeholder, setPlaceholder] = useState('/images/placeholder22.png')
 
     useEffect(() => {
         if (title && subtitle) {
@@ -119,12 +120,12 @@ const Related = ({
                                             <NavLink to={`/${userId}`}>
                                                 <div className={`relative h-[120px] rounded-lg md:h-[180px] overflow-hidden`}>
                                                     <img
-                                                        className={`object-cover w-full h-full
-                                                    text-sm`}
+                                                        className={`${data?.image_url ? 'object-cover' : 'object-scale-down'}  w-full h-full
+                                                    text-sm bg-gray-100`}
                                                         src={
                                                             data?.image_url ?
                                                                 IMG_BASE_URL + data?.image_url :
-                                                                'images/placeholder.gif'
+                                                                'images/placeholder22.png'
                                                         }
                                                         alt={data.title}
                                                     />

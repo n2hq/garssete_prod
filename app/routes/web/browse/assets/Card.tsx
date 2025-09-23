@@ -34,9 +34,11 @@ const Card = ({ listing }: any) => {
 
             //console.log(baseListing)
 
-            setImgsrc(config.IMG_BASE_URL + baseListing?.image_url)
-        } else {
-            setImgsrc(placeholder)
+            if (baseListing?.image_url) {
+                setImgsrc(config.IMG_BASE_URL + baseListing?.image_url)
+            } else {
+                setImgsrc(placeholder)
+            }
         }
     }, [listing])
 
@@ -164,7 +166,7 @@ const Card = ({ listing }: any) => {
                                 <img
                                     src={imgscr}
                                     alt={""}
-                                    className={`object-cover w-full h-full text-sm
+                                    className={`${!baseListing?.image_url ? 'object-cover' : 'object-scale-down'}  w-full h-full text-sm
                              z-0 bg-white`}
                                 />
 

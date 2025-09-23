@@ -291,6 +291,14 @@ const FooterAlt = () => {
                         }
                     </div>
                 </div>
+
+                <div>
+                    <div>
+                        <p className="text-[10px] text-gray-400 text-center mt-2">
+                            Icon by <a href="https://www.flaticon.com/" target="_blank" className="underline">Flaticon</a> (CC BY 3.0)
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     )

@@ -36,10 +36,10 @@ const SrchNavbar = () => {
                 <div className={`max-w-full mx-auto flex items-center justify-between h-full gap-4 px-4 sm:px-6`}>
 
                     {/* Left - Logo and Menu Button */}
-                    <div className="flex items-center gap-2 lg:border-r border-blue-700 pr-4">
+                    <div className="flex items-center gap-1 lg:border-r border-blue-700 pr-4">
                         <div className={`relative w-[25px] h-[25px] overflow-hidden `}>
                             <img
-                                src={`/images/logo.svg`}
+                                src={`/images/gssico.png`}
                                 alt="Garssete"
                                 width={30}
                                 height={30}

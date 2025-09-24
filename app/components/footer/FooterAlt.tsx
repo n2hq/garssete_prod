@@ -249,7 +249,7 @@ const FooterAlt = () => {
                     <div className={`flex place-items-center gap-1.5`}>
                         <div className={`relative w-[20px] h-[20px]`}>
                             <img
-                                src="/images/favicon-garssete.png"
+                                src="/gssicoblk.png"
                                 alt=""
                                 className={` object-cover w-full h-full`}
                             />

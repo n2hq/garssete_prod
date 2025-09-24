@@ -41,7 +41,7 @@ const NormalNavbar = () => {
                     <div className="flex items-center gap-2 lg:border-r border-blue-700 pr-4">
                         <div className={`relative w-[25px] h-[25px] overflow-hidden `}>
                             <img
-                                src={`/images/logo.svg`}
+                                src={`/images/gslogowhite.jpeg`}
                                 alt="Garssete"
                                 width={30}
                                 height={30}

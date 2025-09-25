@@ -99,7 +99,7 @@ export function AddProductDialogProvider({ children }: any) {
                 let error = response.json().then((data) => {
                     //notification.alert('', data.message)
                     console.log(data.message)
-                    showError('Error', `Failed to add product`)
+                    showError('Error', `Failed to add product: ${data.message}`)
                     completeOperation()
                 })
 

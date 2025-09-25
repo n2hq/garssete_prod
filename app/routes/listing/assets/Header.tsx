@@ -31,7 +31,7 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                 </div>
                 <div className={`w-full`}>
                     <div className={`text-[19px] md:text-[24px]
-                font-bold  leading-[1.2em] tracking-tight font-poppins text-blue-500`}>
+                font-bold  leading-[1.2em] tracking-tight font-poppins text-blue-800`}>
                         {listing?.title}
 
                     </div>
@@ -59,13 +59,13 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                                             }
                                             {
                                                 operatingHoursStatus.openStatus === "permanently_closed" &&
-                                                <div key={'2'} className={`bg-red-700 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
+                                                <div key={'2'} className={`bg-red-700 px-2 rounded-lg w-fit text-white pt-[2px] pb-[4px]`}>
                                                     Permantently Closed
                                                 </div>
                                             }
                                             {
                                                 operatingHoursStatus.openStatus === "temporarily_closed" &&
-                                                <div key={'3'} className={`bg-orange-400 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
+                                                <div key={'3'} className={`bg-orange-400 px-2 rounded-lg w-fit text-white pt-[2px] pb-[4px]`}>
                                                     Temporarily Closed
                                                 </div>
                                             }

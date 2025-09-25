@@ -7,7 +7,7 @@ const BusinessPhrases = ({ listing }: any) => {
 
     return (
         <div className='mt-12'>
-            <ComponentTitle title='Business Phrases' />
+            <ComponentTitle title='Business Offerings' />
 
 
             <div className={`flex gap-3 flex-wrap`}>

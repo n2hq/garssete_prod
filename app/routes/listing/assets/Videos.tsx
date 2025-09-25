@@ -214,7 +214,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                                     <div key={i}>
                                         {
                                             i < maxSlides && i < video20?.length ?
-                                                <div key={video20[i]?.videoGuid} className={` w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border  rounded-none overflow-hidden hover:bg-white/50`}
+                                                <div key={video20[i]?.videoGuid} className={` w-[${slideWidth}px] min-w-[${slideWidth}px] relative z-[30] hover:cursor-pointer border  rounded-xl overflow-hidden hover:bg-white/50`}
                                                     /*  onClick={() => { handleOpen(video) }} */
                                                     onClick={() => showCarousel(i)}
                                                 >
@@ -244,12 +244,12 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
 
                                                     </div>
                                                 </div> :
-                                                <div className={`w-[${slideWidth}px] h-full border rounded-none flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-gray-900 `}
+                                                <div className={`w-[${slideWidth}px] h-full border flex place-items-center place-content-center hover:cursor-pointer hover:bg-gray-300 bg-gray-200 rounded-xl `}
                                                     onClick={() => {
                                                         setOpenGallery(true)
                                                     }}
                                                 >
-                                                    <div className={`text-white/60 w-[85%] text-center rounded-md h-[75%] border border-dashed border-gray-200/50 flex place-items-center place-content-center text-[23px]`}>
+                                                    <div className={`text-white/60 w-[85%] text-center rounded-md h-[75%] border border-dashed border-black/30 flex place-items-center place-content-center text-[23px]`}>
                                                         <MdOutlineImage />
                                                     </div>
                                                 </div>
@@ -259,12 +259,15 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                             })}
 
                         {/** last slide that opens gallery */}
-                        <div className={`w-[${slideWidth}px] h-full border border-gray-500 rounded-none flex place-items-center place-content-center hover:cursor-pointer hover:bg-black/50 bg-black`}
+                        <div className={`w-[${slideWidth}px] h-full border border-gray-200 rounded-xl flex place-items-center place-content-center hover:cursor-pointer hover:bg-gray-300 bg-gray-200`}
                             onClick={() => {
                                 setOpenGallery(true)
                             }}
                         >
-                            <div className={`text-white w-1/2 text-center rounded`}>All Videos</div>
+                            <div className={`text-white/60 w-[85%] text-center rounded-md h-[75%] border border-dashed border-black/30 flex place-items-center place-content-center `}>
+                                <div className={`text-white w-1/2 text-center rounded`}>All Videos</div>
+                            </div>
+
                         </div>
 
                     </div>

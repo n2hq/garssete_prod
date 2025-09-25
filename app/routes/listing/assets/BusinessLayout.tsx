@@ -73,13 +73,13 @@ const BusinessLayout = ({
     }, [listing, reportTime])
     return (
         <div className={`mt-5`}>
-            <div className={`px-[15px] w-full`}>
+            <div className={`px-[0px] w-full`}>
                 <div className={`max-w-[1100px] w-full mx-auto bg-white`}>
 
 
                     {
                         ratingsData &&
-                        <div className={`mt-4 flex gap-2 place-items-center`}>
+                        <div className={`mt-4 flex gap-2 place-items-center px-[15px]`}>
                             <RatingBoxSquare rating={Number(ratingsData?.rating_average)} />
                             <div className={`flex place-items-center place-content-center
                                     gap-1 text-black/60 text-[14px]`}>

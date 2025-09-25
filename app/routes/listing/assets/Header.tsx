@@ -17,10 +17,10 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
 
     return (
         <div>
-            <div className={`h-[5px] bg-gradient-to-r from-black to-blue-500 w-full mt-2 `}>
+            {/* <div className={`h-[5px] bg-gradient-to-r from-black to-blue-500 w-full mt-2 `}>
 
-            </div>
-            <div className={`flex gap-2 mt-2 w-full `}>
+            </div> */}
+            <div className={`flex gap-2 mt-2 w-full  p-3 md:p-3 md:shadow-md md:rounded-xl  border border-blue-100 bg-gray-50`}>
 
                 <div className={`bg-white w-[95px] min-w-[95px] h-[95px] rounded-none relative overflow-hidden hidden md:block  `}>
                     <img
@@ -31,7 +31,7 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                 </div>
                 <div className={`w-full`}>
                     <div className={`text-[19px] md:text-[24px]
-                font-bold  leading-[1.2em] tracking-tight font-poppins`}>
+                font-bold  leading-[1.2em] tracking-tight font-poppins text-blue-500`}>
                         {listing?.title}
 
                     </div>

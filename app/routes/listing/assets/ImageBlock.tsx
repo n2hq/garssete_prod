@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { MdOutlineImage } from 'react-icons/md';
 import { useGallery } from '~/context/GalleryContext';
 import { useSliderContext } from '~/context/SliderContext';
 import { config } from '~/lib/lib'
 
 type Image = {
-    id: number;
-    image_url: string;
-    alt: string;
+    id?: number;
+    image_url?: string;
+    alt?: string;
 };
 
 type MasonryProps = {
@@ -58,126 +59,196 @@ const ImageBlock = ({ images, listing }: any) => {
 
 
     return (
-        <div className='w-full h-auto mb-[32px] flex flex-col gap-2'>
-            <div className={`h-[350px]
-                grid grid-cols-12 gap-[7px]`}>
-                <div className={`col-span-7 bg-black
-                    row-span-2 rounded-xl overflow-hidden
-                    relative cursor-pointer`}
-                    onMouseDown={(e) => showCarousel(0)}
-                >
-                    <img
-                        src={
-                            images[0]?.image_url !== undefined && images[0]?.image_url !== null ?
-                                config.IMG_BASE_URL + images[0]?.image_url :
-                                placeholder
-                        }
-                        alt=""
-                        className={`object-cover h-full w-full`}
-                    />
-                </div>
-                <div className={`col-span-5 bg-black
-                    rounded-xl overflow-hidden h-full
-                    relative cursor-pointer`}
-                    onMouseDown={(e) => showCarousel(1)}
-                >
-                    <img
-                        src={
-                            images[1]?.image_url !== undefined && images[1]?.image_url !== null ?
-                                config.IMG_BASE_URL + images[1]?.image_url :
-                                placeholder
-                        }
-                        alt=""
-                        className={`object-cover h-full w-full`}
-                    />
-                </div>
-                <div className={`col-span-5 bg-black
-                    rounded-xl overflow-hidden h-full
-                    relative cursor-pointer`}
-                    onMouseDown={(e) => showCarousel(2)}
-                >
-                    <img
-                        src={
-                            images[2]?.image_url !== undefined && images[2]?.image_url !== null ?
-                                config.IMG_BASE_URL + images[2]?.image_url :
-                                placeholder
-                        }
-                        alt=""
-                        className={`object-cover h-full w-full`}
-                    />
-                </div>
+        <div>
+            <div className={`w-full h-auto mb-[32px] flex flex-col gap-2`}>
+                <ComposeImages imgs={images} showCarousel={showCarousel} index={0} showGallery={showGallery} />
             </div>
 
-            <div className={`grid grid-cols-5 gap-[7px] mt-[2px]`}>
-                <div className={`rounded-xl overflow-hidden
-                    relative cursor-pointer h-[100px] bg-black`}
-                    onMouseDown={(e) => showCarousel(3)}
-                >
-                    <img
-                        src={
-                            images[3]?.image_url !== undefined && images[3]?.image_url !== null ?
-                                config.IMG_BASE_URL + images[3]?.image_url :
-                                placeholder
-                        }
-                        alt=""
-                        className={`object-cover h-full w-full`}
-                    />
-                </div>
-                <div className={`rounded-xl overflow-hidden
-                    relative cursor-pointer h-[100px] bg-black`}
-                    onMouseDown={(e) => showCarousel(4)}
-                >
-                    <img
-                        src={
-                            images[4]?.image_url !== undefined && images[4]?.image_url !== null ?
-                                config.IMG_BASE_URL + images[4]?.image_url :
-                                placeholder
-                        }
-                        alt=""
-                        className={`object-cover h-full w-full`}
-                    />
-                </div>
-                <div className={`rounded-xl overflow-hidden
-                    relative bg-black cursor-pointer h-[100px]`}
-                    onMouseDown={(e) => showCarousel(5)}
-                >
-                    <img
-                        src={
-                            images[5]?.image_url !== undefined && images[5]?.image_url !== null ?
-                                config.IMG_BASE_URL + images[5]?.image_url :
-                                placeholder
-                        }
-                        alt=""
-                        className={`object-cover h-full w-full`}
-                    />
-                </div>
-                <div className={`rounded-xl overflow-hidden
-                    relative bg-black cursor-pointer h-[100px]`}
-                    onMouseDown={(e) => showCarousel(6)}
-                >
-                    <img
-                        src={
-                            images[6]?.image_url !== undefined && images[6]?.image_url !== null ?
-                                config.IMG_BASE_URL + images[6]?.image_url :
-                                placeholder
-                        }
-                        alt=""
-                        className={`object-cover h-full w-full`}
-                    />
-                </div>
-                <div className={`rounded-xl overflow-hidden
-                    relative bg-black text-white cursor-pointer
-                    flex place-content-center place-items-center h-[100px]
-                    bg-cover`}
-                    onMouseDown={(e) => showGallery(0)}
-                    style={{ backgroundImage: `url("/images/abstract_placeholder.jpg")` }}
-                >
-                    <div className={` absolute top-0 left-0 right-0 bottom-0 bg-black/20`}></div>
-                    {images?.length > 7 ? `+${images.length - 7}` : 'View all'}
-                </div>
-            </div>
+
         </div>
     )
 }
 
 export default ImageBlock
+
+
+
+export interface BlockProp {
+    index: number
+    imgs: Image[]
+    showCarousel?: (index: number) => void
+    showGallery?: (index: number) => void
+}
+export function SingleBlock({ index, imgs, showCarousel }: BlockProp) {
+    return (
+        <div className={`rounded-xl overflow-hidden bg-gray-200
+                    relative cursor-pointer w-full h-full`}>
+            {
+                imgs[index]?.image_url !== undefined && imgs[index]?.image_url !== null ?
+                    <img
+                        src={config.IMG_BASE_URL + imgs[index]?.image_url}
+                        alt=""
+                        className={`object-cover h-full w-full`}
+                    /> :
+                    <div className={`w-full h-full px-3 py-3 flex place-content-center place-items-center`}>
+                        <div className={` w-full h-full border border-dashed border-white text-[20px] rounded-lg flex place-content-center place-items-center text-white`}>
+                            <MdOutlineImage />
+                        </div>
+                    </div>
+            }
+        </div>
+
+
+    )
+}
+
+
+export function ComposeImages({ imgs, index, showCarousel, showGallery }: BlockProp) {
+    const [imageTotal, setImageTotal] = useState(0)
+    const [images, setImages] = useState<Image[]>([])
+
+    useEffect(() => {
+        if (imgs?.length > 0) {
+            console.log(imgs)
+            setImageTotal(imgs.length)
+            setImages(imgs)
+        }
+    }, imgs)
+
+
+
+    return (
+        <>
+            {
+                imageTotal === 1 && <div className={`h-[350px]
+                grid grid-cols-12 gap-[7px]`}>
+                    <div className={`col-span-12 
+                    row-span-2 overflow-hidden`}
+                        onMouseDown={(e) => showCarousel && showCarousel(index)}
+                    >
+                        <SingleBlock imgs={images} index={0} />
+                    </div>
+                </div>
+            }
+
+
+            {
+                imageTotal === 2 && <div className={`h-[350px]
+                grid grid-cols-12 gap-[7px]`}>
+                    <div className={`col-span-7 bg-black
+                    row-span-2 rounded-xl overflow-hidden
+                    relative cursor-pointer`}
+                        onMouseDown={(e) => showCarousel && showCarousel(0)}
+                    >
+                        <SingleBlock imgs={images} index={0} />
+                    </div>
+
+
+                    <div className={`col-span-5 bg-black
+                    row-span-2 rounded-xl overflow-hidden
+                    relative cursor-pointer`}
+                        onMouseDown={(e) => showCarousel && showCarousel(1)}
+                    >
+                        <SingleBlock imgs={images} index={1} />
+                    </div>
+                </div>
+            }
+
+
+            {
+                imageTotal === 3 && <div className={`h-[350px]
+                grid grid-cols-12 gap-[7px]`}>
+
+                    <div className={`col-span-7 row-span-2 overflow-hidden`}
+                        onMouseDown={(e) => showCarousel && showCarousel(0)}
+                    >
+                        <SingleBlock imgs={images} index={0} />
+                    </div>
+
+                    <div className={`col-span-5 overflow-hidden`}
+                        onMouseDown={(e) => showCarousel && showCarousel(1)}
+                    >
+                        <SingleBlock imgs={images} index={1} />
+
+                    </div>
+                    <div className={`col-span-5 overflow-hidden
+                    `}
+                        onMouseDown={(e) => showCarousel && showCarousel(2)}
+                    >
+                        <SingleBlock imgs={images} index={2} />
+                    </div>
+                </div>
+            }
+
+            {
+                imageTotal >= 4 && <div className={`space-y-[7px]`}>
+                    <div className={`h-[350px]
+                grid grid-cols-12 gap-[7px]`}>
+
+                        <div className={`col-span-7 row-span-2 overflow-hidden`}
+                            onMouseDown={(e) => showCarousel && showCarousel(0)}
+                        >
+                            <SingleBlock imgs={images} index={0} />
+                        </div>
+
+                        <div className={`col-span-5 overflow-hidden`}
+                            onMouseDown={(e) => showCarousel && showCarousel(1)}
+                        >
+                            <SingleBlock imgs={images} index={1} />
+
+                        </div>
+                        <div className={`col-span-5 overflow-hidden
+                    `}
+                            onMouseDown={(e) => showCarousel && showCarousel(2)}
+                        >
+                            <SingleBlock imgs={images} index={2} />
+                        </div>
+                    </div>
+
+
+                    <div className={`grid grid-cols-5 gap-[7px] mt-[2px] h-[100px]`}>
+
+                        <div className={`overflow-hidden`}
+                            onMouseDown={(e) => showCarousel && showCarousel(3)}
+                        >
+                            <SingleBlock imgs={images} index={3} />
+                        </div>
+                        <div className={`overflow-hidden`}
+                            onMouseDown={(e) => showCarousel && showCarousel(4)}
+                        >
+                            <SingleBlock imgs={images} index={4} />
+                        </div>
+                        <div className={`overflow-hidden`}
+                            onMouseDown={(e) => showCarousel && showCarousel(5)}
+                        >
+                            <SingleBlock imgs={images} index={5} />
+                        </div>
+
+
+                        {
+
+                            <div className={`overflow-hidden`}
+                                onMouseDown={(e) => showCarousel && showCarousel(6)}
+                            >
+                                <SingleBlock imgs={images} index={6} />
+                            </div>
+                        }
+
+
+                        <div className={`rounded-xl overflow-hidden
+                    relative bg-gray-200 text-white cursor-pointer
+                    flex place-content-center place-items-center h-[100px]
+                    bg-cover`}
+                            onMouseDown={(e) => showGallery && showGallery(0)}
+                            style={{ backgroundImage: `url("/images/abstract_placeholder.jpg")` }}
+                        >
+                            <div className={` absolute top-0 left-0 right-0 bottom-0 bg-black/20`}></div>
+                            {images?.length > 7 ? `+${images.length - 7}` : 'View all'}
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </>
+    )
+}

@@ -8,6 +8,7 @@ const BusinessRatings = ({ listing }: any) => {
 
     const [reviews, setReviews] = useState<any[]>([])
     const [ratingsRevews, setRatingsReviews] = useState<any>({})
+    const [img, setImg] = useState('')
 
     useEffect(() => {
 
@@ -35,6 +36,8 @@ const BusinessRatings = ({ listing }: any) => {
             getRatingsReviewsData(listing.gid)
         }
     }, [listing])
+
+
 
     return (
         <div className={`mt-12`}>

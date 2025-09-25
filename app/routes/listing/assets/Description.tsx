@@ -4,14 +4,19 @@ import ComponentTitle from './ComponentTitle'
 
 const Description = ({ listing }: any) => {
     const [img, setImg] = useState('')
+    const [placeholder, setPlaceholder] = useState('/images/placeholder22.png')
 
     useEffect(() => {
         if (listing.gid) {
             //console.log(listing)
             let imgdata = getBusinessProfileImageData(listing.gid)
             imgdata.then((data) => {
+                if (data?.image_url === '' || data?.image_url === undefined || data?.image_url === null) {
+                    setImg(placeholder)
+                } else {
+                    setImg(config.IMG_BASE_URL + data.image_url)
+                }
 
-                setImg(config.IMG_BASE_URL + data.image_url)
             })
         }
     }, [listing])

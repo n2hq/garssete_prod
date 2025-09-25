@@ -48,7 +48,7 @@ const SrchBarHome = () => {
 
     return (
         <div>
-            <div className={` bg-[#520dc1] text-white  fixed top-0 left-0 w-full z-[1000] shadow-sm`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
+            <div className={` bg-[blue] text-white  fixed top-0 left-0 w-full z-[1000] shadow-sm`} style={{ height: `${appConfig.NAVBAR_HEIGHT}px` }}>
 
                 <MobileNav
                     showNav={showNav}

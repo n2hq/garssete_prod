@@ -201,7 +201,7 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
                 />
                 <div
                     ref={scrollRef}
-                    className={`w-full px-0 py-0 mt-3 relative flex flex-1 overflow-x-auto bottom-scrollbar-hidden`}>
+                    className={`w-full px-0 py-0 mt-3 relative flex flex-1 overflow-x-auto bottom-scrollbar-hidden rounded-xl overflow-hidden`}>
                     {/** videos */}
                     <div className={`flex gap-x-3`} id='videobar'>
 
@@ -299,10 +299,6 @@ export const VideoScrollerAlt = ({ outVideo, handleOpen, showCarousel, listing }
 
 export const VideoGallery = ({ outVideo, openGallery,
     setOpenGallery, handleOpen, showCarousel, listing }: any) => {
-
-
-
-
 
     return (
         <>

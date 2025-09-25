@@ -83,7 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                     setUser(null)
                     localStorage.removeItem("authTokens")
                 } else {
-                    console.log(data)
+                    //console.log(data)
                     setUser(data)
                 }
             })

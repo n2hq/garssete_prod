@@ -2,7 +2,7 @@ import { Link, useLocation } from '@remix-run/react'
 import React, { useEffect, useState } from 'react'
 import { BiBriefcase, BiCategory, BiSearch } from 'react-icons/bi'
 import { FaAngleDown, FaBuysellads, FaDemocrat } from 'react-icons/fa'
-import { appConfig } from '~/lib/lib'
+import { appConfig, getUserProfileImageData } from '~/lib/lib'
 import UserMenu from '../usermenu/UserMenu'
 import { TbPasswordUser, TbWritingSign } from 'react-icons/tb'
 import { FiShoppingCart } from 'react-icons/fi'
@@ -11,6 +11,7 @@ import MobileNav from '../MobileNav'
 import { BsHeart, BsSearchHeart } from 'react-icons/bs'
 import HomeNav from '~/routes/assets/header/HomeNav'
 import { lnks } from '~/lib/json'
+import { useAuth } from '~/context/AuthContext'
 
 
 
@@ -19,11 +20,31 @@ const acctLnks = [
 ]
 
 const SrchBarHome = () => {
+    const auth = useAuth()
+    if (!auth) { return null }
+    const { user } = auth
+
     const [showNav, setShowNav] = useState(false)
     const location = useLocation()
     const params = new URLSearchParams(location.search)
     const query = params.get("q") || ""
     const closeNav = () => setShowNav(false)
+
+    const [userProfileImgData, setUserProfileImgData] = useState<any | null>(null)
+
+    useEffect(() => {
+
+        const getUserImageData = async (guid: string) => {
+            const userProfile: any = await getUserProfileImageData(guid)
+            setUserProfileImgData(userProfile)
+            //console.log(userProfile?.image_url)
+        }
+
+        if (user?.guid !== null) {
+
+            getUserImageData(user?.guid)
+        }
+    }, [user])
 
     return (
         <div>
@@ -63,7 +84,7 @@ const SrchBarHome = () => {
 
                     {/* Right - UserMenu */}
                     <div className="flex items-center lg:border-l border-blue-700 pl-4 gap-2">
-                        <UserMenu theme='light' />
+                        <UserMenu theme='light' userProfileImgData={userProfileImgData} />
                         <HamburgerSecondary theme='dark' openNav={() => setShowNav(true)} navBg={false} />
                     </div>
 

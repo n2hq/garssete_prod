@@ -46,7 +46,7 @@ export type LatestBusinessesType = {
 
 
 const Hotels = ({ data }: any) => {
-    console.log(data)
+    //console.log(data)
     const scrollRef = useRef<HTMLDivElement>(null);
     const scrollLeft = () => {
         if (scrollRef.current) {

@@ -36,7 +36,7 @@ const AccountUser = () => {
         hover:cursor-pointer gap-2 place-items-center`}>
                 <div className={` relative h-[30px] w-[30px] rounded-full
                     overflow-hidden flex place-content-center place-items-center
-                    bg-black/20`}>
+                    bg-white`}>
                     {
                         userProfileImgData?.image_url ?
                             <img

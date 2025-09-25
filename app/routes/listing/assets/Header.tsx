@@ -29,14 +29,14 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                         className={` object-cover w-full h-full border-[1px]  border-gray-200`}
                     />
                 </div>
-                <div className={`w-full`}>
+                <div className={`w-full block`}>
                     <div className={`text-[19px] md:text-[24px]
                 font-bold  leading-[1.2em] tracking-tight font-poppins text-blue-800`}>
                         {listing?.title}
 
                     </div>
 
-                    <div>
+                    <div className={` line-clamp-1`}>
 
                         <FormattedAddress listing={listing} />
                     </div>

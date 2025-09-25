@@ -7,7 +7,7 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer, useNavigate, useRouteError, Outlet, useNavigation, isRouteErrorResponse, Meta, Links, ScrollRestoration, Scripts, Link, useLocation, useLoaderData, NavLink as NavLink$2, useSearchParams, useParams } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
-import React, { useContext, createContext, useState, useEffect, useRef } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 import NProgress from "nprogress";
 import { FaSpinner, FaSchool, FaWheelchair, FaSwimmingPool, FaParking, FaTiktok, FaVimeoSquare, FaLinkedinIn, FaWifi, FaSignOutAlt, FaCarSide, FaAngleDown, FaMobile, FaQuestion, FaBriefcase, FaChevronLeft, FaChevronRight, FaFacebook, FaInstagram, FaYoutubeSquare, FaPinterestSquare, FaFacebookSquare } from "react-icons/fa";
 import CryptoJS from "crypto-js";
@@ -8490,7 +8490,7 @@ const getLocationAndBusinessStatus = async (listing) => {
       return `${isOpen2 ? "Open Now" : "Closed Now"}`;
     };
     todayHoursFormatted = /* @__PURE__ */ jsxs("div", { className: "w-full flex gap-1.5 place-items-center flex-wrap", children: [
-      /* @__PURE__ */ jsx("span", { className: `${isOpen ? "bg-blue-700" : "bg-red-500"} text-white px-1 py-[2px] rounded-sm text-[13px]`, children: formattedLabel(isOpen) }, "o1"),
+      /* @__PURE__ */ jsx("span", { className: `${isOpen ? "bg-blue-700" : "bg-red-500"} text-white px-2 py-[2px] rounded-lg text-[13px]`, children: formattedLabel(isOpen) }, "o1"),
       /* @__PURE__ */ jsxs("span", { children: [
         today,
         ", "

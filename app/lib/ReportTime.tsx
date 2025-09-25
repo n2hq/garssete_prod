@@ -170,7 +170,7 @@ export const getLocationAndBusinessStatus = async (listing: any) => {
 
         todayHoursFormatted = (
             <div className="w-full flex gap-1.5 place-items-center flex-wrap">
-                <span key={'o1'} className={`${isOpen ? 'bg-blue-700' : 'bg-red-500'} text-white px-1 py-[2px] rounded-sm text-[13px]`}>
+                <span key={'o1'} className={`${isOpen ? 'bg-blue-700' : 'bg-red-500'} text-white px-2 py-[2px] rounded-lg text-[13px]`}>
                     {formattedLabel(isOpen)}
                 </span>
                 <span key={'o2'}>{today}, </span>

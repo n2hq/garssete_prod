@@ -13,7 +13,7 @@ const BusinessPhrases = ({ listing }: any) => {
             <div className={`flex gap-3 flex-wrap`}>
                 {
                     listing?.business_phrases &&
-                    <StringToListMaker phrasesString={listing?.business_phrases} />
+                    <StringToListMaker useGrid phrasesString={listing?.business_phrases} />
                 }
             </div>
         </div>

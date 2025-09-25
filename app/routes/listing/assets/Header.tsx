@@ -22,7 +22,7 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
             </div> */}
             <div className={`flex gap-2 mt-2 w-full  p-3 md:p-3 md:shadow-md md:rounded-xl  border border-blue-100 bg-gray-50`}>
 
-                <div className={`bg-white w-[95px] min-w-[95px] h-[95px] rounded-none relative overflow-hidden hidden md:block  `}>
+                <div className={`bg-white w-[95px] min-w-[95px] h-[95px] rounded-none relative overflow-hidden  `}>
                     <img
                         src={profileImg}
                         alt=""

@@ -104,7 +104,7 @@ const QueryBuilder: React.FC<QueryBuilderProps> = ({
 
         try {
             const countries = await getCountries()
-            console.log(countries)
+            //console.log(countries)
             setCountries(countries || [])
         } catch (error) {
             console.error('Failed to fetch countries:', error)

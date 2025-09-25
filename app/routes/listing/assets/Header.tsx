@@ -53,7 +53,7 @@ const Header = ({ listing, profileImageData, operatingHoursStatus, ratingsData }
                                         <div>
                                             {
                                                 operatingHoursStatus.openStatus === "always_open" &&
-                                                <div key={'1'} className={`bg-green-700 px-1 rounded-sm w-fit text-white pt-[2px] pb-[4px]`}>
+                                                <div key={'1'} className={`bg-green-700 px-2 rounded-lg w-fit text-white pt-[2px] pb-[4px]`}>
                                                     Always Open
                                                 </div>
                                             }

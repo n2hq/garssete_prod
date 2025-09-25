@@ -166,7 +166,7 @@ const Card = ({ listing }: any) => {
                                 <img
                                     src={imgscr}
                                     alt={""}
-                                    className={`${!baseListing?.image_url ? 'object-cover' : 'object-scale-down'}  w-full h-full text-sm
+                                    className={`object-cover w-full h-full text-sm
                              z-0 bg-white`}
                                 />
 

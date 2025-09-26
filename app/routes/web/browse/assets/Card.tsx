@@ -173,7 +173,7 @@ const Card = ({ listing }: any) => {
                             </div>
 
                             <div className={` w-full`}>
-                                <div className={`text-[18px] font-normal text-blue-700 line-clamp-1 w-full`}>
+                                <div className={`text-[18px] font-normal text-blue-900 line-clamp-1 w-full`}>
                                     {listing?.title}
 
                                 </div>

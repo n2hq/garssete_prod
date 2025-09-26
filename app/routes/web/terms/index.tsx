@@ -5,10 +5,11 @@ import CallToActionSection from '~/components/content/CallToActionSection'
 import FooterSection from '~/routes/landing/assets/FooterSection'
 import SearchLayoutMain from '~/routes/asset/SearchLayoutMain'
 import FooterAlt from '~/components/footer/FooterAlt'
+import SearchLayout from '~/routes/asset/SearchLayout'
 
 const index = () => {
     return (
-        <SearchLayoutMain>
+        <SearchLayout>
             <div className={`max-w-[1100px] mx-auto w-full mt-[30px]`}>
                 <div className={`grid md:grid-cols-12 gap-4 `}>
                     <div className={` md:col-span-7  px-[15px]`}>
@@ -22,7 +23,7 @@ const index = () => {
             </div>
             <VerticalHeight />
             <FooterAlt />
-        </SearchLayoutMain>
+        </SearchLayout>
     )
 }
 

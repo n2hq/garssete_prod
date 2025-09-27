@@ -23,6 +23,10 @@ echo "🔄 Pulling latest changes..."
 #git pull origin main
 
 
+echo "Deleting build folder..."
+rm -rf build/
+
+
 echo "🛠  Building PROD..."
 npm run build:prod
 

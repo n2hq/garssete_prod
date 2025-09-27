@@ -249,7 +249,7 @@ const FooterAlt = () => {
                     <div className={`flex place-items-center gap-1.5`}>
                         <div className={`relative w-[20px] h-[20px]`}>
                             <img
-                                src="/gssicoblk.png"
+                                src="/favicon.png"
                                 alt=""
                                 className={` object-cover w-full h-full`}
                             />
@@ -259,8 +259,9 @@ const FooterAlt = () => {
                         </div>
                     </div>
                     <div className={`font-poppins text-[13px] mt-[-2px]`}>
-                        © 2025 Garssete All rights reserved.
+                        © 2025 Garssete by Storcs Ltd. All rights reserved.
                     </div>
+
                 </div>
 
                 <div className={`mt-3 font-poppins font-[300] grid-cols-1 md:grid-cols-12 flex flex-col place-items-center text-center md:place-items-start md:text-left`}>

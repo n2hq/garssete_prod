@@ -2,6 +2,7 @@ import { ActionFunctionArgs, LoaderFunction } from "@remix-run/node"
 import { query } from "../DB"
 import { DoResponse } from "~/lib/lib"
 import { ListingType } from "~/lib/types"
+import { pageType } from "~/lib/json/page_type"
 
 
 
@@ -75,6 +76,9 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             let branch: boolean = body.branch === undefined ? Boolean(listing.branch) as boolean : Boolean(body.branch)
             let branch_location: string = body.branch_location === undefined ? (listing.branch_location) as string : (body.branch_location)
             let category = body.category as string === undefined ? listing.category : body.category
+
+            let pagetype = body.pagetype as string === undefined ? listing.pagetype : body.pagetype
+
             let short_description = body.short_description as string === undefined ? listing.short_description : body.short_description
             let long_description = body.long_description as string === undefined ? listing.long_description : body.long_description
 
@@ -84,6 +88,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
             let img = body.img as string === undefined ? listing.img : body.img
             let owner = body.owner as string === undefined ? listing.owner : body.owner
             let username = body.username as string === undefined ? listing.username : body.username
+
             let zipcode = body.zipcode as string === undefined ? listing.zipcode : body.zipcode
 
             let products = body.products as string === undefined ? listing.products : body.products
@@ -139,6 +144,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                 address_two = '${address_two}',
                 owner = '${owner}',
                 username = '${username}',
+                pagetype = '${pagetype}',
                 img = '${img}',
                 zipcode = '${zipcode}',
                 products = '${products}',
@@ -172,6 +178,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                 address_two = ?,
                 owner = ?,
                 username = ?,
+                pagetype = ?,
                 img = ?,
                 zipcode = ?,
                 products = ?,
@@ -200,6 +207,7 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
                     address_two,
                     owner,
                     username,
+                    pagetype,
                     img,
                     zipcode,
                     products,

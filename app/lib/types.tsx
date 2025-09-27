@@ -120,6 +120,7 @@ export type ListingType = {
     listing_hash: string
     owner: string
     username: string
+    pagetype: string
     zipcode: string
     products: string
     services: string

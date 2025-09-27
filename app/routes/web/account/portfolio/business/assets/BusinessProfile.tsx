@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import BusinessProfileSchema from './BusinessProfileSchema'
 import { config, getCities, getStates, headers } from '~/lib/lib'
 import { categories as category } from '~/lib/json/categories'
+import { pageType } from '~/lib/json/page_type'
 import { useNotification } from '~/context/NotificationContext'
 import BgComponent from './image/BgComponent'
 import ImgComponentAlt from './image/ImgComponentAlt'
@@ -69,6 +70,8 @@ const BusinessProfile = ({ data }: any) => {
 
     const handleUpdateBusiness: SubmitHandler<any> = async (datar: any) => {
         setWorking(true)
+        //alert(JSON.stringify(datar))
+        //return false
         //notification.notify('Updating business profile...')
         showOperation('processing', 'Updating page profile')
         await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -167,7 +170,7 @@ const BusinessProfile = ({ data }: any) => {
 
             <div>
 
-                <hr />
+                <hr className={`mb-4`} />
 
                 <div className={`relative w-full flex place-items-center gap-1 place-content-end px-[10px]`}>
                     <a href={`/web/account/portfolio`}
@@ -201,12 +204,16 @@ const BusinessProfile = ({ data }: any) => {
 
                     <div className={`${formWrapperClass} mt-0  rounded-lg pt-4 md:max-w-[80%]
                                 lg:max-w-[60%] w-full mx-auto `}>
+
+                        <div className={`text-2xl mb-5`}>
+                            Page update
+                        </div>
                         <div className={`text-xl font-[600] leading-[1.4em] px-[10px] text-black mb-[32px]`}>
                             {data?.businessProfile.title}
                         </div>
 
                         <Input
-                            controlTitle={"Username"}
+                            controlTitle={"Page Username"}
                             controlPlaceholder={"Enter username"}
                             controlName={"username"}
                             register={register}
@@ -214,6 +221,17 @@ const BusinessProfile = ({ data }: any) => {
                             error={errors.username}
                             controlInformation={`Choose a username. `}
 
+                        />
+
+                        <Select
+                            controlTitle={"Page Type"}
+                            controlName={"pagetype"}
+                            controlPlaceholder={"Select Page Type"}
+                            selectJson={pageType}
+                            register={register}
+                            changeHandler={changeHandler}
+                            error={errors.pagetype}
+                            controlInformation={`Select business category.`}
                         />
 
                         <Input
@@ -236,6 +254,21 @@ const BusinessProfile = ({ data }: any) => {
                             controlInformation={`Please enter page name. Page name is compulsory. `}
 
                         />
+
+
+
+                        <Select
+                            controlTitle={"Category"}
+                            controlName={"category"}
+                            controlPlaceholder={"Select category"}
+                            selectJson={categories}
+                            register={register}
+                            changeHandler={changeHandler}
+                            error={errors.category}
+                            controlInformation={`Select business category.`}
+                        />
+
+
 
                         <Input
                             controlTitle={"Year established"}
@@ -331,16 +364,6 @@ const BusinessProfile = ({ data }: any) => {
 
 
 
-                        <Select
-                            controlTitle={"Category"}
-                            controlName={"category"}
-                            controlPlaceholder={"Select category"}
-                            selectJson={categories}
-                            register={register}
-                            changeHandler={changeHandler}
-                            error={errors.category}
-                            controlInformation={`Select business category.`}
-                        />
 
                         <Input
                             controlTitle={"Business Phrases"}

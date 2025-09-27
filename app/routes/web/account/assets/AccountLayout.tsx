@@ -67,8 +67,8 @@ const AccountLayout = ({ children }: any) => {
         }
 
         if (auth?.user) {
-            console.log('hello')
-            console.log(auth?.user)
+
+            //console.log(auth?.user)
             getData(auth?.user.guid)
         }
 

@@ -152,7 +152,7 @@ const Card = ({ listing }: any) => {
 
 
     return (
-        <div className={`bg-white w-full h-auto  overflow-hidden border   hover:shadow-md hover:shadow-gray-200`}>
+        <div className={`bg-white w-full h-auto  overflow-hidden border   hover:shadow-md hover:shadow-gray-200 md:rounded-xl`}>
             {/** header */}
             <div className={`bg-gray-50/30 py-3 px-4 border-b-0`}>
 
@@ -160,7 +160,7 @@ const Card = ({ listing }: any) => {
                     <div className={`flex place-content-between gap-2`}>
                         {/** left */}
                         <div className={`flex place-items-start gap-2 w-full`}>
-                            <div className={`w-[90px] h-[90px] min-w-[90px]   bg-black bg-cover bg-center overflow-hidden relative border`}
+                            <div className={`w-[90px] h-[90px] min-w-[90px]   bg-black bg-cover bg-center overflow-hidden relative border border-gray-300`}
 
                             >
                                 <img
@@ -173,7 +173,7 @@ const Card = ({ listing }: any) => {
                             </div>
 
                             <div className={` w-full`}>
-                                <div className={`text-[18px] font-normal text-blue-900 line-clamp-1 w-full`}>
+                                <div className={`text-[18px] font-normal text-blue-800 line-clamp-1 w-full`}>
                                     {listing?.title}
 
                                 </div>

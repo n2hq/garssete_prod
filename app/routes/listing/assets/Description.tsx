@@ -4,7 +4,7 @@ import ComponentTitle from './ComponentTitle'
 
 const Description = ({ listing }: any) => {
     const [img, setImg] = useState('')
-    const [placeholder, setPlaceholder] = useState('/images/pholder.jpeg')
+    const [placeholder, setPlaceholder] = useState('/images/placeholder22.png')
 
     useEffect(() => {
         if (listing.gid) {

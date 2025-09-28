@@ -100,11 +100,7 @@ const AccountLayout = ({ children }: any) => {
 
     if (loading) {
 
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="text-lg">Loading...</div>
-            </div>
-        )
+        return null
     }
 
 

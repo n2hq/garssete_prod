@@ -3,7 +3,7 @@ import AccountLayout from '../../assets/AccountLayout'
 import ContentLayout from '../../assets/ContentLayout'
 import { useAuth } from '~/context/AuthContext'
 import { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import { Link, useLoaderData, useNavigation } from '@remix-run/react'
 import { getBusinessProfile, getBusinessProfileBgData, getBusinessProfileImageData, getCategories, getCities, getCountries, getStates, getUserProfile, getUserProfileImageData, IsAuthenticated } from '~/lib/lib'
 import BusinessProfileForm from './assets/BusinessProfileForm'
 import BusinessMenu from './assets/BusinessMenu'
@@ -12,6 +12,7 @@ import BusinessHeader from './assets/BusinessHeader'
 import ProfileLayout from '../../assets/ProfileLayout'
 import BusinessProfile from './assets/BusinessProfile'
 import { OperationProvider } from '~/context/OperationContext'
+import LoadingMessage from '~/components/content/LoadingMessage'
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -47,6 +48,7 @@ const index = () => {
     const [categories, setCategories] = useState<any | null>(null)
     const [data, setData] = useState<any | null>(null)
 
+    const navigation = useNavigation();
 
     useEffect(() => {
         async function getAllData(userGuid: string, businessGuid: string) {
@@ -126,9 +128,9 @@ const index = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="text-lg">Loading...</div>
-            </div>
+            <>
+                <LoadingMessage />
+            </>
         )
     }
 

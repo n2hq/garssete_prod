@@ -11,6 +11,7 @@ import CardHeader from '../assets/CardHeader'
 import Profile from './assets/Profile'
 import ProfileLayout from '../assets/ProfileLayout'
 import { useLoaderData } from '@remix-run/react'
+import LoadingMessage from '~/components/content/LoadingMessage'
 
 
 
@@ -18,16 +19,14 @@ import { useLoaderData } from '@remix-run/react'
 
 const index = () => {
 
-    useEffect(() => {
-        IsAuthenticated(localStorage)
-    }, [])
+
 
     const auth = useAuth()
     if (!auth) { return null }
 
     const { user } = auth
 
-
+    IsAuthenticated(localStorage)
 
 
     const [userProfile, setUserProfile] = useState<any | null>(null)
@@ -99,13 +98,9 @@ const index = () => {
 
 
 
-
+    {/** wait until page loads */ }
     if (loading) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="text-lg">Garssete</div>
-            </div>
-        )
+        return null
     }
 
 

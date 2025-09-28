@@ -208,7 +208,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         signin: signin,
         signoutNoReload: signoutNoReload,
         signoutReload: signoutReload,
-        resetpw: resetpw
+        resetpw: resetpw,
     }
 
     return (

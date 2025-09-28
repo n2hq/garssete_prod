@@ -88,15 +88,7 @@ const Index = () => {
         city: searchParams.get('city') || ''
     }
 
-    useEffect(() => {
-        if (loading) {
-            setLoading(false)
-        }
-    }, [loading])
 
-    if (loading) {
-        return <LoadingMessage loading={loading} />
-    }
 
     return (
         <div className=' '>

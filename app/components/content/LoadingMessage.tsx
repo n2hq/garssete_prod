@@ -18,8 +18,12 @@ const LoadingMessage = ({ loading }: LoadingProp) => {
 
     useEffect(() => {
         const handleStopSpin = async (loading: boolean | undefined) => {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            startSpin(false)
+
+
+            setTimeout(() => {
+                startSpin(false)
+            }, 3000)
+
         }
         if (!loading) {
             handleStopSpin(loading)

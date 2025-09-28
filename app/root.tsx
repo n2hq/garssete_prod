@@ -11,7 +11,7 @@ import {
 import type { HeadersFunction, LinksFunction, MetaFunction } from "@remix-run/node";
 
 import "./tailwind.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import NProgress from "nprogress"
 import "nprogress/nprogress.css"
 import { NotificationProvider } from "./context/NotificationContext";
@@ -26,6 +26,7 @@ import { EditVideoDialogProvider } from "./context/EditVideoDialogContext";
 import { OnlineStatusProvider } from "./context/OnlineStatusContext";
 import { OperationProvider } from "./context/OperationContext";
 import { CustomNetworkError, isNetworkError, NetworkErrorBoundary } from "./components/utils/NetworkErrorBoundary";
+import LoadingMessage from "./components/content/LoadingMessage";
 
 
 export const links: LinksFunction = () => [
@@ -54,9 +55,20 @@ export const headers: HeadersFunction = () => {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const navigation = useNavigation()
+  const [hydrated, setHydrated] = useState(false);
 
   const error = useRouteError();
 
+
+
+  const loading = navigation.state !== "idle" || !hydrated;
+
+
+  useEffect(() => {
+    if (loading) {
+      setHydrated(true);
+    }
+  }, [loading]);
 
   if (isNetworkError(error) || error instanceof CustomNetworkError) {
     return <NetworkErrorBoundary />;
@@ -110,6 +122,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+
+        {loading && <LoadingMessage />}
         <NotificationProvider>
           <OperationProvider>
             <VideoSliderProvider>
@@ -120,6 +134,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                       <AddVideoDialogProvider>
                         <AuthProvider>
                           <OnlineStatusProvider>
+
                             {children}
                           </OnlineStatusProvider>
                         </AuthProvider>

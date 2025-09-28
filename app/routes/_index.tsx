@@ -71,9 +71,9 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 
 
     return [
-      { title: "Garssete | Business Directory, Explore Listings Around The World" },
+      { title: "Garssete - Online Business Directory, Explore Listings Around The World" },
       { name: "description", content: "Discover and connect with businesses worldwide. Garssete.com helps you explore listings, find services, and grow your network across industries and countries." },
-      { name: "keywords", content: "Business Directory, Location Services" },
+      { name: "keywords", content: "Business Directory Service, Location Services" },
       { property: "fb:app_id", content: "1325393508603168" },
       { property: "og:url", content: "https://garssete.com" },
       { property: "og:type", content: "website" },

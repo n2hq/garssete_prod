@@ -25,6 +25,7 @@ export const SliderProvider = ({ children }: any) => {
     const counter = useRef(0)
     let slideIncrement = 0
     const [maximized, setMaximized] = useState(false)
+    const [normalState, setNormalState] = useState(true)
 
     const handleTouchStart = (e: any) => {
         slideStep.current = e.touches[0].clientX;
@@ -101,17 +102,26 @@ export const SliderProvider = ({ children }: any) => {
                                     slides.map((slide: any, index: any) => {
 
                                         return (
-                                            <img
-                                                onTouchStart={handleTouchStart}
-                                                onTouchEnd={handleTouchEnd}
-                                                key={index}
-                                                src={IMG_BASE_URL + slide.image_url}
-                                                alt=""
-                                                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                                                className={`object-scale-down w-full h-full 
-                                            block flex-shrink-0 flex-grow-0 transition-transform
+                                            <div className={`w-full h-full flex flex-shrink-0 flex-grow-0 transition-transform  place-content-center place-items-center  relative
                                             ease-in-out duration-1000`}
-                                            />
+                                                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                                            >
+                                                <img
+                                                    onTouchStart={handleTouchStart}
+                                                    onTouchEnd={handleTouchEnd}
+                                                    key={index}
+                                                    src={IMG_BASE_URL + slide.image_url}
+                                                    alt=""
+
+                                                    className={`object-scale-down w-full h-full 
+                                            `}
+                                                />
+                                                <div className={`absolute bottom-[0px] w-full z-[20px] px-5 py-7 bg-black/30 ${maximized ? 'block' : 'block md:hidden'}`}>
+                                                    <div className={` text-center text-white `}>
+                                                        {slide?.image_title} We are very conservative in this. We are very conservative in this.
+                                                    </div>
+                                                </div>
+                                            </div>
                                         )
                                     })
                                 }
@@ -151,7 +161,10 @@ export const SliderProvider = ({ children }: any) => {
 
                             {/** Maximize or Minimize */}
                             <div
-                                onClick={() => { setMaximized(!maximized) }}
+                                onClick={() => {
+                                    setMaximized(!maximized)
+                                    setNormalState(!normalState)
+                                }}
                                 className={`w-[50px] h-[50px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute right-2 top-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`}>
                                 {
                                     maximized ?

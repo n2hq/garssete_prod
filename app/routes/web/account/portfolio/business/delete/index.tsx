@@ -10,6 +10,7 @@ import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
 import BusinessHeader from '../assets/BusinessHeader'
 import DeleteForm from './assets/DeleteForm'
+import LoadingMessage from '~/components/content/LoadingMessage'
 
 
 const Index = () => {
@@ -66,11 +67,7 @@ const Index = () => {
 
 
     if (loading) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="text-lg">Loading...</div>
-            </div>
-        )
+        return <LoadingMessage />
     }
 
     return (

@@ -11,6 +11,7 @@ import { useLocation } from '@remix-run/react'
 import { PortfolioSearchBox } from './business/assets/PortfolioSearchBox'
 import CardHeaderWithSearch from './business/assets/CardHeaderWithSearch'
 import PortfolioLayout from '../assets/PortfolioLayout'
+import LoadingMessage from '~/components/content/LoadingMessage'
 
 
 
@@ -77,11 +78,7 @@ const Index = () => {
 
 
     if (loading) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="text-lg">Loading...</div>
-            </div>
-        )
+        return <LoadingMessage loading={loading} />
     }
 
     return (

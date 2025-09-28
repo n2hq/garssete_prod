@@ -13,6 +13,7 @@ import { useAuth } from '~/context/AuthContext'
 import CardTitle from '../../../assets/CardTitle'
 import BusinessHeader from '../assets/BusinessHeader'
 import { OperationProvider } from '~/context/OperationContext'
+import LoadingMessage from '~/components/content/LoadingMessage'
 
 const index = () => {
     useEffect(() => {
@@ -89,11 +90,7 @@ const index = () => {
 
 
     if (loading) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="text-lg">Loading...</div>
-            </div>
-        )
+        return <LoadingMessage />
     }
 
 

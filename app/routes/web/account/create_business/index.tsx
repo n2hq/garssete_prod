@@ -70,7 +70,7 @@ const index = () => {
 
 
     if (loading) {
-        return <LoadingMessage />
+        return <LoadingMessage loading={loading} />
     }
 
 

@@ -9,6 +9,7 @@ import DeactivateProfileForm from './assets/DeactivateProfileForm'
 import CardTitle from '../assets/CardTitle'
 import CardHeader from '../assets/CardHeader'
 import ProfileContentLayout from '../assets/ProfileContentLayout'
+import LoadingMessage from '~/components/content/LoadingMessage'
 
 const index = () => {
     useEffect(() => {
@@ -57,11 +58,7 @@ const index = () => {
 
 
     if (loading) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="text-lg">Loading...</div>
-            </div>
-        )
+        return <LoadingMessage />
     }
     return (
         <AccountLayout>

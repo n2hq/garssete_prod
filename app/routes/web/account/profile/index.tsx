@@ -100,7 +100,7 @@ const index = () => {
 
     {/** wait until page loads */ }
     if (loading) {
-        return null
+        return <LoadingMessage />
     }
 
 

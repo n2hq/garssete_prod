@@ -8,6 +8,7 @@ import CardTitle from '../assets/CardTitle'
 import CardHeader from '../assets/CardHeader'
 import ProfileContentLayout from '../assets/ProfileContentLayout'
 import { OperationProvider } from '~/context/OperationContext'
+import LoadingMessage from '~/components/content/LoadingMessage'
 
 const index = () => {
     useEffect(() => {
@@ -69,7 +70,7 @@ const index = () => {
 
 
     if (loading) {
-        return null
+        return <LoadingMessage />
     }
 
 

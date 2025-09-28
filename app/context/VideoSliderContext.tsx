@@ -129,6 +129,8 @@ export const VideoSliderProvider = ({ children }: any) => {
         }
     }, [dialog])
 
+
+
     return (
         <VideoSliderContext.Provider value={vals}>
             {
@@ -153,6 +155,7 @@ export const VideoSliderProvider = ({ children }: any) => {
                                                 className="object-scale-down w-full h-full 
                    flex flex-shrink-0 flex-grow-0 transition-transform 
                    ease-in-out duration-1000 relative place-items-center place-content-center bg-black text-white"
+
                                             >
                                                 Loading...
                                                 <iframe
@@ -161,6 +164,14 @@ export const VideoSliderProvider = ({ children }: any) => {
                                                     className="absolute top-0 left-0 w-full h-full"
                                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 />
+
+                                                <div className={`absolute bottom-[0px] w-full z-[20px] px-5 py-7 bg-black/80 md:hidden`}
+                                                    id="vstitle"
+                                                >
+                                                    <div className={` text-center text-white text-[19px] `}>
+                                                        {slide?.video_title}
+                                                    </div>
+                                                </div>
                                             </div>
                                         )
                                     })

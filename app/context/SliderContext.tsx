@@ -116,8 +116,8 @@ export const SliderProvider = ({ children }: any) => {
                                                     className={`object-scale-down w-full h-full 
                                             `}
                                                 />
-                                                <div className={`absolute bottom-[0px] w-full z-[20px] px-5 py-7 bg-black/30 ${maximized ? 'block' : 'block md:hidden'}`}>
-                                                    <div className={` text-center text-white `}>
+                                                <div className={`absolute bottom-[0px] w-full z-[20px] px-5 py-7 bg-black/30 md:hidden`}>
+                                                    <div className={` text-center text-white text-[19px]`}>
                                                         {slide?.image_title}
                                                     </div>
                                                 </div>

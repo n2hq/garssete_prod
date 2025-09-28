@@ -21,6 +21,7 @@ import { ListingType } from '~/lib/types';
 import Pagination from './assets/Pagination';
 import { OnlineStatusProvider } from '~/context/OnlineStatusContext';
 import QueryBuilder from './assets/QueryBuilder';
+import LoadingMessage from '~/components/content/LoadingMessage';
 
 
 export const loader: LoaderFunction = async ({ request, params }) => {
@@ -55,7 +56,7 @@ const Index = () => {
 
     const res: any = useLoaderData()
 
-
+    const [loading, setLoading] = useState(true)
     const [searchParams, setSearchParams] = useSearchParams();
     const navigation = useNavigation()
 
@@ -85,6 +86,16 @@ const Index = () => {
         country: searchParams.get('country') || '',
         state: searchParams.get('state') || '',
         city: searchParams.get('city') || ''
+    }
+
+    useEffect(() => {
+        if (loading) {
+            setLoading(false)
+        }
+    }, [loading])
+
+    if (loading) {
+        return <LoadingMessage loading={loading} />
     }
 
     return (

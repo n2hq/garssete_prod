@@ -133,7 +133,7 @@ export const VideoSliderProvider = ({ children }: any) => {
         <VideoSliderContext.Provider value={vals}>
             {
                 dialog &&
-                <div className={`flex w-screen h-screen bg-white z-[20001] 
+                <div className={`flex w-full h-full bg-white z-[20001] 
                 fixed top-0 left-0 right-0 bottom-0 `}>
                     <div className={`grid grid-cols-12 gap-0 w-full`}>
                         <div className={`${maximized ? 'col-span-12' : 'col-span-12 md:col-span-9'}  w-full h-full relative bg-black flex`}>
@@ -200,7 +200,7 @@ export const VideoSliderProvider = ({ children }: any) => {
                             {/** Maximize or Minimize */}
                             <div
                                 onClick={() => { setMaximized(!maximized) }}
-                                className={`w-[50px] h-[50px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute ${maximized ? 'right-10' : 'right-10 md:right-5'} top-20 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`}>
+                                className={`w-[50px] h-[50px] z-[300] bg-white flex place-content-center place-items-center rounded-full absolute top-2 right-2 cursor-pointer hover:bg-white/40 transition duration-1000 ease-in-out`}>
                                 {
                                     maximized ?
                                         <FaMinimize className={`text-[30px]`} />

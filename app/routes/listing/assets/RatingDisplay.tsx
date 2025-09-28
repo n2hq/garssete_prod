@@ -18,6 +18,7 @@ const RatingDisplay = ({ data }: RatingDisplayProp) => {
 
     useEffect(() => {
         if (data) {
+            //const hasDec = hasDecimal(Number(data?.rating))
             const hasDec = hasDecimal(Number(data?.rating))
             setHasDecimalNumber(hasDec)
         }
@@ -49,7 +50,7 @@ const RatingDisplay = ({ data }: RatingDisplayProp) => {
 
     return (
         <div>
-            <div className={`bg-blue-100 w-full px-3 py-3 border border-b-0 rounded-t-md grid grid-cols-2`}>
+            <div className={`bg-blue-100 w-full px-3 py-3 border border-b-0 rounded-t-2xl grid grid-cols-2`}>
                 {/** left */}
                 <div className={`block`}>
                     <div className={`text-[16px] font-semibold`}>
@@ -76,7 +77,7 @@ const RatingDisplay = ({ data }: RatingDisplayProp) => {
 
                     {/** right */}
                     <div className={``}>
-                        <div className={`bg-blue-950 h-[40px] w-[40px] rounded-md text-white flex place-items-center place-content-center ${hasDecimalNumber ? 'text-[26px]' : 'text-[36px]'}`}>
+                        <div className={`bg-blue-950 font-poppins h-[40px] w-[40px] rounded-xl text-white flex place-items-center place-content-center ${hasDecimalNumber ? 'text-[26px]' : 'text-[36px]'}`}>
                             {formatNumber(Number(data?.rating))}
                         </div>
                     </div>

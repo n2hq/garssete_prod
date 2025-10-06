@@ -97,6 +97,10 @@ export async function action({ request, params }: ActionFunctionArgs) {
                 return new Response(JSON.stringify({ message: "Missing Owner" }), { status: 400 })
             }
 
+            if (!body.pagetype) {
+                return new Response(JSON.stringify({ message: "Missing Pagetype" }), { status: 400 })
+            }
+
             /*  if (!body.established) {
                  return new Response(JSON.stringify({ message: "Missing Year Established" }), { status: 400 })
              } */
@@ -119,6 +123,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
             const result = await query(`INSERT INTO tbl_dir SET 
                 title = ?, 
+                pagetype = ?,
                 branch = ?,
                 branch_location = ?, 
                 category = ?, 
@@ -138,6 +143,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
                 listing_hash = ?`,
                 [
                     body.title || null,
+                    body.pagetype,
                     branch,
                     branch_location,
                     body.category || null,
@@ -169,7 +175,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
             return new Response(JSON.stringify(data), { status: 201 })
         } catch (error: any) {
             console.log(error.message)
-            return new Response(JSON.stringify({ error: error.message }), { status: 500 })
+            return new Response(JSON.stringify({ message: error.message }), { status: 500 })
         }
     }
 }

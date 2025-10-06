@@ -15,6 +15,7 @@ import { useNavigate, useNavigation } from '@remix-run/react'
 import { leftNavLinks } from '~/lib/json.js'
 import { categories as category } from '~/lib/json/categories.js'
 import { useOperation } from '~/context/OperationContext.js'
+import { pageType } from '~/lib/json/page_type.js'
 
 const CreatePageForm = ({ data, user }: any) => {
     const [formdata, setFormdata] = useState<any | null>(null)
@@ -65,6 +66,8 @@ const CreatePageForm = ({ data, user }: any) => {
     }
 
     const handleAddBusiness = async (datar: any) => {
+        //console.log(datar)
+
         setWorking(true)
         //notification.notify('Creating page...')
         showOperation('processing', 'Creating a page')
@@ -87,7 +90,7 @@ const CreatePageForm = ({ data, user }: any) => {
 
             if (!response.ok) {
                 var respObj = await response.json()
-                throw new Error(`Error Code: ${response.status} - ${respObj.message}`)
+                throw new Error(`Error Code: ${response.status} - ${respObj?.message || respObj?.error}`)
             } else {
 
                 showSuccess('success', 'Page created successfully.')
@@ -115,8 +118,9 @@ const CreatePageForm = ({ data, user }: any) => {
 
             }
         } catch (e: any) {
-
-            notification.alertCancel('Error!', e.message)
+            showError('Error', e.message)
+            completeOperation()
+            //notification.alertCancel('Error!', e.message)
         } finally {
             setWorking(false)
         }
@@ -164,6 +168,17 @@ const CreatePageForm = ({ data, user }: any) => {
                     error={errors.title}
                     width={80}
                     controlInformation={`Business name is compulsory.`}
+                />
+
+                <Select
+                    controlTitle={"Page Type"}
+                    controlName={"pagetype"}
+                    controlPlaceholder={"Select Page Type"}
+                    selectJson={pageType}
+                    register={register}
+                    changeHandler={changeHandler}
+                    error={errors.pagetype}
+                    controlInformation={`Select business category.`}
                 />
 
                 <Input

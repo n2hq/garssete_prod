@@ -61,6 +61,8 @@ const CreatePageSchema = z.object({
         .min(3, { message: "Busines Name must not be less than 3 characters" })
         .max(100, { message: "Business name must not be more than 100 characters." }),
 
+    pagetype: z.string({ message: "Please select page type" })
+        .min(1, { message: "Please select page type" }),
 
     category: z.string()
         .min(1, { message: "Please select a business category." }),
